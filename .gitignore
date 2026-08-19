@@ -9,6 +9,8 @@ __pycache__/
 # Distribution / packaging
 .Python
 build/
+# ...but the site build tooling is versioned (validate.js, version.txt)
+!admin/build/
 develop-eggs/
 dist/
 downloads/

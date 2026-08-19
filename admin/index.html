@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Engineering — how this site is built · pki.sgit.ai</title>
+<meta name="description" content="How pki.sgit.ai is built and released: static pages in the sgit.ai design language, validated then auto-tagged and deployed to GitHub Pages by CI on every push to dev.">
+<link rel="canonical" href="https://pki.sgit.ai/admin/index.html">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.0</a>
+  <a class="nl here" href="../admin/index.html">Engineering</a>
+  <a class="nl" href="../admin/comms.html">Comms</a>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / admin</div>
+<h1>How this site is built</h1>
+<p class="lead">Static HTML in the sgit.ai design language, released the same way as <a href="https://sgit.ai">the main site</a> and <a href="https://nhi.sgit.ai">nhi.sgit.ai</a>: every push to <code>dev</code> is validated, auto-tagged, and deployed to GitHub Pages.</p>
+
+<h2 id="pipeline">The release pipeline</h2>
+<ol>
+  <li><b>validate</b> — <code>node admin/build/validate.js</code>: internal links resolve, the version agrees everywhere, every page declares a canonical URL on the host named in <code>CNAME</code>, and a key-leak tripwire bans anything shaped like a vault key from the tree. A failure stops the release: no tag, no publish. It also runs on pull requests, so branch work is gated before it reaches <code>dev</code>.</li>
+  <li><b>tag-release</b> — every push to <code>dev</code> ends tagged <code>v{release}.{major}.{minor}</code>. The version is owned by <code>admin/build/version.txt</code>, bumped exactly once per release, and must agree with the release commit's subject (<code>site vX.Y.Z: ...</code>). CI verifies the two agree and that the bump is the next minor (or a deliberate major), then tags. The first run backfills tags for historical releases from commit subjects.</li>
+  <li><b>deploy</b> — publishes the tagged working tree to GitHub Pages. Runs on manual dispatch even without a tag, never when validation failed, never from a pull request.</li>
+</ol>
+
+<h2 id="canonical">The one check this site adds</h2>
+<p>This site was refactored out of the PKI section of nhi.sgit.ai, so the specific mistake worth catching automatically is a page whose <code>canonical</code> URL still points at the old host. Validation reads <code>CNAME</code> and requires every <code>&lt;link rel="canonical"&gt;</code> and <code>og:url</code> to sit on that host — and requires every page to declare one.</p>
+
+<h2 id="release">Releasing a change</h2>
+<pre class="shell">
+<span class="d"># 1. bump the version — exactly once per release</span>
+echo "v0.1.1" &gt; admin/build/version.txt
+<span class="d"># 2. add a row to admin/versions.html, update admin/comms.html</span>
+<span class="d"># 3. validate locally</span>
+node admin/build/validate.js
+<span class="d"># 4. commit with the version in the subject, push to dev</span>
+git commit -am "site v0.1.1: what changed"
+git push origin dev
+</pre>
+
+<h2 id="conventions">Conventions carried from sgit.ai and nhi.sgit.ai</h2>
+<ul>
+  <li>Light theme, same design tokens, same honest-limitations posture.</li>
+  <li>Source documents captured verbatim under <code>briefs/</code>, with a curated presentation page alongside — the raw file stays the source of truth.</li>
+  <li>Machine-readable entry points: <a href="../llms.txt">llms.txt</a>, <a href="../index.md">index.md</a>.</li>
+  <li>Nav and footer are currently hand-duplicated per page; a shared page generator is queued (T3 on <a href="comms.html">comms</a>), to be shared across the three sites.</li>
+</ul>
+
+<div class="pagenav">
+  <a href="versions.html">← Release history</a>
+  <a href="comms.html">Comms →</a>
+</div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. All content CC BY 4.0.</p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. The full disclosure page lands with the content sections.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.0</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The registry</h4>
+    <a href="../admin/index.html">Engineering</a>
+    <a href="../admin/versions.html">Release history</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../llms.txt">llms.txt</a>
+  </div>
+  <div>
+    <h4>Elsewhere</h4>
+    <a href="https://nhi.sgit.ai">nhi.sgit.ai</a>
+    <a href="https://sgit.ai">sgit.ai</a>
+    <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI">GitHub</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

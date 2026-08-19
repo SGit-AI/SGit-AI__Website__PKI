@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Comms: tasks, requests &amp; status · pki.sgit.ai</title>
+<meta name="description" content="The working channel between the project lead and the site agent for pki.sgit.ai, kept in public on the site itself. What is needed from the project lead, and what is queued.">
+<link rel="canonical" href="https://pki.sgit.ai/admin/comms.html">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.0</a>
+  <a class="nl" href="../admin/index.html">Engineering</a>
+  <a class="nl here" href="../admin/comms.html">Comms</a>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / admin / comms</div>
+<h1>Comms: tasks, requests &amp; status</h1>
+<p class="lead">The working channel between the project lead and the site agent, kept in public on the site itself — which is an instance of the discipline this site argues for. Updated on every release. Current release: <b>v0.1.0</b>, 19 August 2026. Full history: <a href="versions.html">versions</a>.</p>
+
+<h2 id="needs">Needed from the project lead</h2>
+<div class="tablewrap"><table>
+  <thead><tr><th>#</th><th>Request</th><th>Why it blocks</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td>N1</td><td><b>GitHub Pages settings.</b> (a) Settings → Pages → source: <em>GitHub Actions</em>; (b) Settings → Environments → <code>github-pages</code> → Deployment branches → add <code>dev</code>, which the auto-created environment does not allow by default; (c) Settings → Pages → custom domain <code>pki.sgit.ai</code>, plus the DNS <code>CNAME</code> record pointing at <code>sgit-ai.github.io</code></td><td>Until (a) and (b), a release on <code>dev</code> validates and tags but does not publish. Until (c), no pki.sgit.ai URL — this was exactly the sequence that held nhi.sgit.ai up</td><td><span class="tstat t-need">waiting on human</span></td></tr>
+    <tr><td>N2</td><td><b>Merge this branch to <code>dev</code></b> — the release pipeline only tags and deploys from <code>dev</code>; on a feature branch CI runs validation only</td><td>Nothing publishes until the release branch has the site</td><td><span class="tstat t-need">waiting on human</span></td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="board">Task board</h2>
+<div class="tablewrap"><table>
+  <thead><tr><th>#</th><th>Task</th><th>Owner</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td>T1</td><td>CI pipeline: validate → auto-tag → deploy to Pages, adapted from the NHI site; validation extended to pull requests; canonical-host check added</td><td>site agent</td><td><span class="tstat t-done">done v0.1.0</span></td></tr>
+    <tr><td>T2</td><td>Theme carried over from sgit.ai / nhi.sgit.ai, with this site's additions</td><td>site agent</td><td><span class="tstat t-done">done v0.1.0</span></td></tr>
+    <tr><td>T3</td><td>Shared page generator (single template for nav/footer/head) — currently hand-duplicated per page, as on the other two sites</td><td>site agent</td><td><span class="tstat t-open">queued</span></td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="how">How to use this channel</h2>
+<ul>
+  <li><b>Human → agent:</b> reply in the working session, or edit this page / open an issue in <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI">the repo</a>. Anything added under "Needed from the project lead" with an answer gets actioned next session.</li>
+  <li><b>Agent → human:</b> every release updates this page and <a href="versions.html">versions</a>; requests appear in the N-table above, most-blocking first.</li>
+</ul>
+
+<div class="pagenav">
+  <a href="index.html">← How this site is built</a>
+  <a href="versions.html">Release history →</a>
+</div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. All content CC BY 4.0.</p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. The full disclosure page lands with the content sections.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.0</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The registry</h4>
+    <a href="../admin/index.html">Engineering</a>
+    <a href="../admin/versions.html">Release history</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../llms.txt">llms.txt</a>
+  </div>
+  <div>
+    <h4>Elsewhere</h4>
+    <a href="https://nhi.sgit.ai">nhi.sgit.ai</a>
+    <a href="https://sgit.ai">sgit.ai</a>
+    <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI">GitHub</a>
+  </div>
+</div></footer>
+
+</body>
+</html>
