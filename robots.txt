@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pki.sgit.ai/sitemap.xml

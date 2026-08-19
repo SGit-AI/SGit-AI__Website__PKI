@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>pki.sgit.ai — a key registry for agents, designed from a documented failure</title>
+<meta name="description" content="Public key infrastructure for agents. The global keyserver network was destroyed in 2019 by an attack its own maintainer called unsalvageable — and the cause was a stated design goal. This site publishes the history, and the registry rules it produces, before the registry exists.">
+<link rel="canonical" href="https://pki.sgit.ai/index.html">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="index.html">pki<span>.sgit.ai</span></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="admin/versions.html" title="Site release history">v0.1.0</a>
+  <a class="nl" href="admin/index.html">Engineering</a>
+  <a class="nl" href="admin/comms.html">Comms</a>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+</div></nav>
+
+<header class="hero">
+  <div class="eyebrow">Public key infrastructure · agent identity · mandates</div>
+  <h1>Good public key repositories<br>existed, and were destroyed</h1>
+  <p class="sub">In 2019 the global keyserver network was flooded until importing a poisoned certificate broke your installation. Its own maintainer called it <b>unsalvageable</b> — and the cause was a design goal stated at the outset, not a bug. Any registry proposed after that should be able to show it was designed with the history in hand.</p>
+  <div class="ctas">
+    <a class="cta1" href="admin/index.html">How this site is built →</a>
+    <a class="cta2" href="admin/comms.html">Comms: what is queued →</a>
+  </div>
+</header>
+
+<section class="band" id="scaffold">
+  <h2>Site scaffold — release pipeline first</h2>
+  <p class="blurb">This release is the plumbing, deliberately shipped before any content: the validate → tag → deploy pipeline, the shared stylesheet, and the release channel. The content sections land next, refactored across from the PKI section of <a href="https://nhi.sgit.ai/pki/index.html">nhi.sgit.ai</a>, where they were staged.</p>
+  <div class="cards">
+    <div class="card"><span class="tag">Shipped</span><h3>The release pipeline</h3><p>Every push to <code>dev</code> is validated, auto-tagged <code>vX.Y.Z</code> and deployed to GitHub Pages. Validation also gates pull requests. A failure stops the release: no tag, no publish.</p></div>
+    <div class="card"><span class="tag">Shipped</span><h3>The design language</h3><p>The same stylesheet, tokens and page furniture as sgit.ai and nhi.sgit.ai — so a reader moving between the three sites is reading one publication.</p></div>
+    <div class="card"><span class="tag">Next</span><h3>The content</h3><p>The 2019 failure page, the four registry rules published before the registry exists, identity vs. mandate, and the build order — private registry before public.</p></div>
+  </div>
+</section>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. All content CC BY 4.0.</p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. The full disclosure page lands with the content sections.</p>
+    <p class="verline">site <a href="admin/versions.html">v0.1.0</a> · <a href="admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The registry</h4>
+    <a href="admin/index.html">Engineering</a>
+    <a href="admin/versions.html">Release history</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="llms.txt">llms.txt</a>
+  </div>
+  <div>
+    <h4>Elsewhere</h4>
+    <a href="https://nhi.sgit.ai">nhi.sgit.ai</a>
+    <a href="https://sgit.ai">sgit.ai</a>
+    <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI">GitHub</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

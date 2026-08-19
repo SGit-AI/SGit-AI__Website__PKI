@@ -1,0 +1,34 @@
+# pki.sgit.ai — public key infrastructure for agents
+
+> Good public key repositories existed, and were destroyed. In June 2019 the global
+> keyserver network was flooded with bogus signatures until importing a poisoned
+> certificate would break a working installation; one key reached roughly 150,000
+> signatures, and the network's own maintainer called it unsalvageable. The cause was
+> a design goal stated at the outset — a key server could add information to a
+> certificate but never delete anything — not a bug. This site publishes that history,
+> and the registry rules it produces, before the registry exists.
+
+Site version: v0.1.0 (19 August 2026). Published by the sgit project — participant
+disclosure at /about/participant.html. All content CC BY 4.0.
+
+## Status
+
+This release is the site scaffold: the release pipeline (validate → auto-tag → deploy
+to GitHub Pages), the shared sgit.ai design language, and the public release channel.
+The content sections are refactored across from the PKI section of nhi.sgit.ai, where
+they were staged: https://nhi.sgit.ai/pki/index.html
+
+## Site
+
+- [How this site is built](https://pki.sgit.ai/admin/index.html): the release
+  pipeline, and the canonical-host check this site adds to it.
+- [Comms](https://pki.sgit.ai/admin/comms.html): the public working channel — what is
+  needed from the project lead, and what is queued.
+- [Release history](https://pki.sgit.ai/admin/versions.html): every push to dev is a
+  release, validated then auto-tagged by CI.
+
+## Related sites
+
+- https://nhi.sgit.ai — non-human identity, blast radius and agentic security. This
+  site is the cryptographic half of that site's identity gap.
+- https://sgit.ai — the sgit project itself.
