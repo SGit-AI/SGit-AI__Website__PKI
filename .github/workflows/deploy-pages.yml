@@ -13,7 +13,8 @@
 #                     and must also appear in the release commit's subject
 #                     ("site vX.Y.Z: ..."). CI verifies the two agree and that
 #                     the bump is the next minor (or a deliberate major), then
-#                     tags. First run backfills tags for any historical release
+#                     tags the release commit — which is HEAD on a direct push and
+#                     HEAD's parent when a pull request lands as a merge commit. First run backfills tags for any historical release
 #                     from the commit subjects.
 #   3. deploy       — publishes the tagged commit. Runs on manual dispatch even
 #                     without a tag, but never when validation failed.
@@ -79,13 +80,31 @@ jobs:
           TAG="v$VER"
           echo "version.txt says $TAG"
 
-          # The release commit's subject must agree (the backfill above tags it).
-          if ! git rev-parse -q --verify "refs/tags/$TAG" >/dev/null; then
-            echo "::error::HEAD's subject does not carry $TAG — version.txt and the release commit disagree"
+          # The release commit is the one whose SUBJECT carries the version. It is
+          # usually HEAD, but when dev advances by a merge commit — which is how a
+          # pull request lands — HEAD is the merge and the release commit is its
+          # parent. So anchor every check to the newest release commit reachable
+          # from HEAD rather than to HEAD itself.
+          NEWEST=$(git log --format='%s' | grep -oP '^site v\K[0-9]+\.[0-9]+\.[0-9]+(?=:)' | head -1 || true)
+          if [ -z "$NEWEST" ]; then
+            echo "::error::no commit in this history carries a version in its subject (\"site vX.Y.Z: ...\")"
             exit 1
           fi
-          if [ "$(git rev-parse "refs/tags/$TAG^{commit}")" != "$(git rev-parse HEAD)" ]; then
-            echo "::error::$TAG already exists on another commit — version.txt was not bumped for this release"
+          if [ "$NEWEST" != "$VER" ]; then
+            echo "::error::version.txt says $TAG but the newest release commit in this history is v$NEWEST — the two disagree"
+            exit 1
+          fi
+          REL=$(git log --format='%H;%s' | grep -m1 -P ";site v$VER:" | cut -d';' -f1)
+          echo "release commit is ${REL:0:9}"
+
+          # The backfill above tags it. If the tag exists on an EARLIER commit than
+          # this one, the version was reused rather than bumped.
+          if ! git rev-parse -q --verify "refs/tags/$TAG" >/dev/null; then
+            echo "::error::$TAG was not created — version.txt and the release commit disagree"
+            exit 1
+          fi
+          if [ "$(git rev-parse "refs/tags/$TAG^{commit}")" != "$REL" ]; then
+            echo "::error::$TAG already exists on an earlier commit — version.txt was not bumped for this release"
             exit 1
           fi
 
@@ -103,9 +122,9 @@ jobs:
             fi
           fi
 
-          # The load-bearing push: THIS release's tag, at HEAD.
+          # The load-bearing push: THIS release's tag, on the release commit.
           git push origin "refs/tags/$TAG"
-          echo "tagged HEAD as $TAG"
+          echo "tagged ${REL:0:9} as $TAG"
 
           # Best-effort: the backfilled historical tags. GITHUB_TOKEN cannot
           # push a ref to a commit whose tree carries a DIFFERENT
