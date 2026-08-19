@@ -13,12 +13,20 @@ Live site: https://pki.sgit.ai (GitHub Pages, deployed from `dev`).
 
 ## Structure
 
-- `index.html` — front page
-- `assets/site.css` — shared stylesheet (sgit.ai design language)
+- `index.html` — front page: the failure leads
+- `failure/` — the 2019 keyserver failure, with sources; the append-only resolution
+- `rules/` — the four registry rules, published before the registry exists
+- `mandate/` — identity and mandate as separate, independently revocable statements
+- `roadmap/` — the build order, the honest tensions, the open questions
+- `documents/` — the source briefs, readable in-page (raw markdown is the source of truth)
+- `briefs/` — those source documents, captured verbatim
+- `about/participant.html` — the participant disclosure, and where our approach loses
 - `admin/` — engineering: comms (tasks & requests), versions, build tooling
+- `assets/site.css` — shared stylesheet (sgit.ai design language)
 
-Content sections are refactored across from the PKI section of
-[nhi.sgit.ai](https://nhi.sgit.ai/pki/index.html), where they were staged.
+Content was refactored across from the PKI section of
+[nhi.sgit.ai](https://nhi.sgit.ai/pki/index.html), where it was staged, and promoted from
+three pages to a site.
 
 ## Release process
 

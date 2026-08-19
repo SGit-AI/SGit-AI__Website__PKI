@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Build order: a private registry is testable, a public one is a commitment · pki.sgit.ai</title>
+<meta name="description" content="What gets built, in what order, and why the public registry is last. The build order from the scoping brief, what this deliberately is not, the honest tensions, and the open questions published unresolved.">
+<link rel="canonical" href="https://pki.sgit.ai/roadmap/index.html">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.1</a>
+  <a class="nl" href="../failure/index.html">The failure</a>
+  <a class="nl" href="../rules/index.html">The rules</a>
+  <a class="nl" href="../mandate/index.html">Mandate</a>
+  <a class="nl here" href="../roadmap/index.html">Build order</a>
+  <a class="nl" href="../documents/index.html">Docs</a>
+  <a class="nl" href="../admin/comms.html">Comms</a>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / roadmap</div>
+<h1>Build order</h1>
+<p class="lead">The ordering is the design decision, not an implementation detail. A registry holding one organisation's agents can be tested, broken, and thrown away. A global public one cannot — it is a commitment the day somebody depends on it.</p>
+<p class="claim">A registry with one organisation's agents in it is testable; a global one is a commitment.</p>
+
+<h2 id="order">The order</h2>
+<div class="ladder">
+  <div class="cap"><span class="capnum">1</span><h3>The collection, organised by question</h3>
+    <p>The material exists in depth — 729 files in the corpus mention the subject, with dedicated documents going back to February 2026: an architecture debrief, a messaging implementation, model-integration research, a document identity brief, operating modes, a provenance treatment, a brand strategy. So this is a <b>publication and curation problem</b>, organised by the question a reader arrives with rather than by date.</p>
+    <span class="from">Status: <b>queued</b> — needs the corpus documents identified</span></div>
+  <div class="cap"><span class="capnum">2</span><h3>The failure page</h3>
+    <p>Short, useful, and independent of anything being built. The most linkable thing the site will have, and the evidence that what follows was designed with the history in hand.</p>
+    <span class="from">Status: <b>done</b> — <a href="../failure/index.html">read it</a></span></div>
+  <div class="cap"><span class="capnum">3</span><h3>The four rules, published before the registry exists</h3>
+    <p>The registry's stated design, as claims that can be checked against whatever ships. Four sentences that answer the question a reader will have.</p>
+    <span class="from">Status: <b>done</b> — <a href="../rules/index.html">read them</a></span></div>
+  <div class="cap"><span class="capnum">4</span><h3>A private registry, for our own agents</h3>
+    <p>The smaller problem, and the one with a real user. Inside one organisation the trust root is not an open question, abuse is not an open question, and moderation is not an open question — which leaves the actual registry logic as the thing being tested.</p>
+    <span class="from">Status: <b>not started</b> — the next build</span></div>
+  <div class="cap"><span class="capnum">5</span><h3>Mandate statements, separate from identity</h3>
+    <p>Independently revocable signed statements about what an agent may do. <a href="../mandate/index.html">The concept</a> is published; the implementation follows the private registry, because a mandate with nowhere to live is a document.</p>
+    <span class="from">Status: <b>not started</b></span></div>
+  <div class="cap"><span class="capnum">6</span><h3>A public registry — last</h3>
+    <p>It inherits every hard problem of the private one, plus trust roots, abuse and moderation. It is also the memorable idea, which is exactly why it is the one to be disciplined about.</p>
+    <span class="from">Status: <b>not started</b> — and deliberately behind step 4</span></div>
+</div>
+<p>Step 4 before step 6 is the ordering that matters. Everything else can move.</p>
+
+<h2 id="not">What this does not try to be</h2>
+<div class="tablewrap"><table>
+  <thead><tr><th>Not</th><th>Instead</th></tr></thead>
+  <tbody>
+    <tr><td><b>A new key server</b></td><td>A registry designed from a documented failure, with different rules</td></tr>
+    <tr><td><b>Append-only in the way that failed</b></td><td>Append-only with <a href="../rules/index.html#r1">the writer owning what it writes</a></td></tr>
+    <tr><td><b>Deletion-free</b></td><td><a href="../rules/index.html#r2">Revocation is a signed append</a>, which supersedes without destroying</td></tr>
+    <tr><td><b>Automatically a web of trust</b></td><td><a href="../rules/index.html#attestation">Third-party attestation is a deliberate choice</a> with a known cost</td></tr>
+    <tr><td><b>Public first</b></td><td>Private first — testable before committed</td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="tensions">Honest tensions</h2>
+<p>Published because a design page that lists only what works is marketing:</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Tension</th><th>Note</th></tr></thead>
+  <tbody>
+    <tr><td><b>Append-only as house pattern</b></td><td>It is right for channels and it is what destroyed the key servers. The ownership rule is the whole of what separates them, so it carries a great deal of weight for one sentence</td></tr>
+    <tr><td><b>Third-party attestation</b></td><td>What made the old system valuable and what made it attackable — and mandates may need it</td></tr>
+    <tr><td><b>Size bounds on records</b></td><td>They prevent the flooding attack, and they will one day reject a legitimate record</td></tr>
+    <tr><td><b>Fractal trust</b></td><td>Nesting is powerful and it requires every store to declare its roots, or the graph is unevaluable</td></tr>
+    <tr><td><b>Public registry</b></td><td>The memorable idea, carrying abuse, moderation and trust-root problems a private one does not</td></tr>
+    <tr><td><b>Reusing existing material</b></td><td>729 documents is depth, and most of it will not appear on the site</td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="open">Open questions, published unresolved</h2>
+<div class="tablewrap"><table>
+  <thead><tr><th>Question</th><th>Why it is still open</th></tr></thead>
+  <tbody>
+    <tr><td><b>Does the registry accept third-party attestations?</b></td><td>The central design choice: a documented failure on one side, no social trust at all on the other</td></tr>
+    <tr><td><b>What is the size bound per record?</b></td><td>Generous enough to be invisible, small enough to stop flooding — and the number is not chosen</td></tr>
+    <tr><td><b>How is the binding between an agent and its key verified?</b></td><td>The replacement server used email; agents have no equivalent</td></tr>
+    <tr><td><b>Who may be a trust root?</b></td><td>A privileged decision needing a stated answer, even a simple one</td></tr>
+    <tr><td><b>Is a mandate a separate object from an identity?</b></td><td>It should be, since they revoke independently — but that is a position, not an implementation</td></tr>
+    <tr><td><b>What does an agent's identity attest to?</b></td><td>Which agent, running where, on whose authority, and how any of that is checked</td></tr>
+  </tbody>
+</table></div>
+<div class="note"><b>These are refutation targets.</b> Anybody who answers one of these well improves the design — including by showing that a rule is wrong. <a href="../admin/comms.html">Comms</a> is the channel.</div>
+
+<div class="pagenav">
+  <a href="../mandate/index.html">← Identity and mandate</a>
+  <a href="../documents/index.html">The source documents →</a>
+</div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. All content CC BY 4.0.</p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.1</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The registry</h4>
+    <a href="../failure/index.html">Why they don't exist</a>
+    <a href="../rules/index.html">The four rules</a>
+    <a href="../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../roadmap/index.html">Build order</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../documents/pki-registry.html">The scoping brief</a>
+    <a href="../about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="https://nhi.sgit.ai">nhi.sgit.ai</a>
+    <a href="https://sgit.ai">sgit.ai</a>
+  </div>
+</div></footer>
+
+</body>
+</body>
+</html>

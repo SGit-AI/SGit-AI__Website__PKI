@@ -4,8 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>pki.sgit.ai — a key registry for agents, designed from a documented failure</title>
-<meta name="description" content="Public key infrastructure for agents. The global keyserver network was destroyed in 2019 by an attack its own maintainer called unsalvageable — and the cause was a stated design goal. This site publishes the history, and the registry rules it produces, before the registry exists.">
+<meta name="description" content="Good public key repositories existed, and were destroyed. The 2019 keyserver failure, the four registry rules it produces, published before the registry exists, and identity separated from mandate as independently revocable signed statements.">
 <link rel="canonical" href="https://pki.sgit.ai/index.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="pki.sgit.ai">
+<meta property="og:url" content="https://pki.sgit.ai/index.html">
+<meta property="og:title" content="pki.sgit.ai — good public key repositories existed, and were destroyed">
+<meta property="og:description" content="The global keyserver network was destroyed in 2019 by an attack its own maintainer called unsalvageable, and the cause was a stated design goal rather than a bug. The history, and the four registry rules it produces, published before the registry exists.">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
@@ -13,8 +20,12 @@
 <nav class="site"><div class="row">
   <a class="brand" href="index.html">pki<span>.sgit.ai</span></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="admin/versions.html" title="Site release history">v0.1.0</a>
-  <a class="nl" href="admin/index.html">Engineering</a>
+  <a class="ver" href="admin/versions.html" title="Site release history">v0.1.1</a>
+  <a class="nl" href="failure/index.html">The failure</a>
+  <a class="nl" href="rules/index.html">The rules</a>
+  <a class="nl" href="mandate/index.html">Mandate</a>
+  <a class="nl" href="roadmap/index.html">Build order</a>
+  <a class="nl" href="documents/index.html">Docs</a>
   <a class="nl" href="admin/comms.html">Comms</a>
   <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
 </div></nav>
@@ -22,20 +33,87 @@
 <header class="hero">
   <div class="eyebrow">Public key infrastructure · agent identity · mandates</div>
   <h1>Good public key repositories<br>existed, and were destroyed</h1>
-  <p class="sub">In 2019 the global keyserver network was flooded until importing a poisoned certificate broke your installation. Its own maintainer called it <b>unsalvageable</b> — and the cause was a design goal stated at the outset, not a bug. Any registry proposed after that should be able to show it was designed with the history in hand.</p>
+  <p class="sub">In 2019 the global keyserver network was flooded with garbage signatures until importing a poisoned certificate broke your installation. Its own maintainer called it <b>unsalvageable</b> — and the cause was a design goal stated at the outset, not a bug. Anyone proposing a key registry now should be able to show they designed it with that history in hand. This site is that history, and the rules it produces, published before the registry exists.</p>
   <div class="ctas">
-    <a class="cta1" href="admin/index.html">How this site is built →</a>
-    <a class="cta2" href="admin/comms.html">Comms: what is queued →</a>
+    <a class="cta1" href="failure/index.html">Read the failure →</a>
+    <a class="cta2" href="rules/index.html">The four rules →</a>
+    <a class="cta2" href="roadmap/index.html">Build order: private before public →</a>
   </div>
 </header>
 
-<section class="band" id="scaffold">
-  <h2>Site scaffold — release pipeline first</h2>
-  <p class="blurb">This release is the plumbing, deliberately shipped before any content: the validate → tag → deploy pipeline, the shared stylesheet, and the release channel. The content sections land next, refactored across from the PKI section of <a href="https://nhi.sgit.ai/pki/index.html">nhi.sgit.ai</a>, where they were staged.</p>
+<!-- the append-only split -->
+<section class="band" id="split">
+  <h2>One property, two outcomes</h2>
+  <p class="blurb">The design goal that killed the network was <em>append-only</em> — a pattern this project uses in five places, and rightly. A documented catastrophe caused by a pattern you rely on deserves a precise resolution rather than a shrug. Here it is.</p>
+  <div class="split">
+    <table>
+      <thead><tr><th></th><th class="safe">Append-only, owner-writes</th><th class="fatal">Append-only, anyone-writes</th></tr></thead>
+      <tbody>
+        <tr><td><b>Who may write to a record</b></td><td>Only its owner</td><td><b class="no">Anybody</b></td></tr>
+        <tr><td><b>Can a stranger grow your record?</b></td><td><b class="yes">No</b></td><td><b class="no">Without limit</b></td></tr>
+        <tr><td><b>Is every entry attributable?</b></td><td><b class="yes">Yes</b> — signed by the owner</td><td><b class="no">No</b> — garbage is indistinguishable</td></tr>
+        <tr><td><b>Can something be withdrawn?</b></td><td><b class="yes">Yes</b> — a signed append supersedes</td><td><b class="no">Never</b> — by design</td></tr>
+        <tr><td><b>Failure mode</b></td><td>A record grows slowly, in the owner's own hand</td><td><b class="no">Destroyed the network</b></td></tr>
+      </tbody>
+    </table>
+    <p class="cap">Append-only is safe when a writer appends only to objects it owns, and fatal when anyone may append to somebody else's. The rule to carry forward is not "append-only" — it is <em>the writer owns what it writes</em>. <a href="failure/index.html#append-only">The full argument, with sources →</a></p>
+  </div>
+</section>
+
+<!-- the rules -->
+<section class="band alt" id="rules">
+  <h2>Four rules, published before the registry exists</h2>
+  <p class="blurb">Each one turns around a property the 2019 attack abused. Publishing them now is cheap; claiming them afterwards is impossible. If something ships that breaks one, this site is the evidence.</p>
   <div class="cards">
-    <div class="card"><span class="tag">Shipped</span><h3>The release pipeline</h3><p>Every push to <code>dev</code> is validated, auto-tagged <code>vX.Y.Z</code> and deployed to GitHub Pages. Validation also gates pull requests. A failure stops the release: no tag, no publish.</p></div>
-    <div class="card"><span class="tag">Shipped</span><h3>The design language</h3><p>The same stylesheet, tokens and page furniture as sgit.ai and nhi.sgit.ai — so a reader moving between the three sites is reading one publication.</p></div>
-    <div class="card"><span class="tag">Next</span><h3>The content</h3><p>The 2019 failure page, the four registry rules published before the registry exists, identity vs. mandate, and the build order — private registry before public.</p></div>
+    <a class="card" href="rules/index.html#r1"><span class="tag">Rule 1</span><h3>Only the owner writes to their own record</h3><p>Turns around: anyone may append to anybody's certificate. This is the rule that carries the append-only pattern through the history intact.</p><span class="go">Read →</span></a>
+    <a class="card" href="rules/index.html#r2"><span class="tag">Rule 2</span><h3>Revocation is a signed append, not a deletion</h3><p>Signed by the key being revoked. The record stays append-only, the revocation is self-authenticating, and what a key said before revocation stays checkable.</p><span class="go">Read →</span></a>
+    <a class="card" href="rules/index.html#r3"><span class="tag">Rule 3</span><h3>Records are size-bounded</h3><p>One poisoned key reached ~150,000 signatures because certificates had no limit. A stated parameter — with the honest cost that it will one day reject a legitimate record.</p><span class="go">Read →</span></a>
+    <a class="card" href="rules/index.html#r4"><span class="tag">Rule 4</span><h3>Every entry is signed by something you can check</h3><p>Which is what makes untrusted mirrors safe and the registry's contents portable — a reader verifies without trusting whoever served the bytes.</p><span class="go">Read →</span></a>
+  </div>
+</section>
+
+<!-- the history -->
+<section class="band" id="history">
+  <h2>The history, in five minutes</h2>
+  <p class="blurb">Externally verifiable, and cited. Nothing on the failure page depends on trusting us — which is why it leads.</p>
+  <div class="cards">
+    <div class="card"><span class="tag">June 2019</span><h3>~150,000 signatures on one key</h3><p>Two prominent contributors' certificates flooded with bogus signatures. Importing one broke a working installation in hard-to-debug ways; the recommended mitigation became to stop using the network entirely.</p></div>
+    <div class="card"><span class="tag">The cause</span><h3>A design goal, not a bug</h3><p>A key server could add information to a certificate but could never delete a certificate or anything in it — stated at the outset. Changing a goal of that magnitude means a fresh sheet of paper, not a patch.</p></div>
+    <div class="card"><span class="tag">The replacement</span><h3>Immune, and diminished</h3><p>The successor strips all third-party signatures and unverified identities. That stops the attack completely, and removes the web of trust with it — a trade to make deliberately rather than inherit.</p></div>
+  </div>
+  <p class="blurb" style="margin-top:1.6rem;margin-bottom:0"><a href="failure/index.html#sources">The whole story, with sources →</a></p>
+</section>
+
+<!-- mandate -->
+<section class="band alt" id="mandate">
+  <h2>A key says who. It does not say what they may do</h2>
+  <p class="blurb">Current systems give an agent <b>your</b> identity, and therefore all of your permissions. The registry separates two signed statements that revoke independently — a materially different position from a bearer token.</p>
+  <div class="cards">
+    <a class="card" href="mandate/index.html#two"><span class="tag">Concept</span><h3>Identity and mandate</h3><p>Identity: this key belongs to this agent. Mandate: this agent may do these things, until this date, on whose authority. Both checkable by a third party; the second revocable without touching the first.</p><span class="go">Read →</span></a>
+    <a class="card" href="mandate/index.html#vs-token"><span class="tag">Comparison</span><h3>Why it beats a bearer token</h3><p>A token's scope is knowable only to its issuer. A mandate's scope is published, so the party relying on it can see the limits of what it was given — and refuse work outside them.</p><span class="go">Read →</span></a>
+    <a class="card" href="mandate/index.html#caution"><span class="tag">The caution</span><h3>What a mandate does not do</h3><p>It constrains what an agent may be authorised to do, not what it does within that authority. One control among several — it composes with observation and ceilings, it does not replace them.</p><span class="go">Read →</span></a>
+  </div>
+</section>
+
+<!-- why now / build order -->
+<section class="band" id="why-now">
+  <h2>Why attempt this now, and in what order</h2>
+  <p class="blurb">The idea is old. What changed is that vaults supply the layer a key server used to have to build for itself: <b>distribution</b> (a published vault is readable from static hosting and mirrorable by anybody), <b>custody without access</b> (untrusted mirrors are safe by construction), and <b>versioning</b> (the state of a key at any past date is answerable natively). What vaults do <em>not</em> supply — the ownership rule, the size bound, signature checking — is the registry logic, and it is exactly the part that failed last time.</p>
+  <div class="cards">
+    <a class="card" href="roadmap/index.html#order"><span class="tag">Build order</span><h3>Private registry before public</h3><p>A registry with one organisation's agents in it is testable; a global one is a commitment. Steps 2 and 3 — the failure page and the rules — are done, and were done before anything was built.</p><span class="go">Read →</span></a>
+    <a class="card" href="roadmap/index.html#tensions"><span class="tag">Honest tensions</span><h3>Where this design strains</h3><p>Size bounds will one day reject a legitimate record. Fractal trust needs every store to declare its roots. Attestation is valuable and dangerous. Published, not buried.</p><span class="go">Read →</span></a>
+    <a class="card" href="roadmap/index.html#open"><span class="tag">Open questions</span><h3>Six, published unresolved</h3><p>Starting with the central one: does the registry accept third-party attestations at all? A documented failure on one side, no social trust on the other.</p><span class="go">Read →</span></a>
+    <a class="card" href="documents/pki-registry.html"><span class="tag">The source</span><h3>The scoping brief, verbatim</h3><p>Everything here comes from one document, captured whole with its citations and readable in-page. The raw markdown stays the source of truth.</p><span class="go">Read →</span></a>
+  </div>
+</section>
+
+<!-- participant -->
+<section class="band alt" id="participant">
+  <h2>Who is writing this</h2>
+  <p class="blurb">This site is published by the sgit project, which builds the vault layer the registry would be built on. So this is a participant publishing a design — stated here, upfront. The discipline applies lightly to the history, because <a href="failure/index.html#sources">those claims are externally verifiable</a>, and heavily to the design, which is why the design is published as <a href="rules/index.html">checkable rules before the thing exists</a>. And <a href="about/participant.html">we publish where our own approach loses</a>: vaults do not supply the registry, do not solve attestation, and a mandate constrains authority rather than behaviour.</p>
+  <div class="ctas">
+    <a class="cta2" href="about/participant.html">The participant disclosure, in full →</a>
+    <a class="cta2" href="https://nhi.sgit.ai">The identity gap this is the cryptographic half of →</a>
   </div>
 </section>
 
@@ -43,26 +121,32 @@
   <div>
     <div class="brandline">pki<span>.sgit.ai</span></div>
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. All content CC BY 4.0.</p>
-    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. The full disclosure page lands with the content sections.</p>
-    <p class="verline">site <a href="admin/versions.html">v0.1.0</a> · <a href="admin/index.html">engineering</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="admin/versions.html">v0.1.1</a> · <a href="admin/index.html">engineering</a> · <a href="index.md">this page as markdown</a></p>
   </div>
   <div>
     <h4>The registry</h4>
-    <a href="admin/index.html">Engineering</a>
-    <a href="admin/versions.html">Release history</a>
+    <a href="failure/index.html">Why they don't exist</a>
+    <a href="rules/index.html">The four rules</a>
+    <a href="mandate/index.html">Identity &amp; mandate</a>
+    <a href="roadmap/index.html">Build order</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="documents/index.html">The documents</a>
+    <a href="documents/pki-registry.html">The scoping brief</a>
+    <a href="about/participant.html">Where we lose</a>
   </div>
   <div>
     <h4>Site</h4>
     <a href="admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="admin/versions.html">Release history</a>
     <a href="llms.txt">llms.txt</a>
-  </div>
-  <div>
-    <h4>Elsewhere</h4>
     <a href="https://nhi.sgit.ai">nhi.sgit.ai</a>
     <a href="https://sgit.ai">sgit.ai</a>
-    <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI">GitHub</a>
   </div>
 </div></footer>
 
+</body>
 </body>
 </html>

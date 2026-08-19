@@ -3,32 +3,98 @@
 > Good public key repositories existed, and were destroyed. In June 2019 the global
 > keyserver network was flooded with bogus signatures until importing a poisoned
 > certificate would break a working installation; one key reached roughly 150,000
-> signatures, and the network's own maintainer called it unsalvageable. The cause was
-> a design goal stated at the outset — a key server could add information to a
-> certificate but never delete anything — not a bug. This site publishes that history,
-> and the registry rules it produces, before the registry exists.
+> signatures, and the network's own maintainer called it unsalvageable. The cause was a
+> design goal stated at the outset — a key server could add information to a certificate
+> but never delete anything — not a bug. This site publishes that history, and the
+> registry rules it produces, before the registry exists.
 
-Site version: v0.1.0 (19 August 2026). Published by the sgit project — participant
+Site version: v0.1.1 (19 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
-## Status
+## Status, stated plainly
 
-This release is the site scaffold: the release pipeline (validate → auto-tag → deploy
-to GitHub Pages), the shared sgit.ai design language, and the public release channel.
-The content sections are refactored across from the PKI section of nhi.sgit.ai, where
-they were staged: https://nhi.sgit.ai/pki/index.html
+The registry does not exist. Everything on this site is stated design, published in
+advance so it can be checked against whatever ships. Build-order steps 2 and 3 (the
+failure page, the four rules) are done; step 4 (a private registry) is the next build.
+
+## The history
+
+- [Why good public key repositories don't exist](https://pki.sgit.ai/failure/index.html):
+  the June 2019 certificate-flooding attack as a dated timeline; the three abused
+  properties (unlimited signatures per certificate, anyone may append to anybody's
+  certificate, nothing distinguishes a legitimate signature from garbage) mapped onto
+  the rules each produces; the never-delete design goal that made repair impossible; and
+  what the replacement keyserver gave up (all third-party signatures, and the web of
+  trust with them). Externally verifiable and cited.
+- The append-only resolution:
+  https://pki.sgit.ai/failure/index.html#append-only — append-only is safe when a writer
+  appends only to objects it owns, and fatal when anyone may append to somebody else's.
+  The rule to carry forward is not "append-only", it is that the writer owns what it
+  writes.
+
+## The design, published before the implementation
+
+- [The four registry rules](https://pki.sgit.ai/rules/index.html), each turning around a
+  property the attack abused:
+  1. Only the owner writes to their own record.
+  2. Revocation is a signed append, not a deletion — signed by the key being revoked, so
+     the record stays append-only and still supports withdrawal.
+  3. Records are size-bounded.
+  4. Every entry is signed by something you can check.
+- The attestation trade (https://pki.sgit.ai/rules/index.html#attestation): third-party
+  attestations are what made the old system valuable and what made it attackable. Permit
+  them and rules 1 and 3 must be enforced hard; forbid them and the registry carries no
+  social trust signal at all. This is the site's central open question, published
+  unresolved.
+- What vaults supply (https://pki.sgit.ai/rules/index.html#vaults): distribution, custody
+  without access, versioning. What they do not supply: the ownership rule, the size
+  bound, signature checking — the registry logic, and the part that failed last time.
+
+## Agent identity
+
+- [Identity and mandate are separate statements](https://pki.sgit.ai/mandate/index.html):
+  identity says this key belongs to this agent; a mandate says this agent may do these
+  things, until this date, on whose authority. Both signed, both checkable by a third
+  party, and the mandate revocable independently of the identity — materially different
+  from a bearer token, whose scope is knowable only to its issuer.
+- The caution that travels with it: a signed mandate constrains what an agent may be
+  authorised to do, not what it does within that authority. It is one control among
+  several and does not replace observation or ceilings.
+- The limit underneath: a registry can say this key claims to be this agent. It cannot
+  say this key is in the hands of that agent and nobody else — that is attestation, and
+  neither keys nor vaults supply it.
+
+## Build order and open questions
+
+- [Build order](https://pki.sgit.ai/roadmap/index.html): the collection, the failure
+  page, the four rules, a private registry, mandate statements, and a public registry
+  last. A registry with one organisation's agents in it is testable; a global one is a
+  commitment.
+- Six open questions published unresolved
+  (https://pki.sgit.ai/roadmap/index.html#open), starting with whether the registry
+  accepts third-party attestations at all.
+- Honest tensions (https://pki.sgit.ai/roadmap/index.html#tensions), including that the
+  size bound will one day reject a legitimate record.
+
+## Sources
+
+- [The documents](https://pki.sgit.ai/documents/index.html): the scoping brief captured
+  verbatim and readable in-page — strategy brief v0.33.59, 16 August 2026. Raw markdown
+  is the source of truth:
+  https://pki.sgit.ai/briefs/v0.33.59__strategy-brief__pki-sgit-keyserver-failure-append-only-ownership-rule.md
+- [Participant disclosure](https://pki.sgit.ai/about/participant.html): published by the
+  sgit project, which builds the vault layer this registry would be built on — including
+  where that approach loses.
 
 ## Site
 
-- [How this site is built](https://pki.sgit.ai/admin/index.html): the release
-  pipeline, and the canonical-host check this site adds to it.
-- [Comms](https://pki.sgit.ai/admin/comms.html): the public working channel — what is
-  needed from the project lead, and what is queued.
-- [Release history](https://pki.sgit.ai/admin/versions.html): every push to dev is a
-  release, validated then auto-tagged by CI.
+- [How this site is built](https://pki.sgit.ai/admin/index.html)
+- [Comms](https://pki.sgit.ai/admin/comms.html): the public working channel
+- [Release history](https://pki.sgit.ai/admin/versions.html)
 
 ## Related sites
 
-- https://nhi.sgit.ai — non-human identity, blast radius and agentic security. This
-  site is the cryptographic half of that site's identity gap.
+- https://nhi.sgit.ai — non-human identity, blast radius and agentic security. This site
+  is the cryptographic half of that site's identity gap; its PKI section was where this
+  material was staged.
 - https://sgit.ai — the sgit project itself.

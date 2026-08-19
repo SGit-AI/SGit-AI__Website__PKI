@@ -13,8 +13,12 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.0</a>
-  <a class="nl here" href="../admin/index.html">Engineering</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.1</a>
+  <a class="nl" href="../failure/index.html">The failure</a>
+  <a class="nl" href="../rules/index.html">The rules</a>
+  <a class="nl" href="../mandate/index.html">Mandate</a>
+  <a class="nl" href="../roadmap/index.html">Build order</a>
+  <a class="nl" href="../documents/index.html">Docs</a>
   <a class="nl" href="../admin/comms.html">Comms</a>
   <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
 </div></nav>
@@ -37,21 +41,30 @@
 <h2 id="release">Releasing a change</h2>
 <pre class="shell">
 <span class="d"># 1. bump the version — exactly once per release</span>
-echo "v0.1.1" &gt; admin/build/version.txt
+echo "v0.1.2" &gt; admin/build/version.txt
 <span class="d"># 2. add a row to admin/versions.html, update admin/comms.html</span>
 <span class="d"># 3. validate locally</span>
 node admin/build/validate.js
 <span class="d"># 4. commit with the version in the subject, push to dev</span>
-git commit -am "site v0.1.1: what changed"
+git commit -am "site v0.1.2: what changed"
 git push origin dev
 </pre>
+
+<h2 id="ux">The UX carried across</h2>
+<ul>
+  <li><b>The version badge</b> in the nav links to the release history, so any page tells you which release you are reading and CI enforces that they all agree.</li>
+  <li><b>The stage pill</b> states the site's maturity in the nav rather than in a footer nobody reads.</li>
+  <li><b>The in-page markdown reader</b> (<code>assets/mdreader.js</code>) renders a captured document from its raw file, including <code>mermaid</code> fences as diagrams — so the raw markdown stays the source of truth and the page is presentation. Any failure falls back to a link to the raw file, so a document is never unreachable.</li>
+  <li><b>Print styles</b>: every page prints as a clean document — sticky nav flattened, navigation links dropped, tables and figures kept off page breaks.</li>
+  <li><b>The comms page</b>: the working channel between the project lead and the site agent, in public, updated every release.</li>
+</ul>
 
 <h2 id="conventions">Conventions carried from sgit.ai and nhi.sgit.ai</h2>
 <ul>
   <li>Light theme, same design tokens, same honest-limitations posture.</li>
   <li>Source documents captured verbatim under <code>briefs/</code>, with a curated presentation page alongside — the raw file stays the source of truth.</li>
-  <li>Machine-readable entry points: <a href="../llms.txt">llms.txt</a>, <a href="../index.md">index.md</a>.</li>
-  <li>Nav and footer are currently hand-duplicated per page; a shared page generator is queued (T3 on <a href="comms.html">comms</a>), to be shared across the three sites.</li>
+  <li>Machine-readable entry points: <a href="../llms.txt">llms.txt</a>, <a href="../index.md">index.md</a>. Full <code>.md</code> twins per page and <code>llms-full.txt</code> are queued (T5 on <a href="comms.html">comms</a>).</li>
+  <li>Nav and footer are hand-duplicated per page; a shared page generator is queued (T3), to be shared across the three sites.</li>
 </ul>
 
 <div class="pagenav">
@@ -64,26 +77,32 @@ git push origin dev
   <div>
     <div class="brandline">pki<span>.sgit.ai</span></div>
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. All content CC BY 4.0.</p>
-    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. The full disclosure page lands with the content sections.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.0</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.1</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The registry</h4>
-    <a href="../admin/index.html">Engineering</a>
-    <a href="../admin/versions.html">Release history</a>
+    <a href="../failure/index.html">Why they don't exist</a>
+    <a href="../rules/index.html">The four rules</a>
+    <a href="../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../roadmap/index.html">Build order</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../documents/pki-registry.html">The scoping brief</a>
+    <a href="../about/participant.html">Where we lose</a>
   </div>
   <div>
     <h4>Site</h4>
     <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
     <a href="../llms.txt">llms.txt</a>
-  </div>
-  <div>
-    <h4>Elsewhere</h4>
     <a href="https://nhi.sgit.ai">nhi.sgit.ai</a>
     <a href="https://sgit.ai">sgit.ai</a>
-    <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI">GitHub</a>
   </div>
 </div></footer>
 
+</body>
 </body>
 </html>

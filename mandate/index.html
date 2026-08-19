@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Identity and mandate are separate statements · pki.sgit.ai</title>
+<meta name="description" content="A key says who an agent is. It says nothing about what the agent may do. The registry separates identity from mandate as two signed, independently revocable statements — a materially different position from a bearer token.">
+<link rel="canonical" href="https://pki.sgit.ai/mandate/index.html">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.1</a>
+  <a class="nl" href="../failure/index.html">The failure</a>
+  <a class="nl" href="../rules/index.html">The rules</a>
+  <a class="nl here" href="../mandate/index.html">Mandate</a>
+  <a class="nl" href="../roadmap/index.html">Build order</a>
+  <a class="nl" href="../documents/index.html">Docs</a>
+  <a class="nl" href="../admin/comms.html">Comms</a>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / mandate</div>
+<h1>Identity and mandate are separate statements</h1>
+<p class="lead">A key answers <em>who is this</em>. It does not answer <em>what may this one do</em> — and for agents the second question is the one that matters, because the current answer everywhere is "everything you can do". The registry separates the two into signed statements that revoke independently.</p>
+
+<h2 id="problem">What today's answer actually is</h2>
+<p>Survey the available ways to give an agent a shared working area and one finding comes back from all of them: <b>every option runs on your identity</b>. The agent authenticates as you, holds your permissions, and is indistinguishable from you in whatever audit trail exists. So a rogue session reaches everything every other session can reach, and nothing can be attributed to the agent rather than to you. Nothing surveyed supports per-agent keys at all — three requirement rows come back empty across the whole market. That evidence is <a href="https://nhi.sgit.ai/research/shared-drives.html">published on nhi.sgit.ai</a>, and per-agent keys in a registry are what would fill those rows.</p>
+
+<h2 id="two">The two statements</h2>
+<div class="tablewrap"><table>
+  <thead><tr><th>Statement</th><th>Says</th><th>Signed by</th><th>Revoked by</th></tr></thead>
+  <tbody>
+    <tr><td><b>Identity</b></td><td>This key belongs to this agent</td><td>The key itself</td><td>A signed append from that key</td></tr>
+    <tr><td><b>Mandate</b></td><td>This agent may do these things, until this date, on whose authority</td><td>The authority granting it</td><td>A signed append from that authority — independently of the identity</td></tr>
+  </tbody>
+</table></div>
+<p>Both are entries in a record, so both obey <a href="../rules/index.html">the four rules</a>: appended, signed, size-bounded, owner-written. Both are checkable by a third party who trusts neither the agent nor the operator — which is the property a bearer token cannot have.</p>
+
+<h2 id="vs-token">Why this is materially different from a token</h2>
+<div class="tablewrap"><table>
+  <thead><tr><th></th><th class="run">A bearer token</th><th class="rent">Identity + mandate</th></tr></thead>
+  <tbody>
+    <tr><td><b>What it proves</b></td><td>Possession</td><td>Possession, <em>and</em> a separately signed grant</td></tr>
+    <tr><td><b>Who can check it</b></td><td>The issuer</td><td>Anybody, offline, against a published record</td></tr>
+    <tr><td><b>Scope is visible to</b></td><td>The issuer's console</td><td>Anybody reading the mandate</td></tr>
+    <tr><td><b>Narrowing what it may do</b></td><td>Reissue the token</td><td>Append a new mandate; the identity is untouched</td></tr>
+    <tr><td><b>Expiry</b></td><td>Whatever the issuer set</td><td>Stated in the mandate, and readable by the relying party</td></tr>
+  </tbody>
+</table></div>
+<p class="cap" style="max-width:none">The load-bearing difference is the third row. A token's scope is knowable only to whoever issued it; a mandate's scope is a published statement, so the party <em>relying</em> on it can see the limits of what it was given — and refuse work outside them.</p>
+
+<h2 id="caution">The caution that has to travel with this</h2>
+<p class="claim">A signed mandate constrains what an agent may be <em>authorised</em> to do, not what it does within that authority.</p>
+<p>That distinction is easy to lose and expensive to lose. A mandate narrows the grant; it does not observe the agent, bound its spend, cap its time, or tell you where it reached. It is one control among several and composes with them — it does not replace them. A registry that is sold as solving agent security would be repeating, in a new register, exactly the overclaim this project spends its time arguing against.</p>
+<div class="warnbox"><b>And the limit underneath all of it.</b> A registry can say <em>this key claims to be this agent</em>. It cannot say <em>this key is currently in the hands of that agent and nobody else</em> — that is attestation, and neither keys nor vaults supply it. Whoever holds the key is the identity. <a href="../about/participant.html#loses">Where our approach loses</a>, in full.</div>
+
+<h2 id="roots">Who may vouch, and the fractal problem</h2>
+<p>A mandate issued by somebody other than the agent is a third-party attestation — the exact mechanism that made the old network valuable and made it attackable. So the mandate concept cannot be adopted without answering <a href="../rules/index.html#attestation">the attestation question</a>, and it cannot be nested without answering the trust-root question: in a structure of registries within registries, <b>each store must declare which roots it accepts</b>, or the graph is unevaluable. Who may claim to be a root is a privileged decision needing a stated answer, even a simple one.</p>
+<p>This is also why the <a href="../roadmap/index.html">private registry comes first</a>. Inside one organisation, the trust root is not an open question — it is the organisation. That is the version of the problem worth solving before the version with strangers in it.</p>
+
+<h2 id="open">Open, and deliberately so</h2>
+<ul>
+  <li>Is a mandate a separate object from an identity, or a field on it? It should be separate, since they revoke independently — but that is a design position, not a settled implementation.</li>
+  <li>How is the binding between an agent and its key verified in the first place? The replacement keyserver used email. Agents have no equivalent, and this needs an answer.</li>
+  <li>What does an agent's identity actually attest to — which agent, running where, on whose authority, checked how?</li>
+</ul>
+
+<div class="pagenav">
+  <a href="../rules/index.html">← The four rules</a>
+  <a href="../roadmap/index.html">Next: the build order →</a>
+</div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. All content CC BY 4.0.</p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.1</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The registry</h4>
+    <a href="../failure/index.html">Why they don't exist</a>
+    <a href="../rules/index.html">The four rules</a>
+    <a href="../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../roadmap/index.html">Build order</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../documents/pki-registry.html">The scoping brief</a>
+    <a href="../about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="https://nhi.sgit.ai">nhi.sgit.ai</a>
+    <a href="https://sgit.ai">sgit.ai</a>
+  </div>
+</div></footer>
+
+</body>
+</body>
+</html>
