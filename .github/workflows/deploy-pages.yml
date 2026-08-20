@@ -64,16 +64,26 @@ jobs:
           git config user.name  'GitHub Actions'
           git config user.email 'actions@github.com'
 
+          # Read the history ONCE, into a variable. Piping `git log` straight into
+          # an early-exiting reader (grep -m1, head) makes git log die of SIGPIPE,
+          # and under `pipefail` that exit status propagates out of the command
+          # substitution and kills the job — after the variable has been assigned,
+          # which makes it look like the next line failed. It is a race against the
+          # pipe buffer, so it passes on a short history and starts failing once the
+          # log outgrows it. Herestrings below read from a file: nothing upstream to
+          # signal.
+          LOG=$(git log --format='%H;%s')
+
           # Backfill: every release commit carries its version in the subject
           # ("site vR.M.N: ..."). Tag any that are missing — idempotent, so this
           # is a no-op on every run after the first.
-          git log --format='%H;%s' | while IFS=';' read -r h s; do
+          while IFS=';' read -r h s; do
             v=$(printf '%s' "$s" | grep -oP '^site v\K[0-9]+\.[0-9]+\.[0-9]+(?=:)' || true)
             if [ -n "$v" ] && ! git rev-parse -q --verify "refs/tags/v$v" >/dev/null; then
               git tag "v$v" "$h"
               echo "backfilled v$v -> ${h:0:9}"
             fi
-          done
+          done <<< "$LOG"
 
           # The version of THIS release, from the file that owns it.
           VER=$(grep -oP '^v\K[0-9]+\.[0-9]+\.[0-9]+' admin/build/version.txt)
@@ -85,7 +95,7 @@ jobs:
           # pull request lands — HEAD is the merge and the release commit is its
           # parent. So anchor every check to the newest release commit reachable
           # from HEAD rather than to HEAD itself.
-          NEWEST=$(git log --format='%s' | grep -oP '^site v\K[0-9]+\.[0-9]+\.[0-9]+(?=:)' | head -1 || true)
+          NEWEST=$(grep -oP '^[0-9a-f]+;site v\K[0-9]+\.[0-9]+\.[0-9]+(?=:)' <<< "$LOG" | head -1 || true)
           if [ -z "$NEWEST" ]; then
             echo "::error::no commit in this history carries a version in its subject (\"site vX.Y.Z: ...\")"
             exit 1
@@ -94,7 +104,7 @@ jobs:
             echo "::error::version.txt says $TAG but the newest release commit in this history is v$NEWEST — the two disagree"
             exit 1
           fi
-          REL=$(git log --format='%H;%s' | grep -m1 -P ";site v$VER:" | cut -d';' -f1)
+          REL=$(grep -m1 -F ";site v$VER:" <<< "$LOG" | cut -d';' -f1 || true)
           echo "release commit is ${REL:0:9}"
 
           # The backfill above tags it. If the tag exists on an EARLIER commit than

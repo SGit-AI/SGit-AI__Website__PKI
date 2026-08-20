@@ -104,6 +104,26 @@ def footer_html(rel, up):
             f'  </div>\n{cols}\n</div></footer>')
 
 
+def stamp_text_twins():
+    """The version also appears in llms.txt and index.md, and validate.js enforces
+    that it agrees. Nothing used to SET it there, so it was hand-edited every
+    release — and hand-editing it silently missed twice. Own it here instead."""
+    out = []
+    llms = ROOT / "llms.txt"
+    t = llms.read_text()
+    t2, n = re.subn(r"Site version: v\d+\.\d+\.\d+", f"Site version: {VERSION}", t, count=1)
+    if n and t2 != t:
+        llms.write_text(t2)
+        out.append("llms.txt")
+    md = ROOT / "index.md"
+    t = md.read_text()
+    t2, n = re.subn(r"· site v\d+\.\d+\.\d+ ·", f"· site {VERSION} ·", t, count=1)
+    if n and t2 != t:
+        md.write_text(t2)
+        out.append("index.md")
+    return out
+
+
 def main():
     changed = []
     for path in sorted(ROOT.rglob("*.html")):
@@ -123,10 +143,15 @@ def main():
         if text != before:
             path.write_text(text)
             changed.append(rel)
-    print(f"chrome: {VERSION} applied — {len(changed)} page(s) updated")
+    changed += stamp_text_twins()
+    print(f"chrome: {VERSION} applied — {len(changed)} file(s) updated")
     for c in changed:
         print(f"  · {c}")
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except BrokenPipeError:
+        # piped into head/less — not an error
+        sys.stdout = None
