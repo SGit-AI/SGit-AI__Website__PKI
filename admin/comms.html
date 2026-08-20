@@ -13,7 +13,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.8</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.9</a>
   <a class="nl" href="../failure/index.html">The failure</a>
   <a class="nl" href="../origins/index.html">Origins</a>
   <a class="nl" href="../bootstrap/index.html">Bootstrap</a>
@@ -32,7 +32,7 @@
 <main class="doc">
 <div class="crumb"><a href="../index.html">pki.sgit.ai</a> / admin / comms</div>
 <h1>Comms: tasks, requests &amp; status</h1>
-<p class="lead">The working channel between the project lead and the site agent, kept in public on the site itself — which is an instance of the discipline this site argues for. Updated on every release. Current release: <b>v0.1.8</b>, 20 August 2026. Full history: <a href="versions.html">versions</a>.</p>
+<p class="lead">The working channel between the project lead and the site agent, kept in public on the site itself — which is an instance of the discipline this site argues for. Updated on every release. Current release: <b>v0.1.9</b>, 20 August 2026. Full history: <a href="versions.html">versions</a>.</p>
 
 <h2 id="needs">Needed from the project lead</h2>
 <div class="tablewrap"><table>
@@ -43,6 +43,7 @@
     <tr><td>N3</td><td><b>The attestation decision.</b> Does the registry accept third-party attestations? It is the site's central <a href="../roadmap/index.html#open">open question</a> and it is a call for the project lead, not the site agent — a documented failure on one side, no social trust at all on the other</td><td>The private-registry build (step 4) can start without it; mandates (step 5) cannot be finished without it</td><td><span class="tstat t-open">open — published unresolved, deliberately</span></td></tr>
     <tr><td>N6</td><td><b>Adopt (or reshape, or refuse) the registry MVP pack.</b> Now a full <a href="../packs/registry-mvp/index.html">dev pack</a>. The three v0.33.61 briefs arrived and their corrections are recorded in <a href="../packs/registry-mvp/change-control.html">change control</a>, which also carries the decisions register: four settled by those briefs (mandate location, grant redefinition, the fixture class, agent cards + workflow signing), four still yours — the size bounds, the first capability, acceptance semantics, and the corpus version on adoption</td><td>Phase 0 (the fixture class + validator) can start on adoption</td><td><span class="tstat t-need">waiting on human</span></td></tr>
     <tr><td>N7</td><td><b>How much more of the corpus to publish.</b> Tier 0 is <b>done</b> — thirteen documents live under <a href="../origins/index.html">Origins</a>, plus a <a href="../origins/review.html">redacted edition</a> of the review. What remains is a decision on Tier 1 (29 documents, each needing a one-line framing note so a proposal is not read as shipped) and Tier 2 (7 needing redaction). <b>The redaction gate still stands for those tiers</b>: a customer name and live-code findings appear in the source material</td><td>Tier 1 is the next increment of build-order step 1</td><td><span class="tstat t-open">open — Tier 0 shipped, Tier 1 awaiting the call</span></td></tr>
+    <tr><td>N8</td><td><b>Adopt or reject the proposed fifth rule.</b> The four rules are published commitments and have not been renumbered. The fifth — <em>the registry publishes its signed head on a stated cadence</em> — is on <a href="../rules/index.html#reference">the rules page as a proposal</a>. Adopting it makes the append-only claim falsifiable rather than promised; rejecting it leaves that claim as a promise. Related and also yours: <b>which verification mode ships first</b>, since issuance is better for the customer and lookup is better for recurring revenue, and <a href="../documents/notary.html">a site arguing for honest disclosure should say which it chose and why</a></td><td>The rules are the site's load-bearing commitment; a fifth is not the site agent's to add</td><td><span class="tstat t-need">waiting on human</span></td></tr>
     <tr><td>N5</td><td><b>Confirm the execution-layer name.</b> This site publishes it as <b>execution broker</b> rather than <em>Service Twin</em>, on the pack's own argument that a digital twin <em>represents</em> a thing while this <em>acts on</em> one. If the product line settles on a different name, this site should follow it rather than diverge</td><td>A naming split between the site and the product would be worse than either name</td><td><span class="tstat t-open">open — proceeding with "execution broker" unless redirected</span></td></tr>
     <tr><td>N4</td><td><b>Presentation material to recycle.</b> The scoping brief notes 31 files referencing presentation material the project lead wanted reused — worth an infographics section if the posts are identified, as on nhi.sgit.ai</td><td>No infographics section until the material is identified</td><td><span class="tstat t-open">open</span></td></tr>
   </tbody>
@@ -67,6 +68,8 @@
     <tr><td>T17</td><td>Corrections C1–C3 applied to <a href="../shipped/index.html">shipped</a>: the over-generalised algorithm claim (this site's own error, recorded not edited), the verified-versus-trusted provenance note, and the registry that was built in February and retired in June</td><td>site agent</td><td><span class="tstat t-done">done v0.1.7</span></td></tr>
     <tr><td>T18</td><td>Origins section: the four-act arc, 13 Tier-0 primary sources published verbatim (each re-scanned for secrets and identifiers), <a href="../rules/prior-art.html">the retired registry as prior art</a>, and a redacted public edition of the review. Answers the review's gaps A and B</td><td>site agent</td><td><span class="tstat t-done">done v0.1.8</span></td></tr>
     <tr><td>T19</td><td>Still available from the review and not yet done: reclassify open questions 1, 4, 5 and 6 from <em>open</em> to <em>argued here, decision pending</em> — the review rates it the highest credibility-per-hour item on its list</td><td>site agent</td><td><span class="tstat t-open">queued</span></td></tr>
+    <tr><td>T20</td><td>Open questions reclassified (the review's highest credibility-per-hour item): four of six now read <em>argued, decision pending</em> with links, and the eight opened on 20 August are captured on <a href="../roadmap/index.html#open-new">the roadmap</a></td><td>site agent</td><td><span class="tstat t-done">done v0.1.9</span></td></tr>
+    <tr><td>T21</td><td>Four v0.33.61 briefs processed: history/append-only, notary, register UI, and the superseded grant brief. Pack change control C7–C10; <a href="../rules/index.html#reference">proposed fifth rule</a> published as a proposal</td><td>site agent</td><td><span class="tstat t-done">done v0.1.9</span></td></tr>
     <tr><td>T5</td><td>Markdown twins for every page + <code>llms-full.txt</code> (the sgit.ai convention) — only the front page has one</td><td>site agent</td><td><span class="tstat t-open">queued</span></td></tr>
     <tr><td>T6</td><td>The collection (build-order step 1): curate the 729-file corpus by question, promoting the Feb–Mar architecture material</td><td>site agent</td><td><span class="tstat t-doing">blocked on N2</span></td></tr>
     <tr><td>T7</td><td>Redirect the nhi.sgit.ai PKI section here once this site is live on its domain — that section was always staging, and the NHI site queues the spin-out as its T19</td><td>site agent</td><td><span class="tstat t-open">queued — after N1(c)</span></td></tr>
@@ -92,7 +95,7 @@
     <div class="brandline">pki<span>.sgit.ai</span></div>
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. All content CC BY 4.0.</p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.8</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.9</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The registry</h4>

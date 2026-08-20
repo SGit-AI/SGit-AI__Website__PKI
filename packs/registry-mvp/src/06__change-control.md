@@ -52,6 +52,38 @@ Draft-1's most-argued decision — **a mandate lives in the issuer's record; the
 Three items land in this pack rather than in site chores: the **path convention should be promised, not merely true** — `registry/llms.txt` must state that every artefact is fetchable by constructed URL, because agents already rely on it; the **cross-site composition gap** means phase 1's pages link *page-to-page* to the shipped documentation (`/docs/pki`, `/docs/vault-messaging`, `/docs/limitations`), never to a domain; and the report confirms **four rules with no entries are four assertions** — the fixture programme is what tests them, which is C3 from a second direction.
 **Status:** adopted; the first two are also applied to this site directly at v0.1.5.
 
+### C7 — The record model changes: growth moves to the commit graph
+
+**Source:** `v0.33.61__arch-brief__history-is-the-append-only-log…`
+**Draft-1 said:** a record is a numbered sequence of immutable signed statement files, hash-chained by `seq`/`prev`, read to the end for current state (documents 01 and 02, diagram D3).
+**The correction:** that design carries its own growth, which puts the pack's own rules 2 and 3 into tension exactly as the site's do. **The entry should be a *file inside a commit graph*, not a record that accumulates.** The file carries current state and no history array; the versioning substrate already holds every prior state, content-addressed.
+**Consequence:** materially simpler. `seq`/`prev` become the commit graph's job rather than the envelope's; the size bound applies to the entry file and is trivially satisfiable; and "read to the end" becomes "read one object". The verification walk (D5) shortens, and the `acceptance` mechanism gets a second justification — **third-party assertions arrive through a lane that sits outside the commit graph by design**, so rule 1 holds as topology rather than as a check the processor performs.
+**Status:** adopted for draft-2. This is the largest single change to the architecture and it removes code rather than adding it.
+
+### C8 — Two corrections about what "append-only" guarantees
+
+**Source:** the same brief.
+**Draft-1 implied** that resting on a versioned substrate gives immutable history. **It does not.** Blobs, trees and commits are content-addressed and immutable; **branch references are mutable, and moving one is a shipped command.** So append-only history is a policy about a single pointer.
+**Consequence:** the pack must adopt the published-head discipline — the registry publishes its head, signed and dated, on a stated cadence, so a rewrite is falsifiable by any reader who kept the previous one. The site publishes this as a [proposed fifth rule](../../rules/index.html#reference).
+**Second correction:** the pack's headline query — *what did this identity look like on this date* — **has no command behind it.** There is no path-scoped log and no blame in the command surface. Content addressing makes it cheap (an unchanged path carries the same tree hash, so the walk is a comparison per commit rather than a diff), but it is unwritten code, and it is the register's product.
+**Status:** adopted. The traversal moves into the build order as a named deliverable rather than an assumed capability.
+
+### C9 — Verification is two products, and metering costs the privacy claim
+
+**Source:** `v0.33.61__arch-brief__every-trust-edge-is-a-two-way-conversation…`
+**Draft-1 did not address** how a verifier checks a vouching edge beyond "follow references".
+**The correction:** a signed assertion verified once and a live lookup checked every time are **two products with opposite properties**, not two settings — offline versus always-current, staleness versus an availability dependency. And only the live one can be metered, because charging per check requires observing every check. What a live notary accumulates is **a relationship graph neither party handed over**, which contradicts the estate's positioning more sharply than any content service could, and cannot be held encrypted.
+**Consequence for the MVP:** it takes the published form. A notary that publishes signed dated answers to a location the verifier fetches **cannot meter and cannot surveil, and those are one property**. Two additions to the schemas: *unreachable* becomes a fourth state distinct from confirmed, denied and unknown; and a resolution result records **what it declined to verify and why**, distinguishing unreachable from too-expensive.
+**Status:** adopted for draft-2. The commercial choice between issuance and lookup is the project lead's, and the pack does not make it.
+
+### C10 — The interface primitive is a badge on every edge
+
+**Source:** `v0.33.61__dev-brief__register-ui-every-edge-carries-a-verification-badge…`
+**Draft-1 had no interface layer** beyond the workflows.
+**The addition:** every line in a register is a claim by somebody about somebody, so the primitive is a badge carried by every edge — claim, verifiable-by, method, cost, last-checked, result — with **five result states**, because denied, unreachable and never-checked are three different situations. **"Nobody" is a legitimate and informative value for verifiable-by.** A policy then becomes a saved query that must return no rows, and the badge on the constrained edge decides whether that policy is enforcement or instrumentation.
+**And a tested result the pack should carry:** inside a running rented session, the surface is named precisely by environment variables, **no attestation device of any kind is present, and nothing is signed**. The surface is knowable to the agent and unprovable to anybody else. Handing the session a secret makes it worse — a secret proves possession, not location. The vendor *does* record the surface but cannot tell a third party in checkable form, so **the gap is distribution rather than knowledge**, which makes it a product decision rather than a hardware problem.
+**Status:** adopted as the pack's phase 6. The badge vocabulary is written before any page exists.
+
 ## The decisions register
 
 | # | Decision | Made by | Status |
@@ -64,6 +96,11 @@ Three items land in this pack rather than in site chores: the **path convention 
 | 6 | First capability (`repo.pull-request.create`) | draft-1 proposal | **Open — awaiting project lead** |
 | 7 | Corpus version for this pack | — | **Open — assigned on adoption** |
 | 8 | Acceptance semantics (unaccepted mandate = inert) | draft-1 proposal | **Open** |
+| 9 | Entry as a file in a commit graph, not an accumulating record | v0.33.61 | **Settled — architecture change queued** |
+| 10 | Publish the signed head on a cadence | v0.33.61 | **Settled in principle — cadence open** |
+| 11 | Notary takes the published form, not the answering form | v0.33.61 | **Settled for the MVP — the commercial call is the project lead's** |
+| 12 | Mandates are allow-lists; prohibitions are annotations only | v0.33.61 | **Settled** |
+| 13 | Which verification mode ships first | — | **Open — two products, and building both means neither finishes** |
 
 ---
 

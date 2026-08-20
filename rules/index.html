@@ -13,7 +13,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.8</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.9</a>
   <a class="nl" href="../failure/index.html">The failure</a>
   <a class="nl" href="../origins/index.html">Origins</a>
   <a class="nl" href="../bootstrap/index.html">Bootstrap</a>
@@ -94,6 +94,28 @@ sequenceDiagram
 </table></div>
 <div class="warnbox"><b>Do not read the left column as progress on the right.</b> The infrastructure being ready is not the hard part being solved. Every property that failed in 2019 lives in the right-hand column, and that is the part still to build.</div>
 
+<h2 id="reference">A proposed fifth rule: publish the reference</h2>
+<div class="warnbox"><b>Proposed, not adopted.</b> The four rules above are published commitments and are not renumbered here. This is a fifth candidate, raised 20 August, published as a proposal so the decision to adopt or reject it is visible.</div>
+<p>Three of the four rules are about entries. <b>None of them is about the pointer that decides which entries a reader sees</b> — and that turns out to be the one layer where append-only is a policy rather than a mechanism.</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Layer</th><th>Property</th><th>What follows</th></tr></thead>
+  <tbody>
+    <tr><td>Blobs, trees and commits</td><td><b>Content-addressed and immutable</b></td><td>A commit that existed cannot be altered undetectably</td></tr>
+    <tr><td>The branch reference</td><td><b class="no">Mutable</b></td><td>The history a reader sees is whatever the reference currently points at — and moving it is a shipped command</td></tr>
+  </tbody>
+</table></div>
+<p>The distinction is the familiar one. <b>A revert appends</b>: a new commit undoing an earlier one, both still reachable — which is what <a href="#r2">rule 2</a> means. <b>A reset moves the pointer</b>: commits that were reachable stop being. Nothing was mutated, and the history changed anyway.</p>
+<p class="claim">Append-only history is a policy about one pointer, not a property of the store.</p>
+<p>For a registry whose whole proposition is that a reader can reconstruct what was believed at a past date <em>without trusting the party serving it</em>, that is a material gap. Saying "our published branch does not accept a reset" is a promise. The site's own <a href="#r4">fourth rule</a> asks for better:</p>
+<div class="evbox"><span class="evtag">Proposed rule 5</span>
+<p><b>The registry publishes its head — signed and dated — on a stated cadence.</b> A reference that moves backwards is observable to anybody who recorded where it used to point. A reader who kept yesterday's head can verify that today's history still contains it, which turns the promise into an assertion somebody else can falsify.</p></div>
+<p>It is the same move as a short-lived certificate recorded in a public log, and the same move <a href="../documents/notary.html">a notary that publishes rather than answers</a> makes: <b>publish the thing that makes the claim checkable, rather than asking to be believed.</b> The honest limit is that it protects the attentive and nobody else — it only helps readers who kept a previous head.</p>
+
+<h2 id="growth">Where the growth goes — and why rules 2 and 3 stop competing</h2>
+<p>Read as rules about one accumulating object, <a href="#r2">rule 2</a> (nothing is ever removed) and <a href="#r3">rule 3</a> (the record must not grow without limit) are close to contradictory, and rule 3 is the one that would quietly be dropped.</p>
+<p><b>The tension dissolves once the entry is a file inside a commit graph rather than a record that accumulates.</b> The bound applies to the entry file; the growth lives in the history, where growth is already handled. The entry then carries current state and <em>no history array</em> — no list of prior fingerprints, no embedded revocation log. A consumer wanting the current answer fetches one object; a consumer wanting the story clones.</p>
+<div class="note"><b>And rule 1 becomes topology rather than policy.</b> Third-party assertions arrive through <a href="../enrolment/index.html#lane">an append lane that sits outside the commit graph by design</a>, so a stranger does not have their write <em>refused</em> — <b>they have nowhere to write it</b>. Their material lands in a lane the owner enumerates and chooses to incorporate, and incorporating it is a commit the owner makes. That is the 2019 keyserver failure prevented by structure instead of by a check. <a href="../documents/history-append-only.html">The full argument</a>.</div>
+
 <h2 id="capabilities">The authorisation model is not a new one</h2>
 <p>A registry needs to say who may append, who may read, who may configure and who holds the signing key. That model already exists in the platform, implemented and code-verified, as <a href="../shipped/index.html#capabilities">four capability tiers with the server holding only hashes</a> — so a total compromise of the server yields hashes rather than capabilities.</p>
 <p>Reusing it beats designing a second one for three reasons: it is implemented rather than argued for, the hash-only property is the catastrophic-failure discipline these rules already invoke, and <b>a second authorisation model in the same platform is a second thing to reason about, get wrong and document</b>. Rule 1 is a constraint on the first of those four tiers.</p>
@@ -113,7 +135,7 @@ sequenceDiagram
     <div class="brandline">pki<span>.sgit.ai</span></div>
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. All content CC BY 4.0.</p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.8</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.9</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The registry</h4>

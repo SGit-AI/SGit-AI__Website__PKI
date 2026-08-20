@@ -13,7 +13,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.8</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.9</a>
   <a class="nl" href="../failure/index.html">The failure</a>
   <a class="nl" href="../origins/index.html">Origins</a>
   <a class="nl" href="../bootstrap/index.html">Bootstrap</a>
@@ -87,22 +87,36 @@
   </tbody>
 </table></div>
 
-<h2 id="open">Open questions, published unresolved</h2>
+<h2 id="open">Open questions — what is argued, and what is genuinely open</h2>
+<p>Publishing questions unresolved is the discipline. Publishing them as if nothing had been said about them is not: a cross-reference review of the corpus found that four of the six below already have substantial arguments behind them, some running to thousands of words. <b>An open question with an argument behind it reads very differently from one with nothing</b>, so the table now says which is which.</p>
 <div class="tablewrap"><table>
-  <thead><tr><th>Question</th><th>Why it is still open</th></tr></thead>
+  <thead><tr><th>Question</th><th>State</th><th>Where it stands</th></tr></thead>
   <tbody>
-    <tr><td><b>Does the registry accept third-party attestations?</b></td><td>The central design choice: a documented failure on one side, no social trust at all on the other</td></tr>
-    <tr><td><b>What is the size bound per record?</b></td><td>Generous enough to be invisible, small enough to stop flooding — and the number is not chosen</td></tr>
-    <tr><td><b>How is the binding between an agent and its key verified?</b></td><td>The replacement server used email; agents have no equivalent</td></tr>
-    <tr><td><b>Who may be a trust root?</b></td><td>A privileged decision needing a stated answer, even a simple one</td></tr>
-    <tr><td><b>Is a mandate a separate object from an identity?</b></td><td>It should be, since they revoke independently — but that is a position, not an implementation</td></tr>
-    <tr><td><b>What does an agent's identity attest to?</b></td><td>Which agent, running where, on whose authority, and how any of that is checked</td></tr>
-    <tr><td><b>Can a rented agent persist a key between sessions?</b></td><td>If a hosted session cannot keep a key between runs, every session is a new identity and a mandate cannot outlive one conversation — which changes what any of this delivers</td></tr>
-    <tr><td><b>How is the return path secured?</b></td><td>A write-only lane covers ingress only, and the certificate has to get back</td></tr>
-    <tr><td><b>What stops the enrolment ingress being flooded?</b></td><td>It is deliberately unauthenticated, so this needs an answer before it is exposed</td></tr>
+    <tr><td><b>Does the registry accept third-party attestations?</b></td><td><span class="opt-verdict opt-part">argued, decision pending</span></td><td>A working design exists — third-party scanners sign their results, receiver-readable and hash-bound to the file — alongside a multi-dimensional web-of-trust model. The attack surface has also been analysed. What is missing is the <em>call</em>, not the argument</td></tr>
+    <tr><td><b>Who may be a trust root?</b></td><td><span class="opt-verdict opt-part">argued, decision pending</span></td><td>The deepest trust-model work in the corpus addresses it directly, including equivocation witnessing and atomic trust-graph writes. <b>Raised three times in two days</b> and still unresolved — a chain cannot terminate without it</td></tr>
+    <tr><td><b>Is a mandate a separate object from an identity?</b></td><td><span class="opt-verdict opt-yes">argued — yes</span></td><td>Answered twice: <a href="../documents/grant-vs-mandate.html">mandate is delegation</a>, and the right to ask is separable from the means to act. They revoke independently, so they are separate objects</td></tr>
+    <tr><td><b>What does an agent's identity attest to?</b></td><td><span class="opt-verdict opt-part">argued, decision pending</span></td><td><em>Accountability happens when privileges are assigned, not when the model acts</em> — and the newest thinking moves attestation from the actor to the write itself</td></tr>
+    <tr><td><b>What is the size bound per record?</b></td><td><span class="opt-verdict opt-no">genuinely open</span></td><td>Operational limits exist upstream, and <a href="../documents/history-append-only.html">the growth question has since been reframed</a> — the bound belongs on the entry file, not the history. The number is still unchosen</td></tr>
+    <tr><td><b>How is the binding between an agent and its key verified?</b></td><td><span class="opt-verdict opt-no">genuinely open</span></td><td>A design was proposed in March (well-known documents, DNS records, a verification endpoint) and <b>never built</b>. The replacement keyserver used email; agents have no equivalent</td></tr>
   </tbody>
 </table></div>
-<div class="note"><b>These are refutation targets.</b> Anybody who answers one of these well improves the design — including by showing that a rule is wrong. <a href="../admin/comms.html">Comms</a> is the channel.</div>
+
+<h2 id="open-new">Newly opened, 20 August</h2>
+<p>Four briefs on one day opened more than they closed. These are the questions this site now carries that it did not this morning:</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Question</th><th>Why it matters</th></tr></thead>
+  <tbody>
+    <tr><td><b>What forbids a reset on the register's published branch?</b></td><td>A stated policy, a published head and a server-side rule are not equivalent. <a href="../rules/index.html#reference">The proposed fifth rule</a> picks the second</td></tr>
+    <tr><td><b>How often is the head published, and where?</b></td><td>Too rare and a rewrite hides inside the gap; too frequent and it becomes its own growing record</td></tr>
+    <tr><td><b>Does a revocation supersede the entry or add a field to it?</b></td><td>The clean-file rule says supersede — and a consumer wants to see <em>revoked</em> without doing a traversal</td></tr>
+    <tr><td><b>Which verification mode ships first — signed assertion, or live lookup?</b></td><td><a href="../documents/notary.html">Two products with opposite properties</a>, and building both at once means neither is finished</td></tr>
+    <tr><td><b>Is the notary's query graph retained at all?</b></td><td>Billing needs a count, not a subject. The separation should be structural rather than a retention policy</td></tr>
+    <tr><td><b>What is rendered when an edge has never been checked?</b></td><td>Distinct from unreachable and from denied, and the default decides how the whole register reads</td></tr>
+    <tr><td><b>Who reviews a mandate when the provider adds a capability?</b></td><td>A grant grows on somebody else's release schedule — and a deny-list mandate widens with it, silently</td></tr>
+    <tr><td><b>Has any vendor shipped a signed surface claim?</b></td><td>The dated tripwire. It needs an owner and a re-run cadence, and anybody who shows one refutes the claim</td></tr>
+  </tbody>
+</table></div>
+<div class="note"><b>These are refutation targets.</b> Anybody who answers one well improves the design — including by showing that a rule is wrong. <a href="../admin/comms.html">Comms</a> is the channel.</div>
 
 <div class="pagenav">
   <a href="../shipped/index.html">← What already ships</a>
@@ -115,7 +129,7 @@
     <div class="brandline">pki<span>.sgit.ai</span></div>
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. All content CC BY 4.0.</p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.8</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.9</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The registry</h4>

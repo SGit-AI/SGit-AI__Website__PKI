@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>The Register Was Designed In June: Published Keypairs Are Fixtures, Not Identities · documents · pki.sgit.ai</title>
+<title>History Is The Append-Only Log: The Objects Are Immutable And The Reference Is Not · documents · pki.sgit.ai</title>
 <meta name="description" content="Original document, readable in-page: summary, key concepts and key ideas, then the full markdown. Architecture brief, v0.33.61, 20 August 2026. CC BY 4.0.">
-<link rel="canonical" href="https://pki.sgit.ai/documents/register-fixtures.html">
+<link rel="canonical" href="https://pki.sgit.ai/documents/history-append-only.html">
 <link rel="stylesheet" href="../assets/site.css">
 </head>
 <body>
@@ -30,8 +30,8 @@
 </div></nav>
 
 <main class="doc">
-<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="index.html">documents</a> / register-fixtures</div>
-<h1>The Register Was Designed In June: Published Keypairs Are Fixtures, Not Identities</h1>
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="index.html">documents</a> / history-append-only</div>
+<h1>History Is The Append-Only Log: The Objects Are Immutable And The Reference Is Not</h1>
 
 <div class="docmeta">
   <span class="k">Type</span><span class="v">Architecture brief</span>
@@ -39,38 +39,38 @@
   <span class="k">Date</span><span class="v">20 August 2026</span>
   <span class="k">Author</span><span class="v">Dinis Cruz (project lead) and collaborators</span>
   <span class="k">Licence</span><span class="v">CC BY 4.0</span>
-  <span class="k">Source</span><span class="v"><a href="../briefs/v0.33.61__arch-brief__register-was-designed-in-june-published-keypairs-are-fixtures-not-identities.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/dev/briefs/v0.33.61__arch-brief__register-was-designed-in-june-published-keypairs-are-fixtures-not-identities.md">view on GitHub</a></span>
+  <span class="k">Source</span><span class="v"><a href="../briefs/v0.33.61__arch-brief__history-is-the-append-only-log-objects-immutable-reference-is-not.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/dev/briefs/v0.33.61__arch-brief__history-is-the-append-only-log-objects-immutable-reference-is-not.md">view on GitHub</a></span>
 </div>
 
 <h2 id="summary">Summary</h2>
-<p>The register the memo asks for was designed on 5 June (v0.32.4): clues not storage, entries as nodes with relationships as the value, two-level trust in which self-declaration grants nothing, the register as a vault holding no private data, connectors to any identity provider, and resolution as the caller's job — so today's work is operationalisation, not design. The correction that matters: a keypair whose private half is published is not a weak identity but no identity, permanently — a fixture, whose whole purpose is to exercise the plumbing, marked by a required private_key_published flag read before any signature, never reachable from the real trust graph, and retired only by republishing under a fresh key. Personas ship as signed agent cards; the notary is a workflow identity with keyless signing; and push protection will block the published key, which makes the recorded bypass part of the demonstration.</p>
+<p>The brief that dissolves a tension between two of this site's own published rules. Revocation-as-a-signed-append and size-bounded records pull against each other only while the entry is treated as a record that accumulates; seen as a file inside a commit graph, the two rules govern different structures and the conflict disappears. It also corrects a comfortable assumption: blobs, trees and commits are content-addressed and immutable, but branch references are mutable and a history reset is a shipped command — so append-only history is a policy about one pointer, not a property of the store. The fix is the site's own standard: publish the head, signed and dated, so a rewrite becomes falsifiable by any reader who kept the last one. And it names the register's central query — what did this identity look like on this date — as the one piece with no command behind it.</p>
 
 <h2 id="concepts">Key concepts</h2>
 <ul>
-  <li><a href="../packs/registry-mvp/change-control.html"><b>The fixture class</b></a> — adopted into the MVP pack as change C3 — the flag before the signature</li>
-  <li><a href="../rules/index.html#r1"><b>Evidence to the asserter's record</b></a> — the 2019 rule applied to vouching — the same rule the MVP pack chose independently</li>
-  <li><a href="../packs/registry-mvp/tabletop.html"><b>A fixture voids two rules</b></a> — revocation and signature-substance — which is what makes fixtures the rules' first test</li>
-  <li><a href="../bootstrap/index.html#unfixed"><b>Retrieval is not persistence</b></a> — fetching a key works only while the key is public; the 19 August question stays open</li>
+  <li><a href="../rules/index.html#r1"><b>Two append-only structures</b></a> — the commit graph gated by the write key, the lane open to token holders — rule 1 as topology, not policy</li>
+  <li><a href="../packs/registry-mvp/change-control.html"><b>The reference is mutable</b></a> — objects cannot be altered undetectably; the pointer that selects them can be moved</li>
+  <li><a href="../rules/index.html#reference"><b>Publish the head</b></a> — turning an append-only promise into something a reader can falsify</li>
+  <li><a href="../packs/registry-mvp/build-order.html"><b>The missing traversal</b></a> — path-scoped history is the register's product and has no command</li>
 </ul>
 
 <h2 id="ideas">Key ideas</h2>
 <ul>
-  <li>Whether the private half is published is the most consequential evidence an entry can carry.</li>
-  <li>A fixture's append lane is a public inbox — anything sent to it is readable by anybody.</li>
-  <li>The notary must be an agent you run: the two-populations thesis as an implementation constraint.</li>
-  <li>Publishing a key inside vault ciphertext evades secret scanning rather than satisfying it.</li>
+  <li>A third party has nowhere to write into the owner's record — that is a stronger form of rule 1 than a rule can be.</li>
+  <li>The entry file carries current state and no history array; a consumer wanting the answer fetches one object, one wanting the story clones.</li>
+  <li>Content addressing makes the traversal a hash comparison per commit rather than a diff, so it is cheaper than it looks.</li>
+  <li>A mandate's trust ceiling is its issuer's, not its subject's — and it will read as a defect the first time a familiar agent resolves to an unrecognised mandate.</li>
 </ul>
 
 <h2 id="on-site">On this site</h2>
-<p>Folded into the registry MVP pack as change-control entries C2, C3 and C4; the tabletop's inject I5 runs its central warning as an exercise card.</p>
+<p>Folded into the MVP pack as change-control entries C7 and C8, and into the rules page as the proposed fifth rule about the reference.</p>
 
 <h2 id="read">Read the document</h2>
-<div class="mdread-label">📄 Original document · v0.33.61 · 20 August 2026 · rendered from the <a href="../briefs/v0.33.61__arch-brief__register-was-designed-in-june-published-keypairs-are-fixtures-not-identities.md">raw markdown</a> (the source of truth)</div>
-<div class="mdread" id="mdread" data-src="../briefs/v0.33.61__arch-brief__register-was-designed-in-june-published-keypairs-are-fixtures-not-identities.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="../briefs/v0.33.61__arch-brief__register-was-designed-in-june-published-keypairs-are-fixtures-not-identities.md">open the raw markdown</a>.</p></noscript></div>
+<div class="mdread-label">📄 Original document · v0.33.61 · 20 August 2026 · rendered from the <a href="../briefs/v0.33.61__arch-brief__history-is-the-append-only-log-objects-immutable-reference-is-not.md">raw markdown</a> (the source of truth)</div>
+<div class="mdread" id="mdread" data-src="../briefs/v0.33.61__arch-brief__history-is-the-append-only-log-objects-immutable-reference-is-not.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="../briefs/v0.33.61__arch-brief__history-is-the-append-only-log-objects-immutable-reference-is-not.md">open the raw markdown</a>.</p></noscript></div>
 
 <div class="pagenav">
   <a href="index.html">← All documents</a>
-  <a href="../briefs/v0.33.61__arch-brief__register-was-designed-in-june-published-keypairs-are-fixtures-not-identities.md">Raw markdown →</a>
+  <a href="../briefs/v0.33.61__arch-brief__history-is-the-append-only-log-objects-immutable-reference-is-not.md">Raw markdown →</a>
 </div>
 </main>
 
