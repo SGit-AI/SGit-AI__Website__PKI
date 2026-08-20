@@ -13,7 +13,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.6</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.7</a>
   <a class="nl" href="../failure/index.html">The failure</a>
   <a class="nl" href="../bootstrap/index.html">Bootstrap</a>
   <a class="nl" href="../rules/index.html">The rules</a>
@@ -40,6 +40,8 @@
 <div class="note"><b>The shipped documentation, page by page.</b> Per the v0.33.61 <a href="../documents/site-access-report.html">site access report</a>, cross-links here point at pages, not domains: the keypair lifecycle run end to end at <a href="https://sgit.ai/docs/pki.md">sgit.ai/docs/pki</a>, the full messaging choreography at <a href="https://sgit.ai/docs/vault-messaging.md">sgit.ai/docs/vault-messaging</a>, and the shipped-versus-proposed boundary in the platform's own words at <a href="https://sgit.ai/docs/limitations.md">sgit.ai/docs/limitations</a>. Every one has a markdown twin at the same path — a property agents may rely on.</div>
 
 <h2 id="ships">The shipped surface</h2>
+<div class="note"><b>Where this is verified, and where it is taken on trust.</b> The <code>sgit pki</code> commands below live in the <a href="https://github.com/SGit-AI/SGit-AI__CLI">SGit-AI__CLI</a> repository and are recorded as working in the corpus's reality tree — they are <em>not</em> verifiable from the corpus repo itself. The append lane, by contrast, is code-verified there. This page states which is which because the site's own standard requires it.</div>
+
 <div class="tablewrap"><table>
   <thead><tr><th>What ships</th><th>Detail</th></tr></thead>
   <tbody>
@@ -52,17 +54,29 @@
   </tbody>
 </table></div>
 
-<div class="warnbox"><b>A correction worth carrying, because it would get copied into an implementation.</b> Source material circulating in this corpus describes the client sealing a payload to a recipient's <b>X25519</b> key. That is wrong. The shipped primitives are <b>RSA-OAEP 4096</b> and <b>ECDSA P-256</b> — explicitly <em>not</em> X25519 or Ed25519. Anything naming those curves is describing a system that does not exist.</div>
+<div class="warnbox"><b>A correction, including to this page.</b> Source material circulating in this corpus describes the client sealing a payload to a recipient's <b>X25519</b> key. That is wrong <em>for that mechanism</em>: the vault-to-vault client crypto it describes is not built. But an earlier version of this page over-generalised the correction, saying the shipped primitives were RSA-OAEP 4096 and ECDSA P-256 and that "anything naming those curves is describing a system that does not exist." That was checked against the <code>sgit pki</code> documentation and then applied to the whole estate, which is wrong. The accurate statement:
+<ul style="margin:.6rem 0 0">
+  <li><code>sgit pki</code> ships <b>RSA-OAEP 4096</b> and <b>ECDSA P-256</b> exclusively.</li>
+  <li>Elsewhere in the stack, <b>Ed25519</b> (the public SSH keygen tool, live) and <b>ECDH P-256</b> (SecureChannel, replay-guarded, 43 assertions) <b>are shipped</b> — under deliberately different trust models.</li>
+  <li><b>X25519</b> appears only in <em>unbuilt</em> vault-to-vault specifications.</li>
+</ul>
+<p style="margin:.6rem 0 0">Recorded rather than quietly edited, because the failure is instructive: the source was right and the scope was not. Established by a Librarian cross-reference review of the corpus repo at v0.33.61 — 110 PKI documents against ~3,900 lines of PKI code. That review is <b>not published here</b>: it names unremediated findings against live code and a customer, which is the same judgement <a href="../about/participant.html#loses">this site applies to itself</a>.</p></div>
 
 <h2 id="absences">The two absences</h2>
 <div class="tablewrap"><table>
   <thead><tr><th>Absence</th><th>What it costs today</th><th>What supplies it</th></tr></thead>
   <tbody>
     <tr><td><b>No revocation</b></td><td>A compromised key cannot be withdrawn. Anybody holding it stays able to act as that identity, and anybody verifying an old signature cannot tell whether the key was still good at the time</td><td><a href="../rules/index.html#r2">Rule 2</a> — revocation as a signed append, so the record stays append-only and still supports withdrawal</td></tr>
-    <tr><td><b>No directory</b></td><td>Keys are exchanged out of band and kept in a local contacts list. There is no answer to "what is the current key for this agent, and who says so"</td><td><a href="../rules/index.html">The registry</a> — a published, mirrorable record with <a href="../rules/index.html#r1">owner-only writes</a> and <a href="../rules/index.html#r4">every entry signed</a></td></tr>
+    <tr><td><b>No directory</b></td><td>Keys are exchanged out of band and kept in a local contacts list. There is no answer to "what is the current key for this agent, and who says so". <b>And this is a retirement, not an absence</b> — see below</td><td><a href="../rules/index.html">The registry</a> — a published, mirrorable record with <a href="../rules/index.html#r1">owner-only writes</a> and <a href="../rules/index.html#r4">every entry signed</a></td></tr>
   </tbody>
 </table></div>
 <p>Those are the two hardest operations a key repository performs, and they are the two the 2019 network got wrong — it could never delete, and anybody could append to anybody's record. <b>The absences are not an oversight; they are the parts that need designing before they are built.</b> Which is why <a href="../rules/index.html">the rules are published first</a>.</p>
+
+<h2 id="prior-art">There was a directory. It was built, and then retired</h2>
+<p>"No directory" reads like something nobody got round to. It is not. In <b>February 2026</b> this project shipped a key registry: five endpoints (<code>publish</code>, <code>lookup</code>, <code>unpublish</code>, <code>list</code>, <code>log</code>), base-36 lookup codes, duplicate-fingerprint rejection, soft delete, and a <b>genuinely hash-chained transparency log</b>. It was built in a six-day burst, 29 commits and 183 tests, and it still runs behind admin authentication.</p>
+<p>In <b>June 2026</b> it was formally superseded: the vault-hosted registry design records the shipped service as prior art, and the corpus's reality tree carries the line <em>"Replaces a prior FastAPI prototype."</em></p>
+<p class="claim">The registry is not an idea this project is reaching for. It is one this project built, ran, and decided was not enough — and the design that replaced it is the one <a href="../packs/registry-mvp/index.html">the MVP pack operationalises</a>.</p>
+<div class="warnbox"><b>Which turns two of the four rules into checked claims.</b> The February service enforced <a href="../rules/index.html#r1">rule 1</a> by construction (publish binds to a fingerprint; duplicates are rejected) and gave <a href="../rules/index.html#r4">rule 4</a> a working transparency log. It also produced the finding that matters most to <a href="../packs/registry-mvp/architecture.html">the MVP's own hash chain</a>: a hash chain with <b>no external witness cannot detect equivocation</b> — an issue raised at design time, deferred, and never revisited. The MVP inherits that gap and should say so.</div>
 
 <h2 id="capabilities">Reuse the capability model, don't invent one</h2>
 <p>A registry needs an authorisation model, and one already exists in the platform with the right shape. The append lane separates four capabilities, and <b>the server stores only hashes of the first three</b>:</p>
@@ -111,7 +125,7 @@
     <div class="brandline">pki<span>.sgit.ai</span></div>
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. All content CC BY 4.0.</p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.6</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.7</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The registry</h4>
