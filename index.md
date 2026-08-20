@@ -6,7 +6,7 @@
 > Anyone proposing a key registry now should be able to show they designed it with that
 > history in hand.
 
-*Source: <https://pki.sgit.ai/index.html> · site v0.1.4 · markdown twin of the front page.*
+*Source: <https://pki.sgit.ai/index.html> · site v0.1.5 · markdown twin of the front page.*
 
 ---
 
@@ -81,7 +81,8 @@ commitment — so the private registry comes before the public one.
 A five-brief first-pass pack proposes the build: a public vault of append-only signed
 statements, schemas for identity/mandate/grant/revocation, workflows an LLM session can
 follow from a page, and read-path-first phasing.
-[Start with the leading brief](documents/registry-mvp-pack.html).
+Now a full dev pack with diagrams, change control and a tabletop exercise:
+[start at the pack hub](packs/registry-mvp/index.html).
 
 ## Who is writing this
 

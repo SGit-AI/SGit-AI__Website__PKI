@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Register Was Designed In June: Published Keypairs Are Fixtures, Not Identities · documents · pki.sgit.ai</title>
+<meta name="description" content="Original document, readable in-page: summary, key concepts and key ideas, then the full markdown. Architecture brief, v0.33.61, 20 August 2026. CC BY 4.0.">
+<link rel="canonical" href="https://pki.sgit.ai/documents/register-fixtures.html">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.5</a>
+  <a class="nl" href="../failure/index.html">The failure</a>
+  <a class="nl" href="../bootstrap/index.html">Bootstrap</a>
+  <a class="nl" href="../rules/index.html">The rules</a>
+  <a class="nl" href="../mandate/index.html">Mandate</a>
+  <a class="nl" href="../enrolment/index.html">Enrolment</a>
+  <a class="nl" href="../execution/index.html">Execution</a>
+  <a class="nl" href="../shipped/index.html">Shipped</a>
+  <a class="nl" href="../roadmap/index.html">Build order</a>
+  <a class="nl" href="../packs/index.html">Packs</a>
+  <a class="nl" href="../documents/index.html">Docs</a>
+  <a class="nl" href="../admin/comms.html">Comms</a>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="index.html">documents</a> / register-fixtures</div>
+<h1>The Register Was Designed In June: Published Keypairs Are Fixtures, Not Identities</h1>
+
+<div class="docmeta">
+  <span class="k">Type</span><span class="v">Architecture brief</span>
+  <span class="k">Version</span><span class="v">v0.33.61</span>
+  <span class="k">Date</span><span class="v">20 August 2026</span>
+  <span class="k">Author</span><span class="v">Dinis Cruz (project lead) and collaborators</span>
+  <span class="k">Licence</span><span class="v">CC BY 4.0</span>
+  <span class="k">Source</span><span class="v"><a href="../briefs/v0.33.61__arch-brief__register-was-designed-in-june-published-keypairs-are-fixtures-not-identities.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/dev/briefs/v0.33.61__arch-brief__register-was-designed-in-june-published-keypairs-are-fixtures-not-identities.md">view on GitHub</a></span>
+</div>
+
+<h2 id="summary">Summary</h2>
+<p>The register the memo asks for was designed on 5 June (v0.32.4): clues not storage, entries as nodes with relationships as the value, two-level trust in which self-declaration grants nothing, the register as a vault holding no private data, connectors to any identity provider, and resolution as the caller's job — so today's work is operationalisation, not design. The correction that matters: a keypair whose private half is published is not a weak identity but no identity, permanently — a fixture, whose whole purpose is to exercise the plumbing, marked by a required private_key_published flag read before any signature, never reachable from the real trust graph, and retired only by republishing under a fresh key. Personas ship as signed agent cards; the notary is a workflow identity with keyless signing; and push protection will block the published key, which makes the recorded bypass part of the demonstration.</p>
+
+<h2 id="concepts">Key concepts</h2>
+<ul>
+  <li><a href="../packs/registry-mvp/change-control.html"><b>The fixture class</b></a> — adopted into the MVP pack as change C3 — the flag before the signature</li>
+  <li><a href="../rules/index.html#r1"><b>Evidence to the asserter's record</b></a> — the 2019 rule applied to vouching — the same rule the MVP pack chose independently</li>
+  <li><a href="../packs/registry-mvp/tabletop.html"><b>A fixture voids two rules</b></a> — revocation and signature-substance — which is what makes fixtures the rules' first test</li>
+  <li><a href="../bootstrap/index.html#unfixed"><b>Retrieval is not persistence</b></a> — fetching a key works only while the key is public; the 19 August question stays open</li>
+</ul>
+
+<h2 id="ideas">Key ideas</h2>
+<ul>
+  <li>Whether the private half is published is the most consequential evidence an entry can carry.</li>
+  <li>A fixture's append lane is a public inbox — anything sent to it is readable by anybody.</li>
+  <li>The notary must be an agent you run: the two-populations thesis as an implementation constraint.</li>
+  <li>Publishing a key inside vault ciphertext evades secret scanning rather than satisfying it.</li>
+</ul>
+
+<h2 id="on-site">On this site</h2>
+<p>Folded into the registry MVP pack as change-control entries C2, C3 and C4; the tabletop's inject I5 runs its central warning as an exercise card.</p>
+
+<h2 id="read">Read the document</h2>
+<div class="mdread-label">📄 Original document · v0.33.61 · 20 August 2026 · rendered from the <a href="../briefs/v0.33.61__arch-brief__register-was-designed-in-june-published-keypairs-are-fixtures-not-identities.md">raw markdown</a> (the source of truth)</div>
+<div class="mdread" id="mdread" data-src="../briefs/v0.33.61__arch-brief__register-was-designed-in-june-published-keypairs-are-fixtures-not-identities.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="../briefs/v0.33.61__arch-brief__register-was-designed-in-june-published-keypairs-are-fixtures-not-identities.md">open the raw markdown</a>.</p></noscript></div>
+
+<div class="pagenav">
+  <a href="index.html">← All documents</a>
+  <a href="../briefs/v0.33.61__arch-brief__register-was-designed-in-june-published-keypairs-are-fixtures-not-identities.md">Raw markdown →</a>
+</div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. All content CC BY 4.0.</p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.5</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The registry</h4>
+    <a href="../failure/index.html">Why they don't exist</a>
+    <a href="../rules/index.html">The four rules</a>
+    <a href="../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../roadmap/index.html">Build order</a>
+  </div>
+  <div>
+    <h4>The three layers</h4>
+    <a href="../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../enrolment/index.html">Enrolment</a>
+    <a href="../execution/index.html">The execution broker</a>
+    <a href="../shipped/index.html">What already ships</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../packs/registry-mvp/index.html">The registry MVP pack</a>
+    <a href="../about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="https://nhi.sgit.ai">nhi.sgit.ai</a>
+    <a href="https://sgit.ai">sgit.ai</a>
+  </div>
+</div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+<script src="../assets/mdreader.js"></script>
+</body>
+</html>

@@ -32,6 +32,7 @@ NAV = [
     ("execution/index.html", "Execution"),
     ("shipped/index.html",   "Shipped"),
     ("roadmap/index.html",   "Build order"),
+    ("packs/index.html",     "Packs"),
     ("documents/index.html", "Docs"),
     ("admin/comms.html",     "Comms"),
 ]
@@ -51,7 +52,7 @@ FOOTER = [
     ]),
     ("The sources", [
         ("The documents", "documents/index.html"),
-        ("The briefing pack", "documents/briefing-pack.html"),
+        ("The registry MVP pack", "packs/registry-mvp/index.html"),
         ("Where we lose", "about/participant.html"),
     ]),
     ("Site", [

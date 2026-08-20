@@ -11,6 +11,18 @@
 Site version: v0.1.4 (19 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
+## Properties agents may rely on
+
+- Every brief and pack source on this site is fetchable at a stable constructed URL:
+  /briefs/<filename>.md and /packs/<pack>/src/<filename>.md. This is a promise, not an
+  accident (per the v0.33.61 site access report: agents already rely on constructed
+  paths, so the convention is stated rather than left to be inferred).
+- Which third of the answer this site holds: nhi.sgit.ai states the problem (no identity
+  for rented agents); THIS SITE holds the design; https://sgit.ai/docs/pki.md documents
+  the shipped commands. Page-level joins: https://sgit.ai/docs/vault-messaging.md and
+  https://sgit.ai/docs/limitations.md carry the choreography and the shipped-versus-
+  proposed boundary in the platform's own words.
+
 ## Status, stated plainly
 
 The registry does not exist. Everything on this site is stated design, published in
@@ -131,27 +143,34 @@ failure page, the four rules) are done; step 4 (a private registry) is the next 
 - Honest tensions (https://pki.sgit.ai/roadmap/index.html#tensions), including that the
   size bound will one day reject a legitimate record.
 
-## The registry MVP pack (draft, for review)
+## The registry MVP pack (dev pack: draft-1 + change control)
 
-- [Leading brief](https://pki.sgit.ai/documents/registry-mvp-pack.html): a buildable MVP —
+- [Leading brief](https://pki.sgit.ai/packs/registry-mvp/index.html): a buildable MVP —
   a public vault holding keys, identities, mandates and grants, open data by principle
   (a registry contains no secrets), single operator, own-agents enrolment. Public in data,
   private in authority: build-order step 4 with the covers off.
-- [Architecture](https://pki.sgit.ai/documents/registry-vault.html): records are append-only
+- [Architecture](https://pki.sgit.ai/packs/registry-mvp/architecture.html): records are append-only
   hash-chained statement logs keyed by signing fingerprint; the processor is the sole
   write-key holder; the four rules run as processor checks plus a public validator —
   enforcement is verification anybody can re-run.
-- [Schemas](https://pki.sgit.ai/documents/registry-schemas.html): identity, mandate, grant,
+- [Schemas](https://pki.sgit.ai/packs/registry-mvp/schemas.html): identity, mandate, grant,
   acceptance, revocation. A mandate lives in the ISSUER's record (rule 1, no exceptions);
   the subject appends an acceptance. The registry never contains a live capability — grants
   record hashes of what was issued.
-- [Workflows](https://pki.sgit.ai/documents/registry-first-client.html): the first client is
+- [Workflows](https://pki.sgit.ai/packs/registry-mvp/workflows.html): the first client is
   a documented page a fresh LLM session follows — verify, enrol (the bootstrap gradient as
   commands), operate-under-mandate. The three-session demo (issuer, subject, verifier
   sharing only public URLs) is the acceptance test that matters.
-- [Build order](https://pki.sgit.ai/documents/registry-build-order.html): read path before
+- [Build order](https://pki.sgit.ai/packs/registry-mvp/build-order.html): read path before
   write path; five phases; every definition of done is a fresh-session test.
-- Status: draft-1, site-agent authored, awaiting project-lead review (N6 on comms).
+- New at v0.1.5: [Diagrams](https://pki.sgit.ai/packs/registry-mvp/diagrams.html) (the
+  design as eight checkable pictures), [Change control](https://pki.sgit.ai/packs/registry-mvp/change-control.html)
+  (what three v0.33.61 briefs correct in draft-1: grant redefined as what a credential
+  permits, with excess authority = grant − mandate as the countable product; the 5 June
+  design precedence; the fixture class with a required private_key_published flag read
+  before any signature), and the [Tabletop exercise](https://pki.sgit.ai/packs/registry-mvp/tabletop.html)
+  (six injects giving the four published rules their first population).
+- Status: draft-1 + change control, site-agent authored, awaiting project-lead adoption (N6 on comms).
 
 ## Sources
 

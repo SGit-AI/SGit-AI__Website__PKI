@@ -13,7 +13,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.4</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.5</a>
   <a class="nl" href="../failure/index.html">The failure</a>
   <a class="nl" href="../bootstrap/index.html">Bootstrap</a>
   <a class="nl" href="../rules/index.html">The rules</a>
@@ -22,6 +22,7 @@
   <a class="nl" href="../execution/index.html">Execution</a>
   <a class="nl" href="../shipped/index.html">Shipped</a>
   <a class="nl" href="../roadmap/index.html">Build order</a>
+  <a class="nl" href="../packs/index.html">Packs</a>
   <a class="nl here" href="../documents/index.html">Docs</a>
   <a class="nl" href="../admin/comms.html">Comms</a>
   <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
@@ -30,16 +31,14 @@
 <main class="doc">
 <div class="crumb"><a href="../index.html">pki.sgit.ai</a> / documents</div>
 <h1>The documents</h1>
-<p class="lead">The fourteen original markdown documents behind this site, captured verbatim under <code>briefs/</code> and readable here. Each page carries the same apparatus — a summary, the key concepts linked to where they live on the site, the key ideas — and then the full document, rendered in-page from the raw markdown. <b>The raw file stays the source of truth; the page is presentation.</b> That raw-plus-curated split is the provenance discipline this project argues for, applied to itself.</p>
+<p class="lead">The twelve original markdown documents behind this site, captured verbatim under <code>briefs/</code> and readable here. Each page carries the same apparatus — a summary, the key concepts linked to where they live on the site, the key ideas — and then the full document, rendered in-page from the raw markdown. <b>The raw file stays the source of truth; the page is presentation.</b> That raw-plus-curated split is the provenance discipline this project argues for, applied to itself.</p>
 
 <div class="tablewrap"><table>
   <thead><tr><th>Document</th><th>Type · date</th><th>In one line</th></tr></thead>
   <tbody>
-    <tr><td><a href="registry-mvp-pack.html"><b>The registry MVP pack — leading brief</b></a></td><td>Briefing pack · draft-1 · 20 Aug 2026</td><td>Open data, a single operator, LLM sessions as the first users on both sides. Site-agent first pass, for review.</td></tr>
-    <tr><td><a href="registry-vault.html"><b>The registry is a public vault</b></a></td><td>Arch brief · draft-1 · 20 Aug 2026</td><td>Append-only statement logs, the processor as referee, and enforcement as verification anybody can re-run.</td></tr>
-    <tr><td><a href="registry-schemas.html"><b>Identity, mandate, grant, revocation: the schemas</b></a></td><td>Arch brief · draft-1 · 20 Aug 2026</td><td>The statement bodies, the mandate/grant split, and why a mandate lives in the issuer's record.</td></tr>
-    <tr><td><a href="registry-first-client.html"><b>The first client is a documented workflow</b></a></td><td>Arch brief · draft-1 · 20 Aug 2026</td><td>Verify, enrol and operate-under-mandate, in copy-paste form for a fresh LLM session.</td></tr>
-    <tr><td><a href="registry-build-order.html"><b>Registry MVP build order</b></a></td><td>Strategy brief · draft-1 · 20 Aug 2026</td><td>Read path before write path; every phase ends with a fresh session passing its acceptance test.</td></tr>
+    <tr><td><a href="register-fixtures.html"><b>The register was designed in June; published keypairs are fixtures</b></a></td><td>Arch brief · 20 Aug 2026</td><td>The 5 June design located; the fixture class named and bounded; agent cards and workflow signing identified.</td></tr>
+    <tr><td><a href="grant-vs-mandate.html"><b>Grant is not mandate</b></a></td><td>Strategy brief · 20 Aug 2026</td><td>Grant is what a credential permits; the gap to the mandate is excess authority — unaccepted by construction, and countable.</td></tr>
+    <tr><td><a href="site-access-report.html"><b>Site access report</b></a></td><td>Cross-team brief · 20 Aug 2026</td><td>Three findings closed, the acceptance test passes, and the composition gap moved up a layer to sit between three sites.</td></tr>
     <tr><td><a href="briefing-pack.html"><b>Agent identity, mandate and execution</b></a></td><td>Briefing pack · 19 Aug 2026</td><td>The leading brief: three layers, four recommendations, and two corrections that would otherwise reach an implementation.</td></tr>
     <tr><td><a href="site-review.html"><b>What pki.sgit.ai is missing</b></a></td><td>Cross-team brief · 19 Aug 2026</td><td>The review of this site — the mandate gap, the reframing, and a stated limitation that is itself the finding.</td></tr>
     <tr><td><a href="bootstrap-trap.html"><b>The bootstrap trap</b></a></td><td>Strategy brief · 19 Aug 2026</td><td>Why agent key registries do not exist: a loop, seven workarounds, and every one hands over a larger identity.</td></tr>
@@ -51,6 +50,8 @@
     <tr><td><a href="pki-registry.html"><b>pki.sgit.ai: the registry has a documented failure to learn from</b></a></td><td>Strategy brief · 16 Aug 2026</td><td>The 2019 keyserver failure turned into registry rules; append-only resolved precisely; private before public.</td></tr>
   </tbody>
 </table></div>
+
+<div class="note"><b>The registry MVP pack has its own section.</b> The five draft briefs published at v0.1.4 as document pages, plus the diagrams, change control and tabletop exercise added at v0.1.5, now live as a dev pack under <a href="../packs/registry-mvp/index.html">packs/registry-mvp</a> — sources verbatim under <code>src/</code>, a reader page per document, same treatment as <a href="https://nhi.sgit.ai/packs/index.html">nhi.sgit.ai's packs</a>.</div>
 
 <div class="note"><b>More documents.</b> The corpus behind this site runs to 729 files mentioning the subject, with dedicated documents going back to February 2026 — an architecture debrief, a messaging implementation, model-integration research, a document identity brief, operating modes, a provenance treatment and a brand strategy. Curating those by question is <a href="../roadmap/index.html#order">step 1 of the build order</a> and is queued on <a href="../admin/comms.html">comms</a>. The wider corpus is published openly in the <a href="https://github.com/the-cyber-boardroom/SGraph-AI__App__Send">SGraph-AI__App__Send</a> repository.</div>
 
@@ -65,7 +66,7 @@
     <div class="brandline">pki<span>.sgit.ai</span></div>
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. All content CC BY 4.0.</p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.4</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.5</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The registry</h4>
@@ -84,7 +85,7 @@
   <div>
     <h4>The sources</h4>
     <a href="../documents/index.html">The documents</a>
-    <a href="../documents/briefing-pack.html">The briefing pack</a>
+    <a href="../packs/registry-mvp/index.html">The registry MVP pack</a>
     <a href="../about/participant.html">Where we lose</a>
   </div>
   <div>

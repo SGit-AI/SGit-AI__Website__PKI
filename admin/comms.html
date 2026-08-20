@@ -13,7 +13,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.4</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.5</a>
   <a class="nl" href="../failure/index.html">The failure</a>
   <a class="nl" href="../bootstrap/index.html">Bootstrap</a>
   <a class="nl" href="../rules/index.html">The rules</a>
@@ -22,6 +22,7 @@
   <a class="nl" href="../execution/index.html">Execution</a>
   <a class="nl" href="../shipped/index.html">Shipped</a>
   <a class="nl" href="../roadmap/index.html">Build order</a>
+  <a class="nl" href="../packs/index.html">Packs</a>
   <a class="nl" href="../documents/index.html">Docs</a>
   <a class="nl here" href="../admin/comms.html">Comms</a>
   <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
@@ -30,7 +31,7 @@
 <main class="doc">
 <div class="crumb"><a href="../index.html">pki.sgit.ai</a> / admin / comms</div>
 <h1>Comms: tasks, requests &amp; status</h1>
-<p class="lead">The working channel between the project lead and the site agent, kept in public on the site itself — which is an instance of the discipline this site argues for. Updated on every release. Current release: <b>v0.1.4</b>, 20 August 2026. Full history: <a href="versions.html">versions</a>.</p>
+<p class="lead">The working channel between the project lead and the site agent, kept in public on the site itself — which is an instance of the discipline this site argues for. Updated on every release. Current release: <b>v0.1.5</b>, 20 August 2026. Full history: <a href="versions.html">versions</a>.</p>
 
 <h2 id="needs">Needed from the project lead</h2>
 <div class="tablewrap"><table>
@@ -39,7 +40,7 @@
     <tr><td>N1</td><td><b>GitHub Pages and the custom domain.</b> Done — <a href="https://pki.sgit.ai">pki.sgit.ai</a> resolves and serves, DNS and the custom domain are in place, and the full pipeline (validate → tag → deploy) is verified end to end</td><td>No longer blocking</td><td><span class="tstat t-done">done</span></td></tr>
     <tr><td>N2</td><td><b>The corpus documents for the collection.</b> <a href="../roadmap/index.html#order">Build-order step 1</a> needs the February–March PKI material identified: the architecture debrief, the messaging implementation, the model-integration research, the document identity brief, the operating modes, the provenance treatment and the brand strategy. 729 files mention the subject; the site needs the handful worth promoting</td><td>The collection cannot be curated by question until the documents are named</td><td><span class="tstat t-need">waiting on human</span></td></tr>
     <tr><td>N3</td><td><b>The attestation decision.</b> Does the registry accept third-party attestations? It is the site's central <a href="../roadmap/index.html#open">open question</a> and it is a call for the project lead, not the site agent — a documented failure on one side, no social trust at all on the other</td><td>The private-registry build (step 4) can start without it; mandates (step 5) cannot be finished without it</td><td><span class="tstat t-open">open — published unresolved, deliberately</span></td></tr>
-    <tr><td>N6</td><td><b>Review the registry MVP pack.</b> Five first-pass briefs published at v0.1.4 (<a href="../documents/registry-mvp-pack.html">start here</a>). Decisions the pack explicitly leaves to the project lead: adopt/reshape/refuse; assign corpus versions on adoption; confirm the mandate-lives-in-issuer-record decision (the pack's main structural call); confirm the proposed size bounds (256 statements / 512 KB / 8 KB); and name the first capability (the pack proposes <code>repo.pull-request.create</code>)</td><td>Phase 0 (fixtures + validator) can start on adoption; nothing is built until then</td><td><span class="tstat t-need">waiting on human</span></td></tr>
+    <tr><td>N6</td><td><b>Adopt (or reshape, or refuse) the registry MVP pack.</b> Now a full <a href="../packs/registry-mvp/index.html">dev pack</a>. The three v0.33.61 briefs arrived and their corrections are recorded in <a href="../packs/registry-mvp/change-control.html">change control</a>, which also carries the decisions register: four settled by those briefs (mandate location, grant redefinition, the fixture class, agent cards + workflow signing), four still yours — the size bounds, the first capability, acceptance semantics, and the corpus version on adoption</td><td>Phase 0 (the fixture class + validator) can start on adoption</td><td><span class="tstat t-need">waiting on human</span></td></tr>
     <tr><td>N5</td><td><b>Confirm the execution-layer name.</b> This site publishes it as <b>execution broker</b> rather than <em>Service Twin</em>, on the pack's own argument that a digital twin <em>represents</em> a thing while this <em>acts on</em> one. If the product line settles on a different name, this site should follow it rather than diverge</td><td>A naming split between the site and the product would be worse than either name</td><td><span class="tstat t-open">open — proceeding with "execution broker" unless redirected</span></td></tr>
     <tr><td>N4</td><td><b>Presentation material to recycle.</b> The scoping brief notes 31 files referencing presentation material the project lead wanted reused — worth an infographics section if the posts are identified, as on nhi.sgit.ai</td><td>No infographics section until the material is identified</td><td><span class="tstat t-open">open</span></td></tr>
   </tbody>
@@ -57,6 +58,9 @@
     <tr><td>T10</td><td>Acted on the <a href="../documents/site-review.html">site review</a>: <a href="../bootstrap/index.html">bootstrap</a>, <a href="../enrolment/index.html">enrolment</a>, <a href="../execution/index.html">execution</a> and <a href="../shipped/index.html">shipped</a> pages; the front-page three-layer model and reframe; mandate and rules extended; two principles published verbatim; nine documents captured with reader pages</td><td>site agent</td><td><span class="tstat t-done">done v0.1.3</span></td></tr>
     <tr><td>T11</td><td>Third-party market research on the execution layer: published as its <a href="../execution/index.html#market">whitespace finding and acceptance test only</a>, not as a captured document — its vendor scoring is a dated snapshot and it was written to a brief rather than as neutral research. Revisit if it is ever re-run independently</td><td>project lead + agent</td><td><span class="tstat t-done">decided v0.1.3</span></td></tr>
     <tr><td>T12</td><td>Registry MVP pack: five draft briefs (leading, architecture, schemas, first-client workflows, build order) captured under <code>briefs/</code> with reader pages; roadmap step 4 moved to planned</td><td>site agent</td><td><span class="tstat t-done">done v0.1.4 — awaiting N6 review</span></td></tr>
+    <tr><td>T13</td><td>Three v0.33.61 briefs captured with reader pages: <a href="../documents/register-fixtures.html">register/fixtures</a>, <a href="../documents/grant-vs-mandate.html">grant vs mandate</a>, <a href="../documents/site-access-report.html">site access report</a></td><td>site agent</td><td><span class="tstat t-done">done v0.1.5</span></td></tr>
+    <tr><td>T14</td><td>Packs section (<code>gen_packs.py</code>, treatment from nhi.sgit.ai): the registry MVP pack republished as a dev pack with diagrams, change control and the tabletop exercise as first-class documents</td><td>site agent</td><td><span class="tstat t-done">done v0.1.5</span></td></tr>
+    <tr><td>T15</td><td>Site access report acted on: the which-third sentence on the front page, page-level links into sgit.ai/docs (pki, vault-messaging, limitations), and the constructed-path convention promised in llms.txt. Remaining for the other two sites: nhi.sgit.ai should name the shipped commands (its own N-table), and the hub subdomain resolution check</td><td>site agent</td><td><span class="tstat t-done">done v0.1.5 — this site's share</span></td></tr>
     <tr><td>T5</td><td>Markdown twins for every page + <code>llms-full.txt</code> (the sgit.ai convention) — only the front page has one</td><td>site agent</td><td><span class="tstat t-open">queued</span></td></tr>
     <tr><td>T6</td><td>The collection (build-order step 1): curate the 729-file corpus by question, promoting the Feb–Mar architecture material</td><td>site agent</td><td><span class="tstat t-doing">blocked on N2</span></td></tr>
     <tr><td>T7</td><td>Redirect the nhi.sgit.ai PKI section here once this site is live on its domain — that section was always staging, and the NHI site queues the spin-out as its T19</td><td>site agent</td><td><span class="tstat t-open">queued — after N1(c)</span></td></tr>
@@ -82,7 +86,7 @@
     <div class="brandline">pki<span>.sgit.ai</span></div>
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. All content CC BY 4.0.</p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.4</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.5</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The registry</h4>
@@ -101,7 +105,7 @@
   <div>
     <h4>The sources</h4>
     <a href="../documents/index.html">The documents</a>
-    <a href="../documents/briefing-pack.html">The briefing pack</a>
+    <a href="../packs/registry-mvp/index.html">The registry MVP pack</a>
     <a href="../about/participant.html">Where we lose</a>
   </div>
   <div>
