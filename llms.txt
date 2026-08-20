@@ -8,7 +8,7 @@
 > but never delete anything — not a bug. This site publishes that history, and the
 > registry rules it produces, before the registry exists.
 
-Site version: v0.1.2 (19 August 2026). Published by the sgit project — participant
+Site version: v0.1.3 (19 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## Status, stated plainly
@@ -49,6 +49,61 @@ failure page, the four rules) are done; step 4 (a private registry) is the next 
 - What vaults supply (https://pki.sgit.ai/rules/index.html#vaults): distribution, custody
   without access, versioning. What they do not supply: the ownership rule, the size
   bound, signature checking — the registry logic, and the part that failed last time.
+
+## Three questions, three layers
+
+- WHO IS THIS AGENT? — identity, a registry problem. Answered here.
+- WHAT MAY IT DO? — mandate, a delegation problem. Answered here.
+- SHOULD THAT PRODUCE THIS EFFECT, NOW, HERE? — execution, a broker problem. Named here,
+  not owned here: https://pki.sgit.ai/execution/index.html
+- The third corner is the receipt. Recording who a key belongs to and what it was permitted
+  to do leaves out the most auditable event of all: what it actually did.
+
+## The registry is the missing half of a feature that already ships
+
+- [What already ships](https://pki.sgit.ai/shipped/index.html): `sgit pki keygen` makes TWO
+  pairs — RSA-OAEP 4096 for encryption and ECDSA P-256 for signing (NOT X25519/Ed25519).
+  Export emits a JSON bundle of PEM blocks; encrypt --recipient <fingerprint>; envelope v2
+  wraps an AES-256-GCM content key with RSA-OAEP. The shipped documentation states plainly:
+  **no revocation, no directory**. Those two absences are exactly what a registry supplies,
+  which makes this a bounded addition to an existing feature rather than a new product.
+- The capability model to reuse rather than reinvent: four tiers — append token (write only),
+  enumeration key (list/fetch/mark), write key (configure/purge), private key (decrypts, never
+  sent). The server stores only hashes of the first three, so a total compromise yields hashes
+  rather than capabilities.
+- SHIPPED vs PROPOSED: the append lane, its gates, storage and limits are code-verified. The
+  client sealing layer and the lane-address derivation `append_token = H(recipient public key)`
+  are PROPOSED — no shipped command emits it, and today the token is agreed out of band.
+  **Do not code against the derivation.**
+
+## Why agent key registries do not exist: the bootstrap trap
+
+- [The bootstrap trap](https://pki.sgit.ai/bootstrap/index.html): generating a keypair is
+  trivial; getting it recognised requires reaching a trusted authority, every route to which
+  requires authentication, which requires the identity the agent lacks. That is a loop, not a
+  missing feature. Seven common workarounds (operator credential, repo write access, shared bot
+  token, vendor integration, cloud credential, project signing secret, bespoke enrolment server)
+  each solve transport by creating a larger identity problem. Underneath: ambient authority and
+  the confused deputy.
+- The reframing: the hardest part of agent identity is not cryptography but *authority
+  choreography* — the order in which claims are established. A system can use excellent
+  cryptography and still have a weak bootstrap if the first instruction is to hand over a
+  platform token.
+- The gradient: I control this private key (free, proves possession only) → the project
+  recognises this key (a policy decision, not a computation) → the project delegates this
+  mandate (scoped, dated, revocable).
+- [Enrolment](https://pki.sgit.ai/enrolment/index.html): the exit is a door narrow enough that
+  walking through it requires nothing. Posting to an append lane needs a token in the body, no
+  account and no access token, and returns a blind acknowledgement. So the path is buildable
+  rather than theoretical.
+
+## Two principles, stated exactly
+
+- Encryption restricts who can read a mandate. The signature and subject binding establish who
+  may exercise it.
+- A signature over an enrolment request proves the submitter controls the corresponding private
+  key. It does not prove that the project should trust the agent. Trust is a policy decision
+  made afterwards.
 
 ## Agent identity
 

@@ -6,7 +6,7 @@
 > Anyone proposing a key registry now should be able to show they designed it with that
 > history in hand.
 
-*Source: <https://pki.sgit.ai/index.html> · site v0.1.2 · markdown twin of the front page.*
+*Source: <https://pki.sgit.ai/index.html> · site v0.1.3 · markdown twin of the front page.*
 
 ---
 
@@ -23,6 +23,29 @@
 Append-only is safe when a writer appends only to objects it owns, and fatal when anyone
 may append to somebody else's. The rule to carry forward is not "append-only" — it is
 *the writer owns what it writes*. [The full argument, with sources](failure/index.html).
+
+## Three questions, three layers
+
+| Question | What answers it | Kind of problem |
+|---|---|---|
+| Who is this agent? | [Identity](rules/index.html) — a signed statement in a registry | A registry problem |
+| What may it do? | [Mandate](mandate/index.html) — a separate statement, revoked separately | A delegation problem |
+| Should that produce this effect, now, here? | [Execution](execution/index.html) — a broker holding the credential the agent never sees | A broker problem |
+
+## Not a new product — the missing half of one that ships
+
+The keypairs, signing, encryption to a fingerprint and contacts list already exist. The
+documentation says, in its own words, **no revocation, no directory**. Those two absences are
+precisely what a registry supplies — a concrete user and a bounded scope.
+[What already ships, and what is only proposed](shipped/index.html).
+
+## Why registries for agents don't exist
+
+Generating a keypair is trivial; getting it recognised requires reaching a trusted authority,
+every route to which requires authentication, which requires the identity the agent does not
+have. **A loop, not a missing feature** — and every common escape hands over authority broader
+than the identity being created. [The bootstrap trap](bootstrap/index.html), and
+[the account-less door that breaks it](enrolment/index.html).
 
 ## Four rules, published before the registry exists
 

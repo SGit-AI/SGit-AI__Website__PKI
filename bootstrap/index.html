@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The bootstrap trap — why agent key registries don't exist · pki.sgit.ai</title>
+<meta name="description" content="Generating a keypair is trivial. Getting it recognised requires an identity the agent does not yet have — a loop, not a missing feature. Every common workaround escapes the loop by handing over authority broader than the identity being created.">
+<link rel="canonical" href="https://pki.sgit.ai/bootstrap/index.html">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.3</a>
+  <a class="nl" href="../failure/index.html">The failure</a>
+  <a class="nl here" href="../bootstrap/index.html">Bootstrap</a>
+  <a class="nl" href="../rules/index.html">The rules</a>
+  <a class="nl" href="../mandate/index.html">Mandate</a>
+  <a class="nl" href="../enrolment/index.html">Enrolment</a>
+  <a class="nl" href="../execution/index.html">Execution</a>
+  <a class="nl" href="../shipped/index.html">Shipped</a>
+  <a class="nl" href="../roadmap/index.html">Build order</a>
+  <a class="nl" href="../documents/index.html">Docs</a>
+  <a class="nl" href="../admin/comms.html">Comms</a>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / bootstrap</div>
+<h1>The bootstrap trap</h1>
+<p class="lead">Creating a key is easy. Getting it recognised requires an identity you do not yet have — and every common escape hands over a larger one. This is a <em>loop</em>, not a missing feature, and it is why agent key registries do not exist. It is also the mechanism behind incidents that have already happened.</p>
+
+<div class="note"><b>Why this page sits next to <a href="../failure/index.html">the failure</a>.</b> That page explains why the last generation of key repositories was destroyed. This one explains why the next generation has not been built. The two are different obstacles and a registry has to clear both.</div>
+
+<h2 id="loop">The loop</h2>
+<p>Stated in the form that makes it tractable:</p>
+<pre class="shell">
+   Agent needs an identity
+        <span class="d">|</span>
+   must request certification
+        <span class="d">|</span>
+   request must reach trusted infrastructure
+        <span class="d">|</span>
+   infrastructure requires authentication
+        <span class="d">|</span>
+   agent must <span class="r">already possess an identity</span>
+        <span class="d">|</span>
+        <span class="cy">+---- back to the top</span>
+</pre>
+<p>Generating a keypair takes milliseconds. Getting the public half recognised by something that matters is the whole difficulty. The distinction that carries the argument:</p>
+<p class="claim">Creating a key is not creating an identity. A key is a mathematical object anybody can make. An identity is a relationship somebody else has agreed to — and agreement requires a channel.</p>
+
+<h2 id="workarounds">Every workaround trades a small problem for a larger one</h2>
+<p>The escapes people actually use, and what each one grants:</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Workaround</th><th>What it grants</th></tr></thead>
+  <tbody>
+    <tr><td>The operator's platform credential</td><td><b class="no">Everything that person can do, everywhere</b></td></tr>
+    <tr><td>Repository write access</td><td>The whole repository, permanently</td></tr>
+    <tr><td>A shared bot token</td><td>Whatever the bot can do, to everybody holding it</td></tr>
+    <tr><td>A vendor integration</td><td>Whatever its permissions cover, which is usually broad</td></tr>
+    <tr><td>A cloud or service credential</td><td>Whatever that principal can reach</td></tr>
+    <tr><td>A project signing secret</td><td>The ability to sign as the project</td></tr>
+    <tr><td>A bespoke public enrolment server</td><td>A new service to secure — and its own identity problem</td></tr>
+  </tbody>
+</table></div>
+<p><b>Every row solves transport by creating a larger identity problem than the one being solved.</b> That is the argument, and it holds for all seven.</p>
+
+<h2 id="evidence">Not theoretical — the mechanism behind documented incidents</h2>
+<p>The first two rows in particular have public evidence:</p>
+<ul>
+  <li>One coding assistant was found holding a token <b>scoped to every repository its developer had authorised</b> — far more than the surgical changes it was making required.</li>
+  <li>A disclosure at a security conference on 5 August 2026 showed a repository issue, opened by an account with <b>no repository privileges</b>, reaching continuous-integration secrets in three vendors' own repositories, under their own default configurations.</li>
+  <li>The platform feature request for short-lived, repository-scoped tokens for AI agents remains <b>open</b> — which is why the workaround persists rather than being a choice anybody defends.</li>
+</ul>
+<p>So this is not a concern about elegance. <b>It is why <a href="https://nhi.sgit.ai/thesis/index.html">rented agents have no identity</a>:</b> that site observes that for agents you rent the honest answer is to hand over a broad credential and hope. The bootstrap trap is <em>why</em>, and the two arguments are considerably stronger adjacent than apart.</p>
+
+<h2 id="failure-modes">Two named failure modes underneath</h2>
+<div class="tablewrap"><table>
+  <thead><tr><th>Failure mode</th><th>What it is</th><th>Why the workarounds produce it</th></tr></thead>
+  <tbody>
+    <tr><td><b>Ambient authority</b></td><td>Privilege a process holds by virtue of where it runs, rather than because it was handed something specific</td><td>A borrowed credential is ambient authority by construction — the agent inherits everything the holder could do, whether or not the task needs it. Published analysis identifies this as the <b>root cause of prompt injection</b>: an attacker need not break anything, and need only ask the holder to use authority it already has.</td></tr>
+    <tr><td><b>The confused deputy</b></td><td>A party with more authority than its task required, acting on instructions that may not have come from whoever granted it</td><td>The workarounds create deputies as a side effect of solving delivery.</td></tr>
+  </tbody>
+</table></div>
+<p>Both point at the same conclusion. <b>The fix is not a better credential. It is not needing one.</b></p>
+
+<h2 id="choreography">The constraint is transport, not cryptography</h2>
+<p class="claim">The hardest part of agent identity is not cryptography but <em>authority choreography</em> — the order in which claims are established, and what each step requires.</p>
+<p>That reframing does real work. The question is not which signature scheme, which certificate format or which key length; those are settled. <b>The question is what the smallest possible ingress looks like</b>, because the ingress determines what the agent must already have. Stated as the failure it prevents:</p>
+<blockquote class="challenge">A system can use excellent cryptography and still have a weak bootstrap if the first instruction is to hand over a platform token.</blockquote>
+
+<h2 id="gradient">The gradient</h2>
+<p>Each step establishes strictly more than the last, and none requires borrowed authority:</p>
+<div class="ladder">
+  <div class="cap"><span class="capnum">1</span><h3>I control this private key</h3>
+    <p>Proof of possession. Self-issued, free, checkable by anybody, and requiring no relationship with anybody. The smallest defensible primitive, which is why it is the right starting point.</p>
+    <span class="from">Costs: <b>nothing</b> · Establishes: possession, and only possession</span></div>
+  <div class="cap"><span class="capnum">2</span><h3>The project recognises this key</h3>
+    <p>A decision, not a computation. Nothing in the request compels recognition — which is a feature, because it means the project retains judgement and a signature can never be mistaken for an endorsement.</p>
+    <span class="from">Costs: <b>a policy decision by the issuer</b> · Establishes: a relationship</span></div>
+  <div class="cap"><span class="capnum">3</span><h3>The project delegates this mandate</h3>
+    <p>A permission — scoped, dated and revocable independently of the identity. This is the <a href="../mandate/index.html">identity-and-mandate split</a>, reached here from a second direction.</p>
+    <span class="from">Costs: <b>a delegation</b> · Establishes: what the agent may do</span></div>
+</div>
+<p class="claim">A signature over an enrolment request proves the submitter controls the corresponding private key. It does not prove that the project should trust the agent. Trust is a policy decision made afterwards.</p>
+
+<h2 id="door">The exit: a door narrow enough that walking through it requires nothing</h2>
+<p>If the loop is a transport problem, the answer is a channel whose granted capability is to <em>add</em> an object to an inbox — and specifically not to read it, alter it, or reach anything else. An agent that holds nothing can still walk through a door like that.</p>
+<div class="evbox"><span class="evtag">Shipped</span>
+<p>That channel is not a proposal. The append lane exists and is account-less: a write requires an append token carried in the request body, <b>no account and no access token</b>, and returns a blind acknowledgement that tells the sender nothing. So the enrolment path is <b>buildable rather than theoretical</b> — <a href="../enrolment/index.html">how it works</a>, and <a href="../shipped/index.html">what ships versus what is proposed</a>.</p></div>
+<p>The consequence is worth stating plainly rather than glossing: a compromised or hostile agent can add junk to an enrolment inbox. It cannot read other requests, cannot see who else has enrolled, and cannot reach the registry or the issuing key. <b>The blast radius of the ingress is a queue that needs draining</b>, which is the correct shape for a public door.</p>
+
+<h2 id="unfixed">What this does not fix</h2>
+<p>A page claiming the problem is solved would be wrong. The remaining work is substantial: append-capability distribution, spam and denial-of-service controls, replay protection, canonical message formats, certificate expiry, issuer key protection, key rotation, revocation, mandate semantics, private key persistence, cross-registry trust, recovery from compromised keys, lifecycle for ephemeral identities, and confidential response delivery.</p>
+<p class="claim">None of that disappears. The narrower and better claim is that those problems can now be solved <em>without first giving an unenrolled agent a high-authority identity.</em></p>
+<div class="warnbox"><b>Two items deserve flagging.</b> <b>Private key persistence</b> for a rented agent is genuinely unresolved: if a hosted session cannot keep a key between runs, every session is a new identity and a mandate cannot outlive one conversation. And <b>confidential response delivery</b> is the direction a write-only lane does not cover — the certificate has to get back, so the return path needs its own answer rather than inheriting the ingress design.</div>
+
+<h2 id="open">Open questions</h2>
+<ul>
+  <li>Can a rented agent persist a key between sessions? If not, mandates cannot outlive a conversation, which changes what the architecture delivers.</li>
+  <li>How is the return path secured? A write-only lane covers ingress only.</li>
+  <li>What stops the ingress being flooded? It is deliberately unauthenticated, so this needs an answer before it is exposed.</li>
+  <li>Is proof of possession ever mistaken for recognition? The distinction is clear when stated and will not survive casual reading, so the interface has to carry it.</li>
+  <li>Does the gradient need a fourth step? Recognition and mandate may not cover attestation, which remains unavailable for rented agents.</li>
+</ul>
+
+<div class="pagenav">
+  <a href="../failure/index.html">← The failure</a>
+  <a href="../enrolment/index.html">Next: how a key actually gets in →</a>
+</div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. All content CC BY 4.0.</p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.3</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The registry</h4>
+    <a href="../failure/index.html">Why they don't exist</a>
+    <a href="../rules/index.html">The four rules</a>
+    <a href="../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../roadmap/index.html">Build order</a>
+  </div>
+  <div>
+    <h4>The three layers</h4>
+    <a href="../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../enrolment/index.html">Enrolment</a>
+    <a href="../execution/index.html">The execution broker</a>
+    <a href="../shipped/index.html">What already ships</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../documents/briefing-pack.html">The briefing pack</a>
+    <a href="../about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="https://nhi.sgit.ai">nhi.sgit.ai</a>
+    <a href="https://sgit.ai">sgit.ai</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

@@ -13,10 +13,14 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.2</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.3</a>
   <a class="nl" href="../failure/index.html">The failure</a>
+  <a class="nl" href="../bootstrap/index.html">Bootstrap</a>
   <a class="nl" href="../rules/index.html">The rules</a>
   <a class="nl" href="../mandate/index.html">Mandate</a>
+  <a class="nl" href="../enrolment/index.html">Enrolment</a>
+  <a class="nl" href="../execution/index.html">Execution</a>
+  <a class="nl" href="../shipped/index.html">Shipped</a>
   <a class="nl" href="../roadmap/index.html">Build order</a>
   <a class="nl here" href="../documents/index.html">Docs</a>
   <a class="nl" href="../admin/comms.html">Comms</a>
@@ -26,20 +30,28 @@
 <main class="doc">
 <div class="crumb"><a href="../index.html">pki.sgit.ai</a> / documents</div>
 <h1>The documents</h1>
-<p class="lead">The original markdown documents behind this site, captured verbatim under <code>briefs/</code> and readable here. Each page carries the same apparatus — a summary, the key concepts linked to where they live on the site, the key ideas — and then the full document, rendered in-page from the raw markdown. <b>The raw file stays the source of truth; the page is presentation.</b> That raw-plus-curated split is the provenance discipline this project argues for, applied to itself.</p>
+<p class="lead">The nine original markdown documents behind this site, captured verbatim under <code>briefs/</code> and readable here. Each page carries the same apparatus — a summary, the key concepts linked to where they live on the site, the key ideas — and then the full document, rendered in-page from the raw markdown. <b>The raw file stays the source of truth; the page is presentation.</b> That raw-plus-curated split is the provenance discipline this project argues for, applied to itself.</p>
 
 <div class="tablewrap"><table>
   <thead><tr><th>Document</th><th>Type · date</th><th>In one line</th></tr></thead>
   <tbody>
-    <tr><td><a href="pki-registry.html"><b>pki.sgit.ai: the registry has a documented failure to learn from</b></a></td><td>Strategy brief · 16 Aug 2026</td><td>The 2019 keyserver failure turned into registry rules; append-only resolved precisely; identity vs. mandate; private before public.</td></tr>
+    <tr><td><a href="briefing-pack.html"><b>Agent identity, mandate and execution</b></a></td><td>Briefing pack · 19 Aug 2026</td><td>The leading brief: three layers, four recommendations, and two corrections that would otherwise reach an implementation.</td></tr>
+    <tr><td><a href="site-review.html"><b>What pki.sgit.ai is missing</b></a></td><td>Cross-team brief · 19 Aug 2026</td><td>The review of this site — the mandate gap, the reframing, and a stated limitation that is itself the finding.</td></tr>
+    <tr><td><a href="bootstrap-trap.html"><b>The bootstrap trap</b></a></td><td>Strategy brief · 19 Aug 2026</td><td>Why agent key registries do not exist: a loop, seven workarounds, and every one hands over a larger identity.</td></tr>
+    <tr><td><a href="enrolment.html"><b>Agent enrolment without borrowed authority</b></a></td><td>Arch brief · 19 Aug 2026</td><td>Start from a keypair and nothing else; post through an append lane; keep identity separate from mandate.</td></tr>
+    <tr><td><a href="append-lane.html"><b>The append lane is shipped and account-less</b></a></td><td>Arch brief (correction) · 19 Aug 2026</td><td>Four capability tiers, hashes on the server, and five things earlier briefs got wrong.</td></tr>
+    <tr><td><a href="execution-broker.html"><b>The execution broker</b></a></td><td>Arch brief · 19 Aug 2026</td><td>The agent never holds the credential, which closes the one boundary capability and sequence controls could not reach.</td></tr>
+    <tr><td><a href="relay-pattern.html"><b>The relay pattern</b></a></td><td>Arch brief · 16 Aug 2026</td><td>Encryption says who may read, signing says who acted, ordering comes from data dependencies.</td></tr>
+    <tr><td><a href="two-populations.html"><b>nhi.sgit.ai: two populations</b></a></td><td>Strategy brief · 16 Aug 2026</td><td>The identity gap this site is the cryptographic half of.</td></tr>
+    <tr><td><a href="pki-registry.html"><b>pki.sgit.ai: the registry has a documented failure to learn from</b></a></td><td>Strategy brief · 16 Aug 2026</td><td>The 2019 keyserver failure turned into registry rules; append-only resolved precisely; private before public.</td></tr>
   </tbody>
 </table></div>
 
 <div class="note"><b>More documents.</b> The corpus behind this site runs to 729 files mentioning the subject, with dedicated documents going back to February 2026 — an architecture debrief, a messaging implementation, model-integration research, a document identity brief, operating modes, a provenance treatment and a brand strategy. Curating those by question is <a href="../roadmap/index.html#order">step 1 of the build order</a> and is queued on <a href="../admin/comms.html">comms</a>. The wider corpus is published openly in the <a href="https://github.com/the-cyber-boardroom/SGraph-AI__App__Send">SGraph-AI__App__Send</a> repository.</div>
 
 <div class="pagenav">
-  <a href="../roadmap/index.html">← Build order</a>
-  <a href="pki-registry.html">The scoping brief →</a>
+  <a href="../execution/index.html">← The execution broker</a>
+  <a href="briefing-pack.html">The leading brief →</a>
 </div>
 </main>
 
@@ -48,7 +60,7 @@
     <div class="brandline">pki<span>.sgit.ai</span></div>
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. All content CC BY 4.0.</p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.2</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.3</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The registry</h4>
@@ -58,9 +70,16 @@
     <a href="../roadmap/index.html">Build order</a>
   </div>
   <div>
+    <h4>The three layers</h4>
+    <a href="../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../enrolment/index.html">Enrolment</a>
+    <a href="../execution/index.html">The execution broker</a>
+    <a href="../shipped/index.html">What already ships</a>
+  </div>
+  <div>
     <h4>The sources</h4>
     <a href="../documents/index.html">The documents</a>
-    <a href="../documents/pki-registry.html">The scoping brief</a>
+    <a href="../documents/briefing-pack.html">The briefing pack</a>
     <a href="../about/participant.html">Where we lose</a>
   </div>
   <div>

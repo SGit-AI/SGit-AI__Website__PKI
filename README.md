@@ -13,15 +13,21 @@ Live site: https://pki.sgit.ai (GitHub Pages, deployed from `dev`).
 
 ## Structure
 
-- `index.html` — front page: the failure leads
+- `index.html` — front page: the failure leads, then the three layers and the reframe
 - `failure/` — the 2019 keyserver failure, with sources; the append-only resolution
+- `bootstrap/` — the bootstrap trap: why agent key registries do not exist
 - `rules/` — the four registry rules, published before the registry exists
 - `mandate/` — identity and mandate as separate, independently revocable statements
+- `enrolment/` — how a key gets in, starting from a keypair and nothing else
+- `execution/` — the execution broker, and receipts as the third corner
+- `shipped/` — what already ships, what is only proposed, and the two absences
 - `roadmap/` — the build order, the honest tensions, the open questions
 - `documents/` — the source briefs, readable in-page (raw markdown is the source of truth)
 - `briefs/` — those source documents, captured verbatim
 - `about/participant.html` — the participant disclosure, and where our approach loses
 - `admin/` — engineering: comms (tasks & requests), versions, build tooling
+- `admin/build/chrome.py` — the single definition of nav and footer, applied across every page
+- `admin/build/gen_documents.py` — generates the `documents/` reader pages
 - `assets/site.css` — shared stylesheet (sgit.ai design language)
 
 Content was refactored across from the PKI section of
@@ -32,8 +38,10 @@ three pages to a site.
 
 1. Bump `admin/build/version.txt` (vX.Y.Z, exactly once per release) and add a row to
    `admin/versions.html`; update `admin/comms.html`.
-2. `node admin/build/validate.js`
-3. `git commit -am "site vX.Y.Z: ..." && git push origin dev`
+2. `python3 admin/build/chrome.py` — propagates the version badge and any nav/footer change
+   to every page. (`gen_documents.py` first, if a document was added.)
+3. `node admin/build/validate.js`
+4. `git commit -am "site vX.Y.Z: ..." && git push origin dev`
 
 Every push to `dev` runs `.github/workflows/deploy-pages.yml`: validate → auto-tag
 (`vX.Y.Z`, verified against version.txt and the commit subject, next-minor enforced) →

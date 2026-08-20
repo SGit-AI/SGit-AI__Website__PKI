@@ -13,10 +13,14 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.2</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.3</a>
   <a class="nl" href="../failure/index.html">The failure</a>
+  <a class="nl" href="../bootstrap/index.html">Bootstrap</a>
   <a class="nl" href="../rules/index.html">The rules</a>
   <a class="nl here" href="../mandate/index.html">Mandate</a>
+  <a class="nl" href="../enrolment/index.html">Enrolment</a>
+  <a class="nl" href="../execution/index.html">Execution</a>
+  <a class="nl" href="../shipped/index.html">Shipped</a>
   <a class="nl" href="../roadmap/index.html">Build order</a>
   <a class="nl" href="../documents/index.html">Docs</a>
   <a class="nl" href="../admin/comms.html">Comms</a>
@@ -33,13 +37,35 @@
 
 <h2 id="two">The two statements</h2>
 <div class="tablewrap"><table>
-  <thead><tr><th>Statement</th><th>Says</th><th>Signed by</th><th>Revoked by</th></tr></thead>
+  <thead><tr><th>Statement</th><th>Says</th><th>Signed by</th><th>Revoked <em>when</em></th></tr></thead>
   <tbody>
-    <tr><td><b>Identity</b></td><td>This key belongs to this agent</td><td>The key itself</td><td>A signed append from that key</td></tr>
-    <tr><td><b>Mandate</b></td><td>This agent may do these things, until this date, on whose authority</td><td>The authority granting it</td><td>A signed append from that authority — independently of the identity</td></tr>
+    <tr><td><b>Identity</b></td><td>This key belongs to this agent</td><td>The key itself</td><td>The <b>key</b> is compromised</td></tr>
+    <tr><td><b>Mandate</b></td><td>This agent may do these things, until this date, on whose authority</td><td>The authority granting it</td><td>The <b>permission</b> changes</td></tr>
   </tbody>
 </table></div>
+<p>The <em>when</em> column is the whole argument for paying the cost of two statements. Those are different events that happen at different times for different reasons — and a system with one statement has to treat them as the same event.</p>
 <p>Both are entries in a record, so both obey <a href="../rules/index.html">the four rules</a>: appended, signed, size-bounded, owner-written. Both are checkable by a third party who trusts neither the agent nor the operator — which is the property a bearer token cannot have.</p>
+
+<h2 id="principles">Two principles, stated exactly</h2>
+<p>Both are one-liners, both are precise, and both stop a reader building the wrong thing — which is what this page is for.</p>
+<p class="claim">Encryption restricts who can read a mandate. The signature and subject binding establish who may exercise it.</p>
+<p>The two get conflated constantly, and conflating them produces somebody believing a mandate is safe <em>because it is encrypted</em> — when what makes it safe is that exercising it requires a private key the reader does not hold.</p>
+<p class="claim">A signature over an enrolment request proves the submitter controls the corresponding private key. It does not prove that the project should trust the agent. Trust is a policy decision made afterwards.</p>
+<p>A signature proves possession and proves nothing about trustworthiness. <a href="../bootstrap/index.html#gradient">Recognition is a decision, not a computation</a> — which is a feature, because it means the issuer retains judgement.</p>
+
+<h2 id="fields">What a mandate carries</h2>
+<p>The authorisation object, as the <a href="../execution/index.html">execution work</a> specifies it — listed because "a signed permission" is too vague to implement or to check:</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Group</th><th>Fields</th></tr></thead>
+  <tbody>
+    <tr><td><b>Who</b></td><td>Subject · issuer</td></tr>
+    <tr><td><b>Where</b></td><td>Service and instance · resource · environment</td></tr>
+    <tr><td><b>What</b></td><td>Capability · constraints (for example an allowed path set, or a maximum changed-file count)</td></tr>
+    <tr><td><b>When</b></td><td>Workflow and stage · validity window · usage limit</td></tr>
+    <tr><td><b>Proof</b></td><td>Signature</td></tr>
+  </tbody>
+</table></div>
+<p>Verification checks the issuer signature, the subject, the requester's proof of possession, the requested action, and validity including revocation. Note that constraints like an allowed path set cannot be checked by forwarding a request — <a href="../execution/index.html#interpretation">enforcing them requires interpreting it</a>, which is where the engineering cost sits.</p>
 
 <h2 id="vs-token">Why this is materially different from a token</h2>
 <div class="tablewrap"><table>
@@ -56,7 +82,7 @@
 
 <h2 id="caution">The caution that has to travel with this</h2>
 <p class="claim">A signed mandate constrains what an agent may be <em>authorised</em> to do, not what it does within that authority.</p>
-<p>That distinction is easy to lose and expensive to lose. A mandate narrows the grant; it does not observe the agent, bound its spend, cap its time, or tell you where it reached. It is one control among several and composes with them — it does not replace them. A registry that is sold as solving agent security would be repeating, in a new register, exactly the overclaim this project spends its time arguing against.</p>
+<p>That distinction is easy to lose and expensive to lose. A mandate narrows the grant; it does not observe the agent, bound its spend, cap its time, or tell you where it reached. It is one control among several and composes with them — it does not replace them. <a href="../execution/index.html#boundary">The execution layer is what closes it</a>, and it closes it by holding the credential rather than by writing a better policy. A registry that is sold as solving agent security would be repeating, in a new register, exactly the overclaim this project spends its time arguing against.</p>
 <div class="warnbox"><b>And the limit underneath all of it.</b> A registry can say <em>this key claims to be this agent</em>. It cannot say <em>this key is currently in the hands of that agent and nobody else</em> — that is attestation, and neither keys nor vaults supply it. Whoever holds the key is the identity. <a href="../about/participant.html#loses">Where our approach loses</a>, in full.</div>
 
 <h2 id="roots">Who may vouch, and the fractal problem</h2>
@@ -72,7 +98,7 @@
 
 <div class="pagenav">
   <a href="../rules/index.html">← The four rules</a>
-  <a href="../roadmap/index.html">Next: the build order →</a>
+  <a href="../execution/index.html">Next: the execution broker →</a>
 </div>
 </main>
 
@@ -81,7 +107,7 @@
     <div class="brandline">pki<span>.sgit.ai</span></div>
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. All content CC BY 4.0.</p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.2</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.3</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The registry</h4>
@@ -91,9 +117,16 @@
     <a href="../roadmap/index.html">Build order</a>
   </div>
   <div>
+    <h4>The three layers</h4>
+    <a href="../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../enrolment/index.html">Enrolment</a>
+    <a href="../execution/index.html">The execution broker</a>
+    <a href="../shipped/index.html">What already ships</a>
+  </div>
+  <div>
     <h4>The sources</h4>
     <a href="../documents/index.html">The documents</a>
-    <a href="../documents/pki-registry.html">The scoping brief</a>
+    <a href="../documents/briefing-pack.html">The briefing pack</a>
     <a href="../about/participant.html">Where we lose</a>
   </div>
   <div>

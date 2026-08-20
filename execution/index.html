@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The execution broker: receipts are the third corner · pki.sgit.ai</title>
+<meta name="description" content="Identity says who. Mandate says what may be done. Neither records what was actually done. An execution broker holds the credential the agent never sees, enforces the mandate's constraints, and returns a signed receipt — the third corner of the triangle.">
+<link rel="canonical" href="https://pki.sgit.ai/execution/index.html">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.3</a>
+  <a class="nl" href="../failure/index.html">The failure</a>
+  <a class="nl" href="../bootstrap/index.html">Bootstrap</a>
+  <a class="nl" href="../rules/index.html">The rules</a>
+  <a class="nl" href="../mandate/index.html">Mandate</a>
+  <a class="nl" href="../enrolment/index.html">Enrolment</a>
+  <a class="nl here" href="../execution/index.html">Execution</a>
+  <a class="nl" href="../shipped/index.html">Shipped</a>
+  <a class="nl" href="../roadmap/index.html">Build order</a>
+  <a class="nl" href="../documents/index.html">Docs</a>
+  <a class="nl" href="../admin/comms.html">Comms</a>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / execution</div>
+<h1>The execution broker, and why receipts are the third corner</h1>
+<p class="lead">A registry that records <em>who a key belongs to</em> and <em>what it was permitted to do</em> leaves out the most auditable event of all: <b>what it actually did</b>. This site does not own the execution layer — but a reader arriving at a key registry is usually trying to answer a question about something that happened, and the registry alone cannot answer it. So it is named here.</p>
+
+<h2 id="three">Three questions, three layers</h2>
+<pre class="shell">
+   <span class="g">WHO IS THIS AGENT?</span>              identity        a <span class="cy">registry</span> problem
+   <span class="g">WHAT MAY IT DO?</span>                 mandate         a <span class="cy">delegation</span> problem
+   <span class="y">SHOULD THAT PRODUCE THIS
+   EFFECT, NOW, HERE?</span>              execution       a <span class="r">broker</span> problem
+</pre>
+<p>The first two are what a registry publishes. The third is a different kind of control and a different product line — but the three only make sense together, and a site that shows two of them without naming the third is describing a triangle with a missing corner.</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Statement</th><th>Says</th><th>Lives in</th></tr></thead>
+  <tbody>
+    <tr><td><b>Identity</b></td><td>This key is this agent</td><td>The registry</td></tr>
+    <tr><td><b>Mandate</b></td><td>This agent may do this</td><td>The registry</td></tr>
+    <tr><td><b>Receipt</b></td><td>This agent <em>did</em> this, under that mandate, at this time</td><td>Evidence</td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="shift">The shift: the agent never holds the credential</h2>
+<div class="split" style="padding:0">
+  <table>
+    <thead><tr><th></th><th class="fatal">Traditional</th><th class="safe">Execution broker</th></tr></thead>
+    <tbody>
+      <tr><td><b>What the agent receives</b></td><td><b class="no">A credential</b></td><td>Nothing — it sends a mandate and a request</td></tr>
+      <tr><td><b>Who acts on the service</b></td><td>The agent</td><td>The broker, using credentials the agent never sees</td></tr>
+      <tr><td><b>Effective authority bounded by</b></td><td><b class="no">The platform's permission granularity</b></td><td>The business operation the mandate names</td></tr>
+      <tr><td><b>What a leak of the agent's context yields</b></td><td><b class="no">A usable credential</b></td><td><b class="yes">Nothing to exfiltrate</b></td></tr>
+      <tr><td><b>What remains</b></td><td><b class="no">A hope</b> that it uses the credential only as intended</td><td>A constraint the agent has no means of exceeding</td></tr>
+    </tbody>
+  </table>
+  <p class="cap">The unit of delegation moves from <em>credential access</em> to <em>authorised action</em>. Every other mechanism in this space — short-lived credentials, just-in-time access, rotation, secret injection, workload identity, gateway policy — improves how a credential is issued, scoped or expired. They all still eventually hand the agent one.</p>
+</div>
+<p>The example is exact. An agent may need to create one pull request containing changes to three approved files. The platform may only offer a token whose permissions permit substantially more. So the security system can say <em>this agent may possess this token for five minutes</em>, and cannot say <em>this agent may perform exactly this operation, on this repository, in this workflow, at this stage, using these files, once.</em></p>
+
+<h2 id="boundary">This closes a boundary named three times</h2>
+<p>Three separate pieces of work reached the same edge from different directions, and each named it honestly as the limit of what that control could do:</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Control</th><th>Stated limit</th></tr></thead>
+  <tbody>
+    <tr><td>Capability grants</td><td>Constrain what a component may <b>touch</b>, not what it does with it</td></tr>
+    <tr><td>Plan-then-execute</td><td>Constrains <b>which actions occur</b>, not what arguments they carry</td></tr>
+    <tr><td>Per-agent keys</td><td>Constrain <b>which agent acts when</b>, not what that agent does within its step</td></tr>
+  </tbody>
+</table></div>
+<p>Every one ends at the same place: <b>an authorised party misusing authority it legitimately holds.</b> A compromised agent can read its input, do something wrong, sign it correctly and pass it on — with every cryptographic check passing. <b>This closes that gap by construction rather than by policy</b>, because the agent does not perform the action at all.</p>
+<div class="note"><b>Which is the limit <a href="../mandate/index.html#caution">the mandate page states</a>, resolved.</b> A mandate constrains what an agent may be <em>authorised</em> to do, not what it does within that authority. The execution layer closes that — and it closes it by holding the credential, not by writing a better policy.</div>
+
+<h2 id="mandate-object">The mandate as the authorisation object</h2>
+<p>A valid certificate proves a request came from a given agent. It proves nothing about whether that agent may perform the action. So the mandate carries: subject, issuer, service and instance, capability, resource, constraints, workflow and stage, environment, validity window, usage limit, and a signature. Verification checks the issuer signature, the subject, the requester's proof of possession, the requested action, and validity including revocation.</p>
+<p class="claim">Encryption restricts who can read a mandate. The signature and subject binding establish who may exercise it.</p>
+<p>That distinction is worth protecting because the two get conflated constantly — and conflating them produces somebody believing a mandate is safe because it is encrypted, when what makes it safe is that exercising it requires a private key the reader does not hold.</p>
+
+<h2 id="receipts">Receipts are the evidence chain</h2>
+<p>Every operation, successful or rejected, produces a signed receipt establishing that a named broker executed a named action for a named agent under a named mandate at a given time.</p>
+<p class="claim">This creates an evidence chain rather than relying solely on mutable platform audit logs.</p>
+<p>A receipt is <b>a fact with provenance</b> — produced by the party that performed the action rather than by the party being assessed, and it cannot be quietly amended afterwards. The more interesting use is forward rather than backward: a workflow stage that requires evidence the previous stage completed can <b>consume the receipt directly</b>, rather than trusting a status field somebody could set.</p>
+
+<h2 id="rented">It works for rented agents, without attestation</h2>
+<p>The industry's answer to agent identity is attestation-based, which requires a workload you run. For an agent running inside a hosted assistant there is no answer at all — <a href="https://nhi.sgit.ai/thesis/index.html">the two-populations thesis</a>. This needs <b>no attestation</b>: it needs the agent to hold a key and present a mandate, and a hosted agent can do both.</p>
+<p>The practical consequence is the one people actually want: <b>you can let a hosted coding agent open a pull request without giving it repository write access</b>, because it never holds a token. And an agent that never holds a credential <b>cannot leak one</b>, whatever is injected into it, because there is nothing in its context to exfiltrate.</p>
+<div class="warnbox"><b>The honest limit is unchanged.</b> This establishes that a specific key presented a specific mandate. It does not establish what software that key is running inside. <b>Attribution without attestation</b> — which for many purposes is what was wanted, but it is not the same claim.</div>
+
+<h2 id="concentration">The concentration risk, stated plainly</h2>
+<p>The broker holds every credential. That is the mechanism — it cannot execute against a service without a usable credential for it, and it holds them for every service and every tenant it serves. Applying the catastrophic-failure question:</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Component</th><th>Total compromise yields</th></tr></thead>
+  <tbody>
+    <tr><td>The vault</td><td>Ciphertext, and the shape of the estate</td></tr>
+    <tr><td><b>The broker</b></td><td><b class="no">Every credential it holds, usable immediately</b></td></tr>
+  </tbody>
+</table></div>
+<p><b>That is the opposite property</b> to everything else in this architecture, and it should be stated rather than left for a reader to notice. The design removes credentials from many agents by concentrating them in one place: a real and defensible trade, and <em>not</em> a reduction in total exposure. Three things follow.</p>
+<ul>
+  <li><b>Self-hosting is the mitigation, not an upsell.</b> A customer running their own broker has not handed their credentials to anybody. It should be a first-class requirement.</li>
+  <li><b>The broker needs its own identity</b> — so that an agent can <em>refuse</em> to send a mandate to a broker it does not recognise.</li>
+  <li><b>The credential storage boundary is the most important engineering in the product.</b> Everything else can be rebuilt; a credential store compromise cannot be undone.</li>
+</ul>
+
+<h2 id="interpretation">Enforcement is interpretation, not proxying</h2>
+<p>A mandate carrying an allowed path list, a maximum changed-file count or a base branch requires <b>understanding</b> the request, not forwarding it. To check that a pull request touches only permitted paths, the broker must parse the diff; to check a file count, it must count. None of that is proxying.</p>
+<p>So the broker is <b>an interpreter, per provider, per capability</b> — which is where the real engineering cost sits, and why the phasing argument is <b>one provider, one capability, deeply</b>, before any breadth. Adapters are maintenance rather than a build: every provider carries its own authentication, error semantics, rate limits and naming, all of which change underneath you, with the added burden that each capability's constraints must track the provider's request format as it evolves.</p>
+
+<h2 id="market">Independent check: the market has not closed this either</h2>
+<div class="evbox ev-warn"><span class="evtag">Third-party research · 19 Aug 2026</span>
+<p>Market research produced independently of this corpus reached the same conclusion from the outside: a market <b>is</b> forming around this architecture, converging from two directions — several products solve the <b>credential boundary</b>, keeping the provider secret away from the agent, and several newer ones solve parts of the <b>authority boundary</b>, with signed mandates, approval and receipts. What it did not find is the combination:</p>
+<p><b>a portable signed mandate, followed by broker-side semantic execution, followed by a signed receipt from the party that actually performed the effect.</b></p>
+<p>Two cautions on reading that. Its assessment of specific products is a snapshot on a stated date and will age, which is the dating discipline this project applies to any comparison. And it was written to a brief rather than as neutral research, so its whitespace conclusion is <b>a hypothesis somebody could disprove</b> rather than a finding.</p></div>
+
+<h2 id="test">The acceptance test, worth reusing verbatim</h2>
+<blockquote class="challenge">Can an agent holding no token request one pull request, constrained by an independently issued authorisation object covering repository, branch, exact path set, file count, workflow stage and single use, with those arguments enforced by the broker rather than trusted from the caller, and a signed receipt an offline third party can validate?</blockquote>
+<p>That is a better question than any feature list, because every clause is checkable against a real product. It is offered here as a tool for evaluating anything in this space — including whatever we build.</p>
+
+<h2 id="naming">A note on the name</h2>
+<p>The source document calls this a <em>Service Twin</em>. This site calls it an <b>execution broker</b>, deliberately. A <em>digital twin</em> already means something specific in this corpus: the node where a graph meets reality, the thing facts attach to and obligations are assessed against. <b>A digital twin represents a thing; this acts on one.</b> Using one word for both would confuse readers who have met the first, and the confusion would land in security documentation. The rename costs nothing today.</p>
+
+<div class="pagenav">
+  <a href="../mandate/index.html">← Identity and mandate</a>
+  <a href="../shipped/index.html">What already ships →</a>
+</div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. All content CC BY 4.0.</p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.3</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The registry</h4>
+    <a href="../failure/index.html">Why they don't exist</a>
+    <a href="../rules/index.html">The four rules</a>
+    <a href="../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../roadmap/index.html">Build order</a>
+  </div>
+  <div>
+    <h4>The three layers</h4>
+    <a href="../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../enrolment/index.html">Enrolment</a>
+    <a href="../execution/index.html">The execution broker</a>
+    <a href="../shipped/index.html">What already ships</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../documents/briefing-pack.html">The briefing pack</a>
+    <a href="../about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="https://nhi.sgit.ai">nhi.sgit.ai</a>
+    <a href="https://sgit.ai">sgit.ai</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

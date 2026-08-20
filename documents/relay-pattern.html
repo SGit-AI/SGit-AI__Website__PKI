@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Relay Pattern: Encryption, Signing And Ordering Are Three Mechanisms · documents · pki.sgit.ai</title>
+<meta name="description" content="Original document, readable in-page: summary, key concepts and key ideas, then the full markdown. Architecture brief, v0.33.59, 16 August 2026. CC BY 4.0.">
+<link rel="canonical" href="https://pki.sgit.ai/documents/relay-pattern.html">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.3</a>
+  <a class="nl" href="../failure/index.html">The failure</a>
+  <a class="nl" href="../bootstrap/index.html">Bootstrap</a>
+  <a class="nl" href="../rules/index.html">The rules</a>
+  <a class="nl" href="../mandate/index.html">Mandate</a>
+  <a class="nl" href="../enrolment/index.html">Enrolment</a>
+  <a class="nl" href="../execution/index.html">Execution</a>
+  <a class="nl" href="../shipped/index.html">Shipped</a>
+  <a class="nl" href="../roadmap/index.html">Build order</a>
+  <a class="nl" href="../documents/index.html">Docs</a>
+  <a class="nl" href="../admin/comms.html">Comms</a>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="index.html">documents</a> / relay-pattern</div>
+<h1>The Relay Pattern: Encryption, Signing And Ordering Are Three Mechanisms</h1>
+
+<div class="docmeta">
+  <span class="k">Type</span><span class="v">Architecture brief</span>
+  <span class="k">Version</span><span class="v">v0.33.59</span>
+  <span class="k">Date</span><span class="v">16 August 2026</span>
+  <span class="k">Author</span><span class="v">Dinis Cruz (project lead) and collaborators</span>
+  <span class="k">Licence</span><span class="v">CC BY 4.0</span>
+  <span class="k">Source</span><span class="v"><a href="../briefs/v0.33.59__arch-brief__relay-pattern-encryption-signing-and-ordering-are-three-mechanisms.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/dev/briefs/v0.33.59__arch-brief__relay-pattern-encryption-signing-and-ordering-are-three-mechanisms.md">view on GitHub</a></span>
+</div>
+
+<h2 id="summary">Summary</h2>
+<p>Untangles three mechanisms that get bundled as one: encryption says who may read, signing says who acted, and ordering comes from data dependencies rather than from either. The brief that raised per-agent keys and the names-are-identities problem a registry would answer — and that stated, as the limit of its own control, that per-agent keys constrain which agent acts at which step and not what that agent does within its step. That stated limit is one of the three the execution broker closes.</p>
+
+<h2 id="concepts">Key concepts</h2>
+<ul>
+  <li><a href="../execution/index.html#mandate-object"><b>Three mechanisms, not one</b></a> — the same discipline applied to authorisation rather than messaging</li>
+  <li><a href="../execution/index.html#boundary"><b>The stated limit</b></a> — which agent acts when, not what it does within its step</li>
+  <li><a href="../shipped/index.html#anchors"><b>Who may claim to be a participant</b></a> — left open here, answered by registered anchors</li>
+  <li><a href="../enrolment/index.html#request"><b>Replay protection</b></a> — needs a nonce inside the signed payload, and is easily left out</li>
+</ul>
+
+<h2 id="ideas">Key ideas</h2>
+<ul>
+  <li>A compromised agent can read its input, do something wrong, sign it correctly and pass it on, with every cryptographic check passing.</li>
+  <li>Ordering is not a cryptographic property and should not be sought from encryption or signatures.</li>
+  <li>Per-agent keys are the attribution mechanism; the registry is where the verifying keys would live.</li>
+  <li>If anybody can register a name and publish a key for it, a message chain can be redirected.</li>
+</ul>
+
+<h2 id="on-site">On this site</h2>
+<p>Foundation. Supplies the three-mechanisms discipline the mandate and execution pages both rely on.</p>
+
+<h2 id="read">Read the document</h2>
+<div class="mdread-label">📄 Original document · v0.33.59 · 16 August 2026 · rendered from the <a href="../briefs/v0.33.59__arch-brief__relay-pattern-encryption-signing-and-ordering-are-three-mechanisms.md">raw markdown</a> (the source of truth)</div>
+<div class="mdread" id="mdread" data-src="../briefs/v0.33.59__arch-brief__relay-pattern-encryption-signing-and-ordering-are-three-mechanisms.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="../briefs/v0.33.59__arch-brief__relay-pattern-encryption-signing-and-ordering-are-three-mechanisms.md">open the raw markdown</a>.</p></noscript></div>
+
+<div class="pagenav">
+  <a href="index.html">← All documents</a>
+  <a href="../briefs/v0.33.59__arch-brief__relay-pattern-encryption-signing-and-ordering-are-three-mechanisms.md">Raw markdown →</a>
+</div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. All content CC BY 4.0.</p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.3</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The registry</h4>
+    <a href="../failure/index.html">Why they don't exist</a>
+    <a href="../rules/index.html">The four rules</a>
+    <a href="../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../roadmap/index.html">Build order</a>
+  </div>
+  <div>
+    <h4>The three layers</h4>
+    <a href="../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../enrolment/index.html">Enrolment</a>
+    <a href="../execution/index.html">The execution broker</a>
+    <a href="../shipped/index.html">What already ships</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../documents/briefing-pack.html">The briefing pack</a>
+    <a href="../about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="https://nhi.sgit.ai">nhi.sgit.ai</a>
+    <a href="https://sgit.ai">sgit.ai</a>
+  </div>
+</div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+<script src="../assets/mdreader.js"></script>
+</body>
+</html>

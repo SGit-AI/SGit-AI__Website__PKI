@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>What already ships — and the two things it doesn't do · pki.sgit.ai</title>
+<meta name="description" content="The shipped sgit PKI provides keypairs, signing, encryption to a fingerprint and a contacts list. It has no revocation and no directory — which is precisely what a registry supplies. The registry is the missing half of a feature that already exists.">
+<link rel="canonical" href="https://pki.sgit.ai/shipped/index.html">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.3</a>
+  <a class="nl" href="../failure/index.html">The failure</a>
+  <a class="nl" href="../bootstrap/index.html">Bootstrap</a>
+  <a class="nl" href="../rules/index.html">The rules</a>
+  <a class="nl" href="../mandate/index.html">Mandate</a>
+  <a class="nl" href="../enrolment/index.html">Enrolment</a>
+  <a class="nl" href="../execution/index.html">Execution</a>
+  <a class="nl here" href="../shipped/index.html">Shipped</a>
+  <a class="nl" href="../roadmap/index.html">Build order</a>
+  <a class="nl" href="../documents/index.html">Docs</a>
+  <a class="nl" href="../admin/comms.html">Comms</a>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / shipped</div>
+<h1>What already ships, and the two things it doesn't do</h1>
+<p class="lead">This registry is not argued for from first principles. The keypairs, the signing, the encryption to a named recipient and the contacts list <b>already ship</b> — and the documentation says, in its own words, <b>no revocation, no directory</b>. Those two absences are precisely what a registry supplies.</p>
+
+<p class="claim">The registry is the missing half of a feature that already exists.</p>
+
+<p>Stating it that way does three things a general argument about key repositories cannot. It gives a <b>concrete user</b>: somebody already running the PKI commands who has hit exactly these two walls. It <b>bounds the scope</b>, because a directory and revocation are a far smaller thing to build and to explain than a general public key infrastructure. And it makes <a href="../failure/index.html">the keyserver history</a> land harder rather than softer — because that failure explains <em>why</em> those two absences are hard rather than oversights. <b>The last system that attempted both was destroyed by how it did them.</b></p>
+
+<h2 id="ships">The shipped surface</h2>
+<div class="tablewrap"><table>
+  <thead><tr><th>What ships</th><th>Detail</th></tr></thead>
+  <tbody>
+    <tr><td><b>Keypair generation</b></td><td><code>sgit pki keygen</code> makes <b>two</b> pairs: <b>RSA-OAEP 4096</b> for encryption and <b>ECDSA P-256</b> for signing, passphrase-protected</td></tr>
+    <tr><td><b>Export / import</b></td><td>A JSON public-key bundle <code>{v, encrypt, sign, label, fingerprint, signing_fingerprint}</code> of PEM blocks — not a bare PEM</td></tr>
+    <tr><td><b>Sign and verify</b></td><td><code>sgit pki sign</code> / <code>verify</code> over files</td></tr>
+    <tr><td><b>Encrypt to a recipient</b></td><td><code>encrypt --recipient &lt;fingerprint&gt;</code>; <code>decrypt --fingerprint &lt;fingerprint&gt;</code> (required). Envelope v2 is base64 JSON <code>{v,w,i,c}</code>: RSA-OAEP wraps an AES-256-GCM content key</td></tr>
+    <tr><td><b>Contacts</b></td><td><code>sgit pki contacts</code> — a local list of known public keys</td></tr>
+    <tr><td><b>The append lane</b></td><td>The vault-to-vault message transport, server-side and code-verified — <a href="../enrolment/index.html#lane">detail on the enrolment page</a></td></tr>
+  </tbody>
+</table></div>
+
+<div class="warnbox"><b>A correction worth carrying, because it would get copied into an implementation.</b> Source material circulating in this corpus describes the client sealing a payload to a recipient's <b>X25519</b> key. That is wrong. The shipped primitives are <b>RSA-OAEP 4096</b> and <b>ECDSA P-256</b> — explicitly <em>not</em> X25519 or Ed25519. Anything naming those curves is describing a system that does not exist.</div>
+
+<h2 id="absences">The two absences</h2>
+<div class="tablewrap"><table>
+  <thead><tr><th>Absence</th><th>What it costs today</th><th>What supplies it</th></tr></thead>
+  <tbody>
+    <tr><td><b>No revocation</b></td><td>A compromised key cannot be withdrawn. Anybody holding it stays able to act as that identity, and anybody verifying an old signature cannot tell whether the key was still good at the time</td><td><a href="../rules/index.html#r2">Rule 2</a> — revocation as a signed append, so the record stays append-only and still supports withdrawal</td></tr>
+    <tr><td><b>No directory</b></td><td>Keys are exchanged out of band and kept in a local contacts list. There is no answer to "what is the current key for this agent, and who says so"</td><td><a href="../rules/index.html">The registry</a> — a published, mirrorable record with <a href="../rules/index.html#r1">owner-only writes</a> and <a href="../rules/index.html#r4">every entry signed</a></td></tr>
+  </tbody>
+</table></div>
+<p>Those are the two hardest operations a key repository performs, and they are the two the 2019 network got wrong — it could never delete, and anybody could append to anybody's record. <b>The absences are not an oversight; they are the parts that need designing before they are built.</b> Which is why <a href="../rules/index.html">the rules are published first</a>.</p>
+
+<h2 id="capabilities">Reuse the capability model, don't invent one</h2>
+<p>A registry needs an authorisation model, and one already exists in the platform with the right shape. The append lane separates four capabilities, and <b>the server stores only hashes of the first three</b>:</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Tier</th><th>Grants</th><th>Where it lives</th></tr></thead>
+  <tbody>
+    <tr><td><b>Append token</b></td><td>Write to the lane, and nothing else</td><td>With senders</td></tr>
+    <tr><td><b>Enumeration key</b></td><td>List, fetch, mark processed</td><td>With the recipient</td></tr>
+    <tr><td><b>Write key</b></td><td>Configure and purge the lane</td><td>With the vault owner</td></tr>
+    <tr><td><b>Private key</b></td><td>Decrypt the contents</td><td><b>Client side only — never sent</b></td></tr>
+  </tbody>
+</table></div>
+<p>A total compromise of the server yields <b>hashes rather than capabilities</b>. That is the catastrophic-failure principle implemented rather than asserted, and it is the same discipline a registry needs — the mapping is close to direct: who may append a statement to a record, who may read the record, who may configure it, and who holds the key that signs. <a href="../rules/index.html#r1">Rule 1</a>, that only the owner writes to their own record, is a constraint on the first of those.</p>
+<div class="note"><b>Why reuse beats redesign here.</b> This model is implemented and code-verified; the hash-only property is already in production; and a second authorisation model in the same platform is a second thing to reason about, get wrong, and document.</div>
+
+<h2 id="anchors">Who may send is already answered</h2>
+<p>A lane is not open to everybody by default. Its configuration holds <b>registered anchors</b> — hashes of accepted senders — and configuring it requires the write key. So <b>the recipient decides which senders are accepted, using a credential the senders do not have.</b> That answers a question the relay-pattern work left open about who may claim to be a given participant.</p>
+
+<h2 id="proposed">Shipped versus proposed — the boundary that must not blur</h2>
+<p>The addressing scheme is the elegant part: <b>a lane is addressed by the hash of the recipient's public key</b>, so an agent's own key is its address and no directory lookup is needed to find where to send. An agent that has generated a keypair already knows its own lane address without asking anybody — exactly the property <a href="../bootstrap/index.html">the bootstrap trap</a> requires.</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Half</th><th>State</th></tr></thead>
+  <tbody>
+    <tr><td>The lane, its gates, its storage and its limits</td><td><span class="opt-verdict opt-yes">shipped and verified</span></td></tr>
+    <tr><td>The client crypto that seals to a recipient and derives the lane address from the public key</td><td><span class="opt-verdict opt-part">proposed</span></td></tr>
+  </tbody>
+</table></div>
+<div class="warnbox"><b>Do not code against the derivation.</b> The intended lane address is <code>append_token = H(recipient public key)</code>, but <b>no shipped command emits it</b> — today the token is agreed out of band. Both halves are needed for the worked example to run, and documenting the second as though it were the first is the specific error to avoid. The rule this site follows: <b>if it is not code-verified, label it proposed</b> — a page that says "not yet" is better than one an agent trusts and acts on.</div>
+
+<h2 id="limits">Limits worth knowing before building against it</h2>
+<p>Five megabytes per payload, one thousand files per token, one hundred identifiers per batch, three megabytes of inline content, and a maximum list page of two hundred. Immutable objects are served with a one-year immutable cache directive while references and indexes are served <code>no-store</code> — which matters for anything client-side.</p>
+
+<h2 id="composition">The deeper finding: the capability exists, the composition doesn't</h2>
+<p>The transport is documented in one place as a generic append mechanism that never uses the words <em>message</em>, <em>send</em>, <em>recipient</em> or <em>inbox</em>. The cryptography is documented in another as file signing and encryption, with no link to the transport. <b>The page that joins them did not exist</b> — so nobody searching for messaging found either half.</p>
+<p>That is the discoverability problem one layer up: not unreachable documentation, but <em>uncomposed</em> documentation, where every piece is present and nothing tells a reader they combine. The acceptance test is the right one: <b>give a fresh agent only the machine-readable index and ask how to send an encrypted message from one vault to another.</b> It should reach a working answer — including that the recipient's public key hash is the lane address — without reading source or asking a person.</p>
+<div class="note"><b>This site is part of the answer.</b> Its own machine-readable entry point is <a href="../llms.txt">llms.txt</a>, and this page exists to name the combination rather than leave it implied. The general rule is worth adopting as a review check: <b>for any two capabilities that compose into something a user would ask for, does a page exist that names the combination?</b></div>
+
+<div class="pagenav">
+  <a href="../enrolment/index.html">← Enrolment</a>
+  <a href="../roadmap/index.html">Build order →</a>
+</div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. All content CC BY 4.0.</p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.3</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The registry</h4>
+    <a href="../failure/index.html">Why they don't exist</a>
+    <a href="../rules/index.html">The four rules</a>
+    <a href="../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../roadmap/index.html">Build order</a>
+  </div>
+  <div>
+    <h4>The three layers</h4>
+    <a href="../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../enrolment/index.html">Enrolment</a>
+    <a href="../execution/index.html">The execution broker</a>
+    <a href="../shipped/index.html">What already ships</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../documents/briefing-pack.html">The briefing pack</a>
+    <a href="../about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="https://nhi.sgit.ai">nhi.sgit.ai</a>
+    <a href="https://sgit.ai">sgit.ai</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

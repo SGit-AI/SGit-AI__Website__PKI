@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://pki.sgit.ai/index.html</loc><lastmod>2026-08-19</lastmod></url>
-  <url><loc>https://pki.sgit.ai/failure/index.html</loc><lastmod>2026-08-19</lastmod></url>
-  <url><loc>https://pki.sgit.ai/rules/index.html</loc><lastmod>2026-08-19</lastmod></url>
-  <url><loc>https://pki.sgit.ai/mandate/index.html</loc><lastmod>2026-08-19</lastmod></url>
-  <url><loc>https://pki.sgit.ai/roadmap/index.html</loc><lastmod>2026-08-19</lastmod></url>
-  <url><loc>https://pki.sgit.ai/documents/index.html</loc><lastmod>2026-08-19</lastmod></url>
-  <url><loc>https://pki.sgit.ai/documents/pki-registry.html</loc><lastmod>2026-08-19</lastmod></url>
-  <url><loc>https://pki.sgit.ai/about/participant.html</loc><lastmod>2026-08-19</lastmod></url>
-  <url><loc>https://pki.sgit.ai/admin/index.html</loc><lastmod>2026-08-19</lastmod></url>
-  <url><loc>https://pki.sgit.ai/admin/comms.html</loc><lastmod>2026-08-19</lastmod></url>
-  <url><loc>https://pki.sgit.ai/admin/versions.html</loc><lastmod>2026-08-19</lastmod></url>
+  <url><loc>https://pki.sgit.ai/index.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://pki.sgit.ai/failure/index.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://pki.sgit.ai/bootstrap/index.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://pki.sgit.ai/rules/index.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://pki.sgit.ai/mandate/index.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://pki.sgit.ai/enrolment/index.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://pki.sgit.ai/execution/index.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://pki.sgit.ai/shipped/index.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://pki.sgit.ai/roadmap/index.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://pki.sgit.ai/documents/index.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://pki.sgit.ai/documents/briefing-pack.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://pki.sgit.ai/documents/site-review.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://pki.sgit.ai/documents/bootstrap-trap.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://pki.sgit.ai/documents/enrolment.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://pki.sgit.ai/documents/append-lane.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://pki.sgit.ai/documents/execution-broker.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://pki.sgit.ai/documents/relay-pattern.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://pki.sgit.ai/documents/two-populations.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://pki.sgit.ai/documents/pki-registry.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://pki.sgit.ai/about/participant.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://pki.sgit.ai/admin/index.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://pki.sgit.ai/admin/comms.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://pki.sgit.ai/admin/versions.html</loc><lastmod>2026-08-20</lastmod></url>
 </urlset>

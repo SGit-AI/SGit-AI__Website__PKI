@@ -13,10 +13,14 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.2</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.3</a>
   <a class="nl" href="../failure/index.html">The failure</a>
+  <a class="nl" href="../bootstrap/index.html">Bootstrap</a>
   <a class="nl" href="../rules/index.html">The rules</a>
   <a class="nl" href="../mandate/index.html">Mandate</a>
+  <a class="nl" href="../enrolment/index.html">Enrolment</a>
+  <a class="nl" href="../execution/index.html">Execution</a>
+  <a class="nl" href="../shipped/index.html">Shipped</a>
   <a class="nl" href="../roadmap/index.html">Build order</a>
   <a class="nl" href="../documents/index.html">Docs</a>
   <a class="nl here" href="../admin/comms.html">Comms</a>
@@ -26,15 +30,16 @@
 <main class="doc">
 <div class="crumb"><a href="../index.html">pki.sgit.ai</a> / admin / comms</div>
 <h1>Comms: tasks, requests &amp; status</h1>
-<p class="lead">The working channel between the project lead and the site agent, kept in public on the site itself — which is an instance of the discipline this site argues for. Updated on every release. Current release: <b>v0.1.2</b>, 19 August 2026. Full history: <a href="versions.html">versions</a>.</p>
+<p class="lead">The working channel between the project lead and the site agent, kept in public on the site itself — which is an instance of the discipline this site argues for. Updated on every release. Current release: <b>v0.1.3</b>, 20 August 2026. Full history: <a href="versions.html">versions</a>.</p>
 
 <h2 id="needs">Needed from the project lead</h2>
 <div class="tablewrap"><table>
   <thead><tr><th>#</th><th>Request</th><th>Why it blocks</th><th>Status</th></tr></thead>
   <tbody>
-    <tr><td>N1</td><td><b>GitHub Pages: the custom domain.</b> The site is <b>live</b> at <a href="https://sgit-ai.github.io/SGit-AI__Website__PKI/">sgit-ai.github.io/SGit-AI__Website__PKI</a> — the Pages source, the <code>github-pages</code> environment and deploys from <code>dev</code> all work, verified end to end on the v0.1.1 release. Still needed: Settings → Pages → custom domain <code>pki.sgit.ai</code>, plus the DNS <code>CNAME</code> record pointing at <code>sgit-ai.github.io</code> — <code>pki.sgit.ai</code> does not resolve yet</td><td>Until then there is no pki.sgit.ai URL, and every <code>canonical</code> on the site names a host that does not answer</td><td><span class="tstat t-need">waiting on human</span></td></tr>
+    <tr><td>N1</td><td><b>GitHub Pages and the custom domain.</b> Done — <a href="https://pki.sgit.ai">pki.sgit.ai</a> resolves and serves, DNS and the custom domain are in place, and the full pipeline (validate → tag → deploy) is verified end to end</td><td>No longer blocking</td><td><span class="tstat t-done">done</span></td></tr>
     <tr><td>N2</td><td><b>The corpus documents for the collection.</b> <a href="../roadmap/index.html#order">Build-order step 1</a> needs the February–March PKI material identified: the architecture debrief, the messaging implementation, the model-integration research, the document identity brief, the operating modes, the provenance treatment and the brand strategy. 729 files mention the subject; the site needs the handful worth promoting</td><td>The collection cannot be curated by question until the documents are named</td><td><span class="tstat t-need">waiting on human</span></td></tr>
     <tr><td>N3</td><td><b>The attestation decision.</b> Does the registry accept third-party attestations? It is the site's central <a href="../roadmap/index.html#open">open question</a> and it is a call for the project lead, not the site agent — a documented failure on one side, no social trust at all on the other</td><td>The private-registry build (step 4) can start without it; mandates (step 5) cannot be finished without it</td><td><span class="tstat t-open">open — published unresolved, deliberately</span></td></tr>
+    <tr><td>N5</td><td><b>Confirm the execution-layer name.</b> This site publishes it as <b>execution broker</b> rather than <em>Service Twin</em>, on the pack's own argument that a digital twin <em>represents</em> a thing while this <em>acts on</em> one. If the product line settles on a different name, this site should follow it rather than diverge</td><td>A naming split between the site and the product would be worse than either name</td><td><span class="tstat t-open">open — proceeding with "execution broker" unless redirected</span></td></tr>
     <tr><td>N4</td><td><b>Presentation material to recycle.</b> The scoping brief notes 31 files referencing presentation material the project lead wanted reused — worth an infographics section if the posts are identified, as on nhi.sgit.ai</td><td>No infographics section until the material is identified</td><td><span class="tstat t-open">open</span></td></tr>
   </tbody>
 </table></div>
@@ -45,9 +50,11 @@
   <tbody>
     <tr><td>T1</td><td>CI pipeline: validate → auto-tag → deploy to Pages, adapted from the NHI site; validation extended to pull requests; canonical-host check added</td><td>site agent</td><td><span class="tstat t-done">done v0.1.0</span></td></tr>
     <tr><td>T2</td><td>Theme carried over from sgit.ai / nhi.sgit.ai, with this site's additions (rules ladder, timeline, claim block, safe/fatal split columns)</td><td>site agent</td><td><span class="tstat t-done">done v0.1.0</span></td></tr>
-    <tr><td>T3</td><td>Shared page generator (single template for nav/footer/head) — currently hand-duplicated per page, as on the other two sites</td><td>site agent</td><td><span class="tstat t-open">queued</span></td></tr>
+    <tr><td>T3</td><td>Shared chrome: nav and footer now come from one definition in <code>admin/build/chrome.py</code> and are rewritten in place across every page, so the version badge that CI enforces cannot drift. Pages stay hand-written HTML — only the chrome is generated</td><td>site agent</td><td><span class="tstat t-done">done v0.1.3</span></td></tr>
     <tr><td>T4</td><td>Refactor the PKI section across from nhi.sgit.ai and promote it to a site: <a href="../failure/index.html">the failure</a>, <a href="../rules/index.html">the rules</a>, <a href="../mandate/index.html">mandate</a> (new page), <a href="../roadmap/index.html">build order</a> (new page), <a href="../documents/index.html">documents</a>, <a href="../about/participant.html">disclosure</a></td><td>site agent</td><td><span class="tstat t-done">done v0.1.1</span></td></tr>
     <tr><td>T9</td><td>Release-pipeline fix: the tag job anchors on the newest release commit reachable from <code>HEAD</code> instead of on <code>HEAD</code> itself, so a pull request landing as a merge commit no longer stops the release. Found by the pipeline's own first run on <code>dev</code></td><td>site agent</td><td><span class="tstat t-done">done v0.1.2</span></td></tr>
+    <tr><td>T10</td><td>Acted on the <a href="../documents/site-review.html">site review</a>: <a href="../bootstrap/index.html">bootstrap</a>, <a href="../enrolment/index.html">enrolment</a>, <a href="../execution/index.html">execution</a> and <a href="../shipped/index.html">shipped</a> pages; the front-page three-layer model and reframe; mandate and rules extended; two principles published verbatim; nine documents captured with reader pages</td><td>site agent</td><td><span class="tstat t-done">done v0.1.3</span></td></tr>
+    <tr><td>T11</td><td>Third-party market research on the execution layer: published as its <a href="../execution/index.html#market">whitespace finding and acceptance test only</a>, not as a captured document — its vendor scoring is a dated snapshot and it was written to a brief rather than as neutral research. Revisit if it is ever re-run independently</td><td>project lead + agent</td><td><span class="tstat t-done">decided v0.1.3</span></td></tr>
     <tr><td>T5</td><td>Markdown twins for every page + <code>llms-full.txt</code> (the sgit.ai convention) — only the front page has one</td><td>site agent</td><td><span class="tstat t-open">queued</span></td></tr>
     <tr><td>T6</td><td>The collection (build-order step 1): curate the 729-file corpus by question, promoting the Feb–Mar architecture material</td><td>site agent</td><td><span class="tstat t-doing">blocked on N2</span></td></tr>
     <tr><td>T7</td><td>Redirect the nhi.sgit.ai PKI section here once this site is live on its domain — that section was always staging, and the NHI site queues the spin-out as its T19</td><td>site agent</td><td><span class="tstat t-open">queued — after N1(c)</span></td></tr>
@@ -73,7 +80,7 @@
     <div class="brandline">pki<span>.sgit.ai</span></div>
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. All content CC BY 4.0.</p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.2</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.3</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The registry</h4>
@@ -83,9 +90,16 @@
     <a href="../roadmap/index.html">Build order</a>
   </div>
   <div>
+    <h4>The three layers</h4>
+    <a href="../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../enrolment/index.html">Enrolment</a>
+    <a href="../execution/index.html">The execution broker</a>
+    <a href="../shipped/index.html">What already ships</a>
+  </div>
+  <div>
     <h4>The sources</h4>
     <a href="../documents/index.html">The documents</a>
-    <a href="../documents/pki-registry.html">The scoping brief</a>
+    <a href="../documents/briefing-pack.html">The briefing pack</a>
     <a href="../about/participant.html">Where we lose</a>
   </div>
   <div>

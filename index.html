@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>pki.sgit.ai — a key registry for agents, designed from a documented failure</title>
-<meta name="description" content="Good public key repositories existed, and were destroyed. The 2019 keyserver failure, the four registry rules it produces, published before the registry exists, and identity separated from mandate as independently revocable signed statements.">
+<meta name="description" content="Good public key repositories existed, and were destroyed. The 2019 keyserver failure, the four registry rules it produces, the bootstrap trap that explains why agent registries do not exist, and identity separated from mandate as independently revocable signed statements.">
 <link rel="canonical" href="https://pki.sgit.ai/index.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="pki.sgit.ai">
@@ -20,10 +20,14 @@
 <nav class="site"><div class="row">
   <a class="brand" href="index.html">pki<span>.sgit.ai</span></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="admin/versions.html" title="Site release history">v0.1.2</a>
+  <a class="ver" href="admin/versions.html" title="Site release history">v0.1.3</a>
   <a class="nl" href="failure/index.html">The failure</a>
+  <a class="nl" href="bootstrap/index.html">Bootstrap</a>
   <a class="nl" href="rules/index.html">The rules</a>
   <a class="nl" href="mandate/index.html">Mandate</a>
+  <a class="nl" href="enrolment/index.html">Enrolment</a>
+  <a class="nl" href="execution/index.html">Execution</a>
+  <a class="nl" href="shipped/index.html">Shipped</a>
   <a class="nl" href="roadmap/index.html">Build order</a>
   <a class="nl" href="documents/index.html">Docs</a>
   <a class="nl" href="admin/comms.html">Comms</a>
@@ -36,10 +40,39 @@
   <p class="sub">In 2019 the global keyserver network was flooded with garbage signatures until importing a poisoned certificate broke your installation. Its own maintainer called it <b>unsalvageable</b> — and the cause was a design goal stated at the outset, not a bug. Anyone proposing a key registry now should be able to show they designed it with that history in hand. This site is that history, and the rules it produces, published before the registry exists.</p>
   <div class="ctas">
     <a class="cta1" href="failure/index.html">Read the failure →</a>
+    <a class="cta2" href="bootstrap/index.html">Why registries for agents don't exist →</a>
     <a class="cta2" href="rules/index.html">The four rules →</a>
-    <a class="cta2" href="roadmap/index.html">Build order: private before public →</a>
   </div>
 </header>
+
+<!-- the three layers -->
+<section class="band" id="layers">
+  <h2>Three questions, and this site answers the first two</h2>
+  <p class="blurb">A key registry is usually approached as one problem. It is three, and they separate cleanly — which matters, because a system that answers only one of them and implies it answered all three is the failure mode worth avoiding.</p>
+  <div class="split">
+    <table>
+      <thead><tr><th>Question</th><th class="safe">What answers it</th><th>Kind of problem</th></tr></thead>
+      <tbody>
+        <tr><td><b>Who is this agent?</b></td><td><a href="rules/index.html">Identity</a> — a signed statement in a registry</td><td>A registry problem</td></tr>
+        <tr><td><b>What may it do?</b></td><td><a href="mandate/index.html">Mandate</a> — a separate statement, revoked separately</td><td>A delegation problem</td></tr>
+        <tr><td><b>Should that produce this effect, now, here?</b></td><td><a href="execution/index.html">Execution</a> — a broker that holds the credential the agent never sees</td><td>A broker problem</td></tr>
+      </tbody>
+    </table>
+    <p class="cap">The third is a different product line and this site does not own it — but it is <a href="execution/index.html#receipts">named here</a>, because a reader arriving at a key registry is usually trying to answer a question about something that <em>happened</em>, and identity plus mandate cannot answer it. Recording who a key belongs to and what it was permitted to do leaves out the most auditable event of all.</p>
+  </div>
+</section>
+
+<!-- the reframe -->
+<section class="band alt" id="reframe">
+  <h2>Not a new product — the missing half of one that ships</h2>
+  <p class="blurb">The keypairs, the signing, the encryption to a named recipient and the contacts list already exist. The documentation says, in its own words, <b>no revocation, no directory</b>. Those two absences are precisely what a registry supplies.</p>
+  <div class="cards">
+    <div class="card"><span class="tag">Ships today</span><h3>Keys, signatures, encryption</h3><p><code>sgit pki keygen</code> makes two pairs — <b>RSA-OAEP 4096</b> for encryption and <b>ECDSA P-256</b> for signing. Encrypt to a fingerprint, sign, verify, keep contacts.</p></div>
+    <div class="card"><span class="tag">Absent</span><h3>No revocation</h3><p>A compromised key cannot be withdrawn, and anybody verifying an old signature cannot tell whether the key was still good at the time.</p></div>
+    <div class="card"><span class="tag">Absent</span><h3>No directory</h3><p>Keys are exchanged out of band into a local contacts list. There is no answer to "what is the current key for this agent, and who says so".</p></div>
+    <a class="card" href="shipped/index.html"><span class="tag">The consequence</span><h3>A concrete user and a bounded scope</h3><p>Somebody already running these commands who has hit exactly those two walls. And it makes the keyserver history land harder — the last system that attempted both was destroyed by how it did them.</p><span class="go">Read →</span></a>
+  </div>
+</section>
 
 <!-- the append-only split -->
 <section class="band" id="split">
@@ -84,6 +117,18 @@
   <p class="blurb" style="margin-top:1.6rem;margin-bottom:0"><a href="failure/index.html#sources">The whole story, with sources →</a></p>
 </section>
 
+<!-- bootstrap -->
+<section class="band" id="bootstrap">
+  <h2>Why registries for agents don't exist</h2>
+  <p class="blurb">A second obstacle, separate from the 2019 failure and just as load-bearing. Generating a keypair is trivial; getting it recognised requires reaching a trusted authority, every route to which requires authentication, which requires the identity the agent does not have. <b>That is a loop, not a missing feature</b> — and every common escape hands over authority broader than the identity being created.</p>
+  <div class="cards">
+    <a class="card" href="bootstrap/index.html#workarounds"><span class="tag">The trap</span><h3>Seven workarounds, one pattern</h3><p>The operator's credential, repository write access, a shared bot token, a vendor integration, a cloud credential, a project signing secret, a bespoke enrolment server. Every one solves transport by creating a larger identity problem.</p><span class="go">Read →</span></a>
+    <a class="card" href="bootstrap/index.html#evidence"><span class="tag">Evidence</span><h3>Not theoretical</h3><p>A coding assistant holding a token scoped to every repository its developer had authorised. An unprivileged issue reaching CI secrets in three vendors' own repositories. The short-lived-token feature request still open.</p><span class="go">Read →</span></a>
+    <a class="card" href="bootstrap/index.html#choreography"><span class="tag">The reframing</span><h3>Authority choreography</h3><p>The hardest part is not cryptography — it is the order in which claims are established. A system can use excellent cryptography and still have a weak bootstrap if the first instruction is to hand over a platform token.</p><span class="go">Read →</span></a>
+    <a class="card" href="enrolment/index.html"><span class="tag">The exit</span><h3>A door that requires nothing</h3><p>An append lane grants one capability: add an object to an inbox. It is <b>shipped and account-less</b> — a write needs a token in the body, no account, no access token — so the enrolment path is buildable rather than theoretical.</p><span class="go">Read →</span></a>
+  </div>
+</section>
+
 <!-- mandate -->
 <section class="band alt" id="mandate">
   <h2>A key says who. It does not say what they may do</h2>
@@ -92,6 +137,7 @@
     <a class="card" href="mandate/index.html#two"><span class="tag">Concept</span><h3>Identity and mandate</h3><p>Identity: this key belongs to this agent. Mandate: this agent may do these things, until this date, on whose authority. Both checkable by a third party; the second revocable without touching the first.</p><span class="go">Read →</span></a>
     <a class="card" href="mandate/index.html#vs-token"><span class="tag">Comparison</span><h3>Why it beats a bearer token</h3><p>A token's scope is knowable only to its issuer. A mandate's scope is published, so the party relying on it can see the limits of what it was given — and refuse work outside them.</p><span class="go">Read →</span></a>
     <a class="card" href="mandate/index.html#caution"><span class="tag">The caution</span><h3>What a mandate does not do</h3><p>It constrains what an agent may be authorised to do, not what it does within that authority. One control among several — it composes with observation and ceilings, it does not replace them.</p><span class="go">Read →</span></a>
+    <a class="card" href="execution/index.html#receipts"><span class="tag">The third corner</span><h3>Receipts</h3><p>Identity says who, mandate says what may be done, and neither records what was <em>actually</em> done. A signed receipt is a fact with provenance — produced by the party that performed the action, not the party being assessed.</p><span class="go">Read →</span></a>
   </div>
 </section>
 
@@ -122,7 +168,7 @@
     <div class="brandline">pki<span>.sgit.ai</span></div>
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. All content CC BY 4.0.</p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="admin/versions.html">v0.1.2</a> · <a href="admin/index.html">engineering</a> · <a href="index.md">this page as markdown</a></p>
+    <p class="verline">site <a href="admin/versions.html">v0.1.3</a> · <a href="admin/index.html">engineering</a> · <a href="index.md">this page as markdown</a></p>
   </div>
   <div>
     <h4>The registry</h4>
@@ -132,9 +178,16 @@
     <a href="roadmap/index.html">Build order</a>
   </div>
   <div>
+    <h4>The three layers</h4>
+    <a href="bootstrap/index.html">The bootstrap trap</a>
+    <a href="enrolment/index.html">Enrolment</a>
+    <a href="execution/index.html">The execution broker</a>
+    <a href="shipped/index.html">What already ships</a>
+  </div>
+  <div>
     <h4>The sources</h4>
     <a href="documents/index.html">The documents</a>
-    <a href="documents/pki-registry.html">The scoping brief</a>
+    <a href="documents/briefing-pack.html">The briefing pack</a>
     <a href="about/participant.html">Where we lose</a>
   </div>
   <div>

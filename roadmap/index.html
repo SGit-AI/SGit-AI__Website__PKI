@@ -13,10 +13,14 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.2</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.3</a>
   <a class="nl" href="../failure/index.html">The failure</a>
+  <a class="nl" href="../bootstrap/index.html">Bootstrap</a>
   <a class="nl" href="../rules/index.html">The rules</a>
   <a class="nl" href="../mandate/index.html">Mandate</a>
+  <a class="nl" href="../enrolment/index.html">Enrolment</a>
+  <a class="nl" href="../execution/index.html">Execution</a>
+  <a class="nl" href="../shipped/index.html">Shipped</a>
   <a class="nl here" href="../roadmap/index.html">Build order</a>
   <a class="nl" href="../documents/index.html">Docs</a>
   <a class="nl" href="../admin/comms.html">Comms</a>
@@ -40,12 +44,15 @@
   <div class="cap"><span class="capnum">3</span><h3>The four rules, published before the registry exists</h3>
     <p>The registry's stated design, as claims that can be checked against whatever ships. Four sentences that answer the question a reader will have.</p>
     <span class="from">Status: <b>done</b> — <a href="../rules/index.html">read them</a></span></div>
+  <div class="cap"><span class="capnum">3b</span><h3>The other two obstacles, published alongside</h3>
+    <p>Added after review: the failure page explains why the last generation of key repositories was destroyed, and <a href="../bootstrap/index.html">the bootstrap trap</a> explains why the next generation has not been built. Those are different obstacles and a registry has to clear both. <a href="../enrolment/index.html">Enrolment</a> is the path through the second, and <a href="../execution/index.html">the execution layer</a> is named because identity and mandate cannot answer a question about what actually happened.</p>
+    <span class="from">Status: <b>done</b> — the argument pages, ahead of any implementation</span></div>
   <div class="cap"><span class="capnum">4</span><h3>A private registry, for our own agents</h3>
-    <p>The smaller problem, and the one with a real user. Inside one organisation the trust root is not an open question, abuse is not an open question, and moderation is not an open question — which leaves the actual registry logic as the thing being tested.</p>
-    <span class="from">Status: <b>not started</b> — the next build</span></div>
+    <p>The smaller problem, and the one with a real user. Inside one organisation the trust root is not an open question, abuse is not an open question, and moderation is not an open question — which leaves the actual registry logic as the thing being tested. And the user is now concrete rather than hypothetical: somebody already running the shipped PKI commands who has hit <a href="../shipped/index.html#absences">the two absences</a>.</p>
+    <span class="from">Status: <b>not started — and materially smaller than it was</b>. The transport it needs is <a href="../shipped/index.html">already shipped</a>; what remains is the client sealing layer, the canonical enrolment object, the trusted processor and the registry itself</span></div>
   <div class="cap"><span class="capnum">5</span><h3>Mandate statements, separate from identity</h3>
-    <p>Independently revocable signed statements about what an agent may do. <a href="../mandate/index.html">The concept</a> is published; the implementation follows the private registry, because a mandate with nowhere to live is a document.</p>
-    <span class="from">Status: <b>not started</b></span></div>
+    <p>Independently revocable signed statements about what an agent may do. <a href="../mandate/index.html">The concept and its fields</a> are published; the implementation follows the private registry, because a mandate with nowhere to live is a document. It cannot be finished without answering <a href="#open">the attestation question</a>, since a mandate issued by somebody other than the agent <em>is</em> a third-party attestation.</p>
+    <span class="from">Status: <b>not started</b> — blocked on a decision rather than on work</span></div>
   <div class="cap"><span class="capnum">6</span><h3>A public registry — last</h3>
     <p>It inherits every hard problem of the private one, plus trust roots, abuse and moderation. It is also the memorable idea, which is exactly why it is the one to be disciplined about.</p>
     <span class="from">Status: <b>not started</b> — and deliberately behind step 4</span></div>
@@ -88,12 +95,15 @@
     <tr><td><b>Who may be a trust root?</b></td><td>A privileged decision needing a stated answer, even a simple one</td></tr>
     <tr><td><b>Is a mandate a separate object from an identity?</b></td><td>It should be, since they revoke independently — but that is a position, not an implementation</td></tr>
     <tr><td><b>What does an agent's identity attest to?</b></td><td>Which agent, running where, on whose authority, and how any of that is checked</td></tr>
+    <tr><td><b>Can a rented agent persist a key between sessions?</b></td><td>If a hosted session cannot keep a key between runs, every session is a new identity and a mandate cannot outlive one conversation — which changes what any of this delivers</td></tr>
+    <tr><td><b>How is the return path secured?</b></td><td>A write-only lane covers ingress only, and the certificate has to get back</td></tr>
+    <tr><td><b>What stops the enrolment ingress being flooded?</b></td><td>It is deliberately unauthenticated, so this needs an answer before it is exposed</td></tr>
   </tbody>
 </table></div>
 <div class="note"><b>These are refutation targets.</b> Anybody who answers one of these well improves the design — including by showing that a rule is wrong. <a href="../admin/comms.html">Comms</a> is the channel.</div>
 
 <div class="pagenav">
-  <a href="../mandate/index.html">← Identity and mandate</a>
+  <a href="../shipped/index.html">← What already ships</a>
   <a href="../documents/index.html">The source documents →</a>
 </div>
 </main>
@@ -103,7 +113,7 @@
     <div class="brandline">pki<span>.sgit.ai</span></div>
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. All content CC BY 4.0.</p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.2</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.3</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The registry</h4>
@@ -113,9 +123,16 @@
     <a href="../roadmap/index.html">Build order</a>
   </div>
   <div>
+    <h4>The three layers</h4>
+    <a href="../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../enrolment/index.html">Enrolment</a>
+    <a href="../execution/index.html">The execution broker</a>
+    <a href="../shipped/index.html">What already ships</a>
+  </div>
+  <div>
     <h4>The sources</h4>
     <a href="../documents/index.html">The documents</a>
-    <a href="../documents/pki-registry.html">The scoping brief</a>
+    <a href="../documents/briefing-pack.html">The briefing pack</a>
     <a href="../about/participant.html">Where we lose</a>
   </div>
   <div>

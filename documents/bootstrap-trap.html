@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Bootstrap Trap: Every Workaround Hands Over A Larger Identity · documents · pki.sgit.ai</title>
+<meta name="description" content="Original document, readable in-page: summary, key concepts and key ideas, then the full markdown. Strategy brief, v0.33.60, 19 August 2026. CC BY 4.0.">
+<link rel="canonical" href="https://pki.sgit.ai/documents/bootstrap-trap.html">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.3</a>
+  <a class="nl" href="../failure/index.html">The failure</a>
+  <a class="nl" href="../bootstrap/index.html">Bootstrap</a>
+  <a class="nl" href="../rules/index.html">The rules</a>
+  <a class="nl" href="../mandate/index.html">Mandate</a>
+  <a class="nl" href="../enrolment/index.html">Enrolment</a>
+  <a class="nl" href="../execution/index.html">Execution</a>
+  <a class="nl" href="../shipped/index.html">Shipped</a>
+  <a class="nl" href="../roadmap/index.html">Build order</a>
+  <a class="nl" href="../documents/index.html">Docs</a>
+  <a class="nl" href="../admin/comms.html">Comms</a>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="index.html">documents</a> / bootstrap-trap</div>
+<h1>The Bootstrap Trap: Every Workaround Hands Over A Larger Identity</h1>
+
+<div class="docmeta">
+  <span class="k">Type</span><span class="v">Strategy brief</span>
+  <span class="k">Version</span><span class="v">v0.33.60</span>
+  <span class="k">Date</span><span class="v">19 August 2026</span>
+  <span class="k">Author</span><span class="v">Dinis Cruz (project lead) and collaborators</span>
+  <span class="k">Licence</span><span class="v">CC BY 4.0</span>
+  <span class="k">Source</span><span class="v"><a href="../briefs/v0.33.60__strategy-brief__bootstrap-trap-every-workaround-hands-over-a-larger-identity.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/dev/briefs/v0.33.60__strategy-brief__bootstrap-trap-every-workaround-hands-over-a-larger-identity.md">view on GitHub</a></span>
+</div>
+
+<h2 id="summary">Summary</h2>
+<p>Why non-human identity is hard, stated as a circular dependency rather than a cryptographic problem. Generating a keypair is trivial; getting the public half recognised by something that matters requires reaching a trusted authority, every route to which requires authentication, which requires the identity the agent does not have. That is a loop rather than a gap, and every common escape — the operator's credential, repository write access, a shared bot token, a vendor integration, a cloud credential, a project signing secret, a bespoke enrolment server — solves transport by creating a larger identity problem. The answer is not a better credential but a channel narrow enough to require nothing.</p>
+
+<h2 id="concepts">Key concepts</h2>
+<ul>
+  <li><a href="../bootstrap/index.html#loop"><b>The loop</b></a> — creating a key is not creating an identity, because an identity is a relationship somebody agreed to</li>
+  <li><a href="../bootstrap/index.html#failure-modes"><b>Ambient authority and the confused deputy</b></a> — the two named failure modes underneath every workaround</li>
+  <li><a href="../bootstrap/index.html#choreography"><b>Authority choreography</b></a> — the constraint is transport rather than cryptography</li>
+  <li><a href="../bootstrap/index.html#gradient"><b>The gradient</b></a> — I control this key, the project recognises it, the project delegates this mandate</li>
+</ul>
+
+<h2 id="ideas">Key ideas</h2>
+<ul>
+  <li>A system can use excellent cryptography and still have a weak bootstrap if the first instruction is to hand over a platform token.</li>
+  <li>The workarounds are the mechanism behind documented incidents rather than a theoretical concern.</li>
+  <li>Recognition is a decision rather than a computation, so a signature is never an endorsement.</li>
+  <li>The remaining work is long, and the gain is that none of it needs a high-authority identity first.</li>
+</ul>
+
+<h2 id="on-site">On this site</h2>
+<p>Became the bootstrap page, which the site review named the most linkable argument available.</p>
+
+<h2 id="read">Read the document</h2>
+<div class="mdread-label">📄 Original document · v0.33.60 · 19 August 2026 · rendered from the <a href="../briefs/v0.33.60__strategy-brief__bootstrap-trap-every-workaround-hands-over-a-larger-identity.md">raw markdown</a> (the source of truth)</div>
+<div class="mdread" id="mdread" data-src="../briefs/v0.33.60__strategy-brief__bootstrap-trap-every-workaround-hands-over-a-larger-identity.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="../briefs/v0.33.60__strategy-brief__bootstrap-trap-every-workaround-hands-over-a-larger-identity.md">open the raw markdown</a>.</p></noscript></div>
+
+<div class="pagenav">
+  <a href="index.html">← All documents</a>
+  <a href="../briefs/v0.33.60__strategy-brief__bootstrap-trap-every-workaround-hands-over-a-larger-identity.md">Raw markdown →</a>
+</div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. All content CC BY 4.0.</p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.3</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The registry</h4>
+    <a href="../failure/index.html">Why they don't exist</a>
+    <a href="../rules/index.html">The four rules</a>
+    <a href="../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../roadmap/index.html">Build order</a>
+  </div>
+  <div>
+    <h4>The three layers</h4>
+    <a href="../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../enrolment/index.html">Enrolment</a>
+    <a href="../execution/index.html">The execution broker</a>
+    <a href="../shipped/index.html">What already ships</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../documents/briefing-pack.html">The briefing pack</a>
+    <a href="../about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="https://nhi.sgit.ai">nhi.sgit.ai</a>
+    <a href="https://sgit.ai">sgit.ai</a>
+  </div>
+</div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+<script src="../assets/mdreader.js"></script>
+</body>
+</html>
