@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Origins: where this came from, February to August 2026 · pki.sgit.ai</title>
+<meta name="description" content="This site did not spring into existence last week. PKI work here runs from a commit-impersonation incident in February 2026 through four changes of direction — messaging, provenance, agent identity, substrate — with the primary sources published.">
+<link rel="canonical" href="https://pki.sgit.ai/origins/index.html">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.8</a>
+  <a class="nl" href="../failure/index.html">The failure</a>
+  <a class="nl here" href="../origins/index.html">Origins</a>
+  <a class="nl" href="../bootstrap/index.html">Bootstrap</a>
+  <a class="nl" href="../rules/index.html">The rules</a>
+  <a class="nl" href="../mandate/index.html">Mandate</a>
+  <a class="nl" href="../enrolment/index.html">Enrolment</a>
+  <a class="nl" href="../execution/index.html">Execution</a>
+  <a class="nl" href="../shipped/index.html">Shipped</a>
+  <a class="nl" href="../roadmap/index.html">Build order</a>
+  <a class="nl" href="../packs/index.html">Packs</a>
+  <a class="nl" href="../documents/index.html">Docs</a>
+  <a class="nl" href="../admin/comms.html">Comms</a>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / origins</div>
+<h1>Origins: February to August 2026</h1>
+<p class="lead">Until now this site presented itself as if it began five days ago. It did not. PKI work in this project runs from February 2026, changed direction four times, built things that were retired, and specified things that were never coded. A site that argues for provenance discipline owes a reader its own — so here it is, with the primary sources.</p>
+
+<div class="note"><b>How this section is grounded.</b> The arc below comes from a Librarian cross-reference review of the corpus repository at v0.33.61 — roughly 110 PKI-relevant documents against roughly 3,900 lines of PKI and crypto code. That review is not published as written: it names a customer and unremediated findings against running code. A <a href="review.html">redacted public edition</a> is, and it states exactly what was removed and why. The thirteen documents below are published verbatim.</div>
+
+<h2 id="ratio">The number that frames everything</h2>
+<div class="split" style="padding:0">
+  <table>
+    <thead><tr><th></th><th class="fatal">PKI thinking</th><th class="safe">PKI shipping</th></tr></thead>
+    <tbody>
+      <tr><td><b>Volume</b></td><td><b class="no">~110 documents · ~265,000 words</b></td><td>~3,900 lines of code</td></tr>
+      <tr><td><b>Written</b></td><td>February 2026 – August 2026, continuously</td><td><b>20–22 February 2026</b>, a six-day burst</td></tr>
+      <tr><td><b>Changed since</b></td><td>Constantly</td><td><b class="no">Not materially</b></td></tr>
+      <tr><td><b>In the product</b></td><td>Described throughout</td><td><b class="no">None</b> — the paths users touch are symmetric only</td></tr>
+    </tbody>
+  </table>
+  <p class="cap">A prior review measured this project's proposal-to-build ratio at roughly 5–9× in March 2026. For PKI specifically it is considerably worse. <b>That is not a criticism to bury — it is the reason this site exists</b>: publishing the design before the implementation only means something if you also publish how much design is already stacked up behind it.</p>
+</div>
+
+<h2 id="arc">Four acts, and three changes of direction</h2>
+<pre class="shell">
+   Feb 2026    PKI as <span class="g">MESSAGING</span>        recipient-addressed encryption
+   Mar 2026    PKI as <span class="g">PROVENANCE</span>       commit signing, document identity
+   Jun 2026    PKI as <span class="g">AGENT IDENTITY</span>   NHI 2.0, vault-to-vault, brokered kernels
+   Jul–Aug     PKI as <span class="y">SUBSTRATE</span>        mandate; "the write is the attestation"
+</pre>
+
+<ul class="timeline">
+  <li class="bad"><span class="when">12 February 2026 · Act 0</span><span class="what">A <b>commit-impersonation incident</b> establishes that git authorship is metadata and trivially forgeable. On the same day, a brief asks the founding question: <em>"How do I send something to somebody that only THAT person can read?"</em> Two threads — provenance and confidentiality — that PKI would later be asked to carry at once.</span></li>
+  <li><span class="when">19–22 February · Act I, the sprint</span><span class="what">The densest delivery burst in the repository. Admin PKI console, ECDSA signatures, the first browser-to-browser encrypted and signed exchange verified across two networks, a component split, <b>a key registry with a hash-chained transparency log</b>, and a public SSH keygen tool. Twenty-four hours from brief to production; 29 commits and 183 tests.</span></li>
+  <li><span class="when">23–27 February · Act II, the vision explosion</span><span class="what">Ten vision documents in about 48 hours — signed scan chains, signed facts, GitHub-as-registry, key portability — and the <a href="src/2026-02-23__agentic-workflows-supply-chain.md">supply-chain ≅ agent-chain isomorphism</a>, drawn <b>four months before non-human identity was named as a programme</b>. The corpus also self-challenged honestly: <a href="src/2026-02-23__pki-historical-analysis.md">is PKI the right primitive at all?</a> <b>None of these were built.</b></span></li>
+  <li><span class="when">March · from messaging to provenance</span><span class="what">Two public articles reframe the problem after readers push back — <a href="src/2026-03-09__trust-spectrum.md">human verification at the edge, machine identity all the way down</a>. The vault work absorbs PKI, producing the canonical <a href="src/2026-03-14__pki-operating-modes.md">four-key / four-mode taxonomy</a>. A platform brand is acquired and superseded within days.</span></li>
+  <li><span class="when">April–May · the quiet period</span><span class="what">PKI is largely absent. One brief names the gap bluntly: <em>"SG/Send does everything except store vault keys."</em> It resurfaces in late May with a new formulation — <b>PKI on every message</b> between kernels — which is the one Act II idea that became code.</span></li>
+  <li><span class="when">3–7 June · PKI as agent identity</span><span class="what">The pivot: <a href="src/2026-06-03__pki-not-secrets.md">"one person doesn't have one key, one person has bazillions of keys."</a> Within four days it fractals into a fourteen-document programme — <a href="src/2026-06-04__nhi-2-pki-foundations.md">foundations</a>, web of trust, agent trust scores. On 5 June <a href="src/2026-06-05__registry-on-vaults.md">the February registry is formally retired</a> and replaced by a vault-hosted design.</span></li>
+  <li class="bad"><span class="when">10 June · the honest retreat</span><span class="what">Two documents on one day change the posture. <a href="src/2026-06-10__key-storage-recovery-landscape.md">"Storage is easy, recovery is the hard part."</a> And then, acting on it: <a href="src/2026-06-10__partner-briefing.md">"I should not have to do all this by myself."</a> <b>Key custody stops being something to build and becomes something to partner for.</b></span></li>
+  <li><span class="when">18 June – 6 August · Act III, substrate</span><span class="what">PKI is never the subject again. It is the mechanism inside larger arguments: mandate as delegation, <em>augment don't invent</em> on standards, access settled by cryptography rather than rules, and finally the move from <em>may this key write here?</em> to <em>is this the next legal step?</em></span></li>
+</ul>
+
+<h2 id="abandoned">Ideas tried and abandoned, in order</h2>
+<p>Published because a history that lists only the things that worked is marketing:</p>
+<p class="claim">Admin mTLS · Secure Pod and proxy re-encryption · a PKI-keyed personal data vault · PGP in the user interface · a Chrome extension key vault (fully specified, never coded) · a platform brand · GitHub-as-registry (revived once, still unbuilt) · <b>the key registry itself</b> · agent public-key publication.</p>
+<p>The last two are the instructive ones. The registry was <a href="../rules/prior-art.html">built and then superseded by design</a> rather than by neglect. And agent public keys were announced and never generated — a placeholder that has now been public for close to six months, which is the sharpest example in this project of the gap this site exists to close.</p>
+
+<h2 id="documents">The primary sources</h2>
+<p>Thirteen documents, published verbatim and unedited. They were selected by the review as publishable as-is: no customer names, no severities, no commercial detail — and each was re-checked here for secrets and identifiers before publication.</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Date</th><th>Document</th><th>Why it matters</th></tr></thead>
+  <tbody>
+    <tr><td>23 Feb</td><td><a href="src/2026-02-23__pki-historical-analysis.md">PKI historical analysis: why did it not succeed?</a></td><td>The self-challenge, run six months before <a href="../failure/index.html">the failure page</a> asked the same question</td></tr>
+    <tr><td>23 Feb</td><td><a href="src/2026-02-23__agentic-workflows-supply-chain.md">PKI-secured agentic workflows</a></td><td><b>The supply-chain ≅ agent-chain isomorphism</b>, four months early</td></tr>
+    <tr><td>23 Feb</td><td><a href="src/2026-02-23__github-as-registry.md">GitHub as PKI registry</a></td><td>A living-off-the-land exit from <a href="../bootstrap/index.html">the bootstrap trap</a> the site does not yet engage</td></tr>
+    <tr><td>7 Mar</td><td><a href="src/2026-03-07__identity-verification-age-of-agents.md">How do I prove I am who I am?</a></td><td>The published article, and the reader pushback that reframed the problem</td></tr>
+    <tr><td>9 Mar</td><td><a href="src/2026-03-09__trust-spectrum.md">Trust is a spectrum, not a switch</a></td><td>Human verification at the edge, machine identity all the way down</td></tr>
+    <tr><td>14 Mar</td><td><a href="src/2026-03-14__pki-operating-modes.md">PKI workflows and operating modes</a></td><td><b>The four-key / four-mode taxonomy</b> — and the admission that only Mode 1 exists, with no provenance</td></tr>
+    <tr><td>3 Jun</td><td><a href="src/2026-06-03__pki-not-secrets.md">PKI instead of secrets</a></td><td>The pivot: one person has bazillions of keys</td></tr>
+    <tr><td>4 Jun</td><td><a href="src/2026-06-04__nhi-2-pki-foundations.md">NHI 2.0 foundations: PKI primitives</a></td><td><em>Accountability happens when privileges are assigned, not when the model acts</em></td></tr>
+    <tr><td>5 Jun</td><td><a href="src/2026-06-05__registry-on-vaults.md">PKI public key registry on vaults</a></td><td><b>The document that retires the shipped registry</b> — and the design <a href="../packs/registry-mvp/index.html">the MVP pack operationalises</a></td></tr>
+    <tr><td>7 Jun</td><td><a href="src/2026-06-07__vault-to-vault-comms-guide.md">Vault-to-vault encrypted comms: how it works</a></td><td>The most reproducible artefact in the corpus — exact wire formats</td></tr>
+    <tr><td>10 Jun</td><td><a href="src/2026-06-10__recipient-key-management.md">How a recipient manages their vault key</a></td><td>The honest statement of the unsolved problem</td></tr>
+    <tr><td>10 Jun</td><td><a href="src/2026-06-10__key-storage-recovery-landscape.md">How the industry stores and recovers keys</a></td><td><em>Storage is easy, recovery is the hard part</em></td></tr>
+    <tr><td>10 Jun</td><td><a href="src/2026-06-10__partner-briefing.md">Partner briefing: identity and key management</a></td><td>Purpose-built for external distribution — the decision to partner rather than build</td></tr>
+  </tbody>
+</table></div>
+<div class="note"><b>What is not here.</b> The review tiered 53 documents. These are the thirteen it marked publishable with no edits. A further 29 need a framing note so a proposal is not mistaken for a shipped thing, 7 need redaction, and 4 are not publishable at all. Bringing the next tier across is <a href="../admin/comms.html">queued (N7)</a>, and gated on a redaction pass.</div>
+
+<div class="pagenav">
+  <a href="../failure/index.html">← The failure</a>
+  <a href="review.html">The review, redacted →</a>
+</div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. All content CC BY 4.0.</p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.8</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The registry</h4>
+    <a href="../failure/index.html">Why they don't exist</a>
+    <a href="../rules/index.html">The four rules</a>
+    <a href="../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../roadmap/index.html">Build order</a>
+    <a href="../rules/prior-art.html">Prior art</a>
+  </div>
+  <div>
+    <h4>The three layers</h4>
+    <a href="../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../enrolment/index.html">Enrolment</a>
+    <a href="../execution/index.html">The execution broker</a>
+    <a href="../shipped/index.html">What already ships</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../origins/index.html">Origins: 2026</a>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../packs/registry-mvp/index.html">The registry MVP pack</a>
+    <a href="../about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="https://nhi.sgit.ai">nhi.sgit.ai</a>
+    <a href="https://sgit.ai">sgit.ai</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

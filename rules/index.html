@@ -13,8 +13,9 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.7</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.8</a>
   <a class="nl" href="../failure/index.html">The failure</a>
+  <a class="nl" href="../origins/index.html">Origins</a>
   <a class="nl" href="../bootstrap/index.html">Bootstrap</a>
   <a class="nl here" href="../rules/index.html">The rules</a>
   <a class="nl" href="../mandate/index.html">Mandate</a>
@@ -33,7 +34,7 @@
 <h1>The four rules, published before the registry exists</h1>
 <p class="lead">Publishing the design before the implementation is cheap to do in this order and impossible to claim afterwards. These are the registry's stated rules, each derived directly from <a href="../failure/index.html">the documented failure</a>, each checkable against whatever eventually ships. If something ships that breaks one of them, this page is the evidence.</p>
 
-<div class="note"><b>Status.</b> The registry does not exist. Nothing here describes a running system — these are commitments published in advance, which is the whole point of publishing them now. What <em>does</em> ship is the keypair and encryption layer underneath, which has <a href="../shipped/index.html#absences">no revocation and no directory</a> — the two absences these rules are the design for. The <a href="../roadmap/index.html">build order</a> says what gets built first and why.</div>
+<div class="note"><b>Status.</b> The registry does not exist. Nothing here describes a running system — these are commitments published in advance, which is the whole point of publishing them now. What <em>does</em> ship is the keypair and encryption layer underneath, which has <a href="../shipped/index.html#absences">no revocation and no directory</a> — the two absences these rules are the design for. And they are not a first attempt: a registry was <a href="prior-art.html">built in February 2026 and retired in June</a>, which is what turns rules 1 and 4 from assertions into checked claims. The <a href="../roadmap/index.html">build order</a> says what gets built first and why.</div>
 
 <h2 id="rules">The rules</h2>
 <div class="ladder">
@@ -112,7 +113,7 @@ sequenceDiagram
     <div class="brandline">pki<span>.sgit.ai</span></div>
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. All content CC BY 4.0.</p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.7</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.8</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The registry</h4>
@@ -120,6 +121,7 @@ sequenceDiagram
     <a href="../rules/index.html">The four rules</a>
     <a href="../mandate/index.html">Identity &amp; mandate</a>
     <a href="../roadmap/index.html">Build order</a>
+    <a href="../rules/prior-art.html">Prior art</a>
   </div>
   <div>
     <h4>The three layers</h4>
@@ -130,6 +132,7 @@ sequenceDiagram
   </div>
   <div>
     <h4>The sources</h4>
+    <a href="../origins/index.html">Origins: 2026</a>
     <a href="../documents/index.html">The documents</a>
     <a href="../packs/registry-mvp/index.html">The registry MVP pack</a>
     <a href="../about/participant.html">Where we lose</a>

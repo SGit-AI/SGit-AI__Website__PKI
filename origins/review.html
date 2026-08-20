@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The cross-reference review, redacted for publication · pki.sgit.ai</title>
+<meta name="description" content="A public edition of the Librarian cross-reference review of the corpus at v0.33.61: the counts, the narrative arc, the reality check and the design lessons — with the customer name, finding identifiers and live-code weaknesses removed, and the removal stated.">
+<link rel="canonical" href="https://pki.sgit.ai/origins/review.html">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.8</a>
+  <a class="nl" href="../failure/index.html">The failure</a>
+  <a class="nl" href="../origins/index.html">Origins</a>
+  <a class="nl" href="../bootstrap/index.html">Bootstrap</a>
+  <a class="nl" href="../rules/index.html">The rules</a>
+  <a class="nl" href="../mandate/index.html">Mandate</a>
+  <a class="nl" href="../enrolment/index.html">Enrolment</a>
+  <a class="nl" href="../execution/index.html">Execution</a>
+  <a class="nl" href="../shipped/index.html">Shipped</a>
+  <a class="nl" href="../roadmap/index.html">Build order</a>
+  <a class="nl" href="../packs/index.html">Packs</a>
+  <a class="nl" href="../documents/index.html">Docs</a>
+  <a class="nl" href="../admin/comms.html">Comms</a>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="index.html">origins</a> / review</div>
+<h1>The cross-reference review, redacted for publication</h1>
+
+<div class="docmeta">
+  <span class="k">Type</span><span class="v">Redacted public derivative</span>
+  <span class="k">Source</span><span class="v">Librarian cross-reference review, SG/Send agentic team</span>
+  <span class="k">Grounded in</span><span class="v">The corpus repo at v0.33.61 · ~110 documents vs ~3,900 lines of code</span>
+  <span class="k">Date</span><span class="v">20 August 2026</span>
+  <span class="k">Licence</span><span class="v">CC BY 4.0</span>
+  <span class="k">Raw</span><span class="v"><a href="src/2026-08-20__librarian-review-public.md">markdown</a></span>
+</div>
+
+<div class="warnbox"><b>This is a derivative, and the original is not published.</b> The review as written names a rollout customer and unremediated security findings against code that is running now, with enough structure to prioritise an attack — its own guidance is that publishing that "is publishing an attack roadmap". Three classes of content were removed: <b>the customer</b>, <b>finding identifiers, severities and preconditions</b>, and <b>specific weaknesses in live endpoints</b>. Investor material and internal commercial classifications went too. What is kept is the narrative, the counts, the reality check and the design lessons — none of which help an attacker.</div>
+
+<h2 id="why">Why publish a derivative at all</h2>
+<p>Because the alternative is to cite a document nobody can read. This site's standard is that a claim should be checkable, and three of the corrections it applied at v0.1.7 — including <a href="../shipped/index.html#ships">one to its own algorithm claim</a> — rest on this review. Publishing the parts that carry those corrections, and stating precisely what was withheld, is the honest middle. <b>A redaction that announces itself is a stronger artefact than a summary that quietly omits.</b></p>
+
+<h2 id="limits">Where this derivative is weak</h2>
+<ul>
+  <li><b>The line was drawn on judgement.</b> Somebody with the original may reasonably disagree about where. The categories are stated so that disagreement is possible.</li>
+  <li><b>It reports a review, not the code.</b> The review's reading of the codebase has not been independently re-verified here. Where the two disagree, the code wins.</li>
+  <li><b>It is a snapshot</b> at v0.33.61, 20 August 2026. Counts and status age; the ratio it reports will not hold still.</li>
+</ul>
+
+<h2 id="read">Read the document</h2>
+<div class="mdread-label">📄 Public edition · 20 August 2026 · rendered from the <a href="src/2026-08-20__librarian-review-public.md">raw markdown</a> (the source of truth)</div>
+<div class="mdread" id="mdread" data-src="src/2026-08-20__librarian-review-public.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="src/2026-08-20__librarian-review-public.md">open the raw markdown</a>.</p></noscript></div>
+
+<div class="pagenav">
+  <a href="index.html">← Origins</a>
+  <a href="../rules/prior-art.html">The registry that was built and retired →</a>
+</div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. All content CC BY 4.0.</p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.8</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The registry</h4>
+    <a href="../failure/index.html">Why they don't exist</a>
+    <a href="../rules/index.html">The four rules</a>
+    <a href="../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../roadmap/index.html">Build order</a>
+    <a href="../rules/prior-art.html">Prior art</a>
+  </div>
+  <div>
+    <h4>The three layers</h4>
+    <a href="../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../enrolment/index.html">Enrolment</a>
+    <a href="../execution/index.html">The execution broker</a>
+    <a href="../shipped/index.html">What already ships</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../origins/index.html">Origins: 2026</a>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../packs/registry-mvp/index.html">The registry MVP pack</a>
+    <a href="../about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="https://nhi.sgit.ai">nhi.sgit.ai</a>
+    <a href="https://sgit.ai">sgit.ai</a>
+  </div>
+</div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+<script src="../assets/mdreader.js"></script>
+</body>
+</html>

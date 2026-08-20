@@ -25,6 +25,7 @@ GH = "https://github.com/SGit-AI/SGit-AI__Website__PKI"
 # page's own root-relative path equals the href.
 NAV = [
     ("failure/index.html",   "The failure"),
+    ("origins/index.html",   "Origins"),
     ("bootstrap/index.html", "Bootstrap"),
     ("rules/index.html",     "The rules"),
     ("mandate/index.html",   "Mandate"),
@@ -43,6 +44,7 @@ FOOTER = [
         ("The four rules", "rules/index.html"),
         ("Identity &amp; mandate", "mandate/index.html"),
         ("Build order", "roadmap/index.html"),
+        ("Prior art", "rules/prior-art.html"),
     ]),
     ("The three layers", [
         ("The bootstrap trap", "bootstrap/index.html"),
@@ -51,6 +53,7 @@ FOOTER = [
         ("What already ships", "shipped/index.html"),
     ]),
     ("The sources", [
+        ("Origins: 2026", "origins/index.html"),
         ("The documents", "documents/index.html"),
         ("The registry MVP pack", "packs/registry-mvp/index.html"),
         ("Where we lose", "about/participant.html"),
