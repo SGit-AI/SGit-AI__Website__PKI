@@ -6,7 +6,7 @@
 > Anyone proposing a key registry now should be able to show they designed it with that
 > history in hand.
 
-*Source: <https://pki.sgit.ai/index.html> · site v0.1.3 · markdown twin of the front page.*
+*Source: <https://pki.sgit.ai/index.html> · site v0.1.4 · markdown twin of the front page.*
 
 ---
 
@@ -75,6 +75,13 @@ And the caution that travels with it: a signed mandate constrains what an agent 
 A registry with one organisation's agents in it is testable; a global one is a
 commitment — so the private registry comes before the public one.
 [The six steps, the honest tensions, and six open questions published unresolved](roadmap/index.html).
+
+## The registry MVP, proposed
+
+A five-brief first-pass pack proposes the build: a public vault of append-only signed
+statements, schemas for identity/mandate/grant/revocation, workflows an LLM session can
+follow from a page, and read-path-first phasing.
+[Start with the leading brief](documents/registry-mvp-pack.html).
 
 ## Who is writing this
 

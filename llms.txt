@@ -8,7 +8,7 @@
 > but never delete anything — not a bug. This site publishes that history, and the
 > registry rules it produces, before the registry exists.
 
-Site version: v0.1.3 (19 August 2026). Published by the sgit project — participant
+Site version: v0.1.4 (19 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## Status, stated plainly
@@ -130,6 +130,28 @@ failure page, the four rules) are done; step 4 (a private registry) is the next 
   accepts third-party attestations at all.
 - Honest tensions (https://pki.sgit.ai/roadmap/index.html#tensions), including that the
   size bound will one day reject a legitimate record.
+
+## The registry MVP pack (draft, for review)
+
+- [Leading brief](https://pki.sgit.ai/documents/registry-mvp-pack.html): a buildable MVP —
+  a public vault holding keys, identities, mandates and grants, open data by principle
+  (a registry contains no secrets), single operator, own-agents enrolment. Public in data,
+  private in authority: build-order step 4 with the covers off.
+- [Architecture](https://pki.sgit.ai/documents/registry-vault.html): records are append-only
+  hash-chained statement logs keyed by signing fingerprint; the processor is the sole
+  write-key holder; the four rules run as processor checks plus a public validator —
+  enforcement is verification anybody can re-run.
+- [Schemas](https://pki.sgit.ai/documents/registry-schemas.html): identity, mandate, grant,
+  acceptance, revocation. A mandate lives in the ISSUER's record (rule 1, no exceptions);
+  the subject appends an acceptance. The registry never contains a live capability — grants
+  record hashes of what was issued.
+- [Workflows](https://pki.sgit.ai/documents/registry-first-client.html): the first client is
+  a documented page a fresh LLM session follows — verify, enrol (the bootstrap gradient as
+  commands), operate-under-mandate. The three-session demo (issuer, subject, verifier
+  sharing only public URLs) is the acceptance test that matters.
+- [Build order](https://pki.sgit.ai/documents/registry-build-order.html): read path before
+  write path; five phases; every definition of done is a fresh-session test.
+- Status: draft-1, site-agent authored, awaiting project-lead review (N6 on comms).
 
 ## Sources
 

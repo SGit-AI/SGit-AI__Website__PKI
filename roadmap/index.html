@@ -13,7 +13,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.3</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.4</a>
   <a class="nl" href="../failure/index.html">The failure</a>
   <a class="nl" href="../bootstrap/index.html">Bootstrap</a>
   <a class="nl" href="../rules/index.html">The rules</a>
@@ -49,7 +49,7 @@
     <span class="from">Status: <b>done</b> — the argument pages, ahead of any implementation</span></div>
   <div class="cap"><span class="capnum">4</span><h3>A private registry, for our own agents</h3>
     <p>The smaller problem, and the one with a real user. Inside one organisation the trust root is not an open question, abuse is not an open question, and moderation is not an open question — which leaves the actual registry logic as the thing being tested. And the user is now concrete rather than hypothetical: somebody already running the shipped PKI commands who has hit <a href="../shipped/index.html#absences">the two absences</a>.</p>
-    <span class="from">Status: <b>not started — and materially smaller than it was</b>. The transport it needs is <a href="../shipped/index.html">already shipped</a>; what remains is the client sealing layer, the canonical enrolment object, the trusted processor and the registry itself</span></div>
+    <span class="from">Status: <b>planned — first-pass pack published</b>. A five-brief MVP pack (<a href="../documents/registry-mvp-pack.html">leading brief</a>, <a href="../documents/registry-vault.html">architecture</a>, <a href="../documents/registry-schemas.html">schemas</a>, <a href="../documents/registry-first-client.html">workflows</a>, <a href="../documents/registry-build-order.html">build order</a>) proposes the shape: public in data, private in authority — this step with the covers off, not step 6 early. Site-agent first pass, awaiting project-lead review</span></div>
   <div class="cap"><span class="capnum">5</span><h3>Mandate statements, separate from identity</h3>
     <p>Independently revocable signed statements about what an agent may do. <a href="../mandate/index.html">The concept and its fields</a> are published; the implementation follows the private registry, because a mandate with nowhere to live is a document. It cannot be finished without answering <a href="#open">the attestation question</a>, since a mandate issued by somebody other than the agent <em>is</em> a third-party attestation.</p>
     <span class="from">Status: <b>not started</b> — blocked on a decision rather than on work</span></div>
@@ -113,7 +113,7 @@
     <div class="brandline">pki<span>.sgit.ai</span></div>
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. All content CC BY 4.0.</p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.3</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.4</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The registry</h4>
