@@ -155,6 +155,13 @@ Every step is a fetch of a public URL plus a signature check with the shipped CL
 | Do grants belong in the same records as identities? | Churn says maybe not; uniformity says yes; the MVP starts uniform and measures |
 | Key rotation | A new identity statement for a new key, chained by cross-signature from the old — sketched but not schema'd in this pass |
 | Multiple issuers per subject | Nothing prevents it and nothing yet ranks them; a verifier with two conflicting mandates has no tie-break rule |
+---
+
+*Added after publication, 20 August 2026 (site v0.1.12). No claim above has been changed — this pack supersedes rather than rewrites; the only edit was moving the licence line below this block so it stays last. Later documents that bear on this one:*
+
+- `06__change-control.md` — **C1 and C5** — the grant definition here is superseded; the mandate-location decision (option A) is confirmed independently by the corpus
+- `08__ux-mockups.md` — **M4** — excess authority shown to the issuer *before* the mandate is signed, which is what C1 turns these schemas into
+- `10__user-stories-and-features.md` — workflows WF-3, WF-4 and WF-5, and the mandate lifecycle as states — including `Inert`, which is open decision 8 drawn
 
 ---
 

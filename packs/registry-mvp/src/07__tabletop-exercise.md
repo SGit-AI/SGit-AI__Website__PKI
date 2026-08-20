@@ -58,6 +58,12 @@ Every finding lands as one row: *what happened, which page should have answered 
 ## When to run it
 
 Once on paper before phase 0 ships (the cheapest run, catching schema ambiguities); once with real fixtures at the end of phase 2 (the processor runbook meets real junk); and the phase-4 three-session demo *is* the third run, live. Same script all three times, so the findings are comparable.
+---
+
+*Added after publication, 20 August 2026 (site v0.1.12). No claim above has been changed — this pack supersedes rather than rewrites; the only edit was moving the licence line below this block so it stays last. Later documents that bear on this one:*
+
+- `08__ux-mockups.md` — the screens each seat would actually be reading — M6 for the Agent, M7 for the Verifier, M4 for the Issuer. A seat asking for information no screen carries is a finding of the same class as a page that cannot answer
+- `10__user-stories-and-features.md` — twenty-four stories with tests that can fail — several of the injects here are stories run adversarially, and the story list is where new injects should come from
 
 ---
 

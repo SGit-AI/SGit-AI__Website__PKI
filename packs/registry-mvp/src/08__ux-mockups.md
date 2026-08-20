@@ -481,3 +481,13 @@ These are the ones to protect in review. Each is the only place a reader learns 
 | Should a policy verdict be signable? | A signed "0 rows at time T" is a receipt, and document 02 deliberately kept receipts out of the registry |
 | Does the excess-authority box belong to the registry or the broker? | It is computed from registry content but it is a risk statement; the pack's instinct is registry-computed, broker-actioned |
 | What does the graph view look like once badges exist? | Deferred on purpose — this document's position is that it cannot be designed honestly before the badge has met real edges |
+---
+
+*Added after publication, 20 August 2026 (site v0.1.12). No claim above has been changed — this pack supersedes rather than rewrites; the licence line, missing when this document shipped at v0.1.10, was added below. Later documents that bear on this one:*
+
+- `09__wardley-maps.md` — **W4 and W5** — the badge and the policy positioned: five of the badge's six inputs already exist as commodity, and a policy verdict cannot be more solid than the badge two layers down
+- `10__user-stories-and-features.md` — the stories these screens serve — V1–V5, A1–A4, I3, Y1–Y3 — each with the screen named in its tag, and F12 and F13 marked *specified, unbuilt*
+
+---
+
+This document is released under the Creative Commons Attribution 4.0 International licence (CC BY 4.0).

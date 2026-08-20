@@ -84,6 +84,24 @@ Three items land in this pack rather than in site chores: the **path convention 
 **And a tested result the pack should carry:** inside a running rented session, the surface is named precisely by environment variables, **no attestation device of any kind is present, and nothing is signed**. The surface is knowable to the agent and unprovable to anybody else. Handing the session a secret makes it worse — a secret proves possession, not location. The vendor *does* record the surface but cannot tell a third party in checkable form, so **the gap is distribution rather than knowledge**, which makes it a product decision rather than a hardware problem.
 **Status:** adopted as the pack's phase 6. The badge vocabulary is written before any page exists.
 
+## Additions from the pack itself, 20 August 2026
+
+The entries above record what the *corpus* corrects. These record what the pack's own later documents change, which is a different thing and belongs on the same page for the same reason.
+
+### C11 — Three documents added after draft-1: the screens, the maps, and the deliverables
+
+**Source:** documents 08, 09 and 10 of this pack, site-agent authored at the project lead's request (site v0.1.10 and v0.1.12).
+**What they add:** the register interface written out as intended output (08), the pack's argument as six Wardley maps in mermaid's `wardley-beta` (09), and the whole pack restated as six users, twenty-four stories, fourteen features and six workflows (10).
+**What they change in draft-1:** nothing above any published line. Each of documents 00–05 and 07 now carries a dated *added after publication* block pointing at the later material that bears on it — additive, never a rewrite, which is the rule this page implements.
+**Status:** adopted as pack material. Documents 08 and 09 are drawings of decisions already taken; document 10 is a reading of them, and where it appears to decide something it is reading documents 00–09.
+
+### C12 — Two findings the deliverables document surfaced, neither of them design corrections
+
+**Source:** document 10.
+**The first, against document 04.** The build order's four phases were written before the policy layer existed as a concept, so **WF-6 — running a policy — has no acceptance test.** It is specified in 08 and mapped in W5 and has no definition of done. Either phase 3 grows a fifth acceptance test, or the policy layer is honestly declared out of the MVP. This is not a defect in 04; it is a phase list that a later document overtook.
+**The second, between two stories.** *P2 — the processor logs every decision publicly* and *A3 — the acknowledgement tells the agent nothing* are in direct conflict for **declined** submissions: a public decision log is precisely the oracle the blind ack exists to withhold. Delay or aggregation are the plausible resolutions. Today the blind ack wins by default, **which is a decision nobody actually made** — the reason it is recorded here rather than resolved in the document that found it.
+**Status:** both open, both added to the register below as decisions 14 and 15.
+
 ## The decisions register
 
 | # | Decision | Made by | Status |
@@ -101,6 +119,8 @@ Three items land in this pack rather than in site chores: the **path convention 
 | 11 | Notary takes the published form, not the answering form | v0.33.61 | **Settled for the MVP — the commercial call is the project lead's** |
 | 12 | Mandates are allow-lists; prohibitions are annotations only | v0.33.61 | **Settled** |
 | 13 | Which verification mode ships first | — | **Open — two products, and building both means neither finishes** |
+| 14 | Does the policy layer (WF-6) belong in the MVP? | pack doc 10 (C12) | **Open — specified and mapped, with no acceptance test** |
+| 15 | How P2 (public decision log) is reconciled with A3 (blind ack) | pack doc 10 (C12) | **Open — the blind ack currently wins by default** |
 
 ---
 

@@ -128,6 +128,13 @@ Worth stating the negative space: the storage layer knows nothing about identiti
 | One vault or one-per-record? | One vault is simpler and matches one-operator authority; per-record vaults would make record ownership a platform fact — worth revisiting at the fractal stage |
 | Does the processor sign its commits? | A processor countersignature per commit would make the referee auditable too; costs a statement type |
 | How does a mirror announce itself? | Mirroring is free by construction; discovery of mirrors is not designed |
+---
+
+*Added after publication, 20 August 2026 (site v0.1.12). No claim above has been changed — this pack supersedes rather than rewrites; the only edit was moving the licence line below this block so it stays last. Later documents that bear on this one:*
+
+- `06__change-control.md` — **C7** — growth moves to the commit graph: an entry is a file inside a commit graph rather than a record that accumulates, which makes rule 1 topology rather than policy
+- `08__ux-mockups.md` — **M8** — the index-disagrees-with-records state, rendered rather than silently resolved — the countermeasure for the unsigned convenience this document names as its weakest joint
+- `10__user-stories-and-features.md` — features F1–F9, and stories D2 and D3, which are the chain and index properties above written as tests that can fail
 
 ---
 

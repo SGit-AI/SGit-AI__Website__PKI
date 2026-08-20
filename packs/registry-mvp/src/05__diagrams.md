@@ -126,6 +126,13 @@ flowchart TD
   Q -->|"false"| K["signature proves possession<br/>trust remains a policy decision<br/>evaluate evidence, walk to a root"]
   Q -->|"absent"| REJ["reject the entry —<br/>the field has no default"]
 ```
+---
+
+*Added after publication, 20 August 2026 (site v0.1.12). No claim above has been changed — this pack supersedes rather than rewrites; the only edit was moving the licence line below this block so it stays last. Later documents that bear on this one:*
+
+- `08__ux-mockups.md` — the same objects as screens rather than structures — what a reader actually sees when D5's walk resolves, or refuses
+- `09__wardley-maps.md` — the strategic counterpart: these diagrams say what shape the design is, the maps say where each piece sits and how evolved it is
+- `10__user-stories-and-features.md` — a mandate lifecycle state diagram, which is the one shape this document does not carry
 
 ---
 

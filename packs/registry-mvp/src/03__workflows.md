@@ -123,6 +123,13 @@ The workflows live on the site under the same disciplines the site already enfor
 | Where does a hosted session keep its private key? | The agent's own encrypted vault is the natural answer and needs its own worked page |
 | Should the processor publish declined enrolments? | Transparency vs abuse-probe surface; the blind ack currently wins |
 | How does a session prove it is the SAME session later? | Possession of the key is the whole answer today; whether that is enough is a mandate-policy question |
+---
+
+*Added after publication, 20 August 2026 (site v0.1.12). No claim above has been changed — this pack supersedes rather than rewrites; the only edit was moving the licence line below this block so it stays last. Later documents that bear on this one:*
+
+- `08__ux-mockups.md` — **M6 and M7** — these three workflows as screens: the blind-ack enrolment view, the verifier's answer, and the refusal that names where it stopped
+- `09__wardley-maps.md` — **W1** — why the read path is cheap — everything under the four schema objects is commodity
+- `10__user-stories-and-features.md` — WF-1 and WF-2 with acceptance criteria per story, and the note that a blind ack is a success condition that is an absence — easy to break by accident, hard to notice
 
 ---
 

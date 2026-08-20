@@ -14,7 +14,7 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.11</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.12</a>
   <a class="nl" href="../failure/index.html">The failure</a>
   <a class="nl" href="../origins/index.html">Origins</a>
   <a class="nl" href="../bootstrap/index.html">Bootstrap</a>
@@ -38,6 +38,11 @@
 <div class="tablewrap"><table class="vers">
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
+    <tr>
+      <td class="vnum">v0.1.12</td>
+      <td>20 Aug 2026</td>
+      <td><b><a href="../packs/registry-mvp/user-stories.html">10 — User stories, features and workflows</a></b>, and a cross-link pass over the whole pack. The delivery document turns nine documents of design into something a reviewer can sign off: six users — verifier, agent, issuer, processor, policy owner, and <b>auditor as its own seat</b>, because a verifier asks about now and may stop early, while only an auditor reads the log backwards and would notice if history were quietly rewritten; twenty-four stories, each with a test that <em>can fail</em>, because a criterion that cannot come out negative is a description wearing a story's clothes; fourteen features whose status column reads, honestly, that everything at phase 0–1 is designed and nothing is built; six end-to-end workflows; the mandate lifecycle as states; a traceability table; and a flat list of what the pack does <b>not</b> deliver — enforcement, receipts, confidentiality, attestation, a graph browser, a trust score, and estimates, the last because a fabricated number in a delivery document outlives every caveat attached to it. <b>Writing it found two things</b>, both recorded in <a href="../packs/registry-mvp/change-control.html">change control</a> as C12 rather than tidied away: the policy workflow is specified and mapped and has <em>no acceptance test</em>, because the build order's four phases were written before the policy layer existed as a concept; and "log every processor decision publicly" conflicts directly with "the acknowledgement tells the agent nothing" for declined submissions — a public decision log is exactly the oracle the blind ack exists to withhold, and today the blind ack wins by default, which is a decision nobody made. Also: documents 00–05 and 07 each gained a dated <em>added after publication</em> block pointing at the later material that bears on them. Nothing above those lines was rewritten — the pack supersedes rather than edits, which is the rule the change-control page exists to implement.</td>
+    </tr>
     <tr>
       <td class="vnum">v0.1.11</td>
       <td>20 Aug 2026</td>
@@ -113,7 +118,7 @@
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.11</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.12</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The registry</h4>

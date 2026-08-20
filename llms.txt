@@ -8,7 +8,7 @@
 > but never delete anything — not a bug. This site publishes that history, and the
 > registry rules it produces, before the registry exists.
 
-Site version: v0.1.11 (20 August 2026). Published by the sgit project — participant
+Site version: v0.1.12 (20 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## Properties agents may rely on
@@ -181,7 +181,18 @@ failure page, the four rules) are done; step 4 (a private registry) is the next 
   evidence chain terminates in a component that is commodity and worthless; the two
   absences are on top of the shipped surface, not underneath it; a policy verdict cannot
   be more solid than the badge two layers below it).
-- Status: draft-1 + change control + the drawn documents, site-agent authored, awaiting project-lead adoption (N6 on comms).
+- New at v0.1.12: [User stories, features and workflows](https://pki.sgit.ai/packs/registry-mvp/user-stories.html)
+  — the pack as deliverables. Six users (verifier, agent, issuer, processor, policy owner,
+  and auditor as its own seat, because only an auditor reads the log backwards);
+  twenty-four stories, each with a test that can fail and a tag naming its phase, document
+  and screen; fourteen features whose status column reads "everything at phase 0–1 is
+  designed and nothing is built"; six workflows; the mandate lifecycle as states; a
+  traceability table; and a flat list of what is NOT delivered (enforcement, receipts,
+  confidentiality, attestation, a graph browser, a trust score, estimates). Two findings
+  came out of writing it, recorded as change-control C12: the policy workflow has no
+  acceptance test in the build order, and "log every processor decision" conflicts with
+  "the acknowledgement tells the agent nothing" for declined submissions.
+- Status: draft-1 + change control + the drawn documents + the delivery scope, site-agent authored, awaiting project-lead adoption (N6 on comms).
 
 ## Sources
 

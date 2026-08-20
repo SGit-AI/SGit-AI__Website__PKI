@@ -17,13 +17,13 @@ GH = "https://github.com/SGit-AI/SGit-AI__Website__PKI"
 PACKS = [
  dict(slug="registry-mvp",
   name="The Registry MVP: Open Data, A Single Operator, LLM Sessions First",
-  origin="Authored by the pki.sgit.ai site agent, 20 August 2026, at the project lead's request. Status: draft-1 plus same-day change control, plus the UX mockups and the Wardley maps — three project-lead briefs (v0.33.61) landed after draft-1 shipped and their corrections are recorded in document 06 rather than silently folded in. Corpus version assigned on adoption.",
+  origin="Authored by the pki.sgit.ai site agent, 20 August 2026, at the project lead's request. Status: draft-1 plus same-day change control, plus the UX mockups, the Wardley maps and the delivery scope — three project-lead briefs (v0.33.61) landed after draft-1 shipped and their corrections are recorded in document 06 rather than silently folded in. Corpus version assigned on adoption.",
   date="20 August 2026 · draft-1 + change control",
   origin_short="Site agent, this repo",
   row_date="20 Aug 2026 · draft + change control",
-  one_line="A public key registry on vaults — open data, one operator, and LLM sessions as the first users on both sides. 10 documents.",
-  meta_desc="The registry MVP pack, readable in-page: the leading brief, architecture, schemas, workflows, build order, diagrams, change control, the tabletop exercise, the UX mockups and six Wardley maps.",
-  three_sentences="An MVP of the registry this site designs: one public vault whose records are append-only, hash-chained, signed statement logs; a processor as the only write-key holder; and every workflow written for its actual first user — a fresh LLM session holding nothing but public URLs. Open data on principle (a registry contains no secrets), and <b>public in data, private in authority</b>: one operator, one root, own-agents enrolment — build-order step 4 with the covers off. Draft-1 shipped the morning of 20 August; three project-lead briefs landed the same day, and what they correct is recorded in <a href='change-control.html'>change control</a> rather than silently patched. Two later documents draw the thing: <a href='ux-mockups.html'>the register interface, screen by screen</a>, and <a href='wardley-maps.html'>six Wardley maps</a> of where the novelty actually sits.",
+  one_line="A public key registry on vaults — open data, one operator, and LLM sessions as the first users on both sides. 11 documents.",
+  meta_desc="The registry MVP pack, readable in-page: the leading brief, architecture, schemas, workflows, build order, diagrams, change control, the tabletop exercise, the UX mockups, six Wardley maps, and the user stories and features.",
+  three_sentences="An MVP of the registry this site designs: one public vault whose records are append-only, hash-chained, signed statement logs; a processor as the only write-key holder; and every workflow written for its actual first user — a fresh LLM session holding nothing but public URLs. Open data on principle (a registry contains no secrets), and <b>public in data, private in authority</b>: one operator, one root, own-agents enrolment — build-order step 4 with the covers off. Draft-1 shipped the morning of 20 August; three project-lead briefs landed the same day, and what they correct is recorded in <a href='change-control.html'>change control</a> rather than silently patched. Two later documents draw the thing: <a href='ux-mockups.html'>the register interface, screen by screen</a>, and <a href='wardley-maps.html'>six Wardley maps</a> of where the novelty actually sits. <a href='user-stories.html'>Document 10</a> turns all of it into six users, twenty-four stories with tests that can fail, and six workflows.",
   site_relevance="This pack is <a href='../../roadmap/index.html#order'>build-order step 4</a> made concrete. Its constraints are this site's published pages: <a href='../../rules/index.html'>the four rules</a> (implemented as processor checks plus a public validator), <a href='../../mandate/index.html'>identity vs. mandate</a> (with the mandate living in the <em>issuer's</em> record — the same rule the v0.33.61 register brief derives independently), <a href='../../bootstrap/index.html'>the bootstrap trap</a> (the enrolment workflow walks the gradient as commands), and <a href='../../shipped/index.html'>the shipped surface</a> (the lane, the four capability tiers, and the two absences the registry supplies).",
   docs=[
    dict(slug="dev-brief", file="00__LEADING-BRIEF.md",
@@ -163,6 +163,20 @@ PACKS = [
      "Positions are judgements, not measurements \u2014 published to be moved, with the thinnest ones named.",
      "This pack is not building infrastructure: it is composing commodity components into four objects and one badge.",
      "sgit.ai\u2019s own maps are inline SVG; mermaid has since shipped Wardley as a diagram type, and text-in-the-repo maps are correctable in a pull request.",
+    ]),
+   dict(slug="user-stories", file="10__user-stories-and-features.md",
+    title="10 \u2014 User stories, features and workflows",
+    role="Who gets what, and how we know it works \u2014 six users, twenty-four stories, fourteen features, six workflows",
+    summary="The pack turned into something a reviewer can sign off and a builder can work from. Six users \u2014 verifier, agent, issuer, processor, policy owner and <b>auditor</b>, split out as its own seat because it is the only one that exercises <code>effective_from</code>. Twenty-four stories, each with a test that <em>can fail</em> and a tag naming its phase, its defining document and its screen. Fourteen features with a status column whose honest reading is that everything at phase 0\u20131 is designed and nothing is built. Six end-to-end workflows, the mandate lifecycle as states, a traceability table, and a flat list of what the pack does <em>not</em> deliver \u2014 enforcement, receipts, confidentiality, attestation, a graph browser, a trust score, and estimates.",
+    concepts=[
+     ("The auditor as a separate seat", "schemas.html", "a verifier asks about now and may stop early; only an auditor reads the log backwards"),
+     ("WF-6 has no acceptance test", "change-control.html", "a finding against the build order, recorded as C12 rather than tidied away"),
+     ("P2 pulls against A3", "workflows.html", "a public processor log is the oracle the blind ack exists to withhold \u2014 unresolved, and named"),
+    ],
+    ideas=[
+     "A story whose acceptance criterion cannot come out negative is a description wearing a story\u2019s clothes.",
+     "A3 is a story whose success is an absence \u2014 the easiest thing here to break by accident and the hardest to notice.",
+     "Estimates are deliberately absent: a fabricated number in a delivery document outlives every caveat attached to it.",
     ]),
   ]),
 ]

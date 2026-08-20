@@ -73,6 +73,12 @@ The MVP's stated purpose is developing the tech and workflows for LLM-session PK
 | Does phase 4's write-up become the site's first receipt? | The demo's verifier output is nearly a receipt; formalising it would pull receipts into the registry, which brief 02 deliberately did not |
 | When does this pack get corpus versions? | On adoption — the project lead's call, recorded on comms |
 | What triggers widening the enrolment policy? | The genuine public-registry commitment; it deserves its own brief when it is close |
+---
+
+*Added after publication, 20 August 2026 (site v0.1.12). No claim above has been changed — this pack supersedes rather than rewrites; the only edit was moving the licence line below this block so it stays last. Later documents that bear on this one:*
+
+- `09__wardley-maps.md` — **W6** — these phases as a march right-to-left, with fixtures carrying inertia because a fiction that works is hard to replace with an inconvenient fact
+- `10__user-stories-and-features.md` — the traceability table — and a finding against this document: **WF-6, running a policy, has no acceptance test here**, because the policy layer did not exist as a concept when these four phases were written. Either phase 3 grows a fifth test or the policy layer is honestly out of the MVP
 
 ---
 

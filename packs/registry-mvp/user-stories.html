@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>07 — Tabletop exercise · registry-mvp · pki.sgit.ai</title>
-<meta name="description" content="Four participants, six injects, and the four rules meeting their first population. Pack document, readable in-page; the raw markdown under src/ is the source of truth.">
-<link rel="canonical" href="https://pki.sgit.ai/packs/registry-mvp/tabletop.html">
+<title>10 — User stories, features and workflows · registry-mvp · pki.sgit.ai</title>
+<meta name="description" content="Who gets what, and how we know it works — six users, twenty-four stories, fourteen features, six workflows. Pack document, readable in-page; the raw markdown under src/ is the source of truth.">
+<link rel="canonical" href="https://pki.sgit.ai/packs/registry-mvp/user-stories.html">
 <link rel="stylesheet" href="../../assets/site.css">
 </head>
 <body>
@@ -31,41 +31,41 @@
 </div></nav>
 
 <main class="doc">
-<div class="crumb"><a href="../../index.html">pki.sgit.ai</a> / <a href="../index.html">packs</a> / <a href="index.html">registry-mvp</a> / tabletop</div>
-<h1>07 — Tabletop exercise</h1>
+<div class="crumb"><a href="../../index.html">pki.sgit.ai</a> / <a href="../index.html">packs</a> / <a href="index.html">registry-mvp</a> / user-stories</div>
+<h1>10 — User stories, features and workflows</h1>
 
 <div class="docmeta">
   <span class="k">Pack</span><span class="v"><a href="index.html">The Registry MVP: Open Data, A Single Operator, LLM Sessions First</a></span>
-  <span class="k">Role</span><span class="v">Four participants, six injects, and the four rules meeting their first population</span>
+  <span class="k">Role</span><span class="v">Who gets what, and how we know it works — six users, twenty-four stories, fourteen features, six workflows</span>
   <span class="k">Date</span><span class="v">20 August 2026 · draft-1 + change control</span>
   <span class="k">Origin</span><span class="v">Site agent, this repo</span>
-  <span class="k">Source</span><span class="v"><a href="src/07__tabletop-exercise.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/dev/packs/registry-mvp/src/07__tabletop-exercise.md">on GitHub</a></span>
+  <span class="k">Source</span><span class="v"><a href="src/10__user-stories-and-features.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/dev/packs/registry-mvp/src/10__user-stories-and-features.md">on GitHub</a></span>
 </div>
 
 <h2 id="summary">Summary</h2>
-<p>The registry walked through on paper before it is walked through in code. Five seats (operator/issuer, agent, verifier, red, facilitator — every one runnable as an LLM session), a baseline timeline from keygen to a verified mandate, and six injects: revocation mid-exercise, a write into another's record, the flood, the compromised processor, the fixture mistaken for an identity, and session death. The facilitator's rule makes it a documentation test too: any question the published pages cannot answer is logged as a finding. Run three times — on paper before phase 0, with real fixtures after phase 2, and live as the phase-4 demo.</p>
+<p>The pack turned into something a reviewer can sign off and a builder can work from. Six users — verifier, agent, issuer, processor, policy owner and <b>auditor</b>, split out as its own seat because it is the only one that exercises <code>effective_from</code>. Twenty-four stories, each with a test that <em>can fail</em> and a tag naming its phase, its defining document and its screen. Fourteen features with a status column whose honest reading is that everything at phase 0–1 is designed and nothing is built. Six end-to-end workflows, the mandate lifecycle as states, a traceability table, and a flat list of what the pack does <em>not</em> deliver — enforcement, receipts, confidentiality, attestation, a graph browser, a trust score, and estimates.</p>
 
 <h2 id="concepts">Key concepts</h2>
 <ul>
-  <li><a href="architecture.html"><b>I4 — detectable, not preventable, measured</b></a> — the gap between commit and detection is the number the MVP's honesty depends on</li>
-  <li><a href="diagrams.html"><b>I5 — the flag before the signature</b></a> — the most likely real-world implementation bug, run as a card</li>
-  <li><a href="../../admin/comms.html"><b>Findings → comms</b></a> — documentation findings become releases; rule findings go to the project lead</li>
+  <li><a href="schemas.html"><b>The auditor as a separate seat</b></a> — a verifier asks about now and may stop early; only an auditor reads the log backwards</li>
+  <li><a href="change-control.html"><b>WF-6 has no acceptance test</b></a> — a finding against the build order, recorded as C12 rather than tidied away</li>
+  <li><a href="workflows.html"><b>P2 pulls against A3</b></a> — a public processor log is the oracle the blind ack exists to withhold — unresolved, and named</li>
 </ul>
 
 <h2 id="ideas">Key ideas</h2>
 <ul>
-  <li>The failure modes are procedural, not cryptographic — which is what a tabletop surfaces.</li>
-  <li>An imagined population, run honestly, is the cheapest first test the four rules will ever get.</li>
-  <li>Same script all three runs, so findings are comparable.</li>
+  <li>A story whose acceptance criterion cannot come out negative is a description wearing a story’s clothes.</li>
+  <li>A3 is a story whose success is an absence — the easiest thing here to break by accident and the hardest to notice.</li>
+  <li>Estimates are deliberately absent: a fabricated number in a delivery document outlives every caveat attached to it.</li>
 </ul>
 
 <h2 id="read">Read the document</h2>
-<div class="mdread-label">📄 Pack document · 07__tabletop-exercise.md · rendered from the <a href="src/07__tabletop-exercise.md">raw markdown</a> (the source of truth)</div>
-<div class="mdread" id="mdread" data-src="src/07__tabletop-exercise.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="src/07__tabletop-exercise.md">open the raw markdown</a>.</p></noscript></div>
+<div class="mdread-label">📄 Pack document · 10__user-stories-and-features.md · rendered from the <a href="src/10__user-stories-and-features.md">raw markdown</a> (the source of truth)</div>
+<div class="mdread" id="mdread" data-src="src/10__user-stories-and-features.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="src/10__user-stories-and-features.md">open the raw markdown</a>.</p></noscript></div>
 
 <div class="pagenav">
-  <a href="change-control.html">← 06 — Change control</a>
-  <a href="ux-mockups.html">08 — UX mockups →</a>
+  <a href="wardley-maps.html">← 09 — Wardley maps</a>
+  <a href="index.html">Pack hub →</a>
 </div>
 </main>
 

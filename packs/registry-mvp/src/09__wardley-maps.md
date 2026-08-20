@@ -315,3 +315,12 @@ Four constraints found the hard way, none of them documented where a reader woul
 | Do these maps get re-drawn after the tabletop? | The tabletop (document 07) is the first population; W6's positions in particular should be re-checked against what it finds |
 | Is W2 the map the research site should carry? | It is the two-populations thesis in one picture and it is falsifiable per vendor — arguably it belongs on nhi.sgit.ai, not in this pack |
 | Who owns the x-axis positions? | Right now the site agent, which means they carry exactly the authority of an agent saying so — the same standing this pack keeps flagging elsewhere |
+---
+
+*Added after publication, 20 August 2026 (site v0.1.12). No claim above has been changed — this pack supersedes rather than rewrites; the licence line, missing when this document shipped at v0.1.10, was added below. Later documents that bear on this one:*
+
+- `10__user-stories-and-features.md` — the features and phases these maps position, as a table with a status column — and the honest reading of that table: everything at phase 0–1 is designed and nothing is built
+
+---
+
+This document is released under the Creative Commons Attribution 4.0 International licence (CC BY 4.0).
