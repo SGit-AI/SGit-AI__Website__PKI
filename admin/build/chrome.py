@@ -24,21 +24,46 @@ PARENT = "https://sgit.ai"
 PARENT_TITLE = ("sgit.ai — the parent project: the vault layer and the shipped CLI this "
                 "registry would be built on")
 
-# (nav key, href from site root, label). The nav key matches a page when the
-# page's own root-relative path equals the href.
+# The nav, two levels. Twelve flat entries wrapped to two rows on a laptop and four on
+# a phone, so they are grouped — the same component sgit.ai uses, ported with its rules
+# intact. Each entry is (label, own page, [(sub-label, href), ...], (path prefixes)).
+#
+# Two rules the structure has to keep:
+#   · A group label is always a link to a real page, never a menu-only stub. Nothing on
+#     this site should be reachable only by opening a dropdown.
+#   · `prefixes` decides the "here" state, so a page that is not itself in the nav
+#     (documents/notary.html, packs/registry-mvp/schemas.html, origins/review.html)
+#     still lights up the group it belongs to. Without it the deep pages — which is most
+#     of the site — would render with nothing highlighted at all.
 NAV = [
-    ("failure/index.html",   "The failure"),
-    ("origins/index.html",   "Origins"),
-    ("bootstrap/index.html", "Bootstrap"),
-    ("rules/index.html",     "The rules"),
-    ("mandate/index.html",   "Mandate"),
-    ("enrolment/index.html", "Enrolment"),
-    ("execution/index.html", "Execution"),
-    ("shipped/index.html",   "Shipped"),
-    ("roadmap/index.html",   "Build order"),
-    ("packs/index.html",     "Packs"),
-    ("documents/index.html", "Docs"),
-    ("admin/comms.html",     "Comms"),
+    ("The registry", "failure/index.html", [
+        ("Why they don't exist", "failure/index.html"),
+        ("The four rules", "rules/index.html"),
+        ("Identity &amp; mandate", "mandate/index.html"),
+        ("Build order", "roadmap/index.html"),
+        ("Prior art", "rules/prior-art.html"),
+    ], ("failure/", "rules/", "mandate/", "roadmap/")),
+    ("The layers", "bootstrap/index.html", [
+        ("The bootstrap trap", "bootstrap/index.html"),
+        ("Enrolment", "enrolment/index.html"),
+        ("The execution broker", "execution/index.html"),
+        ("What already ships", "shipped/index.html"),
+    ], ("bootstrap/", "enrolment/", "execution/", "shipped/")),
+    ("Origins", "origins/index.html", [
+        ("Origins: 2026", "origins/index.html"),
+        ("The review, redacted", "origins/review.html"),
+    ], ("origins/",)),
+    ("Docs", "documents/index.html", [
+        ("The documents", "documents/index.html"),
+        ("Dev packs", "packs/index.html"),
+        ("The registry MVP pack", "packs/registry-mvp/index.html"),
+    ], ("documents/", "packs/")),
+    ("Site", "admin/comms.html", [
+        ("Comms: tasks &amp; requests", "admin/comms.html"),
+        ("Release history", "admin/versions.html"),
+        ("Admin &amp; engineering", "admin/index.html"),
+        ("Where we lose", "about/participant.html"),
+    ], ("admin/", "about/")),
 ]
 
 FOOTER = [
@@ -83,16 +108,28 @@ PARTNOTE_SELF = '⚠ Participant disclosure: published by the sgit project. You 
 
 
 def nav_html(rel, up):
-    rows = "\n".join(
-        f'  <a class="nl{" here" if href == rel else ""}" href="{up}{href}">{label}</a>'
-        for href, label in NAV)
+    groups = []
+    for label, own, subs, prefixes in NAV:
+        active = rel == own or any(rel.startswith(pre) for pre in prefixes)
+        links = "\n".join(
+            f'      <a class="sl{" here" if href == rel else ""}" href="{up}{href}">{text}</a>'
+            for text, href in subs)
+        groups.append(
+            f'    <div class="ni ni-has">\n'
+            f'      <a class="nl{" here" if active else ""}" href="{up}{own}">{label}'
+            f'<span class="caret">&#9662;</span></a>\n'
+            f'      <div class="sub">\n{links}\n      </div>\n'
+            f'    </div>')
+    rows = "\n".join(groups)
     return (f'<nav class="site"><div class="row">\n'
             f'  <a class="brand" href="{up}index.html">pki<span>.sgit.ai</span></a>\n'
             f'  <a class="parent" href="{PARENT}" title="{PARENT_TITLE}">↗ part of <b>sgit.ai</b></a>\n'
             f'  <span class="stage-pill">mvp draft</span>\n'
             f'  <a class="ver" href="{up}admin/versions.html" title="Site release history">{VERSION}</a>\n'
-            f'{rows}\n'
+            f'  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>\n'
+            f'  <div class="nav-items">\n{rows}\n  </div>\n'
             f'  <a class="gh" href="{GH}">★ GitHub</a>\n'
+            f'  <script src="{up}assets/nav.js" defer></script>\n'
             f'</div></nav>')
 
 

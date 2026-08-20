@@ -14,20 +14,55 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.12</a>
-  <a class="nl" href="../failure/index.html">The failure</a>
-  <a class="nl" href="../origins/index.html">Origins</a>
-  <a class="nl" href="../bootstrap/index.html">Bootstrap</a>
-  <a class="nl" href="../rules/index.html">The rules</a>
-  <a class="nl" href="../mandate/index.html">Mandate</a>
-  <a class="nl" href="../enrolment/index.html">Enrolment</a>
-  <a class="nl" href="../execution/index.html">Execution</a>
-  <a class="nl" href="../shipped/index.html">Shipped</a>
-  <a class="nl" href="../roadmap/index.html">Build order</a>
-  <a class="nl" href="../packs/index.html">Packs</a>
-  <a class="nl" href="../documents/index.html">Docs</a>
-  <a class="nl" href="../admin/comms.html">Comms</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.13</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../failure/index.html">The registry<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../failure/index.html">Why they don't exist</a>
+      <a class="sl" href="../rules/index.html">The four rules</a>
+      <a class="sl" href="../mandate/index.html">Identity &amp; mandate</a>
+      <a class="sl" href="../roadmap/index.html">Build order</a>
+      <a class="sl" href="../rules/prior-art.html">Prior art</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../bootstrap/index.html">The layers<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../bootstrap/index.html">The bootstrap trap</a>
+      <a class="sl" href="../enrolment/index.html">Enrolment</a>
+      <a class="sl" href="../execution/index.html">The execution broker</a>
+      <a class="sl" href="../shipped/index.html">What already ships</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../origins/index.html">Origins<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../origins/index.html">Origins: 2026</a>
+      <a class="sl" href="../origins/review.html">The review, redacted</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../documents/index.html">The documents</a>
+      <a class="sl" href="../packs/index.html">Dev packs</a>
+      <a class="sl" href="../packs/registry-mvp/index.html">The registry MVP pack</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl here" href="../admin/versions.html">Release history</a>
+      <a class="sl" href="../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
   <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+  <script src="../assets/nav.js" defer></script>
 </div></nav>
 
 <main class="doc">
@@ -38,6 +73,11 @@
 <div class="tablewrap"><table class="vers">
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
+    <tr>
+      <td class="vnum">v0.1.13</td>
+      <td>20 Aug 2026</td>
+      <td><b>Twelve top-level nav entries become five</b>, using the two-level component <a href="https://sgit.ai">sgit.ai</a> already runs — ported with its rules intact rather than reinvented. The flat nav had been growing one entry per section and was wrapping to two rows on a laptop and four on a phone: measured, the bar was <b>105px at 1400 and 1100, 145px at 760, and 227px at 390</b>. It is now <b>55px at every desktop width and 92px on a phone</b>, where the whole menu collapses behind one button so the bar stays a single row. Groups: <em>The registry</em> (why they don't exist, the four rules, identity &amp; mandate, build order, prior art), <em>The layers</em> (bootstrap, enrolment, execution, what already ships), <em>Origins</em>, <em>Docs</em> (documents, dev packs, the registry MVP pack) and <em>Site</em> (comms, releases, engineering, the disclosure). Two rules carried over from the parent's implementation and worth keeping: <b>every group label is itself a link to a real page</b>, so nothing on this site is reachable only by opening a menu — the submenu is a shortcut, never the only door; and opening is <b>CSS-only for a mouse (<code>:hover</code>) and for a keyboard (<code>:focus-within</code>)</b>, with script needed only for the phone button and for touch, where hover does not exist. If <code>nav.js</code> never loads, the nav still navigates. One addition of our own: <kbd>Escape</kbd> closes whatever is open. The "here" state is driven by path prefixes rather than exact matches, because most of this site is pages that are not themselves in the nav — a document, a pack chapter, a redacted review — and without prefixes those would all render with nothing highlighted.</td>
+    </tr>
     <tr>
       <td class="vnum">v0.1.12</td>
       <td>20 Aug 2026</td>
@@ -118,7 +158,7 @@
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.12</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.13</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The registry</h4>
