@@ -20,6 +20,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 VERSION = (ROOT / "admin/build/version.txt").read_text().strip()
 GH = "https://github.com/SGit-AI/SGit-AI__Website__PKI"
+PARENT = "https://sgit.ai"
+PARENT_TITLE = ("sgit.ai — the parent project: the vault layer and the shipped CLI this "
+                "registry would be built on")
 
 # (nav key, href from site root, label). The nav key matches a page when the
 # page's own root-relative path equals the href.
@@ -62,16 +65,20 @@ FOOTER = [
         ("Comms: tasks &amp; requests", "admin/comms.html"),
         ("Release history", "admin/versions.html"),
         ("llms.txt", "llms.txt"),
-        ("nhi.sgit.ai", "https://nhi.sgit.ai"),
-        ("sgit.ai", "https://sgit.ai"),
     ]),
 ]
 
 BLURB = ("Public key infrastructure for agents: a registry designed from a documented failure, "
-         "and the published work behind it. All content CC BY 4.0.")
+         "and the published work behind it. Part of the <a href=\"https://sgit.ai\" "
+         "style=\"display:inline;padding:0\"><b>sgit.ai</b></a> network — the vault layer and "
+         "the shipped CLI this registry is designed onto. All content CC BY 4.0.")
 PARTNOTE = ('⚠ Participant disclosure: published by the sgit project, which builds the vault layer '
             'this registry would be built on. <a href="{up}about/participant.html" '
             'style="display:inline;padding:0">Read the disclosure</a>.')
+NETLINE = ('<a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer '
+           'this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · '
+           '<a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · '
+           '<a href="https://sgit.ai/network/index.html">↗ the network</a>')
 PARTNOTE_SELF = '⚠ Participant disclosure: published by the sgit project. You are on the disclosure page.'
 
 
@@ -81,6 +88,7 @@ def nav_html(rel, up):
         for href, label in NAV)
     return (f'<nav class="site"><div class="row">\n'
             f'  <a class="brand" href="{up}index.html">pki<span>.sgit.ai</span></a>\n'
+            f'  <a class="parent" href="{PARENT}" title="{PARENT_TITLE}">↗ part of <b>sgit.ai</b></a>\n'
             f'  <span class="stage-pill">mvp draft</span>\n'
             f'  <a class="ver" href="{up}admin/versions.html" title="Site release history">{VERSION}</a>\n'
             f'{rows}\n'
@@ -101,6 +109,7 @@ def footer_html(rel, up):
             f'  <div>\n'
             f'    <div class="brandline">pki<span>.sgit.ai</span></div>\n'
             f'    <p>{BLURB}</p>\n'
+            f'    <p class="netline">{NETLINE}</p>\n'
             f'    <p class="partnote">{partnote}</p>\n'
             f'    <p class="verline">site <a href="{up}admin/versions.html">{VERSION}</a> · '
             f'<a href="{up}admin/index.html">engineering</a>{md_twin}</p>\n'
