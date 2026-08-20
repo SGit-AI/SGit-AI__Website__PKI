@@ -8,7 +8,7 @@
 > but never delete anything — not a bug. This site publishes that history, and the
 > registry rules it produces, before the registry exists.
 
-Site version: v0.1.9 (20 August 2026). Published by the sgit project — participant
+Site version: v0.1.10 (20 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## Properties agents may rely on
@@ -170,7 +170,18 @@ failure page, the four rules) are done; step 4 (a private registry) is the next 
   design precedence; the fixture class with a required private_key_published flag read
   before any signature), and the [Tabletop exercise](https://pki.sgit.ai/packs/registry-mvp/tabletop.html)
   (six injects giving the four published rules their first population).
-- Status: draft-1 + change control, site-agent authored, awaiting project-lead adoption (N6 on comms).
+- New at v0.1.10: [UX mockups](https://pki.sgit.ai/packs/registry-mvp/ux-mockups.html)
+  (the register interface as intended output, screen by screen: a badge on every edge
+  carrying who can verify it, by what method, at what cost, when it was last checked and
+  what the answer was; five result states, because denied, unreachable and never-checked
+  are three different situations; "verifiable by nobody" rendered as a value rather than
+  a blank; a policy page printing "0 rows" and "detects nothing" together), and
+  [Wardley maps](https://pki.sgit.ai/packs/registry-mvp/wardley-maps.html) (six maps in
+  mermaid's wardley-beta: all the novelty sits in four schema objects; a rented agent's
+  evidence chain terminates in a component that is commodity and worthless; the two
+  absences are on top of the shipped surface, not underneath it; a policy verdict cannot
+  be more solid than the badge two layers below it).
+- Status: draft-1 + change control + the drawn documents, site-agent authored, awaiting project-lead adoption (N6 on comms).
 
 ## Sources
 
