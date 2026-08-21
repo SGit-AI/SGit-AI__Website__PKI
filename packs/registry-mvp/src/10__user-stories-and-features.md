@@ -335,6 +335,8 @@ One row per workflow, so a reviewer can follow any thread end to end.
 *Added after publication, 20 August 2026 (site v0.1.14). No claim above has been changed — this pack supersedes rather than rewrites. Later documents that bear on this one:*
 
 - `11__observability.md` — four more stories (I6, I7, C1, C2), five more features (F15–F19) and **WF-7**. The *not delivered* row reading “records authority; it does not observe behaviour” stays true; the layer measures around the edge of it rather than filling it
+- `12__grant-tree-and-control-labels.md` — four more stories (I8, I9, A6, P4), three more features (F20–F22), and the metric family this document never stated: **counting acceptances is the one measure that inverts under pressure**, so declines and unstatable risks are instrumented first
+- `13__keys-and-signatures.md` — two more stories (V7, I10) on the two cases where a check succeeds and means nothing
 
 ---
 

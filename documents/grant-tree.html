@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Observability Is The Usage Graph Nobody Has To Declare: Check Events Belong In The Issuer's Own Lane · documents · pki.sgit.ai</title>
+<title>The End-To-End Flow Is The August Worked Example With An Agent Installation As The Twin · documents · pki.sgit.ai</title>
 <meta name="description" content="Original document, readable in-page: summary, key concepts and key ideas, then the full markdown. Architecture brief, v0.33.61, 20 August 2026. CC BY 4.0.">
-<link rel="canonical" href="https://pki.sgit.ai/documents/observability.html">
+<link rel="canonical" href="https://pki.sgit.ai/documents/grant-tree.html">
 <link rel="stylesheet" href="../assets/site.css">
 </head>
 <body>
@@ -66,8 +66,8 @@
 </div></nav>
 
 <main class="doc">
-<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="index.html">documents</a> / observability</div>
-<h1>Observability Is The Usage Graph Nobody Has To Declare: Check Events Belong In The Issuer's Own Lane</h1>
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="index.html">documents</a> / grant-tree</div>
+<h1>The End-To-End Flow Is The August Worked Example With An Agent Installation As The Twin</h1>
 
 <div class="docmeta">
   <span class="k">Type</span><span class="v">Architecture brief</span>
@@ -75,38 +75,38 @@
   <span class="k">Date</span><span class="v">20 August 2026</span>
   <span class="k">Author</span><span class="v">Dinis Cruz (project lead) and collaborators</span>
   <span class="k">Licence</span><span class="v">CC BY 4.0</span>
-  <span class="k">Source</span><span class="v"><a href="../briefs/v0.33.61__arch-brief__observability-is-the-usage-graph-check-events-in-the-issuers-lane-a-verification-is-not-a-use.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/dev/briefs/v0.33.61__arch-brief__observability-is-the-usage-graph-check-events-in-the-issuers-lane-a-verification-is-not-a-use.md">view on GitHub</a></span>
+  <span class="k">Source</span><span class="v"><a href="../briefs/v0.33.61__arch-brief__end-to-end-flow-is-the-august-worked-example-grant-tree-needs-control-labels.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/dev/briefs/v0.33.61__arch-brief__end-to-end-flow-is-the-august-worked-example-grant-tree-needs-control-labels.md">view on GitHub</a></span>
 </div>
 
 <h2 id="summary">Summary</h2>
-<p>The observability layer, and the one decision inside it that separates a security property from a surveillance product. Observability goes in at the beginning, not because it is good practice but because the case for declared mandates is that they produce the evidence saying where enforcement earns its cost — and without check events they produce none. The correction the proposal needs: a verification is not a use, and the error runs both ways, since a party that uses a mandate without verifying generates nothing while a resolver walking the chain generates an event with no usage behind it. So the primary output is the missing edges — the parties holding a mandate that have never once checked it — which the issuer can compute because it holds both halves. Where the events are written decides what this is: a central log accumulates who is evaluating whom across parties that never consented; the issuer's own lane makes it an owner observing their own asset. And because nothing is pushed, the interval between a party's checks is its effective revocation latency, measurable before anything is ever revoked.</p>
+<p>The flow from what an agent can reach to somebody accepting a risk does not need designing — it is the 2 August worked example with an agent installation as the twin, and excess authority plays the role a regulatory provision played there, which is what makes the finding computed rather than asserted. Four corrections follow. A grant is a tree of subgrants, so blast radius is a path through it; and the load-bearing part is the label on each node, because a control bounds a grant only when it is enforced by something the grant does not include — giving boundary, setting and expectation, and placing most current containment in the middle tier. The two scenarios are the two populations and neither dominates: locally the containment is available and unused, hosted it may be excellent and is unverifiable. Grants and mandates are artefacts, so they get signed rather than keyed. And counting acceptances is the one metric that inverts, because it is maximised by making risks easy to accept.</p>
 
 <h2 id="concepts">Key concepts</h2>
 <ul>
-  <li><a href="../mandate/index.html"><b>A verification is not a use</b></a> — the party that never verifies is the weakest relying process, and the one this cannot see</li>
-  <li><a href="../packs/registry-mvp/observability.html"><b>The missing edges are the product</b></a> — issued-to minus has-checked, computable by the issuer alone</li>
-  <li><a href="../packs/registry-mvp/change-control.html"><b>The location of the log is the design</b></a> — rule 1 applied to telemetry: the asserter appends to its own record</li>
-  <li><a href="../rules/index.html#revocation"><b>Effective revocation latency</b></a> — no push means propagation happens at the rate parties check — so the rate is measurable in advance</li>
+  <li><a href="../packs/registry-mvp/grant-tree.html"><b>A control bounds a grant only if the grant does not include it</b></a> — three tiers, and no vendor-specific claim required</li>
+  <li><a href="../packs/registry-mvp/schemas.html"><b>Blast radius is a path, not an item</b></a> — containment relationships are what makes the tree worth having</li>
+  <li><a href="../documents/two-populations.html"><b>Neither population dominates</b></a> — a large grant with a boundary you own, against a small one with a boundary you cannot see</li>
+  <li><a href="../packs/registry-mvp/user-stories.html"><b>Declines are the cheapest test</b></a> — a hundred percent acceptance means the risks are trivial or the process is theatre</li>
 </ul>
 
 <h2 id="ideas">Key ideas</h2>
 <ul>
-  <li>The design that protects the positioning is the design that destroys the dataset, and it should be chosen deliberately.</li>
-  <li>A thousand pending files per token makes draining an obligation that fails silently.</li>
-  <li>Whether a lane with no anchors accepts any token holder is absent from the reference, and it gates the whole layer's coverage.</li>
-  <li>“Verify this mandate at least once every twenty-four hours” is one of the very few mandate clauses that is actually decidable.</li>
+  <li>A permission prompt that a flag in a writable file can disable is an expectation wearing a setting's clothes.</li>
+  <li>One hosted container measured: root inside, passwordless escalation, and an egress allowlist that root could not defeat.</li>
+  <li>Prohibitions are the presentation layer and the allow-list is the enforcement layer, generated from each other and dated.</li>
+  <li>Publishing a prepared tree is a dated assessment of somebody else's product, so every node carries its own date and a re-run method.</li>
 </ul>
 
 <h2 id="on-site">On this site</h2>
-<p>Became document 11 of the registry MVP pack, and answers a question the mandate page had been raising since it was published — by refusing it: nobody can say who is using a mandate, and the issuer can say who has never checked one.</p>
+<p>Became document 12 of the registry MVP pack, and gives the grant the structure the excess-authority finding had been assuming since C1.</p>
 
 <h2 id="read">Read the document</h2>
-<div class="mdread-label">📄 Original document · v0.33.61 · 20 August 2026 · rendered from the <a href="../briefs/v0.33.61__arch-brief__observability-is-the-usage-graph-check-events-in-the-issuers-lane-a-verification-is-not-a-use.md">raw markdown</a> (the source of truth)</div>
-<div class="mdread" id="mdread" data-src="../briefs/v0.33.61__arch-brief__observability-is-the-usage-graph-check-events-in-the-issuers-lane-a-verification-is-not-a-use.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="../briefs/v0.33.61__arch-brief__observability-is-the-usage-graph-check-events-in-the-issuers-lane-a-verification-is-not-a-use.md">open the raw markdown</a>.</p></noscript></div>
+<div class="mdread-label">📄 Original document · v0.33.61 · 20 August 2026 · rendered from the <a href="../briefs/v0.33.61__arch-brief__end-to-end-flow-is-the-august-worked-example-grant-tree-needs-control-labels.md">raw markdown</a> (the source of truth)</div>
+<div class="mdread" id="mdread" data-src="../briefs/v0.33.61__arch-brief__end-to-end-flow-is-the-august-worked-example-grant-tree-needs-control-labels.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="../briefs/v0.33.61__arch-brief__end-to-end-flow-is-the-august-worked-example-grant-tree-needs-control-labels.md">open the raw markdown</a>.</p></noscript></div>
 
 <div class="pagenav">
   <a href="index.html">← All documents</a>
-  <a href="../briefs/v0.33.61__arch-brief__observability-is-the-usage-graph-check-events-in-the-issuers-lane-a-verification-is-not-a-use.md">Raw markdown →</a>
+  <a href="../briefs/v0.33.61__arch-brief__end-to-end-flow-is-the-august-worked-example-grant-tree-needs-control-labels.md">Raw markdown →</a>
 </div>
 </main>
 

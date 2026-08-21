@@ -163,6 +163,8 @@ Every step is a fetch of a public URL plus a signature check with the shipped CL
 - `08__ux-mockups.md` — **M4** — excess authority shown to the issuer *before* the mandate is signed, which is what C1 turns these schemas into
 - `10__user-stories-and-features.md` — workflows WF-3, WF-4 and WF-5, and the mandate lifecycle as states — including `Inert`, which is open decision 8 drawn
 - `11__observability.md` — the `check` statement body, and the field list it must **not** carry: a check event recording what the checker was authorising turns an asset log into a surveillance log
+- `12__grant-tree-and-control-labels.md` — the grant body is a **tree**, not a flat instance, and each node needs a control label whose `enforced_by` field is the one nobody currently publishes. Plus the **shortfall**, the region C1 did not name
+- `13__keys-and-signatures.md` — no object here changes shape, which is the useful result: grants, mandates and evidence get an identifier, a content hash and an issuer signature, and **never a keypair of their own**. Now stated policy rather than instinct
 
 ---
 

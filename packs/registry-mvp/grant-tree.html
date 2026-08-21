@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>03 — Workflows · registry-mvp · pki.sgit.ai</title>
-<meta name="description" content="Verify, enrol, operate-under-mandate — copy-paste form for a fresh LLM session. Pack document, readable in-page; the raw markdown under src/ is the source of truth.">
-<link rel="canonical" href="https://pki.sgit.ai/packs/registry-mvp/workflows.html">
+<title>12 — The grant tree and control labels · registry-mvp · pki.sgit.ai</title>
+<meta name="description" content="Blast radius is a path through a tree, and the label on each node is the column nobody publishes. Pack document, readable in-page; the raw markdown under src/ is the source of truth.">
+<link rel="canonical" href="https://pki.sgit.ai/packs/registry-mvp/grant-tree.html">
 <link rel="stylesheet" href="../../assets/site.css">
 </head>
 <body>
@@ -66,41 +66,43 @@
 </div></nav>
 
 <main class="doc">
-<div class="crumb"><a href="../../index.html">pki.sgit.ai</a> / <a href="../index.html">packs</a> / <a href="index.html">registry-mvp</a> / workflows</div>
-<h1>03 — Workflows</h1>
+<div class="crumb"><a href="../../index.html">pki.sgit.ai</a> / <a href="../index.html">packs</a> / <a href="index.html">registry-mvp</a> / grant-tree</div>
+<h1>12 — The grant tree and control labels</h1>
 
 <div class="docmeta">
   <span class="k">Pack</span><span class="v"><a href="index.html">The Registry MVP: Open Data, A Single Operator, LLM Sessions First</a></span>
-  <span class="k">Role</span><span class="v">Verify, enrol, operate-under-mandate — copy-paste form for a fresh LLM session</span>
+  <span class="k">Role</span><span class="v">Blast radius is a path through a tree, and the label on each node is the column nobody publishes</span>
   <span class="k">Date</span><span class="v">20 August 2026 · draft-1 + change control</span>
   <span class="k">Origin</span><span class="v">Site agent, this repo</span>
-  <span class="k">Source</span><span class="v"><a href="src/03__workflows.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/dev/packs/registry-mvp/src/03__workflows.md">on GitHub</a></span>
+  <span class="k">Source</span><span class="v"><a href="src/12__grant-tree-and-control-labels.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/dev/packs/registry-mvp/src/12__grant-tree-and-control-labels.md">on GitHub</a></span>
 </div>
 
 <h2 id="summary">Summary</h2>
-<p>The pack's centre of gravity: the client is a published page. Verify needs no writes, no credentials and no state. Enrol walks the bootstrap gradient as commands — keygen, canonical statement, sign, post through the account-less lane, poll the public registry for the outcome, since the read path is the outcome channel. Operate-under-mandate is the three-session shape: issuer, subject and verifier sharing nothing but public URLs. The two not-yet-shipped dependencies (lane-address derivation; exact sign/verify flags) are marked rather than assumed.</p>
+<p>The grant side, which the pack had specified least and needed most once C1 made the gap between grant and mandate the product. A grant is a <b>tree</b> of subgrants, so blast radius is a path through it rather than an item in a list — and the load-bearing part is the label on each node, above all <b>who enforces the thing standing in the way</b>. The general test needs no vendor claim: <b>a control bounds a grant only when it is enforced by something the grant does not include</b>, giving boundary, setting and expectation, and placing most of what people currently rely on in the middle tier that reads like a boundary and behaves like a setting. Plus the <b>shortfall</b>, the region C1 never named; the two populations with one hosted tree measured rather than described; prohibitions as a generated presentation layer over a stored allow-list; and the correction that <b>counting acceptances is the one metric that inverts under pressure</b>.</p>
 
 <h2 id="concepts">Key concepts</h2>
 <ul>
-  <li><a href="../../bootstrap/index.html#gradient"><b>The hardest easy case</b></a> — full tooling, no standing state, reads documentation literally</li>
-  <li><a href="../../enrolment/index.html#lane"><b>The blind ack has no probe value</b></a> — pending and declined look identical, by design</li>
-  <li><a href="change-control.html"><b>Session-scoped identities</b></a> — a finding to record — and I6 in the tabletop runs it as theatre</li>
+  <li><a href="change-control.html"><b>The three-tier control test</b></a> — C16: enforced from outside the grant, from inside it, or by nothing at all</li>
+  <li><a href="schemas.html"><b>Excess authority, and the shortfall</b></a> — grant minus mandate hurts security; mandate minus grant hurts operations and is harder to detect</li>
+  <li><a href="user-stories.html"><b>A hundred percent acceptance</b></a> — means the risks are trivial or the process is theatre — so declines are instrumented first</li>
+  <li><a href="wardley-maps.html"><b>Two populations, neither winning</b></a> — locally the containment is available and unused; hosted it may be excellent and is unverifiable</li>
 </ul>
 
 <h2 id="ideas">Key ideas</h2>
 <ul>
-  <li>Writing the workflow page is the first acceptance test — executed, not recalled, applies to command blocks.</li>
-  <li>The verifier refusing correctly is as much the test as the happy path.</li>
-  <li>The passphrase question is answered on the page: an encrypted vault yes, the repo and the transcript no.</li>
+  <li>A safe inside a house you handed the keys to is a delay, not a boundary — and so is a folder restriction enforced by a tool running as you.</li>
+  <li>A permission prompt disableable by a flag the agent can write is an expectation wearing a setting's clothes.</li>
+  <li>Each node carries its own date: a vendor changing one default invalidates one row, and a tree dated as a whole is quietly wrong while looking current.</li>
+  <li>The fourth list of absences in this pack — risks that could not be stated is the most informative number in the set.</li>
 </ul>
 
 <h2 id="read">Read the document</h2>
-<div class="mdread-label">📄 Pack document · 03__workflows.md · rendered from the <a href="src/03__workflows.md">raw markdown</a> (the source of truth)</div>
-<div class="mdread" id="mdread" data-src="src/03__workflows.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="src/03__workflows.md">open the raw markdown</a>.</p></noscript></div>
+<div class="mdread-label">📄 Pack document · 12__grant-tree-and-control-labels.md · rendered from the <a href="src/12__grant-tree-and-control-labels.md">raw markdown</a> (the source of truth)</div>
+<div class="mdread" id="mdread" data-src="src/12__grant-tree-and-control-labels.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="src/12__grant-tree-and-control-labels.md">open the raw markdown</a>.</p></noscript></div>
 
 <div class="pagenav">
-  <a href="schemas.html">← 02 — Schemas</a>
-  <a href="build-order.html">04 — Build order →</a>
+  <a href="observability.html">← 11 — Observability</a>
+  <a href="keys-and-signatures.html">13 — Keys and signatures →</a>
 </div>
 </main>
 

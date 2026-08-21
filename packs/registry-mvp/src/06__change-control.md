@@ -129,6 +129,41 @@ The entries above record what the *corpus* corrects. These record what the pack'
 **The consequence for the build order.** Observability cannot be a later phase, because the justification for building declared mandates *is* the evidence it produces. **It belongs in phase 3, with mandates**, and phase 3's acceptance test grows a fifth case: an issuer names a holder that has never checked. Document 04 is amended by this entry rather than edited.
 **Status:** adopted; decision 20.
 
+### C16 — A grant is a tree, and the label on each node is the load-bearing part
+
+**Source:** `v0.33.61__arch-brief__end-to-end-flow-is-the-august-worked-example…`, and document 12.
+**Draft-1 and C1 treated a grant as a flat capability instance**, and screen M4 renders excess authority as a count: *41 repositories against 1*.
+**The correction:** a grant is a **tree of subgrants**, and the interesting relationships are containment ones — running as your user contains reading your files, which contains reading your credential files, which contains reaching every service those credentials open. **Blast radius is a path through the tree, not an item in a list.** Enumerating the tree is the easy half; the half that decides whether any of it is worth reading is the **label on each node**: what is reachable, what stands in the way, **who enforces it**, the evidence class, and a date **per node rather than per tree**.
+**And the general test that makes those labels writable** without any vendor-specific claim, which matters because vendor security assertions age in weeks: *a control bounds a grant only when it is enforced by something the grant does not include.* Three tiers — **boundary** (outside the grant: OS, separate account, container, network policy), **setting** (the tool itself, running inside the grant), **expectation** (nothing; it is written in a prompt). **Most of what people currently rely on is a setting that reads like a boundary**, and a permission prompt disableable by a flag the agent can write is an expectation wearing a setting's clothes.
+**Status:** adopted. Document 12 written. Schema additions queued for draft-2: a parent reference, and the five-field node label with `enforced_by ∈ {boundary, setting, expectation}`.
+
+### C17 — The shortfall, and the metric that inverts
+
+**Source:** the same brief.
+**The addition C1 was missing.** `grant − mandate` is excess authority. The other direction is the **shortfall** — `mandate − grant`, where the holder was authorised to do something its credential cannot do. It hurts operations rather than security, and the failure looks like a bug. **It is the harder of the two to detect**, because excess needs the grant enumerated and the shortfall needs the *mandate* enumerated against real capability names — which the pack cannot do, since its `capability` field draws on a vocabulary that does not exist. Named as a region; unimplementable until decision 6 lands.
+**The metric correction, which the pack had not stated and would have adopted.** *How many risks get accepted* is maximised by making risks easy to accept: shorter statements, softer wording, one button. **A product optimised on it converges on blanket acceptance by people who did not read — worse than no register at all, because it manufactures evidence that somebody considered it.** The corpus already separated *accepted* from *acceptable*. So the primary measure is **risks stated well enough to be accepted** — able to carry a named acceptor and an interval — with acceptances secondary, **declines and escalations counted beside them** (a hundred percent acceptance means the risks are trivial or the process is theatre), and **risks that could not be stated** as the most informative number in the set.
+**And one presentation finding that does not conflict with C12.** C12 established that a mandate written as prohibitions widens silently, so the **stored** form must be an allow-list. That is about storage. Presentation is a different layer: prohibitions are far more legible, and are what a person can actually accept or refuse. **Generate one from the other** — the person accepts the prohibitions, the system enforces the allow-list — and **date the rendering**, because it goes stale the moment the capability set grows. A deny-list is unsafe as a stored rule and safe as a generated view.
+**Status:** adopted; decisions 21–23.
+
+### C18 — A secret is defined by expectation, and it has to be recorded at issue
+
+**Source:** `v0.33.61__arch-brief__a-secret-is-defined-by-expectation-a-signature-by-scarcity…`, and document 13.
+**The principle, promoted to a house rule:** *a secret is defined by expectation, not by content* — the same bytes are a disclosure or a publication depending on whether somebody believed they were private. It explains the estate's existing rules in one line (read keys published, write keys never; plaintext beside ciphertext only where the key is already published) and it tells a reader which question to ask: not *is this key material*, which sorts by class, but **did anybody expect this to be private**, which sorts by intention.
+**The operational half, and it is the one that will be dropped:** *expectation has to be recorded at issue, not recalled afterwards.* A key published deliberately in March and a key leaked in March are indistinguishable in June unless somebody wrote down which was which at the time. **This strengthens C3's required flag and proposes a second field for draft-2 — publication intent, stated at issue** — because *published* and *published on purpose* are different facts and only one of them is currently recorded.
+**One manoeuvre corrected in passing, because the pack will reach for it.** Destroying a vault server-side leaves its key unable to write, and **does not make the content unreadable**: custody without access means mirrors exist that nobody can enumerate, so publishing the key of a destroyed vault publishes its contents permanently, to everybody. *Destroying the vault makes the key safe to publish from the point of view of your server, and says nothing about the content.* Both halves must be true, and only the first is under your control. For the registry's own records the second is satisfied by construction; for fixtures and anything staged privately it is the one to check.
+**Status:** adopted.
+
+### C19 — A signature is defined by scarcity, so per-object keypairs are declined — and that is what preserves C3
+
+**Source:** the same brief.
+**The proposal:** give every grant, mandate, claim and evidence node a keypair, **with the private half published**, on the grounds that this supplies integrity even without confidentiality.
+**Declined, and the reason is one sentence.** A signature's entire value comes from **the scarcity of the private half**. Verification answers exactly one question — *was this produced by somebody holding the key?* — and if the key is published the answer is *yes* for everybody, so the question stops carrying information. Publishing it leaves **a hash wearing a signature's clothes**, which is worse than a hash: a hash makes no promise and is honest; a signature anybody can forge makes a promise it cannot keep, **to a verifier that succeeds and concludes something false**. The proposal's own stated use — sealing or signing *to* a specific object — requires exactly the scarcity it removes.
+**The one genuine benefit, answered more cheaply.** A public key is an **address**, and the lane is addressed by the hash of one. But that derivation is **proposed rather than shipped** (the dependency flag document 03 already carries), and document 11 solved the same problem without keys: route to the **issuer's** lane, tagged with the object's identifier. One lane per party rather than one per document, on the shipped surface today.
+**And the argument that should decide it for this pack.** C3 made `private_key_published` a required field and called it the single most consequential piece of evidence an entry can carry, because it lets the register answer in one query which of its entries are decorative. **Under publish-by-default every row is true, the query returns everything, and the field distinguishes nothing. A flag that is always true is a column, not evidence.** So declining the proposal is not conservatism — **it is what preserves C3.**
+**The rule adopted instead**, which the proposal itself described near its end: **a key belongs to whatever can keep a secret, and everything else is signed by something that can.** People, projects and agent instances get keypairs; grants, mandates, claims and evidence get an identifier, a content hash and an issuer signature. **This confirms C16's artefacts-not-principals position by a second, independent route** — and the same proposal has now been raised twice, which says the first statement of the reason did not stick.
+**One caveat that is not small:** whether a rented agent instance can hold a private half across sessions is open, and it decides whether the agent-instance row is achievable or aspirational.
+**Status:** adopted; decisions 24–26. **C3 reinforced, not amended.**
+
 ## The decisions register
 
 | # | Decision | Made by | Status |
@@ -153,6 +188,14 @@ The entries above record what the *corpus* corrects. These record what the pack'
 | 18 | Does a lane with no anchors accept any token holder? | — | **Open — absent from the parent's API reference; gates the layer's coverage** |
 | 19 | Who drains the lane, and what watches the drain? | — | **Open — the failure is silent and the layer is worthless once it starts** |
 | 20 | Observability ships in phase 3, with mandates | v0.33.61 (C15) | **Settled — build order amended, not edited** |
+| 21 | A grant is a tree; blast radius is a path through it | v0.33.61 (C16) | **Settled — schema change queued** |
+| 22 | Node labels carry `enforced_by` ∈ boundary / setting / expectation, dated per node | v0.33.61 (C16) | **Settled — schema change queued** |
+| 23 | Success is measured by risks stated well enough to be accepted, with declines counted beside acceptances | v0.33.61 (C17) | **Settled — supersedes the obvious metric before it was adopted** |
+| 24 | Prohibitions are a generated, dated view; the allow-list is what is stored | v0.33.61 (C17) | **Settled — reconciles with C12 rather than contradicting it** |
+| 25 | Grants, mandates, claims and evidence get signatures, never keypairs | v0.33.61 (C19) | **Settled — confirmed twice, by two routes** |
+| 26 | Publication intent recorded at issue, beside `private_key_published` | v0.33.61 (C18) | **Open — proposed field for draft-2** |
+| 27 | Is the grant tree in the MVP at all? | pack doc 12 | **Open — it needs enumeration tooling the pack does not have** |
+| 28 | Can an agent instance persist a private half across sessions? | — | **Open since 19 Aug — gates whether instances can hold identities** |
 
 ---
 

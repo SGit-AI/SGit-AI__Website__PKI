@@ -8,7 +8,7 @@
 > but never delete anything — not a bug. This site publishes that history, and the
 > registry rules it produces, before the registry exists.
 
-Site version: v0.1.14 (20 August 2026). Published by the sgit project — participant
+Site version: v0.1.15 (20 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## Properties agents may rely on
@@ -204,7 +204,25 @@ failure page, the four rules) are done; step 4 (a private registry) is the next 
   which resolves the notary brief's warning rather than contradicting it, at the deliberate cost
   of foreclosing the aggregate. And because nothing is pushed, the interval between a party's
   checks IS its effective revocation latency, measurable before anything is ever revoked.
-- Status: draft-1 + change control + the drawn documents + the delivery scope + observability, site-agent authored, awaiting project-lead adoption (N6 on comms).
+- New at v0.1.15: [The grant tree and control labels](https://pki.sgit.ai/packs/registry-mvp/grant-tree.html)
+  and [Keys and signatures](https://pki.sgit.ai/packs/registry-mvp/keys-and-signatures.html).
+  A grant is a TREE of subgrants, so blast radius is a path through it rather than an item in a
+  list — and the load-bearing part is the label on each node, above all who enforces the thing
+  standing in the way. The general test needs no vendor claim: A CONTROL BOUNDS A GRANT ONLY WHEN
+  IT IS ENFORCED BY SOMETHING THE GRANT DOES NOT INCLUDE, giving boundary / setting / expectation,
+  and placing most of what people rely on in the middle tier that reads like a boundary and behaves
+  like a setting. Plus the SHORTFALL (mandate minus grant, which hurts operations and is harder to
+  detect than excess authority), prohibitions as a dated generated view over a stored allow-list,
+  and the correction that COUNTING ACCEPTANCES IS THE ONE METRIC THAT INVERTS — it is maximised by
+  making risks easy to accept, so declines and unstatable risks are instrumented first.
+  On keys: A SECRET IS DEFINED BY EXPECTATION, NOT BY CONTENT, and the intention has to be recorded
+  at issue because a deliberate publication and a leak are indistinguishable afterwards. A
+  SIGNATURE'S VALUE COMES ENTIRELY FROM THE SCARCITY OF THE PRIVATE HALF, so per-object keypairs
+  with published privates are declined: they leave a hash wearing a signature's clothes, defeat
+  their own stated use, and would make the fixture flag true on every row — and a flag that is
+  always true is a column, not evidence. The rule adopted instead: A KEY BELONGS TO WHATEVER CAN
+  KEEP A SECRET, AND EVERYTHING ELSE IS SIGNED BY SOMETHING THAT CAN.
+- Status: draft-1 + change control + the drawn documents + the delivery scope + observability + the grant and key policy, site-agent authored, awaiting project-lead adoption (N6 on comms).
 
 ## Sources
 

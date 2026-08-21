@@ -14,7 +14,7 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.14</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.15</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -73,6 +73,11 @@
 <div class="tablewrap"><table class="vers">
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
+    <tr>
+      <td class="vnum">v0.1.15</td>
+      <td>20 Aug 2026</td>
+      <td>Two more v0.33.61 briefs, and the two pack documents they produce. <b><a href="../packs/registry-mvp/grant-tree.html">12 — The grant tree and control labels</a></b> takes the side the pack had specified least and needed most, once <a href="../packs/registry-mvp/change-control.html">C1</a> made the gap between grant and mandate the product. A grant is a <b>tree</b> of subgrants, so <b>blast radius is a path through it, not an item in a list</b> — and the load-bearing part is not the tree but the label on each node, above all <em>who enforces the thing standing in the way</em>. The general test needs no vendor-specific claim, which matters because those age in weeks: <b>a control bounds a grant only when it is enforced by something the grant does not include.</b> That gives three tiers — boundary, setting, expectation — and it puts most of what people currently rely on in the middle one, the tier that reads like a boundary and behaves like a setting. A folder restriction enforced by a tool running as you, inside a grant that includes running programs as you, is the same object as a safe in a house you handed the keys to; and a permission prompt disableable by a flag the agent can write is an expectation wearing a setting's clothes. The document also adds the <b>shortfall</b> — <em>mandate minus grant</em>, the region C1 never named, which hurts operations rather than security and is the harder of the two to detect — reconciles prohibitions with C12 by making them a dated <em>generated view</em> over a stored allow-list, and corrects a metric the pack had not stated and would have adopted: <b>counting acceptances is the one measure that inverts under pressure</b>, because it is maximised by making risks easy to accept, so declines, escalations and <em>risks that could not be stated</em> get instrumented first. <b><a href="../packs/registry-mvp/keys-and-signatures.html">13 — Keys and signatures</a></b> settles which things in this design get keypairs. Two principles adopted: <b>a secret is defined by expectation, not by content</b> — which explains read-keys-yes and write-keys-never in one line, and needs the intention recorded <em>at issue</em>, because a deliberate publication and a leak are indistinguishable six months later — and <b>a signature's value comes entirely from the scarcity of the private half</b>. One proposal declined: per-object keypairs with the private half published. It leaves <b>a hash wearing a signature's clothes</b>, which is worse than a hash because a verifier checks it, succeeds, and concludes something false; it defeats its own stated use, since sealing to a specific object requires exactly the scarcity it removes; and it would make <a href="../packs/registry-mvp/change-control.html">C3</a>'s fixture flag true on every row. <b>A flag that is always true is a column, not evidence</b> — so declining the proposal is what <em>preserves</em> C3 rather than conservatism. The rule adopted instead: <b>a key belongs to whatever can keep a secret, and everything else is signed by something that can.</b> Change control gains C16–C19 and decisions 21–28; documents 02, 03, 08, 10 and 11 extend their dated cross-reference blocks, with nothing above those lines rewritten. Both briefs are published as reader pages.</td>
+    </tr>
     <tr>
       <td class="vnum">v0.1.14</td>
       <td>20 Aug 2026</td>
@@ -163,7 +168,7 @@
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.14</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.15</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The registry</h4>

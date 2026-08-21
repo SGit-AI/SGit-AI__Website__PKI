@@ -293,4 +293,10 @@ The deliverables document predates this layer. Rather than rewrite it, the addit
 
 ---
 
+*Added after publication, 20 August 2026 (site v0.1.15). No claim above has been changed — this pack supersedes rather than rewrites. Later documents that bear on this one:*
+
+- `13__keys-and-signatures.md` — *sign by default, and publish which signatures anybody actually checks.* This layer is what makes that measurable, and without it a fully signed graph manufactures the appearance of assurance
+
+---
+
 This document is released under the Creative Commons Attribution 4.0 International licence (CC BY 4.0).
