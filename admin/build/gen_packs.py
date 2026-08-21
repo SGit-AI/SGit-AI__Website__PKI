@@ -21,7 +21,7 @@ PACKS = [
   date="20 August 2026 · draft-1 + change control",
   origin_short="Site agent, this repo",
   row_date="20 Aug 2026 · draft + change control",
-  one_line="A public key registry on vaults — open data, one operator, and LLM sessions as the first users on both sides. 14 documents and an appendix — and one of them is built. <a href='registry-mvp/registry-mvp-briefing-pack.zip'>Downloadable as a briefing pack</a>.",
+  one_line="A public key registry on vaults — open data, one operator, and LLM sessions as the first users on both sides. 14 documents and three appendixes — a PR/FAQ, a PEP-style specification, and change control — and one of them is built. <a href='registry-mvp/registry-mvp-briefing-pack.zip'>Downloadable as a briefing pack</a>.",
   meta_desc="The registry MVP pack, readable in-page: the leading brief, architecture, schemas, workflows, build order, diagrams, change control, the tabletop exercise, the UX mockups, six Wardley maps, the user stories and features, the observability layer, the grant tree, the key policy, and the assessment that is actually built.",
   three_sentences="An MVP of the registry this site designs: one public vault whose records are append-only, hash-chained, signed statement logs; a processor as the only write-key holder; and every workflow written for its actual first user — a fresh LLM session holding nothing but public URLs. Open data on principle (a registry contains no secrets), and <b>public in data, private in authority</b>: one operator, one root, own-agents enrolment — build-order step 4 with the covers off. Draft-1 shipped the morning of 20 August; three project-lead briefs landed the same day, and what they correct is recorded in <a href='change-control.html'>the change-control appendix</a> rather than silently patched — it sits last because it never stops growing, and it is the one document to read either second or last, never not at all. Two later documents draw the thing: <a href='ux-mockups.html'>the register interface, screen by screen</a>, and <a href='wardley-maps.html'>six Wardley maps</a> of where the novelty actually sits. <a href='user-stories.html'>Document 10</a> turns all of it into six users, twenty-four stories with tests that can fail, and six workflows; <a href='observability.html'>document 11</a> adds the half that makes the mandate layer defensible \u2014 and answers, by refusing it, the question of who is using a mandate. <a href='grant-tree.html'>Document 12</a> gives the grant the structure C1 implied and never specified, and <a href='keys-and-signatures.html'>document 13</a> settles which things get keypairs \u2014 fewer than proposed. <a href='user-assessment.html'>Document 14</a> is the first that describes something shipped: <a href='../../assess/index.html'>map your own case</a>.",
   site_relevance="This pack is <a href='../../roadmap/index.html#order'>build-order step 4</a> made concrete. Its constraints are this site's published pages: <a href='../../rules/index.html'>the four rules</a> (implemented as processor checks plus a public validator), <a href='../../mandate/index.html'>identity vs. mandate</a> (with the mandate living in the <em>issuer's</em> record — the same rule the v0.33.61 register brief derives independently), <a href='../../bootstrap/index.html'>the bootstrap trap</a> (the enrolment workflow walks the gradient as commands), and <a href='../../shipped/index.html'>the shipped surface</a> (the lane, the four capability tiers, and the two absences the registry supplies).",
@@ -229,8 +229,38 @@ PACKS = [
      "No score out of a hundred: a score gets optimised for how alarming it feels.",
      "The measure set is stated and the page cannot instrument any of it, because it deliberately has no backend.",
     ]),
+   dict(slug="pr-faq", file="90__pr-faq.md",
+    title="Appendix A \u2014 The PR/FAQ",
+    role="The pack written backwards from a customer \u2014 and the customer-quote slot we could not fill",
+    summary="Amazon's Working Backwards form applied to the registry: a press release dated at a hypothetical launch, an external FAQ, and an internal FAQ written to hurt. It is the only document in this pack that reasons from a customer inward rather than from the design outward, and the exercise produced three findings the design documents could not have. <b>The honest press release is narrower than the pack's own framing</b> \u2014 every draft wanted to say <em>know what your agents can do</em>, and the register cannot support that sentence. <b>The customer-quote slot is empty</b>, because there is no customer and inventing one is the move this site's participant rules forbid. And two internal-FAQ answers should change what happens next: the model that monetises best contradicts the positioning, and the central value proposition has never been tested on anybody outside the project.",
+    concepts=[
+     ("Why the operator, not the verifier", "user-stories.html", "the verifier is the seat the design serves and adopts nothing \u2014 the operator is the one who decides"),
+     ("Internal FAQ 5 \u2014 the revenue contradiction", "observability.html", "metered verification requires observing every check, which is the dataset we argued against holding"),
+     ("Internal FAQ 11 \u2014 the untested claim", "../../assess/index.html", "whether <em>checkable by a third party</em> is worth anything to anybody who is not us"),
+    ],
+    ideas=[
+     "The empty customer quote is a dated readiness marker: the day it can be filled honestly, phase 4 has actually happened.",
+     "Fourteen documents of design can be written without noticing that nobody has used this; one press release cannot.",
+     "The cheapest next step in the whole pack is asking five operators whether anybody has ever asked them to prove an agent's authority \u2014 and it needs no registry.",
+    ]),
+   dict(slug="rep-0001", file="91__rep-0001.md",
+    title="Appendix B \u2014 REP-0001: The registry core",
+    role="The normative specification, in PEP form \u2014 with MUST, MUST NOT, and the sections PEP 1 makes mandatory",
+    summary="The design restated as something an implementer works from, borrowing Python's enhancement-proposal format for the sections it <em>forces</em>: <b>Security Implications, How to Teach This, Rejected Ideas and Open Issues are required, not optional</b>, and three of the four are where this design has most to say. Everything normative in documents 01\u201303 and 11\u201313 is collected with RFC 2119 keywords and every recorded corrective applied, which makes it the one place in the pack where the schemas are current rather than superseded-with-a-note. Its <code>Status</code> is <code>Draft</code> and its <code>Sponsor</code> field is <b>empty</b> \u2014 PEP 1 requires a champion, and the gap is accurate rather than an omission.",
+    concepts=[
+     ("The ownership rule, normatively", "../../failure/index.html", "a valid signature by a non-owner MUST NOT be write authority \u2014 2019 reproduced exactly if you check one and not the other"),
+     ("Eleven rejected ideas", "change-control.html", "the section to read before proposing an improvement"),
+     ("Read the fixture flag before the signature", "keys-and-signatures.html", "a fixture's signatures verify and prove nothing"),
+     ("Teachability as a definition of done", "workflows.html", "if a fresh session cannot complete the walk from the page alone, the spec is not finished"),
+    ],
+    ideas=[
+     "The pack's decisions register is a Status field that has not been formalised yet.",
+     "A REP can never move past Draft while there is no accepting authority \u2014 which is the honest state, not a gap to paper over.",
+     "PEPs are CC0; this is CC BY 4.0, and the deviation is stated rather than made quietly.",
+     "One REP for six separately contestable ideas is against PEP practice, and it should split the moment any one of them is contested.",
+    ]),
    dict(slug="change-control", file="99__change-control.md",
-    title="Appendix — Change control",
+    title="Appendix C — Change control",
     role="Every correction and every decision in one place — the errata, and the register of what is settled and what is not",
     summary="The appendix, and the one document in this pack that never stops growing — which is why it sits last rather than at number six. Every correction the corpus has made to a published document in this pack, each with its source and its status, and the decisions register: <b>twenty-two corrections and thirty-five decisions</b>, of which roughly a third are still open and belong to the project lead. It exists because of a rule the pack takes from the corpus: <b>a published document is not silently edited</b>. Sources stay verbatim; corrections live here; draft-2 folds them in and this becomes its change log. Read it <b>second</b> if you are about to build from documents 00–04, so you read them with the errata in hand — and <b>last</b> if you are reading the pack through. Never not at all.",
     concepts=[
@@ -280,7 +310,13 @@ def concepts_html(items):
 def write_pack(p):
     base = ROOT / "packs" / p["slug"]
     zippath = base / f'{p["slug"]}-briefing-pack.zip'
-    zipsize = f'{zippath.stat().st_size // 1024} KB' if zippath.exists() else 'zip'
+    if zippath.exists():
+        import zipfile
+        with zipfile.ZipFile(zippath) as zf:
+            n = len([x for x in zf.namelist() if not x.endswith('/')])
+        zipsize = f'{zippath.stat().st_size // 1024} KB · {n} files'
+    else:
+        zipsize = 'zip'
     # ---- pack hub ----
     rows = "\n".join(
         f'    <tr><td><a href="{d["slug"]}.html"><b>{d["title"]}</b></a></td><td>{d["role"]}</td></tr>'
@@ -304,7 +340,7 @@ def write_pack(p):
     rather than confidence, because a pack with a third of its decisions still open is one where a
     confident plan probably means the reader missed them.</p>
   </div>
-  <a class="dlbtn" href="registry-mvp-briefing-pack.zip" download>&#8595; Briefing pack<span>{zipsize} · 44 files</span></a>
+  <a class="dlbtn" href="registry-mvp-briefing-pack.zip" download>&#8595; Briefing pack<span>{zipsize}</span></a>
 </div>
 
 <h2 id="files">The documents</h2>

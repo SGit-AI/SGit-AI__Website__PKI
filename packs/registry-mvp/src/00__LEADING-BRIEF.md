@@ -103,6 +103,8 @@ The reasons are now executed facts rather than design claims. Public vault read 
 - `99__change-control.md` — **C1 redefines *grant*** — the definition used above (one instance issued under a mandate) is superseded: a grant is what a credential technically permits, whether or not anybody wrote it down, and the gap to the mandate is excess authority
 - `09__wardley-maps.md` — **W3** — the two absences this brief scopes around, positioned: not underneath the shipped surface but on top of it, in Genesis
 - `10__user-stories-and-features.md` — this scope as fourteen features and six workflows, each tagged with the phase that ships it
+- **Appendix A — the PR/FAQ** — this scope written backwards from a customer, which is the one direction this brief does not reason in. It found that the honest claim is narrower than the framing above, and that the customer-quote slot cannot be filled
+- **Appendix B — REP-0001** — the normative specification, with every recorded corrective applied. Where this brief and the REP disagree on a schema, the REP is current
 
 ---
 

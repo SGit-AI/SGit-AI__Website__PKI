@@ -165,6 +165,7 @@ Every step is a fetch of a public URL plus a signature check with the shipped CL
 - `11__observability.md` — the `check` statement body, and the field list it must **not** carry: a check event recording what the checker was authorising turns an asset log into a surveillance log
 - `12__grant-tree-and-control-labels.md` — the grant body is a **tree**, not a flat instance, and each node needs a control label whose `enforced_by` field is the one nobody currently publishes. Plus the **shortfall**, the region C1 did not name
 - `13__keys-and-signatures.md` — no object here changes shape, which is the useful result: grants, mandates and evidence get an identifier, a content hash and an issuer signature, and **never a keypair of their own**. Now stated policy rather than instinct
+- **Appendix B — REP-0001 §4** — these bodies restated normatively, with C1's grant redefinition and C3's fixture flag applied. **The REP is the current form; this document is the reasoning behind it**
 
 ---
 

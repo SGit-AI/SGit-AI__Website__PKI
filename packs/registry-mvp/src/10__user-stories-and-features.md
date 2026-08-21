@@ -339,6 +339,7 @@ One row per workflow, so a reviewer can follow any thread end to end.
 - `13__keys-and-signatures.md` — two more stories (V7, I10) on the two cases where a check succeeds and means nothing
 - `14__user-assessment.md` — a shipped surface for the verifier and issuer seats, and one measure family this pack can state and cannot instrument, because the page deliberately has no backend
 - **C23** — the feature table's honest reading, *everything at phase 0–1 is designed and nothing is built*, is still true of F1–F19 and no longer true of the pack. What shipped is a **consumer** of this model, not a piece of the registry. And this document's named-acceptor test was found **unmeetable** on a page that stores nothing about its visitor
+- **Appendix A — the PR/FAQ** — the same pack from the customer's side. Its internal FAQ contains two questions this document's phases do not: whether the revenue model survives the positioning, and whether anybody outside the project wants the thing at all
 
 ---
 

@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>13 — Keys and signatures · registry-mvp · pki.sgit.ai</title>
-<meta name="description" content="A key belongs to whatever can keep a secret — everything else is signed by something that can. Pack document, readable in-page; the raw markdown under src/ is the source of truth.">
-<link rel="canonical" href="https://pki.sgit.ai/packs/registry-mvp/keys-and-signatures.html">
+<title>Appendix A — The PR/FAQ · registry-mvp · pki.sgit.ai</title>
+<meta name="description" content="The pack written backwards from a customer — and the customer-quote slot we could not fill. Pack document, readable in-page; the raw markdown under src/ is the source of truth.">
+<link rel="canonical" href="https://pki.sgit.ai/packs/registry-mvp/pr-faq.html">
 <link rel="stylesheet" href="../../assets/site.css">
 </head>
 <body>
@@ -73,43 +73,41 @@
 </div></nav>
 
 <main class="doc">
-<div class="crumb"><a href="../../index.html">pki.sgit.ai</a> / <a href="../index.html">packs</a> / <a href="index.html">registry-mvp</a> / keys-and-signatures</div>
-<h1>13 — Keys and signatures</h1>
+<div class="crumb"><a href="../../index.html">pki.sgit.ai</a> / <a href="../index.html">packs</a> / <a href="index.html">registry-mvp</a> / pr-faq</div>
+<h1>Appendix A — The PR/FAQ</h1>
 
 <div class="docmeta">
   <span class="k">Pack</span><span class="v"><a href="index.html">The Registry MVP: Open Data, A Single Operator, LLM Sessions First</a></span>
-  <span class="k">Role</span><span class="v">A key belongs to whatever can keep a secret — everything else is signed by something that can</span>
+  <span class="k">Role</span><span class="v">The pack written backwards from a customer — and the customer-quote slot we could not fill</span>
   <span class="k">Date</span><span class="v">20 August 2026 · draft-1 + change control</span>
   <span class="k">Origin</span><span class="v">Site agent, this repo</span>
-  <span class="k">Source</span><span class="v"><a href="src/13__keys-and-signatures.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/dev/packs/registry-mvp/src/13__keys-and-signatures.md">on GitHub</a></span>
+  <span class="k">Source</span><span class="v"><a href="src/90__pr-faq.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/dev/packs/registry-mvp/src/90__pr-faq.md">on GitHub</a></span>
 </div>
 
 <h2 id="summary">Summary</h2>
-<p>Which things in this design get keypairs, and why the answer is fewer than proposed. Two principles adopted: <b>a secret is defined by expectation, not by content</b> (which explains the estate's existing key rules in one line, and needs the intention recorded <em>at issue</em>, because a deliberate publication and a leak are indistinguishable afterwards); and <b>a signature's value comes entirely from the scarcity of the private half</b>. One proposal declined — per-object keypairs with the private half published — because it leaves a hash wearing a signature's clothes, defeats its own stated use, and would make C3's fixture flag true on every row. <b>A flag that is always true is a column, not evidence</b>, so declining the proposal is what preserves C3 rather than conservatism.</p>
+<p>Amazon's Working Backwards form applied to the registry: a press release dated at a hypothetical launch, an external FAQ, and an internal FAQ written to hurt. It is the only document in this pack that reasons from a customer inward rather than from the design outward, and the exercise produced three findings the design documents could not have. <b>The honest press release is narrower than the pack's own framing</b> — every draft wanted to say <em>know what your agents can do</em>, and the register cannot support that sentence. <b>The customer-quote slot is empty</b>, because there is no customer and inventing one is the move this site's participant rules forbid. And two internal-FAQ answers should change what happens next: the model that monetises best contradicts the positioning, and the central value proposition has never been tested on anybody outside the project.</p>
 
 <h2 id="concepts">Key concepts</h2>
 <ul>
-  <li><a href="change-control.html"><b>A secret is defined by expectation</b></a> — C18: sort by intention rather than by class, and record it at issue</li>
-  <li><a href="schemas.html"><b>Scarcity is what a signature is made of</b></a> — publish the private half and a verifier succeeds and concludes something false</li>
-  <li><a href="grant-tree.html"><b>Artefacts get signed, principals get keys</b></a> — confirmed twice, by two independent routes</li>
-  <li><a href="observability.html"><b>Sign by default, and publish what anybody checks</b></a> — a fully signed graph nobody verifies manufactures the appearance of assurance</li>
+  <li><a href="user-stories.html"><b>Why the operator, not the verifier</b></a> — the verifier is the seat the design serves and adopts nothing — the operator is the one who decides</li>
+  <li><a href="observability.html"><b>Internal FAQ 5 — the revenue contradiction</b></a> — metered verification requires observing every check, which is the dataset we argued against holding</li>
+  <li><a href="../../assess/index.html"><b>Internal FAQ 11 — the untested claim</b></a> — whether <em>checkable by a third party</em> is worth anything to anybody who is not us</li>
 </ul>
 
 <h2 id="ideas">Key ideas</h2>
 <ul>
-  <li>Destroying a vault makes its key safe to publish from your server's point of view, and says nothing about the content — custody without access means mirrors exist that nobody can enumerate.</li>
-  <li>The one genuine benefit of a per-object key is an address, and the lane derivation is proposed rather than shipped.</li>
-  <li>Route to the issuer's lane tagged with the object's identifier: one lane per party, not one per document.</li>
-  <li>Whether a rented instance can hold a private half across sessions is open, and it decides whether instances can hold identities at all.</li>
+  <li>The empty customer quote is a dated readiness marker: the day it can be filled honestly, phase 4 has actually happened.</li>
+  <li>Fourteen documents of design can be written without noticing that nobody has used this; one press release cannot.</li>
+  <li>The cheapest next step in the whole pack is asking five operators whether anybody has ever asked them to prove an agent's authority — and it needs no registry.</li>
 </ul>
 
 <h2 id="read">Read the document</h2>
-<div class="mdread-label">📄 Pack document · 13__keys-and-signatures.md · rendered from the <a href="src/13__keys-and-signatures.md">raw markdown</a> (the source of truth)</div>
-<div class="mdread" id="mdread" data-src="src/13__keys-and-signatures.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="src/13__keys-and-signatures.md">open the raw markdown</a>.</p></noscript></div>
+<div class="mdread-label">📄 Pack document · 90__pr-faq.md · rendered from the <a href="src/90__pr-faq.md">raw markdown</a> (the source of truth)</div>
+<div class="mdread" id="mdread" data-src="src/90__pr-faq.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="src/90__pr-faq.md">open the raw markdown</a>.</p></noscript></div>
 
 <div class="pagenav">
-  <a href="grant-tree.html">← 12 — The grant tree and control labels</a>
-  <a href="user-assessment.html">14 — The user assessment →</a>
+  <a href="user-assessment.html">← 14 — The user assessment</a>
+  <a href="rep-0001.html">Appendix B — REP-0001: The registry core →</a>
 </div>
 </main>
 

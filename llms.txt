@@ -8,7 +8,7 @@
 > but never delete anything — not a bug. This site publishes that history, and the
 > registry rules it produces, before the registry exists.
 
-Site version: v0.1.17 (20 August 2026). Published by the sgit project — participant
+Site version: v0.1.18 (20 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## Properties agents may rely on
@@ -249,7 +249,13 @@ failure page, the four rules) are done; step 4 (a private registry) is the next 
   for a fresh session picking it up cold. It asks for a readiness report rather than an
   implementation: read the supporting material, then the pack, then say whether you have what you
   need or list the questions that block you.
-- Change control is an APPENDIX and sits last (99__change-control.md), because it never stops
+- Three appendixes. A: a Working Backwards PR/FAQ — the pack from a customer inward, whose
+  customer-quote slot is published EMPTY because there is no customer and inventing one is what
+  this site's participant rules forbid. B: REP-0001, the normative spec in Python PEP form, with
+  RFC 2119 keywords and the sections PEP 1 makes mandatory (Security Implications, How to Teach
+  This, Rejected Ideas, Open Issues) — the one place the schemas are current rather than
+  superseded-with-a-note, Status Draft, Sponsor field empty because it has no champion. C: change
+  control, which sits last (99__change-control.md), because it never stops
   growing: twenty-three corrections and thirty-six decisions. Read it second if you are building
   from documents 00-04, so you read them with the errata in hand — draft-1's definition of `grant`
   was superseded on the day it shipped.

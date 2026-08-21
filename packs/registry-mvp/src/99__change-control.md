@@ -205,6 +205,23 @@ C12 established that counting acceptances inverts. **The equivalent trap here is
 
 **Status:** adopted as the pack's status. Decision 36.
 
+### C24 — Two borrowed formats, and the three things they found that fourteen documents did not
+
+**Source:** appendixes A and B of this pack, written at the project lead's request.
+**What was borrowed and why.** Amazon's **Working Backwards PR/FAQ** and Python's **PEP** form, adopted for the sections they *force* rather than for their style. Both mandate the two disciplines this pack already ran on informally: **write down what you rejected**, and **write down what you do not know**. The pack's *Honest tensions* is an unnamed *Rejected Ideas*; its *Open questions* is *Open Issues*; and its decisions register is a `Status` field nobody had formalised. So neither is a foreign template — they are this pack's own habits with their names on.
+**What each one is for.** The PR/FAQ is the only document here that reasons **from a customer inward**; every other one reasons outward from the design. REP-0001 is the only one that is **normative** — RFC 2119 keywords, with every recorded corrective applied, which makes it the single place where the schemas are current rather than superseded-with-a-note.
+
+**Three findings the design documents could not have produced:**
+
+**1. The honest press release is narrower than the pack's own framing.** Every draft wanted to say *know what your agents can do.* The register cannot support that sentence — it records what was **authorised**, not what happens. The published version says *what an agent was authorised to do*: true, less exciting, and correct. **Whether that narrower claim is compelling enough to build on is now a question in front of us rather than an assumption behind us.**
+
+**2. The customer-quote slot cannot be filled, and the format is what surfaced it.** The PR/FAQ requires a quote from somebody who used the thing. There is none, and inventing one is exactly what this site's participant rules forbid — so the slot is published empty with the reason in it. **Fourteen documents of design can be written without noticing that nobody has ever used this; one press release cannot.** It is now a dated readiness marker: the day it can be filled honestly, phase 4 has actually happened.
+
+**3. Two questions the build order does not contain, and both are answerable without writing registry code.** Internal FAQ 5: **the model that monetises best contradicts the positioning** — metered verification requires observing every check, which is the dataset C9 and C14 argued against holding, so the register is a cost centre that makes the platform defensible and is the wrong plan if it must carry revenue alone. Internal FAQ 11: **whether *checkable by a third party* is worth anything to anybody who is not us has never been tested.** The cheapest next step in the entire pack is asking five operators whether anybody has ever asked them to prove an agent's authority.
+
+**And one thing REP-0001 exposed by having a `Sponsor` field.** PEP 1 requires a champion who shepherds a proposal. The field is empty, and a REP cannot move past `Draft` while there is no accepting authority. **That is the pack's standing problem with a name and a form field**, rather than a caveat in a paragraph.
+**Status:** both adopted as appendixes. Change control becomes Appendix C and stays last. Decisions 37–39.
+
 ## The decisions register
 
 | # | Decision | Made by | Status |
@@ -245,6 +262,9 @@ C12 established that counting acceptances inverts. **The equivalent trap here is
 | 34 | When do library entries become named products? | pack doc 14 | **Open — naming one means measuring it under the participant rules** |
 | 35 | Is a scan ever added, and where does its output go? | pack doc 14 | **Open — never browser storage, which argues for the vault path before the scan** |
 | 36 | The pack is a design pack with one shipped consumer; the registry itself is unbuilt | pack doc 14 (C23) | **Settled as the pack's status** |
+| 37 | Do REPs become the pack's decision format? | appendix B (C24) | **Open — if yes, every open decision becomes a REP with a status and a champion, and this register becomes an index** |
+| 38 | Who accepts a REP? | appendix B (C24) | **Open — without an accepting authority every REP stays Draft forever** |
+| 39 | Ask five operators whether the problem is recognised | appendix A (C24) | **Open — the cheapest next step in the pack, and it needs no registry** |
 
 ---
 
