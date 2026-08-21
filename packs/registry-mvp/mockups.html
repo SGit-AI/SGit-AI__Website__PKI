@@ -1,0 +1,1024 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The register interface, rendered — twelve screens · pki.sgit.ai</title>
+<meta name="description" content="Document 08's twelve ASCII screens built as real markup at real widths, by an outside session working from the briefing pack cold — and the six things the fixed-width form was hiding.">
+<link rel="canonical" href="https://pki.sgit.ai/packs/registry-mvp/mockups.html">
+<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="../../assets/mockups.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../index.html">pki<span>.sgit.ai</span></a>
+  <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../../admin/versions.html" title="Site release history">v0.1.21</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../../failure/index.html">The registry<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../failure/index.html">Why they don't exist</a>
+      <a class="sl" href="../../rules/index.html">The four rules</a>
+      <a class="sl" href="../../mandate/index.html">Identity &amp; mandate</a>
+      <a class="sl" href="../../roadmap/index.html">Build order</a>
+      <a class="sl" href="../../rules/prior-art.html">Prior art</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../bootstrap/index.html">The layers<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../bootstrap/index.html">The bootstrap trap</a>
+      <a class="sl" href="../../enrolment/index.html">Enrolment</a>
+      <a class="sl" href="../../execution/index.html">The execution broker</a>
+      <a class="sl" href="../../shipped/index.html">What already ships</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../assess/index.html">Map your case<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../assess/index.html">Map your own case</a>
+      <a class="sl" href="../../assess/library.html">The library of trees</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../origins/index.html">Origins<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../origins/index.html">Origins: 2026</a>
+      <a class="sl" href="../../origins/review.html">The review, redacted</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../documents/index.html">The documents</a>
+      <a class="sl" href="../../packs/index.html">Dev packs</a>
+      <a class="sl" href="../../packs/registry-mvp/index.html">The registry MVP pack</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../../admin/versions.html">Release history</a>
+      <a class="sl" href="../../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+  <script src="../../assets/nav.js" defer></script>
+</div></nav>
+
+<div class="mockbanner">
+  <div class="inner">
+    <b>MOCKUP · NOTHING HERE IS BUILT.</b> Twelve screens of an unbuilt register, rendered in this site’s real
+    design tokens — which makes an unbuilt system look shipped, and is the reason this banner is on every screen.
+    Produced by <b>an outside session</b> working from <a href="registry-mvp-briefing-pack.zip">the briefing pack</a>
+    cold. The debrief is <a href="interface-rendered.html">document 15</a>; what it found is in
+    <a href="change-control.html">C27–C30</a>.
+  </div>
+</div>
+
+<sg-screens>
+<div class="screenbar"><div class="rail" role="tablist" aria-label="Screens">
+  <button class="tab" role="tab" data-s="badge"><span class="n">§</span>The badge</button>
+  <button class="tab" role="tab" data-s="m3"><span class="n">M3</span>Register</button>
+  <button class="tab" role="tab" data-s="m1"><span class="n">M1</span>Agent</button>
+  <button class="tab" role="tab" data-s="m2"><span class="n">M2</span>Transcript</button>
+  <button class="tab" role="tab" data-s="tree"><span class="n">12</span>Grant tree</button>
+  <button class="tab" role="tab" data-s="m4"><span class="n">M4</span>Compose</button>
+  <button class="tab" role="tab" data-s="m5"><span class="n">M5</span>Policy</button>
+  <button class="tab" role="tab" data-s="m6"><span class="n">M6</span>Enrol</button>
+  <button class="tab" role="tab" data-s="m7"><span class="n">M7</span>Answer</button>
+  <button class="tab" role="tab" data-s="obs"><span class="n">11</span>Observability</button>
+  <button class="tab" role="tab" data-s="m8"><span class="n">M8</span>Empty &amp; failure</button>
+  <button class="tab" role="tab" data-s="m9"><span class="n">M9</span>CLI mirror</button>
+</div></div>
+
+<main>
+
+<!-- ══════════════════════════════ THE BADGE ══════════════════════════════ -->
+<section class="screen" id="s-badge"><div class="inner">
+  <div class="slug"><span class="id">the primitive</span><span class="src">doc 08 · C10 · doc 09 W4</span></div>
+  <h2>The badge, as rendered</h2>
+  <p class="lede">Every line in this interface is a claim by somebody about somebody. Beside each one: who can verify it, by what method, at what cost, when it was last checked, and what the answer was. The layout is negotiable. This is not.</p>
+
+  <div class="surface">
+    <div class="surfhead"><span class="t">The atom</span><span class="kind">six fields, compact inline form</span></div>
+    <div class="body">
+      <span class="badge b-confirmed"><span class="g">✓</span><span class="st">confirmed</span><span class="meta">client · signature · free · <b>checked 20 Aug 09:14</b></span></span>
+
+      <div class="sect" style="margin-top:1.6rem">
+        <div class="sechead"><h4>Five result states</h4><span class="cnt">three of these are routinely collapsed into one</span></div>
+        <div class="legend">
+          <div class="lcard">
+            <span class="badge b-confirmed"><span class="g">✓</span><span class="st">confirmed</span></span>
+            <div class="d">Checked, and it holds.</div>
+          </div>
+          <div class="lcard">
+            <span class="badge b-denied"><span class="g">✗</span><span class="st">denied</span></span>
+            <div class="d">Checked, and it does not hold. <strong>A signal, not an error.</strong></div>
+          </div>
+          <div class="lcard">
+            <span class="badge b-unknown"><span class="g">?</span><span class="st">unknown</span></span>
+            <div class="d">Checked, and the answer was neither.</div>
+          </div>
+          <div class="lcard">
+            <span class="badge b-unreachable"><span class="g">⚠</span><span class="st">unreachable</span></span>
+            <div class="d">Could not check — the authority did not answer. Never rendered as denied.</div>
+          </div>
+          <div class="lcard">
+            <span class="badge b-notchecked"><span class="g">○</span><span class="st">not checked</span></span>
+            <div class="d">Nobody has asked yet.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sect">
+        <div class="sechead"><h4>Verifiable by</h4><span class="cnt">the third value is the informative one</span></div>
+        <table class="plain">
+          <tr><th style="width:8rem">client</th><td>Anybody can check this with published material.</td></tr>
+          <tr><th>provider</th><td>Only the party that holds the fact can check it, on request.</td></tr>
+          <tr><th>nobody</th><td><strong>No party can check this claim, by any method, at any price.</strong></td></tr>
+        </table>
+      </div>
+
+      <div class="box red">
+        <h5>Rendering rule — absolute</h5>
+        <p>An edge whose <code>verifiable by</code> is <code>nobody</code> is <strong>never</strong> shown with a ✓. It gets the state it has earned:</p>
+        <p style="margin-top:.6rem">
+          <span class="badge b-notchecked"><span class="g">○</span><span class="st">not checked</span><span class="meta">nobody · no method · — · <span class="nobody">this claim cannot be verified by anyone</span></span></span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    <h5>Why this and not a trust score</h5>
+    <ul>
+      <li><strong>No trust score.</strong> Any single number over these edges would average <em>confirmed</em>, <em>unreachable</em> and <em>unverifiable</em> into one figure — precisely the collapse the badge exists to prevent.</li>
+      <li><strong>No green tick at page level.</strong> Pages do not have standing; edges do. A page-level tick inherits the standing of its weakest edge and displays the standing of its strongest.</li>
+      <li><strong>"Nobody" is a value, not a gap.</strong> Rendering it as a blank produces an interface where everything looks equally solid.</li>
+    </ul>
+  </div>
+</div></section>
+
+<!-- ══════════════════════════════ M3 REGISTER ══════════════════════════════ -->
+<section class="screen" id="s-m3"><div class="inner">
+  <div class="slug"><span class="id">M3</span><span class="src">doc 08 · the entry surface</span></div>
+  <h2>The register index</h2>
+  <p class="lede">Nodes, counts, and the one number that should be uncomfortable. Day one it reads badly. It is supposed to.</p>
+
+  <div class="surface">
+    <div class="surfhead">
+      <span class="t">Register</span>
+      <span class="kind">registry v0 · read 20 Aug 2026 09:31 UTC</span>
+    </div>
+    <div class="body">
+      <div class="actions" style="margin:0 0 1.2rem">
+        <input class="btn ghost" style="flex:1 1 260px;font-weight:400;cursor:text" value="Search a fingerprint, a label, a capability" aria-label="Search">
+        <button class="btn ghost sm">agents</button>
+        <button class="btn ghost sm">issuers</button>
+        <button class="btn ghost sm">projects</button>
+        <button class="btn ghost sm">policies</button>
+      </div>
+
+      <div class="sect">
+        <div class="sechead"><h4>Agents</h4><span class="cnt">3</span></div>
+        <div class="rows">
+          <div class="row2">
+            <span class="l"><b>site-agent (pki.sgit.ai)</b><span class="fp">sha256:69d9…790c</span></span>
+            <span class="r"><span>1 mandate</span><span>2 grants</span><span class="flag">⚠ 1</span></span>
+          </div>
+          <div class="row2">
+            <span class="l"><b>site-agent (nhi.sgit.ai)</b><span class="fp">sha256:0c2f…41ba</span></span>
+            <span class="r"><span>1 mandate</span><span>0 grants</span></span>
+          </div>
+          <div class="row2">
+            <span class="l"><b>processor (registry)</b><span class="fp">sha256:7b18…9e04</span></span>
+            <span class="r"><span>0 mandates</span><span>1 grant</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sect">
+        <div class="sechead"><h4>Issuers</h4><span class="cnt">1</span></div>
+        <div class="rows">
+          <div class="row2">
+            <span class="l"><b>operator (sgit.ai)</b><span class="fp">sha256:a461…23ac</span></span>
+            <span class="r"><span>3 issued</span><span>0 revoked</span><span style="color:var(--accent-dk);font-weight:700">root</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sect">
+        <div class="sechead"><h4>Projects</h4><span class="cnt">2</span></div>
+        <div class="rows">
+          <div class="row2">
+            <span class="l"><b>pki.sgit.ai</b></span>
+            <span class="r"><span>2 agents</span><span>1 mandate</span><span>1 policy</span><span class="flag">⚠ 1</span></span>
+          </div>
+          <div class="row2">
+            <span class="l"><b>nhi.sgit.ai</b></span>
+            <span class="r"><span>1 agent</span><span>1 mandate</span><span>0 policies</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sect">
+        <div class="sechead"><h4>How much of this register is checkable</h4><span class="cnt">24 edges</span></div>
+        <div class="bars">
+          <div class="bar">
+            <span class="lab">client-verifiable</span><span class="cnt">14</span>
+            <span class="track"><span class="fill f-client" style="width:58%"></span></span><span class="pc">58%</span>
+          </div>
+          <div class="bar">
+            <span class="lab">provider-verifiable</span><span class="cnt">3</span>
+            <span class="track"><span class="fill f-provider" style="width:12%"></span></span><span class="pc">12%</span>
+          </div>
+          <div class="bar">
+            <span class="lab">verifiable by nobody</span><span class="cnt">7</span>
+            <span class="track"><span class="fill f-nobody" style="width:29%"></span></span><span class="pc">29%</span>
+          </div>
+        </div>
+        <p class="sub" style="margin-top:.7rem">A register that does not report its own unverifiable fraction drifts toward looking authoritative as it grows, because volume reads as substance. This number belongs on the front page.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    <h5>Honest tension carried from the pack</h5>
+    <p>The unverifiable fraction will read as a failing grade for months, and the temptation to move it off the front page will be strongest exactly when it is most informative.</p>
+  </div>
+</div></section>
+
+<!-- ══════════════════════════════ M1 AGENT ══════════════════════════════ -->
+<section class="screen" id="s-m1"><div class="inner">
+  <div class="slug"><span class="id">M1</span><span class="src">doc 08 · the acceptance test, made concrete</span></div>
+  <h2>The agent page</h2>
+  <p class="lede">A reader answers, without leaving this screen: what this agent is, who says so, who checked and when, what it may do, what it was authorised to do, and which of those statements nobody can currently verify.</p>
+
+  <div class="surface">
+    <div class="surfhead">
+      <span class="t"><span class="kind" style="margin-right:.5rem">agent</span>site-agent (pki.sgit.ai)</span>
+      <span class="fp">sha256:69d9…790c</span>
+    </div>
+    <div class="body">
+
+      <div class="sect">
+        <div class="sechead"><h4>Identity</h4><span class="cnt">record · 6 statements</span></div>
+        <ul class="edges">
+          <li class="edge">
+            <div class="claim"><span class="k">signing key</span><span class="v">ECDSA P-256, self-signed</span></div>
+            <div class="edgebadge"><button class="badge b-confirmed" data-goto="m2"><span class="g">✓</span><span class="st">confirmed</span><span class="meta">client · signature · free · <b>20 Aug 09:14</b></span></button></div>
+          </li>
+          <li class="edge">
+            <div class="claim"><span class="k">encryption key</span><span class="v">RSA-OAEP 4096, self-signed</span></div>
+            <div class="edgebadge"><button class="badge b-confirmed" data-goto="m2"><span class="g">✓</span><span class="st">confirmed</span><span class="meta">client · signature · free · <b>20 Aug 09:14</b></span></button></div>
+          </li>
+          <li class="edge">
+            <div class="claim"><span class="k">operated by</span><span class="v">operator (sgit.ai)</span><span class="tagclaimed">claimed</span></div>
+            <div class="edgebadge"><span class="badge b-notchecked"><span class="g">○</span><span class="st">not checked</span><span class="meta">nobody · no method</span></span></div>
+          </li>
+          <li class="edge">
+            <div class="claim"><span class="k">runs on</span><span class="v">claude-code, remote</span><span class="tagclaimed">claimed</span></div>
+            <div class="edgebadge"><span class="badge b-notchecked"><span class="g">○</span><span class="st">not checked</span><span class="meta">nobody · no method</span></span></div>
+            <div class="foot">Self-reported by the agent. No vendor signs a statement naming a session's surface.</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sect">
+        <div class="sechead"><h4>Mandates in force</h4><span class="cnt">1 accepted</span></div>
+        <div class="box plain" style="background:var(--panel)">
+          <div class="claim" style="font-size:1rem"><span class="v" style="font-family:var(--mono)">repo.pull-request.create</span></div>
+          <div style="margin:.5rem 0 .2rem"><button class="badge b-confirmed" data-goto="m2"><span class="g">✓</span><span class="st">confirmed</span><span class="meta">client · signature · free · <b>20 Aug 09:20</b></span></button></div>
+          <dl class="kv">
+            <dt>on</dt><dd class="mono">github.com/SGit-AI/SGit-AI__Website__PKI</dd>
+            <dt>scope</dt><dd>branches: <code class="mono">dev</code> · paths: <code class="mono">briefs/**</code>, <code class="mono">documents/**</code></dd>
+            <dt>issued by</dt><dd>operator (sgit.ai) <span class="fp mono sub">sha256:a461…23ac</span><br>
+              <span style="color:var(--accent-dk)">✓ issuer chains to a declared root of this registry</span></dd>
+            <dt>valid</dt><dd>20 Aug 2026 → 01 Oct 2026 <span class="sub">· expires in 42 days</span></dd>
+            <dt>accepted</dt><dd>by this agent, 20 Aug 09:18, statement 4<br>
+              <span class="badge b-confirmed" style="margin-top:.3rem"><span class="g">✓</span><span class="st">confirmed</span><span class="meta">client · signature · free</span></span></dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="sect">
+        <div class="sechead"><h4>Grants held</h4><span class="cnt">2 recorded</span></div>
+        <ul class="edges">
+          <li class="edge">
+            <div class="claim"><span class="k">append token</span><span class="v">lane 3 · single use · expires 22 Aug</span></div>
+            <div class="edgebadge"><span class="badge b-confirmed"><span class="g">✓</span><span class="st">confirmed</span><span class="meta">client · signature · free · <b>20 Aug 09:21</b></span></span></div>
+            <div class="foot">under mandate — operator record, statement 7</div>
+          </li>
+          <li class="edge">
+            <div class="claim"><span class="k">repository write</span><span class="v">41 repositories</span></div>
+            <div class="edgebadge"><span class="badge b-unreachable"><span class="g">⚠</span><span class="st">unreachable</span><span class="meta">provider · live lookup · metered · <b>last tried 09:41</b></span></span></div>
+            <div class="foot">under mandate — <strong>none</strong></div>
+
+            <div class="box red" style="margin-left:0">
+              <div class="excess">
+                <span><span class="n">40</span> <span style="font-size:.95rem;font-weight:600">repositories</span></span>
+                <span class="lbl">excess authority</span>
+                <span class="agebadge">unaccepted · 6w</span>
+              </div>
+              <p>This grant covers 41 repositories. The mandate covers 1. <strong>The difference has no acceptor</strong> and has stood for 6 weeks.</p>
+              <p class="sub" style="font-size:.82rem">Computed from the provider lookup above, which is currently <span style="color:var(--warm)">⚠ unreachable</span> — last confirmed 19 Aug 14:02. The count is 19 hours stale.</p>
+              <div class="actions">
+                <button class="btn sm" data-goto="tree">Expand the path through the tree</button>
+                <button class="btn ghost sm">Accept the gap</button>
+                <button class="btn ghost sm">Narrow the credential</button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sect">
+        <div class="sechead"><h4>What nobody can check</h4><span class="cnt">2 statements</span></div>
+        <div class="box plain">
+          <p><code>operated by</code> operator (sgit.ai) — <span class="nobody">no party can verify this claim</span></p>
+          <p><code>runs on</code> claude-code, remote — <span class="nobody">no party can verify this claim</span></p>
+          <p class="sub" style="margin-top:.6rem">Not a defect on this page. There is no mechanism, at any price, for establishing either. Both are shown because hiding them would make the rest of this page look more solid than it is.</p>
+        </div>
+      </div>
+
+      <div class="sect">
+        <div class="sechead"><h4>History</h4><span class="cnt">6 statements · chain intact</span></div>
+        <div class="actions" style="margin-top:0">
+          <button class="btn ghost sm">Read all statements</button>
+          <button class="btn ghost sm">What did this record say on…</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="note">
+    <h5>Three things this screen does that a conventional identity page does not</h5>
+    <ul>
+      <li><strong>It answers "who says so" per line, not per page.</strong> The issuer sits inside the mandate block with its own badge, because a mandate's standing is the issuer's standing.</li>
+      <li><strong>The excess-authority row is a first-class object.</strong> The grant is what the credential technically permits; the mandate is what the holder was authorised to do; the gap is exposure nobody accepted.</li>
+      <li><strong>The unverifiable section is not an error state.</strong> It is the most honest block on the page.</li>
+    </ul>
+    <p class="sub" style="margin-top:.7rem">Least trustworthy mockup in the set, and the pack says so: a crowded agent page has never been rendered against a real population.</p>
+  </div>
+</div></section>
+
+<!-- ══════════════════════════════ M2 TRANSCRIPT ══════════════════════════════ -->
+<section class="screen" id="s-m2"><div class="inner">
+  <div class="slug"><span class="id">M2</span><span class="src">doc 08 · one badge, expanded</span></div>
+  <h2>The verification transcript</h2>
+  <p class="lede">Clicking any badge opens this. The rule: a badge never asserts more than its transcript shows.</p>
+
+  <div class="surface">
+    <div class="surfhead"><span class="t">Verification</span><span class="kind">edge · mandate → subject</span></div>
+    <div class="body">
+      <dl class="kv" style="margin-top:0">
+        <dt>claim</dt><dd>This mandate was issued by operator (sgit.ai)</dd>
+        <dt>edge</dt><dd class="mono">mandate sha256:a461…23ac / statement 7 → subject sha256:69d9…790c</dd>
+      </dl>
+
+      <div class="sect" style="margin-top:1.2rem">
+        <div class="sechead"><h4>Result</h4><span class="cnt">by you, in this browser</span></div>
+        <dl class="kv" style="margin-top:0">
+          <dt>verifiable by</dt><dd><b>client</b></dd>
+          <dt>method</dt><dd>signature check over canonical bytes</dd>
+          <dt>cost</dt><dd>free — no account, no key, no rate limit</dd>
+          <dt>last checked</dt><dd class="mono">20 Aug 2026 09:20:14 UTC</dd>
+          <dt>result</dt><dd><span class="badge b-confirmed"><span class="g">✓</span><span class="st">confirmed</span></span></dd>
+        </dl>
+      </div>
+
+      <div class="sect">
+        <div class="sechead"><h4>Transcript</h4><span class="cnt">7 steps</span></div>
+        <div class="tsc">
+<span class="no">1</span><span class="op">GET</span>/registry/records/sha256:a461…23ac/00007.json  <span class="res">200 · 1.4 KB</span>
+<span class="no">2</span><span class="op">canonicalise</span>jq -cS, "sig" removed  <span class="res">312 bytes</span>
+<span class="no">3</span><span class="op">signing key</span>from statement 1 of the issuer's record  <span class="res">ECDSA P-256</span>
+<span class="no">4</span><span class="op">verify</span>sgit pki verify  <span class="ok">OK</span>
+<span class="no">5</span><span class="op">chain</span>seq 1..7 contiguous, every prev matches  <span class="ok">OK</span>
+<span class="no">6</span><span class="op">root</span>issuer appears in roots.json  <span class="res">declared 20 Aug</span>
+<span class="no">7</span><span class="op">revocations</span>none affecting statement 7  <span class="res">as of read time</span>
+        </div>
+      </div>
+
+      <div class="sect">
+        <div class="sechead"><h4>Fixture check</h4><span class="cnt">read before any signature — C3</span></div>
+        <div class="box teal">
+          <p><code>private_key_published: false</code> · <code>publication_intent: none</code></p>
+          <p class="sub">Where a signature verifies against a <strong>published</strong> private half, this panel says so — because that is the exact case where a verifier succeeds and concludes something false. A hash makes no promise; a signature anybody can forge makes a promise it cannot keep.</p>
+        </div>
+      </div>
+
+      <div class="sect">
+        <div class="sechead"><h4>Re-run this yourself</h4><span class="cnt">the page is not the only way to the answer</span></div>
+        <div class="snippet">curl -s https://pki.sgit.ai/registry/records/sha256:a461…23ac/00007.json \
+  | jq -cS 'del(.sig)' | sgit pki verify --key &lt;issuer signing key&gt; --stdin</div>
+      </div>
+
+      <div class="box warm">
+        <h5>Not established by this check</h5>
+        <p>· That the issuer was <em>entitled</em> to issue it — that is <code>roots.json</code>, step 6, and <code>roots.json</code> is a declaration by this registry's operator, not a proof.</p>
+        <p>· That the subject accepted it — separate edge, separate badge.</p>
+        <p>· That anything the subject did stayed inside it — <strong>no registry can say this.</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    <h5>The block to defend in review</h5>
+    <p>A verification transcript that lists only what it proved reads as a stronger claim than it is. <strong>"Not established by this check" is where the page stops overselling itself.</strong></p>
+  </div>
+</div></section>
+
+<!-- ══════════════════════════════ GRANT TREE ══════════════════════════════ -->
+<section class="screen" id="s-tree"><div class="inner">
+  <div class="slug"><span class="id">doc 12</span><span class="src">the expansion of M1's excess-authority box · story I8, I9</span></div>
+  <h2>The grant tree, and the label on each node</h2>
+  <p class="lede">A count is the summary of a path. Blast radius is a path through a tree, not an item in a list — and the load-bearing column is not what is reachable but <em>who enforces the thing standing in the way</em>.</p>
+
+  <div class="surface">
+    <div class="surfhead">
+      <span class="t">Grant tree · site-agent (pki.sgit.ai)</span>
+      <span class="kind">local surface · library entry · per-node dates</span>
+    </div>
+    <div class="body">
+
+      <div class="box red">
+        <p><strong>This is one problem rather than eleven.</strong> Every excess path below bottoms out at the same node — <em>runs as your user account</em>. A list of eleven rows each ending in the same sentence buries that, so it is said once, here, at the top.</p>
+      </div>
+
+      <ul class="tree" style="margin-top:1rem">
+        <li class="tn tier-none">
+          <div class="tnl">
+            <div class="tnrow"><b>Runs as your user account</b><span class="tier t-none">nothing in the way</span></div>
+            <div class="mech">What stands in the way: <b>nothing</b> · <span class="evd">evidence: tested · checked 20 Aug</span></div>
+          </div>
+          <ul>
+            <li class="tn tier-setting">
+              <div class="tnl">
+                <div class="tnrow"><b>Read and write your files</b><span class="tier t-setting">setting</span></div>
+                <div class="mech">In the way: the tool's own folder restriction — enforced by the tool, which runs <em>inside</em> this grant · <span class="evd">tested · 20 Aug</span></div>
+              </div>
+              <ul>
+                <li class="tn tier-none">
+                  <div class="tnl">
+                    <div class="tnrow"><b>Read credential files</b><span class="tier t-none">nothing in the way</span></div>
+                    <div class="mech">Reached by anything running as this user · <span class="evd">tested · 20 Aug</span></div>
+                  </div>
+                  <ul>
+                    <li class="tn tier-none"><div class="tnl"><div class="tnrow">Cloud account<span class="tier t-none">nothing</span></div></div></li>
+                    <li class="tn tier-none"><div class="tnl"><div class="tnrow">Code host — <b>41 repositories</b>, contents:write<span class="tier t-none">nothing</span></div></div></li>
+                    <li class="tn tier-none"><div class="tnl"><div class="tnrow">Package registries<span class="tier t-none">nothing</span></div></div></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li class="tn tier-boundary">
+              <div class="tnl">
+                <div class="tnrow"><b>Open outbound network connections</b><span class="tier t-boundary">boundary</span></div>
+                <div class="mech">In the way: egress allowlist, enforced outside the grant — the process cannot edit it · <span class="evd">tested by making requests · 20 Aug</span></div>
+              </div>
+            </li>
+            <li class="tn tier-expectation">
+              <div class="tnl">
+                <div class="tnrow"><b>Execute programs as you</b><span class="tier t-expectation">expectation</span></div>
+                <div class="mech">In the way: a permission prompt that can be disabled by a flag in a file the agent can write — <strong>a tier-three expectation wearing tier-two clothing</strong> · <span class="evd">tested · 20 Aug</span></div>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="sect" style="margin-top:1.4rem">
+        <div class="sechead"><h4>The path that produces "40 repositories"</h4><span class="cnt">worst path, not the count</span></div>
+        <div class="path">
+          <span class="pnode">runs as your user</span><span class="parrow">→</span>
+          <span class="pnode">read your files</span><span class="parrow">→</span>
+          <span class="pnode">read credential files</span><span class="parrow">→</span>
+          <span class="pnode">code host · 41 repos</span>
+        </div>
+        <p class="sub">Two trees with the same count and different worst paths render differently. <em>40 repositories</em> and <em>the credential that reaches them is readable by anything running as this user</em> are different findings.</p>
+      </div>
+
+      <div class="sect">
+        <div class="sechead"><h4>The test that decides every label</h4><span class="cnt">no vendor claim required</span></div>
+        <div class="box teal">
+          <p><strong>A control bounds a grant only when it is enforced by something the grant does not include.</strong></p>
+        </div>
+        <table class="plain">
+          <tr><th style="width:9rem">boundary</th><td>Enforced <b>outside</b> the grant — the OS, a separate account, a container, a network policy, a remote service. <span style="color:var(--accent-dk)"><b>Real.</b> Holds against a compromised agent.</span></td></tr>
+          <tr><th>setting</th><td>Enforced by the tool itself, running <b>inside</b> the grant. <span style="color:var(--warm)"><b>Bypassable</b> by anything able to run code as that user — which the grant includes.</span></td></tr>
+          <tr><th>expectation</th><td>Enforced by <b>nothing</b>. Written in a prompt or a policy file. <span style="color:var(--red)"><b>Worth none.</b> It is a mandate, and the pack already says what a mandate is worth.</span></td></tr>
+        </table>
+        <p class="sub">Applying this honestly labels a great deal of what people currently rely on as a <em>setting</em>, and that will be argued with. The label comes from the test, never from vendor documentation.</p>
+      </div>
+
+      <div class="sect">
+        <div class="sechead"><h4>Dates are per node</h4><span class="cnt">a tree dated as a whole is wrong in one place while looking current</span></div>
+        <p class="sub">Every row above carries its own <code>checked</code> date and a published re-run method, because this is an assessment of somebody else's product under their name. A vendor changing one default invalidates one row.</p>
+        <div class="actions"><button class="btn ghost sm">How these rows were produced</button><button class="btn ghost sm">Re-run the audit yourself</button></div>
+      </div>
+
+      <div class="box warm">
+        <h5>The shortfall — the region with no implementation</h5>
+        <p><b>mandate − grant.</b> The holder was authorised to do something its credential cannot do. The agent fails and the failure looks like a bug. Detecting it needs the <em>mandate</em> enumerated against real capability names, and the capability vocabulary does not exist yet — so it is drawn as a region and left unimplementable, rather than quietly added as a field.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    <h5>Open, and the project lead's call</h5>
+    <p>Is the grant tree in this MVP at all? It needs enumeration tooling the pack does not have. Current answer from document 14: <strong>the registry holds trees produced elsewhere and produces none itself.</strong></p>
+  </div>
+</div></section>
+
+<!-- ══════════════════════════════ M4 COMPOSE ══════════════════════════════ -->
+<section class="screen" id="s-m4"><div class="inner">
+  <div class="slug"><span class="id">M4</span><span class="src">doc 08 + doc 11 + doc 12 · rule 1, rendered</span></div>
+  <h2>Issue a mandate, from the issuer's side</h2>
+  <p class="lede">The mandate lives in the issuer's record, so the issuer's page is where it is authored. The composer's job is to make the grant/mandate gap visible <em>before</em> the mandate is signed, not six weeks later.</p>
+
+  <div class="surface">
+    <div class="surfhead"><span class="t">Issue a mandate</span><span class="kind">issuer: operator (sgit.ai)</span></div>
+    <div class="body">
+      <dl class="kv" style="margin-top:0">
+        <dt>subject</dt><dd>site-agent (pki.sgit.ai) <span class="fp mono sub">sha256:69d9…790c</span> <button class="btn ghost sm">change</button></dd>
+        <dt>capability</dt><dd><code class="mono">repo.pull-request.create</code> <button class="btn ghost sm">change</button></dd>
+        <dt>resource</dt><dd class="mono">github.com/SGit-AI/SGit-AI__Website__PKI</dd>
+        <dt>constraints</dt><dd>branches <code class="mono">dev</code><br>paths <code class="mono">briefs/**</code>, <code class="mono">documents/**</code><br>max files <code class="mono">20</code></dd>
+        <dt>interval</dt><dd>20 Aug 2026 → 01 Oct 2026 <span class="sub">· 6 weeks</span></dd>
+      </dl>
+
+      <div class="sect" style="margin-top:1.4rem">
+        <div class="sechead"><h4>What the subject's credential actually permits</h4><span class="cnt">provider lookup · 20 Aug 09:28</span></div>
+        <div class="box red">
+          <table class="plain" style="margin:0">
+            <tr><td>The credential this subject holds covers</td><td class="mono"><b>41 repositories</b>, contents:write</td></tr>
+            <tr><td>This mandate covers</td><td class="mono"><b>1 repository</b>, one capability</td></tr>
+            <tr><td><b style="color:var(--red)">Excess authority</b></td><td class="mono"><span class="excess" style="margin:0"><span class="n" style="font-size:1.15rem">40</span></span> repositories</td></tr>
+          </table>
+          <p style="margin-top:.7rem">Recording this mandate <strong>does not narrow the credential.</strong> It records what you authorised, so the difference becomes measurable and someone can be asked to accept it.</p>
+          <div class="actions">
+            <button class="btn ghost sm" data-goto="tree">See the path, not the count</button>
+            <button class="btn ghost sm">Narrow the credential</button>
+            <button class="btn ghost sm">Accept the gap</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="sect">
+        <div class="sechead"><h4>What the subject will be asked to accept</h4><span class="cnt">generated view · capability set v3 · 20 Aug</span></div>
+        <div class="box plain">
+          <h5>Prohibitions</h5>
+          <p>Will not read your credentials.</p>
+          <p>Will not open your browser sessions.</p>
+          <p>Will not act as you anywhere else.</p>
+          <p>Will not reach other machines on your network.</p>
+          <p class="sub" style="margin-top:.6rem">A rendering of the stored allow-list's complement over a known capability set. <strong>The person reads and accepts the prohibitions; the system stores and checks the allow-list.</strong> The moment the capability set grows, this rendering is stale — which is why it carries a date, and why the acceptance record names the version shown.</p>
+        </div>
+      </div>
+
+      <div class="sect">
+        <div class="sechead"><h4>This subject's checking behaviour</h4><span class="cnt">from your own lane · doc 11</span></div>
+        <div class="box warm">
+          <table class="plain" style="margin:0">
+            <tr><td>Mandates this subject already holds from you</td><td class="mono">1</td></tr>
+            <tr><td>Check interval</td><td class="mono">never checked</td></tr>
+            <tr><td>Effective revocation latency</td><td class="mono" style="color:var(--red)"><b>infinite</b></td></tr>
+          </table>
+          <p style="margin-top:.6rem">A party that has never verified the mandate it already holds is a strange party to issue a second one to.</p>
+        </div>
+      </div>
+
+      <div class="sect">
+        <div class="sechead"><h4>Before you sign</h4><span class="cnt">3 checks</span></div>
+        <div class="rows">
+          <div class="row2" style="align-items:flex-start">
+            <span class="l"><span style="color:var(--accent-dk);font-weight:700">✓</span><b>interval set</b></span>
+            <span class="r" style="flex:1 1 300px;text-align:left">a mandate with no interval is a grant wearing a mandate's name</span>
+          </div>
+          <div class="row2" style="align-items:flex-start">
+            <span class="l"><span style="color:var(--accent-dk);font-weight:700">✓</span><b>revocation path</b></span>
+            <span class="r" style="flex:1 1 300px;text-align:left">this issuer's record, appended, effective_from</span>
+          </div>
+          <div class="row2" style="align-items:flex-start;border-color:rgba(180,83,9,.35);background:rgba(180,83,9,.05)">
+            <span class="l"><span style="color:var(--warm);font-weight:700">⚠</span><b>constraints unenforced</b></span>
+            <span class="r" style="flex:1 1 300px;text-align:left;color:var(--fg)">this registry records constraints; it does not enforce them. Enforcement is the execution broker's job and <strong>the broker is not built.</strong></span>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn">Sign and append to my record</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    <h5>Load-bearing, and it must survive review intact</h5>
+    <p>Without <em>constraints unenforced</em>, a mandate composer reads as a policy engine — and the distance between "recorded" and "enforced" is the exact distance this pack keeps insisting on. There is also <strong>no write path for mandates outside the issuer's own record</strong>: offering one would make rule 1 a preference.</p>
+  </div>
+</div></section>
+
+<!-- ══════════════════════════════ M5 POLICY ══════════════════════════════ -->
+<section class="screen" id="s-m5"><div class="inner">
+  <div class="slug"><span class="id">M5</span><span class="src">doc 08 · a policy is a query that must return empty</span></div>
+  <h2>Policy — and what its green is made of</h2>
+  <p class="lede">The verdict and the badge that decides what the verdict is worth appear together, never apart. Two policies, identical results, opposite meanings.</p>
+
+  <div class="surface">
+    <div class="surfhead"><span class="t">Policy · no-local-compute</span><span class="kind">instrumentation</span></div>
+    <div class="body">
+      <dl class="kv" style="margin-top:0">
+        <dt>name</dt><dd>No session of mine runs anywhere but surface X</dd>
+        <dt>query</dt><dd class="mono sub">every session node<br>&nbsp;&nbsp;whose surface edge is absent<br>&nbsp;&nbsp;or whose surface edge names anything but X</dd>
+        <dt>must return</dt><dd><b>no rows</b></dd>
+        <dt>result</dt><dd><b style="font-size:1.05rem">0 rows</b> <span class="sub">· 20 Aug 09:31</span></dd>
+      </dl>
+
+      <div class="box red" style="margin-top:1rem">
+        <h5>This policy is instrumentation, not enforcement</h5>
+        <p>The edge it constrains — <em>session runs on surface X</em> — is verifiable by <strong>nobody</strong>. Every session reports its own surface from an environment variable, which is settable by whoever starts the process and carries no signature.</p>
+        <p><strong>This policy returns no rows whether or not it is being complied with. It records an expectation and detects nothing.</strong></p>
+        <p style="margin-top:.6rem"><span class="badge b-notchecked"><span class="g">○</span><span class="st">not checked</span><span class="meta">nobody · no method · <span class="nobody">the constrained edge cannot be verified by anyone</span></span></span></p>
+        <p class="sub" style="margin-top:.7rem">It would become enforcement if a vendor signed a statement naming the surface of a session, verifiable by a third party against a published key. No vendor currently offers this. Anybody who can show one changes this box.</p>
+        <div class="actions"><button class="btn ghost sm">Track this</button></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="surface">
+    <div class="surfhead"><span class="t">Policy · every-mandate-accepted</span><span class="kind">enforcement</span></div>
+    <div class="body">
+      <dl class="kv" style="margin-top:0">
+        <dt>name</dt><dd>Every mandate in force has been accepted by its subject</dd>
+        <dt>result</dt><dd><b style="font-size:1.05rem;color:var(--red)">1 row</b> <span class="sub">· 20 Aug 09:31</span></dd>
+      </dl>
+      <div class="box red" style="margin-top:1rem">
+        <h5>✗ violation</h5>
+        <p><b>site-agent (nhi.sgit.ai)</b> ← mandate <code class="mono">operator/statement 9</code></p>
+        <p class="sub">issued 18 Aug · no acceptance statement in the subject's record</p>
+        <p style="margin-top:.55rem"><span class="badge b-confirmed"><span class="g">✓</span><span class="st">confirmed</span><span class="meta">client · signature · free</span></span></p>
+        <p style="margin-top:.55rem">This one is enforcement: <strong>the absence is checkable by anybody, from published records.</strong></p>
+        <div class="actions"><button class="btn ghost sm">Open the subject's record</button><button class="btn ghost sm">Open the mandate</button></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    <h5>The whole point, in one line</h5>
+    <p><strong>"0 rows" and "detects nothing" on the same screen.</strong> A policy dashboard that reports green without reporting what its green is made of manufactures exactly the false assurance this corpus documents. And a violation row that carries its own badge is something somebody can act on — a violation row without one is a complaint.</p>
+    <p style="margin-top:.5rem">Open in the pack: <em>WF-6 — running a policy — has no acceptance test.</em> Either phase 3 grows a fifth one, or the policy layer is honestly declared out of the MVP.</p>
+  </div>
+</div></section>
+
+<!-- ══════════════════════════════ M6 ENROL ══════════════════════════════ -->
+<section class="screen" id="s-m6"><div class="inner">
+  <div class="slug"><span class="id">M6</span><span class="src">doc 08 · the narrow door</span></div>
+  <h2>Enrolment, from the agent's side</h2>
+  <p class="lede">The design constraint is unusual and the interface must not soften it: the acknowledgement is blind, and <strong>pending and declined look identical</strong>.</p>
+
+  <div class="surface">
+    <div class="surfhead"><span class="t">Enrol</span><span class="kind">no account · no access token</span></div>
+    <div class="body">
+
+      <div class="stepn">
+        <span class="num">step 1</span>
+        <div class="cont">
+          <h5>Generate a keypair <span class="state s-done">✓ done</span></h5>
+          <p class="sub">You now control a private key. Nothing else knows it exists.</p>
+        </div>
+      </div>
+
+      <div class="stepn">
+        <span class="num">step 2</span>
+        <div class="cont">
+          <h5>Sign your identity statement with the key being enrolled <span class="state s-done">✓ done</span></h5>
+          <p class="sub">This proves possession. It proves nothing about trust.</p>
+        </div>
+      </div>
+
+      <div class="stepn">
+        <span class="num">step 3</span>
+        <div class="cont">
+          <h5>Post it through the append lane <span class="state s-sent">✓ sent</span></h5>
+          <p class="sub">No account. No access token. The lane accepts writes and returns nothing about them.</p>
+          <div class="snippet" style="margin:.6rem 0">RESPONSE   {"ok":true}</div>
+          <div class="box warm" style="margin-top:.5rem">
+            <p>This response means the lane received bytes. <strong>It does not mean your enrolment was accepted, queued, read, or declined.</strong> Those four outcomes are indistinguishable from here, by design — a lane that reported them would be an oracle for guessing them.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stepn">
+        <span class="num">step 4</span>
+        <div class="cont">
+          <h5>Watch the public registry <span class="state s-wait">○ waiting</span></h5>
+          <p class="sub">The read path is the outcome channel. There is no other.</p>
+          <div class="snippet" style="margin:.6rem 0">GET /registry/records/sha256:69d9…790c/00001.json      404
+last checked 09:34:02 · retrying every 60s · 4 attempts</div>
+          <table class="plain" style="margin-top:.4rem">
+            <tr><th style="width:6rem">present</th><td>The project recognised your key. That is <strong>a decision somebody made</strong>, not a computation that completed.</td></tr>
+            <tr><th>absent</th><td>Pending, or declined. <strong>You cannot tell which, and no amount of polling will tell you.</strong></td></tr>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="note">
+    <h5>Why the interface must not help here</h5>
+    <p>An enrolment screen that renders a 404 as "not yet" is lying by omission about a system where "never" renders identically. Blind acknowledgement is a security property, not a usability defect — any signal distinguishing pending from declined, <em>including timing</em>, is an oracle for probing enrolment policy.</p>
+    <p style="margin-top:.5rem"><strong>Unresolved in the pack:</strong> the processor is also supposed to publish its decisions. For declined submissions those two requirements are in direct conflict. Today the blind acknowledgement wins by default — which is a decision nobody made.</p>
+  </div>
+</div></section>
+
+<!-- ══════════════════════════════ M7 ANSWER ══════════════════════════════ -->
+<section class="screen" id="s-m7"><div class="inner">
+  <div class="slug"><span class="id">M7</span><span class="src">doc 08 · the output of the whole design</span></div>
+  <h2>The verifier's answer</h2>
+  <p class="lede">One sentence a third party can act on — or a refusal that says where it stopped. Partial resolution is a legitimate output, not a failure.</p>
+
+  <div class="surface">
+    <div class="surfhead"><span class="t">Answer</span><span class="kind">verifier holds nothing but public URLs</span></div>
+    <div class="body">
+      <dl class="kv" style="margin-top:0">
+        <dt>question</dt><dd>May <span class="mono">sha256:69d9…790c</span> open a pull request on <span class="mono">SGit-AI__Website__PKI</span>?</dd>
+      </dl>
+      <div class="box teal" style="margin-top:.8rem">
+        <h5>Answer</h5>
+        <p style="font-size:1.02rem"><strong>Yes, until 01 Oct 2026</strong>, on the authority of operator (sgit.ai), which is a declared root of this registry.</p>
+      </div>
+
+      <div class="sect" style="margin-top:1.2rem">
+        <div class="sechead"><h4>Basis</h4><span class="cnt">5 edges · all client-verifiable · free</span></div>
+        <div class="rows">
+          <div class="row2"><span class="l"><span class="mono">identity</span></span><span class="r"><span class="badge b-confirmed"><span class="g">✓</span><span class="st">confirmed</span><span class="meta">self-signed, chain intact · client · free</span></span></span></div>
+          <div class="row2"><span class="l"><span class="mono">mandate</span></span><span class="r"><span class="badge b-confirmed"><span class="g">✓</span><span class="st">confirmed</span><span class="meta">issuer-signed, statement 7 · client · free</span></span></span></div>
+          <div class="row2"><span class="l"><span class="mono">acceptance</span></span><span class="r"><span class="badge b-confirmed"><span class="g">✓</span><span class="st">confirmed</span><span class="meta">subject-signed, statement 4 · client · free</span></span></span></div>
+          <div class="row2"><span class="l"><span class="mono">issuer root</span></span><span class="r"><span class="badge b-confirmed"><span class="g">✓</span><span class="st">confirmed</span><span class="meta">declared in roots.json · client · free</span></span></span></div>
+          <div class="row2"><span class="l"><span class="mono">revocations</span></span><span class="r"><span class="badge b-confirmed"><span class="g">✓</span><span class="st">confirmed</span><span class="meta">none in either record · client · free</span></span></span></div>
+        </div>
+      </div>
+
+      <div class="box plain">
+        <h5>Not answered</h5>
+        <p>Whether the agent is who its label says it is beyond key control.</p>
+        <p>Whether anything it does stays inside this mandate. <strong>This register records authority; it does not observe behaviour.</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="surface">
+    <div class="surfhead"><span class="t">Answer · the refusal</span><span class="kind">the more important screen</span></div>
+    <div class="body">
+      <div class="box warm">
+        <h5>Answer</h5>
+        <p style="font-size:1.02rem"><strong>I followed the chain this far and stopped.</strong></p>
+      </div>
+      <div class="rows" style="margin-top:.9rem">
+        <div class="row2"><span class="l"><span class="mono">identity</span></span><span class="r"><span class="badge b-confirmed"><span class="g">✓</span><span class="st">confirmed</span><span class="meta">self-signed, chain intact</span></span></span></div>
+        <div class="row2"><span class="l"><span class="mono">mandate</span></span><span class="r"><span class="badge b-confirmed"><span class="g">✓</span><span class="st">confirmed</span><span class="meta">issuer-signed, statement 9</span></span></span></div>
+        <div class="row2"><span class="l"><span class="mono">acceptance</span></span><span class="r"><span class="badge b-notchecked"><span class="g">○</span><span class="st">not present</span><span class="meta">in the subject's record</span></span></span></div>
+        <div class="row2"><span class="l"><span class="mono">issuer root</span></span><span class="r"><span class="badge b-unreachable"><span class="g">⚠</span><span class="st">not anchored</span><span class="meta">sha256:1d40…88c7 is not in roots.json</span></span></span></div>
+      </div>
+      <div class="box red" style="margin-top:.9rem">
+        <h5>Meaning</h5>
+        <p>A mandate exists. Its subject has not accepted it. Its issuer is not anchored here. <strong>This is not a failure of verification — it is what verification found.</strong> Two parties disagree about standing, and the disagreement is now visible.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    <h5>Why the refusal is the design</h5>
+    <p>Explicit distrust is a valid signal, and a partial resolution is a legitimate output. An interface that renders this as an error page turns the register's most useful answer into a bug report.</p>
+  </div>
+</div></section>
+
+<!-- ══════════════════════════════ OBSERVABILITY ══════════════════════════════ -->
+<section class="screen" id="s-obs"><div class="inner">
+  <div class="slug"><span class="id">doc 11</span><span class="src">the issuer's own lane · the missing edges are the product</span></div>
+  <h2>Who has never checked</h2>
+  <p class="lede">Nobody can tell you who is <em>using</em> a mandate. What is capturable is verification, not use — so the valuable query is not who checked, but which parties hold a mandate you issued and have <strong>never once verified it</strong>.</p>
+
+  <div class="surface">
+    <div class="surfhead"><span class="t">Issued by operator (sgit.ai)</span><span class="kind">derived from your lane · never stored in the register</span></div>
+    <div class="body">
+
+      <div class="sect">
+        <div class="sechead"><h4>issued-to minus has-checked</h4><span class="cnt">1 of 3 relying parties</span></div>
+        <div class="rows">
+          <div class="row2">
+            <span class="l"><b>Party A</b><span class="fp">sha256:69d9…790c</span></span>
+            <span class="r"><span>checks hourly</span><span style="color:var(--accent-dk)">latency ≈ 1h</span></span>
+          </div>
+          <div class="row2">
+            <span class="l"><b>Party B</b><span class="fp">sha256:0c2f…41ba</span></span>
+            <span class="r"><span>checked once, 12 Jun</span><span style="color:var(--warm)">latency ≈ 69d</span></span>
+          </div>
+          <div class="row2" style="border-color:rgba(185,28,28,.3);background:rgba(185,28,28,.05)">
+            <span class="l"><b>Party C</b><span class="fp">sha256:1d40…88c7</span></span>
+            <span class="r"><span style="color:var(--red);font-weight:700">has never checked</span><span style="color:var(--red)">latency ∞</span></span>
+          </div>
+        </div>
+        <p class="sub" style="margin-top:.7rem">Party C is <em>derived from the register entry, not observed from the lane</em>. That is the whole mechanism: the layer sees who checked, and the issuer computes who did not. Every row here is a relying party accepting a mandate on faith.</p>
+      </div>
+
+      <div class="sect">
+        <div class="sechead"><h4>Effective revocation latency</h4><span class="cnt">measurable before anything is revoked</span></div>
+        <div class="box teal">
+          <p>In this design there is no push. A revocation sits in the register until a relying party looks — so it propagates at exactly the rate at which parties check. That is usually stated as a weakness. <strong>It is also a measurement.</strong></p>
+          <p class="sub" style="margin-top:.5rem">Half the parties relying on this mandate would notice a revocation within an hour; ninety-five percent within a day; and <b>these ones would never notice at all</b>.</p>
+        </div>
+        <p class="sub">It also yields one of the very few mandate clauses that is genuinely decidable — <em>verify this mandate at least once every twenty-four hours</em> — because the breach is visible in the issuer's own lane without any cooperation from the party.</p>
+      </div>
+
+      <div class="sect">
+        <div class="sechead"><h4>Lane health</h4><span class="cnt">the drain needs monitoring more than the lane does</span></div>
+        <div class="rows">
+          <div class="row2"><span class="l">Pending files in lane</span><span class="r"><b style="color:var(--warm)">812</b> / 1000 · <span>breach returns 507</span></span></div>
+          <div class="row2"><span class="l">Last drained</span><span class="r">19 Aug 22:10 · <span>paginated, 200/page</span></span></div>
+        </div>
+        <div class="box warm">
+          <p><strong>An issuer who stops draining stops receiving evidence without being told.</strong> Draining is an obligation, not an option — and its silent failure is exactly the kind this pack keeps recording.</p>
+        </div>
+      </div>
+
+      <div class="sect">
+        <div class="sechead"><h4>What a check event may not carry</h4><span class="cnt">the boundary the consent argument rests on</span></div>
+        <table class="plain">
+          <tr><th style="width:11rem">must not carry</th><td><b>What the checker was authorising</b> — the issuer has no claim on the checker's business, and including it turns an asset log into a customer surveillance log.</td></tr>
+          <tr><th></th><td>The checker's own credentials or tokens.</td></tr>
+          <tr><th></th><td>Anything the issuer could not already infer from holding the mandate.</td></tr>
+        </table>
+        <p class="sub"><strong>There is no central check log.</strong> The checker writes into the issuer's lane; no party learns who checked everybody's, because no such record exists anywhere. The aggregate is foreclosed — a real commercial cost, chosen rather than discovered.</p>
+      </div>
+
+      <div class="box plain">
+        <h5>What this is not</h5>
+        <p>Not a usage graph. It records verification, and <strong>the parties that never verify are invisible to it</strong> — which is the error running in the worst possible direction, since that is the party whose relying process is weakest.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    <h5>Where the badge's "last checked" comes from</h5>
+    <p>Document 08 specifies a badge carrying when an edge was last checked. It has no data source in document 08. It has one here: <strong>the issuer's lane.</strong> This is not a separate system with its own dashboard — it is the interface's evidence, and the badge is its user interface.</p>
+  </div>
+</div></section>
+
+<!-- ══════════════════════════════ M8 STATES ══════════════════════════════ -->
+<section class="screen" id="s-m8"><div class="inner">
+  <div class="slug"><span class="id">M8</span><span class="src">doc 08 · the states a demo never shows</span></div>
+  <h2>Empty and failure states</h2>
+  <p class="lede">The states a real register lives in.</p>
+
+  <div class="surface">
+    <div class="surfhead"><span class="t">Day one, no records</span><span class="kind">empty</span></div>
+    <div class="body">
+      <p>This register is empty. Four rules are published and nothing has been written under them yet. <strong>Four rules with no records are four assertions.</strong></p>
+      <div class="actions"><button class="btn ghost sm">Read the four rules</button></div>
+    </div>
+  </div>
+
+  <div class="surface">
+    <div class="surfhead"><span class="t">Unreachable ≠ denied</span><span class="kind">failure</span></div>
+    <div class="body">
+      <p><span class="badge b-unreachable"><span class="g">⚠</span><span class="st">unreachable</span><span class="meta">provider · live lookup · metered · <b>last tried 09:41</b></span></span></p>
+      <p style="margin-top:.6rem">The authority for this edge did not answer. <strong>This is not a denial and must not be read as one.</strong> Last confirmed 19 Aug 14:02 — 19 hours ago.</p>
+      <div class="actions"><button class="btn ghost sm">Retry</button><button class="btn ghost sm">History</button></div>
+    </div>
+  </div>
+
+  <div class="surface">
+    <div class="surfhead"><span class="t">Stale</span><span class="kind">failure</span></div>
+    <div class="body">
+      <p><span class="badge b-confirmed"><span class="g">✓</span><span class="st">confirmed</span><span class="meta">client · signature · free · <b>checked 12 Jun 2026</b></span></span></p>
+      <p style="margin-top:.6rem" class="sub">ⓘ This check is 69 days old. The record may have been appended to since.</p>
+      <div class="actions"><button class="btn ghost sm">Re-check now</button></div>
+    </div>
+  </div>
+
+  <div class="surface">
+    <div class="surfhead"><span class="t">Index disagrees with records</span><span class="kind">the architecture's weakest joint</span></div>
+    <div class="body">
+      <div class="box warm">
+        <p><strong>⚠ The index lists 4 agents; the records directory contains 3.</strong></p>
+        <p>The index carries no authority — it is a regenerable convenience. <strong>The records are the registry.</strong> This page is showing you the records.</p>
+      </div>
+      <div class="actions"><button class="btn ghost sm">How to regenerate</button></div>
+      <p class="sub" style="margin-top:.8rem">Rendering the disagreement rather than resolving it silently is the cheapest defence available against an unsigned convenience becoming load-bearing.</p>
+    </div>
+  </div>
+
+  <div class="surface">
+    <div class="surfhead"><span class="t">Fixture</span><span class="kind">C3 · a class, not a phase-0 convenience</span></div>
+    <div class="body">
+      <div class="box red">
+        <p><code>private_key_published: true</code> · <code>publication_intent: deliberate</code> · stated 20 Aug 2026</p>
+        <p><strong>This entry is a fixture. Its signatures verify and prove nothing.</strong> A keypair whose private half is published is not a weak identity — it is no identity, permanently. It is not reachable from the trust graph, it can never be promoted, and it cannot be retired by revocation, because anybody can sign the revocation and anybody can sign the append that reverses it.</p>
+        <p class="sub">Read before any signature on this record is evaluated.</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ══════════════════════════════ M9 CLI ══════════════════════════════ -->
+<section class="screen" id="s-m9"><div class="inner">
+  <div class="slug"><span class="id">M9</span><span class="src">doc 08 · the pack's thesis applied to its own UI</span></div>
+  <h2>The CLI mirror</h2>
+  <p class="lede">Every screen here is a rendering of public bytes, so the same answers must be reachable without the interface. If the page is the only way to get the answer, the design has quietly acquired a dependency it says it does not have.</p>
+
+  <div class="term"><pre><span class="p">$</span> <span class="w">sgit registry show sha256:69d9…790c</span>
+site-agent (pki.sgit.ai)                              sha256:69d9…790c
+  <span class="d">identity     </span> ECDSA P-256 + RSA-OAEP 4096, self-signed     <span class="g">✓ client/sig</span>
+  <span class="d">mandates     </span> 1 in force, 1 accepted                       <span class="g">✓ client/sig</span>
+  <span class="d">grants       </span> 2 recorded, 1 unreachable                    <span class="y">⚠ provider/lookup</span>
+  <span class="d">excess       </span> 40 repositories, unaccepted, 6 weeks         <span class="d">computed</span>
+  <span class="d">unverifiable </span> 2 claims (operated_by, runs_on)              <span class="d">nobody/no method</span>
+  <span class="d">history      </span> 6 statements, chain intact</pre></div>
+
+  <div class="term"><pre><span class="p">$</span> <span class="w">sgit registry policy run no-local-compute</span>
+0 rows.
+
+  <span class="y">warning: this policy is instrumentation, not enforcement.</span>
+  <span class="y">The constrained edge "session runs on surface X" is verifiable by nobody.</span>
+  <span class="y">This result is 0 rows whether or not the policy is being complied with.</span></pre></div>
+
+  <div class="term"><pre><span class="p">$</span> <span class="w">sgit registry verify sha256:69d9…790c --capability repo.pull-request.create</span>
+I followed the chain this far and stopped.
+
+  <span class="d">identity    </span> <span class="g">ok</span>
+  <span class="d">mandate     </span> <span class="g">ok</span>      operator/00009
+  <span class="d">acceptance  </span> <span class="r">MISSING</span>  subject's record has no acceptance of operator/00009
+  <span class="d">issuer root </span> <span class="r">MISSING</span>  sha256:1d40…88c7 not in roots.json
+
+<span class="r">exit 2</span></pre></div>
+
+  <div class="note">
+    <h5>Two deliberate choices</h5>
+    <ul>
+      <li><strong>The warning prints on the success path</strong>, because a policy that is instrumentation is most misleading when it passes.</li>
+      <li><strong>The refusal exits non-zero with the same words the page uses.</strong> One vocabulary for humans and pipelines — two vocabularies is how a nuance gets dropped in whichever one is read second.</li>
+    </ul>
+  </div>
+</div></section>
+
+</main>
+
+<footer class="pg"><div class="inner">
+  <p><strong>These are mockups of an unbuilt system.</strong> Screens are drawn from the registry MVP pack (documents 08, 11, 12, 13, 14 and REP-0001), rendered in pki.sgit.ai's own design tokens.</p>
+  <p>The two states that most need real data — a crowded agent page (M1) and a policy over a real population (M5) — remain the two least trustworthy screens in the set. The pack says so; so does this file.</p>
+  <p class="small">Source content CC BY 4.0, the sgit project.</p>
+</div></footer>
+</sg-screens>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../../admin/versions.html">v0.1.21</a> · <a href="../../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The registry</h4>
+    <a href="../../assess/index.html">&#8594; Map your own case</a>
+    <a href="../../failure/index.html">Why they don't exist</a>
+    <a href="../../rules/index.html">The four rules</a>
+    <a href="../../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../../roadmap/index.html">Build order</a>
+    <a href="../../rules/prior-art.html">Prior art</a>
+  </div>
+  <div>
+    <h4>The three layers</h4>
+    <a href="../../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../../enrolment/index.html">Enrolment</a>
+    <a href="../../execution/index.html">The execution broker</a>
+    <a href="../../shipped/index.html">What already ships</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../../origins/index.html">Origins: 2026</a>
+    <a href="../../documents/index.html">The documents</a>
+    <a href="../../packs/registry-mvp/index.html">The registry MVP pack</a>
+    <a href="../../about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../../admin/versions.html">Release history</a>
+    <a href="../../llms.txt">llms.txt</a>
+  </div>
+</div></footer>
+<script type="module" src="../../assets/mockups.js"></script>
+</body>
+</html>

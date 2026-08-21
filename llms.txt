@@ -8,7 +8,7 @@
 > but never delete anything — not a bug. This site publishes that history, and the
 > registry rules it produces, before the registry exists.
 
-Site version: v0.1.20 (20 August 2026). Published by the sgit project — participant
+Site version: v0.1.21 (20 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## Properties agents may rely on
@@ -259,6 +259,14 @@ failure page, the four rules) are done; step 4 (a private registry) is the next 
   for a fresh session picking it up cold. It asks for a readiness report rather than an
   implementation: read the supporting material, then the pack, then say whether you have what you
   need or list the questions that block you.
+- Document 15 is the first written by SOMEBODY WHO WAS NOT IN THE PACK: an outside session took the
+  briefing pack cold and answered "if this were implemented as specified, what would it look like?",
+  returning twelve screens as real markup (https://pki.sgit.ai/packs/registry-mvp/mockups.html) and a
+  debrief. Verified before adoption: all seven of document 08's load-bearing strings appear VERBATIM,
+  its C8 citation is accurate, and it loads with no framework and no third-party request. Five of its
+  six findings are things the fixed-width ASCII form could not surface — COLOUR RE-COLLAPSES THE FIVE
+  RESULT STATES, the badge's wrap point can produce the exact misreading the badge exists to prevent,
+  and a column of five ticks is a page-level tick that document 08 forbids. Adopted as C27-C31.
 - Four appendixes. A: a Working Backwards PR/FAQ — the pack from a customer inward, whose
   customer-quote slot is published EMPTY because there is no customer and inventing one is what
   this site's participant rules forbid. B: REP-0001, the normative spec in Python PEP form, with
