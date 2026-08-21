@@ -338,6 +338,7 @@ One row per workflow, so a reviewer can follow any thread end to end.
 - `12__grant-tree-and-control-labels.md` — four more stories (I8, I9, A6, P4), three more features (F20–F22), and the metric family this document never stated: **counting acceptances is the one measure that inverts under pressure**, so declines and unstatable risks are instrumented first
 - `13__keys-and-signatures.md` — two more stories (V7, I10) on the two cases where a check succeeds and means nothing
 - `14__user-assessment.md` — a shipped surface for the verifier and issuer seats, and one measure family this pack can state and cannot instrument, because the page deliberately has no backend
+- **C23** — the feature table's honest reading, *everything at phase 0–1 is designed and nothing is built*, is still true of F1–F19 and no longer true of the pack. What shipped is a **consumer** of this model, not a piece of the registry. And this document's named-acceptor test was found **unmeetable** on a page that stores nothing about its visitor
 
 ---
 

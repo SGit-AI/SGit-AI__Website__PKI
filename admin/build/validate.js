@@ -96,7 +96,7 @@ for (const f of htmlFiles) {
 // --- 4. key-leak tripwire -------------------------------------------------
 const KEY_SHAPE = /[A-Za-z0-9_-]{20,}:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
 for (const f of files) {
-  if (/\.(png|jpg|jpeg|gif|webp|ico|woff2?)$/.test(f)) continue;
+  if (/\.(png|jpg|jpeg|gif|webp|ico|woff2?|zip)$/.test(f)) continue;
   const t = fs.readFileSync(f, 'utf8');
   if (KEY_SHAPE.test(t)) {
     errors.push(`${path.relative(ROOT, f)}: contains a vault-key-shaped string`);

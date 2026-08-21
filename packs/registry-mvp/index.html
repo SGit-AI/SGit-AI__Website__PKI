@@ -14,7 +14,7 @@
   <a class="brand" href="../../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../../admin/versions.html" title="Site release history">v0.1.16</a>
+  <a class="ver" href="../../admin/versions.html" title="Site release history">v0.1.17</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -75,9 +75,23 @@
 <main class="doc">
 <div class="crumb"><a href="../../index.html">pki.sgit.ai</a> / <a href="../index.html">packs</a> / registry-mvp</div>
 <h1>The Registry MVP: Open Data, A Single Operator, LLM Sessions First</h1>
-<p class="lead">An MVP of the registry this site designs: one public vault whose records are append-only, hash-chained, signed statement logs; a processor as the only write-key holder; and every workflow written for its actual first user — a fresh LLM session holding nothing but public URLs. Open data on principle (a registry contains no secrets), and <b>public in data, private in authority</b>: one operator, one root, own-agents enrolment — build-order step 4 with the covers off. Draft-1 shipped the morning of 20 August; three project-lead briefs landed the same day, and what they correct is recorded in <a href='change-control.html'>change control</a> rather than silently patched. Two later documents draw the thing: <a href='ux-mockups.html'>the register interface, screen by screen</a>, and <a href='wardley-maps.html'>six Wardley maps</a> of where the novelty actually sits. <a href='user-stories.html'>Document 10</a> turns all of it into six users, twenty-four stories with tests that can fail, and six workflows; <a href='observability.html'>document 11</a> adds the half that makes the mandate layer defensible — and answers, by refusing it, the question of who is using a mandate. <a href='grant-tree.html'>Document 12</a> gives the grant the structure C1 implied and never specified, and <a href='keys-and-signatures.html'>document 13</a> settles which things get keypairs — fewer than proposed. <a href='user-assessment.html'>Document 14</a> is the first that describes something shipped: <a href='../../assess/index.html'>map your own case</a>.</p>
+<p class="lead">An MVP of the registry this site designs: one public vault whose records are append-only, hash-chained, signed statement logs; a processor as the only write-key holder; and every workflow written for its actual first user — a fresh LLM session holding nothing but public URLs. Open data on principle (a registry contains no secrets), and <b>public in data, private in authority</b>: one operator, one root, own-agents enrolment — build-order step 4 with the covers off. Draft-1 shipped the morning of 20 August; three project-lead briefs landed the same day, and what they correct is recorded in <a href='change-control.html'>the change-control appendix</a> rather than silently patched — it sits last because it never stops growing, and it is the one document to read either second or last, never not at all. Two later documents draw the thing: <a href='ux-mockups.html'>the register interface, screen by screen</a>, and <a href='wardley-maps.html'>six Wardley maps</a> of where the novelty actually sits. <a href='user-stories.html'>Document 10</a> turns all of it into six users, twenty-four stories with tests that can fail, and six workflows; <a href='observability.html'>document 11</a> adds the half that makes the mandate layer defensible — and answers, by refusing it, the question of who is using a mandate. <a href='grant-tree.html'>Document 12</a> gives the grant the structure C1 implied and never specified, and <a href='keys-and-signatures.html'>document 13</a> settles which things get keypairs — fewer than proposed. <a href='user-assessment.html'>Document 14</a> is the first that describes something shipped: <a href='../../assess/index.html'>map your own case</a>.</p>
 
-<div class="note"><b>Origin.</b> Authored by the pki.sgit.ai site agent, 20 August 2026, at the project lead's request. Status: draft-1 plus same-day change control, plus the UX mockups, the Wardley maps, the delivery scope, observability, the grant tree and the key policy — three project-lead briefs (v0.33.61) landed after draft-1 shipped and their corrections are recorded in document 06 rather than silently folded in. Corpus version assigned on adoption.</div>
+<div class="note"><b>Origin.</b> Authored by the pki.sgit.ai site agent, 20 August 2026, at the project lead's request. Status: a design pack with one shipped consumer — the registry itself is unbuilt, and the assessment at /assess is live — three project-lead briefs (v0.33.61) landed after draft-1 shipped and their corrections are recorded in the change-control appendix rather than silently folded in — which now runs to twenty-three corrections and thirty-six decisions, roughly a third of them still open. Corpus version assigned on adoption.</div>
+
+<div class="dl">
+  <div>
+    <b>Take the whole pack with you.</b>
+    <p>Every source document, every supporting brief, this site's machine-readable front door,
+    and the reference implementation — with a briefing for a fresh session picking it up cold.
+    It asks for a <em>readiness report</em> rather than an implementation plan: read the supporting
+    material, then the pack, then say whether you have what you need or list the questions that
+    block you. It names the six things that trip a new reader, and asks for blocking questions
+    rather than confidence, because a pack with a third of its decisions still open is one where a
+    confident plan probably means the reader missed them.</p>
+  </div>
+  <a class="dlbtn" href="registry-mvp-briefing-pack.zip" download>&#8595; Briefing pack<span>307 KB · 44 files</span></a>
+</div>
 
 <h2 id="files">The documents</h2>
 <div class="tablewrap"><table>
@@ -89,7 +103,6 @@
     <tr><td><a href="workflows.html"><b>03 — Workflows</b></a></td><td>Verify, enrol, operate-under-mandate — copy-paste form for a fresh LLM session</td></tr>
     <tr><td><a href="build-order.html"><b>04 — Build order</b></a></td><td>Read path before write path; five phases; every definition of done is a fresh-session test</td></tr>
     <tr><td><a href="diagrams.html"><b>05 — Diagrams</b></a></td><td>The design as pictures: the estate, the record, the write path, the walk, the demo, the gap</td></tr>
-    <tr><td><a href="change-control.html"><b>06 — Change control</b></a></td><td>What v0.33.61 corrects in draft-1, recorded rather than silently patched</td></tr>
     <tr><td><a href="tabletop.html"><b>07 — Tabletop exercise</b></a></td><td>Four participants, six injects, and the four rules meeting their first population</td></tr>
     <tr><td><a href="ux-mockups.html"><b>08 — UX mockups</b></a></td><td>The register interface as intended output, screen by screen, with “nobody” as a first-class answer</td></tr>
     <tr><td><a href="wardley-maps.html"><b>09 — Wardley maps</b></a></td><td>Six maps: where the novelty actually sits, and why a policy is worth what its weakest badge is worth</td></tr>
@@ -98,6 +111,7 @@
     <tr><td><a href="grant-tree.html"><b>12 — The grant tree and control labels</b></a></td><td>Blast radius is a path through a tree, and the label on each node is the column nobody publishes</td></tr>
     <tr><td><a href="keys-and-signatures.html"><b>13 — Keys and signatures</b></a></td><td>A key belongs to whatever can keep a secret — everything else is signed by something that can</td></tr>
     <tr><td><a href="user-assessment.html"><b>14 — The user assessment</b></a></td><td>The one document here describing something built — and a conformance test for the site's own claim</td></tr>
+    <tr><td><a href="change-control.html"><b>Appendix — Change control</b></a></td><td>Every correction and every decision in one place — the errata, and the register of what is settled and what is not</td></tr>
   </tbody>
 </table></div>
 
@@ -120,7 +134,7 @@
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../../admin/versions.html">v0.1.16</a> · <a href="../../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../../admin/versions.html">v0.1.17</a> · <a href="../../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The registry</h4>

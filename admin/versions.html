@@ -14,7 +14,7 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.16</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.17</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -80,6 +80,11 @@
 <div class="tablewrap"><table class="vers">
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
+    <tr>
+      <td class="vnum">v0.1.17</td>
+      <td>20 Aug 2026</td>
+      <td>Three changes to the <a href="../packs/registry-mvp/index.html">registry MVP pack</a>, all of them about how it is read rather than what it says. <b>Change control becomes an appendix and moves to the end.</b> It was document 06, sitting in the middle of a numbered sequence while being the one document here that never stops growing — it now runs to twenty-three corrections and thirty-six decisions, which is longer than most of the documents it corrects. Its published URL is unchanged; only its position and its title moved. The reading advice moved with it and is worth keeping: read it <b>second</b> if you are about to build from documents 00–04, so you read them with the errata in hand, and <b>last</b> if you are reading the pack through — never not at all, because draft-1's definition of <em>grant</em> was superseded on the day it shipped. <b>The pack now states its own status honestly</b>, recorded as C23 rather than edited in quietly: it is a design pack with <em>one shipped consumer</em>. Document 10's honest reading — <em>everything at phase 0–1 is designed and nothing is built</em> — is still true of every registry feature and no longer true of the pack, and the distinction that matters is that <a href="../assess/index.html">what shipped</a> is a consumer of the model rather than a piece of the registry. Two findings come with that. The build order gained a phase nobody planned, <em>before</em> phase 0: <b>the first useful thing this pack produced needed none of the infrastructure the pack is about</b> — it needed a library and an interface, not a registry, and a design pack whose first shipped artefact bypasses its own architecture should say so out loud. And one of the pack's own standards was found unmeetable in the field: document 10 requires a <b>named</b> acceptor, and the first interface to try it discovered a name is a fact about the visitor's organisation with nowhere safe to live, so it offers a role. The standard is not wrong; it is unreachable on a page that stores nothing about its visitor, and the two constraints are in genuine conflict. And the pack is now <b><a href="../packs/registry-mvp/registry-mvp-briefing-pack.zip">downloadable as a briefing pack</a></b> (306 KB): the fifteen sources, every supporting brief, the site's machine-readable front door, and the reference implementation — with a briefing for a fresh session that asks it to read the supporting material, then the pack in detail, and then answer one question honestly: <em>do you have what you need, or what has to be answered first?</em> It names six things that will trip a new reader, and it asks for blocking questions rather than a confident plan, because a pack with a third of its decisions still open is one where a confident plan probably means the reader missed them.</td>
+    </tr>
     <tr>
       <td class="vnum">v0.1.16</td>
       <td>20 Aug 2026</td>
@@ -180,7 +185,7 @@
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.16</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.17</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The registry</h4>

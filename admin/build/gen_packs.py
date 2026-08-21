@@ -17,13 +17,13 @@ GH = "https://github.com/SGit-AI/SGit-AI__Website__PKI"
 PACKS = [
  dict(slug="registry-mvp",
   name="The Registry MVP: Open Data, A Single Operator, LLM Sessions First",
-  origin="Authored by the pki.sgit.ai site agent, 20 August 2026, at the project lead's request. Status: draft-1 plus same-day change control, plus the UX mockups, the Wardley maps, the delivery scope, observability, the grant tree and the key policy — three project-lead briefs (v0.33.61) landed after draft-1 shipped and their corrections are recorded in document 06 rather than silently folded in. Corpus version assigned on adoption.",
+  origin="Authored by the pki.sgit.ai site agent, 20 August 2026, at the project lead's request. Status: a design pack with one shipped consumer — the registry itself is unbuilt, and the assessment at /assess is live — three project-lead briefs (v0.33.61) landed after draft-1 shipped and their corrections are recorded in the change-control appendix rather than silently folded in \u2014 which now runs to twenty-three corrections and thirty-six decisions, roughly a third of them still open. Corpus version assigned on adoption.",
   date="20 August 2026 · draft-1 + change control",
   origin_short="Site agent, this repo",
   row_date="20 Aug 2026 · draft + change control",
-  one_line="A public key registry on vaults — open data, one operator, and LLM sessions as the first users on both sides. 15 documents, one of them built.",
+  one_line="A public key registry on vaults — open data, one operator, and LLM sessions as the first users on both sides. 14 documents and an appendix — and one of them is built. <a href='registry-mvp/registry-mvp-briefing-pack.zip'>Downloadable as a briefing pack</a>.",
   meta_desc="The registry MVP pack, readable in-page: the leading brief, architecture, schemas, workflows, build order, diagrams, change control, the tabletop exercise, the UX mockups, six Wardley maps, the user stories and features, the observability layer, the grant tree, the key policy, and the assessment that is actually built.",
-  three_sentences="An MVP of the registry this site designs: one public vault whose records are append-only, hash-chained, signed statement logs; a processor as the only write-key holder; and every workflow written for its actual first user — a fresh LLM session holding nothing but public URLs. Open data on principle (a registry contains no secrets), and <b>public in data, private in authority</b>: one operator, one root, own-agents enrolment — build-order step 4 with the covers off. Draft-1 shipped the morning of 20 August; three project-lead briefs landed the same day, and what they correct is recorded in <a href='change-control.html'>change control</a> rather than silently patched. Two later documents draw the thing: <a href='ux-mockups.html'>the register interface, screen by screen</a>, and <a href='wardley-maps.html'>six Wardley maps</a> of where the novelty actually sits. <a href='user-stories.html'>Document 10</a> turns all of it into six users, twenty-four stories with tests that can fail, and six workflows; <a href='observability.html'>document 11</a> adds the half that makes the mandate layer defensible \u2014 and answers, by refusing it, the question of who is using a mandate. <a href='grant-tree.html'>Document 12</a> gives the grant the structure C1 implied and never specified, and <a href='keys-and-signatures.html'>document 13</a> settles which things get keypairs \u2014 fewer than proposed. <a href='user-assessment.html'>Document 14</a> is the first that describes something shipped: <a href='../../assess/index.html'>map your own case</a>.",
+  three_sentences="An MVP of the registry this site designs: one public vault whose records are append-only, hash-chained, signed statement logs; a processor as the only write-key holder; and every workflow written for its actual first user — a fresh LLM session holding nothing but public URLs. Open data on principle (a registry contains no secrets), and <b>public in data, private in authority</b>: one operator, one root, own-agents enrolment — build-order step 4 with the covers off. Draft-1 shipped the morning of 20 August; three project-lead briefs landed the same day, and what they correct is recorded in <a href='change-control.html'>the change-control appendix</a> rather than silently patched — it sits last because it never stops growing, and it is the one document to read either second or last, never not at all. Two later documents draw the thing: <a href='ux-mockups.html'>the register interface, screen by screen</a>, and <a href='wardley-maps.html'>six Wardley maps</a> of where the novelty actually sits. <a href='user-stories.html'>Document 10</a> turns all of it into six users, twenty-four stories with tests that can fail, and six workflows; <a href='observability.html'>document 11</a> adds the half that makes the mandate layer defensible \u2014 and answers, by refusing it, the question of who is using a mandate. <a href='grant-tree.html'>Document 12</a> gives the grant the structure C1 implied and never specified, and <a href='keys-and-signatures.html'>document 13</a> settles which things get keypairs \u2014 fewer than proposed. <a href='user-assessment.html'>Document 14</a> is the first that describes something shipped: <a href='../../assess/index.html'>map your own case</a>.",
   site_relevance="This pack is <a href='../../roadmap/index.html#order'>build-order step 4</a> made concrete. Its constraints are this site's published pages: <a href='../../rules/index.html'>the four rules</a> (implemented as processor checks plus a public validator), <a href='../../mandate/index.html'>identity vs. mandate</a> (with the mandate living in the <em>issuer's</em> record — the same rule the v0.33.61 register brief derives independently), <a href='../../bootstrap/index.html'>the bootstrap trap</a> (the enrolment workflow walks the gradient as commands), and <a href='../../shipped/index.html'>the shipped surface</a> (the lane, the four capability tiers, and the two absences the registry supplies).",
   docs=[
    dict(slug="dev-brief", file="00__LEADING-BRIEF.md",
@@ -108,19 +108,6 @@ PACKS = [
     ideas=[
      "Each diagram is a claim, which makes each one checkable against the build.",
      "D6 is the phase-4 acceptance test drawn rather than described.",
-    ]),
-   dict(slug="change-control", file="06__change-control.md",
-    title="06 — Change control",
-    role="What v0.33.61 corrects in draft-1, recorded rather than silently patched",
-    summary="Draft-1 shipped at site v0.1.4 on the morning of 20 August; three project-lead briefs landed the same day. The corrections, each with source and status: grant redefined as what a credential permits, making excess authority (grant minus mandate) the registry's countable product; the 5 June design (v0.32.4) located, so the pack operationalises rather than designs; fixtures upgraded to a bounded class with a required private_key_published flag read before any signature; personas as signed agent cards with a workflow identity as notary; and the mandate-location decision confirmed independently. Plus the decisions register: four settled, four open for the project lead.",
-    concepts=[
-     ("C1 — grant redefined", "../../documents/grant-vs-mandate.html", "the v0.33.61 brief this folds in"),
-     ("C2 — designed in June", "../../documents/register-fixtures.html", "inherit, don't re-derive: clues-not-storage, two-level trust, partial resolution"),
-     ("C5 — confirmed from two directions", "schemas.html", "the mandate-location rule, now corpus-aligned"),
-    ],
-    ideas=[
-     "Sources stay verbatim; corrections live here until draft-2 folds them in — supersede, never rewrite.",
-     "Four decisions are settled, four are open, and the register says which is which.",
     ]),
    dict(slug="tabletop", file="07__tabletop-exercise.md",
     title="07 — Tabletop exercise",
@@ -242,6 +229,19 @@ PACKS = [
      "No score out of a hundred: a score gets optimised for how alarming it feels.",
      "The measure set is stated and the page cannot instrument any of it, because it deliberately has no backend.",
     ]),
+   dict(slug="change-control", file="99__change-control.md",
+    title="Appendix — Change control",
+    role="Every correction and every decision in one place — the errata, and the register of what is settled and what is not",
+    summary="The appendix, and the one document in this pack that never stops growing — which is why it sits last rather than at number six. Every correction the corpus has made to a published document in this pack, each with its source and its status, and the decisions register: <b>twenty-two corrections and thirty-five decisions</b>, of which roughly a third are still open and belong to the project lead. It exists because of a rule the pack takes from the corpus: <b>a published document is not silently edited</b>. Sources stay verbatim; corrections live here; draft-2 folds them in and this becomes its change log. Read it <b>second</b> if you are about to build from documents 00–04, so you read them with the errata in hand — and <b>last</b> if you are reading the pack through. Never not at all.",
+    concepts=[
+     ("C1 — grant redefined", "../../documents/grant-vs-mandate.html", "the v0.33.61 brief this folds in"),
+     ("C2 — designed in June", "../../documents/register-fixtures.html", "inherit, don't re-derive: clues-not-storage, two-level trust, partial resolution"),
+     ("C5 — confirmed from two directions", "schemas.html", "the mandate-location rule, now corpus-aligned"),
+    ],
+    ideas=[
+     "Sources stay verbatim; corrections live here until draft-2 folds them in — supersede, never rewrite.",
+     "Four decisions are settled, four are open, and the register says which is which.",
+    ]),
   ]),
 ]
 
@@ -279,6 +279,8 @@ def concepts_html(items):
 
 def write_pack(p):
     base = ROOT / "packs" / p["slug"]
+    zippath = base / f'{p["slug"]}-briefing-pack.zip'
+    zipsize = f'{zippath.stat().st_size // 1024} KB' if zippath.exists() else 'zip'
     # ---- pack hub ----
     rows = "\n".join(
         f'    <tr><td><a href="{d["slug"]}.html"><b>{d["title"]}</b></a></td><td>{d["role"]}</td></tr>'
@@ -290,6 +292,20 @@ def write_pack(p):
 <p class="lead">{p["three_sentences"]}</p>
 
 <div class="note"><b>Origin.</b> {p["origin"]}</div>
+
+<div class="dl">
+  <div>
+    <b>Take the whole pack with you.</b>
+    <p>Every source document, every supporting brief, this site's machine-readable front door,
+    and the reference implementation — with a briefing for a fresh session picking it up cold.
+    It asks for a <em>readiness report</em> rather than an implementation plan: read the supporting
+    material, then the pack, then say whether you have what you need or list the questions that
+    block you. It names the six things that trip a new reader, and asks for blocking questions
+    rather than confidence, because a pack with a third of its decisions still open is one where a
+    confident plan probably means the reader missed them.</p>
+  </div>
+  <a class="dlbtn" href="registry-mvp-briefing-pack.zip" download>&#8595; Briefing pack<span>{zipsize} · 44 files</span></a>
+</div>
 
 <h2 id="files">The documents</h2>
 <div class="tablewrap"><table>

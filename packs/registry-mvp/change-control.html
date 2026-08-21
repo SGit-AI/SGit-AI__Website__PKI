@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>06 — Change control · registry-mvp · pki.sgit.ai</title>
-<meta name="description" content="What v0.33.61 corrects in draft-1, recorded rather than silently patched. Pack document, readable in-page; the raw markdown under src/ is the source of truth.">
+<title>Appendix — Change control · registry-mvp · pki.sgit.ai</title>
+<meta name="description" content="Every correction and every decision in one place — the errata, and the register of what is settled and what is not. Pack document, readable in-page; the raw markdown under src/ is the source of truth.">
 <link rel="canonical" href="https://pki.sgit.ai/packs/registry-mvp/change-control.html">
 <link rel="stylesheet" href="../../assets/site.css">
 </head>
@@ -14,7 +14,7 @@
   <a class="brand" href="../../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../../admin/versions.html" title="Site release history">v0.1.16</a>
+  <a class="ver" href="../../admin/versions.html" title="Site release history">v0.1.17</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -74,18 +74,18 @@
 
 <main class="doc">
 <div class="crumb"><a href="../../index.html">pki.sgit.ai</a> / <a href="../index.html">packs</a> / <a href="index.html">registry-mvp</a> / change-control</div>
-<h1>06 — Change control</h1>
+<h1>Appendix — Change control</h1>
 
 <div class="docmeta">
   <span class="k">Pack</span><span class="v"><a href="index.html">The Registry MVP: Open Data, A Single Operator, LLM Sessions First</a></span>
-  <span class="k">Role</span><span class="v">What v0.33.61 corrects in draft-1, recorded rather than silently patched</span>
+  <span class="k">Role</span><span class="v">Every correction and every decision in one place — the errata, and the register of what is settled and what is not</span>
   <span class="k">Date</span><span class="v">20 August 2026 · draft-1 + change control</span>
   <span class="k">Origin</span><span class="v">Site agent, this repo</span>
-  <span class="k">Source</span><span class="v"><a href="src/06__change-control.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/dev/packs/registry-mvp/src/06__change-control.md">on GitHub</a></span>
+  <span class="k">Source</span><span class="v"><a href="src/99__change-control.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/dev/packs/registry-mvp/src/99__change-control.md">on GitHub</a></span>
 </div>
 
 <h2 id="summary">Summary</h2>
-<p>Draft-1 shipped at site v0.1.4 on the morning of 20 August; three project-lead briefs landed the same day. The corrections, each with source and status: grant redefined as what a credential permits, making excess authority (grant minus mandate) the registry's countable product; the 5 June design (v0.32.4) located, so the pack operationalises rather than designs; fixtures upgraded to a bounded class with a required private_key_published flag read before any signature; personas as signed agent cards with a workflow identity as notary; and the mandate-location decision confirmed independently. Plus the decisions register: four settled, four open for the project lead.</p>
+<p>The appendix, and the one document in this pack that never stops growing — which is why it sits last rather than at number six. Every correction the corpus has made to a published document in this pack, each with its source and its status, and the decisions register: <b>twenty-two corrections and thirty-five decisions</b>, of which roughly a third are still open and belong to the project lead. It exists because of a rule the pack takes from the corpus: <b>a published document is not silently edited</b>. Sources stay verbatim; corrections live here; draft-2 folds them in and this becomes its change log. Read it <b>second</b> if you are about to build from documents 00–04, so you read them with the errata in hand — and <b>last</b> if you are reading the pack through. Never not at all.</p>
 
 <h2 id="concepts">Key concepts</h2>
 <ul>
@@ -101,12 +101,12 @@
 </ul>
 
 <h2 id="read">Read the document</h2>
-<div class="mdread-label">📄 Pack document · 06__change-control.md · rendered from the <a href="src/06__change-control.md">raw markdown</a> (the source of truth)</div>
-<div class="mdread" id="mdread" data-src="src/06__change-control.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="src/06__change-control.md">open the raw markdown</a>.</p></noscript></div>
+<div class="mdread-label">📄 Pack document · 99__change-control.md · rendered from the <a href="src/99__change-control.md">raw markdown</a> (the source of truth)</div>
+<div class="mdread" id="mdread" data-src="src/99__change-control.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="src/99__change-control.md">open the raw markdown</a>.</p></noscript></div>
 
 <div class="pagenav">
-  <a href="diagrams.html">← 05 — Diagrams</a>
-  <a href="tabletop.html">07 — Tabletop exercise →</a>
+  <a href="user-assessment.html">← 14 — The user assessment</a>
+  <a href="index.html">Pack hub →</a>
 </div>
 </main>
 
@@ -116,7 +116,7 @@
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../../admin/versions.html">v0.1.16</a> · <a href="../../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../../admin/versions.html">v0.1.17</a> · <a href="../../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The registry</h4>

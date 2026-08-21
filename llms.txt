@@ -8,7 +8,7 @@
 > but never delete anything — not a bug. This site publishes that history, and the
 > registry rules it produces, before the registry exists.
 
-Site version: v0.1.16 (20 August 2026). Published by the sgit project — participant
+Site version: v0.1.17 (20 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## Properties agents may rely on
@@ -244,7 +244,18 @@ failure page, the four rules) are done; step 4 (a private registry) is the next 
   rather than operational, and checkable in the network panel in ten seconds.
   The library of pre-computed trees is public at https://pki.sgit.ai/assess/library.json — classes
   of installation rather than named products, because naming one means measuring it.
-- Status: draft-1 + change control + the drawn documents + the delivery scope + observability + the grant and key policy + one shipped surface, site-agent authored, awaiting project-lead adoption (N6 on comms).
+- Downloadable: https://pki.sgit.ai/packs/registry-mvp/registry-mvp-briefing-pack.zip — the fifteen
+  pack sources, every supporting brief, this file, and the reference implementation, with a briefing
+  for a fresh session picking it up cold. It asks for a readiness report rather than an
+  implementation: read the supporting material, then the pack, then say whether you have what you
+  need or list the questions that block you.
+- Change control is an APPENDIX and sits last (99__change-control.md), because it never stops
+  growing: twenty-three corrections and thirty-six decisions. Read it second if you are building
+  from documents 00-04, so you read them with the errata in hand — draft-1's definition of `grant`
+  was superseded on the day it shipped.
+- Status: a design pack with ONE SHIPPED CONSUMER. The registry itself is unbuilt; the assessment
+  at /assess is live and is a consumer of the model rather than a piece of the registry.
+  Site-agent authored, awaiting project-lead adoption (N6 on comms).
 
 ## Sources
 

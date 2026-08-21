@@ -290,6 +290,18 @@ pre.mermaid{background:var(--panel);border:1px solid var(--line);border-radius:1
 .mermaid{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:1rem;
   margin:1.2rem 0;box-shadow:var(--shadow);text-align:center;overflow-x:auto}
 
+/* the pack download — a real affordance rather than a link in a paragraph */
+.dl{display:flex;gap:1.4rem;align-items:center;justify-content:space-between;flex-wrap:wrap;
+  background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);
+  border-radius:12px;padding:1.1rem 1.3rem;margin:1.6rem 0;box-shadow:var(--shadow)}
+.dl > div{flex:1 1 22rem}
+.dl p{margin:.45rem 0 0;font-size:.88rem;color:#34363c;line-height:1.6}
+.dlbtn{display:flex;flex-direction:column;align-items:center;gap:.15rem;white-space:nowrap;
+  background:var(--accent);color:#fff;border:1px solid var(--accent);border-radius:10px;
+  padding:.75rem 1.3rem;font-weight:700;font-size:.9rem}
+.dlbtn span{font-family:var(--mono);font-size:.68rem;font-weight:400;opacity:.85;letter-spacing:.04em}
+.dlbtn:hover{background:var(--accent-dk);border-color:var(--accent-dk);text-decoration:none}
+
 /* ---------- the assessment workflow (/assess) ----------
    Built to make one claim checkable rather than to look busy: the page stores
    references into a public library and nothing typed, so there is no text input

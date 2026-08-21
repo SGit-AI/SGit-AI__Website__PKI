@@ -100,7 +100,7 @@ The reasons are now executed facts rather than design claims. Public vault read 
 
 *Added after publication, 20 August 2026 (site v0.1.12). No claim above has been changed — this pack supersedes rather than rewrites; the only edit was moving the licence line below this block so it stays last. Later documents that bear on this one:*
 
-- `06__change-control.md` — **C1 redefines *grant*** — the definition used above (one instance issued under a mandate) is superseded: a grant is what a credential technically permits, whether or not anybody wrote it down, and the gap to the mandate is excess authority
+- `99__change-control.md` — **C1 redefines *grant*** — the definition used above (one instance issued under a mandate) is superseded: a grant is what a credential technically permits, whether or not anybody wrote it down, and the gap to the mandate is excess authority
 - `09__wardley-maps.md` — **W3** — the two absences this brief scopes around, positioned: not underneath the shipped surface but on top of it, in Genesis
 - `10__user-stories-and-features.md` — this scope as fourteen features and six workflows, each tagged with the phase that ships it
 

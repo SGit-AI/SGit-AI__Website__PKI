@@ -159,7 +159,7 @@ Every step is a fetch of a public URL plus a signature check with the shipped CL
 
 *Added after publication, 20 August 2026 (site v0.1.12). No claim above has been changed — this pack supersedes rather than rewrites; the only edit was moving the licence line below this block so it stays last. Later documents that bear on this one:*
 
-- `06__change-control.md` — **C1 and C5** — the grant definition here is superseded; the mandate-location decision (option A) is confirmed independently by the corpus
+- `99__change-control.md` — **C1 and C5** — the grant definition here is superseded; the mandate-location decision (option A) is confirmed independently by the corpus
 - `08__ux-mockups.md` — **M4** — excess authority shown to the issuer *before* the mandate is signed, which is what C1 turns these schemas into
 - `10__user-stories-and-features.md` — workflows WF-3, WF-4 and WF-5, and the mandate lifecycle as states — including `Inert`, which is open decision 8 drawn
 - `11__observability.md` — the `check` statement body, and the field list it must **not** carry: a check event recording what the checker was authorising turns an asset log into a surveillance log

@@ -80,6 +80,7 @@ The MVP's stated purpose is developing the tech and workflows for LLM-session PK
 - `09__wardley-maps.md` — **W6** — these phases as a march right-to-left, with fixtures carrying inertia because a fiction that works is hard to replace with an inconvenient fact
 - `10__user-stories-and-features.md` — the traceability table — and a finding against this document: **WF-6, running a policy, has no acceptance test here**, because the policy layer did not exist as a concept when these four phases were written. Either phase 3 grows a fifth test or the policy layer is honestly out of the MVP
 - `11__observability.md` — an amendment to these phases: observability belongs in **phase 3, with mandates**, because the justification for building declared mandates *is* the evidence it produces. Phase 3's acceptance test grows a fifth case
+- `14__user-assessment.md` — and a finding against these phases recorded as C23: **the first useful thing this pack produced sits before phase 0 and depends on none of it.** The assessment needed a library and an interface, not a registry. A design pack whose first shipped artefact bypasses its own architecture should say so
 
 ---
 

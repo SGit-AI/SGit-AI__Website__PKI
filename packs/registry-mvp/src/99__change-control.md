@@ -191,6 +191,20 @@ C12 established that counting acceptances inverts. **The equivalent trap here is
 **The admission:** the page has no backend, so it can measure **none** of them. That is the same property that makes the privacy claim architectural. If any of these numbers is ever wanted it has to be collected somewhere that says so, which is a decision with a cost — stated rather than solved quietly.
 **Status:** adopted as the measure set; unmeasurable as built, deliberately. Decision 33.
 
+### C23 — Part of this pack is now built, which changes how the rest of it should be read
+
+**Source:** the assessment at `/assess`, shipped at site v0.1.16, specified by document 14.
+**What changes.** Until v0.1.16 every document here was a design, and the pack said so. One surface now exists, and it was not built from the abstract parts: **it was built from C16's grant tree, C16's three-tier control test, C17's prohibition rendering and C17's metric family**, which means four corrections that had only ever been argued have now been implemented once each. That is the first evidence in this pack that its own corrections are buildable rather than merely defensible.
+**Three things the build changed about the pack's own claims, and they belong here rather than in a quiet edit:**
+
+**1. Document 10's feature table needs a footnote it cannot carry.** Its honest reading was *everything at phase 0–1 is designed and nothing is built.* That is still true of every registry feature, F1–F19 — and it is no longer true of the pack as a whole. The distinction to keep is that **what shipped is a consumer of the registry's model, not a piece of the registry**: it renders grant trees and mandates and stores nothing on anybody's behalf. The registry itself remains entirely unbuilt.
+
+**2. The build order gained a phase nobody planned, before phase 0.** Document 04 sequences fixtures → read path → write path → mandates → demo. The assessment sits *before* all of it and depends on none of it, because it needs no registry: it needs a **library** and an **interface**. That is worth stating as a finding rather than a scheduling note — **the first useful thing this pack produced needed none of the infrastructure the pack is about**, and a design pack whose first shipped artefact bypasses its own architecture should say so out loud.
+
+**3. One of the pack's own standards was found unmeetable in the field.** Document 10's test is that a risk carries a **named acceptor**. The first interface to try it discovered that a name is a fact about the visitor's organisation and has nowhere safe to live, so it offers a **role** instead (decision 30). The standard is not wrong; it is **unreachable on a page that stores nothing about the visitor**, and the two constraints are in genuine conflict. Recorded so the next builder meets it as a known tension rather than as a surprise.
+
+**Status:** adopted as the pack's status. Decision 36.
+
 ## The decisions register
 
 | # | Decision | Made by | Status |
@@ -230,6 +244,7 @@ C12 established that counting acceptances inverts. **The equivalent trap here is
 | 33 | Measure action taken, not alarm produced | v0.33.61 (C22) | **Settled as the measure set — and unmeasurable as built, with no backend** |
 | 34 | When do library entries become named products? | pack doc 14 | **Open — naming one means measuring it under the participant rules** |
 | 35 | Is a scan ever added, and where does its output go? | pack doc 14 | **Open — never browser storage, which argues for the vault path before the scan** |
+| 36 | The pack is a design pack with one shipped consumer; the registry itself is unbuilt | pack doc 14 (C23) | **Settled as the pack's status** |
 
 ---
 
