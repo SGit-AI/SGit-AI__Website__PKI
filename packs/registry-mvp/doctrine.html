@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Appendix C — Wardley doctrine, and where this project actually stands · pki.sgit.ai</title>
+<meta name="description" content="The 40 Wardley doctrines in six categories and four phases, with an honest self-assessment of the registry MVP pack against every one of them — including what it explains about where this project is weak.">
+<link rel="canonical" href="https://pki.sgit.ai/packs/registry-mvp/doctrine.html">
+<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="doctrine/doctrine.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../index.html">pki<span>.sgit.ai</span></a>
+  <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../../admin/versions.html" title="Site release history">v0.1.20</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../../failure/index.html">The registry<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../failure/index.html">Why they don't exist</a>
+      <a class="sl" href="../../rules/index.html">The four rules</a>
+      <a class="sl" href="../../mandate/index.html">Identity &amp; mandate</a>
+      <a class="sl" href="../../roadmap/index.html">Build order</a>
+      <a class="sl" href="../../rules/prior-art.html">Prior art</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../bootstrap/index.html">The layers<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../bootstrap/index.html">The bootstrap trap</a>
+      <a class="sl" href="../../enrolment/index.html">Enrolment</a>
+      <a class="sl" href="../../execution/index.html">The execution broker</a>
+      <a class="sl" href="../../shipped/index.html">What already ships</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../assess/index.html">Map your case<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../assess/index.html">Map your own case</a>
+      <a class="sl" href="../../assess/library.html">The library of trees</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../origins/index.html">Origins<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../origins/index.html">Origins: 2026</a>
+      <a class="sl" href="../../origins/review.html">The review, redacted</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../documents/index.html">The documents</a>
+      <a class="sl" href="../../packs/index.html">Dev packs</a>
+      <a class="sl" href="../../packs/registry-mvp/index.html">The registry MVP pack</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../../admin/versions.html">Release history</a>
+      <a class="sl" href="../../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+  <script src="../../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc wide">
+<div class="crumb"><a href="../../index.html">pki.sgit.ai</a> / <a href="../index.html">packs</a> / <a href="index.html">registry-mvp</a> / doctrine</div>
+<h1>Appendix C — Doctrine</h1>
+<p class="lead">Wardley's forty doctrines are the part of his model that <em>always</em> applies — the training, not the battle plan. This appendix explains them for readers who know the maps and have never met the doctrine, then rates this project against all forty. The shape of the result turned out to be the finding.</p>
+
+<div class="note"><b>Read this as a self-assessment by the party being assessed</b>, which is the weakest kind there is. It is published in that form on purpose: every rating names the artefact it rests on, so a reader who disagrees has the evidence in front of them. Assessment version <code data-ver>…</code>.</div>
+
+<h2 id="what">What doctrine is, and why it is not strategy</h2>
+
+<p>Most people meet Wardley Mapping through the maps — components positioned against a value chain and an evolution axis. The maps are only one layer of the model, and they are the <em>context-specific</em> one. Doctrine is the layer underneath, and its defining property is that it is <b>context-free</b>: it applies whatever your industry, landscape or strategy happens to be.</p>
+
+<div class="stack">
+  <div class="slayer s5"><b>Leadership</b><span>The context-specific moves — gameplay. What <em>you</em> do, here, now.</span></div>
+  <div class="slayer s4 hi"><b>Doctrine</b><span>Universal good practice. Applies to everyone, regardless of context. <b>This page.</b></span></div>
+  <div class="slayer s3"><b>Climate</b><span>The rules that govern change — evolution, inertia, the things you do not control.</span></div>
+  <div class="slayer s2"><b>Landscape</b><span>The map. Positions relative to an anchor, usually a user need.</span></div>
+  <div class="slayer s1"><b>Purpose</b><span>The mission. What game you are playing at all.</span></div>
+</div>
+
+<p>Wardley's own analogy is military: doctrine is the <b>training of your forces</b> — the standard techniques any unit benefits from, drilled regardless of which battle they end up in. You would not send troops into a fight to learn how to communicate. Strategy tells you where to attack; doctrine is why you are capable of attacking anything.</p>
+
+<p class="claim">Strategy and mapping are context-specific. Doctrine always applies — so an organisation's ability to handle a hard problem tends to track how well it practises doctrine, before any strategy is chosen.</p>
+
+<p>One distinction matters, and Wardley is explicit about it: these are principles you <b>choose</b> because the evidence says they are broadly useful — <em>not</em> immutable laws. Several writers separate <em>doctrine</em>, meaning chosen and evidence-based good practice, from <em>dogma</em>, meaning belief held past the point of questioning. Rating yourself against forty of them, as this page does, is only useful if you are willing to argue with the rating.</p>
+
+<h2 id="how">How they are organised</h2>
+<p>Roughly forty principles, grouped into <b>six categories</b> and sequenced into <b>four phases</b> of increasing maturity. The phases are the useful part: they say what to fix first. There is no point distributing decision-making before anyone agrees what the words mean.</p>
+
+<h3>The four phases</h3>
+<div id="phases" class="phases"></div>
+<p class="small dim">Click any phase to filter the forty below. The bar shows practised · partly · not practised · no basis yet.</p>
+
+<h3>The six categories</h3>
+<div id="cats" class="cats"></div>
+
+<h2 id="verdict">Where this project actually stands</h2>
+<p class="dim small">Assessed as if the pack were built as specified — so the ratings cover the design, the published record and the one shipped surface, not a running registry.</p>
+<div id="headline" class="headline"></div>
+
+<h2 id="all">All forty</h2>
+<div id="controls"></div>
+<div class="dsplit">
+  <div id="grid" class="dgrid"></div>
+  <div id="detail"></div>
+</div>
+
+<h2 id="reading">What the shape says</h2>
+<p><b>The result is not a score, and it is not flattering in an interesting way.</b> This project practises the doctrines that a small, documentation-heavy effort can practise on its own: agreeing what words mean, publishing the reasoning, challenging assumptions including its own, knowing the details of what it measured, using standards rather than inventing them, and admitting error in public. Those are real, and they are also the cheap ones for a project of this shape.</p>
+
+<p><b>It is weak on every doctrine that requires other people.</b> <em>Know your users</em> is the sharpest: the only user is the project itself. <em>Listen to your ecosystem</em> has no ecosystem to listen to. <em>Be the owner</em> has an empty <code>Sponsor</code> field on its own specification. <em>Distribute power and decision making</em> routes every open decision to one person, and the register proves it. Five more cannot be rated at all, because rating team structure with no team would be theatre.</p>
+
+<p class="claim">The two findings the pack already had — that nobody outside the project has been asked whether this is a need, and that nothing can move past Draft without an accepting authority — are not two problems. They are the same doctrinal hole, showing up in two places.</p>
+
+<p>Which gives the appendix a use beyond the scoring. <b>Phase I is nine doctrines: five practised, three partly, and one not</b> — and the one that is not is <em>know your users</em>, which is the one that gates everything after it. The cheapest next action in the entire pack — ask five operators whether anybody has ever asked them to prove an agent's authority — is <b>a Phase I doctrine fix</b>, and it needs no registry, no REP and no code.</p>
+
+<h2 id="caveats">Honest tensions in the assessment itself</h2>
+<table class="split">
+  <thead><tr><th>Tension</th><th>Note</th></tr></thead>
+  <tbody>
+    <tr><td><b>Self-assessed</b></td><td>The party being rated wrote the ratings. Mitigated only by naming the artefact behind each one, which turns disagreement into something a reader can act on rather than merely feel.</td></tr>
+    <tr><td><b>“No basis yet” is convenient</b></td><td>Five doctrines are excluded because there is no organisation. That is true, and it is also the answer that flatters us most — a reader should treat those five as unearned rather than neutral.</td></tr>
+    <tr><td><b>The phase model implies a ladder</b></td><td>Wardley sequences the phases, and real projects practise bits of Phase III while missing bits of Phase I. This one does exactly that.</td></tr>
+    <tr><td><b>Forty is approximate</b></td><td>The canonical list is “roughly forty” and different sources group and name them slightly differently. The categories and phase placements here follow the briefing this appendix was built from; a few placements are ours and are arguable.</td></tr>
+    <tr><td><b>Rating design rather than a running system</b></td><td>The registry is unbuilt. Doctrines about operations and flow are rated against how the <em>project</em> is run, which is a weaker claim than rating a service.</td></tr>
+  </tbody>
+</table>
+
+<h2 id="sources">Sources</h2>
+<ul class="srcs">
+  <li><a href="https://www.wardleymaps.com/glossary/doctrine">Doctrine — Wardley Maps glossary</a></li>
+  <li><a href="https://learnwardleymapping.com/doctrine/">Doctrine — Learn Wardley Mapping</a>, and <a href="https://learnwardleymapping.com/2020/08/17/principles-first/">Principles First</a>, which gives the four phases</li>
+  <li><a href="https://learnwardleymapping.com/2019/12/28/the-value-of-doctrine/">The Value of Doctrine</a> and <a href="https://learnwardleymapping.com/2020/12/07/getting-started-with-wardleys-doctrine-is-easier-than-you-think/">Getting Started with Doctrine</a></li>
+  <li><a href="https://medium.com/swlh/doctrine-or-dogma-2abeaef0cbc7">Doctrine or Dogma?</a> — the chosen-practice against unquestioned-belief distinction</li>
+  <li><a href="https://www.theuncertaintyproject.org/tools/wardley-maps">Wardley Maps — The Uncertainty Project</a>, for the five-layer model</li>
+  <li>The raw assessment data, for anybody who would rather read it than click it: <a href="doctrine/doctrine.json">doctrine.json</a></li>
+</ul>
+
+<div class="pagenav">
+  <a href="rep-0001.html">← Appendix B — REP-0001</a>
+  <a href="change-control.html">Appendix D — Change control →</a>
+</div>
+
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../../admin/versions.html">v0.1.20</a> · <a href="../../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The registry</h4>
+    <a href="../../assess/index.html">&#8594; Map your own case</a>
+    <a href="../../failure/index.html">Why they don't exist</a>
+    <a href="../../rules/index.html">The four rules</a>
+    <a href="../../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../../roadmap/index.html">Build order</a>
+    <a href="../../rules/prior-art.html">Prior art</a>
+  </div>
+  <div>
+    <h4>The three layers</h4>
+    <a href="../../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../../enrolment/index.html">Enrolment</a>
+    <a href="../../execution/index.html">The execution broker</a>
+    <a href="../../shipped/index.html">What already ships</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../../origins/index.html">Origins: 2026</a>
+    <a href="../../documents/index.html">The documents</a>
+    <a href="../../packs/registry-mvp/index.html">The registry MVP pack</a>
+    <a href="../../about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../../admin/versions.html">Release history</a>
+    <a href="../../llms.txt">llms.txt</a>
+  </div>
+</div></footer>
+<script type="module" src="doctrine/doctrine.js"></script>
+</body>
+</html>

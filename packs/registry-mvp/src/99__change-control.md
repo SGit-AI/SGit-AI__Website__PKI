@@ -232,6 +232,19 @@ C12 established that counting acceptances inverts. **The equivalent trap here is
 **One correction to a claim this pack published.** Document 14 and the v1 library said a separate user account was "an hour". **It is not** — paths, permissions, editors and agents all assume one account, and desktop applications frequently cannot be run that way at all. The reason almost nobody does the most effective thing available is that it is genuinely difficult, and a tool that implies otherwise blames the reader for a real obstacle. Corrected in the library and recorded here.
 **Status:** shipped at site v0.1.19. Decisions 40–41.
 
+### C26 — Forty doctrines, and the shape of the answer
+
+**Source:** appendix C of this pack, at the project lead's request, from a briefing on Wardley's doctrine.
+**What it is.** The forty context-free principles — six categories, four phases — with this project rated against every one, and enough explanation of what doctrine *is* that a reader who knows the maps and has never met the doctrine can follow it. Doctrine is the layer under the map: **the maps are context-specific and doctrine always applies**, which is why an organisation's ability to handle a hard problem tends to track how well it practises doctrine before any strategy is chosen.
+**The result, and the shape is the finding rather than the score.** Of the 35 doctrines that can be rated at this size, **17 are practised, 12 partly, and 6 are not.** Five more need an organisation and are marked *no basis yet* rather than scored, because rating team structure with no team would be theatre.
+**And the pattern is uncomfortably clean.** This project is strong exactly where a documentation-heavy solo effort can be strong **on its own** — a common language, transparency, challenging assumptions, knowing the details of what it measured, standards, embracing uncertainty, humility. It is weak on **every doctrine that requires other people**: *know your users*, *listen to your ecosystem*, *be the owner*, *distribute power and decision making*, *inspire others*, *exploit the landscape*.
+
+> **The two findings this pack already carried are not two problems.** Internal FAQ 11 — nobody outside the project has been asked whether this is a need — and REP-0001's empty `Sponsor` field are **the same doctrinal hole appearing in two places**.
+
+**What it changes about what happens next.** Phase I is nine doctrines: five practised, three partly, and **one not — *know your users*, which gates everything after it.** Which makes decision 39 — ask five operators whether anybody has ever asked them to prove an agent's authority — **a Phase I doctrine fix rather than a nice-to-have**, and it needs no registry, no REP and no code. That is the strongest argument the appendix makes for existing.
+**Housekeeping that came with it.** The appendixes are re-lettered so the letters follow reading order and change control keeps the last: **A** the PR/FAQ, **B** REP-0001, **C** doctrine, **D** change control. C24 above says change control became Appendix C, which was true when it was written and is superseded by this line rather than edited.
+**Status:** adopted as an appendix. Decision 42.
+
 ## The decisions register
 
 | # | Decision | Made by | Status |
@@ -277,6 +290,7 @@ C12 established that counting acceptances inverts. **The equivalent trap here is
 | 39 | Ask five operators whether the problem is recognised | appendix A (C24) | **Open — the cheapest next step in the pack, and it needs no registry** |
 | 40 | The assessment has no cases — it has agents | pack doc 14 (C25) | **Settled — a design vocabulary in an interface produced a defect that looked like a UI bug** |
 | 41 | Risk acceptance is out of the assessment | pack doc 14 (C25) | **Settled — it belongs to the risk product** |
+| 42 | Doctrine is assessed, and re-assessed when the project has people | appendix C (C26) | **Open — the rating is a self-assessment and five doctrines cannot be rated at all yet** |
 
 ---
 

@@ -259,8 +259,12 @@ PACKS = [
      "PEPs are CC0; this is CC BY 4.0, and the deviation is stated rather than made quietly.",
      "One REP for six separately contestable ideas is against PEP practice, and it should split the moment any one of them is contested.",
     ]),
+   dict(slug="doctrine", standalone=True,
+    title="Appendix C \u2014 Doctrine",
+    role="Wardley's forty doctrines, and an honest self-assessment of this project against every one",
+    ),
    dict(slug="change-control", file="99__change-control.md",
-    title="Appendix C — Change control",
+    title="Appendix D — Change control",
     role="Every correction and every decision in one place — the errata, and the register of what is settled and what is not",
     summary="The appendix, and the one document in this pack that never stops growing — which is why it sits last rather than at number six. Every correction the corpus has made to a published document in this pack, each with its source and its status, and the decisions register: <b>twenty-two corrections and thirty-five decisions</b>, of which roughly a third are still open and belong to the project lead. It exists because of a rule the pack takes from the corpus: <b>a published document is not silently edited</b>. Sources stay verbatim; corrections live here; draft-2 folds them in and this becomes its change log. Read it <b>second</b> if you are about to build from documents 00–04, so you read them with the errata in hand — and <b>last</b> if you are reading the pack through. Never not at all.",
     concepts=[
@@ -373,6 +377,7 @@ def write_pack(p):
 
     # ---- reader pages ----
     docs = p["docs"]
+    docs = [d for d in docs if not d.get("standalone")]
     for i, d in enumerate(docs):
         prev_l = f'<a href="{docs[i-1]["slug"]}.html">← {docs[i-1]["title"]}</a>' if i else '<a href="index.html">← Pack hub</a>'
         next_l = f'<a href="{docs[i+1]["slug"]}.html">{docs[i+1]["title"]} →</a>' if i+1 < len(docs) else '<a href="index.html">Pack hub →</a>'

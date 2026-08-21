@@ -7,6 +7,7 @@
 
 import * as M from './model.js';
 import * as G from './graph.js';
+import * as SC from './scene.js';
 import { storage } from './store.js';
 import './components.js';
 
@@ -16,6 +17,8 @@ const $ = id => document.getElementById(id);
 let LIB = null;
 let state = M.emptyState();
 let inspected = null;   /* { kind: 'node'|'cap', id, surface } */
+/* The graph shows relationships; the scene shows recognition. Two jobs, one model. */
+let view = 'scene';
 
 /* ---------------------------------------------------------------- boot */
 fetch('library.json')
@@ -68,14 +71,21 @@ function render() {
     $('graphs').innerHTML = r.graphs.map(g => {
       const s = LIB.surfaces.find(x => x.id === g.surface);
       const hi = highlightSet(r);
+      const selNode = inspected?.kind === 'node' && inspected.surface === g.surface ? inspected.id : null;
+      const body = view === 'scene'
+        ? `<div class="gscroll">${SC.render(LIB, g, { selected: selNode })}</div>` + SC.legend()
+        : `<div class="gscroll">${G.render(g, { highlight: hi.surface === g.surface ? hi.ids : new Set(), selected: selNode })}</div>` + G.legend(LIB);
       return `<figure class="gwrap" data-surface="${esc(g.surface)}">
         <figcaption><b>${esc(s.label)}</b> <span class="dim small">— ${esc(s.oneline)}</span></figcaption>
-        <div class="gscroll">${G.render(g, { highlight: hi.surface === g.surface ? hi.ids : new Set(), selected: inspected?.kind === 'node' && inspected.surface === g.surface ? inspected.id : null })}</div>
-        ${G.legend(LIB)}
+        ${body}
         <details class="rerun"><summary>How these rows were produced, so you can disagree with them</summary>
           <p class="small">${esc(LIB.rerun[g.surface] || '')}</p></details>
       </figure>`;
     }).join('');
+    $('viewtoggle').innerHTML = ['scene', 'graph'].map(v =>
+      `<button class="vt${v === view ? ' on' : ''}" data-view="${v}">${v === 'scene' ? 'As a picture' : 'As a graph'}</button>`).join('');
+    $('viewtoggle').querySelectorAll('[data-view]').forEach(b =>
+      b.addEventListener('click', () => { view = b.dataset.view; render(); }));
     wireGraph();
 
     $('intent').data = { lib: LIB, reach: r.reach, intent: state.intent };
@@ -151,7 +161,8 @@ function inspectorBody(r) {
       <p class="small"><b>Weakest link:</b> ${esc(e.weakest.label)} — ${esc(LIB.tiers[e.weakest.tier])}</p>
       ${e.mechanisms && e.mechanisms.length ? `<p class="small"><b>What is claimed to be in the way:</b> ${e.mechanisms.map(esc).join('; ')}</p>` : '<p class="small">Nothing is claimed to be in the way anywhere on this path.</p>'}
       ${e.viaEscalation ? `<div class="note small"><b>There is a way around.</b> ${esc((LIB.escalations.find(x => x.surfaces.includes(e.surface)) || {}).why || '')}</div>` : ''}
-      ${e.unverified ? `<div class="note small">You answered <b>not sure</b> to a question this path depends on, so it is shown and marked rather than assumed away.</div>` : ''}`;
+      ${e.unverified ? `<div class="note small">You answered <b>not sure</b> to a question this path depends on, so it is shown and marked rather than assumed away.</div>` : ''}
+      ${evidencePack(e)}`;
   }
   const g = r.graphs.find(x => x.surface === inspected.surface);
   const n = g?.nodes.find(x => x.id === inspected.id);
@@ -172,10 +183,25 @@ function inspectorBody(r) {
     <p class="small dim"><b>Where this comes from:</b> ${esc(LIB.evidence[n.evidence] || n.evidence)}</p>`;
 }
 
+/* What this capability actually rests on: every claim in the path, its class, and how to
+   go and check it. The claim is only ever as good as its weakest evidence, so the pack
+   names that too rather than averaging it away. */
+function evidencePack(e) {
+  const order = ['derived', 'third-party', 'documented', 'tested', 'measured'];
+  const rows = e.path.map(n => `<tr><td>${esc(n.label)}</td><td><span class="evt e-${esc(n.evidence)}">${esc(n.evidence)}</span></td></tr>`).join('');
+  const weakestEv = e.path.reduce((acc, n) =>
+    order.indexOf(n.evidence) < order.indexOf(acc.evidence) ? n : acc, e.path[0]);
+  return `<details class="evpack" open><summary>What this rests on</summary>
+    <table class="evtable"><tbody>${rows}</tbody></table>
+    <p class="small"><b>Weakest evidence on the path:</b> <span class="evt e-${esc(weakestEv.evidence)}">${esc(weakestEv.evidence)}</span> —
+      ${esc(LIB.evidence[weakestEv.evidence] || '')}</p>
+    <p class="small dim"><b>Check it yourself:</b> ${esc(LIB.rerun[e.surface] || '')}</p></details>`;
+}
+
 function wireGraph() {
   document.querySelectorAll('.gwrap').forEach(fig => {
     const surface = fig.dataset.surface;
-    fig.querySelectorAll('[data-node]').forEach(g => {
+    fig.querySelectorAll('svg [data-node]').forEach(g => {
       const open = () => { inspected = { kind: 'node', id: g.dataset.node, surface }; render();
         document.getElementById('inspector').scrollIntoView({ block: 'nearest', behavior: 'smooth' }); };
       g.addEventListener('click', open);

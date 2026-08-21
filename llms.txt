@@ -8,7 +8,7 @@
 > but never delete anything — not a bug. This site publishes that history, and the
 > registry rules it produces, before the registry exists.
 
-Site version: v0.1.19 (20 August 2026). Published by the sgit project — participant
+Site version: v0.1.20 (20 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## Properties agents may rely on
@@ -259,13 +259,22 @@ failure page, the four rules) are done; step 4 (a private registry) is the next 
   for a fresh session picking it up cold. It asks for a readiness report rather than an
   implementation: read the supporting material, then the pack, then say whether you have what you
   need or list the questions that block you.
-- Three appendixes. A: a Working Backwards PR/FAQ — the pack from a customer inward, whose
+- Four appendixes. A: a Working Backwards PR/FAQ — the pack from a customer inward, whose
   customer-quote slot is published EMPTY because there is no customer and inventing one is what
   this site's participant rules forbid. B: REP-0001, the normative spec in Python PEP form, with
   RFC 2119 keywords and the sections PEP 1 makes mandatory (Security Implications, How to Teach
   This, Rejected Ideas, Open Issues) — the one place the schemas are current rather than
   superseded-with-a-note, Status Draft, Sponsor field empty because it has no champion. C: change
-  control, which sits last (99__change-control.md), because it never stops
+  C: https://pki.sgit.ai/packs/registry-mvp/doctrine.html — Wardley's FORTY DOCTRINES in six
+  categories and four phases, explained for readers who know the maps and not the doctrine, with
+  this project rated against every one. Of the 35 that can be rated at this size: 17 practised,
+  12 partly, 6 not; five need an organisation and are marked "no basis yet" rather than scored.
+  THE SHAPE IS THE FINDING — strong exactly where a documentation-heavy solo effort can be strong
+  alone, weak on every doctrine that needs other people. Which makes "nobody outside the project
+  has been asked whether this is a need" and "REP-0001 has no sponsor" the same doctrinal hole in
+  two places, and makes asking five operators a PHASE I doctrine fix rather than a nice-to-have.
+  Raw data: https://pki.sgit.ai/packs/registry-mvp/doctrine/doctrine.json
+  D: change control, which sits last (99__change-control.md), because it never stops
   growing: twenty-three corrections and thirty-six decisions. Read it second if you are building
   from documents 00-04, so you read them with the errata in hand — draft-1's definition of `grant`
   was superseded on the day it shipped.

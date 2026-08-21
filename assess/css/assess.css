@@ -200,3 +200,56 @@ svg.graph .edge.dim{opacity:.2}
 .rawh{font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin:0 0 .5rem}
 .capgh{font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin:1rem 0 .4rem}
 .opt.tight code{margin-left:auto;font-size:.7rem}
+
+/* ---------- the scene: recognition rather than relationships ---------- */
+.viewtoggle{display:inline-flex;gap:.25rem;background:var(--panel2);border:1px solid var(--line);
+  border-radius:9px;padding:.2rem;margin:.5rem 0 .2rem}
+.vt{background:none;border:0;border-radius:7px;padding:.35rem .8rem;cursor:pointer;
+  font:600 .8rem/1 var(--sans);color:var(--dim)}
+.vt.on{background:var(--accent);color:#fff}
+svg.scene{display:block;width:100%;max-width:var(--nat);height:auto;margin:.4rem auto}
+@media (max-width:620px){svg.scene{width:auto;min-width:600px;max-width:none}}
+svg.scene .frame{fill:var(--panel);stroke:var(--line2);stroke-width:1.5;stroke-dasharray:6 5}
+svg.scene .frame.vendor{fill:rgba(15,118,110,.04)}
+svg.scene .ftitle{font:700 11px var(--sans);fill:var(--dim);letter-spacing:.06em;text-transform:uppercase}
+svg.scene .boundary{stroke:var(--accent);stroke-width:2.5;stroke-dasharray:3 6}
+svg.scene .bmark{font:600 9.5px var(--sans);fill:var(--accent-dk)}
+svg.scene .reach{stroke-width:2;fill:none}
+svg.scene .reach.open{stroke:var(--red);opacity:.55}
+svg.scene .reach.setting{stroke:var(--warm);opacity:.55;stroke-dasharray:5 4}
+svg.scene .reach.blocked{stroke:var(--line2);opacity:.5;stroke-dasharray:2 5}
+svg.scene .reach.on{opacity:1;stroke-width:3}
+svg.scene .stop circle{fill:var(--panel);stroke:var(--accent);stroke-width:2}
+svg.scene .stop path{stroke:var(--accent);stroke-width:2}
+svg.scene .node{cursor:pointer}
+svg.scene .agent rect{fill:var(--term-bg);stroke:var(--line2)}
+svg.scene .agent .bar{fill:#22272e} svg.scene .agent .bar2{fill:#22272e}
+svg.scene .agent .acap{font:600 11px var(--sans);fill:var(--term-dim)}
+svg.scene .agent .prompt{font:12px var(--mono);fill:var(--term-green)}
+svg.scene .agent .cmd{fill:var(--term-cyan)}
+svg.scene .agent.sel rect{stroke:var(--accent);stroke-width:2}
+svg.scene .asset rect{fill:var(--panel);stroke:var(--line2);stroke-width:1.5}
+svg.scene .asset .ico{fill:none;stroke:var(--dim);stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round}
+svg.scene .asset .al{font:600 10px var(--sans);fill:var(--dim)}
+svg.scene .asset.open rect{stroke:var(--red)} svg.scene .asset.open .ico{stroke:var(--red)}
+svg.scene .asset.warn rect{stroke:var(--warm)} svg.scene .asset.warn .ico{stroke:var(--warm)}
+svg.scene .asset.safe rect{stroke:var(--accent);fill:rgba(15,118,110,.06)} svg.scene .asset.safe .ico{stroke:var(--accent)}
+svg.scene .asset.sel rect{stroke-width:3}
+svg.scene .asset:hover rect{stroke-width:2.5}
+svg.scene .asset:focus{outline:none} svg.scene .asset:focus rect{stroke:var(--accent);stroke-width:3}
+svg.scene .unvmark{font:800 12px var(--sans);fill:var(--yellow)}
+svg.scene .out rect{fill:var(--panel2)} svg.scene .out .ai{font:700 15px var(--sans);fill:var(--dim)}
+.lg .sc-open{background:var(--red)} .lg .sc-warn{background:var(--warm)} .lg .sc-safe{background:var(--accent)}
+
+/* ---------- the evidence pack behind a capability ---------- */
+.evpack{margin-top:.6rem;border-top:1px dashed var(--line);padding-top:.5rem}
+.evpack summary{cursor:pointer;font-size:.82rem;font-weight:600;color:var(--accent-dk)}
+.evtable{width:100%;border-collapse:collapse;margin:.4rem 0;font-size:.76rem}
+.evtable td{padding:.2rem .3rem;border-bottom:1px solid var(--line)}
+.evtable td:last-child{text-align:right;width:6.5rem}
+.evt{font-family:var(--mono);font-size:.63rem;letter-spacing:.05em;text-transform:uppercase;
+  border-radius:99px;padding:.06rem .42rem;border:1px solid;white-space:nowrap}
+.e-derived{color:var(--dim);border-color:var(--line2);background:var(--panel2)}
+.e-third-party{color:var(--yellow);border-color:rgba(161,98,7,.35);background:rgba(161,98,7,.07)}
+.e-measured{color:var(--accent-dk);border-color:rgba(15,118,110,.4);background:rgba(15,118,110,.08)}
+.e-tested{color:var(--accent-dk);border-color:rgba(15,118,110,.55);background:rgba(15,118,110,.14);font-weight:700}
