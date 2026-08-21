@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://pki.sgit.ai/assess/index.html</loc><lastmod>2026-08-20</lastmod></url>
   <url><loc>https://pki.sgit.ai/index.html</loc><lastmod>2026-08-20</lastmod></url>
   <url><loc>https://pki.sgit.ai/failure/index.html</loc><lastmod>2026-08-20</lastmod></url>
   <url><loc>https://pki.sgit.ai/bootstrap/index.html</loc><lastmod>2026-08-20</lastmod></url>
@@ -39,6 +40,7 @@
   <url><loc>https://pki.sgit.ai/packs/registry-mvp/observability.html</loc><lastmod>2026-08-20</lastmod></url>
   <url><loc>https://pki.sgit.ai/packs/registry-mvp/grant-tree.html</loc><lastmod>2026-08-20</lastmod></url>
   <url><loc>https://pki.sgit.ai/packs/registry-mvp/keys-and-signatures.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://pki.sgit.ai/packs/registry-mvp/user-assessment.html</loc><lastmod>2026-08-20</lastmod></url>
   <url><loc>https://pki.sgit.ai/documents/register-fixtures.html</loc><lastmod>2026-08-20</lastmod></url>
   <url><loc>https://pki.sgit.ai/documents/grant-vs-mandate.html</loc><lastmod>2026-08-20</lastmod></url>
   <url><loc>https://pki.sgit.ai/documents/site-access-report.html</loc><lastmod>2026-08-20</lastmod></url>
@@ -49,6 +51,7 @@
   <url><loc>https://pki.sgit.ai/documents/observability.html</loc><lastmod>2026-08-20</lastmod></url>
   <url><loc>https://pki.sgit.ai/documents/grant-tree.html</loc><lastmod>2026-08-20</lastmod></url>
   <url><loc>https://pki.sgit.ai/documents/keys-and-signatures.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://pki.sgit.ai/documents/user-section.html</loc><lastmod>2026-08-20</lastmod></url>
   <url><loc>https://pki.sgit.ai/documents/notary.html</loc><lastmod>2026-08-20</lastmod></url>
   <url><loc>https://pki.sgit.ai/documents/register-ui.html</loc><lastmod>2026-08-20</lastmod></url>
 </urlset>

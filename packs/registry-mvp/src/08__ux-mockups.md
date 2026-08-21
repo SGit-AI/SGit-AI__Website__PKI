@@ -490,6 +490,7 @@ These are the ones to protect in review. Each is the only place a reader learns 
 - `11__observability.md` — the data source the badge's **last checked** field did not have. It is the issuer's own lane, which also means M4 should show a subject's check interval before a second mandate is issued to it
 - `12__grant-tree-and-control-labels.md` — two screens change without changing layout: M1's excess-authority box should expand into the **path through the tree** that produces its count, and M4 should render the mandate **as prohibitions** for the person signing while storing the allow-list, with the rendering dated
 - `13__keys-and-signatures.md` — one addition to M2's transcript: where a signature verified against a **published** private half, the result must say so, because that is the exact case where a verifier succeeds and concludes something false
+- `14__user-assessment.md` — the first screens in this pack that were **built** rather than mocked. Two of its decisions cut against M1 and M4: the acceptor is a **role**, because a name is a fact about the visitor's organisation, and the gap is shown as a picture with no score at all
 
 ---
 

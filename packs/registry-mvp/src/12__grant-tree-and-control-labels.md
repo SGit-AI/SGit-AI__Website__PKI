@@ -243,4 +243,10 @@ Stated here rather than by editing the published documents.
 
 ---
 
+*Added after publication, 20 August 2026 (site v0.1.16). No claim above has been changed — this pack supersedes rather than rewrites. Later documents that bear on this one:*
+
+- `14__user-assessment.md` — this document's tree, labels and three tiers, built and rendered at [/assess](../../assess/index.html) against a public library. It also answers open question 1 in the negative for now: the registry holds trees produced elsewhere and produces none itself
+
+---
+
 This document is released under the Creative Commons Attribution 4.0 International licence (CC BY 4.0).

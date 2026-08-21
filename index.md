@@ -6,7 +6,7 @@
 > Anyone proposing a key registry now should be able to show they designed it with that
 > history in hand.
 
-*Source: <https://pki.sgit.ai/index.html> · site v0.1.15 · markdown twin of the front page.*
+*Source: <https://pki.sgit.ai/index.html> · site v0.1.16 · markdown twin of the front page.*
 
 ---
 
@@ -89,6 +89,11 @@ twenty-four stories, six workflows — [observability](packs/registry-mvp/observ
 mandate by refusing the question and telling you instead who has never checked one, and
 [the grant tree](packs/registry-mvp/grant-tree.html) — blast radius as a path, and the three-tier
 test for whether a control is a boundary at all: [start at the pack hub](packs/registry-mvp/index.html).
+
+And one part of it is built rather than designed: [map your own case](assess/index.html) — pick the
+agents you run, tick what you meant them to do, and see the difference. It stores your choices and
+never your answers, entirely in your browser, and you can check that in the network panel in ten
+seconds.
 
 ## Who is writing this
 

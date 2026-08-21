@@ -164,6 +164,33 @@ The entries above record what the *corpus* corrects. These record what the pack'
 **One caveat that is not small:** whether a rented agent instance can hold a private half across sessions is open, and it decides whether the agent-instance row is achievable or aspirational.
 **Status:** adopted; decisions 24–26. **C3 reinforced, not amended.**
 
+### C20 — The first thing in this pack that is built, and the rule that shaped it
+
+**Source:** `v0.33.61__dev-brief__user-section-is-a-conformance-test…`, and document 14.
+**What shipped:** an assessment workflow at `/assess`, where a visitor assembles their own agent installations as grant trees (C16) and mandates (C17), sees the gap, and records a decision per gap with an acceptor and an interval. It is the first thing in this pack that exists rather than being specified — and it exercises C16, C17 and C12 against a real interface rather than a mockup.
+**The rule that shaped every decision in it:** a completed assessment describes which agents somebody runs, holding which credentials, with which containment — and assembled, dated and ranked, **that is a serviceable plan for attacking them, which the site asked them to write down.** So: **store the choices, never the answers.** What is kept is identifiers from a public library plus fixed options and derived dates. The implementation takes the strictest available reading — **there is no free-text input anywhere on the page** — which turns *we do not store what you type* into *there is nothing to type*.
+**One consequence the pack should own rather than hide:** the pack's own standard is a **named** acceptor, and a name is a fact about the visitor's organisation. The page offers a **role** instead, so **it cannot meet the pack's own standard** — a real reduction in fidelity, taken deliberately and recorded here rather than in a footnote.
+**And browser storage is not a placeholder.** It makes the no-collection claim **architectural rather than operational** — a property, not a promise — and checkable in ten seconds in the network panel. The assessment is a conformance test for the site's own claim, in the same way the static deployment was a conformance test for the server reading nothing. Migrating to a vault later changes **durability**, not privacy, and swaps silent loss that costs little for a key with no reset — so browser storage stays the default and the vault is offered rather than defaulted.
+**Status:** shipped at site v0.1.16. Decisions 29–31.
+
+### C21 — A strong threat with a weak answer produces denial, which decides how every result page ends
+
+**Source:** the same brief.
+**The finding, measured rather than intuited.** The standing meta-analysis on fear appeals: **strong fear appeals with low-efficacy messages produce the greatest defensive response** — avoidance, denial, reactance — while strong appeals with high-efficacy messages produce the greatest behaviour change. The two correlate **negatively**, so this is an opposite effect rather than a weaker one. **A frightening picture of somebody's own estate with no credible answer performs worse than saying nothing.**
+**Two components, and the second is the one this domain fails.** Response efficacy — *would it work?* — is answerable, because the tree visibly shrinks. **Self-efficacy — *could I do it?* — is where it fails**, because the broad grant is often the only grant a tool knows how to issue. So the tool must not recommend actions the visitor cannot perform: a recommendation that fails on arrival confirms that nothing can be done.
+**This contradicts the explainer's no-remedies rule, and both stand.** A general page may withhold the answer, because withholding creates appetite. **A personalised one may not, because withholding creates denial.** The discriminator is whether the message is about the world or about the reader, and it belongs in whatever guides this site's authors — otherwise the two pages look inconsistent and somebody will align them.
+**The hardest case is hosted, and it is structurally the worst one.** The containment belongs to the vendor, cannot be inspected, changed or attested, so honest advice reduces to *use it less*. **Zero efficacy by construction — which makes the page most likely to alarm a visitor the page least able to do anything with the alarm.** Its exit is a **request rather than a remedy**: ask the vendor for an endpoint that signs an existing audit record for a named relying party, with the surface field in it. The build adds one thing the brief did not: the hosted grant reaches **what you put in front of it**, and that part of the containment *is* the visitor's — so the hosted case ships one genuine remedy beside the request.
+**And a finding the build itself surfaced.** On a local tree every excess path bottoms out at the same node — *runs as your user account* — so a list of eleven rows each ending in the same sentence buries it. The page says it once, at the top: **this is one problem rather than eleven**, which is a better efficacy message than any individual row.
+**Status:** adopted, and implemented. Decision 32.
+
+### C22 — What to measure, and the honest admission that this page cannot
+
+**Source:** the same brief.
+C12 established that counting acceptances inverts. **The equivalent trap here is measuring shock**: a tool optimised on how alarming its result feels converges on a number nobody believes. So no score out of a hundred — the gap is shown as a picture and a count of what each action closes.
+**The measure family:** assessments completed rather than abandoned (an abandoned one is fear control in real time); **visitors who take a named action afterwards** (the only measure of danger control, and the one to instrument first); risks stated with an acceptor and an interval; risks declined; and **visitors who report the result as wrong**, which is the cheapest correction the library will ever get.
+**The admission:** the page has no backend, so it can measure **none** of them. That is the same property that makes the privacy claim architectural. If any of these numbers is ever wanted it has to be collected somewhere that says so, which is a decision with a cost — stated rather than solved quietly.
+**Status:** adopted as the measure set; unmeasurable as built, deliberately. Decision 33.
+
 ## The decisions register
 
 | # | Decision | Made by | Status |
@@ -196,6 +223,13 @@ The entries above record what the *corpus* corrects. These record what the pack'
 | 26 | Publication intent recorded at issue, beside `private_key_published` | v0.33.61 (C18) | **Open — proposed field for draft-2** |
 | 27 | Is the grant tree in the MVP at all? | pack doc 12 | **Open — it needs enumeration tooling the pack does not have** |
 | 28 | Can an agent instance persist a private half across sessions? | — | **Open since 19 Aug — gates whether instances can hold identities** |
+| 29 | Store references into a public library, never descriptions of the visitor's machine | v0.33.61 (C20) | **Settled — implemented as no free-text input at all** |
+| 30 | Acceptor is a role, not a name, on the user-facing page | pack doc 14 (C20) | **Settled — and it means that page cannot meet the pack's own named-acceptor standard** |
+| 31 | Browser storage is the default; the vault is offered, never defaulted | v0.33.61 (C20) | **Settled — the vault changes durability, not privacy** |
+| 32 | Every personalised result page ends on an action the visitor can perform | v0.33.61 (C21) | **Settled — and it does not generalise to the explainer** |
+| 33 | Measure action taken, not alarm produced | v0.33.61 (C22) | **Settled as the measure set — and unmeasurable as built, with no backend** |
+| 34 | When do library entries become named products? | pack doc 14 | **Open — naming one means measuring it under the participant rules** |
+| 35 | Is a scan ever added, and where does its output go? | pack doc 14 | **Open — never browser storage, which argues for the vault path before the scan** |
 
 ---
 

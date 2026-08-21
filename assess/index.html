@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Map your own case — grants, mandates and the gap · pki.sgit.ai</title>
+<meta name="description" content="Assemble your own agent installations as grant trees and mandates, see what is reachable that you never intended, and decide what to do about it. Everything stays in your browser — open the network panel and check.">
+<link rel="canonical" href="https://pki.sgit.ai/assess/index.html">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
+  <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.16</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../failure/index.html">The registry<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../failure/index.html">Why they don't exist</a>
+      <a class="sl" href="../rules/index.html">The four rules</a>
+      <a class="sl" href="../mandate/index.html">Identity &amp; mandate</a>
+      <a class="sl" href="../roadmap/index.html">Build order</a>
+      <a class="sl" href="../rules/prior-art.html">Prior art</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../bootstrap/index.html">The layers<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../bootstrap/index.html">The bootstrap trap</a>
+      <a class="sl" href="../enrolment/index.html">Enrolment</a>
+      <a class="sl" href="../execution/index.html">The execution broker</a>
+      <a class="sl" href="../shipped/index.html">What already ships</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../assess/index.html">Map your case<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl here" href="../assess/index.html">Map your own case</a>
+      <a class="sl" href="../assess/library.json">The library of trees</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../origins/index.html">Origins<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../origins/index.html">Origins: 2026</a>
+      <a class="sl" href="../origins/review.html">The review, redacted</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../documents/index.html">The documents</a>
+      <a class="sl" href="../packs/index.html">Dev packs</a>
+      <a class="sl" href="../packs/registry-mvp/index.html">The registry MVP pack</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../admin/versions.html">Release history</a>
+      <a class="sl" href="../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+  <script src="../assets/nav.js" defer></script>
+</div></nav>
+
+<header class="hero">
+  <div class="inner">
+    <p class="eyebrow">Grants · mandates · the gap nobody accepted</p>
+    <h1>Map your own case</h1>
+    <p class="sub">Pick the agents you run and the surface they run on, tick what you actually meant them to do, and see what the difference is. The output is a list of things somebody has to accept or decline — not a score, and not a report.</p>
+  </div>
+</header>
+
+<main class="inner">
+
+<div class="conform">
+  <h2 id="stays">Everything here stays in this browser, and you can check that in ten seconds</h2>
+  <p>This is a static site. There is no backend to send anything to, so the claim that we do not collect your assessment is <b>architectural rather than operational</b> — a property, not a promise. Open your browser's network panel, complete the whole thing, and watch: the only request this page makes is for <a href="library.json">library.json</a>, and that is us sending you something.</p>
+  <p><b>And there is a second rule underneath that one, which matters more.</b> A completed assessment describes which agents you run, on which machine, holding which credentials, with which containment, and which of those containments is only a setting. Individually those are unremarkable facts. Assembled, dated and ranked, they are a serviceable plan for attacking you — and we would have asked you to write it down.</p>
+  <p class="claim">So this page stores your <em>choices</em>, never your <em>answers</em>: identifiers from a public library, plus fixed options and dates derived from them.</p>
+  <p><b>There is no free-text box anywhere on this page.</b> That is not an oversight and it is not a first version — it is the rule made checkable. You will notice it most where an acceptor should be a person's name: you pick a <em>role</em> instead, because a name is a fact about your organisation and this page has nowhere safe to put one. Scroll to <a href="#stored">the bottom</a> and press the button to see the exact bytes held for you.</p>
+  <div class="note small"><b>What browser storage actually gives you.</b> Per browser, per device, per origin — it will not follow you to your phone. Cleared when you clear site data, and when a private window closes. <b>No recovery of any kind.</b> And readable by any script running on this origin, which is the reason for the references-only rule rather than an argument against storing anything. Losing this costs you almost nothing, by design: it is a handful of pointers into a public file.</div>
+</div>
+
+<div id="storagenote"></div>
+
+<div id="libmoved" class="note" style="display:none"><b>The library has changed since you were last here.</b> You were assessing against <code id="libwas"></code> and this is <code class="libver-inline"></code>. Your choices are unchanged. Anything that reads differently is the library moving, not you — which is why the version is recorded rather than assumed.</div>
+
+<h2 id="build">Your cases</h2>
+<p class="dim">A case is one agent installation on one surface. Most people have two or three, and they are <b>not</b> variants of each other: a local install is an enormous grant with a boundary you own and have not used, and a hosted one is a smaller grant with a boundary you cannot see. Neither wins.</p>
+
+<div class="addrow">
+  <button class="btn" data-act="add" data-v="local">+ An agent on my own machine</button>
+  <button class="btn" data-act="add" data-v="hosted">+ An agent hosted by a vendor</button>
+</div>
+
+<div id="cases"></div>
+
+<h2 id="stored">Everything this site has stored about you</h2>
+<p>Not a description of it. The bytes.</p>
+<pre id="dump" class="dumpbox">(nothing stored yet)</pre>
+<p class="small dim">Library version in use: <code id="libver">…</code>. Every value above is an identifier from <a href="library.json">that file</a>, a fixed option, or a date this page worked out from one. Nothing you typed, because there was nothing to type.</p>
+<p><button class="btn ghost" data-act="wipe">Delete all of it</button> <span class="small dim">Immediate, local, and not recoverable — the same as clearing site data, with a button.</span></p>
+
+<h2 id="honest">What this is not</h2>
+<table class="split">
+  <thead><tr><th>Not</th><th>Why it matters</th></tr></thead>
+  <tbody>
+    <tr><td><b>Not a scanner</b></td><td>Nothing here inspects your machine. If a scan is ever added, its output belongs in your own vault and never in browser storage — which is an argument for building the vault path <em>before</em> the scan rather than after.</td></tr>
+    <tr><td><b>Not a score</b></td><td>A number out of a hundred gets optimised for how alarming it feels. The measured finding is that a strong threat with a weak answer produces denial and reactance rather than change — worse than saying nothing, because it manufactures the counter-argument. So this shows a picture and an action, not a grade.</td></tr>
+    <tr><td><b>Not a durable record</b></td><td>Browser storage has no recovery. When the vault path exists it will be offered rather than defaulted, because a vault swaps silent loss that costs little for a key with no reset.</td></tr>
+    <tr><td><b>Not a vendor assessment</b></td><td>The library carries classes of installation, not named products, and every node says whether it was derived, taken from a published third-party tool, or measured. One hosted tree was measured — one vendor, one surface, one date, unnamed. Grading products would need measuring them.</td></tr>
+    <tr><td><b>Not an alarm</b></td><td>Every case ends on something you can actually do. Where the honest answer is that you can do nothing — the hosted containment — the page says so and gives you a request to make instead of a remedy to pretend at.</td></tr>
+  </tbody>
+</table>
+
+<h2 id="wrong">If it is wrong, that is the most useful thing you have</h2>
+<p>The trees are pre-computed claims about other people's products, dated, with the method published above each one so you can re-run it. A visitor saying <em>that is not what my setup looks like</em> is the cheapest correction this library will ever get. There is nowhere on this page to send that — deliberately, because a feedback box is a free-text box — so it goes to <a href="../admin/comms.html">comms</a>, or to the repository.</p>
+
+<div class="pagenav">
+  <a href="../mandate/index.html">← Identity and mandate</a>
+  <a href="../packs/registry-mvp/grant-tree.html">The grant tree, in full →</a>
+</div>
+
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.16</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The registry</h4>
+    <a href="../assess/index.html">&#8594; Map your own case</a>
+    <a href="../failure/index.html">Why they don't exist</a>
+    <a href="../rules/index.html">The four rules</a>
+    <a href="../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../roadmap/index.html">Build order</a>
+    <a href="../rules/prior-art.html">Prior art</a>
+  </div>
+  <div>
+    <h4>The three layers</h4>
+    <a href="../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../enrolment/index.html">Enrolment</a>
+    <a href="../execution/index.html">The execution broker</a>
+    <a href="../shipped/index.html">What already ships</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../origins/index.html">Origins: 2026</a>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../packs/registry-mvp/index.html">The registry MVP pack</a>
+    <a href="../about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../llms.txt">llms.txt</a>
+  </div>
+</div></footer>
+<script src="../assets/assess.js" defer></script>
+</body>
+</html>

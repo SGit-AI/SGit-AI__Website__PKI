@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Dev packs · pki.sgit.ai</title>
-<meta name="description" content="Dev packs: implementation-plan packs captured verbatim, with a hub per pack and a reader page per document — architecture, diagrams, change control and the tabletop exercise included.">
-<link rel="canonical" href="https://pki.sgit.ai/packs/index.html">
+<title>The User Section Is A Conformance Test For The Site's Own Claim · documents · pki.sgit.ai</title>
+<meta name="description" content="Original document, readable in-page: summary, key concepts and key ideas, then the full markdown. Dev brief, v0.33.61, 20 August 2026. CC BY 4.0.">
+<link rel="canonical" href="https://pki.sgit.ai/documents/user-section.html">
 <link rel="stylesheet" href="../assets/site.css">
 </head>
 <body>
@@ -54,7 +54,7 @@
       <a class="nl here" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl" href="../documents/index.html">The documents</a>
-      <a class="sl here" href="../packs/index.html">Dev packs</a>
+      <a class="sl" href="../packs/index.html">Dev packs</a>
       <a class="sl" href="../packs/registry-mvp/index.html">The registry MVP pack</a>
       </div>
     </div>
@@ -73,22 +73,47 @@
 </div></nav>
 
 <main class="doc">
-<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / packs</div>
-<h1>Dev packs</h1>
-<p class="lead">Implementation-plan packs, captured verbatim and presented the same way as the site's <a href="../documents/index.html">documents</a>: a hub per pack, and a reader page per document with a summary, key concepts, key ideas and the full markdown (diagrams rendered). The treatment follows <a href="https://nhi.sgit.ai/packs/index.html">nhi.sgit.ai's packs section</a>; a pack here carries its architecture, its diagrams, its change control and its tabletop exercise as first-class documents.</p>
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="index.html">documents</a> / user-section</div>
+<h1>The User Section Is A Conformance Test For The Site's Own Claim</h1>
 
-<div class="tablewrap"><table>
-  <thead><tr><th>Pack</th><th>Date · status</th><th>In one line</th></tr></thead>
-  <tbody>
-    <tr><td><a href="registry-mvp/index.html"><b>The Registry MVP: Open Data, A Single Operator, LLM Sessions First</b></a></td><td>20 Aug 2026 · draft + change control</td><td>A public key registry on vaults — open data, one operator, and LLM sessions as the first users on both sides. 15 documents, one of them built.</td></tr>
-  </tbody>
-</table></div>
+<div class="docmeta">
+  <span class="k">Type</span><span class="v">Dev brief</span>
+  <span class="k">Version</span><span class="v">v0.33.61</span>
+  <span class="k">Date</span><span class="v">20 August 2026</span>
+  <span class="k">Author</span><span class="v">Dinis Cruz (project lead) and collaborators</span>
+  <span class="k">Licence</span><span class="v">CC BY 4.0</span>
+  <span class="k">Source</span><span class="v"><a href="../briefs/v0.33.61__dev-brief__user-section-is-a-conformance-test-store-the-choices-not-the-answers.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/dev/briefs/v0.33.61__dev-brief__user-section-is-a-conformance-test-store-the-choices-not-the-answers.md">view on GitHub</a></span>
+</div>
 
-<div class="note"><b>Adding a pack.</b> Sources land under <code>packs/&lt;name&gt;/src/</code> verbatim; the pages are one entry in <code>admin/build/gen_packs.py</code>, then <code>chrome.py</code> applies the shared nav and footer.</div>
+<h2 id="summary">Summary</h2>
+<p>The user area, the one thing that must not be stored in it, and the documented reason its stated objective can backfire. What a visitor assembles — which agents run where, holding which credentials, with which containment — is in aggregate a serviceable plan for attacking them, so the site stores their choices rather than their answers: references into a public library of pre-computed trees, and nothing describing their machine. Browser storage then stops being a compromise and becomes a demonstration of the site's own thesis, checkable in the network panel in ten seconds. And the objective is behaviour change, which has a measured failure mode: strong fear appeals with low-efficacy messages produce the greatest defensive response, so a frightening page with no credible answer performs worse than one that says nothing. That contradicts the explainer's no-remedies rule, and both are right, because a general page may withhold and a personalised one may not. The hardest case is hosted, where the honest answer is that nothing the visitor can do changes the containment — zero efficacy by construction — so its exit is a request rather than a remedy.</p>
+
+<h2 id="concepts">Key concepts</h2>
+<ul>
+  <li><a href="../assess/index.html"><b>Store the choices, not the answers</b></a> — the rule, running — and there is no free-text input on the page at all</li>
+  <li><a href="../packs/registry-mvp/user-assessment.html"><b>A privacy claim that is architectural</b></a> — a property rather than a promise, because there is no backend to send to</li>
+  <li><a href="../packs/registry-mvp/grant-tree.html"><b>Zero efficacy by construction</b></a> — the hosted page alarms most and can do least, so its exit is a request</li>
+  <li><a href="../packs/registry-mvp/change-control.html"><b>Measure action, not alarm</b></a> — C22 — and the honest admission that a page with no backend can measure none of it</li>
+</ul>
+
+<h2 id="ideas">Key ideas</h2>
+<ul>
+  <li>A general page may withhold the answer; a personalised one may not — withholding creates appetite in one and denial in the other.</li>
+  <li>Losing the stored pack costs the visitor almost nothing, which is exactly what a demonstration wants.</li>
+  <li>A local-folder copy of the site gets an opaque origin, so this is the feature that breaks first in a downloadable bundle.</li>
+  <li>A visitor saying “that is not what my setup looks like” is the cheapest correction the library will ever receive.</li>
+</ul>
+
+<h2 id="on-site">On this site</h2>
+<p>Became document 14 of the registry MVP pack and the workflow at /assess — the first thing on this site that is built rather than specified.</p>
+
+<h2 id="read">Read the document</h2>
+<div class="mdread-label">📄 Original document · v0.33.61 · 20 August 2026 · rendered from the <a href="../briefs/v0.33.61__dev-brief__user-section-is-a-conformance-test-store-the-choices-not-the-answers.md">raw markdown</a> (the source of truth)</div>
+<div class="mdread" id="mdread" data-src="../briefs/v0.33.61__dev-brief__user-section-is-a-conformance-test-store-the-choices-not-the-answers.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="../briefs/v0.33.61__dev-brief__user-section-is-a-conformance-test-store-the-choices-not-the-answers.md">open the raw markdown</a>.</p></noscript></div>
 
 <div class="pagenav">
-  <a href="../documents/index.html">← The documents</a>
-  <a href="registry-mvp/index.html">First pack →</a>
+  <a href="index.html">← All documents</a>
+  <a href="../briefs/v0.33.61__dev-brief__user-section-is-a-conformance-test-store-the-choices-not-the-answers.md">Raw markdown →</a>
 </div>
 </main>
 
@@ -131,5 +156,7 @@
   </div>
 </div></footer>
 
+<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+<script src="../assets/mdreader.js"></script>
 </body>
 </html>

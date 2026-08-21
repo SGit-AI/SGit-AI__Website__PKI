@@ -14,7 +14,7 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.15</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.16</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -34,6 +34,13 @@
       <a class="sl" href="../enrolment/index.html">Enrolment</a>
       <a class="sl" href="../execution/index.html">The execution broker</a>
       <a class="sl" href="../shipped/index.html">What already ships</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../assess/index.html">Map your case<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../assess/index.html">Map your own case</a>
+      <a class="sl" href="../assess/library.json">The library of trees</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -73,6 +80,11 @@
 <div class="tablewrap"><table class="vers">
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
+    <tr>
+      <td class="vnum">v0.1.16</td>
+      <td>20 Aug 2026</td>
+      <td><b>The first thing on this site that is built rather than specified: <a href="../assess/index.html">Map your own case</a></b>, with <a href="../packs/registry-mvp/user-assessment.html">document 14</a> as its specification and a ninth v0.33.61 brief behind it. A visitor picks the agents they run and the surface they run on, ticks what they actually meant the agent to do, and sees what is reachable that they never intended — with a decision per gap carrying an acceptor and an interval, which is what a risk register consumes. It exercises <a href="../packs/registry-mvp/grant-tree.html">the grant tree</a>, the three-tier control test and the prohibition rendering against a real interface rather than a mockup. <b>Two rules shaped every decision in it, and both cut against the obvious build.</b> The first: a completed assessment describes which agents somebody runs, on which machine, holding which credentials, with which containment — and assembled, dated and ranked, that is <b>a serviceable plan for attacking them, which the site asked them to write down</b>. So the page <b>stores your choices and never your answers</b>: identifiers from <a href="../assess/library.json">a public library</a>, fixed options, and dates derived from them. Implemented as strictly as it can be — <b>there is no free-text input anywhere on the page</b>, which turns "we do not store what you type" into "there is nothing to type". The visible cost is the acceptor: the pack's standard is a <em>named</em> acceptor, a name is a fact about your organisation, so the page offers a <b>role</b> and <b>cannot meet the pack's own standard</b> — recorded rather than hidden. The second rule is measured rather than intuited: <b>a strong threat with a weak answer produces denial, not change.</b> The standing meta-analysis on fear appeals finds defensive response and behaviour change correlate <em>negatively</em>, so a frightening picture of somebody's estate with no credible action performs <em>worse</em> than saying nothing. Every case therefore ends on something the visitor can actually perform, with the number of their own gaps it closes <b>computed rather than asserted</b> — and an action that closes none says so, including one worth doing that does not shrink the tree. <b>The hosted case is the one most likely to backfire</b>, because the containment is the vendor's — uninspectable, unchangeable and, tested rather than assumed, unattestable. That is zero efficacy by construction, so it ends on a <b>request rather than a remedy</b>: ask your vendor for an endpoint that signs an audit record they already hold, for a named relying party. The build added one thing the brief did not — the hosted grant reaches what you put in front of it, and that part <em>is</em> yours. Two more things worth naming: <b>browser storage here is the site's own claim made checkable</b>, not a placeholder — there is no backend, so the no-collection claim is architectural rather than operational, and a "show me everything stored" panel prints the exact bytes; and on a local tree every excess path bottoms out at the same node, so the page says it once at the top — <b>this is one problem rather than eleven</b>. Change control gains C20–C22 and decisions 29–35. The nav gains a sixth group; documents 08, 10 and 12 extend their cross-reference blocks. Tested across the paths that actually fail: a library that moved since your last visit, a browser refusing site data, and a local-folder copy of the site, which gets an opaque origin and is the feature that breaks first in a downloadable bundle.</td>
+    </tr>
     <tr>
       <td class="vnum">v0.1.15</td>
       <td>20 Aug 2026</td>
@@ -168,10 +180,11 @@
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.15</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.16</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The registry</h4>
+    <a href="../assess/index.html">&#8594; Map your own case</a>
     <a href="../failure/index.html">Why they don't exist</a>
     <a href="../rules/index.html">The four rules</a>
     <a href="../mandate/index.html">Identity &amp; mandate</a>

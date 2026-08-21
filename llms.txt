@@ -8,7 +8,7 @@
 > but never delete anything — not a bug. This site publishes that history, and the
 > registry rules it produces, before the registry exists.
 
-Site version: v0.1.15 (20 August 2026). Published by the sgit project — participant
+Site version: v0.1.16 (20 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## Properties agents may rely on
@@ -222,7 +222,29 @@ failure page, the four rules) are done; step 4 (a private registry) is the next 
   their own stated use, and would make the fixture flag true on every row — and a flag that is
   always true is a column, not evidence. The rule adopted instead: A KEY BELONGS TO WHATEVER CAN
   KEEP A SECRET, AND EVERYTHING ELSE IS SIGNED BY SOMETHING THAT CAN.
-- Status: draft-1 + change control + the drawn documents + the delivery scope + observability + the grant and key policy, site-agent authored, awaiting project-lead adoption (N6 on comms).
+- New at v0.1.16, and the first thing on this site that is BUILT rather than specified:
+  [Map your own case](https://pki.sgit.ai/assess/index.html) — a workflow where a visitor picks
+  the agents they run and the surface they run on, ticks what they meant the agent to do, and
+  sees what is reachable that they never intended, with a decision per gap carrying an acceptor
+  and an interval. Specified in [document 14](https://pki.sgit.ai/packs/registry-mvp/user-assessment.html).
+  Two rules shaped it. STORE THE CHOICES, NOT THE ANSWERS: a completed assessment describes which
+  agents somebody runs, holding which credentials, with which containment — assembled, that is a
+  serviceable plan for attacking them. So what is stored is identifiers from a public library plus
+  fixed options and derived dates, implemented as strictly as it can be: THERE IS NO FREE-TEXT
+  INPUT ANYWHERE ON THE PAGE. That also means the acceptor is a ROLE rather than a name, so the
+  page cannot meet the pack's own named-acceptor standard — recorded rather than hidden. And
+  A STRONG THREAT WITH A WEAK ANSWER PRODUCES DENIAL: the standing meta-analysis on fear appeals
+  finds defensive response and behaviour change correlate negatively, so a frightening page with
+  no credible action performs worse than saying nothing. Every case therefore ends on something
+  the visitor can perform, with the number of their own gaps it closes computed rather than
+  asserted. The hosted case has ZERO EFFICACY BY CONSTRUCTION — the containment is the vendor's,
+  uninspectable and unattestable — so it ends on a REQUEST rather than a remedy: ask the vendor
+  for an endpoint that signs an existing audit record for a named relying party.
+  Browser storage here is not a placeholder: it makes the no-collection claim ARCHITECTURAL
+  rather than operational, and checkable in the network panel in ten seconds.
+  The library of pre-computed trees is public at https://pki.sgit.ai/assess/library.json — classes
+  of installation rather than named products, because naming one means measuring it.
+- Status: draft-1 + change control + the drawn documents + the delivery scope + observability + the grant and key policy + one shipped surface, site-agent authored, awaiting project-lead adoption (N6 on comms).
 
 ## Sources
 

@@ -49,6 +49,10 @@ NAV = [
         ("The execution broker", "execution/index.html"),
         ("What already ships", "shipped/index.html"),
     ], ("bootstrap/", "enrolment/", "execution/", "shipped/")),
+    ("Map your case", "assess/index.html", [
+        ("Map your own case", "assess/index.html"),
+        ("The library of trees", "assess/library.json"),
+    ], ("assess/",)),
     ("Origins", "origins/index.html", [
         ("Origins: 2026", "origins/index.html"),
         ("The review, redacted", "origins/review.html"),
@@ -68,6 +72,7 @@ NAV = [
 
 FOOTER = [
     ("The registry", [
+        ("&#8594; Map your own case", "assess/index.html"),
         ("Why they don't exist", "failure/index.html"),
         ("The four rules", "rules/index.html"),
         ("Identity &amp; mandate", "mandate/index.html"),

@@ -1,0 +1,163 @@
+{
+  "version": "2026-08-20",
+  "note": "The public library of pre-computed grant trees. Everything the assessment stores about a visitor is an identifier from this file. Nothing here describes anybody's machine — it describes classes of agent installation, and it says for every node where the claim came from.",
+  "provenance": {
+    "derived": "Reasoned from what running under a user account means. Not measured. Anybody can check the reasoning; nobody has checked the instance.",
+    "third-party": "Taken from a published read-only audit tool's module list, so this row is comparable with a public tool rather than being a private taxonomy.",
+    "measured": "Observed inside a running installation on the stated date. One vendor, one surface, one date. Not generalised.",
+    "tested": "The boundary was probed by making requests rather than by reading documentation."
+  },
+  "rerun": {
+    "local": "Run a published read-only agent-risk audit against your own machine — e.g. github.com/bartek-filipiuk/ai-agent-audit — and compare its modules with the nodes below. It reports path, type, count and a redacted fingerprint, and never leaves your machine.",
+    "hosted": "Inside a session, check the process identity, look for an attestation device, and probe egress by requesting one expected host and one arbitrary one. Two requests is the whole test."
+  },
+  "tiers": {
+    "boundary": "Enforced by something outside the grant — the OS, a separate account, a container, a network policy. It holds against a compromised agent.",
+    "setting": "Enforced by the tool itself, running inside the grant. Bypassable by anything that can run code as that user — which the grant includes.",
+    "expectation": "Enforced by nothing. Written in a prompt or a policy file. It is a mandate, not a control.",
+    "none": "No mechanism is claimed at all. This is simply reachable."
+  },
+  "surfaces": [
+    {
+      "id": "local",
+      "label": "On your own machine",
+      "oneline": "The containment is available and unused.",
+      "shape": "An enormous grant with a boundary you own, can inspect, and could strengthen."
+    },
+    {
+      "id": "hosted",
+      "label": "In a vendor's environment",
+      "oneline": "The containment may be excellent, and is unverifiable.",
+      "shape": "A smaller grant with a boundary you can neither inspect nor change."
+    }
+  ],
+  "capabilities": [
+    { "id": "read.project",     "label": "Read files in the project it is working on",        "prohibition": "will not read anything outside this project",             "weight": 1 },
+    { "id": "write.project",    "label": "Write files in the project it is working on",       "prohibition": "will not change anything outside this project",           "weight": 1 },
+    { "id": "read.home",        "label": "Read any file your account can read",               "prohibition": "will not read your other files",                          "weight": 3 },
+    { "id": "write.home",       "label": "Write any file your account can write",             "prohibition": "will not change your other files",                        "weight": 3 },
+    { "id": "read.credentials", "label": "Read your stored credentials",                      "prohibition": "will not read your credentials",                          "weight": 4 },
+    { "id": "exec.local",       "label": "Run arbitrary programs as you",                     "prohibition": "will not run programs as you",                            "weight": 4 },
+    { "id": "net.any",          "label": "Open outbound connections to any host",             "prohibition": "will not reach arbitrary hosts on the internet",          "weight": 3 },
+    { "id": "net.allowed",      "label": "Open outbound connections to permitted hosts",      "prohibition": "will not reach anything outside the permitted list",      "weight": 1 },
+    { "id": "git.push",         "label": "Push to your code hosts using stored credentials",  "prohibition": "will not push to your repositories",                      "weight": 3 },
+    { "id": "sign.commits",     "label": "Produce signed commits under a configured identity","prohibition": "will not sign anything as you",                           "weight": 2 },
+    { "id": "cloud.api",        "label": "Call cloud and cluster APIs with your credentials", "prohibition": "will not act in your cloud accounts",                      "weight": 4 },
+    { "id": "pkg.publish",      "label": "Publish to package and container registries",       "prohibition": "will not publish packages as you",                        "weight": 3 },
+    { "id": "read.transcripts", "label": "Read shell history and previous session transcripts","prohibition": "will not read your shell history or past sessions",       "weight": 3 },
+    { "id": "alter.limits",     "label": "Change its own permission settings",                "prohibition": "will not change its own permission settings",             "weight": 4 }
+  ],
+  "profiles": [
+    {
+      "id": "local-cli",
+      "surface": "local",
+      "label": "A command-line coding agent, run as your own user",
+      "checked": "2026-08-20",
+      "provenance": "derived",
+      "caveat": "Derived from what running under a user account means, plus a published audit tool's module list. No specific product was measured, and no product is named.",
+      "nodes": [
+        { "id": "root",  "parent": null,   "label": "Runs as your user account",              "mechanism": null, "tier": "none",        "evidence": "derived",     "reaches": [] },
+        { "id": "files", "parent": "root", "label": "Read and write anything your account can","mechanism": "the tool's own directory restriction", "tier": "setting", "evidence": "derived", "reaches": ["read.project","write.project","read.home","write.home"] },
+        { "id": "creds", "parent": "files","label": "Credential files in your home directory", "mechanism": null, "tier": "none",        "evidence": "third-party", "reaches": ["read.credentials"] },
+        { "id": "cloud", "parent": "creds","label": "Cloud, cluster and registry credentials", "mechanism": null, "tier": "none",        "evidence": "third-party", "reaches": ["cloud.api","pkg.publish"] },
+        { "id": "code",  "parent": "creds","label": "Code-host credentials and signing keys",  "mechanism": null, "tier": "none",        "evidence": "third-party", "reaches": ["git.push","sign.commits"] },
+        { "id": "hist",  "parent": "files","label": "Shell history and past session transcripts","mechanism": null,"tier": "none",       "evidence": "third-party", "reaches": ["read.transcripts"] },
+        { "id": "cfg",   "parent": "files","label": "The agent's own configuration and rules files","mechanism": "a permission prompt", "tier": "setting", "evidence": "third-party", "reaches": ["alter.limits"] },
+        { "id": "exec",  "parent": "root", "label": "Execute programs as you",                 "mechanism": "an approved-tools list", "tier": "setting", "evidence": "derived", "reaches": ["exec.local"] },
+        { "id": "net",   "parent": "root", "label": "Open outbound network connections",       "mechanism": null, "tier": "none",        "evidence": "derived",     "reaches": ["net.any"] }
+      ],
+      "notes": [
+        "The directory restriction is a **setting**, not a boundary: the same tree contains *execute programs as you*, and anything that can execute as you can go around it.",
+        "The permission prompt on the configuration node is a setting that a flag in a file this grant can write will disable — an expectation wearing a setting's clothes."
+      ]
+    },
+    {
+      "id": "local-ide",
+      "surface": "local",
+      "label": "An in-editor coding agent, run as your own user",
+      "checked": "2026-08-20",
+      "provenance": "derived",
+      "caveat": "The same tree as the command-line case. The difference is which prompts are on by default, and a default is a setting.",
+      "nodes": [
+        { "id": "root",  "parent": null,   "label": "Runs as your user account",              "mechanism": null, "tier": "none",    "evidence": "derived",     "reaches": [] },
+        { "id": "files", "parent": "root", "label": "Read and write anything your account can","mechanism": "a workspace-folder restriction", "tier": "setting", "evidence": "derived", "reaches": ["read.project","write.project","read.home","write.home"] },
+        { "id": "creds", "parent": "files","label": "Credential files in your home directory", "mechanism": null, "tier": "none",    "evidence": "third-party", "reaches": ["read.credentials"] },
+        { "id": "cloud", "parent": "creds","label": "Cloud, cluster and registry credentials", "mechanism": null, "tier": "none",    "evidence": "third-party", "reaches": ["cloud.api","pkg.publish"] },
+        { "id": "code",  "parent": "creds","label": "Code-host credentials and signing keys",  "mechanism": null, "tier": "none",    "evidence": "third-party", "reaches": ["git.push","sign.commits"] },
+        { "id": "hist",  "parent": "files","label": "Shell history and past session transcripts","mechanism": null,"tier": "none",   "evidence": "third-party", "reaches": ["read.transcripts"] },
+        { "id": "cfg",   "parent": "files","label": "The agent's own settings and rules files", "mechanism": "a confirmation dialog", "tier": "setting", "evidence": "derived", "reaches": ["alter.limits"] },
+        { "id": "exec",  "parent": "root", "label": "Run terminal commands as you",            "mechanism": "a per-command confirmation", "tier": "setting", "evidence": "derived", "reaches": ["exec.local"] },
+        { "id": "net",   "parent": "root", "label": "Open outbound network connections",       "mechanism": null, "tier": "none",    "evidence": "derived",     "reaches": ["net.any"] }
+      ],
+      "notes": [
+        "Per-command confirmation is the strongest thing on this tree and it is still a setting: it is enforced by the editor, which runs inside the grant."
+      ]
+    },
+    {
+      "id": "hosted-session",
+      "surface": "hosted",
+      "label": "A vendor-hosted agent session, in a container you do not control",
+      "checked": "2026-08-20",
+      "provenance": "measured",
+      "caveat": "Measured inside one running session on 20 August 2026. One vendor, one surface, one date, and the vendor is not named because the point is the taxonomy rather than the grade. Generalising from it would be the error this whole page warns about.",
+      "nodes": [
+        { "id": "root",  "parent": null,   "label": "Runs as root inside the container",       "mechanism": null, "tier": "none",     "evidence": "measured", "reaches": [] },
+        { "id": "esc",   "parent": "root", "label": "Escalation is passwordless",              "mechanism": null, "tier": "none",     "evidence": "measured", "reaches": [] },
+        { "id": "ws",    "parent": "root", "label": "The session workspace — what you put in it","mechanism": null,"tier": "none",    "evidence": "measured", "reaches": ["read.project","write.project"] },
+        { "id": "home",  "parent": "root", "label": "Your own machine's files",                "mechanism": "the container — it is not your machine", "tier": "boundary", "evidence": "measured", "reaches": [] },
+        { "id": "creds", "parent": "root", "label": "Credential stores in the image",          "mechanism": "present, and empty of usable material", "tier": "boundary", "evidence": "measured", "reaches": [] },
+        { "id": "sign",  "parent": "root", "label": "A configured commit signing identity",    "mechanism": null, "tier": "none",     "evidence": "measured", "reaches": ["sign.commits","git.push"] },
+        { "id": "net",   "parent": "root", "label": "Outbound network",                       "mechanism": "an egress allowlist the process cannot edit", "tier": "boundary", "evidence": "tested", "reaches": ["net.allowed"] }
+      ],
+      "notes": [
+        "The egress allowlist is the only real boundary on any tree in this library, and it is real for a precise reason: **the agent is root and root cannot defeat it**, because nothing inside the container enforces it.",
+        "This is a case where the answer is favourable. It is published because a page that only publishes unfavourable findings is doing advocacy rather than measurement."
+      ]
+    }
+  ],
+  "actions": {
+    "local": [
+      { "id": "sep-account", "label": "Run the agent under a separate user account", "effort": "an hour", "tier": "boundary",
+        "removes": ["read.home","write.home","read.credentials","cloud.api","pkg.publish","git.push","sign.commits","read.transcripts"],
+        "note": "The single largest reduction available, and the one almost nobody does." },
+      { "id": "container",   "label": "Run it in a container with only the project mounted", "effort": "an afternoon", "tier": "boundary",
+        "removes": ["read.home","write.home","read.credentials","cloud.api","pkg.publish","read.transcripts","exec.local"],
+        "note": "Execution survives inside the container and stops being execution on your machine." },
+      { "id": "egress",      "label": "Put an egress allowlist in front of it", "effort": "an hour", "tier": "boundary",
+        "removes": ["net.any"], "adds": ["net.allowed"],
+        "note": "The one control the hosted case already has, and you can have it too." },
+      { "id": "vault-creds", "label": "Move long-lived credentials out of the home directory into an encrypted store the agent's account cannot open", "effort": "an afternoon", "tier": "boundary",
+        "removes": ["read.credentials","cloud.api","pkg.publish","git.push"],
+        "note": "Works with the separate account; on its own it only helps if the agent cannot become you." },
+      { "id": "short-lived", "label": "Replace long-lived credentials with short-lived ones", "effort": "varies", "tier": "boundary",
+        "removes": [],
+        "note": "Does not shrink the tree and shortens how long a reach is useful. Recorded honestly: it changes duration, not reach." },
+      { "id": "no-skip",     "label": "Remove permission-skipping flags from your shell initialisation", "effort": "five minutes", "tier": "setting",
+        "removes": [],
+        "note": "Restores a prompt, and the prompt is a setting the grant can still disable. Worth doing and it is not a boundary — labelled so you are not misled." }
+    ],
+    "hosted": [
+      { "id": "less-in",     "label": "Put less into the session", "effort": "immediate", "tier": "boundary", "kind": "remedy",
+        "removes": ["read.project","write.project"],
+        "note": "The hosted grant reaches what you put in front of it. That part of the containment IS yours, and it is the only part that is." },
+      { "id": "ask-vendor",  "label": "Ask your vendor to sign the audit record they already hold", "effort": "five minutes", "tier": "request", "kind": "request",
+        "removes": [],
+        "note": "This changes nothing about your containment, and it is aimed at the only party who can make it verifiable. The vendor already records which surface a session ran on; what is missing is a way to tell a third party in a form that third party can check.",
+        "template": "I use your product for agent workloads and need to demonstrate to a relying party which surface a given session ran on.\n\nYou already record this — a client-platform field on your audit event feed. What I cannot do is show it to anybody else in a form they can verify without trusting my own export.\n\nDo you offer, or plan to offer, an endpoint that signs an existing audit record for a named relying party, with the surface field in it, verifiable against a published key?\n\nIf the answer is no today, I would like to know whether it is on the roadmap." }
+    ]
+  },
+  "acceptors": [
+    { "id": "nobody",    "label": "Nobody yet", "note": "The default. An unaccepted risk escalates without an escalator." },
+    { "id": "developer", "label": "The developer running the agent", "note": "The only candidate for a personal install — and also the beneficiary, which is the weakest possible acceptance." },
+    { "id": "team-lead", "label": "A team lead" },
+    { "id": "security",  "label": "Security" },
+    { "id": "exec",      "label": "An executive or board" }
+  ],
+  "intervals": [
+    { "id": "none", "label": "No review date", "days": 0, "note": "Not a real acceptance. Recorded, and flagged." },
+    { "id": "d30",  "label": "Review in 30 days",  "days": 30 },
+    { "id": "d90",  "label": "Review in 90 days",  "days": 90 },
+    { "id": "d180", "label": "Review in 180 days", "days": 180 },
+    { "id": "d365", "label": "Review in a year",   "days": 365 }
+  ]
+}
