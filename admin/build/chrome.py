@@ -52,6 +52,7 @@ NAV = [
     ("Map your case", "assess/index.html", [
         ("Map your own case", "assess/index.html"),
         ("The library of trees", "assess/library.html"),
+        ("Synthetic readers", "packs/map-your-case/readers/index.html"),
     ], ("assess/",)),
     ("Origins", "origins/index.html", [
         ("Origins: 2026", "origins/index.html"),

@@ -1,0 +1,46 @@
+/* pki.sgit.ai — the synthetic readers area. Simulated material is rendered
+   differently from every other page on this site, on purpose: rule one says a
+   simulated reaction must never be confusable with a real one. */
+
+.simbanner{border:2px solid var(--warn,#b45309);background:#fff8ed;color:#7c3a02;
+  border-radius:10px;padding:.8rem 1rem;margin:1.2rem 0;font-size:.95rem}
+.simbanner b{letter-spacing:.02em}
+ /* The running header rule one asks for. It sits BELOW the site nav (55px, sticky,
+    z-index 50) rather than under it, so it survives scrolling — a marker that scrolls
+    away is a marker that a screenshot can lose. */
+.simrail{position:sticky;top:55px;z-index:40;background:#7c3a02;color:#fff;
+  font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+  text-align:center;padding:.35rem .5rem;margin:0 0 1rem}
+@media (max-width:760px){.simrail{top:0;font-size:.66rem}}
+
+.ledger{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.6rem;margin:1rem 0}
+.ledger div{border:1px solid var(--line,#e4e0d8);border-radius:8px;padding:.6rem .7rem;background:var(--card,#fff)}
+.ledger .k{display:block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dim,#6b6560)}
+.ledger .v{font-weight:600}
+
+.step{border:1px solid var(--line,#e4e0d8);border-radius:12px;margin:1.6rem 0;overflow:hidden;background:var(--card,#fff)}
+.step > h3{margin:0;padding:.7rem 1rem;background:var(--soft,#f6f4ef);border-bottom:1px solid var(--line,#e4e0d8);
+  font-size:.95rem;display:flex;flex-wrap:wrap;gap:.6rem;align-items:baseline}
+.step > h3 .n{font-variant-numeric:tabular-nums;color:var(--dim,#6b6560)}
+.shotwrap{margin:0;padding:1rem;background:#f1efe9}
+.shotwrap img{display:block;width:100%;height:auto;border:1px solid var(--line,#e4e0d8);border-radius:6px}
+.shotwrap figcaption{font-size:.82rem;color:var(--dim,#6b6560);margin-top:.5rem}
+.react{padding:1rem}
+.react .qa{margin:0 0 .9rem}
+.react .q{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dim,#6b6560);margin:0 0 .25rem}
+.simquote{border-left:3px solid #b45309;background:#fffaf3;padding:.6rem .8rem;border-radius:0 8px 8px 0;margin:0}
+.simquote::before{content:"SIMULATED READER — NOT A REAL USER";display:block;
+  font-size:.64rem;letter-spacing:.1em;color:#7c3a02;margin-bottom:.35rem;font-weight:600}
+.act{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86rem;
+  background:var(--soft,#f6f4ef);border-radius:6px;padding:.45rem .6rem;display:inline-block}
+.rnote{font-size:.84rem;color:var(--dim,#6b6560);margin:.6rem 0 0;border-top:1px dashed var(--line,#e4e0d8);padding-top:.5rem}
+
+.arch{border:1px solid var(--line,#e4e0d8);border-radius:12px;padding:1rem;margin:1rem 0;background:var(--card,#fff)}
+.arch h3{margin:0 0 .3rem}
+.arch .code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--dim,#6b6560)}
+.arch dl{display:grid;grid-template-columns:max-content 1fr;gap:.25rem .8rem;margin:.7rem 0 0;font-size:.9rem}
+.arch dt{color:var(--dim,#6b6560)}
+.arch dd{margin:0}
+
+.fnd td:first-child{white-space:nowrap;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+@media (max-width:640px){.arch dl{grid-template-columns:1fr}.arch dt{margin-top:.4rem}}

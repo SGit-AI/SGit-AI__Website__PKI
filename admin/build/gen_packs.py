@@ -306,6 +306,28 @@ PACKS = [
   date="21 August 2026 · draft-1 + change control",
   origin_short="Site agent, this repo",
   row_date="21 Aug 2026 · draft + change control",
+  extra="""
+<h2 id="readers">Below the pack: the synthetic readers</h2>
+<p>The pack is an argument about a tool. <a href="readers/index.html"><b>The readers area</b></a> is the
+instrument that tests it — and it sits <b>outside</b> the pack on purpose, because it feeds the pack rather
+than belonging to it, and because its output is <b>simulated material</b> that must never be shelved beside
+the documents it tested as though it were the same kind of thing.</p>
+<p>Two agents: one is a browser and nothing else; one is an archetype that receives <b>pixels and nothing
+else</b> — no page text, no structure, no source, no knowledge of the project — and points spatially at where
+to go next. Patience is set from outside the model, so abandonment is a measured event rather than a story the
+model tells about itself. <b>One run has been performed</b> and its findings are already in
+<a href="change-control.html">change control</a> as MC5&ndash;MC9.</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Where</th><th>What it holds</th></tr></thead>
+  <tbody>
+    <tr><td><a href="readers/index.html"><b>The readers area</b></a></td><td>The programme, the run index, the schedule of what has <em>not</em> been run, and the findings so far</td></tr>
+    <tr><td><a href="readers/archetypes.html"><b>The three archetypes</b></a></td><td>The shipping founder, the agent-security practitioner, the adoption executive &mdash; property lists, not portraits</td></tr>
+    <tr><td><a href="readers/instruments.html"><b>The fixed instruments</b></a></td><td>The elevator pitch, and the expectation, comprehension and closing questions &mdash; fixed wording, all four</td></tr>
+    <tr><td><a href="readers/simulated-run-001-founder-tabletop.html"><b>Simulated run 001</b></a></td><td>Six screens, verbatim reactions, the budget ledger, seven findings &mdash; and a pre-registered prediction that turned out wrong</td></tr>
+    <tr><td><a href="readers/simulated-run-001-founder-analysis.html"><b>Run 001 &mdash; informed analysis</b></a></td><td>The type B pass: the same run read by an agent that <em>has</em> read the pack</td></tr>
+  </tbody>
+</table></div>
+""",
   dl_blurb="",
   one_line="The dev pack for <a href='../assess/index.html'>the assessment</a> — the one thing on this site that is built rather than specified. Thirteen documents and a change-control appendix: the principles each purchased with a mistake, the library, the model, the two 20 August programmes (levels × variants, and synthetic readers behind a screenshot boundary), sharing by fragment, four Wardley maps, and the honest record of the first MVP.",
   meta_desc="The Map Your Case pack, readable in-page: the leading brief, thirteen principles, the library, the model, the architecture, user stories, the screens, the levels-and-variants programme, the synthetic-reader tabletop, sharing, four Wardley maps, the v3 build order, the first-MVP retrospective, and change control.",
@@ -502,7 +524,7 @@ PACKS = [
    dict(slug="change-control", file="99__change-control.md",
     title="Appendix — Change control",
     role="Four corrections, eighteen decisions, and the relationship to the sibling register where the tool grew up",
-    summary="The appendix, opening with entries rather than waiting for them, because the tool shipped twice before the pack existed. MC1 records the two 20 August programme briefs and what they correct; MC2 makes the pack's after-the-build status a standing entry with a currently-empty disagreement list; MC3 adopts per-node dating as a defect to fix rather than an aspiration; MC4 supersedes the copy-summary with fragment shares. The register carries the early decisions forward from the registry pack's register without renumbering them into new authority, and adds what belongs only here — level one's author, the exercised-set import, budget-setting, the marker's export survival, and the archetype count are the open ones.",
+    summary="The appendix, opening with entries rather than waiting for them, because the tool shipped twice before the pack existed. It runs to <b>ten corrections and twenty-six decisions</b> at draft-1. MC1 records the two 20 August programme briefs and what they correct; MC2 makes the pack's after-the-build status a standing entry with a currently-empty disagreement list; MC3 adopts per-node dating as a defect to fix rather than an aspiration; MC4 supersedes the copy-summary with fragment shares; and MC5–MC9 carry the synthetic-readers area, the arrival-condition amendment to document 08, the four defects the first run found, and MC10 — where the informed second pass corrected two errors in this project&#39;s own run record and added four findings the blind run could not produce. The register carries the early decisions forward from the registry pack's register without renumbering them into new authority, and adds what belongs only here — level one's author, the exercised-set import, budget-setting, the marker's export survival, and the archetype count are the open ones.",
     concepts=[
      ("Supersede, never rewrite", "principles.html", "P13 — the correction count only ever goes up"),
      ("MC-D7 — the import gate", "levels-and-variants.html", "the exercised set's source is a transcript, which carries everything the session saw"),
@@ -584,7 +606,7 @@ def write_pack(p):
 {rows}
   </tbody>
 </table></div>
-
+{p.get("extra", "")}
 <h2 id="relevance">Why it is on this site</h2>
 <p>{p["site_relevance"]}</p>
 

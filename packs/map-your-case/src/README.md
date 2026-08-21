@@ -20,6 +20,16 @@ The dev pack for **Map Your Case** — the workflow where a visitor assembles th
 11. `10__wardley-maps.md` — four maps: the scarce components are editorial, none mechanical
 12. `11__build-order.md` — five phases; documents before code; tabletop before build
 13. `12__the-first-mvp.md` — v1, the corrections, the bugs, the verification discipline — the receipts
-14. `99__change-control.md` — **the appendix.** Four corrections, eighteen decisions. Read it second if you are about to build; last if you are reading through. Never not at all
+14. `99__change-control.md` — **the appendix.** Nine corrections, twenty-four decisions. Read it second if you are about to build; last if you are reading through. Never not at all
+
+## Below the pack: the synthetic readers
+
+`packs/map-your-case/readers/` — the instrument that tests these pages, kept **outside** the pack
+because it feeds the pack rather than belonging to it, and because its output is **simulated
+material**. Three archetypes, four fixed instruments, exogenous patience budgets, and the run
+records — including **simulated run 001**, performed against /assess at v0.1.22, which found four
+defects and confirmed two design decisions from the outside, and its **type B informed analysis**,
+which corrected two errors in the run record and added four findings the blind run could not
+produce. Findings flow one way, into the appendix above as MC5–MC10.
 
 All content CC BY 4.0.

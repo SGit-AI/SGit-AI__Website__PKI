@@ -35,6 +35,65 @@ The corpus's own: **a published document is not silently edited.** This pack was
 **What supersedes it:** document 09's fragment links — same rule (choices, never descriptions), stronger form (reconstructable, pinned, checkable). The copy-summary stays until phase 3 ships, then remains as the plain-text fallback.
 **Status:** adopted for v3.
 
+### MC5 — The synthetic-readers area exists, and it sits outside the pack
+
+**Source:** the project lead, 21 August, and the first run performed the same day.
+**What changes:** the programme specified in [document 08](08__synthetic-readers.md) now has somewhere to live and something in it — [the readers area](../readers/index.html), holding three archetypes, the fixed instruments, and the run records. It is deliberately **outside** the pack: it feeds the pack rather than belonging to it, and its output is simulated material, which must never be shelved beside the documents it tested as though it were the same kind of thing. Findings flow one way, into this register.
+**Status:** adopted. Decisions MC-D19 to MC-D22.
+
+### MC6 — The arrival condition becomes a run parameter, amending document 08
+
+**Source:** the project lead's instruction that a reader is given an elevator pitch before the first screenshot.
+**Document 08 says:** the reader must not be told what the page is for, because a page whose purpose is not apparent is the commonest real failure and briefing the reader makes it undetectable.
+**The amendment:** that rule is right and describes an arrival nobody actually has — real readers arrive with a sentence from whoever sent them the link. So the arrival condition becomes a parameter recorded per run: **cold** (told nothing, which is what preserves 08's detection property) or **pitched** (the fixed pitch paragraph and nothing else, which measures whether the page delivers the promise that brought the reader). Both are needed; running only the pitched form would quietly retire rule 3, so the schedule carries a cold run.
+**Status:** adopted; document 08's rule 3 is amended rather than overturned. Decision MC-D19.
+
+### MC7 — Four defects found by simulated run 001
+
+**Source:** [simulated run 001](../readers/simulated-run-001-founder-tabletop.html), the shipping founder, pitched arrival, budget spent without abandonment.
+
+| # | Defect | Cost as observed |
+|---|---|---|
+| **F1** | **“and 5 more” is inert** — a `span.dim` with `cursor:auto`, at exactly the point the reader wants the rest of their own delta | One screen and one click of budget, and an explicit loss of trust: *“that’s the kind of small dead end that makes me stop trusting a page… I’m not going to try a third time”* |
+| **F2** | **The entry point speaks the project’s vocabulary** — the eyebrow, the nav and “around a stated control” were called “jargon soup” in the first ten seconds | Nearly lost a reader who then liked the tool. Pulls against the corpus's deliberate precision — see MC-D23 |
+| **F3** | **The escalation sentence is the least understood claim on the page**, and the reader named it the most interesting one in the same breath | The tool's sharpest finding did not land |
+| **F4** | **Loading an example lands the reader mid-card** (the page scrolls itself to 422px) | A wasted move, and a complaint |
+
+**Status:** F1 and F4 adopted as obviously-right fixes, queued for v3 phase 1. F3 adopted as a wording task on document 06's string list. F2 recorded and **not** resolved — it is a genuine tension, not a bug report.
+
+### MC8 — The artefact is not edited while a run stands against it
+
+**Source:** the discipline the runs require.
+**The rule:** a run record describes a page as it was on a date. Fixing MC7's defects changes that page, so the fixes ship as a version bump and the run is **re-run** against the new artefact rather than the record being amended. Run 008 in the schedule is that re-run, and it is blocked on the fixes shipping — which is why it appears in the schedule as blocked rather than being quietly assumed.
+**Status:** standing.
+
+### MC9 — What run 001 confirmed, which is separate from what it found
+
+**Two design decisions were validated by a reader that could not see the reasoning behind them.** The **chokepoint sentence** (document 03) was quoted back twice and named as the reason the reader would act — *“a single fix, which is the only kind of advice I'll act on.”* And **conceding the value before naming the danger** (principle P10) landed with the archetype predicted to be most reactance-prone: offering only reachable capabilities at the intent step read as *“a smart flip — it makes the gap mine rather than a lecture.”*
+**And the pre-registered prediction was wrong.** R1 was predicted to bounce off jargon before reaching the finding. It flagged the jargon three times and kept going, because the example card gave it a result before it had to read anything — which is evidence for the dashboard-first inversion recorded in [document 12](12__the-first-mvp.md). The prediction and the outcome are both published, unchanged.
+**Status:** recorded. Decision MC-D24.
+
+
+### MC10 — What the informed analysis added, including two corrections to the run record
+
+**Source:** [the type B pass on run 001](../readers/simulated-run-001-founder-analysis.html) — an agent that *had* read the pack, reading the same transcript.
+
+**It corrected this project's own record twice.** The run record's finding-to-correction mapping pointed at the wrong entries, and it marked F2 *adopted* where this register deliberately leaves it open. Both were fixed before publication. **The two-pass split paid for itself on its first outing**, and the mechanism is worth naming: the blind reader produces experience, the informed pass produces *mechanism*, and neither can produce the other.
+
+**Four findings the blind run could not have produced:**
+
+| # | Finding | Verified |
+|---|---|---|
+| **F8** | **Truncation inverts principle P6.** The delta is sorted frightening-first and then cut with `excess.slice(0, 4)`, so the five hidden rows are by construction the *mildest*. The page therefore reads as **more alarming than its own data** — in a tool whose sixth principle is that nothing may be optimised for how alarming it feels. The reader's *“I want to know what else is hiding in there”* is that inversion working exactly as it must | `components.js` |
+| **F9** | **F3 is routing, not wording.** The plain-English explanation already exists in the library, and the reader guessed it correctly while refusing to trust the guess. Worse, **story V6's acceptance test passes** because it checks the explanation is *available* on click rather than *findable* — [document 12](12__the-first-mvp.md)'s lesson 3 recurring at the story layer | `library.json`, doc 05 |
+| **F10** | The self-scroll's cause is one line: `scrollIntoView({block:'start'})` under a `position:sticky` nav with **no `scroll-margin-top` anywhere in the stylesheet** | `app.js`:251, `assess.css` |
+| **F11** | **The flagship example contradicts document 02's benign rule.** The solo-dev intent omits the benign capability `draft`, so “draft or edit a document for me” sits in its excess list and the headline count reads **9 where it should read 8** | `library.json` |
+
+**It also refused the obvious fix on F2, correctly.** The reader wanted the vocabulary gone; “grant” and “mandate” are inherited corpus vocabulary whose definitions the whole computation depends on, and dropping them loses the interval and with it the join to the registry. The proposal instead: **the page already contains the plain-language version** — the h1 says *what your agents can reach, and what you meant* — so lead with it and let the terms appear where the computation defines them. Decision MC-D23 stays open, better specified.
+
+**Status:** F8–F11 adopted, queued behind [MC8](#)'s rule — they change the artefact, so they ship as a version bump and run 008 re-runs against it. F8 is the single recommended fix. Decision MC-D25.
+
+
 ## The decisions register
 
 | # | Decision | Made by / where | Status |
@@ -57,6 +116,14 @@ The corpus's own: **a published document is not silently edited.** This pack was
 | MC-D16 | Who authors level one | doc 07 | **Open — the hardest editorial item in the pack** |
 | MC-D17 | Where the calibration record lives, and its publication form | doc 08 | **Open — gates the part-two service entirely** |
 | MC-D18 | Variant rounds are qualitative; no percentages at this sample size | v0.33.61 levels brief; doc 07 | **Settled** |
+| MC-D19 | Arrival condition is a per-run parameter: cold or pitched | project lead, 21 Aug (MC6) | **Settled — both forms scheduled** |
+| MC-D20 | Simulated material lives outside the pack, with markers in filename, banner, running header and beside every quote | MC5 | **Settled — implemented, not described** |
+| MC-D21 | Round 1 archetypes: the shipping founder, the agent-security practitioner, the adoption executive | project lead, 21 Aug | **Settled — one of three run** |
+| MC-D22 | Round 1 budgets: 6 screens, 8 clicks, 10 minutes | doc 08 proposal, unchanged | **Provisional — round 2's come from round 1's spend data** |
+| MC-D23 | Does the entry point drop “grant”, “mandate” and “the delta” for the reader's own words? | run 001 (MC7 F2) | **Open — the terms are load-bearing corpus vocabulary and the reader found them repellent; both costs are real** |
+| MC-D24 | Pre-registered predictions are published whether or not they survive the run | MC9 | **Settled** |
+| MC-D25 | The single fix before the re-run: un-truncate the dashboard delta | MC10 (F8) | **Settled — queued, not yet shipped** |
+| MC-D26 | Acceptance tests that check availability rather than discoverability are re-specified | MC10 (F9) | **Open — starts with story V6** |
 
 ## How this register relates to the registry pack's
 
