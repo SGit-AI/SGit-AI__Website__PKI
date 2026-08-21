@@ -222,6 +222,16 @@ C12 established that counting acceptances inverts. **The equivalent trap here is
 **And one thing REP-0001 exposed by having a `Sponsor` field.** PEP 1 requires a champion who shepherds a proposal. The field is empty, and a REP cannot move past `Draft` while there is no accepting authority. **That is the pack's standing problem with a name and a form field**, rather than a caveat in a paragraph.
 **Status:** both adopted as appendixes. Change control becomes Appendix C and stays last. Decisions 37–39.
 
+### C25 — The reference implementation met a stranger, and the model lost
+
+**Source:** the first walkthrough of `/assess` by a reader who was not its author, 21 August 2026, and the v2 rebuild that followed.
+**Why this belongs in change control rather than in a commit message.** The pack has been arguing that the documentation is the client and that a fresh reader who finds a page unclear has found a defect in the page. This is the first time that was tested on something built, and **the test found a defect in the pack's vocabulary, not only in the code.**
+**The instructive bug.** A "+ add an agent" button added a whole new **case** on every press, and a reader trying to add a second agent ended up with a dozen cases. The button was not the bug. **The model was.** The tool had been built around *cases* — which is how the design documents think — and a person does not have cases, they have agents. v2 removed the concept, and the button that could not behave correctly went with it. **A design vocabulary leaked into an interface and produced a defect that looked like a UI bug**, which is worth recording because the pack is fifteen documents of design vocabulary.
+**Three more corrections the walkthrough forced**, each of them something the pack asserts elsewhere and the interface was not doing: the tree is a **graph** and its relationships were the content the list was hiding; the tree must be **pruned by facts about the reader's own machine**, because a picture of somebody else's machine is not evidence about theirs; and **escalation is an edge**, not an annotation — *execute programs as you* reaches around the folder restriction, and drawing it is what makes C16's "setting" tier land.
+**Two removals.** **Risk acceptance is gone** from the tool: acceptor, interval, accept and decline belong to the risk product, and this tool's job ends at *here is what is possible, and here is the delta*. And **"what you can do about it" is now "controls"** — the things that remove capability, ticked as already-true rather than offered as advice, with their effect on the reader's own gap computed rather than asserted.
+**One correction to a claim this pack published.** Document 14 and the v1 library said a separate user account was "an hour". **It is not** — paths, permissions, editors and agents all assume one account, and desktop applications frequently cannot be run that way at all. The reason almost nobody does the most effective thing available is that it is genuinely difficult, and a tool that implies otherwise blames the reader for a real obstacle. Corrected in the library and recorded here.
+**Status:** shipped at site v0.1.19. Decisions 40–41.
+
 ## The decisions register
 
 | # | Decision | Made by | Status |
@@ -265,6 +275,8 @@ C12 established that counting acceptances inverts. **The equivalent trap here is
 | 37 | Do REPs become the pack's decision format? | appendix B (C24) | **Open — if yes, every open decision becomes a REP with a status and a champion, and this register becomes an index** |
 | 38 | Who accepts a REP? | appendix B (C24) | **Open — without an accepting authority every REP stays Draft forever** |
 | 39 | Ask five operators whether the problem is recognised | appendix A (C24) | **Open — the cheapest next step in the pack, and it needs no registry** |
+| 40 | The assessment has no cases — it has agents | pack doc 14 (C25) | **Settled — a design vocabulary in an interface produced a defect that looked like a UI bug** |
+| 41 | Risk acceptance is out of the assessment | pack doc 14 (C25) | **Settled — it belongs to the risk product** |
 
 ---
 

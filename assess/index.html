@@ -3,10 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Map your own case — grants, mandates and the gap · pki.sgit.ai</title>
-<meta name="description" content="Assemble your own agent installations as grant trees and mandates, see what is reachable that you never intended, and decide what to do about it. Everything stays in your browser — open the network panel and check.">
+<title>Map the gap between what your agents can reach and what you meant · pki.sgit.ai</title>
+<meta name="description" content="Pick the LLM agents you actually run, answer a few questions about your machine, and see the delta between what they can reach and what you meant them to do. Everything stays in your browser.">
 <link rel="canonical" href="https://pki.sgit.ai/assess/index.html">
 <link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="css/assess.css">
 </head>
 <body>
 
@@ -14,7 +15,7 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.18</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.19</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -40,7 +41,7 @@
       <a class="nl here" href="../assess/index.html">Map your case<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl here" href="../assess/index.html">Map your own case</a>
-      <a class="sl" href="../assess/library.json">The library of trees</a>
+      <a class="sl" href="../assess/library.html">The library of trees</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -72,63 +73,117 @@
   <script src="../assets/nav.js" defer></script>
 </div></nav>
 
-<header class="hero">
+<header class="hero tight">
   <div class="inner">
-    <p class="eyebrow">Grants · mandates · the gap nobody accepted</p>
-    <h1>Map your own case</h1>
-    <p class="sub">Pick the agents you run and the surface they run on, tick what you actually meant them to do, and see what the difference is. The output is a list of things somebody has to accept or decline — not a score, and not a report.</p>
+    <p class="eyebrow">Grants · mandates · the delta nobody accepted</p>
+    <h1>What your agents can reach, and what you meant</h1>
+    <p class="sub">Pick the LLM agents you actually run. Answer a few questions about your own machine. See the gap — and get a summary you can send to somebody.</p>
   </div>
 </header>
 
-<main class="inner">
+<main class="inner wide">
 
-<div class="conform">
-  <h2 id="stays">Everything here stays in this browser, and you can check that in ten seconds</h2>
-  <p>This is a static site. There is no backend to send anything to, so the claim that we do not collect your assessment is <b>architectural rather than operational</b> — a property, not a promise. Open your browser's network panel, complete the whole thing, and watch: the only request this page makes is for <a href="library.json">library.json</a>, and that is us sending you something.</p>
-  <p><b>And there is a second rule underneath that one, which matters more.</b> A completed assessment describes which agents you run, on which machine, holding which credentials, with which containment, and which of those containments is only a setting. Individually those are unremarkable facts. Assembled, dated and ranked, they are a serviceable plan for attacking you — and we would have asked you to write it down.</p>
-  <p class="claim">So this page stores your <em>choices</em>, never your <em>answers</em>: identifiers from a public library, plus fixed options and dates derived from them.</p>
-  <p><b>There is no free-text box anywhere on this page.</b> That is not an oversight and it is not a first version — it is the rule made checkable. You will notice it most where an acceptor should be a person's name: you pick a <em>role</em> instead, because a name is a fact about your organisation and this page has nowhere safe to put one. Scroll to <a href="#stored">the bottom</a> and press the button to see the exact bytes held for you.</p>
-  <div class="note small"><b>What browser storage actually gives you.</b> Per browser, per device, per origin — it will not follow you to your phone. Cleared when you clear site data, and when a private window closes. <b>No recovery of any kind.</b> And readable by any script running on this origin, which is the reason for the references-only rule rather than an argument against storing anything. Losing this costs you almost nothing, by design: it is a handful of pointers into a public file.</div>
-</div>
-
+<!-- 1 · the snapshot, first, because it is the thing worth sending ------------------->
+<sg-dashboard id="dash"></sg-dashboard>
+<div id="flash" class="flash" hidden></div>
+<div id="libmoved" class="note" style="display:none"></div>
 <div id="storagenote"></div>
 
-<div id="libmoved" class="note" style="display:none"><b>The library has changed since you were last here.</b> You were assessing against <code id="libwas"></code> and this is <code class="libver-inline"></code>. Your choices are unchanged. Anything that reads differently is the library moving, not you — which is why the version is recorded rather than assumed.</div>
+<!-- 2 · start from an example, or pick your own ------------------------------------->
+<section class="step">
+  <h2 id="start">Start from an example, or pick your own</h2>
+  <p class="dim small">Four setups already filled in. Load one to see what the tool does, then change it into yours — nothing is sent anywhere either way.</p>
+  <div id="examples" class="exs"></div>
+</section>
 
-<h2 id="build">Your cases</h2>
-<p class="dim">A case is one agent installation on one surface. Most people have two or three, and they are <b>not</b> variants of each other: a local install is an enormous grant with a boundary you own and have not used, and a hosted one is a smaller grant with a boundary you cannot see. Neither wins.</p>
+<section class="step">
+  <h2 id="agents">1 · Which agents do you actually run?</h2>
+  <p class="dim small">Pick as many as apply. A local agent and a hosted one are not two versions of the same thing — they have different shapes, and neither is safer.</p>
+  <sg-picker id="picker"></sg-picker>
+  <p id="nothing-yet" class="dim">Pick one and the rest of the page appears.</p>
+</section>
 
-<div class="addrow">
-  <button class="btn" data-act="add" data-v="local">+ An agent on my own machine</button>
-  <button class="btn" data-act="add" data-v="hosted">+ An agent hosted by a vendor</button>
-</div>
+<!-- 3 · facts about the machine ----------------------------------------------------->
+<section class="step" data-needs-agent hidden>
+  <h2 id="facts-h">2 · What is actually on your machine?</h2>
+  <p class="dim small">These prune the graph. If there are no credential files, that branch should not be drawn — a picture of a machine that is not yours is not evidence about you.</p>
+  <sg-facts id="facts"></sg-facts>
+</section>
 
-<div id="cases"></div>
+<!-- 4 · the graph + inspector ------------------------------------------------------->
+<section class="step" data-needs-agent hidden>
+  <h2 id="graph-h">3 · What that reaches</h2>
+  <p class="dim small">Every box says what stands in the way and <b>who enforces it</b>. Click any of them.</p>
+  <div class="gsplit">
+    <div id="graphs"></div>
+    <sg-inspector id="inspector"></sg-inspector>
+  </div>
+</section>
 
-<h2 id="stored">Everything this site has stored about you</h2>
-<p>Not a description of it. The bytes.</p>
-<pre id="dump" class="dumpbox">(nothing stored yet)</pre>
-<p class="small dim">Library version in use: <code id="libver">…</code>. Every value above is an identifier from <a href="library.json">that file</a>, a fixed option, or a date this page worked out from one. Nothing you typed, because there was nothing to type.</p>
-<p><button class="btn ghost" data-act="wipe">Delete all of it</button> <span class="small dim">Immediate, local, and not recoverable — the same as clearing site data, with a button.</span></p>
+<!-- 5 · intent ---------------------------------------------------------------------->
+<section class="step" data-needs-agent hidden>
+  <h2 id="intent-h">4 · What did you mean it to do?</h2>
+  <p class="dim small">Only what is actually reachable is offered — there is no point asking you to authorise something nothing you picked can do.</p>
+  <sg-intent id="intent"></sg-intent>
+</section>
 
-<h2 id="honest">What this is not</h2>
-<table class="split">
-  <thead><tr><th>Not</th><th>Why it matters</th></tr></thead>
-  <tbody>
-    <tr><td><b>Not a scanner</b></td><td>Nothing here inspects your machine. If a scan is ever added, its output belongs in your own vault and never in browser storage — which is an argument for building the vault path <em>before</em> the scan rather than after.</td></tr>
-    <tr><td><b>Not a score</b></td><td>A number out of a hundred gets optimised for how alarming it feels. The measured finding is that a strong threat with a weak answer produces denial and reactance rather than change — worse than saying nothing, because it manufactures the counter-argument. So this shows a picture and an action, not a grade.</td></tr>
-    <tr><td><b>Not a durable record</b></td><td>Browser storage has no recovery. When the vault path exists it will be offered rather than defaulted, because a vault swaps silent loss that costs little for a key with no reset.</td></tr>
-    <tr><td><b>Not a vendor assessment</b></td><td>The library carries classes of installation, not named products, and every node says whether it was derived, taken from a published third-party tool, or measured. One hosted tree was measured — one vendor, one surface, one date, unnamed. Grading products would need measuring them.</td></tr>
-    <tr><td><b>Not an alarm</b></td><td>Every case ends on something you can actually do. Where the honest answer is that you can do nothing — the hosted containment — the page says so and gives you a request to make instead of a remedy to pretend at.</td></tr>
-  </tbody>
-</table>
+<!-- 6 · the gap --------------------------------------------------------------------->
+<section class="step" data-needs-agent hidden>
+  <h2 id="gap-h">5 · The delta</h2>
+  <div id="gap"></div>
+</section>
 
-<h2 id="wrong">If it is wrong, that is the most useful thing you have</h2>
-<p>The trees are pre-computed claims about other people's products, dated, with the method published above each one so you can re-run it. A visitor saying <em>that is not what my setup looks like</em> is the cheapest correction this library will ever get. There is nowhere on this page to send that — deliberately, because a feedback box is a free-text box — so it goes to <a href="../admin/comms.html">comms</a>, or to the repository.</p>
+<!-- 7 · controls -------------------------------------------------------------------->
+<section class="step" data-needs-agent hidden>
+  <h2 id="controls-h">6 · Controls</h2>
+  <p class="dim small">Not advice, and not a to-do list. These are the things that <em>remove</em> capability — tick what is already true and watch the numbers above move.</p>
+  <sg-controls id="controls"></sg-controls>
+</section>
+
+<!-- 8 · the small print, demoted ---------------------------------------------------->
+<section class="step">
+  <h2 id="stays">Where any of this goes</h2>
+  <div class="sidenote">
+    <p><b>Nowhere. There is no backend to send it to</b>, so open your network panel and watch: this page asks for its
+    stylesheet, its scripts and <a href="library.json">library.json</a>, and that last one is us sending you something.
+    The claim is <b>architectural rather than operational</b> — a property, not a promise.</p>
+    <details>
+      <summary>What is stored, and the rule underneath it</summary>
+      <p>A completed assessment describes which agents you run, on which machine, holding which credentials, with which
+      containment. Individually unremarkable; assembled, dated and ranked, it is a serviceable plan for attacking you —
+      and we would have asked you to write it down. So this page stores your <b>choices</b>, never your <b>answers</b>:
+      identifiers from a public library, fixed options, and nothing else.</p>
+      <p><b>There is no free-text box anywhere on this page.</b> That is the rule made checkable rather than promised.
+      It is also why there is no risk-acceptance step here and no place to name a person — a name is a fact about your
+      organisation, and this page has nowhere safe to put one.</p>
+      <p class="small dim">Per browser, per device, per origin. Cleared with site data and when a private window closes.
+      <b>No recovery.</b> Readable by any script on this origin, which is the reason for references-only rather than an
+      argument against storing anything. Losing it costs you almost nothing, by design.</p>
+    </details>
+    <details>
+      <summary>Everything stored, as bytes</summary>
+      <pre id="dump" class="dumpbox">(nothing stored yet)</pre>
+      <p class="small dim">Library version <code data-libver>…</code>. Every value is an identifier from
+      <a href="library.json">that file</a>, a fixed option, or derived from one.</p>
+      <p><button class="btn ghost sm" id="wipe">Delete all of it</button>
+         <button class="btn ghost sm" id="reset">Start again</button></p>
+    </details>
+  </div>
+</section>
+
+<section class="step">
+  <h2 id="wrong">If it is wrong, that is the most useful thing you have</h2>
+  <p>The trees are pre-computed claims, dated, with the method published beside each one. Every one of them is derived
+  from what a surface <em>architecturally is</em> — that a command-line agent running under your account reaches what
+  your account reaches is a fact about command-line programs, not a claim about whoever wrote one. Where a node comes
+  from something stronger, it says so. <a href="library.html">Browse the whole library</a>, disagree with it, and send
+  the disagreement to <a href="../admin/comms.html">comms</a> — there is no feedback box here, because a feedback box
+  is a text box.</p>
+</section>
 
 <div class="pagenav">
   <a href="../mandate/index.html">← Identity and mandate</a>
-  <a href="../packs/registry-mvp/grant-tree.html">The grant tree, in full →</a>
+  <a href="library.html">The library of trees →</a>
 </div>
 
 </main>
@@ -139,7 +194,7 @@
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.18</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.19</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The registry</h4>
@@ -171,6 +226,6 @@
     <a href="../llms.txt">llms.txt</a>
   </div>
 </div></footer>
-<script src="../assets/assess.js" defer></script>
+<script type="module" src="js/app.js"></script>
 </body>
 </html>

@@ -3,10 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>pki.sgit.ai: The Public Key Registry Has A Documented Failure To Learn From · documents · pki.sgit.ai</title>
-<meta name="description" content="Original document, readable in-page: summary, key concepts and key ideas, then the full markdown. Strategy brief, v0.33.59, 16 August 2026. CC BY 4.0.">
-<link rel="canonical" href="https://pki.sgit.ai/documents/pki-registry.html">
+<title>The library of trees — every claim, drawn and raw · pki.sgit.ai</title>
+<meta name="description" content="The public library the assessment stores references into: four surface archetypes as graphs, with the raw JSON beside each one, and where every node's claim came from.">
+<link rel="canonical" href="https://pki.sgit.ai/assess/library.html">
 <link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="css/assess.css">
 </head>
 <body>
 
@@ -37,10 +38,10 @@
       </div>
     </div>
     <div class="ni ni-has">
-      <a class="nl" href="../assess/index.html">Map your case<span class="caret">&#9662;</span></a>
+      <a class="nl here" href="../assess/index.html">Map your case<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl" href="../assess/index.html">Map your own case</a>
-      <a class="sl" href="../assess/library.html">The library of trees</a>
+      <a class="sl here" href="../assess/library.html">The library of trees</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -51,7 +52,7 @@
       </div>
     </div>
     <div class="ni ni-has">
-      <a class="nl here" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <a class="nl" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl" href="../documents/index.html">The documents</a>
       <a class="sl" href="../packs/index.html">Dev packs</a>
@@ -72,49 +73,65 @@
   <script src="../assets/nav.js" defer></script>
 </div></nav>
 
-<main class="doc">
-<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="index.html">documents</a> / pki-registry</div>
-<h1>pki.sgit.ai: The Public Key Registry Has A Documented Failure To Learn From</h1>
+<header class="hero tight">
+  <div class="inner">
+    <p class="eyebrow">Public · dated · disagreeable</p>
+    <h1>The library of trees</h1>
+    <p class="sub">Everything <a href="index.html">the assessment</a> stores about you is an identifier from this file. So here it is: drawn, and raw, side by side.</p>
+  </div>
+</header>
 
-<div class="docmeta">
-  <span class="k">Type</span><span class="v">Strategy brief</span>
-  <span class="k">Version</span><span class="v">v0.33.59</span>
-  <span class="k">Date</span><span class="v">16 August 2026</span>
-  <span class="k">Author</span><span class="v">Dinis Cruz (project lead) and collaborators</span>
-  <span class="k">Licence</span><span class="v">CC BY 4.0</span>
-  <span class="k">Source</span><span class="v"><a href="../briefs/v0.33.59__strategy-brief__pki-sgit-keyserver-failure-append-only-ownership-rule.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/dev/briefs/v0.33.59__strategy-brief__pki-sgit-keyserver-failure-append-only-ownership-rule.md">view on GitHub</a></span>
+<main class="inner wide">
+
+<div class="sidenote">
+  <p><b>What every tree here is, and is not.</b> Each one is derived from what a surface <em>architecturally is</em> —
+  that a command-line agent running under your account reaches what your account reaches is a fact about command-line
+  programs, true of all of them, and <b>it is not a claim about whoever wrote one</b>. Where a node comes from something
+  stronger — a published third-party audit, or a direct measurement — the node says so and carries its date.</p>
+  <p class="small dim">Which is why the library names <em>surfaces</em> and offers products as examples within them,
+  rather than grading products. Grading a named product means measuring it, under the participant rules this site
+  applies to every comparison: a verification date, a published re-run method, and the participant named on the page.</p>
 </div>
 
-<h2 id="summary">Summary</h2>
-<p>The brief that scoped this site. It takes one historical lesson — the global keyserver network was destroyed in 2019 by a certificate-flooding attack its own maintainer called unsalvageable, and the cause was a stated design goal (never delete), not a bug — and turns it into the registry's design. The three abused properties become rules. The tension with the corpus's own append-only pattern is resolved precisely rather than by instinct: append-only is safe when the writer owns what it writes. Revocation becomes a signed append rather than a deletion. Identity and mandate separate into independently revocable signed statements. And the build order puts a private registry before a public one: testable versus commitment.</p>
+<section class="step">
+  <h2 id="trees">The four shapes</h2>
+  <p class="dim small">Every fact answered <b>yes</b>, so you see the maximum extent of each. In the assessment these get pruned by what you actually have.</p>
+  <div class="libnav" id="libnav"></div>
+  <div class="libsplit">
+    <div>
+      <div id="libgraph"></div>
+      <sg-inspector id="inspector"></sg-inspector>
+    </div>
+    <div>
+      <h3 class="rawh">The raw entry</h3>
+      <pre class="rawbox" id="raw">loading…</pre>
+      <p class="small dim">The whole file: <a href="library.json">library.json</a> — version <code data-libver>…</code>.</p>
+    </div>
+  </div>
+</section>
 
-<h2 id="concepts">Key concepts</h2>
-<ul>
-  <li><a href="../failure/index.html"><b>The 2019 keyserver failure</b></a> — ~150,000 garbage signatures on one key; unrepairable by design</li>
-  <li><a href="../failure/index.html#append-only"><b>The ownership rule</b></a> — append-only is a guarantee when writers own their records, an attack surface when anyone appends to another's</li>
-  <li><a href="../rules/index.html"><b>The four registry rules</b></a> — owner-only writes, revocation as signed append, size bounds, every entry signed</li>
-  <li><a href="../mandate/index.html"><b>Identity vs. mandate</b></a> — who the key belongs to vs. what the agent may do, separately revocable</li>
-</ul>
+<section class="step">
+  <h2 id="caps">What the trees reach</h2>
+  <p class="dim small">The capability vocabulary the whole tool is built on. Everyday uses are in it deliberately: a tool that only lists frightening capabilities is measuring its own framing.</p>
+  <div id="caps"></div>
+</section>
 
-<h2 id="ideas">Key ideas</h2>
-<ul>
-  <li>Third-party attestations are what made the old system valuable and what made it attackable — the central design choice, to be made deliberately.</li>
-  <li>Vaults supply distribution, safe mirroring and versioning; the ownership rule, size bound and signature checking are the registry logic still to build.</li>
-  <li>Fractal trust structures require declared roots, or the graph is unevaluable.</li>
-  <li>Lead with the failure page — the most linkable thing the site will have, and proof the design knew the history.</li>
-</ul>
+<section class="step">
+  <h2 id="controls">The controls</h2>
+  <p class="dim small">What removes capability, and what tier it actually is. A control enforced by the tool — running inside the grant — is a <b>setting</b>, however it is documented.</p>
+  <div id="ctrls"></div>
+</section>
 
-<h2 id="on-site">On this site</h2>
-<p>Became the site: the failure page, the four rules, identity and mandate, and the build order.</p>
-
-<h2 id="read">Read the document</h2>
-<div class="mdread-label">📄 Original document · v0.33.59 · 16 August 2026 · rendered from the <a href="../briefs/v0.33.59__strategy-brief__pki-sgit-keyserver-failure-append-only-ownership-rule.md">raw markdown</a> (the source of truth)</div>
-<div class="mdread" id="mdread" data-src="../briefs/v0.33.59__strategy-brief__pki-sgit-keyserver-failure-append-only-ownership-rule.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="../briefs/v0.33.59__strategy-brief__pki-sgit-keyserver-failure-append-only-ownership-rule.md">open the raw markdown</a>.</p></noscript></div>
+<section class="step">
+  <h2 id="evidence">Where the claims come from</h2>
+  <div id="ev"></div>
+</section>
 
 <div class="pagenav">
-  <a href="index.html">← All documents</a>
-  <a href="../briefs/v0.33.59__strategy-brief__pki-sgit-keyserver-failure-append-only-ownership-rule.md">Raw markdown →</a>
+  <a href="index.html">← Map your own case</a>
+  <a href="../packs/registry-mvp/grant-tree.html">The grant tree, in full →</a>
 </div>
+
 </main>
 
 <footer class="site"><div class="cols">
@@ -155,8 +172,6 @@
     <a href="../llms.txt">llms.txt</a>
   </div>
 </div></footer>
-
-<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
-<script src="../assets/mdreader.js"></script>
+<script type="module" src="js/library.js"></script>
 </body>
 </html>

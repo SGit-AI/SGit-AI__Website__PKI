@@ -8,7 +8,7 @@
 > but never delete anything — not a bug. This site publishes that history, and the
 > registry rules it produces, before the registry exists.
 
-Site version: v0.1.18 (20 August 2026). Published by the sgit project — participant
+Site version: v0.1.19 (20 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## Properties agents may rely on
@@ -222,11 +222,21 @@ failure page, the four rules) are done; step 4 (a private registry) is the next 
   their own stated use, and would make the fixture flag true on every row — and a flag that is
   always true is a column, not evidence. The rule adopted instead: A KEY BELONGS TO WHATEVER CAN
   KEEP A SECRET, AND EVERYTHING ELSE IS SIGNED BY SOMETHING THAT CAN.
-- New at v0.1.16, and the first thing on this site that is BUILT rather than specified:
+- BUILT, not specified — and rebuilt at v0.1.19 after its first walkthrough by a stranger:
   [Map your own case](https://pki.sgit.ai/assess/index.html) — a workflow where a visitor picks
   the agents they run and the surface they run on, ticks what they meant the agent to do, and
   sees what is reachable that they never intended, with a decision per gap carrying an acceptor
   and an interval. Specified in [document 14](https://pki.sgit.ai/packs/registry-mvp/user-assessment.html).
+  You pick NAMED PRODUCTS (Claude Code, ChatGPT, Le Chat...) inside four surface archetypes; facts
+  about your own machine PRUNE the graph; escalation is drawn as an EDGE, so you see the path that
+  goes around a stated control rather than reading that one exists; the gap is a picture; and
+  controls are things you tick as ALREADY TRUE, with their effect on your own gap computed rather
+  than asserted. Risk acceptance is deliberately NOT here — it belongs to the risk product, and the
+  v1 that had it was wrong. The library of trees is browsable at
+  https://pki.sgit.ai/assess/library.html — every tree drawn, with its raw JSON beside it and the
+  selected node highlighted in both. The graph is hand-written SVG with no charting library, because
+  a CDN dependency would put a third-party request on a page whose whole argument is that you can
+  open the network panel and watch nothing leave.
   Two rules shaped it. STORE THE CHOICES, NOT THE ANSWERS: a completed assessment describes which
   agents somebody runs, holding which credentials, with which containment — assembled, that is a
   serviceable plan for attacking them. So what is stored is identifiers from a public library plus

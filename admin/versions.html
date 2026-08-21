@@ -14,7 +14,7 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.18</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.19</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -40,7 +40,7 @@
       <a class="nl" href="../assess/index.html">Map your case<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl" href="../assess/index.html">Map your own case</a>
-      <a class="sl" href="../assess/library.json">The library of trees</a>
+      <a class="sl" href="../assess/library.html">The library of trees</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -80,6 +80,11 @@
 <div class="tablewrap"><table class="vers">
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
+    <tr>
+      <td class="vnum">v0.1.19</td>
+      <td>21 Aug 2026</td>
+      <td><b><a href="../assess/index.html">Map your own case</a> rebuilt</b>, after the first walkthrough by a reader who was not its author — and the defects that walkthrough found were more useful than the design that produced them, so they are recorded as <a href="../packs/registry-mvp/change-control.html">C25</a> rather than fixed quietly. <b>The instructive one was not a UI bug.</b> A "+ add an agent" button added a whole new <em>case</em> on every press, and a reader trying to add a second agent ended up with a dozen. The button was not the problem — <b>the model was</b>: the tool had been built around <em>cases</em>, which is how the design documents think, and a person does not have cases, they have agents. v2 has none; you pick agents, and one assessment covers all of them. A design vocabulary had leaked into an interface and produced something that looked like a coding mistake, which is worth recording in a pack that is fifteen documents of design vocabulary. <b>What v2 does differently.</b> The <b>snapshot comes first</b>, filling in as you go, because the thing worth sending somebody is a summary and nobody reads three screens of preamble to earn one — the privacy material is still there, demoted to a side note where it belongs. You pick <b>named products</b> — Claude Code, ChatGPT, Le Chat and the rest — inside four surface archetypes, instead of translating your own setup into "on my machine" or "hosted by a vendor". The tree is now a <b>graph with an inspector</b>: click any node for what it means, what stands in the way, and where the claim came from. <b>Facts prune it</b> — no credential files, no branch, because a picture of a machine that is not yours is not evidence about you — and <b>"not sure" keeps the branch and marks it</b>, since assuming absence is the comfortable error. <b>Escalation is drawn as an edge</b>: <em>execute programs as you</em> reaches the agent's own config and around the folder restriction, which is what makes the "setting" tier land rather than being asserted. Intent offers only what is actually reachable and now includes <b>benign uses</b> — hold a conversation, draft a document, explain a file — because a tool that lists only frightening capabilities is measuring its own framing. The gap is <b>a picture</b>, and clicking any of it lights up the path. <b>Two removals.</b> Risk acceptance is gone — acceptor, interval, accept and decline belong to the risk product, and this tool's job ends at <em>here is what is possible, and here is the delta</em>. And "what you can do about it" is now <b>controls</b>: tick what is already true and the numbers above move, with each control's effect on your own gap computed rather than asserted. <b>One published claim corrected</b>: a separate user account was described as "an hour". It is not — paths, permissions, editors and agents all assume one account, and desktop apps often cannot do it at all. The reason almost nobody does the most effective thing available is that it is genuinely hard, and implying otherwise blames the reader for a real obstacle. Engineering: the section is <b>its own folder</b> — two pages, five ES modules split by concern, six custom elements, its own stylesheet, and no giant HTML file. The graph is <b>hand-written SVG with no charting library</b>, because a CDN dependency would put a third-party request on a page whose whole argument is that you can open the network panel and watch nothing leave; it still makes only same-origin requests, and that is now checked rather than claimed. New: <a href="../assess/library.html">the library of trees</a>, where every tree is drawn and its raw JSON sits beside it with the selected node highlighted in both.</td>
+    </tr>
     <tr>
       <td class="vnum">v0.1.18</td>
       <td>20 Aug 2026</td>
@@ -190,7 +195,7 @@
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.18</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.19</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The registry</h4>

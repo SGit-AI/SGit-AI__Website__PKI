@@ -182,4 +182,55 @@ The third clause fails if the efficacy exit is missing. The fourth is the one th
 
 ---
 
+## v2 — What Changed When Somebody Actually Used It
+
+*Added 21 August 2026, after the first walkthrough by a reader who was not the author. Everything above stands; this section records what that walkthrough broke, because the defects it found are more useful than the design that produced them.*
+
+**Three bugs, and the first one is the instructive one.**
+
+**A "+ add an agent" button added a whole new *case* on every press.** A reader clicking it to add a second agent got a second case, then a third, then a dozen — and only discovered why at the bottom of the page. The bug was not the button; **the bug was the model.** The tool had been built around "cases", which is how the *design documents* think, and a person does not have cases — they have agents. v2 has no cases at all: you pick agents, and one assessment covers all of them. The button that could not behave correctly was removed by deleting the concept it belonged to.
+
+**A hosted agent had exactly one option**, and **clicking a choice appeared to do nothing**, because the interesting change happened below the fold.
+
+**And the framing was wrong in a way that took a stranger to see.** *Map your own case* — what case? The job is specific: **map the delta between what your LLM agents can reach and what you meant them to do.** The page says that now.
+
+### What v2 does differently
+
+| v1 | v2 | Why |
+|---|---|---|
+| Three screens of preamble, then the tool | **The snapshot first**, filled in as you go | The thing worth sending somebody is a summary, and nobody reads three screens to earn one. The privacy material is good and is now a side note at the bottom |
+| "An agent on my machine" / "hosted by a vendor" | **Named products in four surface archetypes** — Claude Code, ChatGPT, Le Chat, and so on | A person knows which product they run. They do not know which archetype it is, and asking them to translate was asking them to do our modelling |
+| A static list of tree rows | **A graph**, with an inspector: click any node for what it means, what stands in the way, and where the claim came from | The relationships were the content and the list was hiding them |
+| The same tree for everyone | **Facts prune it.** No credential files, no branch | A picture of a machine that is not yours is not evidence about you |
+| Settings and boundaries as labels | **Escalation edges, drawn.** *Execute programs as you* reaches the agent's own config and around the folder restriction | This is what makes a setting cosmetic, and it is an edge, not an annotation |
+| Everything reachable offered as intent | **Only what is reachable**, and benign uses added — hold a conversation, draft a document, explain a file | A tool that offers only frightening capabilities is measuring its own framing |
+| The gap as a list of rows | **The gap as a picture**: asked-for beside can-also-do, click any of them to light up the path | |
+| "What you can do about it" | **Controls.** Tick what is *already true* and the numbers above move | Not advice and not a to-do list: the things that remove capability |
+| Accept / decline, acceptor, interval | **Removed** | Risk acceptance belongs to the risk product. This tool's job ends at *here is what is possible, and here is the delta* |
+| One page | **Two**, plus a module per concern | |
+
+### Three decisions worth defending
+
+**The separate-account control now says it is hard.** v1 said "an hour". It is not: paths, permissions, editors and agents all assume one account, and desktop applications frequently cannot be run that way at all. **The reason almost nobody does the most effective thing available is that it is genuinely difficult**, and a tool that implies otherwise is blaming the reader for a real obstacle.
+
+**The graph is hand-written SVG, with no charting library.** A library from a CDN would add a third-party request to a page whose entire argument is that you can open the network panel and watch nothing leave. The layout needed is a layered DAG with two edge kinds — about a hundred lines — and it is worth a hundred lines to keep the claim whole. **The page still makes only same-origin requests, and that is now checked rather than asserted.**
+
+**"Not sure" is a first-class answer that keeps the branch.** Assuming absence is the comfortable error, and the tool has no business making it on the reader's behalf. Those paths are drawn, marked, and counted separately on the snapshot.
+
+### And one finding the build produced
+
+On a local surface, **every excess path bottoms out at the same node** — *runs as your user account*. Nine rows each ending in the same sentence buries that, so the snapshot says it once: **one node is the weakest link on 9 of 9; that is one thing to change, not nine.** It is a better efficacy message than any individual row, and it only became visible once the paths were computed rather than described.
+
+### Still open after v2
+
+| | |
+|---|---|
+| **No desktop or CLI picture** | The memo asked for a drawing of a desktop and a terminal with the assets shown in place. The graph is the abstraction; the picture would be the recognition, and it is not built |
+| **Evidence packs are not linked per capability** | The `?` opens the path and the provenance. It does not yet open the evidence a capability rests on, which is a different thing |
+| **No export** | A file the reader keeps is the obvious next ask, and it is also the moment the plan-for-attacking-them leaves the browser |
+| **Containers and local environments as their own profiles** | Named in the memo as later use cases; the library has controls for them but no profiles |
+
+
+---
+
 This document is released under the Creative Commons Attribution 4.0 International licence (CC BY 4.0).

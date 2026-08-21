@@ -51,7 +51,7 @@ NAV = [
     ], ("bootstrap/", "enrolment/", "execution/", "shipped/")),
     ("Map your case", "assess/index.html", [
         ("Map your own case", "assess/index.html"),
-        ("The library of trees", "assess/library.json"),
+        ("The library of trees", "assess/library.html"),
     ], ("assess/",)),
     ("Origins", "origins/index.html", [
         ("Origins: 2026", "origins/index.html"),

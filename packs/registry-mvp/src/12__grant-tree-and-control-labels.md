@@ -246,6 +246,7 @@ Stated here rather than by editing the published documents.
 *Added after publication, 20 August 2026 (site v0.1.16). No claim above has been changed — this pack supersedes rather than rewrites. Later documents that bear on this one:*
 
 - `14__user-assessment.md` — this document's tree, labels and three tiers, built and rendered at [/assess](../../assess/index.html) against a public library. It also answers open question 1 in the negative for now: the registry holds trees produced elsewhere and produces none itself
+- **C25** — the three-tier test and the node labels, drawn as a **graph** with escalation edges, at [/assess](../../assess/index.html). Drawing the escalation is what makes the `setting` tier land: a reader sees the path that goes around the control rather than reading that one exists
 
 ---
 
