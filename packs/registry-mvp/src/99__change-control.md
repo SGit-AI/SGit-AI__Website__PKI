@@ -289,6 +289,13 @@ One thing it did **not** do, and the pack should not pretend otherwise: it is st
 **And one of its own open questions is answered by measuring its own build.** It asks *what is the mobile form of the grant tree*, calling it "the one layout in this set that has no good answer yet". Measured at 390px, the tree reflows into indented cards, stays legible, and does not overflow. Two other screens did overflow — the CLI mirror's terminal blocks and the badge legend — and both are fixed. **The question was answered by running the thing rather than by reasoning about it**, which is the doctrine the pack rates itself as practising.
 **Status:** recorded. Decisions 43–44.
 
+### C32 — The assessment gets its own pack; document 14 becomes the outside view
+
+**Source:** two further v0.33.61 project-lead briefs, processed 21 August — `levels-and-variants-are-two-axes…` and `screenshot-boundary-is-the-instrument…` — and the project lead's request for a dedicated dev pack.
+**What changes:** document 14's subject now has its own pack, [Map Your Case](../../map-your-case/index.html), which captures the tool's principles, library, model and architecture as built, and operationalises the two briefs as its documents 07 and 08 (the levels-and-variants programme; the synthetic-reader tabletop). Document 14 is **not superseded**: it remains the registry-side view — the conformance-test framing, and the tool's place in this pack's build — while the new pack owns the tool itself. The early decisions taken in this register (29–35, 40–41) remain the record of when and by whom; the new pack's register carries them forward by cross-reference without renumbering them into new authority.
+**What the two briefs correct here:** nothing in this pack's schemas — their subject is the assessment's explanation and testing programmes. The one point that touches this pack: the levels brief's *three sets* framing (mandated / exercised / held-and-never-used) is a sharper rendering of C1's excess authority for a human reader, and the register interface's mandate composer (document 08, M4) should eventually say which excess capabilities have actually been exercised — which is observability data this pack's document 11 deliberately does not collect. That tension is recorded rather than resolved.
+**Status:** recorded. Decision 45.
+
 ## The decisions register
 
 | # | Decision | Made by | Status |
@@ -337,6 +344,7 @@ One thing it did **not** do, and the pack should not pretend otherwise: it is st
 | 42 | Doctrine is assessed, and re-assessed when the project has people | appendix C (C26) | **Open — the rating is a self-assessment and five doctrines cannot be rated at all yet** |
 | 43 | Do the badge's rendering rules live in document 08, or in their own document? | doc 15 (C27) | **Open — 08 is explicitly about wording, and these are rules about drawing** |
 | 44 | Does the mockup stay a pack artefact, or become a site page? | doc 15 (C31) | **Settled — a page. It inherits the participant disclosure, the versioning and the honest-limitations register, which a zip does not** |
+| 45 | Map Your Case gets its own dev pack; document 14 stays as the registry-side view | project lead, 21 Aug (C32) | **Settled — the pack exists; shared decisions cross-reference rather than renumber** |
 
 ---
 

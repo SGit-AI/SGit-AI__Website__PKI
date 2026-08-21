@@ -17,10 +17,17 @@ GH = "https://github.com/SGit-AI/SGit-AI__Website__PKI"
 PACKS = [
  dict(slug="registry-mvp",
   name="The Registry MVP: Open Data, A Single Operator, LLM Sessions First",
-  origin="Authored by the pki.sgit.ai site agent, 20 August 2026, at the project lead's request. Status: a design pack with one shipped consumer — the registry itself is unbuilt, and the assessment at /assess is live — three project-lead briefs (v0.33.61) landed after draft-1 shipped and their corrections are recorded in the change-control appendix rather than silently folded in \u2014 which now runs to twenty-three corrections and thirty-six decisions, roughly a third of them still open. Corpus version assigned on adoption.",
+  origin="Authored by the pki.sgit.ai site agent, 20 August 2026, at the project lead's request. Status: a design pack with one shipped consumer — the registry itself is unbuilt, and the assessment at /assess is live — three project-lead briefs (v0.33.61) landed after draft-1 shipped and their corrections are recorded in the change-control appendix rather than silently folded in \u2014 which now runs to thirty-two corrections and forty-five decisions, roughly a third of them still open. Corpus version assigned on adoption.",
   date="20 August 2026 · draft-1 + change control",
   origin_short="Site agent, this repo",
   row_date="20 Aug 2026 · draft + change control",
+  dl_blurb="""Every source document, every supporting brief, this site's machine-readable front door,
+    and the reference implementation — with a briefing for a fresh session picking it up cold.
+    It asks for a <em>readiness report</em> rather than an implementation plan: read the supporting
+    material, then the pack, then say whether you have what you need or list the questions that
+    block you. It names the six things that trip a new reader, and asks for blocking questions
+    rather than confidence, because a pack with a third of its decisions still open is one where a
+    confident plan probably means the reader missed them.""",
   one_line="A public key registry on vaults — open data, one operator, and LLM sessions as the first users on both sides. 15 documents and four appendixes — a PR/FAQ, a PEP-style specification, and change control — and one of them is built. <a href='registry-mvp/registry-mvp-briefing-pack.zip'>Downloadable as a briefing pack</a>.",
   meta_desc="The registry MVP pack, readable in-page: the leading brief, architecture, schemas, workflows, build order, diagrams, change control, the tabletop exercise, the UX mockups, six Wardley maps, the user stories and features, the observability layer, the grant tree, the key policy, and the assessment that is actually built.",
   three_sentences="An MVP of the registry this site designs: one public vault whose records are append-only, hash-chained, signed statement logs; a processor as the only write-key holder; and every workflow written for its actual first user — a fresh LLM session holding nothing but public URLs. Open data on principle (a registry contains no secrets), and <b>public in data, private in authority</b>: one operator, one root, own-agents enrolment — build-order step 4 with the covers off. Draft-1 shipped the morning of 20 August; three project-lead briefs landed the same day, and what they correct is recorded in <a href='change-control.html'>the change-control appendix</a> rather than silently patched — it sits last because it never stops growing, and it is the one document to read either second or last, never not at all. Two later documents draw the thing: <a href='ux-mockups.html'>the register interface, screen by screen</a>, and <a href='wardley-maps.html'>six Wardley maps</a> of where the novelty actually sits. <a href='user-stories.html'>Document 10</a> turns all of it into six users, twenty-four stories with tests that can fail, and six workflows; <a href='observability.html'>document 11</a> adds the half that makes the mandate layer defensible \u2014 and answers, by refusing it, the question of who is using a mandate. <a href='grant-tree.html'>Document 12</a> gives the grant the structure C1 implied and never specified, and <a href='keys-and-signatures.html'>document 13</a> settles which things get keypairs \u2014 fewer than proposed. <a href='user-assessment.html'>Document 14</a> is the first that describes something shipped: <a href='../../assess/index.html'>map your own case</a>.",
@@ -281,7 +288,7 @@ PACKS = [
    dict(slug="change-control", file="99__change-control.md",
     title="Appendix D — Change control",
     role="Every correction and every decision in one place — the errata, and the register of what is settled and what is not",
-    summary="The appendix, and the one document in this pack that never stops growing — which is why it sits last rather than at number six. Every correction the corpus has made to a published document in this pack, each with its source and its status, and the decisions register: <b>twenty-two corrections and thirty-five decisions</b>, of which roughly a third are still open and belong to the project lead. It exists because of a rule the pack takes from the corpus: <b>a published document is not silently edited</b>. Sources stay verbatim; corrections live here; draft-2 folds them in and this becomes its change log. Read it <b>second</b> if you are about to build from documents 00–04, so you read them with the errata in hand — and <b>last</b> if you are reading the pack through. Never not at all.",
+    summary="The appendix, and the one document in this pack that never stops growing — which is why it sits last rather than at number six. Every correction the corpus has made to a published document in this pack, each with its source and its status, and the decisions register: <b>thirty-two corrections and forty-five decisions</b>, of which roughly a third are still open and belong to the project lead. It exists because of a rule the pack takes from the corpus: <b>a published document is not silently edited</b>. Sources stay verbatim; corrections live here; draft-2 folds them in and this becomes its change log. Read it <b>second</b> if you are about to build from documents 00–04, so you read them with the errata in hand — and <b>last</b> if you are reading the pack through. Never not at all.",
     concepts=[
      ("C1 — grant redefined", "../../documents/grant-vs-mandate.html", "the v0.33.61 brief this folds in"),
      ("C2 — designed in June", "../../documents/register-fixtures.html", "inherit, don't re-derive: clues-not-storage, two-level trust, partial resolution"),
@@ -290,6 +297,220 @@ PACKS = [
     ideas=[
      "Sources stay verbatim; corrections live here until draft-2 folds them in — supersede, never rewrite.",
      "Four decisions are settled, four are open, and the register says which is which.",
+    ]),
+  ]),
+
+ dict(slug="map-your-case",
+  name="Map Your Case: The Grant–Mandate Delta, Mapped By Its Owner",
+  origin="Authored by the pki.sgit.ai site agent, 21 August 2026, at the project lead's request — and written the other way round from its sibling: the tool it specifies is already built. The assessment at /assess shipped as v1 on 20 August and was rebuilt as v2 on 21 August from the project lead's corrections; this pack captures the thinking that produced it and specifies v3, with four corrections and eighteen decisions in the appendix at draft-1. Corpus version assigned on adoption.",
+  date="21 August 2026 · draft-1 + change control",
+  origin_short="Site agent, this repo",
+  row_date="21 Aug 2026 · draft + change control",
+  dl_blurb="",
+  one_line="The dev pack for <a href='../assess/index.html'>the assessment</a> — the one thing on this site that is built rather than specified. Thirteen documents and a change-control appendix: the principles each purchased with a mistake, the library, the model, the two 20 August programmes (levels × variants, and synthetic readers behind a screenshot boundary), sharing by fragment, four Wardley maps, and the honest record of the first MVP.",
+  meta_desc="The Map Your Case pack, readable in-page: the leading brief, thirteen principles, the library, the model, the architecture, user stories, the screens, the levels-and-variants programme, the synthetic-reader tabletop, sharing, four Wardley maps, the v3 build order, the first-MVP retrospective, and change control.",
+  three_sentences="The dev pack for <a href='../../assess/index.html'>Map Your Case</a>, written after the thing it specifies: v1 shipped on 20 August, the project lead's corrections arrived within hours, v2 shipped the next day — so half of this pack is capture (the <a href='principles.html'>thirteen principles</a>, <a href='library.html'>the library</a>, <a href='model.html'>the model</a> and <a href='architecture.html'>the architecture</a> as built, with their reasons) and half is specification, expanded in documents first so v3 is built from pages rather than memory. Two v0.33.61 programme briefs land here as first-class documents: <a href='levels-and-variants.html'>levels and variants as two axes</a> — five scenarios ordered by grant size, everybody starts at level one, and the three sets whose third row (<em>held and never used</em>) is the product — and <a href='synthetic-readers.html'>the synthetic-reader tabletop</a>, where the screenshot boundary is the instrument, the patience budget comes from outside the model, and the two 9 August simulation rules are carried verbatim. <a href='first-mvp.html'>Document 12</a> is the extra one a hindsight pack owes: what v1 got wrong, the six bugs that became principles, and what was verified before each ship — the receipts behind every rule the pack states.",
+  site_relevance="This pack owns the first thing on this site that is <em>built</em>: the workflow at <a href='../../assess/index.html'>/assess</a>, which the <a href='../registry-mvp/index.html'>registry MVP pack</a> describes from the outside as its document 14 and its one shipped consumer. Its constraints are the site's published positions — <a href='../../documents/grant-vs-mandate.html'>grant is not mandate</a>, <a href='../../documents/grant-tree.html'>the three-tier control test</a>, <a href='../../documents/user-section.html'>store the choices, not the answers</a> — and its two programme documents operationalise <a href='../../documents/levels-and-variants.html'>the levels-and-variants brief</a> and <a href='../../documents/synthetic-readers.html'>the screenshot-boundary brief</a>, both captured verbatim under documents.",
+  docs=[
+   dict(slug="dev-brief", file="00__LEADING-BRIEF.md",
+    title="00 — The leading brief",
+    role="What the tool is, the inherited vocabulary, five positions on one axis, and the concession made first",
+    summary="The pack scoped, and the inversion named: this pack is written after the thing it specifies, so half is capture and half is v3 specification, with the change-control appendix recording which differences from the shipped tool are deliberate. The tool renders the delta between grant (what an installation can technically reach) and mandate (what its owner meant to authorise) from a public library, with nothing about the visitor ever leaving their browser. The audience is organised by grant size rather than job title — five scenarios from dictation to operations — and the framing concedes the experienced reader's objection before making its argument: the gap is not only where the danger is, it is also where the value came from, so the honest rendering is three sets, and the third — held and never used — is the product.",
+    concepts=[
+     ("Grant, mandate, excess, shortfall", "../../documents/grant-vs-mandate.html", "the vocabulary is inherited from the corpus, not invented here"),
+     ("The registry relationship", "../registry-mvp/user-assessment.html", "same argument, two audiences, opposite direction of computation"),
+     ("The three sets", "levels-and-variants.html", "mandated, exercised beyond the mandate, held and never used"),
+    ],
+    ideas=[
+     "The registry computes excess authority from records; this tool computes it from choices — and stores neither.",
+     "A reference implementation whose design lives in one retrospective document inside somebody else's pack is a reference to nothing.",
+     "Everybody starts at level one: expertise predicts vocabulary, not whether somebody knows their own grant.",
+    ]),
+   dict(slug="principles", file="01__principles.md",
+    title="01 — Principles",
+    role="Thirteen invariants, each with its reason and the check that would catch a violation",
+    summary="The rules the tool runs on, collected because most are implemented as absences — no free-text input, no backend, no score, no risk acceptance — and an absence is the easiest thing in a codebase to break politely. Each principle carries three parts: the statement, the reason, and how a violation would be caught, because a principle nobody can test is a preference. The set includes the two 9 August simulation rules verbatim (a simulated acceptance must never be confusable with a real one; simulate the role, not the named individual) and the variant rule that makes renderings governable: a persona may change emphasis, ordering, vocabulary and format, and may never change what is being accepted — mechanically checkable here, because the library gives facts identity and a fact-set diff across variants must be empty.",
+    concepts=[
+     ("Store the choices, never the answers", "../../documents/user-section.html", "P1 — implemented as the absence of any text input"),
+     ("Computed, never asserted", "model.html", "P3 — every conclusion about the visitor traces to a model function"),
+     ("The variant rule", "levels-and-variants.html", "P11 — an empty fact-set diff, checkable without judgement"),
+     ("The two simulation rules", "synthetic-readers.html", "P12 — carried verbatim because document 08 builds the machinery they govern"),
+    ],
+    ideas=[
+     "Nearly every rule here was purchased with a specific mistake — document 12 has the receipts.",
+     "“Not sure” resolves to present-but-unverified, because assuming absence is the comfortable error.",
+     "Every personalised result ends on something the visitor can do; the hosted case ends on a request.",
+     "The gap is conceded as where the value came from before it is named as the danger.",
+    ]),
+   dict(slug="library", file="02__the-library.md",
+    title="02 — The library",
+    role="The single data file: what it holds, the rules its entries obey, and why the honesty lives here rather than in the code",
+    summary="Everything the tool knows lives in one versioned JSON file, served same-origin, readable raw, and rendered by its own explorer page. The code computes; the library claims — so an argument with the tool is an argument with a library row, reviewable in a pull request. The basis rule keeps named products from becoming a vendor scorecard: every tree is derived from what a surface architecturally is, so the product picks the surface and the surface carries the tree. Facts are questions with a fixed vocabulary and requires-chains; controls are already-true containment with four structural effect fields; nodes carry tier, evidence class and quotable detail prose; escalations carry their why in plain language; and every surface names a public re-run method, because the library never asks to be believed.",
+    concepts=[
+     ("Architecture, not audit", "../../documents/grant-tree.html", "a CLI agent reaching what your account reaches is a fact about CLI programs, not a claim about a vendor"),
+     ("Four evidence classes", "model.html", "derived, third-party, measured, tested — and the weakest on the path labels the answer"),
+     ("Benign nodes are mandatory", "first-mvp.html", "a tree that only lists frightening capabilities measures its own framing"),
+    ],
+    ideas=[
+     "Fact-set identity is load-bearing: renaming a fact id breaks every stored assessment and share link, and gets a change-control entry.",
+     "The library is dated as a whole at v2, and that is a recorded defect (MC3) — per-node dates are phase 1.",
+     "A control's effect is never its description — it is a before/after diff against this visitor's case.",
+    ]),
+   dict(slug="model", file="03__the-model.md",
+    title="03 — The model",
+    role="Choices to delta in six stages — and the three places the obvious implementation is wrong",
+    summary="The computation, pure and testable: facts prune, controls reshape, every path is enumerated, the weakest link labels the capability, the weakest route wins across surfaces, and the dashboard gets a sentence rather than a histogram — the chokepoint: one node is the weakest link on N of M paths, which says the visitor has one problem rather than eleven. The three documented traps: escalation-existence must be tracked across all paths, not on the winner (the root already wins every direct-path contest, so winner-only tracking hid every escalation the library had); dropping a node must walk its ancestors; and a tree without benign capabilities manufactures false shortfalls that a test suite can happily assert.",
+    concepts=[
+     ("The weakest link on the path", "library.html", "a path is only as bounded as its least-enforced node — the file's one idea"),
+     ("The chokepoint sentence", "screens.html", "on local surfaces the tier histogram reads all-none and tells nobody anything"),
+     ("Escalation tracked across paths", "first-mvp.html", "the shipped bug: recording it on the winning path alone masked all of them"),
+    ],
+    ideas=[
+     "The model's entire output vocabulary is: reachable, tier, evidence, path, excess, shortfall, chokepoint, closes, strengthens.",
+     "Every bug in this document's history has a test that fails if it comes back.",
+     "controlEffect runs the whole pipeline twice and diffs — the most expensive call in the file, and still instant at library scale.",
+    ]),
+   dict(slug="architecture", file="04__architecture.md",
+    title="04 — Architecture",
+    role="Web components without shadow DOM, one state owner, and storage that treats its own absence as a case",
+    summary="The page as engineering: seven JS files with one-line jobs, six custom elements that are seams rather than boundaries (no shadow DOM — the site's stylesheet should reach in), bubbling CustomEvents up and state down through a single owner in app.js, and a hand-rolled SVG renderer because a chart library is a third-party request. store.js handles storage's three failure modes explicitly, including the opaque-origin case a downloaded copy hits. The v1 lesson stands behind the layout: one large HTML page with everything inline was named in the correction memo, and the v2 split is what made design changes reviewable as diffs of one file.",
+    concepts=[
+     ("Events up, state down", "first-mvp.html", "every v1 inert-click symptom traced to state living in more than one place"),
+     ("Same-origin as architecture", "principles.html", "the network panel after a full pass shows only this site — checked every release"),
+     ("Two views, one graph", "screens.html", "the scene for recognition, the DAG for structure"),
+    ],
+    ideas=[
+     "A new section is a new component with its own events — never a script block in the page.",
+     "A capability that needs a server is a different page with its own disclosure, not an upgrade to this one.",
+     "model.js stays DOM-free, or the test harness goes blind.",
+    ]),
+   dict(slug="workflows", file="05__workflows-and-user-stories.md",
+    title="05 — Workflows and user stories",
+    role="Five users, twenty stories with tests that can fail, seven workflows, and the honest feature column",
+    summary="The pack as deliverables. Five users — the visitor at five grant positions, the librarian, the sharer and recipient, the run operator, the site agent — and twenty stories each carrying a test that can come out negative, tagged with its defining document and shipped status. The feature table's honest reading is the inverse of the registry pack's: the instrument is built, the programmes around it are not. The flat refusals list is repeated from the principles so a reviewer can disagree in one place: no risk acceptance, no scanning, no backend, no score, no A/B statistics at qualitative sample sizes, no preferences verdict from synthetic readers.",
+    concepts=[
+     ("A test that can fail", "../registry-mvp/user-stories.html", "the sibling pack's standard, applied — a story that cannot fail is a description"),
+     ("The acceptor is nobody", "principles.html", "no user of this tool is ever asked to sign anything — P7 as a user model"),
+     ("V8, the standing story", "architecture.html", "no request leaves the origin — re-run before every release"),
+    ],
+    ideas=[
+     "V12 (the three sets) is the one story gated on an open decision rather than on effort.",
+     "The librarian's stories become scripts in phase 1; at v2 they are conventions, and the column says so.",
+     "Workflow 7 — test a page before building it — is a workflow of this product, not just of its development.",
+    ]),
+   dict(slug="screens", file="06__screens.md",
+    title="06 — The screens",
+    role="The page in order, the rendering rules, the load-bearing strings, and the four v3 screens",
+    summary="Dashboard first — the page shows what it can already say before it asks for anything, the exact inversion of v1's reading-first order. Each shipped screen with its job and its fixed wording: the chokepoint sentence, “not established either way” for untouched facts, “changes nothing in your current case” for a control that does nothing here. Five rendering rules inherited from the estate's mockup exercise: no page-level verdict, state never rides on colour alone, an absent computation renders as absent, situation copy comes from the model, wide content scrolls in its own container. The v3 screens are specified for the tabletop before they are built: the level-one landing, the three-sets dashboard, the share view, and the run gallery whose job is the working method rather than an advertisement.",
+    concepts=[
+     ("The order is the argument", "first-mvp.html", "v1 made the visitor pay before seeing the instrument work"),
+     ("Strings are design", "../registry-mvp/interface-rendered.html", "a renderer that paraphrases them in a mockup will paraphrase them in the product"),
+     ("The run gallery", "synthetic-readers.html", "abandoned runs, the change made, and the run that then succeeded"),
+    ],
+    ideas=[
+     "Wherever a summary number would go, the chokepoint sentence goes instead — a noun the visitor can act on.",
+     "A control that closes nothing must say so, or the row reads as broken rather than honest.",
+     "The screen this tool will never have is a score.",
+    ]),
+   dict(slug="levels-and-variants", file="07__levels-and-variants.md",
+    title="07 — Levels and variants",
+    role="The explanation programme: a grid not a ladder, five grant-ordered scenarios, the three sets, and the stopping rule",
+    summary="The v0.33.61 levels-and-variants brief operationalised. Levels vary depth for one reader; variants vary the rendering of one level; they are orthogonal, and a programme that conflates them cannot tell whether a poor result needs different content or different wording. The variant rule is mechanically enforceable here because the library gives facts identity: a fact-set diff across variants must be empty. Everybody starts at level one — the advanced user holds the largest grant and the strongest prior, the reactance combination — and the five scenarios are ordered by grant size, landing in this tool as library examples. The three sets organise the dashboard, with the exercised set's import gated on an open decision because its source is a session transcript. The stopping rule answers the depth question by dissolving it: each level must be a complete answer, a landing rather than a stair.",
+    concepts=[
+     ("The grid", "../../documents/levels-and-variants.html", "five levels by three variants, generated rather than written"),
+     ("The three sets", "screens.html", "the third row — held and never used — is the product"),
+     ("The stopping rule", "build-order.html", "shown only level three, the reader says what they would do — or the level failed"),
+     ("Reserved words", "../registry-mvp/observability.html", "altitude stays stakeholder; persona stays the generator"),
+    ],
+    ideas=[
+     "Test the visual variants first: a visual eliminated a framing effect significant in text alone, and this tool ends in a picture.",
+     "At a few dozen readers this is qualitative research — watch, ask for say-back, count nothing.",
+     "Synthetic readers clear the levels; humans judge the variants; that order is also the cheap one.",
+    ]),
+   dict(slug="synthetic-readers", file="08__synthetic-readers.md",
+    title="08 — Synthetic readers",
+    role="The tabletop: pixels only, fixed artefacts, exogenous budgets, defects not preferences — and the two rules kept verbatim",
+    summary="The v0.33.61 screenshot-boundary brief operationalised. Two agents: a renderer that is a caller of the estate's existing browser-automation service, configured never to pass text or structure on; and a reader that receives pixels and nothing else, is never told the page's purpose, and clicks spatially. The page under test is a fixed artefact authored before the run — a page generated during the run measures the model agreeing with itself — and the patience budget is set exogenously so abandonment is a measured event rather than a coherent story. The honest limit is stated as the method's credibility: synthetic readers find defects and cannot report preferences. Rule one puts the simulation marker in the filename, the headers and beside every quote, because export is where markers die; rule two's narrow exception is the archetype, with a test checkable by somebody other than the author.",
+    concepts=[
+     ("The screenshot boundary", "../../documents/synthetic-readers.html", "the instrument, not a limitation — and somebody will try to improve it away"),
+     ("The fixed comprehension question", "principles.html", "what would you do now, and what did that page tell you — in those words, every time"),
+     ("Portrait versus archetype", "levels-and-variants.html", "the property list is the archetype; the individual is only where properties were sampled"),
+     ("The service boundary", "build-order.html", "comprehension questions only — and it is a property of the product, not of its terms of service"),
+    ],
+    ideas=[
+     "A synthetic run should be difficult to quote misleadingly even by somebody trying.",
+     "The runs worth publishing most are the abandoned ones, because those changed the design.",
+     "The calibration record — published, including the misses — is what separates a product from a plausible-opinion generator.",
+     "First budgets are stated to be argued with: six screens, ten minutes, eight clicks — and round two's come from round one's spend data.",
+    ]),
+   dict(slug="sharing", file="09__sharing.md",
+    title="09 — Sharing",
+    role="The fragment as the channel, identifiers as the payload, and the drift a pinned version makes sayable",
+    summary="How a case leaves the browser without describing its owner. The choices-only rule solved sharing before it was designed: the stored artefact is references into a public library, so a share discloses nothing personal by construction. The channel is the URL fragment — never sent to a server — carrying the state object plus the library version it was composed against. On version mismatch the recipient gets today's truth plus a notice, never the old library served as if current. Screenshots get one rule instead of machinery: the dashboard renders its library version where a natural screenshot captures it. And three refusals: not a collaboration backend, not an identity, and never a channel for transcript material.",
+    concepts=[
+     ("The fragment channel", "../../documents/levels-and-variants.html", "settled on 16 August for keys; the same channel carries a selection"),
+     ("Version pinning", "library.html", "the drift count needs per-node dates — one more reason MC3 is phase 1"),
+     ("The loaded state is marked", "principles.html", "a share must not be confusable with the recipient's own answers"),
+    ],
+    ideas=[
+     "The obvious backend solution creates exactly the stored answers this tool exists to never hold.",
+     "The encoder refuses anything that is not a library identifier or a vocabulary answer — story S1 stays testable.",
+     "If the three-sets dashboard ever shares, it shares the visitor's claims, never transcript material.",
+    ]),
+   dict(slug="wardley-maps", file="10__wardley-maps.md",
+    title="10 — Wardley maps",
+    role="Four maps: the scarce components are all editorial, none mechanical",
+    summary="The tool mapped in mermaid's wardley-beta, inheriting the sibling pack's working grammar. M1 finds the novelty in exactly two components — library curation and the delta framing — with everything between them product-shaped, which is why v1 could be rebuilt as v2 in a day. M2 draws the honesty chain and finds its one genesis component: per-node dating, from which the whole chain's credibility hangs by the same weakest-link rule the model applies to the visitor's paths. M3 splits the testing programmes — defect detection stands on near-product components, preference judgement on the scarcest one, recruited humans — and finds the calibration record at deep genesis. M4 maps the advanced user's reframing and positions the exercised set at genesis for a design reason, not a technical one.",
+    concepts=[
+     ("The maps agree", "build-order.html", "the genesis components are written, not programmed — the argument for documents-before-code"),
+     ("M2 — the honesty chain", "library.html", "a claim's credibility hangs from its least-evolved link"),
+     ("The working grammar", "../registry-mvp/wardley-maps.html", "the wardley-beta constraints, found empirically there, applied here"),
+    ],
+    ideas=[
+     "Positions are judgements published to be moved; the thinnest one is named under each map.",
+     "If a public evidence-classed library of agent grant trees existed elsewhere, M1's genesis component would be an adoption, not a build — none is known, dated 21 August 2026.",
+     "The code is where the hours go and the maps say it is the cheap part — the inverse of how the work feels.",
+    ]),
+   dict(slug="build-order", file="11__build-order.md",
+    title="11 — Build order",
+    role="Five phases; documents before code; tabletop before build; every definition of done a run or a check",
+    summary="The v3 order, chosen by two rules: the scarce components are editorial (the maps' finding), so writing them is the critical path; and every new screen gets a synthetic-reader round as a fixed mockup before implementation, because a defect found there costs a file edit rather than a refactor. Phase 1 pays the library's debts (per-node dates, the five scenarios, the entry checker as a script). Phase 2 writes and tabletop-tests level one before building it, and publishes the runs including abandonments. Phase 3 ships fragment sharing. Phase 4 ships the three sets on the visitor's claims, with the transcript import waiting for its decision rather than being prototyped around. Phase 5 — only after synthetic rounds cleared the levels — spends the few dozen real readers on visual variants first, qualitatively.",
+    concepts=[
+     ("Tabletop before build", "synthetic-readers.html", "the programme's highest-value use, scheduled rather than admired"),
+     ("Phase 4's gate", "levels-and-variants.html", "the one feature that could breach P1 by accident waits for its decision"),
+     ("The standing checks", "principles.html", "same-origin, model suite, the no-free-text grep, the wording rules — every phase"),
+    ],
+    ideas=[
+     "A published tabletop against an unbuilt page is the estate's publish-before-build move one layer deeper.",
+     "The persona-simulation service is unscheduled because building it before a calibration record exists is building the unfalsifiable version.",
+     "Phase 2 is done when an abandonment produced a change and the changed page's re-run is published beside it.",
+    ]),
+   dict(slug="first-mvp", file="12__the-first-mvp.md",
+    title="12 — The first MVP",
+    role="v1 and v2 as they actually happened: the corrections, the six bugs that became principles, and the verification discipline",
+    summary="The receipts. v1 was built in a day and was right about the spine — choices-only, same-origin, unsure-means-present, weakest-link, no score — and wrong in six instructive ways: a design vocabulary (“cases”) leaked into the interface and produced a defect that looked like a UI bug; categories answered nobody's question until products were named; the page made the visitor read before doing; risk acceptance sat where it did not belong; an effort label flattered the hardest control; and clicks looked inert because state lived in more than one place. Plus the three v2-era bugs now pinned by tests: escalation masking, the missing conversation node (asserted as correct by its own test), and wording that got ahead of the visitor. Ends with what was verified before each ship and what v2 still owes.",
+    concepts=[
+     ("The vocabulary leak", "../registry-mvp/change-control.html", "C25/decision 40 — the visitor's nouns are the interface's nouns"),
+     ("A test asserting nonsense", "model.html", "a test that encodes the author's assumption verifies the assumption, not the behaviour"),
+     ("The verification list", "build-order.html", "model suite, same-origin, five viewports, live-byte hashes, the redaction scan"),
+    ],
+    ideas=[
+     "Several obvious improvements are listed here as the defects they turned out to be — read this before proposing one.",
+     "“An hour” for a separate account was corrected by the person who had done it: hard — days, and it fights you.",
+     "The correction cycle — ship, be corrected within hours, rebuild — is the working method, and this document is its record.",
+    ]),
+   dict(slug="change-control", file="99__change-control.md",
+    title="Appendix — Change control",
+    role="Four corrections, eighteen decisions, and the relationship to the sibling register where the tool grew up",
+    summary="The appendix, opening with entries rather than waiting for them, because the tool shipped twice before the pack existed. MC1 records the two 20 August programme briefs and what they correct; MC2 makes the pack's after-the-build status a standing entry with a currently-empty disagreement list; MC3 adopts per-node dating as a defect to fix rather than an aspiration; MC4 supersedes the copy-summary with fragment shares. The register carries the early decisions forward from the registry pack's register without renumbering them into new authority, and adds what belongs only here — level one's author, the exercised-set import, budget-setting, the marker's export survival, and the archetype count are the open ones.",
+    concepts=[
+     ("Supersede, never rewrite", "principles.html", "P13 — the correction count only ever goes up"),
+     ("MC-D7 — the import gate", "levels-and-variants.html", "the exercised set's source is a transcript, which carries everything the session saw"),
+     ("The sibling register", "../registry-mvp/change-control.html", "C20–C25 and decisions 29–35, 40–41 stay the record of when and by whom"),
+    ],
+    ideas=[
+     "A future correction to a shared decision lands in both registers with a cross-reference.",
+     "The fixed comprehension question can only be changed here — that is what fixed means.",
     ]),
   ]),
 ]
@@ -329,13 +550,21 @@ def concepts_html(items):
 def write_pack(p):
     base = ROOT / "packs" / p["slug"]
     zippath = base / f'{p["slug"]}-briefing-pack.zip'
+    dl_block = ''
     if zippath.exists():
         import zipfile
         with zipfile.ZipFile(zippath) as zf:
             n = len([x for x in zf.namelist() if not x.endswith('/')])
         zipsize = f'{zippath.stat().st_size // 1024} KB · {n} files'
-    else:
-        zipsize = 'zip'
+        dl_block = f'''
+<div class="dl">
+  <div>
+    <b>Take the whole pack with you.</b>
+    <p>{p["dl_blurb"]}</p>
+  </div>
+  <a class="dlbtn" href="{zippath.name}" download>&#8595; Briefing pack<span>{zipsize}</span></a>
+</div>
+'''
     # ---- pack hub ----
     rows = "\n".join(
         f'    <tr><td><a href="{d["slug"]}.html"><b>{d["title"]}</b></a></td><td>{d["role"]}</td></tr>'
@@ -347,21 +576,7 @@ def write_pack(p):
 <p class="lead">{p["three_sentences"]}</p>
 
 <div class="note"><b>Origin.</b> {p["origin"]}</div>
-
-<div class="dl">
-  <div>
-    <b>Take the whole pack with you.</b>
-    <p>Every source document, every supporting brief, this site's machine-readable front door,
-    and the reference implementation — with a briefing for a fresh session picking it up cold.
-    It asks for a <em>readiness report</em> rather than an implementation plan: read the supporting
-    material, then the pack, then say whether you have what you need or list the questions that
-    block you. It names the six things that trip a new reader, and asks for blocking questions
-    rather than confidence, because a pack with a third of its decisions still open is one where a
-    confident plan probably means the reader missed them.</p>
-  </div>
-  <a class="dlbtn" href="registry-mvp-briefing-pack.zip" download>&#8595; Briefing pack<span>{zipsize}</span></a>
-</div>
-
+{dl_block}
 <h2 id="files">The documents</h2>
 <div class="tablewrap"><table>
   <thead><tr><th>Document</th><th>Role</th></tr></thead>

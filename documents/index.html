@@ -14,7 +14,7 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.21</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.22</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -56,6 +56,7 @@
       <a class="sl here" href="../documents/index.html">The documents</a>
       <a class="sl" href="../packs/index.html">Dev packs</a>
       <a class="sl" href="../packs/registry-mvp/index.html">The registry MVP pack</a>
+      <a class="sl" href="../packs/map-your-case/index.html">The Map Your Case pack</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -75,11 +76,13 @@
 <main class="doc">
 <div class="crumb"><a href="../index.html">pki.sgit.ai</a> / documents</div>
 <h1>The documents</h1>
-<p class="lead">The fifteen original markdown documents behind this site, captured verbatim under <code>briefs/</code> and readable here. Each page carries the same apparatus — a summary, the key concepts linked to where they live on the site, the key ideas — and then the full document, rendered in-page from the raw markdown. <b>The raw file stays the source of truth; the page is presentation.</b> That raw-plus-curated split is the provenance discipline this project argues for, applied to itself.</p>
+<p class="lead">The twenty-one original markdown documents behind this site, captured verbatim under <code>briefs/</code> and readable here. Each page carries the same apparatus — a summary, the key concepts linked to where they live on the site, the key ideas — and then the full document, rendered in-page from the raw markdown. <b>The raw file stays the source of truth; the page is presentation.</b> That raw-plus-curated split is the provenance discipline this project argues for, applied to itself.</p>
 
 <div class="tablewrap"><table>
   <thead><tr><th>Document</th><th>Type · date</th><th>In one line</th></tr></thead>
   <tbody>
+    <tr><td><a href="synthetic-readers.html"><b>The screenshot boundary is the instrument</b></a></td><td>Dev brief · 20 Aug 2026</td><td>Synthetic readers find defects, not preferences; the patience budget comes from outside the model; and the service is one question from the banned tool. Operationalised in <a href="../packs/map-your-case/synthetic-readers.html">the Map Your Case pack</a>.</td></tr>
+    <tr><td><a href="levels-and-variants.html"><b>Levels and variants are two axes</b></a></td><td>Dev brief · 20 Aug 2026</td><td>A grid, not a ladder; everybody starts at level one; and the worked instance is the session itself — mandated, exercised, and held-never-used. Operationalised in <a href="../packs/map-your-case/levels-and-variants.html">the Map Your Case pack</a>.</td></tr>
     <tr><td><a href="history-append-only.html"><b>History is the append-only log</b></a></td><td>Arch brief · 20 Aug 2026</td><td>Growth moves to the commit graph, which dissolves the tension between rules 2 and 3 — and the reference is mutable, so append-only is a policy about one pointer.</td></tr>
     <tr><td><a href="user-section.html"><b>The user section is a conformance test for the site’s own claim</b></a></td><td>Dev brief · 20 Aug 2026</td><td>Store the choices, not the answers — and a high threat with no efficacy produces denial rather than change. Built as <a href="../assess/index.html">/assess</a>.</td></tr>
     <tr><td><a href="grant-tree.html"><b>The end-to-end flow, with an agent installation as the twin</b></a></td><td>Arch brief · 20 Aug 2026</td><td>A grant is a tree; a control bounds it only if something outside the grant enforces it; counting acceptances is the metric that inverts.</td></tr>
@@ -102,7 +105,7 @@
   </tbody>
 </table></div>
 
-<div class="note"><b>The registry MVP pack has its own section.</b> The five draft briefs published at v0.1.4 as document pages, plus the diagrams, change control and tabletop exercise added at v0.1.5, now live as a dev pack under <a href="../packs/registry-mvp/index.html">packs/registry-mvp</a> — sources verbatim under <code>src/</code>, a reader page per document, same treatment as <a href="https://nhi.sgit.ai/packs/index.html">nhi.sgit.ai's packs</a>.</div>
+<div class="note"><b>The registry MVP pack has its own section.</b> The five draft briefs published at v0.1.4 as document pages, plus the diagrams, change control and tabletop exercise added at v0.1.5, now live as a dev pack under <a href="../packs/registry-mvp/index.html">packs/registry-mvp</a> — sources verbatim under <code>src/</code>, a reader page per document, same treatment as <a href="https://nhi.sgit.ai/packs/index.html">nhi.sgit.ai's packs</a>. A second pack, <a href="../packs/map-your-case/index.html">Map Your Case</a>, owns the assessment at <a href="../assess/index.html">/assess</a> and operationalises the two 20 August programme briefs above.</div>
 
 <div class="note"><b>More documents.</b> The corpus behind this site runs to 729 files mentioning the subject, with dedicated documents going back to February 2026 — an architecture debrief, a messaging implementation, model-integration research, a document identity brief, operating modes, a provenance treatment and a brand strategy. Curating those by question is <a href="../roadmap/index.html#order">step 1 of the build order</a> and is queued on <a href="../admin/comms.html">comms</a>. The wider corpus is published openly in the <a href="https://github.com/the-cyber-boardroom/SGraph-AI__App__Send">SGraph-AI__App__Send</a> repository.</div>
 
@@ -118,7 +121,7 @@
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.21</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.22</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The registry</h4>
@@ -141,6 +144,7 @@
     <a href="../origins/index.html">Origins: 2026</a>
     <a href="../documents/index.html">The documents</a>
     <a href="../packs/registry-mvp/index.html">The registry MVP pack</a>
+    <a href="../packs/map-your-case/index.html">The Map Your Case pack</a>
     <a href="../about/participant.html">Where we lose</a>
   </div>
   <div>

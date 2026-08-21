@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Map Your Case: The Grant–Mandate Delta, Mapped By Its Owner · packs · pki.sgit.ai</title>
+<meta name="description" content="The Map Your Case pack, readable in-page: the leading brief, thirteen principles, the library, the model, the architecture, user stories, the screens, the levels-and-variants programme, the synthetic-reader tabletop, sharing, four Wardley maps, the v3 build order, the first-MVP retrospective, and change control.">
+<link rel="canonical" href="https://pki.sgit.ai/packs/map-your-case/index.html">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../index.html">pki<span>.sgit.ai</span></a>
+  <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../../admin/versions.html" title="Site release history">v0.1.22</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../../failure/index.html">The registry<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../failure/index.html">Why they don't exist</a>
+      <a class="sl" href="../../rules/index.html">The four rules</a>
+      <a class="sl" href="../../mandate/index.html">Identity &amp; mandate</a>
+      <a class="sl" href="../../roadmap/index.html">Build order</a>
+      <a class="sl" href="../../rules/prior-art.html">Prior art</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../bootstrap/index.html">The layers<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../bootstrap/index.html">The bootstrap trap</a>
+      <a class="sl" href="../../enrolment/index.html">Enrolment</a>
+      <a class="sl" href="../../execution/index.html">The execution broker</a>
+      <a class="sl" href="../../shipped/index.html">What already ships</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../assess/index.html">Map your case<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../assess/index.html">Map your own case</a>
+      <a class="sl" href="../../assess/library.html">The library of trees</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../origins/index.html">Origins<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../origins/index.html">Origins: 2026</a>
+      <a class="sl" href="../../origins/review.html">The review, redacted</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../documents/index.html">The documents</a>
+      <a class="sl" href="../../packs/index.html">Dev packs</a>
+      <a class="sl" href="../../packs/registry-mvp/index.html">The registry MVP pack</a>
+      <a class="sl here" href="../../packs/map-your-case/index.html">The Map Your Case pack</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../../admin/versions.html">Release history</a>
+      <a class="sl" href="../../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+  <script src="../../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../../index.html">pki.sgit.ai</a> / <a href="../index.html">packs</a> / map-your-case</div>
+<h1>Map Your Case: The Grant–Mandate Delta, Mapped By Its Owner</h1>
+<p class="lead">The dev pack for <a href='../../assess/index.html'>Map Your Case</a>, written after the thing it specifies: v1 shipped on 20 August, the project lead's corrections arrived within hours, v2 shipped the next day — so half of this pack is capture (the <a href='principles.html'>thirteen principles</a>, <a href='library.html'>the library</a>, <a href='model.html'>the model</a> and <a href='architecture.html'>the architecture</a> as built, with their reasons) and half is specification, expanded in documents first so v3 is built from pages rather than memory. Two v0.33.61 programme briefs land here as first-class documents: <a href='levels-and-variants.html'>levels and variants as two axes</a> — five scenarios ordered by grant size, everybody starts at level one, and the three sets whose third row (<em>held and never used</em>) is the product — and <a href='synthetic-readers.html'>the synthetic-reader tabletop</a>, where the screenshot boundary is the instrument, the patience budget comes from outside the model, and the two 9 August simulation rules are carried verbatim. <a href='first-mvp.html'>Document 12</a> is the extra one a hindsight pack owes: what v1 got wrong, the six bugs that became principles, and what was verified before each ship — the receipts behind every rule the pack states.</p>
+
+<div class="note"><b>Origin.</b> Authored by the pki.sgit.ai site agent, 21 August 2026, at the project lead's request — and written the other way round from its sibling: the tool it specifies is already built. The assessment at /assess shipped as v1 on 20 August and was rebuilt as v2 on 21 August from the project lead's corrections; this pack captures the thinking that produced it and specifies v3, with four corrections and eighteen decisions in the appendix at draft-1. Corpus version assigned on adoption.</div>
+
+<h2 id="files">The documents</h2>
+<div class="tablewrap"><table>
+  <thead><tr><th>Document</th><th>Role</th></tr></thead>
+  <tbody>
+    <tr><td><a href="dev-brief.html"><b>00 — The leading brief</b></a></td><td>What the tool is, the inherited vocabulary, five positions on one axis, and the concession made first</td></tr>
+    <tr><td><a href="principles.html"><b>01 — Principles</b></a></td><td>Thirteen invariants, each with its reason and the check that would catch a violation</td></tr>
+    <tr><td><a href="library.html"><b>02 — The library</b></a></td><td>The single data file: what it holds, the rules its entries obey, and why the honesty lives here rather than in the code</td></tr>
+    <tr><td><a href="model.html"><b>03 — The model</b></a></td><td>Choices to delta in six stages — and the three places the obvious implementation is wrong</td></tr>
+    <tr><td><a href="architecture.html"><b>04 — Architecture</b></a></td><td>Web components without shadow DOM, one state owner, and storage that treats its own absence as a case</td></tr>
+    <tr><td><a href="workflows.html"><b>05 — Workflows and user stories</b></a></td><td>Five users, twenty stories with tests that can fail, seven workflows, and the honest feature column</td></tr>
+    <tr><td><a href="screens.html"><b>06 — The screens</b></a></td><td>The page in order, the rendering rules, the load-bearing strings, and the four v3 screens</td></tr>
+    <tr><td><a href="levels-and-variants.html"><b>07 — Levels and variants</b></a></td><td>The explanation programme: a grid not a ladder, five grant-ordered scenarios, the three sets, and the stopping rule</td></tr>
+    <tr><td><a href="synthetic-readers.html"><b>08 — Synthetic readers</b></a></td><td>The tabletop: pixels only, fixed artefacts, exogenous budgets, defects not preferences — and the two rules kept verbatim</td></tr>
+    <tr><td><a href="sharing.html"><b>09 — Sharing</b></a></td><td>The fragment as the channel, identifiers as the payload, and the drift a pinned version makes sayable</td></tr>
+    <tr><td><a href="wardley-maps.html"><b>10 — Wardley maps</b></a></td><td>Four maps: the scarce components are all editorial, none mechanical</td></tr>
+    <tr><td><a href="build-order.html"><b>11 — Build order</b></a></td><td>Five phases; documents before code; tabletop before build; every definition of done a run or a check</td></tr>
+    <tr><td><a href="first-mvp.html"><b>12 — The first MVP</b></a></td><td>v1 and v2 as they actually happened: the corrections, the six bugs that became principles, and the verification discipline</td></tr>
+    <tr><td><a href="change-control.html"><b>Appendix — Change control</b></a></td><td>Four corrections, eighteen decisions, and the relationship to the sibling register where the tool grew up</td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="relevance">Why it is on this site</h2>
+<p>This pack owns the first thing on this site that is <em>built</em>: the workflow at <a href='../../assess/index.html'>/assess</a>, which the <a href='../registry-mvp/index.html'>registry MVP pack</a> describes from the outside as its document 14 and its one shipped consumer. Its constraints are the site's published positions — <a href='../../documents/grant-vs-mandate.html'>grant is not mandate</a>, <a href='../../documents/grant-tree.html'>the three-tier control test</a>, <a href='../../documents/user-section.html'>store the choices, not the answers</a> — and its two programme documents operationalise <a href='../../documents/levels-and-variants.html'>the levels-and-variants brief</a> and <a href='../../documents/synthetic-readers.html'>the screenshot-boundary brief</a>, both captured verbatim under documents.</p>
+
+<h2 id="readme">The pack README</h2>
+<div class="mdread-label">📄 Pack overview · README.md · rendered from the <a href="src/README.md">raw markdown</a> (the source of truth)</div>
+<div class="mdread" id="mdread" data-src="src/README.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="src/README.md">open the raw markdown</a>.</p></noscript></div>
+
+<div class="pagenav">
+  <a href="../index.html">← All packs</a>
+  <a href="dev-brief.html">First document →</a>
+</div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../../admin/versions.html">v0.1.22</a> · <a href="../../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The registry</h4>
+    <a href="../../assess/index.html">&#8594; Map your own case</a>
+    <a href="../../failure/index.html">Why they don't exist</a>
+    <a href="../../rules/index.html">The four rules</a>
+    <a href="../../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../../roadmap/index.html">Build order</a>
+    <a href="../../rules/prior-art.html">Prior art</a>
+  </div>
+  <div>
+    <h4>The three layers</h4>
+    <a href="../../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../../enrolment/index.html">Enrolment</a>
+    <a href="../../execution/index.html">The execution broker</a>
+    <a href="../../shipped/index.html">What already ships</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../../origins/index.html">Origins: 2026</a>
+    <a href="../../documents/index.html">The documents</a>
+    <a href="../../packs/registry-mvp/index.html">The registry MVP pack</a>
+    <a href="../../packs/map-your-case/index.html">The Map Your Case pack</a>
+    <a href="../../about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../../admin/versions.html">Release history</a>
+    <a href="../../llms.txt">llms.txt</a>
+  </div>
+</div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+<script src="../../assets/mdreader.js"></script>
+</body>
+</html>

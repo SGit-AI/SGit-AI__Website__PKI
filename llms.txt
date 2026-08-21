@@ -8,7 +8,7 @@
 > but never delete anything — not a bug. This site publishes that history, and the
 > registry rules it produces, before the registry exists.
 
-Site version: v0.1.21 (20 August 2026). Published by the sgit project — participant
+Site version: v0.1.22 (20 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## Properties agents may rely on
@@ -283,12 +283,62 @@ failure page, the four rules) are done; step 4 (a private registry) is the next 
   two places, and makes asking five operators a PHASE I doctrine fix rather than a nice-to-have.
   Raw data: https://pki.sgit.ai/packs/registry-mvp/doctrine/doctrine.json
   D: change control, which sits last (99__change-control.md), because it never stops
-  growing: twenty-three corrections and thirty-six decisions. Read it second if you are building
+  growing: thirty-two corrections and forty-five decisions. Read it second if you are building
   from documents 00-04, so you read them with the errata in hand — draft-1's definition of `grant`
   was superseded on the day it shipped.
 - Status: a design pack with ONE SHIPPED CONSUMER. The registry itself is unbuilt; the assessment
   at /assess is live and is a consumer of the model rather than a piece of the registry.
   Site-agent authored, awaiting project-lead adoption (N6 on comms).
+
+## The Map Your Case pack (dev pack: draft-1 + change control)
+
+A second dev pack, published 21 August 2026 at https://pki.sgit.ai/packs/map-your-case/index.html —
+the pack for the assessment at /assess, WRITTEN AFTER THE THING IT SPECIFIES: v1 shipped 20 August,
+was corrected by the project lead within hours, and v2 shipped the next day; the pack captures the
+thinking (documents 01-04: thirteen principles, the library, the model, the architecture) and
+specifies v3 from documents rather than memory (07-09, 11). Sources verbatim under
+https://pki.sgit.ai/packs/map-your-case/src/ — thirteen documents plus a change-control appendix.
+- The one-line frame: the tool renders the delta between GRANT (what an installation can
+  technically reach) and MANDATE (what its owner meant to authorise), from a public library of
+  pre-computed trees, with nothing about the visitor ever leaving their browser.
+- Two v0.33.61 programme briefs are operationalised as first-class documents:
+  LEVELS AND VARIANTS (https://pki.sgit.ai/packs/map-your-case/levels-and-variants.html) — levels
+  vary depth, variants vary rendering, they are ORTHOGONAL so the design is a grid not a ladder;
+  the variant rule is mechanically checkable (a fact-set diff across variants must be empty);
+  EVERYBODY STARTS AT LEVEL ONE because expertise predicts vocabulary, not self-knowledge, and the
+  advanced user (largest grant, strongest prior) is the reactance case; five scenarios ordered by
+  GRANT SIZE, dictation to operations; and the three sets — MANDATED, EXERCISED BEYOND THE MANDATE,
+  HELD AND NEVER USED — where the third set is the product and the concession comes first: THE GAP
+  IS NOT ONLY WHERE THE DANGER IS, IT IS ALSO WHERE THE VALUE CAME FROM. The stopping rule answers
+  the depth question: each level must be a complete answer, a landing rather than a stair.
+  SYNTHETIC READERS (https://pki.sgit.ai/packs/map-your-case/synthetic-readers.html) — two agents,
+  one rendering (a caller of an existing browser-automation service), one reading PIXELS AND
+  NOTHING ELSE: the screenshot boundary is the instrument, not a limitation. The page under test is
+  a FIXED ARTEFACT authored before the run (a page generated during the run measures the model
+  agreeing with itself); the patience budget is EXOGENOUS (screens, minutes, clicks fixed in
+  advance) so abandonment is a measured event; the comprehension question is fixed wording: "what
+  would you do now, and what did that page tell you". SYNTHETIC READERS FIND DEFECTS, NOT
+  PREFERENCES — they clear the levels, humans judge the variants. The two 9 August simulation rules
+  are carried verbatim: a simulated acceptance must never be confusable with a real one (the marker
+  lives in the filename, the headers and beside every quote, because export is where markers die);
+  and simulate the role, not the named individual — archetypes composed from several people, with
+  the test: if the person it came from, or a colleague, would recognise them in it, it is a
+  portrait. The part-two service is bounded by THE QUESTION IT ACCEPTS: comprehension and confusion
+  yes; "what would this person approve" is the banned tool one prompt away.
+- Sharing (document 09): a share is a link whose URL FRAGMENT holds library identifiers plus the
+  library version — never sent to a server, nothing personal by construction. On version mismatch
+  the recipient gets today's truth plus a notice, never the old library served as current.
+- Four Wardley maps (document 10) agree on one finding: the scarce components are ALL EDITORIAL,
+  none mechanical — library curation, per-node dating, level-one prose, archetype property lists,
+  the calibration record. The code is product-shaped; the genesis components are written, not
+  programmed — which is the argument for documents-before-code in the v3 build order.
+- Document 12 is the first-MVP retrospective — the receipts: the "cases" vocabulary leak that
+  looked like a UI bug, categories nobody recognised until products were named, risk acceptance
+  removed (it belongs to the risk product), "an hour" corrected to "hard — days, and it fights
+  you" by the person who had done it, escalation masking (tracked on the winning path only, so
+  ALL of them were hidden), and the missing conversation node whose own test asserted the nonsense.
+- Change control: four corrections, eighteen decisions at draft-1. The registry pack records the
+  same handover as its C32/decision 45: document 14 there remains the registry-side view.
 
 ## Sources
 

@@ -61,6 +61,7 @@ NAV = [
         ("The documents", "documents/index.html"),
         ("Dev packs", "packs/index.html"),
         ("The registry MVP pack", "packs/registry-mvp/index.html"),
+        ("The Map Your Case pack", "packs/map-your-case/index.html"),
     ], ("documents/", "packs/")),
     ("Site", "admin/comms.html", [
         ("Comms: tasks &amp; requests", "admin/comms.html"),
@@ -89,6 +90,7 @@ FOOTER = [
         ("Origins: 2026", "origins/index.html"),
         ("The documents", "documents/index.html"),
         ("The registry MVP pack", "packs/registry-mvp/index.html"),
+        ("The Map Your Case pack", "packs/map-your-case/index.html"),
         ("Where we lose", "about/participant.html"),
     ]),
     ("Site", [
