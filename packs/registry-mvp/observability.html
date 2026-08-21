@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>07 — Tabletop exercise · registry-mvp · pki.sgit.ai</title>
-<meta name="description" content="Four participants, six injects, and the four rules meeting their first population. Pack document, readable in-page; the raw markdown under src/ is the source of truth.">
-<link rel="canonical" href="https://pki.sgit.ai/packs/registry-mvp/tabletop.html">
+<title>11 — Observability · registry-mvp · pki.sgit.ai</title>
+<meta name="description" content="Nobody can tell you who is using a mandate — the issuer's lane can tell you who has never checked one. Pack document, readable in-page; the raw markdown under src/ is the source of truth.">
+<link rel="canonical" href="https://pki.sgit.ai/packs/registry-mvp/observability.html">
 <link rel="stylesheet" href="../../assets/site.css">
 </head>
 <body>
@@ -66,41 +66,43 @@
 </div></nav>
 
 <main class="doc">
-<div class="crumb"><a href="../../index.html">pki.sgit.ai</a> / <a href="../index.html">packs</a> / <a href="index.html">registry-mvp</a> / tabletop</div>
-<h1>07 — Tabletop exercise</h1>
+<div class="crumb"><a href="../../index.html">pki.sgit.ai</a> / <a href="../index.html">packs</a> / <a href="index.html">registry-mvp</a> / observability</div>
+<h1>11 — Observability</h1>
 
 <div class="docmeta">
   <span class="k">Pack</span><span class="v"><a href="index.html">The Registry MVP: Open Data, A Single Operator, LLM Sessions First</a></span>
-  <span class="k">Role</span><span class="v">Four participants, six injects, and the four rules meeting their first population</span>
+  <span class="k">Role</span><span class="v">Nobody can tell you who is using a mandate — the issuer's lane can tell you who has never checked one</span>
   <span class="k">Date</span><span class="v">20 August 2026 · draft-1 + change control</span>
   <span class="k">Origin</span><span class="v">Site agent, this repo</span>
-  <span class="k">Source</span><span class="v"><a href="src/07__tabletop-exercise.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/dev/packs/registry-mvp/src/07__tabletop-exercise.md">on GitHub</a></span>
+  <span class="k">Source</span><span class="v"><a href="src/11__observability.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/dev/packs/registry-mvp/src/11__observability.md">on GitHub</a></span>
 </div>
 
 <h2 id="summary">Summary</h2>
-<p>The registry walked through on paper before it is walked through in code. Five seats (operator/issuer, agent, verifier, red, facilitator — every one runnable as an LLM session), a baseline timeline from keygen to a verified mandate, and six injects: revocation mid-exercise, a write into another's record, the flood, the compromised processor, the fixture mistaken for an identity, and session death. The facilitator's rule makes it a documentation test too: any question the published pages cannot answer is logged as a finding. Run three times — on paper before phase 0, with real fixtures after phase 2, and live as the phase-4 demo.</p>
+<p>The layer that answers a question this site raised in four places and answered in none: a mandate says what an agent may be <em>authorised</em> to do, not what it does — so who is using it? The answer refuses the question. What is capturable is <b>verification, not use</b>, and the two come apart both ways: a party that uses a mandate without verifying generates nothing, and the party that never verifies is the party whose relying process is weakest. So the product is the <b>missing</b> edges — who holds a mandate I issued and has never once checked it — a join the issuer can compute because it holds both halves. Where the log lives decides everything: a central check log accumulates who is evaluating whom across parties that never consented; a check event written into the <b>issuer's own lane</b> is an owner observing their own asset. And revocation latency becomes measurable before anything is ever revoked.</p>
 
 <h2 id="concepts">Key concepts</h2>
 <ul>
-  <li><a href="architecture.html"><b>I4 — detectable, not preventable, measured</b></a> — the gap between commit and detection is the number the MVP's honesty depends on</li>
-  <li><a href="diagrams.html"><b>I5 — the flag before the signature</b></a> — the most likely real-world implementation bug, run as a card</li>
-  <li><a href="../../admin/comms.html"><b>Findings → comms</b></a> — documentation findings become releases; rule findings go to the project lead</li>
+  <li><a href="../../mandate/index.html"><b>A verification is not a use</b></a> — the four places this site says a mandate does not observe behaviour — all still true</li>
+  <li><a href="ux-mockups.html"><b>The gap is the finding</b></a> — the third list of absences in this pack, and again the actionable half</li>
+  <li><a href="change-control.html"><b>Where the log lives</b></a> — C14: rule 1 applied to telemetry resolves C9 rather than contradicting it</li>
+  <li><a href="schemas.html"><b>Effective revocation latency</b></a> — the interval between a party's checks, computable before anything is revoked — and one of the very few decidable mandate clauses</li>
 </ul>
 
 <h2 id="ideas">Key ideas</h2>
 <ul>
-  <li>The failure modes are procedural, not cryptographic — which is what a tabletop surfaces.</li>
-  <li>An imagined population, run honestly, is the cheapest first test the four rules will ever get.</li>
-  <li>Same script all three runs, so findings are comparable.</li>
+  <li>Without check events, declared mandates produce no evidence — which would make the pack's own justification for building them indefensible.</li>
+  <li>The design that protects the positioning is the design that destroys the dataset, and it should be chosen deliberately rather than discovered later.</li>
+  <li>Draining the lane is an obligation that fails silently: an issuer who stops draining stops receiving evidence without being told.</li>
+  <li>This is where the badge's “last checked” field comes from — the observability layer is the interface's evidence, not a second dashboard.</li>
 </ul>
 
 <h2 id="read">Read the document</h2>
-<div class="mdread-label">📄 Pack document · 07__tabletop-exercise.md · rendered from the <a href="src/07__tabletop-exercise.md">raw markdown</a> (the source of truth)</div>
-<div class="mdread" id="mdread" data-src="src/07__tabletop-exercise.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="src/07__tabletop-exercise.md">open the raw markdown</a>.</p></noscript></div>
+<div class="mdread-label">📄 Pack document · 11__observability.md · rendered from the <a href="src/11__observability.md">raw markdown</a> (the source of truth)</div>
+<div class="mdread" id="mdread" data-src="src/11__observability.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="src/11__observability.md">open the raw markdown</a>.</p></noscript></div>
 
 <div class="pagenav">
-  <a href="change-control.html">← 06 — Change control</a>
-  <a href="ux-mockups.html">08 — UX mockups →</a>
+  <a href="user-stories.html">← 10 — User stories, features and workflows</a>
+  <a href="index.html">Pack hub →</a>
 </div>
 </main>
 

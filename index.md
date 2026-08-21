@@ -6,7 +6,7 @@
 > Anyone proposing a key registry now should be able to show they designed it with that
 > history in hand.
 
-*Source: <https://pki.sgit.ai/index.html> · site v0.1.13 · markdown twin of the front page.*
+*Source: <https://pki.sgit.ai/index.html> · site v0.1.14 · markdown twin of the front page.*
 
 ---
 
@@ -84,8 +84,10 @@ follow from a page, and read-path-first phasing.
 Now a full dev pack of ten documents — diagrams, change control, a tabletop exercise,
 the [interface written out screen by screen](packs/registry-mvp/ux-mockups.html), and
 [six Wardley maps](packs/registry-mvp/wardley-maps.html) of where the novelty actually
-sits, and [the whole thing as deliverables](packs/registry-mvp/user-stories.html) — six
-users, twenty-four stories, six workflows: [start at the pack hub](packs/registry-mvp/index.html).
+sits, [the whole thing as deliverables](packs/registry-mvp/user-stories.html) — six users,
+twenty-four stories, six workflows — and [observability](packs/registry-mvp/observability.html),
+which answers who is using a mandate by refusing the question and telling you instead who has
+never checked one: [start at the pack hub](packs/registry-mvp/index.html).
 
 ## Who is writing this
 

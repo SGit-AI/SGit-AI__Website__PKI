@@ -332,4 +332,10 @@ One row per workflow, so a reviewer can follow any thread end to end.
 
 ---
 
+*Added after publication, 20 August 2026 (site v0.1.14). No claim above has been changed — this pack supersedes rather than rewrites. Later documents that bear on this one:*
+
+- `11__observability.md` — four more stories (I6, I7, C1, C2), five more features (F15–F19) and **WF-7**. The *not delivered* row reading “records authority; it does not observe behaviour” stays true; the layer measures around the edge of it rather than filling it
+
+---
+
 This document is released under the Creative Commons Attribution 4.0 International licence (CC BY 4.0).

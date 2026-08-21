@@ -130,6 +130,7 @@ The workflows live on the site under the same disciplines the site already enfor
 - `08__ux-mockups.md` — **M6 and M7** — these three workflows as screens: the blind-ack enrolment view, the verifier's answer, and the refusal that names where it stopped
 - `09__wardley-maps.md` — **W1** — why the read path is cheap — everything under the four schema objects is commodity
 - `10__user-stories-and-features.md` — WF-1 and WF-2 with acceptance criteria per story, and the note that a blind ack is a success condition that is an absence — easy to break by accident, hard to notice
+- `11__observability.md` — **WF-7**, the workflow these three did not have: the checker reports its check into the issuer's lane, and the issuer computes who never reported at all
 
 ---
 

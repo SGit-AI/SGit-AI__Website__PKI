@@ -102,6 +102,33 @@ The entries above record what the *corpus* corrects. These record what the pack'
 **The second, between two stories.** *P2 — the processor logs every decision publicly* and *A3 — the acknowledgement tells the agent nothing* are in direct conflict for **declined** submissions: a public decision log is precisely the oracle the blind ack exists to withhold. Delay or aggregation are the plausible resolutions. Today the blind ack wins by default, **which is a decision nobody actually made** — the reason it is recorded here rather than resolved in the document that found it.
 **Status:** both open, both added to the register below as decisions 14 and 15.
 
+### C13 — Observability, and the question the site kept asking without answering
+
+**Source:** `v0.33.61__arch-brief__observability-is-the-usage-graph…`, and document 11 of this pack.
+**The question, raised in four places on this estate and answered in none:** a mandate says what an agent may be *authorised* to do, not what it does — so **how does anybody know who is using it?**
+**The answer, and it refuses the question as asked.** You cannot know. What is capturable is **verification, not use**, and the two come apart in both directions: a mandate used by a party that does not bother verifying generates **nothing**, while a resolver walking past one generates an event with no usage behind it. So the graph is a verification graph, and the error runs in the worst direction — the party that never verifies is the party whose relying process is weakest, and it is the one this layer cannot see.
+**What makes it worth building anyway:** the primary output is the **missing** edges. *Which parties hold a mandate I issued and have never once checked it?* The issuer holds both halves — who it issued to, and who wrote to its lane — so the join is computable, small, and every row is a relying party accepting a mandate on faith.
+**And it makes something already published either true or empty.** C1's position was that declared mandates are instrumentation rather than enforcement, and worth building because they produce the evidence that says where enforcement earns its cost. **Without check events they produce no evidence at all.** Observability is not an adjunct to the mandate layer; it is the half that makes the pack's own description of that layer honest.
+**Status:** adopted. Document 11 written. **The pack's four "does not observe behaviour" statements stay exactly as they are** — this layer measures around the edge of that hole rather than filling it, and softening them would be the overclaim this site exists to argue against.
+
+### C14 — Where the check log lives, which resolves C9 rather than contradicting it
+
+**Source:** the same brief.
+**The tension the pack was carrying.** C9 warned that a live notary accumulates a map of who is evaluating whether to trust whom, that neither party handed it over, and that holding that graph in plaintext is the sharpest available contradiction of the estate's positioning. Observability proposes building that dataset **as a security feature**. Both are right; the difference is entirely **who accumulates it**.
+**The resolution, and it is the pack's own rule rather than a new preference.** Evidence is appended by the asserter to its own record — rule 1, taken from the 2019 keyserver failure. So **the checker writes the check event into the issuer's own lane**, never into a central log at the registry. The issuer learns who checked the mandates *it* issued. No party learns who checked everybody's, because no such record exists anywhere.
+**The cost, chosen rather than discovered:** the aggregate is foreclosed. The operator cannot see, sell or reason over the whole graph — which removes precisely the asset C9 named as more valuable than the answers being sold. **The design that protects the positioning is the design that destroys the dataset.**
+**Two consequences the pack inherits.** The shipped append lane is the mechanism, and its **thousand-pending-files-per-token** limit makes **draining an obligation that fails silently** — an issuer who stops draining stops receiving evidence without being told, so the drain needs monitoring more than the lane does. And **one property the layer depends on is absent from the parent's API reference**: whether a lane with no anchors configured accepts any token holder, or refuses everything. That decides whether unknown relying parties — the ones you most want to observe — can report at all. On comms as a documentation gap, not as a pack decision.
+**Status:** adopted for the MVP. Decisions 16–19 below.
+
+### C15 — Effective revocation latency, and the phase this forces
+
+**Source:** the same brief.
+**The observation.** In this design there is no push: a revocation sits in the register until a relying party looks, so it propagates at exactly the rate parties check. Usually stated as a weakness — it is also a **measurement**. A relying party's **effective revocation latency is the interval between its checks**, computable per party and per mandate **before anything has ever been revoked**. Conventional key infrastructure cannot do this because the consumers of a revocation list are invisible to the issuer; here they wrote to the issuer's lane.
+**And it yields one of the very few decidable mandate clauses:** *verify this mandate at least once every twenty-four hours.* A party in breach is visible in the issuer's own lane without any cooperation from that party.
+**The honest limit, stated in the same breath:** for a party that never checks, the latency is infinite and invisible, so the published distribution describes the participants rather than the population.
+**The consequence for the build order.** Observability cannot be a later phase, because the justification for building declared mandates *is* the evidence it produces. **It belongs in phase 3, with mandates**, and phase 3's acceptance test grows a fifth case: an issuer names a holder that has never checked. Document 04 is amended by this entry rather than edited.
+**Status:** adopted; decision 20.
+
 ## The decisions register
 
 | # | Decision | Made by | Status |
@@ -121,6 +148,11 @@ The entries above record what the *corpus* corrects. These record what the pack'
 | 13 | Which verification mode ships first | — | **Open — two products, and building both means neither finishes** |
 | 14 | Does the policy layer (WF-6) belong in the MVP? | pack doc 10 (C12) | **Open — specified and mapped, with no acceptance test** |
 | 15 | How P2 (public decision log) is reconciled with A3 (blind ack) | pack doc 10 (C12) | **Open — the blind ack currently wins by default** |
+| 16 | Check events go to the issuer's own lane, never a central log | v0.33.61 (C14) | **Settled — rule 1 applied to telemetry** |
+| 17 | A check event never carries what the checker was authorising | v0.33.61 (C14) | **Settled — the consent argument depends on it** |
+| 18 | Does a lane with no anchors accept any token holder? | — | **Open — absent from the parent's API reference; gates the layer's coverage** |
+| 19 | Who drains the lane, and what watches the drain? | — | **Open — the failure is silent and the layer is worthless once it starts** |
+| 20 | Observability ships in phase 3, with mandates | v0.33.61 (C15) | **Settled — build order amended, not edited** |
 
 ---
 

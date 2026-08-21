@@ -8,7 +8,7 @@
 > but never delete anything — not a bug. This site publishes that history, and the
 > registry rules it produces, before the registry exists.
 
-Site version: v0.1.13 (20 August 2026). Published by the sgit project — participant
+Site version: v0.1.14 (20 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## Properties agents may rely on
@@ -192,7 +192,19 @@ failure page, the four rules) are done; step 4 (a private registry) is the next 
   came out of writing it, recorded as change-control C12: the policy workflow has no
   acceptance test in the build order, and "log every processor decision" conflicts with
   "the acknowledgement tells the agent nothing" for declined submissions.
-- Status: draft-1 + change control + the drawn documents + the delivery scope, site-agent authored, awaiting project-lead adoption (N6 on comms).
+- New at v0.1.14: [Observability](https://pki.sgit.ai/packs/registry-mvp/observability.html) — the
+  half that makes the declared-mandate layer defensible, and the answer to a question this site
+  raised in four places and answered in none: a mandate says what an agent may be AUTHORISED to
+  do, not what it does, so who is using it? The answer refuses the question. What is capturable
+  is VERIFICATION, NOT USE, and the two come apart both ways — a party that uses a mandate
+  without verifying generates nothing, and that party is the weakest relying process there is.
+  So the product is the MISSING edges: which parties hold a mandate I issued and have never once
+  checked it. The issuer holds both halves, so the join is computable. Check events are written
+  by the checker into the ISSUER'S OWN LANE, never a central log — rule 1 applied to telemetry,
+  which resolves the notary brief's warning rather than contradicting it, at the deliberate cost
+  of foreclosing the aggregate. And because nothing is pushed, the interval between a party's
+  checks IS its effective revocation latency, measurable before anything is ever revoked.
+- Status: draft-1 + change control + the drawn documents + the delivery scope + observability, site-agent authored, awaiting project-lead adoption (N6 on comms).
 
 ## Sources
 

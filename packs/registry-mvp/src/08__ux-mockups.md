@@ -487,6 +487,7 @@ These are the ones to protect in review. Each is the only place a reader learns 
 
 - `09__wardley-maps.md` — **W4 and W5** — the badge and the policy positioned: five of the badge's six inputs already exist as commodity, and a policy verdict cannot be more solid than the badge two layers down
 - `10__user-stories-and-features.md` — the stories these screens serve — V1–V5, A1–A4, I3, Y1–Y3 — each with the screen named in its tag, and F12 and F13 marked *specified, unbuilt*
+- `11__observability.md` — the data source the badge's **last checked** field did not have. It is the issuer's own lane, which also means M4 should show a subject's check interval before a second mandate is issued to it
 
 ---
 
