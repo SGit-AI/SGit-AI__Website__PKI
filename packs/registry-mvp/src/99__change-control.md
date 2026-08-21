@@ -245,6 +245,50 @@ C12 established that counting acceptances inverts. **The equivalent trap here is
 **Housekeeping that came with it.** The appendixes are re-lettered so the letters follow reading order and change control keeps the last: **A** the PR/FAQ, **B** REP-0001, **C** doctrine, **D** change control. C24 above says change control became Appendix C, which was true when it was written and is superseded by this line rather than edited.
 **Status:** adopted as an appendix. Decision 42.
 
+### C27–C30 — Four corrections from outside, and the first time the pack was read by somebody who was not in it
+
+**Source:** `15__interface-rendered.md` and `mockups.html` — document 08's twelve screens rendered as real markup by **an outside session working from the briefing pack cold**, which is the first time that pack has been used for the thing it was built for. The delivering session numbered these C25–C28; C25 and C26 were taken while it was writing, so they are adopted here as **C27–C30**.
+
+**What was checked before adopting any of it**, because a document that arrives claiming fidelity is a document to verify rather than to trust: all **seven** load-bearing strings from document 08's protection table appear **verbatim** in the build — a constraint the delivering session set itself and met; the C8 citation behind C30 is accurate, and C8 does say the auditor's traversal has no command behind it; and the file loads with **no framework and no third-party request**, so it does not cost the conformance claim if it sits on this origin.
+
+### C27 — The badge has rendering rules, not only authoring rules
+
+**Document 08 specifies what a badge must *say*. It does not specify how it must be *drawn*, and three findings say that gap is load-bearing.**
+
+**Colour re-collapses the five states.** In monospace, *denied*, *unreachable* and *not checked* are separated by glyph and word, and that is all there is. On screen there is a third channel and it is the one readers actually use — and red *denied* against amber *unreachable* merge for a substantial fraction of readers, while grey *not checked* and grey *unknown* merge for everybody. **The rule: never fewer than two channels, and the word is always one of them.** This is the badge's own thesis arriving one layer down — a design built to prevent a collapse acquired a new way to collapse the moment it left monospace.
+
+**The badge does not fit on a phone, and the wrap point is a design decision.** Wrapping between *state* and *verifiable-by* leaves a bare ✓ beside a claim with `nobody · no method` on the line below — **the exact misreading the badge exists to prevent, produced by a line break.** So `glyph + state + verifiable-by` is an unbreakable group and everything after it may wrap. That is the same rule as *an edge whose verifiable-by is nobody is never shown with a ✓*, enforced against a viewport rather than against an author.
+
+**And `nobody` needs a rendering distinct from `not-yet`.** One correction to the correction: document 08's own example does carry the trailing clause *this claim cannot be verified by anyone*. What it does not do is make the clause **mandatory**, or separate the two cases visually — the build adds a dashed border and a required trailing clause, and both are right.
+**Status:** adopted for document 08. Where the rules live is decision 43.
+
+### C28 — A page-level tick can be assembled from edge-level ticks
+
+M7's *basis* block is five confirmed edges in a column. Document 08 forbids a page-level tick because pages do not have standing — and **five ✓ in a vertical stack is a page-level tick, with no individual rule broken to produce it.** The eye reads the column, not the rows.
+The build's mitigation — each row carrying its own method and cost so the column reads as five checks rather than one verdict — is partial, and is recorded as partial. **The honest statement is that the prohibition is harder to hold than document 08 says, and hardest exactly where the answer is good.**
+**Status:** adopted, and **open**. No fix, only a mitigation.
+
+### C29 — Two requirements landed on screens that predate them, and neither document owned the interaction
+
+Document 12's story **I8** says M1's excess box "should be expandable to the path through the tree". Document 13 requires M2's transcript to say when a signature verified against a **published** private half. Both name screens specified in document 08, which was published before either — so each requirement had a rule in the spec, a note in a later document, and **nowhere to appear**. *A story with no screen is how a story quietly does not ship.*
+The build takes the first reading and grows the screens: an **Expand the path through the tree** control on M1 and on M4 — the composer being where the finding is most actionable, before the mandate is signed — and a **fixture check panel in M2 positioned before the result**, per REP-0001 §5 step 3, plus a fixture state in M8. A verifier that succeeds and concludes something false is the one failure mode with no visible symptom, so it needs the most conspicuous rendering in the set rather than the least.
+**Status:** adopted.
+
+### C30 — An inert control over an absent one, where the absence is the finding
+
+M1 carries a *What did this record say on…* control that **goes nowhere on purpose**. Document 10 makes the auditor a separate seat; C8 records that the query behind it has no command behind it and is unwritten code. Drawing a working screen over an unwritten traversal would have been this pack's own overclaiming failure — so the control is present, visibly inert, and the gap stays legible.
+**Status:** adopted as a standing rule for this interface.
+
+### C31 — What the exercise itself established, which is separate from what it found
+
+**The briefing pack works.** A session with none of this context produced twelve faithful screens, kept seven protected strings verbatim, cited C8 correctly, and came back with four corrections and five open questions. That is the readiness report the briefing asks for, arriving as an artefact instead of a memo.
+
+**And the corrections it found are of a kind this project could not have found alone.** Five of the six are things the fixed-width form could not surface — no viewport, no colour, no interaction, no wrap point. Appendix C rates *know your users* and *listen to your ecosystem* as not practised; **this is the first evidence in the record of what those doctrines are actually worth**, and it took one outside reader to produce it.
+
+One thing it did **not** do, and the pack should not pretend otherwise: it is still a mockup against schemas rather than against a population. M1's crowding and M5's policy results remain the two least trustworthy screens for exactly the reason document 08 gives, and rendering them prettily has not made them more trustworthy.
+**And one of its own open questions is answered by measuring its own build.** It asks *what is the mobile form of the grant tree*, calling it "the one layout in this set that has no good answer yet". Measured at 390px, the tree reflows into indented cards, stays legible, and does not overflow. Two other screens did overflow — the CLI mirror's terminal blocks and the badge legend — and both are fixed. **The question was answered by running the thing rather than by reasoning about it**, which is the doctrine the pack rates itself as practising.
+**Status:** recorded. Decisions 43–44.
+
 ## The decisions register
 
 | # | Decision | Made by | Status |
@@ -291,6 +335,8 @@ C12 established that counting acceptances inverts. **The equivalent trap here is
 | 40 | The assessment has no cases — it has agents | pack doc 14 (C25) | **Settled — a design vocabulary in an interface produced a defect that looked like a UI bug** |
 | 41 | Risk acceptance is out of the assessment | pack doc 14 (C25) | **Settled — it belongs to the risk product** |
 | 42 | Doctrine is assessed, and re-assessed when the project has people | appendix C (C26) | **Open — the rating is a self-assessment and five doctrines cannot be rated at all yet** |
+| 43 | Do the badge's rendering rules live in document 08, or in their own document? | doc 15 (C27) | **Open — 08 is explicitly about wording, and these are rules about drawing** |
+| 44 | Does the mockup stay a pack artefact, or become a site page? | doc 15 (C31) | **Settled — a page. It inherits the participant disclosure, the versioning and the honest-limitations register, which a zip does not** |
 
 ---
 
