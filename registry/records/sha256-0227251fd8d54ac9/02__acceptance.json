@@ -1,0 +1,16 @@
+{
+  "body": {
+    "accepts": {
+      "record": "sha256:5ed815f7fac44f27bdde74c366e20629689db40782dad8d6842455d2060c8f49",
+      "statement": "sha256:fcc173a371f0f7adc578fd07c80c57072a84b4b25708809b63b04e66a2380bb4"
+    },
+    "as": "mandate"
+  },
+  "created_at": "2026-08-01T10:00:00Z",
+  "record": "sha256:0227251fd8d54ac989f6a29f0e56ea160e2d30fed1974474cecfc77923b58e16",
+  "registry": "pki.sgit.ai",
+  "sig": "MEUCIHFT9RJxM/tped/gjm9g8QOqkpd/v+bgz4h+LcNyqn1xAiEA3wS0/w/VQxI2gJzO5nFoKM27uP/ISe9Et1HPUGRBpY4=",
+  "signer": "sha256:0227251fd8d54ac989f6a29f0e56ea160e2d30fed1974474cecfc77923b58e16",
+  "type": "acceptance",
+  "v": 1
+}

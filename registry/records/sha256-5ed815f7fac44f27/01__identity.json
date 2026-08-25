@@ -1,0 +1,29 @@
+{
+  "body": {
+    "agent_type": "operator",
+    "bundle": {
+      "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAt+bucSs4wx6AXDP0CkkS\nd03L0N518zVqSoWDvvdkXJ8FE5O/5IuJfejPAj3iJSKFyPVdMR7Plj2d3cZMOPxK\nI5oL3msjc9kqVlQiOWxNHMfEqToifxPL8sBGAZmD5Wj7ZJxZZAL37oQWECH85+kQ\nD6VkFTWPmEFs+YgZjPFTs3gJFdQRvT43tiH18gqiqAv6nu+S53/jminANbd8Un+Y\nB9Tbf8ylHLDHQlsh+q/sS1I/fqCf1o5zVH7iZfS6edxMmgET0TjrvYxkIWzgkUuf\nFq6mBWj/MZiZPABifEtniJKSWEKmpSJbFRPPk6FtciHCvLX94r7tTTZiKR05jgPr\nj8hldrtHxEW/DtlHeY94RZrwIabC8pDbMn4TG3gC2AAPxOkFPSeI6t2Ai51TYOTt\nQZtIrubSOxvgk0ikrFKEZ3ze/DyfGbZ5+95wfqGkgApbALhLPZG3kvB3iARBmz3k\n3ZyOPrvmAK7PntA3wdhX2hotnj8S8rmFkJlwW2L0TjgXH3FzMszMKwnkTDPVvpbz\nhp+F1rNIsW8FC1upsXMj91WO118GVUWN1MuIdwoJ5RqqHWzoepu16/YkNY4zKtmd\nOyXBzcMlPC8hUK8rLYaiLa3NoGXSmKIce/mRZF64D45pQO6frmzS38t4GkX6NnrS\n3v0Sy5M3MgKf+wlO+ZF2insCAwEAAQ==\n-----END PUBLIC KEY-----\n",
+      "fingerprint": "sha256:a600af93a261da543d5b07a2915773b492b98c9bba75d8b58a676393703a24bf",
+      "label": "fixture-operator (pki.sgit.ai)",
+      "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEJ9rT8bIQEi5ZQElRLi+eBYoOArKJ\nH9dj/gUYg1fBKJiCIJPEF1p2vFnvb1vJdh0hmjsnfte649sdMm33LQqInA==\n-----END PUBLIC KEY-----\n",
+      "signing_fingerprint": "sha256:5ed815f7fac44f27bdde74c366e20629689db40782dad8d6842455d2060c8f49",
+      "v": 1
+    },
+    "claims": {
+      "note": "FIXTURE \u2014 this identity exists to exercise the plumbing; its signatures prove nothing (change-control C3)"
+    },
+    "private_key_paths": [
+      "private/sign.pem",
+      "private/encrypt.pem"
+    ],
+    "private_key_published": true,
+    "publication_intent": "deliberate"
+  },
+  "created_at": "2026-08-25T09:00:00Z",
+  "record": "sha256:5ed815f7fac44f27bdde74c366e20629689db40782dad8d6842455d2060c8f49",
+  "registry": "pki.sgit.ai",
+  "sig": "MEYCIQDPkESaJH6UoFbwmQCzbxdZAkZHRwdDiz2eAiUtocnGKwIhAPCof7jF+K1a7YAHXhXyvrgY01HfpXx3gAm0vZ8H0WmO",
+  "signer": "sha256:5ed815f7fac44f27bdde74c366e20629689db40782dad8d6842455d2060c8f49",
+  "type": "identity",
+  "v": 1
+}

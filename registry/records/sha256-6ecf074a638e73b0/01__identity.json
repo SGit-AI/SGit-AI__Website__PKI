@@ -1,0 +1,29 @@
+{
+  "body": {
+    "agent_type": "llm-session",
+    "bundle": {
+      "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAn3ZXdOIInIfZZXlXbRwX\nkMykDQ7BCztkBoYaQquhTFCnfsloAspaknvvx8yfMIGq5as6iXuSS30f6zmV+xFx\n0JCO+U/DXvVSZpMlCzmIoN2ybd4VWHXLq1sjEGtZo9qBawiiy8PDPsHmso0kfz4X\nT/DY07VvydfzxWeAGyVTPn3m2+j5tmYKZV9k+fcgbts9MjkUisX1S958JKbC6nbu\n0/vHHgVXQ752wkKH/1YAcVEpaAzhmzsuMg8kg3GieZQlnGvyzaMB1WRdA7nXV7Oh\nhuayVWSK73q2cHxpAsOrSN19omvVTyw6dWjMlT/wFseLcgRTG9OUUjBaMjrwhUai\npKg8ClWPuRYLmojPcvyslGXt5ug3MlAle8qtDiAwDp2tTm+dLh1TQOKawopU+SOx\nuP1U+O1WLF1klCpsIi8MdAbcEPrMHNa1aGwHA+/z7ciFSkfoL6eZ88SVh+RBTa7X\nAhwcMYBNAG3mhtKz3Mf/zfy6TmBNYKhCHVXEUMhlj4nBfRPs1QhcU279NsBbNlNy\nHbG2OR8ki7Q7rdjbPd4xBQ0FEKV9sebQSZsHD6p+7y9AkLonE3c8R44Y7CXLPU6a\nZdKzMtxFvzEE351V9bQr2D36MMc+VhkAjUK66omjRqDsLBpT0XpwG57FP9DQfx8R\nM3NcoGUJaNT8NCafWoJBwoMCAwEAAQ==\n-----END PUBLIC KEY-----\n",
+      "fingerprint": "sha256:cb86dbfe668481a32dc52e38c8c492e743999900f33d32edf55b7b478fb153e7",
+      "label": "fixture-agent-a \u2014 valid, accepted mandate",
+      "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEIhHgxbaqEw9XdFDfeVREVz9gJROp\nweNVEbwKgReOVP69n1skeg0q9HdXtoA1J45IhDhZ5OupamZqyWsVJWV0dw==\n-----END PUBLIC KEY-----\n",
+      "signing_fingerprint": "sha256:6ecf074a638e73b0126758f81e95c8202ec0c8f97fbfc8183087aae960074663",
+      "v": 1
+    },
+    "claims": {
+      "note": "FIXTURE \u2014 this identity exists to exercise the plumbing; its signatures prove nothing (change-control C3)"
+    },
+    "private_key_paths": [
+      "private/sign.pem",
+      "private/encrypt.pem"
+    ],
+    "private_key_published": true,
+    "publication_intent": "deliberate"
+  },
+  "created_at": "2026-08-25T09:00:00Z",
+  "record": "sha256:6ecf074a638e73b0126758f81e95c8202ec0c8f97fbfc8183087aae960074663",
+  "registry": "pki.sgit.ai",
+  "sig": "MEYCIQDoP7l0EVVBD9vF5QWLDPrQwz/lHtHDCTZE0Lzh9l5RqgIhAKHClVArMiHnhYi9Y76QWhInlmvM4sV8JE3eTGIGMRBw",
+  "signer": "sha256:6ecf074a638e73b0126758f81e95c8202ec0c8f97fbfc8183087aae960074663",
+  "type": "identity",
+  "v": 1
+}

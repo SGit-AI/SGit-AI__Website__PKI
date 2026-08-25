@@ -1,0 +1,23 @@
+{
+  "v": 0,
+  "_what_this_is": "The fixture capability vocabulary. Pack decision 6 — what a capability name IS — remains open and awaiting the project lead; this file exists so the fixture mandates and grants can name capabilities without pretending that question is settled.",
+  "comparison": "exact string equality only. Containment (does repo.* cover repo.pull-request.create?) is DELIBERATELY UNDEFINED — defining it is a grammar, a grammar is a standard-shaped commitment, and the pack's own position (Wardley map W6) is to adopt one if it emerges rather than define one here.",
+  "consequence": "excess authority and shortfall are computable in this registry only where grant and mandate name resources countably — which is why the grant's permits block carries resources_count. A real vocabulary makes the set difference real; this one makes it demonstrable.",
+  "capabilities": [
+    {
+      "name": "repo.pull-request.create",
+      "means": "open a pull request on the named repository",
+      "origin": "the pack's own candidate first capability (decision 6, proposed)"
+    },
+    {
+      "name": "repo.contents.write",
+      "means": "push commits to the named repository within the stated constraints",
+      "origin": "fixture vocabulary"
+    },
+    {
+      "name": "vault.lane.append",
+      "means": "post one payload to the named append lane",
+      "origin": "fixture vocabulary — the shipped transport's write operation, named"
+    }
+  ]
+}

@@ -1,0 +1,166 @@
+# pki.sgit.ai/registry — the fixture registry's machine-readable front door
+#
+# WHAT THIS IS. A static register of agent identities, mandates, grants,
+# acceptances and revocations, published as plain files so that agents and
+# downstream sites can learn to CONSUME these objects — including sites that
+# build risk products on top of mandates and grants. It is the registry MVP
+# pack (https://pki.sgit.ai/packs/registry-mvp/) made concrete as fixtures.
+#
+# READ THIS LINE BEFORE ANYTHING ELSE IN THIS TREE:
+#
+#   EVERY RECORD HERE IS A FIXTURE. Every private key in this register is
+#   published, deliberately, beside its public half. Every signature verifies
+#   and proves NOTHING about anyone — a signature's value is the scarcity of
+#   the private half, and here there is none. This register is not after
+#   confidentiality or integrity at this stage; it is after teaching the
+#   shape: how an agent reads, verifies, and consumes grants and mandates.
+#   (Pack change-control C3: a keypair whose private half is published is not
+#   a weak identity — it is no identity, permanently.)
+#
+# THE FLAG RULE, which this register exists to drill:
+#   read body.private_key_published in a record's identity statement BEFORE
+#   evaluating any signature on that record. Here it is true on every record,
+#   on purpose, so a verifier that forgets the rule gets confident wrong
+#   answers five times out of five.
+#
+# THE PROMISE. Every artefact below is fetchable at its constructed URL:
+#   https://pki.sgit.ai/registry/<path>
+# No account, no API key, no session. (Authored on a branch; these URLs are
+# live from the site release that ships this tree.)
+
+## The tree
+
+  llms.txt                          this file
+  README.md                         the human account: purpose, decisions taken,
+                                    decisions still open, re-run method
+  params.json                       canonicalisation, signature, fingerprint and
+                                    id recipes; proposed bounds; the record model
+  roots.json                        one declared root — a FIXTURE root, and it
+                                    says so in its own entry
+  capabilities.json                 the fixture capability vocabulary (v0);
+                                    what a capability name IS remains open
+  index.json                        convenience map, NO AUTHORITY, regenerable
+  views/expected-verifications.json the five verification cases and their
+                                    expected answers — the acceptance test for
+                                    any verifier you write
+  views/excess-authority.json       grant minus mandate, per subject — the
+                                    consumable for risk products; NO AUTHORITY,
+                                    recompute it yourself
+  records/<sha256-hex16>/           one directory per record, named by the
+                                    first 16 hex of the owner's signing-key
+                                    fingerprint (full fingerprint inside)
+    01__identity.json               statement 1, always the identity
+    NN__<type>__<slug>.json         further statements; NN is display order
+                                    only — ordering authority is the public
+                                    git history of this repository
+    record.json                     unsigned manifest, NO AUTHORITY
+    public/sign.pem  public/encrypt.pem
+    private/sign.pem private/encrypt.pem    published — that is the point
+  tools/registry_tool.py            generator, verifier and validator; the
+                                    same openssl+jq commands as below
+
+## The record model
+
+One record per subject; only the owner signs statements in it (the 2019
+keyserver failure inverted into a rule — a valid signature by a non-owner is
+NOT write authority). Statements are immutable signed files. There is no
+seq/prev chain in the envelope: this register takes the pack's C7 correction —
+the entry is a file inside a commit graph, and ordering, history and
+tamper-evidence come from the public git repository serving this tree
+(github.com/SGit-AI/SGit-AI__Website__PKI). "What did this record say in
+March?" is a git question, answered by clone or the commit API, not by
+replaying a chain.
+
+A mandate lives in the ISSUER's record; the subject appends an acceptance to
+its own (pack decision 1, settled twice). An unaccepted mandate is inert
+(decision 8, taken provisionally). Revocation is a signed append with an
+effective date; nothing is ever deleted.
+
+## How to verify one statement (executed 2026-08-25, before publication)
+
+    # the operator's mandate to agent-a, verified end to end
+    R=records/sha256-5ed815f7fac44f27      # or fetch each file by URL
+
+    # 1. canonical bytes: jq -cS, sig removed  (params.json: jq-cS-1)
+    jq -cS 'del(.sig)' $R/02__mandate__pr-create__to-agent-a.json > payload.bin
+
+    # 2. the signature, base64 -> DER
+    jq -r '.sig' $R/02__mandate__pr-create__to-agent-a.json | base64 -d > sig.der
+
+    # 3. verify against the record owner's signing key
+    openssl dgst -sha256 -verify $R/public/sign.pem -signature sig.der payload.bin
+    #   -> Verified OK
+
+    # 4. the key IS the record identifier — derive the fingerprint yourself
+    openssl pkey -pubin -in $R/public/sign.pem -outform DER | sha256sum
+    #   -> 5ed815f7fac44f27...  == the .record field, minus the sha256: prefix
+
+    # 5. and the statement id, for following references
+    jq -cS . $R/02__mandate__pr-create__to-agent-a.json | sha256sum
+    #   -> matches the .body.accepts.statement field in agent-a's acceptance
+
+What step 3 proves here: that the statement was signed by a holder of that
+private key. What that is worth in THIS register: nothing — you are also a
+holder of that private key. Run this to feel it (executed, same day):
+
+    printf '{"forged":"anyone can sign this"}' > forged.json
+    openssl dgst -sha256 -sign $R/private/sign.pem forged.json > forged.sig
+    openssl dgst -sha256 -verify $R/public/sign.pem -signature forged.sig forged.json
+    #   -> Verified OK.   A signature anybody can produce conveys nothing.
+
+## The verification walk
+
+For "may agent X exercise capability C?": fetch roots.json and params.json;
+fetch the subject record; READ THE FIXTURE FLAG; verify every statement's
+signature against the owner's key and reject any statement whose signer is
+not the owner; check for an identity revocation; follow acceptances to
+mandates in issuer records; verify the issuer's record the same way; require
+the issuer in roots.json; check revocations against the mandate; check the
+validity interval. Answer YES with expiry and authority, NO with the reason,
+or STOPPED with where the chain ended — a partial resolution is a legitimate
+output, not a failure.
+
+    python3 tools/registry_tool.py verify sha256-6ecf074a638e73b0 repo.pull-request.create
+
+Five subjects exercise the five answers a verifier must get right:
+
+  agent-a   YES — valid, accepted, issuer is a declared root (until 2026-10-01,
+            after which this fixture genuinely expires: re-run it then)
+  agent-b   NO  — mandate revoked by its issuer, effective 2026-08-20
+  agent-c   NO  — mandate expired 2026-08-01
+  agent-d   NO  — mandate issued and never accepted: inert
+  agent-e   NO  — subject identity self-revoked (key-compromise), 2026-08-24
+
+Expected answers, as data: views/expected-verifications.json. If your
+verifier reproduces all five (as of the file's as_of date), it implements
+this register's walk. If it passes agent-a WITHOUT surfacing the fixture
+caveat, it skipped the flag rule and is wrong while looking right.
+
+## For consumers building on grants and mandates (e.g. risk products)
+
+The countable object is the gap. The operator's grant statement records what
+agent-a's credential ACTUALLY permits (41 repositories, contents:write, as a
+tree with per-node control labels); its mandate covers one repository and one
+capability. views/excess-authority.json carries the computed row: 40
+resources of exposure, acceptor: none. Recompute it from the records —
+the view is a convenience and carries no authority.
+
+The grant's tree nodes carry the pack's five-field control label:
+{reaches, mechanism, enforced_by: boundary|setting|expectation, evidence,
+checked} — dated PER NODE. The test for enforced_by is general: a control
+bounds a grant only when it is enforced by something the grant does not
+include.
+
+## What this register does not have, deliberately
+
+  no live capability, ever — grants carry hashes; the one descriptor here
+    had its preimage discarded before publication
+  no write path — no lane, no processor, no enrolment; this is the read
+    path over fixtures, and the pack's phase-2 questions stay open
+  no enforcement — the register records authority; nothing here observes
+    or constrains behaviour
+  no trust — that is not a limitation of the fixture set; it is the
+    fixture set
+
+# Pack: https://pki.sgit.ai/packs/registry-mvp/   Rules: https://pki.sgit.ai/rules/
+# All content CC BY 4.0.

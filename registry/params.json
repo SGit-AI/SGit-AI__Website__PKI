@@ -1,0 +1,31 @@
+{
+  "v": 1,
+  "registry": "pki.sgit.ai",
+  "status": "FIXTURE REGISTRY — every private key in this register is published, deliberately. No signature here proves anything about anyone. This register exists so agents and downstream sites can learn to consume identities, mandates and grants. See README.md.",
+  "record_model": "commit-graph (pack change-control C7): each statement is one immutable signed file; ordering, history and tamper-evidence come from the public git repository this registry is served from. The envelope carries no seq/prev — that is the commit graph's job.",
+  "canonicalisation": {
+    "version": "jq-cS-1",
+    "recipe": "canonical bytes are exactly the output of `jq -cS 'del(.sig)' statement.json > payload.bin` — UTF-8, sorted keys, compact, one trailing newline",
+    "number_rule": "statement bodies must not contain non-integer numbers (float serialisation is canonicalisation-hostile)",
+    "refusal_rule": "a verifier that does not implement this canonicalisation version must refuse the statement rather than guess"
+  },
+  "statement_id": "\"sha256:\" + sha256 hex over `jq -cS . statement.json > full.bin` (sig included, same trailing-newline rule). References carry {record, statement}; any path field is convenience only.",
+  "signature": {
+    "algorithm": "ECDSA P-256 with SHA-256, DER-encoded, base64",
+    "over": "the canonical bytes",
+    "sign": "openssl dgst -sha256 -sign private/sign.pem payload.bin | base64",
+    "verify": "openssl dgst -sha256 -verify public/sign.pem -signature sig.der payload.bin"
+  },
+  "fingerprint": {
+    "derivation": "\"sha256:\" + sha256 hex over the DER SubjectPublicKeyInfo of the signing public key (`openssl pkey -pubin -outform DER | sha256sum`)",
+    "note": "reconciliation with `sgit pki` fingerprints is an open item — see README.md, decisions"
+  },
+  "record_dirname": "\"sha256-\" + the first 16 hex characters of the fingerprint. A ':' in a path breaks Windows checkouts; the full fingerprint inside the statements is the identifier, the directory name is an address.",
+  "bounds": {
+    "proposed": true,
+    "max_statement_bytes": 16384,
+    "max_statements_per_record": 256,
+    "note": "pack decision 5 is open; these numbers are the draft-1 proposal with the per-statement bound doubled because an identity statement carrying two PEM public keys plus the fixture flags runs past 8 KB — recorded here rather than silently resized"
+  },
+  "statement_types": ["identity", "mandate", "grant", "acceptance", "revocation"]
+}

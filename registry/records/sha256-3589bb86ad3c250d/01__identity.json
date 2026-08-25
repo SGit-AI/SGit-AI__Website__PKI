@@ -1,0 +1,29 @@
+{
+  "body": {
+    "agent_type": "llm-session",
+    "bundle": {
+      "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAvITtA6pASnfhOtq4mGy7\nbOO6OFKEw7VZxbjbBgk/6katMNgdUQRRfkmAabdf7eN5Sa/x2eMeGcQ+vEFt1wnw\nRYHJZfFdPTU6Kce5PDEhTGTnLYtfcMNVy26Uo8HElRj2cNqwNmoSbwqkrcie9uD/\nnRSZaHnvazASKupJY16QAOsMv/9LPtzlVGrnevgumxt1BYZFuHb8oNas4YTCc8/I\nrKOokR49mSwMYSGE4Te1D9ypaYPvbXu0tpldPRKpGRghIwJ8Lyb9ObZwqMylxoQ0\nXHSnvyFVpeCzrdusOJpMdPnCGH3H2RcRa1flHcnzisPkGZbr1u10r+aN3cLDra38\nQ1MkuLQdRjUNpBTN1nKuC7D48jSBAcq1c5cLonSYUSZOw0dHfpPjQJnY15MmrXc8\n6TttixUC6fYWLFKIu5WM6SxSGZBdpckd9TE25JvHggzs0IQicrg4U3AEG06HjERJ\nREAWVIKnLlJfsOC1J8ZeYrXFgj/eIc5+UEU1PeqsbwuUQhY/CibYh2aJc+BKEU0S\ndolYsSv0aV/XBfKdo/peuRTzMFpY6jj/aFw4grD6DWvXPNn80rwixMEf0MdQfuws\nWbnqudAr4eGcxQQa5/HpQAdLhQTLrL5UQ6zUdyLliLuhSyQoeaHkTgsKmOpUfHBU\nSM30vvKWERXZiBrEbfTF1eECAwEAAQ==\n-----END PUBLIC KEY-----\n",
+      "fingerprint": "sha256:e91a78820250e34f079172cb428876114c2fda7a4a2da923b00d1321467b78c6",
+      "label": "fixture-agent-c \u2014 mandate expired",
+      "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEw7W5Yp/+J4AbEGf3pBpTy+kYXYTZ\n4YrBEdsCr1tvxDBZzUggdsuxCrKt6hyr7oW+SSZIecjD6BGCU49VAcwciw==\n-----END PUBLIC KEY-----\n",
+      "signing_fingerprint": "sha256:3589bb86ad3c250dfe20765565c508549f9e811637c3c85ff0301f7b50138a73",
+      "v": 1
+    },
+    "claims": {
+      "note": "FIXTURE \u2014 this identity exists to exercise the plumbing; its signatures prove nothing (change-control C3)"
+    },
+    "private_key_paths": [
+      "private/sign.pem",
+      "private/encrypt.pem"
+    ],
+    "private_key_published": true,
+    "publication_intent": "deliberate"
+  },
+  "created_at": "2026-08-25T09:00:00Z",
+  "record": "sha256:3589bb86ad3c250dfe20765565c508549f9e811637c3c85ff0301f7b50138a73",
+  "registry": "pki.sgit.ai",
+  "sig": "MEYCIQDhS9fp8lAwI/HQnfbjvJtFenLFjAnrSMufZ8hL45stSwIhAKeUfuMN3xDNkcigcv3jEQ0qtuK8doI/YWWcNlnt+7kC",
+  "signer": "sha256:3589bb86ad3c250dfe20765565c508549f9e811637c3c85ff0301f7b50138a73",
+  "type": "identity",
+  "v": 1
+}

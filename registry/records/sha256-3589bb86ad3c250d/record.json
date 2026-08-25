@@ -1,0 +1,26 @@
+{
+  "_authority": "NONE \u2014 unsigned manifest, regenerable",
+  "dirname": "sha256-3589bb86ad3c250d",
+  "label": "fixture-agent-c \u2014 mandate expired",
+  "private_keys": [
+    "encrypt.pem",
+    "sign.pem"
+  ],
+  "public_keys": [
+    "encrypt.pem",
+    "sign.pem"
+  ],
+  "record": "sha256:3589bb86ad3c250dfe20765565c508549f9e811637c3c85ff0301f7b50138a73",
+  "statements": [
+    {
+      "file": "01__identity.json",
+      "statement": "sha256:a5840e43d861dc81104fa7378dec39b52ae09845543fb1c9f861fe50073b73d6",
+      "type": "identity"
+    },
+    {
+      "file": "02__acceptance.json",
+      "statement": "sha256:a1c4ddfec1241412bc2f24a7ce519ac213c8375d00a51751e41734e145f28306",
+      "type": "acceptance"
+    }
+  ]
+}
