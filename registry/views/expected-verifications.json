@@ -6,36 +6,43 @@
       "because": "valid mandate, accepted, issuer is a root",
       "capability": "repo.pull-request.create",
       "expected": "YES",
-      "subject": "sha256:6ecf074a638e73b0126758f81e95c8202ec0c8f97fbfc8183087aae960074663",
+      "subject": "sha256:df2bb4d93af69e6a",
       "subject_label": "fixture-agent-a \u2014 valid, accepted mandate"
     },
     {
       "because": "mandate revoked, effective 2026-08-20",
       "capability": "repo.contents.write",
       "expected": "NO",
-      "subject": "sha256:0227251fd8d54ac989f6a29f0e56ea160e2d30fed1974474cecfc77923b58e16",
+      "subject": "sha256:1ccafd8f3f8906c4",
       "subject_label": "fixture-agent-b \u2014 mandate revoked by issuer"
     },
     {
       "because": "mandate expired 2026-08-01",
       "capability": "repo.pull-request.create",
       "expected": "NO",
-      "subject": "sha256:3589bb86ad3c250dfe20765565c508549f9e811637c3c85ff0301f7b50138a73",
+      "subject": "sha256:f32e7a1da4e098e0",
       "subject_label": "fixture-agent-c \u2014 mandate expired"
     },
     {
       "because": "mandate issued, never accepted \u2014 inert",
       "capability": "repo.pull-request.create",
       "expected": "NO",
-      "subject": "sha256:1e8d12d8cb90268678382876ae61db595d1e8604e97144572e233d2f2b8735bd",
+      "subject": "sha256:b3ffc1f05803720b",
       "subject_label": "fixture-agent-d \u2014 mandate issued, never accepted"
     },
     {
       "because": "subject identity revoked, effective 2026-08-24",
       "capability": "repo.pull-request.create",
       "expected": "NO",
-      "subject": "sha256:749858ae145f387b0463b9ecf43fe45485d51eb6f21ebfd35be4950164862c30",
+      "subject": "sha256:1d7edf604b98bcf2",
       "subject_label": "fixture-agent-e \u2014 identity self-revoked"
+    },
+    {
+      "because": "the role holds a valid accepted mandate \u2014 and anyone holding the published key can exercise it, which is the lesson",
+      "capability": "repo.pull-request.create",
+      "expected": "YES",
+      "subject": "sha256:878bb98be58abc56",
+      "subject_label": "role: site-agent"
     }
   ]
 }

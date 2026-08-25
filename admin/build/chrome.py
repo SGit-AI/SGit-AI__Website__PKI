@@ -37,12 +37,13 @@ PARENT_TITLE = ("sgit.ai — the parent project: the vault layer and the shipped
 #     of the site — would render with nothing highlighted at all.
 NAV = [
     ("The registry", "failure/index.html", [
+        ("&#9679; The registry, live", "registry/index.html"),
         ("Why they don't exist", "failure/index.html"),
         ("The four rules", "rules/index.html"),
         ("Identity &amp; mandate", "mandate/index.html"),
         ("Build order", "roadmap/index.html"),
         ("Prior art", "rules/prior-art.html"),
-    ], ("failure/", "rules/", "mandate/", "roadmap/")),
+    ], ("failure/", "rules/", "mandate/", "roadmap/", "registry/")),
     ("The layers", "bootstrap/index.html", [
         ("The bootstrap trap", "bootstrap/index.html"),
         ("Enrolment", "enrolment/index.html"),
@@ -74,6 +75,7 @@ NAV = [
 
 FOOTER = [
     ("The registry", [
+        ("&#9679; The registry, live", "registry/index.html"),
         ("&#8594; Map your own case", "assess/index.html"),
         ("Why they don't exist", "failure/index.html"),
         ("The four rules", "rules/index.html"),

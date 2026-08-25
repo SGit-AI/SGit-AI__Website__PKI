@@ -1,0 +1,8 @@
+{
+  "algorithm": "RSA-OAEP",
+  "created": 1756108800,
+  "encryption_fingerprint": "sha256:3b768e160b2a55a2",
+  "key_size": 4096,
+  "label": "role: site-agent",
+  "signing_fingerprint": "sha256:878bb98be58abc56"
+}

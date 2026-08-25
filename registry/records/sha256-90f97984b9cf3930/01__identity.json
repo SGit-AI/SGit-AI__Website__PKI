@@ -1,0 +1,29 @@
+{
+  "body": {
+    "agent_type": "operator",
+    "bundle": {
+      "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAwc8ooBs80OdcZUuhJ9Zb\nEFYyhWrjmWtxP52lMevmhRYcLGEsNq1FtuF8PlRjP1CZ/YIwsQHb84XmCIJ6PRKv\nhjBcdsLDbR5NXAtc9jxMwUEwl81i0Wr3kNS/ftvTXOzIVPqgoRLmWiPgXm5eP5kN\nFUM6PnCnZPddfzJ+eJRGJLOp/lWtrsFMY6xyCf7DjQXebODGO9/JTYwNLocR4ZF1\n4GGxtvXQB9Fe0B50jLkecsQMYzp+bjEX85IF/61V9UhXJ41pryQTdTaE2EH/g9b/\n1TjBEb4s5Nf7xBf4P9PsB0g4TG1qnOe6mb32AUMzyUj2w9RbQuX5NmRgPHTEbk8D\nmX2YhFvLHaQG67MQ4eFnz6gmSgQTHckDo568ManhtW1g5fVMRBa1FWZMefIz4zMt\ny7omFeI8llRGvmv4ZqxFd8QdC0yjlyxBnKNufl3H7fyEa8iQ89wSpanO8l/uF324\n6QCymHEuaGwcsJtDPuAousciXO5w3U6E22nWwVxdK2XEzr0kOpR7Nvzwu+VS9rwo\nYi3xXM8c6WKwOeZ12EWCSCVx3yIJ3ItTexlN4WccnCirZwj60W06Z2hnC1lPLmQR\nb9b6ZQ605g+hAn6fDk/3N9/fLBGKKlq8rQoYIvLVJ5qmuf08TbO8am3CMHDD7hfq\nHHO8138Lcs26tIkPuKQJGssCAwEAAQ==\n-----END PUBLIC KEY-----\n",
+      "fingerprint": "sha256:075693699f0694d0",
+      "label": "fixture-operator (pki.sgit.ai)",
+      "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEMyV4VomyzuWQP8wb2c+zhmoWjGrO\nrACHWENMiys8OO22T5rlNHWGnBdh/8agNziVCj/N4NhD/b7coIbH8Kqr2w==\n-----END PUBLIC KEY-----\n",
+      "signing_fingerprint": "sha256:90f97984b9cf3930",
+      "v": 1
+    },
+    "claims": {
+      "note": "FIXTURE \u2014 exists to exercise the plumbing; its signatures prove nothing (change-control C3)"
+    },
+    "private_key_paths": [
+      "private/sign.pem",
+      "private/encrypt.pem"
+    ],
+    "private_key_published": true,
+    "publication_intent": "deliberate"
+  },
+  "created_at": "2026-08-25T09:00:00Z",
+  "record": "sha256:90f97984b9cf3930",
+  "registry": "pki.sgit.ai",
+  "sig": "vYZagjijs/yWmZxM0fSFn9awTa6djiRA6FuHa2m5ILTYu2CJ090MGgXQ8m4ch0A02f/eS7ievIGjWqlaCYG1pQ==",
+  "signer": "sha256:90f97984b9cf3930",
+  "type": "identity",
+  "v": 1
+}

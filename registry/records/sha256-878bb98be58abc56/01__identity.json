@@ -1,0 +1,32 @@
+{
+  "body": {
+    "agent_type": "llm-session",
+    "bundle": {
+      "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAz6R6yQddvbSddKFjpSCO\nMd8+oQaGXNdVyRct6SwZseK4nbe3WmQsOWCFPpynNdFNaQ71SfMCUIBT09HVizqJ\nmXvgOPjDCBNfnYKseQLwQQskJM63Qd5oHLSTcmK4R7EHl1Nb48yplRb3i+hJ9me/\nWzrY2RcpHc0lGS/jbwlUJcGdlZnS3cuufbo6xuhTfBl/TAfkkrG+yqNMqUudMZJX\nTR70s8akHiloH2dtUmWzug4FC8coQxSGBHqaHQNzgN5TCWlrfgbxY2hlmEJXxomw\nL6hjGqmjL0Uln/cmHa1RDKbfWeYxJCiq92AN4tkWQH0vRmaAEHmdn4cB4E3zcaD1\nkYXFbnc5WrBKY+yVU27glqv7481R3XRWKWlp/ChEkyviQqWpA9d1WPhl0THLyK8q\niSEYK9yUntT6EMbvXwY7z7Z5HUtbB5d1jd7cDwp5+qOc/gEXKtLV9KBkBG2e1wUv\n/m/9e8yDO+GEvEbXeCJ4apHbXjWD+P2xoOFH4tLf5qlpEszM6K8twkcvSWShlNgM\naBd6eV0mDi4BSOl2MHhs5OPy8pHCf0OIO+1OmCon4fCm4lpihXeqKU036ulT+KXu\ns0QBFCmU58EZreEyNbvnSbKW++ReXr67rCQJ4xwzZ9qasonh1PijPTO6Mc7ZqHLR\nxvOuvUeQL5rUJUDfy3/3DOcCAwEAAQ==\n-----END PUBLIC KEY-----\n",
+      "fingerprint": "sha256:3b768e160b2a55a2",
+      "label": "role: site-agent",
+      "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEYZexnJicCnbLLvWrdFjI7bXkBeV1\nB+XBNf13n/3A4sDVQq8ujfrA8Oz1VGZJ4MtC2kOK3dAmVKW0Tj7jtKVM8g==\n-----END PUBLIC KEY-----\n",
+      "signing_fingerprint": "sha256:878bb98be58abc56",
+      "v": 1
+    },
+    "claims": {
+      "note": "FIXTURE ROLE \u2014 the private half (and the keystore passphrase) are published so any fresh session can assume this role by retrieval. A role is a costume, not an identity: knowing the key says nothing about who is wearing it",
+      "role": "site-agent",
+      "role_definition": "maintains a published site under mandate: reads the repo, opens pull requests, never pushes to the release branch"
+    },
+    "private_key_paths": [
+      "private/sign.pem",
+      "private/encrypt.pem",
+      "keystore/ (sgit on-disk format, passphrase in keystore/PASSPHRASE.txt)"
+    ],
+    "private_key_published": true,
+    "publication_intent": "deliberate"
+  },
+  "created_at": "2026-08-25T10:00:00Z",
+  "record": "sha256:878bb98be58abc56",
+  "registry": "pki.sgit.ai",
+  "sig": "Z3vZzub0H3uQ8tHudajMQIohu6tdBcODbvDb8L4+1h1kcqDwYhKaG6qZClDmRA/X7x4/1J5UNoctr9enkCon6Q==",
+  "signer": "sha256:878bb98be58abc56",
+  "type": "identity",
+  "v": 1
+}

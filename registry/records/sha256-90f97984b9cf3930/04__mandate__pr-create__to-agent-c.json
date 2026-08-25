@@ -1,0 +1,22 @@
+{
+  "body": {
+    "capability": "repo.pull-request.create",
+    "constraints": {
+      "branches": [
+        "dev"
+      ]
+    },
+    "environment": "fixture",
+    "mandate_subject": "sha256:f32e7a1da4e098e0",
+    "resource": "github.com/SGit-AI/SGit-AI__Website__PKI",
+    "valid_from": "2026-07-01T00:00:00Z",
+    "valid_until": "2026-08-01T00:00:00Z"
+  },
+  "created_at": "2026-07-01T09:00:00Z",
+  "record": "sha256:90f97984b9cf3930",
+  "registry": "pki.sgit.ai",
+  "sig": "dA2E2THXcAzCsa5dnsIzCOWBO6tla78SGrlY1SpExtBoiWkbxtqau3p8uMgf53L//iofruEyzxNhN+9EIhZDww==",
+  "signer": "sha256:90f97984b9cf3930",
+  "type": "mandate",
+  "v": 1
+}

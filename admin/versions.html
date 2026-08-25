@@ -14,12 +14,13 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.25</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.26</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
       <a class="nl" href="../failure/index.html">The registry<span class="caret">&#9662;</span></a>
       <div class="sub">
+      <a class="sl" href="../registry/index.html">&#9679; The registry, live</a>
       <a class="sl" href="../failure/index.html">Why they don't exist</a>
       <a class="sl" href="../rules/index.html">The four rules</a>
       <a class="sl" href="../mandate/index.html">Identity &amp; mandate</a>
@@ -82,6 +83,11 @@
 <div class="tablewrap"><table class="vers">
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
+    <tr>
+      <td class="vnum">v0.1.26</td>
+      <td>25 Aug 2026</td>
+      <td><b>The registry, live — the first MVP ships as files.</b> Eleven records at <a href="../registry/index.html">/registry/</a>: identities, four assumable <b>roles</b> with published keypairs and drop-in sgit keystores, mandates, a grant with the document-12 tree and control labels, acceptances and revocations — every statement a signed file at a constructed URL. <b>sgit-native by execution</b>: bundle, fingerprint and signature formats reconciled against sgit-ai v0.16.0 by round-trip in both directions, so <code>sgit pki import</code> + <code>verify</code> work on the records directly. Ten records are fixtures with private halves published on purpose (change-control C3 as an entire register); one is real (<code>private_key_published: false</code>), keeping the flag evidence rather than a column. Six expected verification answers ship as data and the registry validator reproduces all six; the excess-authority view (41 permitted vs 1 mandated, acceptor none) ships for downstream risk consumers. The record model is C7's commit graph — no <code>seq</code>/<code>prev</code>; the public git history is the chain — making this the first implementation of that correction. The write path today is a git commit reviewed by a maintainer, stated as such; the lane-based phase 2 stays open. Preceded by the <a href="../packs/registry-mvp/readiness-report.md">readiness report</a> the briefing pack asks a fresh session for: six blocking questions, three answered or dissolved here by execution, three still the project lead's.</td>
+    </tr>
     <tr>
       <td class="vnum">v0.1.25</td>
       <td>21 Aug 2026</td>
@@ -227,10 +233,11 @@
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.25</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.26</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The registry</h4>
+    <a href="../registry/index.html">&#9679; The registry, live</a>
     <a href="../assess/index.html">&#8594; Map your own case</a>
     <a href="../failure/index.html">Why they don't exist</a>
     <a href="../rules/index.html">The four rules</a>

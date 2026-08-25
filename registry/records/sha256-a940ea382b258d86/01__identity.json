@@ -1,0 +1,32 @@
+{
+  "body": {
+    "agent_type": "llm-session",
+    "bundle": {
+      "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAwAgIcJRXM9hjFZSbrZmi\n9ltK/VyBACXkMxSwv7/hNWhsJaLPYH78Hmw9PnWAnPruBHZAFiWSsMinym1efLgE\nAktNjxcjD5SMpXhPeDlQko3wjAc1P18/hG7eJPdmxUZvftuRG/8qn1pJfpFJSmil\nHV/Vhr3kfL26R8x64NrxyEUuNXyHYYx0HFiN8/UydTPEWPDVoncEbvro1vMdiu2A\nOFzXz9+Q6spOuXFhrppKvxh4R5RJh1tCJLsNCRxf+jGAtwe/QihWnDYpQz9vAlYL\noVtsVY0PfQ+W2FWzvQCm1jpcjcVa2tIfmOOhPH6wHiAREAtmVyQcupuPLEsApF5k\nFmv1hUE9v5Xv48InotqRvEhuGkHwiWTLmdI5wbILXvViGRdQuF8aU4ph80E9H9+W\nF3Ih9ijfjVVT5HvsU8CbMoii3t31UQTBKHn56UOjt+v/V5xKKojsG2u9W7fizJFs\n/vZfRIyCFHSYJ/CjtgkDcicgpei4F3B9aFml5+jXEG7e+tns1Lp+cr+TZl0DxDUi\nw1Cm2e2Oh3gbTL/T/J+e+HJJeEXfz5BxuNzj2CguynniPnVjl7gFvbaDrhILL2AT\nZq6/6cQwTiYk053W2k5QcKWicaiRAoAhwT0Juoyz1fmA0olWEELQP8ugd8zzkZG2\nl5n+URAG65CJt054MuMEyg8CAwEAAQ==\n-----END PUBLIC KEY-----\n",
+      "fingerprint": "sha256:c34ff365aae672c4",
+      "label": "role: verifier",
+      "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEebes2HRTtUOhFPW5BTYWWyMgn8fr\nlefnL+Hi7iQJcUvmKmPhBeUjX9u9xtHoV9aMUJzPgPs19J0tdzSNXPqW2g==\n-----END PUBLIC KEY-----\n",
+      "signing_fingerprint": "sha256:a940ea382b258d86",
+      "v": 1
+    },
+    "claims": {
+      "note": "FIXTURE ROLE \u2014 the private half (and the keystore passphrase) are published so any fresh session can assume this role by retrieval. A role is a costume, not an identity: knowing the key says nothing about who is wearing it",
+      "role": "verifier",
+      "role_definition": "a third party answering 'may agent X do Y right now?' from public records and signature checks alone"
+    },
+    "private_key_paths": [
+      "private/sign.pem",
+      "private/encrypt.pem",
+      "keystore/ (sgit on-disk format, passphrase in keystore/PASSPHRASE.txt)"
+    ],
+    "private_key_published": true,
+    "publication_intent": "deliberate"
+  },
+  "created_at": "2026-08-25T10:00:00Z",
+  "record": "sha256:a940ea382b258d86",
+  "registry": "pki.sgit.ai",
+  "sig": "vg3Ou+TMJevs3+nxFl8ZkmjyNppIkC+nP3lNDjn7Ivx23yWfqYbpZPoxAAJoRoxkn3sgmrTV9UexK8Qi0RcHgg==",
+  "signer": "sha256:a940ea382b258d86",
+  "type": "identity",
+  "v": 1
+}

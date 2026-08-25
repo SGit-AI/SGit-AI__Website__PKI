@@ -1,0 +1,26 @@
+{
+  "_authority": "NONE \u2014 unsigned manifest, regenerable",
+  "dirname": "sha256-33aae8150b3628ea",
+  "fixture": true,
+  "keystore": [
+    "PASSPHRASE.txt",
+    "sha256_bfd182ce8a6c84e5"
+  ],
+  "label": "role: processor",
+  "private_keys": [
+    "encrypt.pem",
+    "sign.pem"
+  ],
+  "public_keys": [
+    "encrypt.pem",
+    "sign.pem"
+  ],
+  "record": "sha256:33aae8150b3628ea",
+  "statements": [
+    {
+      "file": "01__identity.json",
+      "statement": "sha256:28ad7eabf35374f95df8039dab44ffe4fdfea272d4d14045c8fa4d5955db83e4",
+      "type": "identity"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "body": {
+    "effective_from": "2026-08-24T00:00:00Z",
+    "reason": "key-compromise",
+    "revokes": {
+      "record": "sha256:1d7edf604b98bcf2",
+      "statement": "sha256:6966b8765b4f083ed8a0907d07e33c73850516c3eea5ee1572afde0eadff2417"
+    }
+  },
+  "created_at": "2026-08-24T09:00:00Z",
+  "record": "sha256:1d7edf604b98bcf2",
+  "registry": "pki.sgit.ai",
+  "sig": "9POa2x3g6SPH/gN+PBgr+6UCVH/ZTQO5Y+VdKs1Pi5yv9ZYmvYbfxQe5luQ7NT6Gt5K//Uh4m9E0neNUW3TgIg==",
+  "signer": "sha256:1d7edf604b98bcf2",
+  "type": "revocation",
+  "v": 1
+}

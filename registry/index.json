@@ -2,69 +2,113 @@
   "_authority": "NONE \u2014 a regenerable convenience; the records are the registry (regenerate: registry_tool.py validate)",
   "generated_as_of": "2026-08-25T12:00:00Z",
   "mandates_by_subject": {
-    "sha256:0227251fd8d54ac989f6a29f0e56ea160e2d30fed1974474cecfc77923b58e16": [
+    "sha256:1ccafd8f3f8906c4": [
       {
         "capability": "repo.contents.write",
-        "issuer": "sha256:5ed815f7fac44f27bdde74c366e20629689db40782dad8d6842455d2060c8f49",
-        "path": "records/sha256-5ed815f7fac44f27/03__mandate__contents-write__to-agent-b.json",
-        "statement": "sha256:fcc173a371f0f7adc578fd07c80c57072a84b4b25708809b63b04e66a2380bb4"
+        "issuer": "sha256:90f97984b9cf3930",
+        "path": "records/sha256-90f97984b9cf3930/03__mandate__contents-write__to-agent-b.json",
+        "statement": "sha256:06da5443b3fb9225c1d019737b9718464f9e3c9252b5a6eb99885a8e9f5c828f"
       }
     ],
-    "sha256:1e8d12d8cb90268678382876ae61db595d1e8604e97144572e233d2f2b8735bd": [
+    "sha256:878bb98be58abc56": [
       {
         "capability": "repo.pull-request.create",
-        "issuer": "sha256:5ed815f7fac44f27bdde74c366e20629689db40782dad8d6842455d2060c8f49",
-        "path": "records/sha256-5ed815f7fac44f27/05__mandate__pr-create__to-agent-d.json",
-        "statement": "sha256:b376bb57bd7915e384d0486b69b8fc1e7a3712dc891cbafb6d12bbac0ffacaca"
+        "issuer": "sha256:90f97984b9cf3930",
+        "path": "records/sha256-90f97984b9cf3930/08__mandate__pr-create__to-role-site-agent.json",
+        "statement": "sha256:6139dd65791395e501a6de74c96e032d935b20b869964916073d860792a51f09"
       }
     ],
-    "sha256:3589bb86ad3c250dfe20765565c508549f9e811637c3c85ff0301f7b50138a73": [
+    "sha256:b3ffc1f05803720b": [
       {
         "capability": "repo.pull-request.create",
-        "issuer": "sha256:5ed815f7fac44f27bdde74c366e20629689db40782dad8d6842455d2060c8f49",
-        "path": "records/sha256-5ed815f7fac44f27/04__mandate__pr-create__to-agent-c.json",
-        "statement": "sha256:1eca52b1deb1c21ff547b9438f27aa3190d0ee3e2b89af1c6c93930b1152b220"
+        "issuer": "sha256:90f97984b9cf3930",
+        "path": "records/sha256-90f97984b9cf3930/05__mandate__pr-create__to-agent-d.json",
+        "statement": "sha256:ac339acbdc86bc0b57044b77aac88b847a214b16e795910efcab59d484c4e396"
       }
     ],
-    "sha256:6ecf074a638e73b0126758f81e95c8202ec0c8f97fbfc8183087aae960074663": [
+    "sha256:df2bb4d93af69e6a": [
       {
         "capability": "repo.pull-request.create",
-        "issuer": "sha256:5ed815f7fac44f27bdde74c366e20629689db40782dad8d6842455d2060c8f49",
-        "path": "records/sha256-5ed815f7fac44f27/02__mandate__pr-create__to-agent-a.json",
-        "statement": "sha256:bd637d3ae2da7458f0665efd2234bab1625aaa03226aebf17d9794d756eb8111"
+        "issuer": "sha256:90f97984b9cf3930",
+        "path": "records/sha256-90f97984b9cf3930/02__mandate__pr-create__to-agent-a.json",
+        "statement": "sha256:e572d490272cc517d3fe0783193b539c06bb9f06bf19334ca02619a926e7c45d"
+      }
+    ],
+    "sha256:f32e7a1da4e098e0": [
+      {
+        "capability": "repo.pull-request.create",
+        "issuer": "sha256:90f97984b9cf3930",
+        "path": "records/sha256-90f97984b9cf3930/04__mandate__pr-create__to-agent-c.json",
+        "statement": "sha256:834e29ab87165620f816526a752c25c0df6515af9fe35cf5b62b823137dcb624"
       }
     ]
   },
   "records": {
-    "sha256:0227251fd8d54ac989f6a29f0e56ea160e2d30fed1974474cecfc77923b58e16": {
+    "sha256:1ccafd8f3f8906c4": {
+      "fixture": true,
       "label": "fixture-agent-b \u2014 mandate revoked by issuer",
-      "path": "records/sha256-0227251fd8d54ac9/",
+      "path": "records/sha256-1ccafd8f3f8906c4/",
       "statements": 2
     },
-    "sha256:1e8d12d8cb90268678382876ae61db595d1e8604e97144572e233d2f2b8735bd": {
-      "label": "fixture-agent-d \u2014 mandate issued, never accepted",
-      "path": "records/sha256-1e8d12d8cb902686/",
+    "sha256:1d7edf604b98bcf2": {
+      "fixture": true,
+      "label": "fixture-agent-e \u2014 identity self-revoked",
+      "path": "records/sha256-1d7edf604b98bcf2/",
+      "statements": 2
+    },
+    "sha256:33aae8150b3628ea": {
+      "fixture": true,
+      "label": "role: processor",
+      "path": "records/sha256-33aae8150b3628ea/",
       "statements": 1
     },
-    "sha256:3589bb86ad3c250dfe20765565c508549f9e811637c3c85ff0301f7b50138a73": {
-      "label": "fixture-agent-c \u2014 mandate expired",
-      "path": "records/sha256-3589bb86ad3c250d/",
+    "sha256:878bb98be58abc56": {
+      "fixture": true,
+      "label": "role: site-agent",
+      "path": "records/sha256-878bb98be58abc56/",
       "statements": 2
     },
-    "sha256:5ed815f7fac44f27bdde74c366e20629689db40782dad8d6842455d2060c8f49": {
+    "sha256:90f97984b9cf3930": {
+      "fixture": true,
       "label": "fixture-operator (pki.sgit.ai)",
-      "path": "records/sha256-5ed815f7fac44f27/",
-      "statements": 7
+      "path": "records/sha256-90f97984b9cf3930/",
+      "statements": 8
     },
-    "sha256:6ecf074a638e73b0126758f81e95c8202ec0c8f97fbfc8183087aae960074663": {
+    "sha256:9953ff45429350bc": {
+      "fixture": true,
+      "label": "role: librarian",
+      "path": "records/sha256-9953ff45429350bc/",
+      "statements": 1
+    },
+    "sha256:a940ea382b258d86": {
+      "fixture": true,
+      "label": "role: verifier",
+      "path": "records/sha256-a940ea382b258d86/",
+      "statements": 1
+    },
+    "sha256:b3ffc1f05803720b": {
+      "fixture": true,
+      "label": "fixture-agent-d \u2014 mandate issued, never accepted",
+      "path": "records/sha256-b3ffc1f05803720b/",
+      "statements": 1
+    },
+    "sha256:df2bb4d93af69e6a": {
+      "fixture": true,
       "label": "fixture-agent-a \u2014 valid, accepted mandate",
-      "path": "records/sha256-6ecf074a638e73b0/",
+      "path": "records/sha256-df2bb4d93af69e6a/",
       "statements": 2
     },
-    "sha256:749858ae145f387b0463b9ecf43fe45485d51eb6f21ebfd35be4950164862c30": {
-      "label": "fixture-agent-e \u2014 identity self-revoked",
-      "path": "records/sha256-749858ae145f387b/",
+    "sha256:f32e7a1da4e098e0": {
+      "fixture": true,
+      "label": "fixture-agent-c \u2014 mandate expired",
+      "path": "records/sha256-f32e7a1da4e098e0/",
       "statements": 2
+    },
+    "sha256:f9facb4c94da6c19": {
+      "fixture": false,
+      "label": "site-session-2026-08-25 (authoring session of this registry)",
+      "path": "records/sha256-f9facb4c94da6c19/",
+      "statements": 1
     }
   }
 }

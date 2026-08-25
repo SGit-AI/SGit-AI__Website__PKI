@@ -1,0 +1,27 @@
+{
+  "body": {
+    "agent_type": "llm-session",
+    "bundle": {
+      "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAqCww5kCPDGf+wUxNxCs6\nN0+t53tryaaJNaq/tY46khbk/4MHkDZhBRZGmA8KKwH4EebfN6/09rcuX1EnKE2v\ncA+iU1myRjDvcUUWsPyqQcePSqaoTGHHyELa98/Vi6TsTDFkc/VvD5OUQYi5iqTb\nrqjOrB7g5GzteM7MJVA+QYLOTgJ9tGOOO2fOgTQ3rhs0gdEFIRrJjCoZwuqnFRFL\n4awhhLtGQVvlzo0ku3eT9GfPRZBqYQVYjV3jALZ4MBvQAp/63+ijDeWRpOHqL4EN\n0Ajsz+0WLbrcL3x2DuIo74wHbWuzjNN57MsLukf49bfmGuDQScCpAPChweEi3DfV\nAioFXL/wZQOuv+RAuXTbq+NmhsNcNBa65IEf3gsZgHiEvZirwh53mZD53XNGJT2+\nzu5oaXHXpPOy5IUIyXwnX1zQqOzoqplKfaR9f0ZlHVQOrgUJW7EAo7+5hNl5Pbzo\nCLKLALvga87erb8aTfYnNhePQzxiYuws2KZ4p1bN6sixabo4O5q+USZlcWiaDvUJ\neGzB278WgIdECARvC+fusaH1jgIk5QYAbR0tN2zRNG5/7hzMrOjgS3mVbuJIOsK5\ntqu3mgYydQdg7WcfnK6Ds2LD0WlOlxIWMNgr/5+w8xRzW/XKecaY8a2dQOcsfN4d\nOtqG5obm4UuAKAdFMJyB0uMCAwEAAQ==\n-----END PUBLIC KEY-----\n",
+      "fingerprint": "sha256:cac36b2a1eefa53c",
+      "label": "site-session-2026-08-25 (authoring session of this registry)",
+      "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEMR9+fpnvW9bdQogpUzg2lH/5vM0v\nVD7CB67gdZeyvs//YbjwNkW3VdOLFC4Ao/i1WdZ3rm03ACglVTo1CUqTBA==\n-----END PUBLIC KEY-----\n",
+      "signing_fingerprint": "sha256:f9facb4c94da6c19",
+      "v": 1
+    },
+    "claims": {
+      "note": "the one non-fixture record in this register, which is what makes private_key_published evidence rather than a column (change-control C19)",
+      "persistence": "session-scoped: the private half exists only inside the authoring session's ephemeral container and is not stored anywhere durable. When that session ends the key is gone and nothing can sign as this identity again \u2014 recorded as the pack's session-scoped-identity finding, executed rather than described",
+      "platform": "claude-code, remote container"
+    },
+    "private_key_published": false,
+    "publication_intent": "none"
+  },
+  "created_at": "2026-08-25T11:00:00Z",
+  "record": "sha256:f9facb4c94da6c19",
+  "registry": "pki.sgit.ai",
+  "sig": "fx53gRT8MU5P+Sp1NsxqQYCqNLzic7HEvYefVd9v1r1FJ66B+ye3PliCTm+urG1AHj87t87RPKFJat5dys6YZA==",
+  "signer": "sha256:f9facb4c94da6c19",
+  "type": "identity",
+  "v": 1
+}

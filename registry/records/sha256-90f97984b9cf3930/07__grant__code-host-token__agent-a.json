@@ -1,0 +1,79 @@
+{
+  "body": {
+    "basis": "asserted",
+    "credential": {
+      "descriptor": "sha256:29c5221f09b5599c760e5112939898739dc16e42a0ccf7972983b99d34684e71",
+      "descriptor_note": "hash of the issued credential; the preimage was discarded before publication",
+      "kind": "code-host-token"
+    },
+    "grant_subject": "sha256:df2bb4d93af69e6a",
+    "observed_at": "2026-08-25",
+    "permits": {
+      "capability": "repo.contents.write",
+      "note": "fixture: the count is the scenario, the sample is real repository names, the credential is fiction",
+      "resources_count": 41,
+      "resources_sample": [
+        "github.com/SGit-AI/SGit-AI__Website__PKI",
+        "github.com/SGit-AI/SGit-AI__Website__NHI",
+        "github.com/SGit-AI/SGit-AI__Website"
+      ]
+    },
+    "tree": [
+      {
+        "checked": "2026-08-25",
+        "enforced_by": "none",
+        "evidence": "asserted",
+        "id": "n1",
+        "mechanism": null,
+        "parent": null,
+        "reaches": [
+          "holds the code-host token in process environment"
+        ]
+      },
+      {
+        "checked": "2026-08-25",
+        "enforced_by": "none",
+        "evidence": "asserted",
+        "id": "n2",
+        "mechanism": null,
+        "parent": "n1",
+        "reaches": [
+          "repo.contents.write on 41 repositories"
+        ]
+      },
+      {
+        "checked": "2026-08-25",
+        "enforced_by": "setting",
+        "evidence": "documented",
+        "id": "n3",
+        "mechanism": "branch protection on dev",
+        "parent": "n2",
+        "reaches": [
+          "modify CI workflows, reaching deploy credentials"
+        ]
+      },
+      {
+        "checked": "2026-08-25",
+        "enforced_by": "boundary",
+        "evidence": "documented",
+        "id": "n4",
+        "mechanism": "environment restricted to the dev branch",
+        "parent": "n2",
+        "reaches": [
+          "publish to the Pages deployment"
+        ]
+      }
+    ],
+    "under_mandate": {
+      "record": "sha256:90f97984b9cf3930",
+      "statement": "sha256:e572d490272cc517d3fe0783193b539c06bb9f06bf19334ca02619a926e7c45d"
+    }
+  },
+  "created_at": "2026-08-25T09:15:00Z",
+  "record": "sha256:90f97984b9cf3930",
+  "registry": "pki.sgit.ai",
+  "sig": "OB2GoS1VG0B0+a8uj8gEoBfaGfnynCFlq+/LHevKwXiP7rfZFUgmJ2eycNC+kQsg0011WAUtS9yTirLgrxDjyw==",
+  "signer": "sha256:90f97984b9cf3930",
+  "type": "grant",
+  "v": 1
+}

@@ -8,7 +8,7 @@
 > but never delete anything — not a bug. This site publishes that history, and the
 > registry rules it produces, before the registry exists.
 
-Site version: v0.1.25 (20 August 2026). Published by the sgit project — participant
+Site version: v0.1.26 (25 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## Properties agents may rely on
@@ -25,9 +25,36 @@ disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## Status, stated plainly
 
-The registry does not exist. Everything on this site is stated design, published in
-advance so it can be checked against whatever ships. Build-order steps 2 and 3 (the
-failure page, the four rules) are done; step 4 (a private registry) is the next build.
+The registry's first MVP exists, as of v0.1.26: a static register at /registry/ —
+eleven records, ten of them fixtures whose private keys are published on purpose, one
+real. Its write path is a git commit reviewed by a maintainer; the account-less
+append-lane write path, the processor, and enrolment by strangers remain stated design.
+Everything else on this site remains design published in advance so it can be checked
+against what ships — and the register is the first thing to check it against.
+
+## The registry, live (machine-readable: /registry/llms.txt)
+
+The first MVP of the registry this site designs, shipped as static files. Start at
+https://pki.sgit.ai/registry/llms.txt — the register's own front door, with executed
+verification workflows for `sgit pki`, openssl and python-cryptography.
+
+- Every artefact is fetchable at a constructed URL: /registry/records/<sha256-hex16>/
+  <statement>.json, plus roots.json, params.json, roles.json, capabilities.json,
+  index.json (convenience, no authority) and views/.
+- TEN OF ELEVEN RECORDS ARE FIXTURES: private keys published beside public halves,
+  deliberately. Signatures verify and prove nothing (pack change-control C3). Read
+  body.private_key_published in the identity statement BEFORE evaluating any signature.
+- Four pre-defined ROLES (site-agent, processor, verifier, librarian) ship with
+  published keypairs and drop-in sgit keystores: a fresh session assumes a role by
+  retrieval alone (/registry/roles.json). A role is a costume, not an identity.
+- Six expected verification answers ship as data in
+  /registry/views/expected-verifications.json — the acceptance test for any verifier.
+- For risk consumers: /registry/views/excess-authority.json is grant minus mandate per
+  subject (change-control C1), regenerable from the records.
+- The record model is the pack's C7 commit graph: statements are immutable signed
+  files; ordering and history are this repository's public git history; no seq/prev.
+- sgit-native by execution: fingerprints, bundles and raw r||s ECDSA P-256 signatures
+  are byte-compatible with sgit-ai v0.16.0 (round-tripped both directions, 25 Aug 2026).
 
 ## The history
 

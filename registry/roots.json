@@ -2,10 +2,10 @@
   "registry": "pki.sgit.ai",
   "roots": [
     {
-      "fingerprint": "sha256:5ed815f7fac44f27bdde74c366e20629689db40782dad8d6842455d2060c8f49",
+      "fingerprint": "sha256:90f97984b9cf3930",
       "label": "fixture-operator (pki.sgit.ai)",
       "private_key_published": true,
-      "warning": "FIXTURE ROOT \u2014 the private half of this root is published in this repository. A chain anchored here demonstrates the walk and proves nothing."
+      "warning": "FIXTURE ROOT \u2014 the private half of this root is published in this repository. A chain anchored here demonstrates the walk and proves nothing. The first real root awaits an identity whose private half has a good place to live."
     }
   ],
   "v": 1

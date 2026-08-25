@@ -12,15 +12,15 @@
       "grant": {
         "capability": "repo.contents.write",
         "resources": 41,
-        "statement": "sha256:80fa774f9de2c249154ef7afb8bea7e25e41036c0d5e5aa805e042a656bae1de"
+        "statement": "sha256:4dec940de3243f48ecd77de478b6fa24e09fe3f6095cf2e4023863dec944db3d"
       },
       "mandate": {
         "capability": "repo.pull-request.create",
         "resource": "github.com/SGit-AI/SGit-AI__Website__PKI",
         "resources": 1,
-        "statement": "sha256:bd637d3ae2da7458f0665efd2234bab1625aaa03226aebf17d9794d756eb8111"
+        "statement": "sha256:e572d490272cc517d3fe0783193b539c06bb9f06bf19334ca02619a926e7c45d"
       },
-      "subject": "sha256:6ecf074a638e73b0126758f81e95c8202ec0c8f97fbfc8183087aae960074663"
+      "subject": "sha256:df2bb4d93af69e6a"
     }
   ],
   "what_this_is": "grant minus mandate, per subject: the exposure nobody accepted (change-control C1); built for downstream risk consumers"

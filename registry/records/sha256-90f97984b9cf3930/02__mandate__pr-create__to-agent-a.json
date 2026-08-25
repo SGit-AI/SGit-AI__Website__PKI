@@ -1,0 +1,27 @@
+{
+  "body": {
+    "capability": "repo.pull-request.create",
+    "constraints": {
+      "branches": [
+        "dev"
+      ],
+      "max_files": 20,
+      "paths": [
+        "briefs/**",
+        "documents/**"
+      ]
+    },
+    "environment": "fixture",
+    "mandate_subject": "sha256:df2bb4d93af69e6a",
+    "resource": "github.com/SGit-AI/SGit-AI__Website__PKI",
+    "valid_from": "2026-08-25T00:00:00Z",
+    "valid_until": "2026-10-01T00:00:00Z"
+  },
+  "created_at": "2026-08-25T09:05:00Z",
+  "record": "sha256:90f97984b9cf3930",
+  "registry": "pki.sgit.ai",
+  "sig": "rE4lR8oYTKj83oC2eE5CGf0yzyDj1UnNLi9J+bj1S6rMvIRHoAjuYkohJE81SYiSPa/+jqMW92pOBGh6yFFjLg==",
+  "signer": "sha256:90f97984b9cf3930",
+  "type": "mandate",
+  "v": 1
+}

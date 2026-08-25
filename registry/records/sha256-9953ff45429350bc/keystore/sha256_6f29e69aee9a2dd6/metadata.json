@@ -1,0 +1,8 @@
+{
+  "algorithm": "RSA-OAEP",
+  "created": 1756108800,
+  "encryption_fingerprint": "sha256:6f29e69aee9a2dd6",
+  "key_size": 4096,
+  "label": "role: librarian",
+  "signing_fingerprint": "sha256:9953ff45429350bc"
+}

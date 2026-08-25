@@ -1,0 +1,23 @@
+{
+  "_authority": "NONE \u2014 unsigned manifest, regenerable",
+  "dirname": "sha256-b3ffc1f05803720b",
+  "fixture": true,
+  "keystore": [],
+  "label": "fixture-agent-d \u2014 mandate issued, never accepted",
+  "private_keys": [
+    "encrypt.pem",
+    "sign.pem"
+  ],
+  "public_keys": [
+    "encrypt.pem",
+    "sign.pem"
+  ],
+  "record": "sha256:b3ffc1f05803720b",
+  "statements": [
+    {
+      "file": "01__identity.json",
+      "statement": "sha256:701b92a555ec6df6e237a9ed01a76dceaf74d32aafd5124cbcbea3c1cf065307",
+      "type": "identity"
+    }
+  ]
+}

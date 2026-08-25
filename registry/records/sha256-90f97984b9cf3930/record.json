@@ -1,0 +1,58 @@
+{
+  "_authority": "NONE \u2014 unsigned manifest, regenerable",
+  "dirname": "sha256-90f97984b9cf3930",
+  "fixture": true,
+  "keystore": [],
+  "label": "fixture-operator (pki.sgit.ai)",
+  "private_keys": [
+    "encrypt.pem",
+    "sign.pem"
+  ],
+  "public_keys": [
+    "encrypt.pem",
+    "sign.pem"
+  ],
+  "record": "sha256:90f97984b9cf3930",
+  "statements": [
+    {
+      "file": "01__identity.json",
+      "statement": "sha256:2087cd35b2240cf1c270ea7915ce99805801c172f636fd59b3452e8fc0f4710d",
+      "type": "identity"
+    },
+    {
+      "file": "02__mandate__pr-create__to-agent-a.json",
+      "statement": "sha256:e572d490272cc517d3fe0783193b539c06bb9f06bf19334ca02619a926e7c45d",
+      "type": "mandate"
+    },
+    {
+      "file": "03__mandate__contents-write__to-agent-b.json",
+      "statement": "sha256:06da5443b3fb9225c1d019737b9718464f9e3c9252b5a6eb99885a8e9f5c828f",
+      "type": "mandate"
+    },
+    {
+      "file": "04__mandate__pr-create__to-agent-c.json",
+      "statement": "sha256:834e29ab87165620f816526a752c25c0df6515af9fe35cf5b62b823137dcb624",
+      "type": "mandate"
+    },
+    {
+      "file": "05__mandate__pr-create__to-agent-d.json",
+      "statement": "sha256:ac339acbdc86bc0b57044b77aac88b847a214b16e795910efcab59d484c4e396",
+      "type": "mandate"
+    },
+    {
+      "file": "06__revocation__of-03.json",
+      "statement": "sha256:00d5fba95ef79b18bdf665dae6c57ae9cab54d6a891f8ecf10dc293423e3e2c5",
+      "type": "revocation"
+    },
+    {
+      "file": "07__grant__code-host-token__agent-a.json",
+      "statement": "sha256:4dec940de3243f48ecd77de478b6fa24e09fe3f6095cf2e4023863dec944db3d",
+      "type": "grant"
+    },
+    {
+      "file": "08__mandate__pr-create__to-role-site-agent.json",
+      "statement": "sha256:6139dd65791395e501a6de74c96e032d935b20b869964916073d860792a51f09",
+      "type": "mandate"
+    }
+  ]
+}

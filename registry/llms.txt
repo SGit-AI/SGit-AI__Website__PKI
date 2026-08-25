@@ -1,139 +1,199 @@
-# pki.sgit.ai/registry — the fixture registry's machine-readable front door
+# pki.sgit.ai/registry — the registry's machine-readable front door
 #
-# WHAT THIS IS. A static register of agent identities, mandates, grants,
-# acceptances and revocations, published as plain files so that agents and
-# downstream sites can learn to CONSUME these objects — including sites that
-# build risk products on top of mandates and grants. It is the registry MVP
-# pack (https://pki.sgit.ai/packs/registry-mvp/) made concrete as fixtures.
+# WHAT THIS IS. A static register of agent identities, roles, mandates,
+# grants, acceptances and revocations, published as plain files so that
+# agents and downstream sites can learn to CONSUME these objects — including
+# sites that build risk products on top of the grant/mandate gap. It is the
+# registry MVP pack (https://pki.sgit.ai/packs/registry-mvp/) made concrete.
+# The register is sgit-native: every statement here verifies with the shipped
+# `sgit pki` commands, established by execution on 25 Aug 2026 (sgit-ai
+# v0.16.0), and equally with openssl or python-cryptography.
 #
-# READ THIS LINE BEFORE ANYTHING ELSE IN THIS TREE:
+# READ THIS BEFORE ANYTHING ELSE IN THIS TREE:
 #
-#   EVERY RECORD HERE IS A FIXTURE. Every private key in this register is
-#   published, deliberately, beside its public half. Every signature verifies
-#   and proves NOTHING about anyone — a signature's value is the scarcity of
-#   the private half, and here there is none. This register is not after
+#   TEN OF THE ELEVEN RECORDS ARE FIXTURES: their private keys are published
+#   beside their public halves, deliberately. Every signature verifies and
+#   proves NOTHING about anyone — a signature's value is the scarcity of the
+#   private half, and a fixture has none. This register is not after
 #   confidentiality or integrity at this stage; it is after teaching the
-#   shape: how an agent reads, verifies, and consumes grants and mandates.
-#   (Pack change-control C3: a keypair whose private half is published is not
-#   a weak identity — it is no identity, permanently.)
+#   shape: how an agent reads, verifies, signs and consumes grants and
+#   mandates. (Pack change-control C3: a keypair whose private half is
+#   published is not a weak identity — it is no identity, permanently.)
 #
-# THE FLAG RULE, which this register exists to drill:
-#   read body.private_key_published in a record's identity statement BEFORE
-#   evaluating any signature on that record. Here it is true on every record,
-#   on purpose, so a verifier that forgets the rule gets confident wrong
-#   answers five times out of five.
+#   ONE RECORD IS REAL (private_key_published: false) — which is what makes
+#   the flag evidence rather than a column. Read the flag in a record's
+#   identity statement BEFORE evaluating any signature on that record. A
+#   verifier that skips the flag passes ten confident wrong answers in a row.
 #
 # THE PROMISE. Every artefact below is fetchable at its constructed URL:
 #   https://pki.sgit.ai/registry/<path>
-# No account, no API key, no session. (Authored on a branch; these URLs are
-# live from the site release that ships this tree.)
+# No account, no API key, no session.
 
 ## The tree
 
   llms.txt                          this file
-  README.md                         the human account: purpose, decisions taken,
-                                    decisions still open, re-run method
-  params.json                       canonicalisation, signature, fingerprint and
-                                    id recipes; proposed bounds; the record model
+  index.html                        the human page for this register
+  README.md                         the human account: purpose, decisions
+                                    taken, decisions still open, re-run method
+  params.json                       canonicalisation, signature, fingerprint
+                                    and id recipes; proposed bounds; the
+                                    record model
   roots.json                        one declared root — a FIXTURE root, and it
                                     says so in its own entry
+  roles.json                        the published roles and how to assume one
   capabilities.json                 the fixture capability vocabulary (v0);
                                     what a capability name IS remains open
   index.json                        convenience map, NO AUTHORITY, regenerable
-  views/expected-verifications.json the five verification cases and their
-                                    expected answers — the acceptance test for
-                                    any verifier you write
+  views/expected-verifications.json six verification cases and their expected
+                                    answers — the acceptance test for any
+                                    verifier you write
   views/excess-authority.json       grant minus mandate, per subject — the
-                                    consumable for risk products; NO AUTHORITY,
-                                    recompute it yourself
+                                    consumable for risk products; NO
+                                    AUTHORITY, recompute it yourself
   records/<sha256-hex16>/           one directory per record, named by the
-                                    first 16 hex of the owner's signing-key
-                                    fingerprint (full fingerprint inside)
+                                    owner's signing fingerprint with ':' as
+                                    '-' (Windows-safe paths)
     01__identity.json               statement 1, always the identity
     NN__<type>__<slug>.json         further statements; NN is display order
                                     only — ordering authority is the public
                                     git history of this repository
     record.json                     unsigned manifest, NO AUTHORITY
     public/sign.pem  public/encrypt.pem
-    private/sign.pem private/encrypt.pem    published — that is the point
-  tools/registry_tool.py            generator, verifier and validator; the
-                                    same openssl+jq commands as below
+    private/…  keystore/…           FIXTURES ONLY — published on purpose; a
+                                    real record has no private material, and
+                                    the validator enforces that
+  tools/registry_tool.py            generator, verifier, validator and
+                                    enrolment helper (python3 + jq;
+                                    cryptography — the same library sgit uses)
 
-## The record model
+## The format, reconciled with the shipped CLI by execution
 
-One record per subject; only the owner signs statements in it (the 2019
-keyserver failure inverted into a rule — a valid signature by a non-owner is
-NOT write authority). Statements are immutable signed files. There is no
-seq/prev chain in the envelope: this register takes the pack's C7 correction —
-the entry is a file inside a commit graph, and ordering, history and
-tamper-evidence come from the public git repository serving this tree
-(github.com/SGit-AI/SGit-AI__Website__PKI). "What did this record say in
-March?" is a git question, answered by clone or the commit API, not by
-replaying a chain.
+  fingerprint      sgit's own: "sha256:" + first 16 hex of sha256 over the
+                   DER SubjectPublicKeyInfo (verified against sgit-ai v0.16.0
+                   source and output). sgit addresses KEYSTORE operations by
+                   the ENCRYPTION fingerprint (bundle.fingerprint); records
+                   here are keyed by the SIGNING fingerprint
+                   (bundle.signing_fingerprint) because registry statements
+                   are signed artefacts
+  bundle           the exact `sgit pki export` shape:
+                   {v, encrypt, sign, label, fingerprint, signing_fingerprint}
+  canonical bytes  `jq -cS 'del(.sig)' statement.json > payload.bin`
+                   (params.json: jq-cS-1; bodies carry no non-integer numbers)
+  sig              base64 of RAW r||s (64 bytes), ECDSA P-256 over SHA-256 —
+                   sgit's format, chosen for Web Crypto interop: a browser
+                   can verify these statements with no conversion
+  statement id     "sha256:" + full sha256 over `jq -cS . statement.json` —
+                   a content address, deliberately untruncated; references
+                   carry {record, statement}
 
-A mandate lives in the ISSUER's record; the subject appends an acceptance to
-its own (pack decision 1, settled twice). An unaccepted mandate is inert
-(decision 8, taken provisionally). Revocation is a signed append with an
-effective date; nothing is ever deleted.
+## Verify with sgit (executed 2026-08-25)
 
-## How to verify one statement (executed 2026-08-25, before publication)
+    pip3 install sgit-ai
+    R=records/sha256-90f97984b9cf3930          # the operator's record
 
-    # the operator's mandate to agent-a, verified end to end
-    R=records/sha256-5ed815f7fac44f27      # or fetch each file by URL
-
-    # 1. canonical bytes: jq -cS, sig removed  (params.json: jq-cS-1)
+    # 1. canonical payload and a .sig file in sgit's own shape
     jq -cS 'del(.sig)' $R/02__mandate__pr-create__to-agent-a.json > payload.bin
+    jq '{signature: .sig, fingerprint: .signer}' \
+        $R/02__mandate__pr-create__to-agent-a.json > payload.bin.sig
 
-    # 2. the signature, base64 -> DER
-    jq -r '.sig' $R/02__mandate__pr-create__to-agent-a.json | base64 -d > sig.der
+    # 2. import the record's bundle as a contact, then verify
+    jq '.body.bundle' $R/01__identity.json > op-bundle.json
+    sgit pki import op-bundle.json
+    sgit pki verify payload.bin payload.bin.sig
+    #   -> Signature valid (signer: fixture-operator (pki.sgit.ai))
 
-    # 3. verify against the record owner's signing key
+## Verify with openssl (executed 2026-08-25)
+
+    # same payload; the raw 64-byte signature needs one conversion to DER
+    jq -r '.sig' $R/02__mandate__pr-create__to-agent-a.json | base64 -d > sig.raw
+    python3 -c "
+    from cryptography.hazmat.primitives.asymmetric.utils import encode_dss_signature
+    raw = open('sig.raw','rb').read()
+    open('sig.der','wb').write(encode_dss_signature(
+        int.from_bytes(raw[:32],'big'), int.from_bytes(raw[32:],'big')))"
     openssl dgst -sha256 -verify $R/public/sign.pem -signature sig.der payload.bin
     #   -> Verified OK
 
-    # 4. the key IS the record identifier — derive the fingerprint yourself
+    # the key IS the record identifier — derive the fingerprint yourself
     openssl pkey -pubin -in $R/public/sign.pem -outform DER | sha256sum
-    #   -> 5ed815f7fac44f27...  == the .record field, minus the sha256: prefix
+    #   -> first 16 hex == the .record field, minus the sha256: prefix
 
-    # 5. and the statement id, for following references
-    jq -cS . $R/02__mandate__pr-create__to-agent-a.json | sha256sum
-    #   -> matches the .body.accepts.statement field in agent-a's acceptance
-
-What step 3 proves here: that the statement was signed by a holder of that
-private key. What that is worth in THIS register: nothing — you are also a
-holder of that private key. Run this to feel it (executed, same day):
+What a verified signature proves here: that the statement was signed by a
+holder of that private key. What that is worth on a FIXTURE record: nothing —
+you are also a holder of that private key. Feel it (executed, same day):
 
     printf '{"forged":"anyone can sign this"}' > forged.json
-    openssl dgst -sha256 -sign $R/private/sign.pem forged.json > forged.sig
-    openssl dgst -sha256 -verify $R/public/sign.pem -signature forged.sig forged.json
+    openssl dgst -sha256 -sign $R/private/sign.pem forged.json > forged.der
+    openssl dgst -sha256 -verify $R/public/sign.pem -signature forged.der forged.json
     #   -> Verified OK.   A signature anybody can produce conveys nothing.
+
+## Roles: published identities a fresh session can assume (executed)
+
+roles.json lists four pre-defined roles — site-agent, processor, verifier,
+librarian — each a fixture identity whose keypair AND sgit keystore (with a
+published passphrase) ship in its record. Bootstrap is retrieval:
+
+    cp -r records/sha256-878bb98be58abc56/keystore/sha256_* ~/.sg-send/keys/
+    printf 'fixture-roles-2026\n' | \
+      sgit pki sign myfile --fingerprint sha256:3b768e160b2a55a2
+    #   (the ENCRYPTION fingerprint — sgit's keystore address)
+    #   -> Signature valid (signer: role: site-agent)
+
+A role is a costume, not an identity. The register can say what the role may
+do — role-site-agent holds an accepted mandate for
+repo.pull-request.create on this repository, constrained to registry/** on
+dev — and can never say who wore it. That is the point, and the limit.
+
+## The one real identity, and how to enrol another
+
+records/sha256-f9facb4c94da6c19 is the authoring session's own identity:
+public halves only, private_key_published: false, and honest claims — the
+private half lived only in the authoring session's ephemeral container, so
+this identity is session-scoped, which is the pack's open persistence
+question recorded as an executed fact rather than a design note.
+
+To enrol a real identity of your own (an identity whose private half has a
+good place to live):
+
+    python3 tools/registry_tool.py enrol --label "your name or agent" \
+        --agent-type human
+    # generates a keypair, writes the record (public halves only), stores the
+    # private halves passphrase-encrypted in ~/.sg-send/keys/ — then commit
+    # the record directory. THE WRITE PATH TODAY IS A GIT COMMIT, and the
+    # processor is whoever reviews it. The append-lane write path stays
+    # designed-not-built (pack phase 2), with its open questions intact.
 
 ## The verification walk
 
 For "may agent X exercise capability C?": fetch roots.json and params.json;
 fetch the subject record; READ THE FIXTURE FLAG; verify every statement's
 signature against the owner's key and reject any statement whose signer is
-not the owner; check for an identity revocation; follow acceptances to
-mandates in issuer records; verify the issuer's record the same way; require
-the issuer in roots.json; check revocations against the mandate; check the
-validity interval. Answer YES with expiry and authority, NO with the reason,
-or STOPPED with where the chain ended — a partial resolution is a legitimate
-output, not a failure.
+not the owner (a valid signature by a non-owner is the 2019 keyserver
+failure, not write authority); check for an identity revocation; follow
+acceptances to mandates in issuer records; verify the issuer's record the
+same way; require the issuer in roots.json; check revocations against the
+mandate; check the validity interval. Answer YES with expiry and authority,
+NO with the reason, or STOPPED with where the chain ended — a partial
+resolution is a legitimate output, not a failure.
 
-    python3 tools/registry_tool.py verify sha256-6ecf074a638e73b0 repo.pull-request.create
+    python3 tools/registry_tool.py verify sha256:df2bb4d93af69e6a repo.pull-request.create
 
-Five subjects exercise the five answers a verifier must get right:
+Six cases exercise the answers a verifier must get right:
 
-  agent-a   YES — valid, accepted, issuer is a declared root (until 2026-10-01,
-            after which this fixture genuinely expires: re-run it then)
-  agent-b   NO  — mandate revoked by its issuer, effective 2026-08-20
-  agent-c   NO  — mandate expired 2026-08-01
-  agent-d   NO  — mandate issued and never accepted: inert
-  agent-e   NO  — subject identity self-revoked (key-compromise), 2026-08-24
+  agent-a          YES — valid, accepted, issuer is a declared root (until
+                   2026-10-01, after which this fixture genuinely expires:
+                   re-run it then and watch the answer flip)
+  agent-b          NO  — mandate revoked by its issuer, effective 2026-08-20
+  agent-c          NO  — mandate expired 2026-08-01
+  agent-d          NO  — mandate issued and never accepted: inert
+  agent-e          NO  — subject identity self-revoked, 2026-08-24
+  role-site-agent  YES — the role holds a valid accepted mandate, and anyone
+                   holding the published key can exercise it: the costume
+                   lesson, as a test case
 
 Expected answers, as data: views/expected-verifications.json. If your
-verifier reproduces all five (as of the file's as_of date), it implements
-this register's walk. If it passes agent-a WITHOUT surfacing the fixture
+verifier reproduces all six (as of the file's as_of date), it implements this
+register's walk. If it passes any of them WITHOUT surfacing the fixture
 caveat, it skipped the flag rule and is wrong while looking right.
 
 ## For consumers building on grants and mandates (e.g. risk products)
@@ -142,8 +202,8 @@ The countable object is the gap. The operator's grant statement records what
 agent-a's credential ACTUALLY permits (41 repositories, contents:write, as a
 tree with per-node control labels); its mandate covers one repository and one
 capability. views/excess-authority.json carries the computed row: 40
-resources of exposure, acceptor: none. Recompute it from the records —
-the view is a convenience and carries no authority.
+resources of exposure, acceptor: none. Recompute it from the records — the
+view is a convenience and carries no authority.
 
 The grant's tree nodes carry the pack's five-field control label:
 {reaches, mechanism, enforced_by: boundary|setting|expectation, evidence,
@@ -155,12 +215,14 @@ include.
 
   no live capability, ever — grants carry hashes; the one descriptor here
     had its preimage discarded before publication
-  no write path — no lane, no processor, no enrolment; this is the read
-    path over fixtures, and the pack's phase-2 questions stay open
+  no append-lane write path — no lane, no processor, no blind ack; today
+    the write path is a git commit and the processor is the reviewer; the
+    pack's phase-2 questions (lane anchors, token distribution, processor
+    transparency) remain open
   no enforcement — the register records authority; nothing here observes
     or constrains behaviour
-  no trust — that is not a limitation of the fixture set; it is the
-    fixture set
+  no trust — ten records are fixtures and the root is a fixture; the first
+    real root awaits an identity whose private half has a good place to live
 
 # Pack: https://pki.sgit.ai/packs/registry-mvp/   Rules: https://pki.sgit.ai/rules/
 # All content CC BY 4.0.

@@ -1,0 +1,41 @@
+{
+  "_what_this_is": "pre-defined agent roles with PUBLISHED keypairs, so a fresh session can assume a role by retrieval alone. A role is a costume, not an identity: the register can say what the role may do (its mandate) and can never say who wore it.",
+  "assume_with_openssl": [
+    "fetch the role's private/sign.pem (unencrypted PEM)",
+    "openssl dgst -sha256 -sign private/sign.pem <file>  # emits DER; convert to raw r||s for registry statements"
+  ],
+  "assume_with_sgit": [
+    "pip3 install sgit-ai",
+    "fetch (or clone) the role's keystore/ directory",
+    "cp -r keystore/sha256_* ~/.sg-send/keys/",
+    "sgit pki sign <file> --fingerprint <ENCRYPTION fingerprint \u2014 bundle.fingerprint, the keystore's address>  # passphrase: see keystore/PASSPHRASE.txt"
+  ],
+  "keystore_passphrase": "fixture-roles-2026",
+  "roles": [
+    {
+      "definition": "maintains a published site under mandate: reads the repo, opens pull requests, never pushes to the release branch",
+      "path": "records/sha256-878bb98be58abc56/",
+      "record": "sha256:878bb98be58abc56",
+      "role": "site-agent"
+    },
+    {
+      "definition": "the referee of a write path: drains an inbox, applies published policy, commits what passes \u2014 the runbook is a policy document",
+      "path": "records/sha256-33aae8150b3628ea/",
+      "record": "sha256:33aae8150b3628ea",
+      "role": "processor"
+    },
+    {
+      "definition": "a third party answering 'may agent X do Y right now?' from public records and signature checks alone",
+      "path": "records/sha256-a940ea382b258d86/",
+      "record": "sha256:a940ea382b258d86",
+      "role": "verifier"
+    },
+    {
+      "definition": "curates a corpus: locates sources, tiers them for publication, keeps the manifest that says what is where",
+      "path": "records/sha256-9953ff45429350bc/",
+      "record": "sha256:9953ff45429350bc",
+      "role": "librarian"
+    }
+  ],
+  "v": 1
+}

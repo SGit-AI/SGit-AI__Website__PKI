@@ -1,0 +1,20 @@
+{
+  "_authority": "NONE \u2014 unsigned manifest, regenerable",
+  "dirname": "sha256-f9facb4c94da6c19",
+  "fixture": false,
+  "keystore": [],
+  "label": "site-session-2026-08-25 (authoring session of this registry)",
+  "private_keys": [],
+  "public_keys": [
+    "encrypt.pem",
+    "sign.pem"
+  ],
+  "record": "sha256:f9facb4c94da6c19",
+  "statements": [
+    {
+      "file": "01__identity.json",
+      "statement": "sha256:d7928e3c2d5874dd3600d6c16ffc359731d96a766608f650db5eb50b54cf6762",
+      "type": "identity"
+    }
+  ]
+}

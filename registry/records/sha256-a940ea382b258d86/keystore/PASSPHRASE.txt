@@ -1,0 +1,2 @@
+fixture-roles-2026
+# published on purpose — this role is a fixture; anyone may assume it, which is the point and the limit

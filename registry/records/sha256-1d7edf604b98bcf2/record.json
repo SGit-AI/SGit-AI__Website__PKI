@@ -1,0 +1,28 @@
+{
+  "_authority": "NONE \u2014 unsigned manifest, regenerable",
+  "dirname": "sha256-1d7edf604b98bcf2",
+  "fixture": true,
+  "keystore": [],
+  "label": "fixture-agent-e \u2014 identity self-revoked",
+  "private_keys": [
+    "encrypt.pem",
+    "sign.pem"
+  ],
+  "public_keys": [
+    "encrypt.pem",
+    "sign.pem"
+  ],
+  "record": "sha256:1d7edf604b98bcf2",
+  "statements": [
+    {
+      "file": "01__identity.json",
+      "statement": "sha256:6966b8765b4f083ed8a0907d07e33c73850516c3eea5ee1572afde0eadff2417",
+      "type": "identity"
+    },
+    {
+      "file": "02__revocation__of-own-identity.json",
+      "statement": "sha256:f587719a4ae0af0e0d3f4f0c9f794286970864b058ee112290be8c1589d25f6a",
+      "type": "revocation"
+    }
+  ]
+}
