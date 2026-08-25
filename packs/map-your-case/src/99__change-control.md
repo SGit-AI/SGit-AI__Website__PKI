@@ -94,6 +94,15 @@ The corpus's own: **a published document is not silently edited.** This pack was
 **Status:** F8–F11 adopted, queued behind [MC8](#)'s rule — they change the artefact, so they ship as a version bump and run 008 re-runs against it. F8 is the single recommended fix. Decision MC-D25.
 
 
+### MC11 — Scenario 5 has no tree: the scenario table outruns the library
+
+**Source:** the site agent's readiness review of this pack as an implementation brief, 21 August — the first read of the pack asking *can v3 actually be built from these documents*.
+
+**The gap:** [document 07](07__levels-and-variants.md) orders five scenarios by grant size and [the build order](11__build-order.md) phase 1 lands them as library examples — but a library example is a complete state over an existing surface tree, and the library's surfaces are `cli / desktop / web / agentbox`. **Scenario 5 (operations — an agent with production access, grant: the estate) has no tree to point at**: no production-access nodes, no facts, no tiers, no evidence classes, no re-run method, anywhere in [document 02](02__the-library.md) or `library.json`. Scenario 2 (mail/drive) is mostly coverable by the existing `web` tree's connectors fact; scenario 5 is net-new curation. The Wardley maps rate library curation as this tool's genesis component, so this is the expensive kind of missing — and the pack read as complete until it was read as a build plan, which is itself a finding about hindsight packs: **capture reads as coverage until an implementer asks it for a tree.**
+
+**Status:** recorded; blocks the scenario half of phase 1 (the fix list half is unblocked). Decision MC-D27.
+
+
 ## The decisions register
 
 | # | Decision | Made by / where | Status |
@@ -124,6 +133,7 @@ The corpus's own: **a published document is not silently edited.** This pack was
 | MC-D24 | Pre-registered predictions are published whether or not they survive the run | MC9 | **Settled** |
 | MC-D25 | The single fix before the re-run: un-truncate the dashboard delta | MC10 (F8) | **Settled — queued, not yet shipped** |
 | MC-D26 | Acceptance tests that check availability rather than discoverability are re-specified | MC10 (F9) | **Open — starts with story V6** |
+| MC-D27 | Does the library grow an operations surface for scenario 5, and who supplies its claims? | MC11 | **Open — net-new curation; derived-from-architecture like the rest, or deferred until somebody with an estate is asked** |
 
 ## How this register relates to the registry pack's
 

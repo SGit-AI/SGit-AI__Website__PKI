@@ -20,7 +20,7 @@ The dev pack for **Map Your Case** — the workflow where a visitor assembles th
 11. `10__wardley-maps.md` — four maps: the scarce components are editorial, none mechanical
 12. `11__build-order.md` — five phases; documents before code; tabletop before build
 13. `12__the-first-mvp.md` — v1, the corrections, the bugs, the verification discipline — the receipts
-14. `99__change-control.md` — **the appendix.** Nine corrections, twenty-four decisions. Read it second if you are about to build; last if you are reading through. Never not at all
+14. `99__change-control.md` — **the appendix.** Eleven corrections, twenty-seven decisions. Read it second if you are about to build; last if you are reading through. Never not at all
 
 ## Below the pack: the synthetic readers
 
