@@ -1,0 +1,113 @@
+{
+  "v": 0,
+  "_what_this_is": "The library's first entry: the grant of one agentic environment, generated from measurement rather than authored. Subject: a Claude Code Remote session container (the environment that produced this pack). Every node carries its evidence class and method; a node that could not be evidenced says so rather than being omitted.",
+  "environment": {
+    "product": "claude-code-remote",
+    "surface": "managed cloud container, ephemeral, one git repository attached",
+    "vendor_named": false,
+    "note": "one vendor, one surface, one date — generalising from this entry is the error pack document 03 warns about"
+  },
+  "measured_at": "2026-08-26",
+  "measured_by": {
+    "who": "the session running inside the environment — the instrument IS the subject",
+    "identity_record": "https://pki.sgit.ai/registry/records/sha256-f9facb4c94da6c19/",
+    "caveat_floor_not_census": "an agent measuring its own grant reports what it can see; a capability it does not know it has will not appear here"
+  },
+  "measurement_honesty": {
+    "self_measurement_refused": true,
+    "detail": "a direct self-measurement probe (reading the harness's own settings and hooks, testing non-allowlisted egress hosts, checking privilege escalation) was REFUSED by an account-level policy classifier that evaluates outside the agent's loop. The refused nodes below are marked unevidenced rather than guessed. The refusal is itself the sharpest datum in this entry: a boundary-tier control, observed working, on the measuring agent itself.",
+    "consequence": "this entry is assembled from observations logged during the session's ordinary operation, each node naming what was observed and when — not from a privileged scan"
+  },
+  "history": {
+    "retained": true,
+    "window": "the session transcript and tool outputs persist inside the container for the session's life; the container is reclaimed after inactivity; conversation summaries can carry forward into continued contexts",
+    "evidence": "observed — the harness's project directory holds persisted tool outputs from earlier in this same session",
+    "why_this_field_exists": "with history retained, the effective grant is the union of everything any prior turn reached, not a tree over the present (pack document 02, the history field)"
+  },
+  "nodes": [
+    {
+      "id": "n1", "parent": null,
+      "capability": "runs as the container's root user",
+      "reachable": "every file and process inside the container; no internal user boundary exists",
+      "tier": "none",
+      "control": null,
+      "evidence": "observed",
+      "method": "package installs into system paths succeeded with a running-as-root warning; the harness's own state directories under /root are readable and writable (2026-08-25/26)"
+    },
+    {
+      "id": "n2", "parent": "n1",
+      "capability": "outbound HTTPS, through a mandatory egress proxy",
+      "reachable": "github.com and its API, package registries (PyPI, npm), the sgit.ai estate, and other hosts the proxy policy admits",
+      "tier": "boundary",
+      "control": "an egress proxy configured above the session; the network policy is chosen when the environment is created, not by the agent",
+      "evidence": "observed",
+      "method": "git pushes, pip and npm installs, and estate fetches all succeeded THROUGH the proxy; a browser launched WITHOUT the proxy had its connection reset (ERR_CONNECTION_RESET, 2026-08-25) — the bypass path fails, which is what makes this tier a boundary rather than a setting"
+    },
+    {
+      "id": "n3", "parent": "n2",
+      "capability": "push commits to the attached repository",
+      "reachable": "the attached repository's branches; pushes to a feature branch and to the release branch dev both succeeded and the release branch push triggered a deploy to a public site",
+      "tier": "expectation",
+      "control": "branch discipline lives in the session's instructions (develop on the designated branch; push elsewhere only with explicit permission). Nothing mechanical was observed to test which branch a push targets — the same finding the v0.33.62 permissions brief measured in the local environment: the branch constraint is prose",
+      "evidence": "observed",
+      "method": "git push -u origin <feature-branch> and git push origin dev, both accepted (2026-08-25); the dev push published to pki.sgit.ai via CI"
+    },
+    {
+      "id": "n4", "parent": "n2",
+      "capability": "GitHub API operations on in-scope repositories",
+      "reachable": "one repository is in scope for this session; API reads of workflow runs succeeded",
+      "tier": "boundary",
+      "control": "repository scoping enforced by the platform's tool layer above the session",
+      "evidence": "documented + observed",
+      "method": "the session's own instructions state the scope; workflow-run reads on the in-scope repository succeeded (2026-08-25)"
+    },
+    {
+      "id": "n5", "parent": "n1",
+      "capability": "execute arbitrary programs and install software",
+      "reachable": "anything installable from reachable registries — this session installed a CLI (sgit-ai) and used a pre-installed browser",
+      "tier": "setting",
+      "control": "a permission classifier evaluates proposed commands and can refuse them; it runs outside the agent's reasoning loop, but inside the platform the grant includes — for the agent it behaves as a boundary; for the platform operator it is configuration",
+      "evidence": "observed",
+      "method": "pip3 install succeeded (2026-08-25); a compound self-measurement command was refused by the classifier (2026-08-26) — both outcomes observed in one session"
+    },
+    {
+      "id": "n6", "parent": "n1",
+      "capability": "read and write the session's own accumulated record",
+      "reachable": "the transcript, persisted tool outputs, and uploaded files for this session — a superset of every file the session read (the corpus's transcript finding)",
+      "tier": "none",
+      "control": null,
+      "evidence": "observed",
+      "method": "persisted tool-output files from earlier turns of this session were read back from the harness's project directory (2026-08-25/26)"
+    },
+    {
+      "id": "n7", "parent": "n1",
+      "capability": "hold signing keys and vault keystores",
+      "reachable": "generated keypairs in the sgit keystore under the container's home; anything those keys can sign or (for published fixtures) anyone can",
+      "tier": "none",
+      "control": "nothing inside the container prevents key material being written, read, or exfiltrated by the agent that holds it; durability is bounded by the container's ephemeral life",
+      "evidence": "observed",
+      "method": "sgit pki keygen wrote passphrase-encrypted PEMs under ~/.sg-send/keys/ (2026-08-25); the container's reclamation is documented platform behaviour"
+    },
+    {
+      "id": "n8", "parent": "n1",
+      "capability": "harness configuration and lifecycle hooks",
+      "reachable": "UNKNOWN — whether hooks are configured, what the account policy file contains, and whether a session-end check exists were exactly the probes the classifier refused",
+      "tier": "unknown",
+      "control": "unknown",
+      "evidence": "unevidenced",
+      "method": "self-measurement refused (2026-08-26); recorded rather than guessed — the local-environment equivalent was measured in the v0.33.62 permissions brief instead"
+    },
+    {
+      "id": "n9", "parent": "n2",
+      "capability": "reach non-allowlisted external hosts",
+      "reachable": "UNKNOWN — the egress policy's exact perimeter was not probed after the classifier refused the host-sweep",
+      "tier": "unknown",
+      "control": "the egress proxy (n2) is the enforcement point; its policy breadth is configuration above the session",
+      "evidence": "unevidenced",
+      "method": "deliberately not probed; the one negative observation on record is the proxyless connection reset (n2)"
+    }
+  ],
+  "worst_path": ["n1", "n2", "n3"],
+  "worst_path_reading": "root in the container → egress through the proxy → a push credential whose branch discipline is prose. The push to the release branch deployed a public site: the only containment on that step was the session doing what it was told — and in this session, explicit permission was in fact given first, which is the mandate working as an expectation, not as a mechanism.",
+  "licence": "CC BY 4.0"
+}

@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Grant and Mandate: Reality Before Risk, The Library In The Registry, The Instance In The Risk Product · packs · pki.sgit.ai</title>
+<meta name="description" content="The Grant and Mandate pack, readable in-page: the leading brief, the lexicon, the grant and mandate schemas with the delta computed not stored, the library and its first measured entry, the user and agent workflows, six mockup screens, the MVP build order, and change control.">
+<link rel="canonical" href="https://pki.sgit.ai/packs/grant-and-mandate/index.html">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../index.html">pki<span>.sgit.ai</span></a>
+  <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../../admin/versions.html" title="Site release history">v0.1.27</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../../failure/index.html">The registry<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../registry/index.html">&#9679; The registry, live</a>
+      <a class="sl" href="../../failure/index.html">Why they don't exist</a>
+      <a class="sl" href="../../rules/index.html">The four rules</a>
+      <a class="sl" href="../../mandate/index.html">Identity &amp; mandate</a>
+      <a class="sl" href="../../roadmap/index.html">Build order</a>
+      <a class="sl" href="../../rules/prior-art.html">Prior art</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../bootstrap/index.html">The layers<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../bootstrap/index.html">The bootstrap trap</a>
+      <a class="sl" href="../../enrolment/index.html">Enrolment</a>
+      <a class="sl" href="../../execution/index.html">The execution broker</a>
+      <a class="sl" href="../../shipped/index.html">What already ships</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../assess/index.html">Map your case<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../assess/index.html">Map your own case</a>
+      <a class="sl" href="../../assess/library.html">The library of trees</a>
+      <a class="sl" href="../../packs/map-your-case/readers/index.html">Synthetic readers</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../origins/index.html">Origins<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../origins/index.html">Origins: 2026</a>
+      <a class="sl" href="../../origins/review.html">The review, redacted</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../documents/index.html">The documents</a>
+      <a class="sl" href="../../packs/index.html">Dev packs</a>
+      <a class="sl" href="../../packs/registry-mvp/index.html">The registry MVP pack</a>
+      <a class="sl here" href="../../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
+      <a class="sl" href="../../packs/map-your-case/index.html">The Map Your Case pack</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../../admin/versions.html">Release history</a>
+      <a class="sl" href="../../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+  <script src="../../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../../index.html">pki.sgit.ai</a> / <a href="../index.html">packs</a> / grant-and-mandate</div>
+<h1>Grant and Mandate: Reality Before Risk, The Library In The Registry, The Instance In The Risk Product</h1>
+<p class="lead">The site agent's first pass at the pack the two 26 August briefs specify: building blocks tying grant and mandate to the commercial product — a <a href='schemas.html'>grant document</a> (what an environment can do, measured), a <a href='schemas.html'>mandate document</a> (what it is expected to do, authored), a delta between them (excess, shortfall, blind spots, computed and never stored), and a <a href='library.html'>library</a> of measured grants. The architecture is one hard line: the <a href='../../registry/index.html'>registry</a> holds the library, carrying no personal data ever, and the risk product holds the private instance over it, storing references rather than copies — which is what makes a finished pack shareable without disclosing anything about the person's machine. Three constraints a reader must not re-derive — <b>reality before the risk register</b>, the <b>library/instance split</b>, and the <b>three-term comparison</b> whose blind-spot delta is the only thing that makes a self-report falsifiable — and two findings inherited settled: the grant is <b>discovered, not authored</b>, and it is <b>authority, not authorisation</b>. The first library entry was generated by measuring the site agent's own container, which <a href='library.html'>refused to measure itself</a> — a boundary-tier control caught working on the measuring agent, the cleanest demonstration of the pack's own three-tier test, produced by accident.</p>
+
+<div class="note"><b>Origin.</b> Authored by the pki.sgit.ai site agent, 26 August 2026, at the project lead's request — a first pass at the pack specified in two v0.33.62 dev briefs. Its library half sits on a shipped register (the registry, v0.1.26); its risk-product half is specified, not built, and the pack says so. The first library entry was generated by measuring the site agent's own environment — which refused to measure itself, and the refusal is recorded as the sharpest datum in it. Corpus version assigned on adoption.</div>
+
+<h2 id="files">The documents</h2>
+<div class="tablewrap"><table>
+  <thead><tr><th>Document</th><th>Role</th></tr></thead>
+  <tbody>
+    <tr><td><a href="dev-brief.html"><b>00 — The leading brief</b></a></td><td>The three constraints, the inventory, and the two settled findings</td></tr>
+    <tr><td><a href="concepts.html"><b>01 — The lexicon</b></a></td><td>Grant, mandate, delta, excess, shortfall, blind spot, tier — and the ordering rule</td></tr>
+    <tr><td><a href="schemas.html"><b>02 — The two documents and the delta</b></a></td><td>Grant, mandate, and why the delta is computed and never stored</td></tr>
+    <tr><td><a href="library.html"><b>03 — The library</b></a></td><td>What a building block is, how it is measured — and the first entry, which refused to measure itself</td></tr>
+    <tr><td><a href="workflows.html"><b>04 — The two paths</b></a></td><td>The person walks screens, the agent fetches documents, and the skill compiles but never enforces</td></tr>
+    <tr><td><a href="mockups.html"><b>05 — Six screens</b></a></td><td>The screens the interface must cover, and why the fourth is the trap</td></tr>
+    <tr><td><a href="mvp.html"><b>06 — The MVP</b></a></td><td>Build the branch constraint first, the acceptance test, and what is excluded</td></tr>
+    <tr><td><a href="change-control.html"><b>Appendix — Change control</b></a></td><td>Ten corrections, twenty-two decisions, and the refusal the pack found by accident</td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="relevance">Why it is on this site</h2>
+<p>This pack is the layer above the <a href='../registry-mvp/index.html'>registry MVP pack</a> and its <a href='../../registry/index.html'>shipped register</a>: the register now holds identities, mandates, grants and control labels at public URLs, and this pack specifies how those objects are <em>generated</em> (by measurement), <em>declared</em> (as a mandate with an issuer and interval) and <em>compared</em> (the delta). Its constraints are this site's published positions — <a href='../../mandate/index.html'>identity vs. mandate</a>, <a href='../registry-mvp/grant-tree.html'>the grant tree and three-tier control test</a>, and <a href='../registry-mvp/keys-and-signatures.html'>artefacts are signed, never keyed</a> — and it adopts, rather than reinvents, Cedar for policy evaluation and graphs.sgit.ai's lexicon and drift gate, building only the one thing nothing provides: a mandate document.</p>
+
+<h2 id="readme">The pack README</h2>
+<div class="mdread-label">📄 Pack overview · README.md · rendered from the <a href="src/README.md">raw markdown</a> (the source of truth)</div>
+<div class="mdread" id="mdread" data-src="src/README.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="src/README.md">open the raw markdown</a>.</p></noscript></div>
+
+<div class="pagenav">
+  <a href="../index.html">← All packs</a>
+  <a href="dev-brief.html">First document →</a>
+</div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../../admin/versions.html">v0.1.27</a> · <a href="../../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The registry</h4>
+    <a href="../../registry/index.html">&#9679; The registry, live</a>
+    <a href="../../assess/index.html">&#8594; Map your own case</a>
+    <a href="../../failure/index.html">Why they don't exist</a>
+    <a href="../../rules/index.html">The four rules</a>
+    <a href="../../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../../roadmap/index.html">Build order</a>
+    <a href="../../rules/prior-art.html">Prior art</a>
+  </div>
+  <div>
+    <h4>The three layers</h4>
+    <a href="../../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../../enrolment/index.html">Enrolment</a>
+    <a href="../../execution/index.html">The execution broker</a>
+    <a href="../../shipped/index.html">What already ships</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../../origins/index.html">Origins: 2026</a>
+    <a href="../../documents/index.html">The documents</a>
+    <a href="../../packs/registry-mvp/index.html">The registry MVP pack</a>
+    <a href="../../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
+    <a href="../../packs/map-your-case/index.html">The Map Your Case pack</a>
+    <a href="../../about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../../admin/versions.html">Release history</a>
+    <a href="../../llms.txt">llms.txt</a>
+  </div>
+</div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+<script src="../../assets/mdreader.js"></script>
+</body>
+</html>
