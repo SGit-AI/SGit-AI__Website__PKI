@@ -74,6 +74,33 @@ A claim, once published, is not edited. If it is wrong or overtaken, an entry he
 The measured environment can push to the release branch of a repository that deploys a public site, and **nothing mechanical checks which branch** — the constraint is prose (`expectation` tier). In this session explicit permission was given first, so the mandate worked *as an expectation*, not as a mechanism. That is exactly the gap build-order step 1 closes.
 **Status:** recorded as the worked example the branch-constraint fix addresses.
 
+### GM11 — Build-order step 1 is built, and the acceptance test passed
+
+**Source:** this pack, [document 07](07__enforcement.md), 26 August 2026.
+**What was built:** a mandate document (issuer-signed, interval-bearing, allow-list stored and prohibitions generated), a tool that issues, verifies and evaluates it, and a `pre-push` hook that git runs and that refuses by exit code.
+**The test, executed:** `git push origin HEAD:dev` against a mandate permitting only `claude/**` produced `error: failed to push some refs`; `origin/dev` was unchanged; a push to `claude/**` in the same minute succeeded. **The refusal came from git, not from the agent deciding to comply** — the acceptance test's last sentence, and the only part of it that could not be faked.
+**The tier reached, stated rather than claimed:** **setting**, not boundary — the hook is inside the grant it bounds (`--no-verify`, unsetting `core.hooksPath`, or editing the file all get past it). Exactly the move the permissions brief predicted, tier three to tier two, and no further. A boundary is the same allow-list evaluated where the agent cannot reach it: branch protection, or a required CI check.
+**Status:** adopted. Two design choices recorded with it — the hook **reads the mandate at runtime rather than compiling a copy** (a compiled copy drifts exactly as a stored delta goes stale), and it is **default-deny** (missing, unparseable, mis-signed or expired all refuse), the adopted Cedar discipline, which does carry the cost that a broken mandate file stops all pushes.
+
+### GM12 — The control refused the release that was carrying it, and the remedy was to amend the mandate
+
+**Source:** the same document.
+**What happened:** within the hour, the hook refused the release push that would have published document 07. The correct remedy was **not** `--no-verify` and **not** editing the hook. Mandate v1 was simply **wrong** — narrower than the authorisation that actually existed, since the project lead had granted `dev` pushes explicitly on 25 August. So the issuer **amended it**: v2 supersedes v1, permits `claude/**` and `dev`, cites the instruction, and carries an interval scoped to the MVP stage. Branch-scoped excess authority went from `['dev']` to `none`; `main` is still refused, because nobody authorised it.
+**Why it belongs on the record:** *issue -> refuse -> discover the mandate was wrong -> amend with a citation and an interval* is what a mandate is **for**, and it is only visible because the constraint was mechanical. **An expectation that was too narrow would have been silently ignored and nobody would have learned anything: the refusal is what forced the authorisation to be written down.** It will also look, to a sceptic, exactly like moving the goalposts, which is why the amendment carries its citation and its interval rather than a wider allow-list and no explanation.
+**Status:** recorded; the amendment path is the designed one and is now demonstrated.
+
+### GM13 — The measurement caught its own tier change, unprompted
+
+**Source:** `tools/measure.py`, run 26 August after the hook was installed.
+The tool independently reported node n4 as `setting` where the 26 August library entry recorded `expectation`, because it probes `core.hooksPath` rather than being told what to say. That is [document 03](03__library.md)'s drift table working in the *somebody improved something* direction, on the first re-measurement, one commit after the improvement — and the alarming direction (`setting` to `expectation`: a control removed while nothing broke) is the same diff read the other way, so it now has a working detector rather than a described one.
+**Status:** recorded. It is also the first evidence that the measurement method is reproducible by something other than the session that wrote the entry.
+
+### GM14 — The authority is a fixture and the enforcement is not, and they are independent
+
+**Source:** [document 07](07__enforcement.md).
+The mandate's issuer is the registry's operator root, whose private half is **published**. So anybody can forge this mandate, and the hook would enforce the forgery exactly as diligently. **A hook enforcing a fixture-signed mandate is real enforcement of an unaccountable instruction** — the two halves come apart, and a report giving only one of them misleads in whichever direction it omits. Closing the authority half needs a real issuer key, which is the enrolment path the registry already ships and nobody has walked.
+**Status:** recorded as a standing limitation of every demonstration built on the fixture root.
+
 ## The decisions register
 
 | # | Decision | Made by / where | Status |
@@ -100,6 +127,11 @@ The measured environment can push to the release branch of a repository that dep
 | GM-D20 | Is the blind-spot number published per agent? | pack doc 05 | **Open — it is a vendor comparison either way** |
 | GM-D21 | Can a hook trust the mandate file it reads? | pack doc 06 | **Open — the registry is what makes it checkable** |
 | GM-D22 | Corpus version for this pack | — | **Open — assigned on adoption** |
+| GM-D23 | The hook reads the mandate at runtime rather than compiling a copy | pack doc 07 (GM11) | **Settled — no drift between policy and enforcement point** |
+| GM-D24 | Enforcement is default-deny: missing/unparseable/mis-signed/expired all refuse | pack doc 07 (GM11) | **Settled — Cedar's discipline, and it does stop work when the file breaks** |
+| GM-D25 | A refusal is remedied by amending the mandate, never by bypassing the control | pack doc 07 (GM12) | **Settled — demonstrated by v1 to v2** |
+| GM-D26 | Reaching tier *boundary* means the same allow-list evaluated off-machine | pack doc 07 (GM11) | **Open — branch protection or a required CI check: a change of location, not policy** |
+| GM-D27 | Who issues a real (non-fixture) mandate for this estate? | pack doc 07 (GM14) | **Open — needs a real enrolment; the registry ships the path** |
 
 ---
 

@@ -68,4 +68,11 @@ This pack builds the left column and specifies the right one. The risk derivatio
 
 ---
 
+*Added after publication, 26 August 2026. No claim above has been changed. Later material that bears on this document:*
+
+- `07__enforcement.md` — **build-order step 1 is built and its acceptance test has been run.** A push to a branch the mandate does not permit was refused by git, `origin/dev` was unchanged, and a permitted push in the same minute succeeded. The constraint reached tier **setting**, exactly as predicted, and not boundary — the hook is inside the grant it bounds. Steps 2 and 3 are also done (the measurement tool, and the two schemas); steps 4–6 (a mandate per environment, the skill, the Cedar target) remain
+- The same document records the finding that the control **refused the release that was carrying it**, and that the correct remedy was the issuer amending the mandate rather than any bypass — which is what a mandate is for, and is only visible once the constraint is mechanical
+
+---
+
 *CC BY 4.0.*

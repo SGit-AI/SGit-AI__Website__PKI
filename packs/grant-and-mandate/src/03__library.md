@@ -71,4 +71,11 @@ The library needs more than one point before it can compute a blind-spot delta f
 
 ---
 
+*Added after publication, 26 August 2026. No claim above has been changed — this pack supersedes rather than rewrites. Later material that bears on this document:*
+
+- `07__enforcement.md` — the measurement method was made runnable (`tools/measure.py`) and re-run in the same environment, which **independently reported node n4 as `setting` where this document's entry recorded `expectation`**, because the hook described there had been installed between the two runs. That is this document's drift table working in the *somebody improved something* direction, demonstrated on the first re-measurement rather than argued
+- **The second entry** is measured by the same tool inside the CI runner — the environment an agent's push reaches into, so the two entries join at node n3 and together they are the blast-radius path rather than two unrelated points
+
+---
+
 *CC BY 4.0.*

@@ -2,10 +2,29 @@
 # The enforcement point. Git runs this before any push; it refuses by exit
 # code, from outside the agent's turn. The policy it evaluates is the signed
 # mandate at packs/grant-and-mandate/mandates/current.json — read at runtime
-# rather than compiled in, so the hook and the mandate cannot drift apart.
+# rather than compiled in, so the hook and the policy cannot drift apart.
 #
 # Install:  git config core.hooksPath .githooks
 # Bypass:   git push --no-verify     <- which is why this is tier SETTING
-set -euo pipefail
+#
+# DEFAULT-DENY, including on its own dependencies: if this hook cannot
+# evaluate the mandate, it refuses rather than waving the push through. A
+# control that fails open is not a control.
+set -uo pipefail
 ROOT="$(git rev-parse --show-toplevel)"
-exec python3 "$ROOT/packs/grant-and-mandate/tools/mandate.py" pre-push "$@"
+TOOL="$ROOT/packs/grant-and-mandate/tools/mandate.py"
+
+if ! command -v python3 >/dev/null 2>&1; then
+  echo "  ✗ PUSH REFUSED: python3 is required to evaluate the mandate at" >&2
+  echo "    packs/grant-and-mandate/mandates/current.json, and is not present." >&2
+  echo "    This is default-deny on a missing dependency, not a bug." >&2
+  echo "    Install python3 + 'cryptography', or push with --no-verify." >&2
+  exit 1
+fi
+if ! python3 -c "import cryptography" >/dev/null 2>&1; then
+  echo "  ✗ PUSH REFUSED: the 'cryptography' package is required to verify the" >&2
+  echo "    mandate's signature, and is not installed (pip3 install cryptography)." >&2
+  echo "    Refusing rather than skipping the signature check." >&2
+  exit 1
+fi
+exec python3 "$TOOL" pre-push "$@"

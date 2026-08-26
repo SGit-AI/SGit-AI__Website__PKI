@@ -14,7 +14,7 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.27</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.28</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -84,6 +84,11 @@
 <div class="tablewrap"><table class="vers">
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
+    <tr>
+      <td class="vnum">v0.1.28</td>
+      <td>26 Aug 2026</td>
+      <td><b>A push refused by something that is not the agent &mdash; build-order step 1, built and tested.</b> The <a href="../packs/grant-and-mandate/index.html">Grant &amp; Mandate pack</a> gains <a href="../packs/grant-and-mandate/enforcement.html">document 07</a>: a mandate authored deliberately narrower than the measured grant (permitting <code>claude/**</code> while the library entry records the environment can also push to <code>dev</code>, the branch that deploys this site), compiled into a <code>pre-push</code> hook. The acceptance test ran: <code>error: failed to push some refs</code>, <code>origin/dev</code> unchanged, a permitted push succeeding in the same minute &mdash; <b>git's refusal, not the agent's compliance</b>. The tier reached is stated rather than claimed: <b>setting, not boundary</b>, because the hook sits inside the grant it bounds and <code>--no-verify</code> still gets past it. Two findings the exercise produced and no diagram would have: within the hour <b>the control refused the release that was carrying it</b>, and the correct remedy was the issuer <em>amending</em> the mandate &mdash; v1 was narrower than the authorisation that actually existed &mdash; rather than any bypass; and <a href="../packs/grant-and-mandate/library.html">the measurement tool</a>, now runnable anywhere and re-run in the same environment, <b>independently caught its own tier change</b>, which is the drift detector working one commit after the improvement. Recorded with the standing limitation that the mandate's issuer is the fixture root, so <b>the enforcement is real and the authority is not</b> &mdash; two halves that come apart, and only the second is waiting on a real enrolment.</td>
+    </tr>
     <tr>
       <td class="vnum">v0.1.27</td>
       <td>26 Aug 2026</td>
@@ -239,7 +244,7 @@
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.27</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.28</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The registry</h4>
