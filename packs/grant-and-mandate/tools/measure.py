@@ -66,18 +66,39 @@ def unknown(nid, parent, capability, why):
 # ── probes ──────────────────────────────────────────────────────────────────
 
 def probe_identity(nodes):
+    """The tier of the user separation depends on whether escalation past it is
+    free, so this probe decides n1 AFTER testing sudo. A tier is a property of
+    a node's relationship to the rest of the tree, not of the node alone —
+    evaluating each node in isolation is what produced the mislabelled
+    boundary in the CI entry of 26 August (library entry #2, finding 1)."""
     uid = os.geteuid() if hasattr(os, "geteuid") else None
     is_root = uid == 0
     sudo_ok, sudo_out = run(["sudo", "-n", "true"]) if shutil.which("sudo") else (False, "sudo not present")
+
+    if is_root:
+        tier, control = "none", None
+        reach = "every file and process this user can reach; no internal user boundary exists"
+    elif sudo_ok:
+        # The separation exists and the same grant can step over it for free.
+        tier = "setting"
+        control = ("the OS user separation — DEFEATED by n1a: passwordless "
+                   "escalation is available to this same grant, so it bounds "
+                   "nothing. A control enforced by something the grant "
+                   "includes is a setting, however it is documented")
+        reach = ("nominally this user's permissions, effectively everything, "
+                 "because n1a escalates without a further credential")
+    else:
+        tier, control = "boundary", "the OS user separation"
+        reach = "every file and process this user can reach; bounded by this user's permissions"
+
     nodes.append(node(
         "n1", None,
         "runs as %s" % ("the container/system root user" if is_root else f"uid {uid}"),
-        "every file and process this user can reach; "
-        + ("no internal user boundary exists" if is_root
-           else "bounded by this user's permissions"),
-        "none" if is_root else "boundary",
-        None if is_root else "the OS user separation",
-        "observed", f"geteuid()={uid}; platform={platform.system()}"))
+        reach, tier, control,
+        "observed",
+        f"geteuid()={uid}; platform={platform.system()}; "
+        f"passwordless escalation {'AVAILABLE' if sudo_ok else 'not available'} "
+        f"(tier decided against the escalation result, not in isolation)"))
     nodes.append(node(
         "n1a", "n1", "escalate to administrator",
         "everything, without a further credential" if sudo_ok else "not via passwordless sudo",

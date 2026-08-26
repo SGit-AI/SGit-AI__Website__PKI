@@ -101,6 +101,21 @@ The tool independently reported node n4 as `setting` where the 26 August library
 The mandate's issuer is the registry's operator root, whose private half is **published**. So anybody can forge this mandate, and the hook would enforce the forgery exactly as diligently. **A hook enforcing a fixture-signed mandate is real enforcement of an unaccountable instruction** — the two halves come apart, and a report giving only one of them misleads in whichever direction it omits. Closing the authority half needs a real issuer key, which is the enrolment path the registry already ships and nobody has walked.
 **Status:** recorded as a standing limitation of every demonstration built on the fixture root.
 
+### GM15 — The library has a second entry, and it is the other end of node n3
+
+**Source:** [library entry #2](../library/github-actions-runner__ci__2026-08-26.json), measured by `tools/measure.py` running inside a GitHub Actions runner (run 32984977257, 26 August 2026).
+**Why this environment:** entry #1 ends at a push (node n3). **This is what happens next.** So the two entries join at that edge and together they are the blast-radius path, rather than two unrelated points in a list — which is what a library of measured grants is *for*, and what a single entry could not demonstrate.
+**The contrast, which is the useful part:** the hosted agent sits behind a **mandatory egress proxy** (a non-allowlisted host was connection-reset); the CI runner that deploys its work reached **every host tested, unrestricted**. The agent **retains a session record**, so its grant is a union over prior turns; the runner retains **nothing**, so its grant is a tree over the present — the clearest illustration in the library of why the `history` field changes the meaning of every node. And the runner's grant is the only one in either entry **declared up front**, in a `permissions:` block set above the job that the job cannot widen: the one genuine boundary that was *designed* as one rather than discovered.
+**Status:** adopted as the library's second entry.
+
+### GM16 — The second measurement found two defects, both by measurement rather than review
+
+**Source:** the same entry.
+**The first is in the tool, and it is the pack's own warning turned on itself.** Node n1 labelled the OS user separation a `boundary`; node n1a recorded that passwordless `sudo` **succeeds**. So the separation is defeated by a capability the same grant includes — a **setting**, by the pack's own test, mislabelled as a boundary by an automated measurer. The cause: the tool evaluated each node **in isolation**. *A tier is a property of a node's relationship to the rest of the tree, not of the node.* The tool has been corrected to decide n1 against the escalation result; the entry keeps the original label under `SUPERSEDED_BY` so the defect stays visible rather than being tidied away.
+**The second is in the control built yesterday.** Node n4 reports `core.hooksPath=unset`, tier `expectation` — in a repository whose tree **does** contain `.githooks/pre-push`. The hook file is committed; **the git config that activates it is local and does not travel.** Any fresh clone — a runner, a new contributor, the same agent in a new container — gets the file and not the enforcement, and nothing announces it. **The control is one un-run command away from being absent.**
+**Consequence:** it strengthens GM-D26 rather than weakening step 1. A boundary is the same allow-list evaluated where the agent cannot reach it — branch protection, or a required CI check — and that needs no per-clone setup step at all.
+**Status:** the tool defect corrected; the hook limitation recorded as decision GM-D28 rather than silently patched.
+
 ## The decisions register
 
 | # | Decision | Made by / where | Status |
@@ -132,6 +147,8 @@ The mandate's issuer is the registry's operator root, whose private half is **pu
 | GM-D25 | A refusal is remedied by amending the mandate, never by bypassing the control | pack doc 07 (GM12) | **Settled — demonstrated by v1 to v2** |
 | GM-D26 | Reaching tier *boundary* means the same allow-list evaluated off-machine | pack doc 07 (GM11) | **Open — branch protection or a required CI check: a change of location, not policy** |
 | GM-D27 | Who issues a real (non-fixture) mandate for this estate? | pack doc 07 (GM14) | **Open — needs a real enrolment; the registry ships the path** |
+| GM-D28 | The pre-push hook does not travel with a clone (`core.hooksPath` is local config) | library entry #2 (GM16) | **Open — a per-clone setup step, or move the check off-machine per GM-D26** |
+| GM-D29 | A tier is decided against the tree, never in isolation | library entry #2 (GM16) | **Settled — tool corrected; the mislabelled node kept visible** |
 
 ---
 

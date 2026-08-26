@@ -74,7 +74,8 @@ The library needs more than one point before it can compute a blind-spot delta f
 *Added after publication, 26 August 2026. No claim above has been changed — this pack supersedes rather than rewrites. Later material that bears on this document:*
 
 - `07__enforcement.md` — the measurement method was made runnable (`tools/measure.py`) and re-run in the same environment, which **independently reported node n4 as `setting` where this document's entry recorded `expectation`**, because the hook described there had been installed between the two runs. That is this document's drift table working in the *somebody improved something* direction, demonstrated on the first re-measurement rather than argued
-- **The second entry** is measured by the same tool inside the CI runner — the environment an agent's push reaches into, so the two entries join at node n3 and together they are the blast-radius path rather than two unrelated points
+- **[The second entry](../library/github-actions-runner__ci__2026-08-26.json) now exists**, measured by the same tool inside a CI runner (run 32984977257) — the environment an agent's push reaches into, so the two entries join at node n3 and together they are the blast-radius path rather than two unrelated points. It carries the contrast this document could not draw from one point: the hosted agent is behind a **mandatory egress proxy** while the runner that deploys its work reaches **any host unrestricted**; the agent **retains a session record** while the runner retains nothing; and the runner's grant is the only one in the library **declared up front**, in a permissions block the job cannot edit
+- And it found two defects by measurement rather than review — a tier mislabelled because it was decided in isolation, and the pre-push hook not travelling with a clone. Both are recorded as GM16
 
 ---
 

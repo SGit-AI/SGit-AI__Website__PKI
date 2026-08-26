@@ -14,7 +14,7 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.28</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.29</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -84,6 +84,11 @@
 <div class="tablewrap"><table class="vers">
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
+    <tr>
+      <td class="vnum">v0.1.29</td>
+      <td>26 Aug 2026</td>
+      <td><b>The library's second entry, and the two defects it found.</b> <a href="../packs/grant-and-mandate/library.html">Entry #2</a> is a GitHub Actions runner, measured by <code>tools/measure.py</code> running <em>inside</em> it rather than written from documentation. It is deliberately the other end of entry #1's node n3: an agent's push ends there, and this is what happens next, so the two <b>join at that edge and together are the blast-radius path</b>. The contrast is the useful part &mdash; the hosted agent sits behind a <b>mandatory egress proxy</b> while the runner that deploys its work reached every host <b>unrestricted</b>; the agent retains a session record (its grant is a union over prior turns) while the runner retains nothing (a tree over the present); and the runner's grant is the only one in either entry <b>declared up front</b>, in a <code>permissions:</code> block the job cannot widen. Two defects surfaced by measurement rather than review, both recorded rather than tidied away: the tool labelled the OS user separation a <b>boundary</b> while the next node showed passwordless <code>sudo</code> succeeding &mdash; the pack's own <em>setting that reads like a boundary</em> warning, reproduced by an automated measurer, because tiers were being decided <b>in isolation</b> rather than against the tree (corrected, with the mislabelled node kept visible); and <b>the pre-push hook does not travel with a clone</b>, since the file is committed but the <code>core.hooksPath</code> config that activates it is local &mdash; the control is one un-run command away from being absent, which strengthens the case for moving the check off-machine.</td>
+    </tr>
     <tr>
       <td class="vnum">v0.1.28</td>
       <td>26 Aug 2026</td>
@@ -244,7 +249,7 @@
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.28</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.29</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The registry</h4>
