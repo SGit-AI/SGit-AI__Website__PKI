@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The building blocks: badges, cards and visualisations, rendered from real documents · pki.sgit.ai</title>
+<meta name="description" content="The Grant and Mandate building blocks — tier and evidence badges, grant node cards, the mandate card with its authority/enforcement split, the delta block, the three-term comparison and the grant tree — rendered from the actual measured library entries and the signed mandate rather than from mockup data.">
+<link rel="canonical" href="https://pki.sgit.ai/packs/grant-and-mandate/blocks.html">
+<meta property="og:url" content="https://pki.sgit.ai/packs/grant-and-mandate/blocks.html">
+<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="../../assets/gm-blocks.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../index.html">pki<span>.sgit.ai</span></a>
+  <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../../admin/versions.html" title="Site release history">v0.1.31</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../../failure/index.html">The registry<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../registry/index.html">&#9679; The registry, live</a>
+      <a class="sl" href="../../failure/index.html">Why they don't exist</a>
+      <a class="sl" href="../../rules/index.html">The four rules</a>
+      <a class="sl" href="../../mandate/index.html">Identity &amp; mandate</a>
+      <a class="sl" href="../../roadmap/index.html">Build order</a>
+      <a class="sl" href="../../rules/prior-art.html">Prior art</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../bootstrap/index.html">The layers<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../bootstrap/index.html">The bootstrap trap</a>
+      <a class="sl" href="../../enrolment/index.html">Enrolment</a>
+      <a class="sl" href="../../execution/index.html">The execution broker</a>
+      <a class="sl" href="../../shipped/index.html">What already ships</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../assess/index.html">Map your case<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../assess/index.html">Map your own case</a>
+      <a class="sl" href="../../assess/library.html">The library of trees</a>
+      <a class="sl" href="../../packs/map-your-case/readers/index.html">Synthetic readers</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../origins/index.html">Origins<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../origins/index.html">Origins: 2026</a>
+      <a class="sl" href="../../origins/review.html">The review, redacted</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../documents/index.html">The documents</a>
+      <a class="sl" href="../../packs/index.html">Dev packs</a>
+      <a class="sl" href="../../packs/registry-mvp/index.html">The registry MVP pack</a>
+      <a class="sl" href="../../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
+      <a class="sl" href="../../packs/map-your-case/index.html">The Map Your Case pack</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../../admin/versions.html">Release history</a>
+      <a class="sl" href="../../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+  <script src="../../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../../index.html">pki.sgit.ai</a> / <a href="../index.html">packs</a> / <a href="index.html">grant-and-mandate</a> / blocks</div>
+<h1>The building blocks, rendered from real documents</h1>
+<p class="lead">The nine primitives specified in <a href="building-blocks.html">document 09</a>, built as a stylesheet
+(<a href="../../assets/gm-blocks.css"><code>assets/gm-blocks.css</code></a>) and rendered here from
+<b>the actual documents</b> — both <a href="library.html">measured library entries</a> and the
+<a href="mandates/current.json">signed mandate</a> — rather than from mockup data. A block is a rendering of a field
+that already exists; if the schema moves, this page breaks at build time rather than at integration.</p>
+
+<div class="gm-fixture"><div><b>Read this before any badge below.</b> Every signature behind this data is a
+<b>fixture</b>: the private halves are published, so they verify and prove nothing. The blocks render the data
+honestly; the data itself is a demonstration. That is why block 6 exists — the enforcement is real and the
+authority is not, and the two are shown separately rather than averaged.</div></div>
+
+<h2 id="b1">1 &middot; Tier badge</h2>
+<div class="gm-spec">Five states. <b>Two channels minimum and the word is always one of them</b> — border style carries the second, so the states stay distinct without colour. A control whose defeat path exists in the same tree renders as <b>setting</b>, never boundary.</div>
+<div class="gm-row"><span class="gm-tier gm-tier--boundary"><span class="gm-glyph">⛨</span>boundary</span><span class="gm-tier gm-tier--setting"><span class="gm-glyph">◐</span>setting</span><span class="gm-tier gm-tier--expectation"><span class="gm-glyph">○</span>expectation</span><span class="gm-tier gm-tier--none"><span class="gm-glyph">—</span>none</span><span class="gm-tier gm-tier--unknown"><span class="gm-glyph">?</span>unknown</span></div>
+<div class="gm-src">rendered from the tier vocabulary in document 01</div>
+
+<h2 id="b2">2 &middot; Evidence badge</h2>
+<div class="gm-spec">How the fact was obtained. <b>The four are not equally trustworthy</b>, so <code>inferred</code> and <code>none</code> get a visibly weaker treatment rather than sitting flat beside <code>observed</code>.</div>
+<div class="gm-row"><span class="gm-ev gm-ev--observed">observed</span><span class="gm-ev gm-ev--read">read</span><span class="gm-ev gm-ev--documented">documented</span><span class="gm-ev gm-ev--inferred">inferred</span><span class="gm-ev gm-ev--none">none</span></div>
+<div class="gm-src">rendered from the evidence classes in document 02</div>
+
+<h2 id="b3">3 &middot; Freshness chip</h2>
+<div class="gm-spec">Dated <b>per node, never per tree</b> — a tree dated as a whole is wrong in one place while looking current. Staleness is a fact about the <em>measurement</em>, so it never turns the tier red.</div>
+<div class="gm-row"><span class="gm-date">checked 2026-08-26 · today</span><span class="gm-date gm-date--stale">checked 2026-06-01 · 86d</span></div>
+<div class="gm-src">rendered from per-node dates; stale after 30 days</div>
+
+<h2 id="b4">4 &middot; Grant node card</h2>
+<div class="gm-spec">One node of a measured tree. The <b>reaches</b> line does the work: a list of what is reachable without what stands in the way is the part people already have and the part that misleads. The second card below is the rule from block 1 <b>working on real data that is wrong</b> — the stored document says <code>boundary</code>, the next node defeats it, and the block renders the corrected tier with the defeat path attached.</div>
+<div class="gm-node gm-node--worst">
+  <div class="gm-node__head">
+    <span class="gm-node__id">n3</span>
+    <span class="gm-node__cap">push commits to the attached repository</span>
+  </div>
+  <div class="gm-node__reaches"><b>reaches:</b> the attached repository&#x27;s branches; pushes to a feature branch and to the release branch dev both succeeded and the release branch push triggered a deploy to a public site</div>
+  <div class="gm-node__mech">stands in the way: branch discipline lives in the session&#x27;s instructions (develop on the designated branch; push elsewhere only with explicit permission). Nothing mechanical was observed to test which branch a push targets — the same finding the v0.33.62 permissions brief measured in the local environment: the branch constraint is prose</div>
+  <div class="gm-node__meta"><span class="gm-tier gm-tier--expectation"><span class="gm-glyph">○</span>expectation</span>
+    <span class="gm-ev gm-ev--observed">observed</span><span class="gm-date">checked 2026-08-26 · today</span></div>
+</div><div class="gm-node">
+  <div class="gm-node__head">
+    <span class="gm-node__id">n1</span>
+    <span class="gm-node__cap">runs as uid 1001</span>
+  </div>
+  <div class="gm-node__reaches"><b>reaches:</b> every file and process this user can reach; bounded by this user&#x27;s permissions</div>
+  <div class="gm-node__mech">stands in the way: the OS user separation</div>
+  <div class="gm-node__meta"><span class="gm-tier gm-tier--setting"><span class="gm-glyph">◐</span>setting</span><span class="gm-defeat">defeated by &rarr; <b>n1a</b> escalate to administrator</span>
+    <span class="gm-ev gm-ev--observed">observed</span><span class="gm-date">checked 2026-08-26 · today</span></div>
+</div>
+<div class="gm-src">rendered from library entry #1 node n3, and entry #2 node n1 (stored tier: <code>boundary</code>, corrected on render)</div>
+
+<h2 id="b5">5 &middot; Mandate card + 6 · authority/enforcement split</h2>
+<div class="gm-spec">Prohibitions are shown; <b>the allow-list is stored and not displayed</b> — screen four's trap. The interval renders as time remaining, not only as a date. And the mandate carries <b>two</b> indicators, never one: the enforcement is real and the authority is a fixture, and averaging them is how a demonstration gets mistaken for a control.</div>
+<div class="gm-mandate">
+  <div class="gm-mandate__head">
+    <span class="gm-mandate__title">Mandate v2</span>
+    <span class="gm-interval "><span class="gm-interval__bar"><span class="gm-interval__fill" style="width:100%"></span></span>127d left</span>
+  </div>
+  <div class="gm-mandate__body">
+    <div class="gm-kv">
+      <span class="k">Issuer</span><span class="v">sha256:90f97984b9cf3930</span>
+      <span class="k">Subject</span><span class="v">sha256:f9facb4c94da6c19</span>
+      <span class="k">Interval</span><span class="v">2026-08-26T15:00:00Z &rarr; 2026-12-31T00:00:00Z</span>
+    </div>
+    <div class="gm-split">
+  <div class="gm-half gm-half--real">
+    <div class="gm-half__k">enforcement</div>
+    <div class="gm-half__v">● real</div>
+    <div class="gm-half__note">a <code>pre-push</code> hook git runs, refusing by exit
+      code &mdash; tier <b>setting</b>,
+      because the hook sits inside the grant it bounds</div>
+  </div>
+  <div class="gm-half gm-half--fixture">
+    <div class="gm-half__k">authority</div>
+    <div class="gm-half__v">○ fixture</div>
+    <div class="gm-half__note">the issuer's private half is published, so anybody could forge this mandate and the hook would enforce the forgery just as diligently</div>
+  </div>
+</div>
+    <div class="gm-half__k" style="margin-top:.6rem">What the subject may not do</div>
+    <ul class="gm-prohib"><li>will not push to any branch of this repository outside claude/**, dev</li><li>will not push to any other repository</li><li>will not act on any resource other than github.com/SGit-AI/SGit-AI__Website__PKI</li></ul>
+    <div class="gm-stored"><b>The allow-list is stored and is deliberately not shown here.</b>
+      It holds 2 branch pattern(s). A person accepts prohibitions; the system
+      enforces the allow-list &mdash; showing the allow-list for approval produces
+      consent without comprehension.</div>
+    <div class="gm-rendered">prohibitions rendered 2026-08-26
+      over capability set v0 (registry/capabilities.json)</div>
+  </div>
+</div>
+<div class="gm-src">rendered from the signed mandate at mandates/current.json</div>
+
+<h2 id="b7">7 &middot; Delta block</h2>
+<div class="gm-spec">Excess and shortfall <b>side by side, never stacked</b> — different audiences, different remedies. Each excess row carries the tier of the capability it names. <b>No score</b>: a single number would average tiers that must stay distinct. Recomputed on render, never stored.</div>
+<div class="gm-delta">
+  <div class="gm-delta__col gm-delta__col--excess">
+    <div class="gm-delta__head">excess authority &mdash; grant &minus; mandate</div>
+    <div class="gm-delta__body"><div class="gm-delta__row">push to <code>main</code><span class="gm-tier gm-tier--expectation"><span class="gm-glyph">○</span>expectation</span><span class="gm-acceptor">acceptor: none</span></div></div>
+  </div>
+  <div class="gm-delta__col gm-delta__col--shortfall">
+    <div class="gm-delta__head">shortfall &mdash; mandate &minus; grant</div>
+    <div class="gm-delta__body"><div class="gm-delta__none">none observed &mdash; the
+      mandate asks for nothing the grant lacks</div></div>
+  </div>
+</div>
+<div class="gm-src">rendered from the mandate and library entry #1, differenced at build time</div>
+
+<h2 id="b8">8 &middot; Three-term comparison</h2>
+<div class="gm-spec">Library, self-report, mandate &mdash; two deltas between them. Rendered here with <b>a term that does not exist yet</b>, deliberately: no agent has filed a structured self-report, so the middle column is a gap rather than an invented number.</div>
+<div class="gm-three">
+  <div class="gm-term"><div class="gm-term__k">library</div>
+    <div class="gm-term__v">9</div>
+    <div class="gm-term__n">capabilities this environment is known to grant, measured 2026-08-26</div></div>
+  <div class="gm-arrow"><span class="gm-arrow__line">&minus;</span>blind spots</div>
+  <div class="gm-term"><div class="gm-term__k">self-report</div>
+    <div class="gm-term__v" style="color:var(--dim)"><span class="gm-tier gm-tier--unknown"><span class="gm-glyph">?</span>unknown</span></div>
+    <div class="gm-term__n">no agent has filed a structured self-report against this
+      entry yet &mdash; rendered as a gap rather than as a number</div></div>
+  <div class="gm-arrow"><span class="gm-arrow__line">&minus;</span>excess authority</div>
+  <div class="gm-term"><div class="gm-term__k">mandate</div>
+    <div class="gm-term__v">1</div>
+    <div class="gm-term__n">capability declared, with an issuer and an interval</div></div>
+</div>
+<div class="gm-headline"><b>The blind-spot count is not computable yet</b>, and that is the
+honest rendering: it needs a self-report to subtract. The block shows which term is
+missing instead of averaging around it.</div>
+<div class="gm-src">rendered from library entry #1 and the signed mandate</div>
+
+<h2 id="b9">9 &middot; Grant tree</h2>
+<div class="gm-spec">The nodes as a <b>graph, not a list</b>, because blast radius is a path. Two things the list form cannot do: the <b>worst path is highlighted</b> rather than left to be traced, and <b>escalation edges are drawn</b> rather than annotated &mdash; drawing the path around a control is what makes the setting tier land.</div>
+<div class="gm-tree"><ul><li><div class="gm-tree__row gm-tree__row--worst"><span class="gm-node__id">n1</span><span class="gm-tree__cap">runs as the container&#x27;s root user</span><span class="gm-tier gm-tier--none"><span class="gm-glyph">—</span>none</span><span class="gm-ev gm-ev--observed">observed</span></div><ul><li><div class="gm-tree__row gm-tree__row--worst"><span class="gm-node__id">n2</span><span class="gm-tree__cap">outbound HTTPS, through a mandatory egress proxy</span><span class="gm-tier gm-tier--boundary"><span class="gm-glyph">⛨</span>boundary</span><span class="gm-ev gm-ev--observed">observed</span></div><ul><li><div class="gm-tree__row gm-tree__row--worst"><span class="gm-node__id">n3</span><span class="gm-tree__cap">push commits to the attached repository</span><span class="gm-tier gm-tier--expectation"><span class="gm-glyph">○</span>expectation</span><span class="gm-ev gm-ev--observed">observed</span></div></li><li><div class="gm-tree__row"><span class="gm-node__id">n4</span><span class="gm-tree__cap">GitHub API operations on in-scope repositories</span><span class="gm-tier gm-tier--boundary"><span class="gm-glyph">⛨</span>boundary</span><span class="gm-ev gm-ev--observed">observed</span></div></li><li><div class="gm-tree__row"><span class="gm-node__id">n9</span><span class="gm-tree__cap">reach non-allowlisted external hosts</span><span class="gm-tier gm-tier--unknown"><span class="gm-glyph">?</span>unknown</span><span class="gm-ev gm-ev--none">none</span></div></li></ul></li><li><div class="gm-tree__row"><span class="gm-node__id">n5</span><span class="gm-tree__cap">execute arbitrary programs and install software</span><span class="gm-tier gm-tier--setting"><span class="gm-glyph">◐</span>setting</span><span class="gm-ev gm-ev--observed">observed</span></div></li><li><div class="gm-tree__row"><span class="gm-node__id">n6</span><span class="gm-tree__cap">read and write the session&#x27;s own accumulated record</span><span class="gm-tier gm-tier--none"><span class="gm-glyph">—</span>none</span><span class="gm-ev gm-ev--observed">observed</span></div></li><li><div class="gm-tree__row"><span class="gm-node__id">n7</span><span class="gm-tree__cap">hold signing keys and vault keystores</span><span class="gm-tier gm-tier--none"><span class="gm-glyph">—</span>none</span><span class="gm-ev gm-ev--observed">observed</span></div></li><li><div class="gm-tree__row"><span class="gm-node__id">n8</span><span class="gm-tree__cap">harness configuration and lifecycle hooks</span><span class="gm-tier gm-tier--unknown"><span class="gm-glyph">?</span>unknown</span><span class="gm-ev gm-ev--none">none</span></div></li></ul></li></ul></div><p class="gm-src" style="margin-top:.8rem">And the same block over entry #2, where the escalation edge is the finding:</p><div class="gm-tree"><ul><li><div class="gm-tree__row"><span class="gm-node__id">n1</span><span class="gm-tree__cap">runs as uid 1001</span><span class="gm-tier gm-tier--setting"><span class="gm-glyph">◐</span>setting</span><span class="gm-ev gm-ev--observed">observed</span></div><span class="gm-tree__esc">&#8627; escalation edge: <b>n1a</b> escalate to administrator &mdash; goes around this control</span><ul><li><div class="gm-tree__row"><span class="gm-node__id">n1a</span><span class="gm-tree__cap">escalate to administrator</span><span class="gm-tier gm-tier--none"><span class="gm-glyph">—</span>none</span><span class="gm-ev gm-ev--observed">observed</span></div></li><li><div class="gm-tree__row"><span class="gm-node__id">n2</span><span class="gm-tree__cap">read and write this user&#x27;s home directory</span><span class="gm-tier gm-tier--none"><span class="gm-glyph">—</span>none</span><span class="gm-ev gm-ev--observed">observed</span></div></li><li><div class="gm-tree__row"><span class="gm-node__id">n3</span><span class="gm-tree__cap">outbound network access</span><span class="gm-tier gm-tier--none"><span class="gm-glyph">—</span>none</span><span class="gm-ev gm-ev--observed">observed</span></div><ul><li><div class="gm-tree__row"><span class="gm-node__id">n4</span><span class="gm-tree__cap">push commits to the configured remote</span><span class="gm-tier gm-tier--expectation"><span class="gm-glyph">○</span>expectation</span><span class="gm-ev gm-ev--observed">observed</span></div></li></ul></li><li><div class="gm-tree__row"><span class="gm-node__id">n5</span><span class="gm-tree__cap">agent harness configuration</span><span class="gm-tier gm-tier--unknown"><span class="gm-glyph">?</span>unknown</span><span class="gm-ev gm-ev--none">none</span></div></li><li><div class="gm-tree__row"><span class="gm-node__id">n6</span><span class="gm-tree__cap">read this environment&#x27;s accumulated session record</span><span class="gm-tier gm-tier--unknown"><span class="gm-glyph">?</span>unknown</span><span class="gm-ev gm-ev--none">none</span></div></li></ul></li><li><div class="gm-tree__row"><span class="gm-node__id">c1</span><span class="gm-tree__cap">runs as an ephemeral CI job</span><span class="gm-tier gm-tier--boundary"><span class="gm-glyph">⛨</span>boundary</span><span class="gm-ev gm-ev--observed">observed</span></div><ul><li><div class="gm-tree__row"><span class="gm-node__id">c2</span><span class="gm-tree__cap">act on the repository with the job&#x27;s token</span><span class="gm-tier gm-tier--boundary"><span class="gm-glyph">⛨</span>boundary</span><span class="gm-ev gm-ev--observed">observed</span></div></li><li><div class="gm-tree__row"><span class="gm-node__id">c3</span><span class="gm-tree__cap">read the repository contents</span><span class="gm-tier gm-tier--none"><span class="gm-glyph">—</span>none</span><span class="gm-ev gm-ev--observed">observed</span></div></li></ul></li></ul></div>
+<div class="gm-src">rendered from both library entries, in full</div>
+
+<h2 id="using">Using them</h2>
+<p>Link the stylesheet and use the classes; nothing here needs JavaScript, a framework, or a build step.
+The intended second consumer is the risk product, which holds the instance while this site holds the library —
+so the blocks are deliberately free of anything personal: they render a <em>library entry</em> and a
+<em>mandate</em>, and neither carries anything about a person.</p>
+<div class="gm-spec"><b>What has not happened:</b> these blocks have been exercised against
+<b>two environments and one mandate</b>, all measured by one agent. They are specified for a population they
+have not met, and the honest limits are in <a href="building-blocks.html#tensions">document 09</a>.</div>
+
+<div class="pagenav">
+  <a href="building-blocks.html">← 09 — The building blocks</a>
+  <a href="index.html">Pack hub →</a>
+</div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../../admin/versions.html">v0.1.31</a> · <a href="../../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The registry</h4>
+    <a href="../../registry/index.html">&#9679; The registry, live</a>
+    <a href="../../assess/index.html">&#8594; Map your own case</a>
+    <a href="../../failure/index.html">Why they don't exist</a>
+    <a href="../../rules/index.html">The four rules</a>
+    <a href="../../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../../roadmap/index.html">Build order</a>
+    <a href="../../rules/prior-art.html">Prior art</a>
+  </div>
+  <div>
+    <h4>The three layers</h4>
+    <a href="../../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../../enrolment/index.html">Enrolment</a>
+    <a href="../../execution/index.html">The execution broker</a>
+    <a href="../../shipped/index.html">What already ships</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../../origins/index.html">Origins: 2026</a>
+    <a href="../../documents/index.html">The documents</a>
+    <a href="../../packs/registry-mvp/index.html">The registry MVP pack</a>
+    <a href="../../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
+    <a href="../../packs/map-your-case/index.html">The Map Your Case pack</a>
+    <a href="../../about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../../admin/versions.html">Release history</a>
+    <a href="../../llms.txt">llms.txt</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

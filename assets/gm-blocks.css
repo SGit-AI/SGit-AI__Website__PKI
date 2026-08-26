@@ -1,0 +1,175 @@
+/* gm-blocks.css — the Grant & Mandate building blocks.
+ *
+ * The component layer specified in packs/grant-and-mandate/src/09__building-blocks.md.
+ * Every block renders a field that already exists in a grant or mandate document;
+ * none of them computes an opinion. Depends on the design tokens in site.css.
+ *
+ * The rules encoded here rather than left to the author:
+ *   · two channels minimum, and the WORD is always one of them (C27) — so every
+ *     tier carries border-style as a second channel and never relies on colour
+ *   · a defeated control renders as `setting`, never `boundary` (GM-D29)
+ *   · `unknown` is rendered, never blank
+ *   · no page-level verdict, and no score
+ */
+
+/* ── 1 · tier badge ───────────────────────────────────────────────────────── */
+.gm-tier{display:inline-flex;align-items:center;gap:.34rem;font-family:var(--mono);
+  font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;
+  border-radius:5px;padding:.14rem .5rem;font-weight:600}
+/* border-style is the second channel: solid / dashed / dotted are distinguishable
+   without colour, which is what keeps five states from collapsing into two. */
+.gm-tier--boundary{color:#0f766e;background:rgba(15,118,110,.08);border:2px solid rgba(15,118,110,.5)}
+.gm-tier--setting{color:#b45309;background:rgba(180,83,9,.07);border:2px dashed rgba(180,83,9,.55)}
+.gm-tier--expectation{color:#b91c1c;background:rgba(185,28,28,.06);border:2px dotted rgba(185,28,28,.55)}
+.gm-tier--none{color:var(--dim);background:var(--panel2);border:2px solid var(--line2)}
+.gm-tier--unknown{color:var(--dim);background:repeating-linear-gradient(135deg,var(--panel2),var(--panel2) 4px,#fff 4px,#fff 8px);
+  border:2px dashed var(--line2)}
+.gm-tier .gm-glyph{font-size:.8em;line-height:1}
+
+/* The defeat path. A boundary with one of these is not a boundary — the rule is
+   in the markup contract, and this styling makes it impossible to miss. */
+.gm-defeat{display:inline-flex;align-items:center;gap:.3rem;font-family:var(--mono);
+  font-size:.66rem;color:#b91c1c;background:rgba(185,28,28,.05);
+  border:1px solid rgba(185,28,28,.3);border-radius:5px;padding:.1rem .45rem;margin-left:.35rem}
+.gm-defeat b{font-weight:700}
+
+/* ── 2 · evidence badge ───────────────────────────────────────────────────── */
+.gm-ev{display:inline-block;font-family:var(--mono);font-size:.63rem;letter-spacing:.04em;
+  text-transform:uppercase;border-radius:99px;padding:.06rem .45rem;border:1px solid var(--line2);
+  color:var(--dim);background:var(--panel)}
+.gm-ev--observed{color:#0f766e;border-color:rgba(15,118,110,.4)}
+.gm-ev--read{color:#115e59;border-color:rgba(17,94,89,.35)}
+.gm-ev--documented{color:var(--dim);border-color:var(--line2)}
+/* inferred and none are visibly weaker — the four are not equally trustworthy */
+.gm-ev--inferred{color:var(--warm);border-color:rgba(180,83,9,.4);border-style:dashed}
+.gm-ev--none{color:#b91c1c;border-color:rgba(185,28,28,.4);border-style:dashed;
+  background:repeating-linear-gradient(135deg,#fff,#fff 3px,rgba(185,28,28,.05) 3px,rgba(185,28,28,.05) 6px)}
+
+/* ── 3 · freshness chip ───────────────────────────────────────────────────── */
+.gm-date{display:inline-block;font-family:var(--mono);font-size:.63rem;color:var(--dim2);
+  border:1px dashed var(--line2);border-radius:5px;padding:.06rem .4rem}
+/* staleness is a fact about the MEASUREMENT, never about the control — so it
+   never turns the tier red, only itself amber. */
+.gm-date--stale{color:var(--warm);border-color:rgba(180,83,9,.45)}
+
+/* ── 4 · grant node card ──────────────────────────────────────────────────── */
+.gm-node{background:var(--panel);border:1px solid var(--line);border-radius:10px;
+  padding:.8rem .95rem;box-shadow:var(--shadow);margin:.6rem 0}
+.gm-node__head{display:flex;flex-wrap:wrap;align-items:center;gap:.45rem;margin-bottom:.4rem}
+.gm-node__id{font-family:var(--mono);font-size:.66rem;color:var(--dim2);
+  border:1px solid var(--line);border-radius:4px;padding:.05rem .35rem}
+.gm-node__cap{font-weight:600;font-size:.92rem;color:#101114}
+/* the line that does the work */
+.gm-node__reaches{font-size:.86rem;color:#34363c;line-height:1.55;margin:.3rem 0 .5rem}
+.gm-node__reaches b{color:#101114}
+.gm-node__mech{font-size:.79rem;color:var(--dim);margin:.25rem 0 .5rem}
+.gm-node__mech em{color:var(--red);font-style:normal;font-weight:600}
+.gm-node__meta{display:flex;flex-wrap:wrap;gap:.35rem;align-items:center;
+  border-top:1px solid var(--line);padding-top:.5rem}
+.gm-node--worst{border-left:4px solid var(--red)}
+
+/* ── 5 · mandate card ─────────────────────────────────────────────────────── */
+.gm-mandate{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  box-shadow:var(--shadow);overflow:hidden;margin:1rem 0}
+.gm-mandate__head{background:var(--panel2);padding:.7rem .95rem;border-bottom:1px solid var(--line);
+  display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;justify-content:space-between}
+.gm-mandate__title{font-weight:700;font-size:.9rem;color:#101114}
+.gm-mandate__body{padding:.85rem .95rem}
+.gm-kv{display:grid;grid-template-columns:auto 1fr;gap:.25rem .9rem;font-size:.84rem;margin-bottom:.6rem}
+.gm-kv .k{color:var(--dim);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;padding-top:.18rem}
+.gm-kv .v{color:#34363c;font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere}
+/* the interval as time remaining, not only as a date */
+.gm-interval{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.72rem}
+.gm-interval__bar{width:120px;height:6px;border-radius:99px;background:var(--panel2);
+  border:1px solid var(--line2);overflow:hidden}
+.gm-interval__fill{height:100%;background:var(--accent);display:block}
+.gm-interval--soon .gm-interval__fill{background:var(--warm)}
+.gm-interval--expired .gm-interval__fill{background:var(--red)}
+
+/* prohibitions are what a person accepts; the allow-list is stored and NOT shown */
+.gm-prohib{list-style:none;padding:0;margin:.4rem 0 0}
+.gm-prohib li{position:relative;padding-left:1.3rem;font-size:.86rem;color:#34363c;margin:.28rem 0;line-height:1.5}
+.gm-prohib li::before{content:"✕";position:absolute;left:.15rem;top:0;color:var(--red);
+  font-family:var(--mono);font-size:.8rem;font-weight:700}
+.gm-rendered{font-size:.7rem;color:var(--dim2);font-family:var(--mono);margin-top:.5rem;
+  border-top:1px dashed var(--line);padding-top:.4rem}
+.gm-stored{font-size:.74rem;color:var(--dim);background:var(--panel2);border:1px dashed var(--line2);
+  border-radius:6px;padding:.4rem .6rem;margin-top:.55rem}
+
+/* ── 6 · authority / enforcement split ────────────────────────────────────── */
+/* two indicators, never one — averaging them is how a demonstration gets
+   mistaken for a control (GM14). */
+.gm-split{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.5rem;margin:.6rem 0}
+.gm-half{border:1px solid var(--line);border-radius:8px;padding:.5rem .65rem;background:var(--panel)}
+.gm-half__k{font-family:var(--mono);font-size:.63rem;letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
+.gm-half__v{display:flex;align-items:center;gap:.35rem;font-weight:700;font-size:.86rem;margin:.15rem 0 .2rem}
+.gm-half__note{font-size:.74rem;color:var(--dim);line-height:1.45}
+.gm-half--real{border-left:4px solid var(--accent)}
+.gm-half--real .gm-half__v{color:var(--accent-dk)}
+.gm-half--fixture{border-left:4px solid var(--red)}
+.gm-half--fixture .gm-half__v{color:var(--red)}
+
+/* ── 7 · delta block ──────────────────────────────────────────────────────── */
+/* side by side, never stacked: different audiences, different remedies */
+.gm-delta{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.7rem;margin:.8rem 0}
+.gm-delta__col{border:1px solid var(--line);border-radius:10px;background:var(--panel);
+  box-shadow:var(--shadow);overflow:hidden}
+.gm-delta__head{padding:.5rem .8rem;font-family:var(--mono);font-size:.68rem;text-transform:uppercase;
+  letter-spacing:.07em;border-bottom:1px solid var(--line)}
+.gm-delta__col--excess .gm-delta__head{background:rgba(185,28,28,.07);color:#b91c1c}
+.gm-delta__col--shortfall .gm-delta__head{background:rgba(180,83,9,.07);color:var(--warm)}
+.gm-delta__body{padding:.65rem .8rem}
+.gm-delta__row{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;font-size:.85rem;
+  color:#34363c;padding:.32rem 0;border-bottom:1px dashed var(--line)}
+.gm-delta__row:last-child{border-bottom:none}
+.gm-delta__none{font-size:.85rem;color:var(--dim);font-style:italic}
+.gm-acceptor{font-family:var(--mono);font-size:.66rem;color:#b91c1c;
+  border:1px solid rgba(185,28,28,.35);border-radius:4px;padding:.05rem .35rem}
+
+/* ── 8 · three-term comparison ────────────────────────────────────────────── */
+.gm-three{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:.5rem;align-items:stretch;
+  margin:.9rem 0;font-size:.85rem}
+.gm-term{border:1px solid var(--line);border-radius:10px;background:var(--panel);
+  padding:.6rem .7rem;box-shadow:var(--shadow)}
+.gm-term__k{font-family:var(--mono);font-size:.63rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--dim);margin-bottom:.2rem}
+.gm-term__v{font-size:1.4rem;font-weight:700;color:#101114;line-height:1.1}
+.gm-term__n{font-size:.74rem;color:var(--dim);line-height:1.45;margin-top:.2rem}
+.gm-arrow{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:.6rem;color:var(--dim);text-align:center;min-width:74px}
+.gm-arrow__line{font-size:1.1rem;color:var(--line2);line-height:1}
+.gm-headline{font-size:.95rem;color:#101114;background:var(--panel2);border:1px solid var(--line);
+  border-radius:8px;padding:.55rem .8rem;margin-top:.5rem}
+.gm-headline b{font-size:1.05rem}
+@media(max-width:720px){.gm-three{grid-template-columns:1fr}.gm-arrow{min-width:0;flex-direction:row;gap:.4rem}}
+
+/* ── 9 · grant tree ───────────────────────────────────────────────────────── */
+.gm-tree{margin:.8rem 0;font-size:.87rem}
+.gm-tree ul{list-style:none;margin:0;padding-left:1.15rem;border-left:1px solid var(--line2)}
+.gm-tree>ul{padding-left:0;border-left:none}
+.gm-tree li{position:relative;padding:.3rem 0 .3rem .7rem}
+.gm-tree li::before{content:"";position:absolute;left:0;top:1.05rem;width:.55rem;height:1px;background:var(--line2)}
+.gm-tree>ul>li::before{display:none}
+.gm-tree__row{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem}
+.gm-tree__cap{color:#34363c}
+/* the worst path is highlighted rather than left for the reader to trace */
+.gm-tree__row--worst .gm-tree__cap{font-weight:700;color:#101114}
+.gm-tree__row--worst::after{content:"worst path";font-family:var(--mono);font-size:.6rem;
+  text-transform:uppercase;letter-spacing:.06em;color:#b91c1c;
+  border:1px solid rgba(185,28,28,.35);border-radius:99px;padding:.02rem .38rem}
+/* an escalation edge is drawn, not annotated */
+.gm-tree__esc{display:block;margin:.15rem 0 .1rem .3rem;font-family:var(--mono);font-size:.68rem;
+  color:#b91c1c;border-left:2px dotted rgba(185,28,28,.5);padding-left:.5rem}
+
+/* ── the fixture strip — read before anything else ────────────────────────── */
+.gm-fixture{display:flex;gap:.6rem;align-items:flex-start;background:rgba(185,28,28,.05);
+  border:1px solid rgba(185,28,28,.3);border-left:4px solid var(--red);border-radius:0 8px 8px 0;
+  padding:.6rem .8rem;font-size:.82rem;color:#34363c;margin:.7rem 0}
+.gm-fixture b{color:#b91c1c}
+
+/* ── gallery scaffolding (not part of the component contract) ─────────────── */
+.gm-spec{border:1px solid var(--line);border-radius:10px;background:var(--panel2);
+  padding:.55rem .8rem;font-size:.78rem;color:var(--dim);margin:.5rem 0 1rem}
+.gm-spec b{color:#101114}
+.gm-row{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center;margin:.5rem 0}
+.gm-src{font-family:var(--mono);font-size:.68rem;color:var(--dim2);margin-top:.35rem}

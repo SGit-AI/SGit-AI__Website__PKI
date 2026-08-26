@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>05 — Workflows and user stories · map-your-case · pki.sgit.ai</title>
-<meta name="description" content="Five users, twenty stories with tests that can fail, seven workflows, and the honest feature column. Pack document, readable in-page; the raw markdown under src/ is the source of truth.">
-<link rel="canonical" href="https://pki.sgit.ai/packs/map-your-case/workflows.html">
+<title>09 — The building blocks · grant-and-mandate · pki.sgit.ai</title>
+<meta name="description" content="Badges, cards, blocks and visualisations — and the one rule that makes a tier badge honest. Pack document, readable in-page; the raw markdown under src/ is the source of truth.">
+<link rel="canonical" href="https://pki.sgit.ai/packs/grant-and-mandate/building-blocks.html">
 <link rel="stylesheet" href="../../assets/site.css">
 </head>
 <body>
@@ -77,41 +77,42 @@
 </div></nav>
 
 <main class="doc">
-<div class="crumb"><a href="../../index.html">pki.sgit.ai</a> / <a href="../index.html">packs</a> / <a href="index.html">map-your-case</a> / workflows</div>
-<h1>05 — Workflows and user stories</h1>
+<div class="crumb"><a href="../../index.html">pki.sgit.ai</a> / <a href="../index.html">packs</a> / <a href="index.html">grant-and-mandate</a> / building-blocks</div>
+<h1>09 — The building blocks</h1>
 
 <div class="docmeta">
-  <span class="k">Pack</span><span class="v"><a href="index.html">Map Your Case: The Grant–Mandate Delta, Mapped By Its Owner</a></span>
-  <span class="k">Role</span><span class="v">Five users, twenty stories with tests that can fail, seven workflows, and the honest feature column</span>
-  <span class="k">Date</span><span class="v">21 August 2026 · draft-1 + change control</span>
+  <span class="k">Pack</span><span class="v"><a href="index.html">Grant and Mandate: Reality Before Risk, The Library In The Registry, The Instance In The Risk Product</a></span>
+  <span class="k">Role</span><span class="v">Badges, cards, blocks and visualisations — and the one rule that makes a tier badge honest</span>
+  <span class="k">Date</span><span class="v">26 August 2026 · draft-1 + change control</span>
   <span class="k">Origin</span><span class="v">Site agent, this repo</span>
-  <span class="k">Source</span><span class="v"><a href="src/05__workflows-and-user-stories.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/dev/packs/map-your-case/src/05__workflows-and-user-stories.md">on GitHub</a></span>
+  <span class="k">Source</span><span class="v"><a href="src/09__building-blocks.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/dev/packs/grant-and-mandate/src/09__building-blocks.md">on GitHub</a></span>
 </div>
 
 <h2 id="summary">Summary</h2>
-<p>The pack as deliverables. Five users — the visitor at five grant positions, the librarian, the sharer and recipient, the run operator, the site agent — and twenty stories each carrying a test that can come out negative, tagged with its defining document and shipped status. The feature table's honest reading is the inverse of the registry pack's: the instrument is built, the programmes around it are not. The flat refusals list is repeated from the principles so a reviewer can disagree in one place: no risk acceptance, no scanning, no backend, no score, no A/B statistics at qualitative sample sizes, no preferences verdict from synthetic readers.</p>
+<p>The brief the project lead called #3, derived from the two v0.33.62 briefs rather than supplied: the reusable primitives the six screens are assembled from, specified as components with rendering rules rather than drawn as pictures, because a mockup is thrown away and a block is used. Nine primitives, each a rendering of a field that already exists in a grant or mandate document. The load-bearing rule came from the build rather than from design: a tier is a property of a node's relationship to the tree, not of the node, so <b>a tier badge must be able to show what defeats it, and a defeated control never renders as a boundary</b> — the register's own escalation-is-an-edge finding arriving one layer down. It also adds the one block that exists because building the thing taught the pack something it did not know: the authority/enforcement split, two indicators and never one, because the enforcement is real and the authority is a fixture and averaging them is how a demonstration gets mistaken for a control. Ships as a stylesheet and <a href='blocks.html'>a gallery rendering the actual documents</a>, not as images.</p>
 
 <h2 id="concepts">Key concepts</h2>
 <ul>
-  <li><a href="../registry-mvp/user-stories.html"><b>A test that can fail</b></a> — the sibling pack's standard, applied — a story that cannot fail is a description</li>
-  <li><a href="principles.html"><b>The acceptor is nobody</b></a> — no user of this tool is ever asked to sign anything — P7 as a user model</li>
-  <li><a href="architecture.html"><b>V8, the standing story</b></a> — no request leaves the origin — re-run before every release</li>
+  <li><a href="blocks.html"><b>The defeat-path rule</b></a> — a defeated control renders as setting, with the path reachable from the badge</li>
+  <li><a href="enforcement.html"><b>The authority/enforcement split</b></a> — two indicators, never one — merging them is the failure</li>
+  <li><a href="mockups.html"><b>Prohibitions shown, allow-list stored</b></a> — screen four's trap, enforced by the component</li>
 </ul>
 
 <h2 id="ideas">Key ideas</h2>
 <ul>
-  <li>V12 (the three sets) is the one story gated on an open decision rather than on effort.</li>
-  <li>The librarian's stories become scripts in phase 1; at v2 they are conventions, and the column says so.</li>
-  <li>Workflow 7 — test a page before building it — is a workflow of this product, not just of its development.</li>
+  <li>A block is a rendering of a field: if it needs data no schema carries, the block is wrong, not the schema.</li>
+  <li>Two channels minimum and the word is always one — colour alone re-collapses five states into two.</li>
+  <li>`unknown` renders as `unknown`: the gaps are part of the map, and a blank reads as a to-do.</li>
+  <li>The gallery renders real documents, so a schema change breaks the build rather than the integration.</li>
 </ul>
 
 <h2 id="read">Read the document</h2>
-<div class="mdread-label">📄 Pack document · 05__workflows-and-user-stories.md · rendered from the <a href="src/05__workflows-and-user-stories.md">raw markdown</a> (the source of truth)</div>
-<div class="mdread" id="mdread" data-src="src/05__workflows-and-user-stories.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="src/05__workflows-and-user-stories.md">open the raw markdown</a>.</p></noscript></div>
+<div class="mdread-label">📄 Pack document · 09__building-blocks.md · rendered from the <a href="src/09__building-blocks.md">raw markdown</a> (the source of truth)</div>
+<div class="mdread" id="mdread" data-src="src/09__building-blocks.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="src/09__building-blocks.md">open the raw markdown</a>.</p></noscript></div>
 
 <div class="pagenav">
-  <a href="architecture.html">← 04 — Architecture</a>
-  <a href="screens.html">06 — The screens →</a>
+  <a href="build-record.html">← 08 — The build record</a>
+  <a href="change-control.html">Appendix — Change control →</a>
 </div>
 </main>
 
