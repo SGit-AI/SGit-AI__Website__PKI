@@ -190,6 +190,45 @@ def probe_agent_config(nodes):
             "above this session was not established"))
 
 
+def probe_ci(nodes):
+    """A CI runner is an agentic-adjacent environment with one property the
+    others lack: its grant is declared UP FRONT, in the workflow's own
+    `permissions:` block, and set above the job by something the job cannot
+    edit. That makes it the clearest boundary in the library."""
+    if not os.environ.get("GITHUB_ACTIONS"):
+        return
+    wf = os.environ.get("GITHUB_WORKFLOW", "?")
+    repo = os.environ.get("GITHUB_REPOSITORY", "?")
+    ref = os.environ.get("GITHUB_REF", "?")
+    runner = f"{platform.system()} {platform.machine()}"
+    nodes.append(node(
+        "c1", None, "runs as an ephemeral CI job",
+        f"workflow '{wf}' on {repo} at {ref}; runner {runner}. The machine is "
+        f"destroyed after the job, so nothing persists between runs except "
+        f"what is deliberately uploaded",
+        "boundary",
+        "the runner is provisioned per job and discarded; no state carries "
+        "forward without an explicit artefact or commit",
+        "observed", "GITHUB_ACTIONS environment, read at run time"))
+    tok = "GITHUB_TOKEN" in os.environ or "INPUT_GITHUB_TOKEN" in os.environ
+    nodes.append(node(
+        "c2", "c1", "act on the repository with the job's token",
+        "bounded by the workflow's `permissions:` block — this job declares "
+        "contents:read and nothing else, so the token cannot write to the "
+        "repository, publish, or dispatch another workflow",
+        "boundary",
+        "the `permissions:` block, set in the workflow file above the job; "
+        "the job cannot widen its own token at run time",
+        "observed",
+        f"token present in environment: {tok}; scope declared in "
+        f".github/workflows/measure-grant.yml"))
+    nodes.append(node(
+        "c3", "c1", "read the repository contents",
+        "every file in the checked-out tree at this ref — including anything "
+        "a contributor committed by mistake",
+        "none", None, "observed", "actions/checkout ran before this step"))
+
+
 def probe_history(nodes):
     """The time axis. With history retained the grant is a union over every
     prior session's reach, not a tree over the present."""
@@ -215,6 +254,7 @@ def measure(product: str, surface: str, identity_record: str = None) -> dict:
     probe_egress(nodes)
     probe_vcs(nodes)
     probe_agent_config(nodes)
+    probe_ci(nodes)
     retained = probe_history(nodes)
 
     refused = [n for n in nodes if n["tier"] == "unknown"]
