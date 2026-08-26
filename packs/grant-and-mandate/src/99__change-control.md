@@ -116,6 +116,14 @@ The mandate's issuer is the registry's operator root, whose private half is **pu
 **Consequence:** it strengthens GM-D26 rather than weakening step 1. A boundary is the same allow-list evaluated where the agent cannot reach it — branch protection, or a required CI check — and that needs no per-clone setup step at all.
 **Status:** the tool defect corrected; the hook limitation recorded as decision GM-D28 rather than silently patched.
 
+### GM17 — The deliveries are now recorded, not only the corrections
+
+**Source:** [document 08, the build record](08__build-record.md), 26 August 2026.
+**Why it was needed:** this estate records every correction meticulously and had recorded **no deliveries at all**. The cost was visible: three days after the register shipped, the registry pack still described its own subject as *entirely unbuilt* in three places, because nothing in the discipline obliged anyone to write down that something had been finished. **A corpus that records only its corrections will misstate what it has built — and in this case it understated it.**
+**What the record covers:** four releases (v0.1.26–v0.1.29), each row naming a fetchable artefact so a reader checks the claim rather than takes it; the four findings that cost something to record (GM12, GM13, and GM16's two defects); what the readiness report's six blocking questions became — three closed by execution, three still open; and a flat list of what remains only written down, because a build record that lists only deliveries is a sales document.
+**The correction it forced elsewhere:** the registry pack's [C33](../../registry-mvp/change-control.html) supersedes its own *unbuilt* status, and C34 records the readiness report and the three questions the build answered.
+**Status:** adopted. The build record is maintained alongside change control, not instead of it.
+
 ## The decisions register
 
 | # | Decision | Made by / where | Status |
@@ -149,6 +157,7 @@ The mandate's issuer is the registry's operator root, whose private half is **pu
 | GM-D27 | Who issues a real (non-fixture) mandate for this estate? | pack doc 07 (GM14) | **Open — needs a real enrolment; the registry ships the path** |
 | GM-D28 | The pre-push hook does not travel with a clone (`core.hooksPath` is local config) | library entry #2 (GM16) | **Open — a per-clone setup step, or move the check off-machine per GM-D26** |
 | GM-D29 | A tier is decided against the tree, never in isolation | library entry #2 (GM16) | **Settled — tool corrected; the mislabelled node kept visible** |
+| GM-D30 | Deliveries are recorded in a build record, beside the corrections | pack doc 08 (GM17) | **Settled — the discipline recorded corrections and no deliveries** |
 
 ---
 

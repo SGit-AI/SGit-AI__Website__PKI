@@ -296,6 +296,32 @@ One thing it did **not** do, and the pack should not pretend otherwise: it is st
 **What the two briefs correct here:** nothing in this pack's schemas — their subject is the assessment's explanation and testing programmes. The one point that touches this pack: the levels brief's *three sets* framing (mandated / exercised / held-and-never-used) is a sharper rendering of C1's excess authority for a human reader, and the register interface's mandate composer (document 08, M4) should eventually say which excess capabilities have actually been exercised — which is observability data this pack's document 11 deliberately does not collect. That tension is recorded rather than resolved.
 **Status:** recorded. Decision 45.
 
+### C33 — The registry is built, which supersedes this pack's own status
+
+**Source:** the register shipped at site v0.1.26, live at [`/registry/`](../../registry/index.html), and the [build record](../grant-and-mandate/build-record.html) that documents it in full.
+
+**What this pack said, in three places, and what is now true.** C23 recorded that *"the registry itself remains entirely unbuilt"*; decision 36 settled the pack's status as *"a design pack with one shipped consumer; the registry itself is unbuilt"*; and the pack README carried the same line. **All three were accurate when written and are now false.** Per this page's rule they are superseded here rather than edited — except the README status line, which is living metadata about the pack's current state rather than a published claim, and has been corrected.
+
+**What exists.** Eleven records and twenty-three signed statements at constructed public URLs; ten of them **fixtures** with published private halves (C3's class, applied to an entire register) and **one real**, which is what keeps `private_key_published` evidence rather than a column; four assumable **roles** shipping drop-in `sgit` keystores; mandates, acceptances, revocations, and a grant carrying [document 12's](grant-tree.html) tree with per-node control labels; six expected verification answers shipped **as data**; the excess-authority view; and a validator that enforces the ownership rule — a valid signature by a non-owner rejected, the 2019 failure as a test case — reads the fixture flag **before** any signature, and reproduces all six answers.
+
+**Two corrections this build settles by execution rather than argument.** The record model is **C7's commit graph** — no `seq`/`prev`, the public git history is the chain — so C7 moves from *settled, change queued* to **implemented**, and this is its first implementation. And the register is **sgit-format-compatible, established by round-trip** against sgit-ai v0.16.0 rather than assumed, which closes the dependency flag [document 03](workflows.html) carried from the beginning: fingerprints are sgit's 16-hex short form, bundles are shaped like `sgit pki export`, and signatures are raw `r||s` ECDSA P-256, the encoding sgit's own source chose for Web Crypto interop.
+
+**What the build did NOT close, stated so the correction is not read as more than it is.** The write path is **a git commit reviewed by a maintainer**, not the account-less append lane this pack designs — so the lane, the processor runbook and the blind acknowledgement are exactly as unbuilt as before, and phase 2's open questions are untouched. The root is a **fixture root**, and `roots.json` says so in its own entry, so no chain in this register carries authority. **The registry is built; the trustworthy registry is not.**
+
+**Status:** adopted. C23 and decision 36 superseded; decisions 46 and 47 below.
+
+### C34 — A fresh session produced the readiness report the briefing asks for, and half its blockers were answered by building
+
+**Source:** [`readiness-report.md`](../readiness-report.md), 25 August 2026, and the build that followed.
+
+The briefing pack asks a fresh session for **a readiness report rather than an implementation plan**, on the grounds that a confident plan probably means the reader missed the open decisions. One was produced: seven sections, **six blocking questions**, and a section arguing where the pack is wrong.
+
+**Three of the six were closed by execution**, which is the useful part — they were answerable by building rather than by deciding. Q1 (which record model) resolved to the commit graph; Q4 (what the CLI accepts and emits) closed by round-trip; Q5 (processor transparency) closed **for the git write path only**, since commits are public and the processor's decisions are the repository history. **Three remain open and are the project lead's**: Q2 (does a lane with no anchors accept any token holder — it gates phase 2 entirely and one experiment would answer it), Q3 (what a capability *name* is — a missing type underneath excess authority rather than a scoping choice), and Q6 (acceptance semantics, taken provisionally as inert).
+
+**And one finding from that report stands uncorrected**: the briefing instructs an implementer to build from REP-0001, whose §2 normatively specifies the accumulating record model that C7 supersedes. The register was built to C7 instead. **The REP still points a fresh implementer at the superseded form**, and the cheapest fix remains one sentence at §2 saying which half is current.
+
+**Status:** recorded. The report ships beside the pack rather than inside it, and its section 7 is the pack's first outside criticism.
+
 ## The decisions register
 
 | # | Decision | Made by | Status |
@@ -345,6 +371,9 @@ One thing it did **not** do, and the pack should not pretend otherwise: it is st
 | 43 | Do the badge's rendering rules live in document 08, or in their own document? | doc 15 (C27) | **Open — 08 is explicitly about wording, and these are rules about drawing** |
 | 44 | Does the mockup stay a pack artefact, or become a site page? | doc 15 (C31) | **Settled — a page. It inherits the participant disclosure, the versioning and the honest-limitations register, which a zip does not** |
 | 45 | Map Your Case gets its own dev pack; document 14 stays as the registry-side view | project lead, 21 Aug (C32) | **Settled — the pack exists; shared decisions cross-reference rather than renumber** |
+| 46 | The pack's status: **the registry is built** — a live register with a fixture root, and an unbuilt write path | site v0.1.26 (C33) | **Settled — supersedes decision 36** |
+| 47 | C7's commit-graph record model is **implemented**, not queued | site v0.1.26 (C33) | **Settled — first implementation** |
+| 48 | REP-0001 §2 still specifies the superseded accumulating model | readiness report (C34) | **Open — one sentence at §2 fixes it; the register was built to C7** |
 
 ---
 
