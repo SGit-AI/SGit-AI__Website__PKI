@@ -1,0 +1,30 @@
+# Measures the CI runner's own grant, with the same tool that measures every
+# other environment in the library — because the pack's rule is that a grant
+# is discovered, not authored, and an entry written from documentation would
+# be a wish. The runner is the environment an agent's push REACHES INTO: node
+# n3 of the container entry ends at a push, and this is what happens next, so
+# the two entries join at that edge and together they are the blast-radius path.
+#
+# This workflow deliberately does not touch deploy-pages.yml, holds
+# contents:read and nothing else, and writes nothing back to the repository —
+# it prints the measurement to the job log, which is the evidence.
+name: measure-grant
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'packs/grant-and-mandate/tools/measure.py'
+      - '.github/workflows/measure-grant.yml'
+permissions:
+  contents: read
+jobs:
+  measure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Measure this runner's grant
+        run: |
+          python3 packs/grant-and-mandate/tools/measure.py \
+            --product "github-actions-runner" \
+            --surface "ephemeral CI runner, ubuntu-latest, contents:read token"
