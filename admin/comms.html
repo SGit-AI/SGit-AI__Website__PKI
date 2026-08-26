@@ -14,7 +14,7 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.31</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.32</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -50,6 +50,16 @@
       <div class="sub">
       <a class="sl" href="../origins/index.html">Origins: 2026</a>
       <a class="sl" href="../origins/review.html">The review, redacted</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../bench/index.html">The bench<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../bench/index.html">&#9679; The bench &mdash; what is built</a>
+      <a class="sl" href="../registry/index.html">The register, live</a>
+      <a class="sl" href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
+      <a class="sl" href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
+      <a class="sl" href="../assess/index.html">Map your own case</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -121,6 +131,7 @@
     <tr><td>T18</td><td>Origins section: the four-act arc, 13 Tier-0 primary sources published verbatim (each re-scanned for secrets and identifiers), <a href="../rules/prior-art.html">the retired registry as prior art</a>, and a redacted public edition of the review. Answers the review's gaps A and B</td><td>site agent</td><td><span class="tstat t-done">done v0.1.8</span></td></tr>
     <tr><td>T19</td><td>Still available from the review and not yet done: reclassify open questions 1, 4, 5 and 6 from <em>open</em> to <em>argued here, decision pending</em> — the review rates it the highest credibility-per-hour item on its list</td><td>site agent</td><td><span class="tstat t-open">queued</span></td></tr>
     <tr><td>T20</td><td>Open questions reclassified (the review's highest credibility-per-hour item): four of six now read <em>argued, decision pending</em> with links, and the eight opened on 20 August are captured on <a href="../roadmap/index.html#open-new">the roadmap</a></td><td>site agent</td><td><span class="tstat t-done">done v0.1.9</span></td></tr>
+    <tr><td>T27</td><td><b><a href="../bench/index.html">The bench</a></b> &mdash; a first-class section for shipping MVPs and experiments, seeded with the six things already built. Each entry declares what it demonstrates and, <b>mandatorily</b>, what it does not prove; <code>gen_bench.py</code> refuses to build without that field or without gates, verified by emptying one. Adding one is a dict plus a folder with its own code. Named <em>the bench</em> rather than <em>labs</em> &mdash; the reasoning is on the page and it is a one-line rename if you prefer otherwise. Also: GM-D32 answered &mdash; RiskMandate <b>consumes</b> the block stylesheet rather than forking it.</td><td>site agent</td><td><span class="tstat t-done">done v0.1.32</span></td></tr>
     <tr><td>T26</td><td><b>Brief #3 written and built.</b> <a href="../packs/grant-and-mandate/building-blocks.html">Document 09</a> derives the badge/card/block/visualisation specification from the two v0.33.62 briefs rather than waiting for a third; <a href="../assets/gm-blocks.css">assets/gm-blocks.css</a> and <a href="../packs/grant-and-mandate/blocks.html">the gallery</a> are the components, rendering the real library entries and signed mandate. Two new rules the build produced: a defeated control never renders as a boundary (GM-D29 at the interface layer), and a mandate carries two indicators &mdash; enforcement and authority &mdash; never one. GM18: the gallery caught two schema violations in the hand-assembled library entry on first render; the tool-generated entry had none.</td><td>site agent</td><td><span class="tstat t-done">done v0.1.31</span></td></tr>
     <tr><td>T25</td><td><b>The deliveries recorded, and the registry pack's status corrected.</b> <a href="../packs/grant-and-mandate/build-record.html">Document 08</a> is the build record for v0.1.26&ndash;v0.1.29, naming a fetchable artefact for every claim and carrying a flat list of what is still only written down. Registry pack <a href="../packs/registry-mvp/change-control.html">C33</a> supersedes its own <em>unbuilt</em> status (three places, all accurate when written); C34 records the readiness report and the three of six blocking questions the build answered. Found while doing it: the discipline recorded corrections and no deliveries, so the corpus understated what it had built &mdash; now decision GM-D30.</td><td>site agent</td><td><span class="tstat t-done">done v0.1.30</span></td></tr>
     <tr><td>T24</td><td><b>Build-order step 1 of the <a href="../packs/grant-and-mandate/index.html">Grant &amp; Mandate pack</a>, built and tested</b> (<a href="../packs/grant-and-mandate/enforcement.html">document 07</a>): a signed mandate compiled into a <code>pre-push</code> hook, and a push to a branch it does not permit refused by git with <code>error: failed to push some refs</code>. Tier reached: <b>setting</b>, not boundary, stated on the refusal banner itself. Plus <code>tools/measure.py</code>, the measurement method made runnable anywhere &mdash; it reports presence and reachability, never contents, and records refused probes as <em>unknown</em> rather than guessing. <b>Needed from you:</b> a real issuer key (N11) and a decision on whether to raise this to a boundary (N12).</td><td>site agent</td><td><span class="tstat t-done">done v0.1.28</span></td></tr>
@@ -153,12 +164,18 @@
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.31</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.32</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The bench</h4>
+    <a href="../bench/index.html">&#9679; What is built</a>
+    <a href="../registry/index.html">The register, live</a>
+    <a href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
+    <a href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
+    <a href="../assess/index.html">&#8594; Map your own case</a>
   </div>
   <div>
     <h4>The registry</h4>
-    <a href="../registry/index.html">&#9679; The registry, live</a>
-    <a href="../assess/index.html">&#8594; Map your own case</a>
     <a href="../failure/index.html">Why they don't exist</a>
     <a href="../rules/index.html">The four rules</a>
     <a href="../mandate/index.html">Identity &amp; mandate</a>

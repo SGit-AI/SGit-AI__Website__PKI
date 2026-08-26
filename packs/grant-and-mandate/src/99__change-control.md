@@ -167,7 +167,7 @@ The mandate's issuer is the registry's operator root, whose private half is **pu
 | GM-D29 | A tier is decided against the tree, never in isolation | library entry #2 (GM16) | **Settled — tool corrected; the mislabelled node kept visible** |
 | GM-D30 | Deliveries are recorded in a build record, beside the corrections | pack doc 08 (GM17) | **Settled — the discipline recorded corrections and no deliveries** |
 | GM-D31 | The block gallery renders real documents, and unrecognised vocabulary fails the build | pack doc 09 (GM18) | **Settled — verified by injecting a bad value** |
-| GM-D32 | Does the risk product consume this stylesheet, or fork it? | pack doc 09 | **Open — consuming binds two products to one contract; forking guarantees drift** |
+| GM-D32 | Does the risk product consume this stylesheet, or fork it? | pack doc 09; project lead, 26 Aug | **Settled — RiskMandate CONSUMES it. The library/instance split argued for it and the project lead confirmed: two products, one component contract** |
 
 ---
 

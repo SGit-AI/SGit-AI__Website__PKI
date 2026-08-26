@@ -59,6 +59,13 @@ NAV = [
         ("Origins: 2026", "origins/index.html"),
         ("The review, redacted", "origins/review.html"),
     ], ("origins/",)),
+    ("The bench", "bench/index.html", [
+        ("&#9679; The bench &mdash; what is built", "bench/index.html"),
+        ("The register, live", "registry/index.html"),
+        ("The mandate hook", "packs/grant-and-mandate/enforcement.html"),
+        ("The building blocks", "packs/grant-and-mandate/blocks.html"),
+        ("Map your own case", "assess/index.html"),
+    ], ("bench/",)),
     ("Docs", "documents/index.html", [
         ("The documents", "documents/index.html"),
         ("Dev packs", "packs/index.html"),
@@ -75,9 +82,14 @@ NAV = [
 ]
 
 FOOTER = [
-    ("The registry", [
-        ("&#9679; The registry, live", "registry/index.html"),
+    ("The bench", [
+        ("&#9679; What is built", "bench/index.html"),
+        ("The register, live", "registry/index.html"),
+        ("The mandate hook", "packs/grant-and-mandate/enforcement.html"),
+        ("The building blocks", "packs/grant-and-mandate/blocks.html"),
         ("&#8594; Map your own case", "assess/index.html"),
+    ]),
+    ("The registry", [
         ("Why they don't exist", "failure/index.html"),
         ("The four rules", "rules/index.html"),
         ("Identity &amp; mandate", "mandate/index.html"),

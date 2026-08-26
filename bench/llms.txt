@@ -1,0 +1,73 @@
+# pki.sgit.ai/bench — MVPs and experiments, and what each does not prove
+#
+# Every entry below carries a `does not prove` list. It is mandatory: the
+# generator refuses to build an entry without one, because a section that
+# collected demonstrations without their limits would manufacture the false
+# assurance this site exists to argue against.
+#
+# 5 of 6 are built and running. Hub: https://pki.sgit.ai/bench/index.html
+
+## The register — live
+  where     https://pki.sgit.ai/registry/index.html
+  code      registry/, registry/tools/registry_tool.py
+  since     v0.1.26 (last moved v0.1.29)
+  is        A static register of agent identities, roles, mandates, grants, acceptances and revocations — eleven records and twenty-three signed statements at constructed public URLs, verifiable with the shipped sgit pki commands.
+  DOES NOT PROVE:
+    - That anything here is trustworthy. Ten of the eleven records are fixtures — private keys published on purpose — so every signature verifies and proves nothing
+    - That the root can be relied on: it is a fixture root, and roots.json says so in its own entry
+    - That enrolment works without a human: the write path is a git commit reviewed by a maintainer, not the account-less lane the pack designs
+
+## The mandate hook — live
+  where     https://pki.sgit.ai/packs/grant-and-mandate/enforcement.html
+  code      .githooks/pre-push, packs/grant-and-mandate/tools/mandate.py, packs/grant-and-mandate/mandates/
+  since     v0.1.28 (last moved v0.1.29)
+  is        A signed mandate compiled into a pre-push hook that git runs — and that refused a real push to dev with error: failed to push some refs.
+  DOES NOT PROVE:
+    - That the mandate has any authority. Its issuer is the fixture root, so anybody could forge it and the hook would enforce the forgery just as diligently
+    - That the constraint is a boundary: it reached tier setting, and --no-verify still gets past it
+    - That it protects a fresh clone — the hook file is committed, the config that activates it is local and does not travel
+
+## Grant measurement — live
+  where     https://pki.sgit.ai/packs/grant-and-mandate/library.html
+  code      packs/grant-and-mandate/tools/measure.py, packs/grant-and-mandate/library/
+  since     v0.1.27 (last moved v0.1.29)
+  is        A tool that generates a grant document for the environment it runs in, and two measured entries — a hosted agent container and a CI runner — that join at the push edge.
+  DOES NOT PROVE:
+    - That the measurement is complete. An agent measuring its own grant reports what it can see; it is a floor, not a census, and says so on its face
+    - Anything about environments nobody has measured — two entries, one agent, and a blind-spot delta needs at least two agents against a common reference
+    - That a hand-assembled entry is as good as a measured one: the gallery caught schema drift in the hand-written entry and none in the tool-generated one
+
+## The building blocks — live
+  where     https://pki.sgit.ai/packs/grant-and-mandate/blocks.html
+  code      assets/gm-blocks.css, admin/build/gen_blocks.py
+  since     v0.1.31 (last moved v0.1.31)
+  is        Nine reusable components — tier and evidence badges, cards, the delta block, the grant tree — shipped as a stylesheet and a gallery that renders the real documents.
+  DOES NOT PROVE:
+    - That the components survive contact with a population. They have been exercised against two environments and one mandate, all measured by one agent
+    - That the layouts hold on a phone — the grant tree below 390px has a proposed degradation nobody has tested
+    - That a second consumer will find the contract workable; RiskMandate is committed to consuming it and has not yet
+
+## Map your own case — live
+  where     https://pki.sgit.ai/assess/index.html
+  code      assess/
+  since     v0.1.16 (last moved v0.1.19)
+  is        A visitor assembles their own agent installations as grant trees, sees the gap, and records a decision per gap — storing the choices and never the answers.
+  DOES NOT PROVE:
+    - That the library covers anybody's real estate. Scenario 5 has no tree to point at at all
+    - That the assessment changes what anybody does — it has no backend, so it can measure none of its own success measures
+    - That the acceptor model is sound: it offers a role where the pack's own standard asks for a named person
+
+## Synthetic readers — specified
+  where     https://pki.sgit.ai/packs/map-your-case/readers/index.html
+  code      packs/map-your-case/readers/
+  since     v0.1.23 (last moved v0.1.24)
+  is        A programme that puts a page in front of an agent which receives pixels and nothing else — no text, no structure, no knowledge of the project — and watches where it goes.
+  DOES NOT PROVE:
+    - That synthetic readers can report preferences. They find defects; a preference from a simulated reader is not evidence and the programme says so
+    - That the findings generalise — one run, one archetype, one page
+    - That the simulation marker survives export, which is the rule most likely to be broken by accident
+
+# Putting something on the bench: its own folder and its own code, an origin
+# (a brief or a dev-pack document), and a does_not_prove list plus gates —
+# both enforced by admin/build/gen_bench.py.
+# All content CC BY 4.0.

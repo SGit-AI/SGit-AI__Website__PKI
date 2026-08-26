@@ -1,0 +1,45 @@
+/* bench.css — the bench section. Depends on the tokens in site.css.
+ * The one visual rule: "what it demonstrates" and "what it does not prove" are
+ * given EQUAL WEIGHT, side by side. Making the limits smaller or greyer than
+ * the claims is how a bench turns into a showcase. */
+
+.bench-rule{border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:0 10px 10px 0;
+  background:var(--panel);padding:.85rem 1.05rem;box-shadow:var(--shadow);margin:1.3rem 0 2rem}
+.bench-rule__k{font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--dim);margin-bottom:.3rem}
+.bench-rule p{margin:0;font-size:.92rem;line-height:1.6}
+
+.bench-state{display:inline-block;font-family:var(--mono);font-size:.64rem;text-transform:uppercase;
+  letter-spacing:.06em;border-radius:99px;padding:.1rem .55rem;white-space:nowrap;font-weight:600}
+.bench-state--live{color:#0f766e;border:1px solid rgba(15,118,110,.4);background:rgba(15,118,110,.09)}
+.bench-state--specified{color:var(--warm);border:1px dashed rgba(180,83,9,.5);background:rgba(180,83,9,.06)}
+.bench-state--retired{color:var(--dim);border:1px solid var(--line2);background:var(--panel2)}
+
+.bench-item{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  box-shadow:var(--shadow);padding:1.1rem 1.2rem;margin:1.1rem 0;scroll-margin-top:70px}
+.bench-item__head{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between}
+.bench-item__head h3{margin:0;font-size:1.08rem;color:#101114}
+.bench-item__line{font-size:.93rem;color:#34363c;margin:.45rem 0 .8rem;line-height:1.6}
+
+/* equal weight, side by side — the section's one visual rule */
+.bench-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:.8rem;margin:.5rem 0 .8rem}
+.bench-col{border:1px solid var(--line);border-radius:9px;padding:.6rem .75rem;background:var(--bg)}
+.bench-col--not{border-left:3px solid var(--red)}
+.bench-col__k{font-family:var(--mono);font-size:.63rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--dim);margin-bottom:.35rem}
+.bench-col--not .bench-col__k{color:#b91c1c}
+.bench-list{list-style:none;margin:0;padding:0}
+.bench-list li{position:relative;padding-left:1.15rem;font-size:.86rem;color:#34363c;
+  line-height:1.55;margin:.32rem 0}
+.bench-list li::before{content:"·";position:absolute;left:.25rem;color:var(--dim2);font-weight:700}
+.bench-list--yes li::before{content:"✓";color:var(--accent);font-size:.8rem}
+.bench-list--no li::before{content:"✕";color:var(--red);font-size:.78rem}
+
+.bench-gates{font-size:.85rem;color:#34363c;background:var(--panel2);border:1px solid var(--line);
+  border-radius:9px;padding:.55rem .75rem;margin:.2rem 0 .7rem}
+.bench-gates b{color:#101114}
+.bench-gates .bench-list li{font-size:.83rem}
+
+.bench-meta{display:flex;flex-wrap:wrap;gap:.4rem 1.1rem;border-top:1px solid var(--line);
+  padding-top:.55rem;font-size:.74rem;color:var(--dim2)}
+.bench-meta code{font-size:.92em;overflow-wrap:anywhere}

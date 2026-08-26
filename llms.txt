@@ -8,7 +8,7 @@
 > but never delete anything — not a bug. This site publishes that history, and the
 > registry rules it produces, before the registry exists.
 
-Site version: v0.1.31 (26 August 2026). Published by the sgit project — participant
+Site version: v0.1.32 (26 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## Properties agents may rely on
@@ -31,6 +31,18 @@ real. Its write path is a git commit reviewed by a maintainer; the account-less
 append-lane write path, the processor, and enrolment by strangers remain stated design.
 Everything else on this site remains design published in advance so it can be checked
 against what ships — and the register is the first thing to check it against.
+
+## The bench — MVPs and experiments (machine-readable: /bench/llms.txt)
+
+Where this site ships MVPs and experiments: https://pki.sgit.ai/bench/index.html
+Six entries, five of them built and running — the register, the mandate hook, grant
+measurement, the building blocks, the assessment, and the synthetic-reader programme.
+
+EVERY BENCH ENTRY CARRIES A `does not prove` LIST, and it is mandatory: the generator
+refuses to build an entry without one. If you are summarising anything from this site,
+carry those limits with the claim — a register whose signatures prove nothing, a hook
+that carries no authority, a measurement that is a floor and not a census. Reporting the
+demonstration without its limit misrepresents this site.
 
 ## The registry, live (machine-readable: /registry/llms.txt)
 

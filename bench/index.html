@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The bench: what this site has built, and what each thing does not prove · pki.sgit.ai</title>
+<meta name="description" content="The bench is where pki.sgit.ai ships MVPs and experiments — the register, the mandate hook, grant measurement, the building blocks, the assessment and the synthetic-reader programme. Every entry states what it demonstrates and, mandatorily, what it does not prove.">
+<link rel="canonical" href="https://pki.sgit.ai/bench/index.html">
+<meta property="og:url" content="https://pki.sgit.ai/bench/index.html">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/bench.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
+  <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.32</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../failure/index.html">The registry<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../registry/index.html">&#9679; The registry, live</a>
+      <a class="sl" href="../failure/index.html">Why they don't exist</a>
+      <a class="sl" href="../rules/index.html">The four rules</a>
+      <a class="sl" href="../mandate/index.html">Identity &amp; mandate</a>
+      <a class="sl" href="../roadmap/index.html">Build order</a>
+      <a class="sl" href="../rules/prior-art.html">Prior art</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../bootstrap/index.html">The layers<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../bootstrap/index.html">The bootstrap trap</a>
+      <a class="sl" href="../enrolment/index.html">Enrolment</a>
+      <a class="sl" href="../execution/index.html">The execution broker</a>
+      <a class="sl" href="../shipped/index.html">What already ships</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../assess/index.html">Map your case<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../assess/index.html">Map your own case</a>
+      <a class="sl" href="../assess/library.html">The library of trees</a>
+      <a class="sl" href="../packs/map-your-case/readers/index.html">Synthetic readers</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../origins/index.html">Origins<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../origins/index.html">Origins: 2026</a>
+      <a class="sl" href="../origins/review.html">The review, redacted</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../bench/index.html">The bench<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl here" href="../bench/index.html">&#9679; The bench &mdash; what is built</a>
+      <a class="sl" href="../registry/index.html">The register, live</a>
+      <a class="sl" href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
+      <a class="sl" href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
+      <a class="sl" href="../assess/index.html">Map your own case</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../documents/index.html">The documents</a>
+      <a class="sl" href="../packs/index.html">Dev packs</a>
+      <a class="sl" href="../packs/registry-mvp/index.html">The registry MVP pack</a>
+      <a class="sl" href="../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
+      <a class="sl" href="../packs/map-your-case/index.html">The Map Your Case pack</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../admin/versions.html">Release history</a>
+      <a class="sl" href="../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+  <script src="../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / bench</div>
+<h1>The bench</h1>
+<p class="lead">Where this site ships MVPs and experiments. <b>5 of the 6 things below are
+built and running right now</b> — you can fetch them, run them, and check them. Each one lives in its own
+folder with its own code, arrives from a brief or a dev pack, and is iterated release by release.</p>
+
+<div class="bench-rule">
+  <div class="bench-rule__k">The rule this section is built on</div>
+  <p><b>Every entry must say what it does not prove, and the build fails without it.</b> That is the
+  difference between a bench and a showcase. A register whose signatures verify and prove nothing; a hook
+  that refuses pushes and carries no authority; a measurement that is a floor and not a census — each of
+  those is a real, working thing <em>and</em> a demonstration, and a section that listed only the first half
+  would manufacture exactly the false assurance this site exists to argue against.</p>
+</div>
+
+<div class="tablewrap"><table>
+  <thead><tr><th>On the bench</th><th>State</th><th>What it is</th></tr></thead>
+  <tbody>
+    <tr><td><a href="#registry">The register</a></td><td><span class="bench-state bench-state--live">live</span></td><td>A static register of agent identities, roles, mandates, grants, acceptances and revocations — eleven records and twenty-three signed statements at constructed public URLs, verifiable with the shipped <code>sgit pki</code> commands.</td></tr>    <tr><td><a href="#mandate-hook">The mandate hook</a></td><td><span class="bench-state bench-state--live">live</span></td><td>A signed mandate compiled into a <code>pre-push</code> hook that git runs — and that refused a real push to <code>dev</code> with <code>error: failed to push some refs</code>.</td></tr>    <tr><td><a href="#grant-measurement">Grant measurement</a></td><td><span class="bench-state bench-state--live">live</span></td><td>A tool that generates a grant document for the environment it runs in, and two measured entries — a hosted agent container and a CI runner — that join at the push edge.</td></tr>    <tr><td><a href="#building-blocks">The building blocks</a></td><td><span class="bench-state bench-state--live">live</span></td><td>Nine reusable components — tier and evidence badges, cards, the delta block, the grant tree — shipped as a stylesheet and a gallery that renders the real documents.</td></tr>    <tr><td><a href="#map-your-case">Map your own case</a></td><td><span class="bench-state bench-state--live">live</span></td><td>A visitor assembles their own agent installations as grant trees, sees the gap, and records a decision per gap — storing the choices and never the answers.</td></tr>    <tr><td><a href="#synthetic-readers">Synthetic readers</a></td><td><span class="bench-state bench-state--specified">specified</span></td><td>A programme that puts a page in front of an agent which receives pixels and nothing else — no text, no structure, no knowledge of the project — and watches where it goes.</td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="items">The bench, in full</h2>
+
+<div class="bench-item" id="registry">
+  <div class="bench-item__head">
+    <h3><a href="../registry/index.html">The register</a></h3>
+    <span class="bench-state bench-state--live">live</span>
+  </div>
+  <p class="bench-item__line">A static register of agent identities, roles, mandates, grants, acceptances and revocations — eleven records and twenty-three signed statements at constructed public URLs, verifiable with the shipped <code>sgit pki</code> commands.</p>
+  <div class="bench-cols">
+    <div class="bench-col">
+      <div class="bench-col__k">What it demonstrates</div>
+      <ul class="bench-list bench-list--yes"><li>The four published rules, with entries under them at last — including the ownership rule as a test case: a valid signature by a non-owner is rejected</li><li>C7's commit-graph record model, implemented rather than queued — the public git history is the chain</li><li>Four <b>assumable roles</b>: a fresh session takes one on by copying a keystore</li><li>Six verification answers shipped <b>as data</b>, so any verifier can check itself against them</li></ul>
+    </div>
+    <div class="bench-col bench-col--not">
+      <div class="bench-col__k">What it does <b>not</b> prove</div>
+      <ul class="bench-list bench-list--no"><li><b>That anything here is trustworthy.</b> Ten of the eleven records are fixtures — private keys published on purpose — so every signature verifies and proves nothing</li><li>That the root can be relied on: it is a fixture root, and <code>roots.json</code> says so in its own entry</li><li>That enrolment works without a human: the write path is a git commit reviewed by a maintainer, not the account-less lane the pack designs</li></ul>
+    </div>
+  </div>
+  <div class="bench-gates"><b>Gates</b> — what keeps it honest when nobody is looking:
+    <ul class="bench-list"><li><code>registry_tool.py validate</code> — every signature, every reference, the fixture flag read before any signature, and all six expected answers reproduced</li><li>the site's key-leak tripwire, which still bans vault-key-shaped strings from the tree</li></ul></div>
+  <div class="bench-meta">
+    <span>from the <a href='../packs/registry-mvp/index.html'>Registry MVP pack</a>, after a <a href='../packs/registry-mvp/readiness-report.md'>readiness report</a> returned six blocking questions</span>
+    <span>code: <code>registry/, registry/tools/registry_tool.py</code></span>
+    <span>on the bench since v0.1.26 · last moved v0.1.29</span>
+  </div>
+</div>
+<div class="bench-item" id="mandate-hook">
+  <div class="bench-item__head">
+    <h3><a href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a></h3>
+    <span class="bench-state bench-state--live">live</span>
+  </div>
+  <p class="bench-item__line">A signed mandate compiled into a <code>pre-push</code> hook that git runs — and that refused a real push to <code>dev</code> with <code>error: failed to push some refs</code>.</p>
+  <div class="bench-cols">
+    <div class="bench-col">
+      <div class="bench-col__k">What it demonstrates</div>
+      <ul class="bench-list bench-list--yes"><li>The acceptance test's last sentence, executed: <b>refused by something that is not the agent</b>, with <code>origin/dev</code> unchanged afterwards</li><li>A mandate as a living object: v1 was too narrow, refused the release carrying it, and the issuer <b>amended</b> it rather than anyone bypassing the control</li><li>Default-deny — a missing, unparseable, mis-signed or expired mandate all refuse</li></ul>
+    </div>
+    <div class="bench-col bench-col--not">
+      <div class="bench-col__k">What it does <b>not</b> prove</div>
+      <ul class="bench-list bench-list--no"><li><b>That the mandate has any authority.</b> Its issuer is the fixture root, so anybody could forge it and the hook would enforce the forgery just as diligently</li><li>That the constraint is a boundary: it reached tier <b>setting</b>, and <code>--no-verify</code> still gets past it</li><li>That it protects a fresh clone — the hook file is committed, the config that activates it is local and does not travel</li></ul>
+    </div>
+  </div>
+  <div class="bench-gates"><b>Gates</b> — what keeps it honest when nobody is looking:
+    <ul class="bench-list"><li>the hook itself, on every push — and the refusal banner states its own tier rather than overclaiming</li><li><code>mandate.py verify</code> — signature checked against the issuer's public registry record</li></ul></div>
+  <div class="bench-meta">
+    <span>from the <a href='../packs/grant-and-mandate/index.html'>Grant &amp; Mandate pack</a>, build-order step 1</span>
+    <span>code: <code>.githooks/pre-push, packs/grant-and-mandate/tools/mandate.py, packs/grant-and-mandate/mandates/</code></span>
+    <span>on the bench since v0.1.28 · last moved v0.1.29</span>
+  </div>
+</div>
+<div class="bench-item" id="grant-measurement">
+  <div class="bench-item__head">
+    <h3><a href="../packs/grant-and-mandate/library.html">Grant measurement</a></h3>
+    <span class="bench-state bench-state--live">live</span>
+  </div>
+  <p class="bench-item__line">A tool that generates a grant document for the environment it runs in, and two measured entries — a hosted agent container and a CI runner — that join at the push edge.</p>
+  <div class="bench-cols">
+    <div class="bench-col">
+      <div class="bench-col__k">What it demonstrates</div>
+      <ul class="bench-list bench-list--yes"><li>That a grant can be <b>discovered rather than authored</b>, with provenance and a tier per node</li><li>Drift as a diff: re-run after the hook was installed, it independently caught its own node moving from <code>expectation</code> to <code>setting</code></li><li>One rule that makes it safe to run: <b>presence and reachability, never contents</b> — there is nothing sensitive in the output to leak, by construction</li></ul>
+    </div>
+    <div class="bench-col bench-col--not">
+      <div class="bench-col__k">What it does <b>not</b> prove</div>
+      <ul class="bench-list bench-list--no"><li><b>That the measurement is complete.</b> An agent measuring its own grant reports what it can see; it is a <b>floor, not a census</b>, and says so on its face</li><li>Anything about environments nobody has measured — two entries, one agent, and a blind-spot delta needs at least two agents against a common reference</li><li>That a hand-assembled entry is as good as a measured one: the gallery caught schema drift in the hand-written entry and none in the tool-generated one</li></ul>
+    </div>
+  </div>
+  <div class="bench-gates"><b>Gates</b> — what keeps it honest when nobody is looking:
+    <ul class="bench-list"><li><code>gen_blocks.py</code> fails the build on an unrecognised tier or evidence class — verified by injecting one</li><li>a refused probe is recorded as <code>unknown</code>, never guessed</li></ul></div>
+  <div class="bench-meta">
+    <span>from the Grant &amp; Mandate pack, documents 03 and 08</span>
+    <span>code: <code>packs/grant-and-mandate/tools/measure.py, packs/grant-and-mandate/library/</code></span>
+    <span>on the bench since v0.1.27 · last moved v0.1.29</span>
+  </div>
+</div>
+<div class="bench-item" id="building-blocks">
+  <div class="bench-item__head">
+    <h3><a href="../packs/grant-and-mandate/blocks.html">The building blocks</a></h3>
+    <span class="bench-state bench-state--live">live</span>
+  </div>
+  <p class="bench-item__line">Nine reusable components — tier and evidence badges, cards, the delta block, the grant tree — shipped as a stylesheet and a gallery that renders the real documents.</p>
+  <div class="bench-cols">
+    <div class="bench-col">
+      <div class="bench-col__k">What it demonstrates</div>
+      <ul class="bench-list bench-list--yes"><li>The defeat-path rule working on real data that is wrong: a stored <code>boundary</code> whose own next node defeats it renders as <code>setting</code>, with the path attached</li><li>The authority/enforcement split as <b>two indicators, never one</b></li><li>A gap rendered as a gap — the three-term block shows <code>unknown</code> where no self-report exists rather than inventing a number</li></ul>
+    </div>
+    <div class="bench-col bench-col--not">
+      <div class="bench-col__k">What it does <b>not</b> prove</div>
+      <ul class="bench-list bench-list--no"><li><b>That the components survive contact with a population.</b> They have been exercised against two environments and one mandate, all measured by one agent</li><li>That the layouts hold on a phone — the grant tree below 390px has a proposed degradation nobody has tested</li><li>That a second consumer will find the contract workable; RiskMandate is committed to consuming it and has not yet</li></ul>
+    </div>
+  </div>
+  <div class="bench-gates"><b>Gates</b> — what keeps it honest when nobody is looking:
+    <ul class="bench-list"><li>the gallery renders the actual library entries and mandate, so a schema change breaks the build rather than the integration</li></ul></div>
+  <div class="bench-meta">
+    <span>from the Grant &amp; Mandate pack, <a href='../packs/grant-and-mandate/building-blocks.html'>document 09</a></span>
+    <span>code: <code>assets/gm-blocks.css, admin/build/gen_blocks.py</code></span>
+    <span>on the bench since v0.1.31 · last moved v0.1.31</span>
+  </div>
+</div>
+<div class="bench-item" id="map-your-case">
+  <div class="bench-item__head">
+    <h3><a href="../assess/index.html">Map your own case</a></h3>
+    <span class="bench-state bench-state--live">live</span>
+  </div>
+  <p class="bench-item__line">A visitor assembles their own agent installations as grant trees, sees the gap, and records a decision per gap — storing the choices and never the answers.</p>
+  <div class="bench-cols">
+    <div class="bench-col">
+      <div class="bench-col__k">What it demonstrates</div>
+      <ul class="bench-list bench-list--yes"><li>That the no-collection claim can be <b>architectural rather than operational</b>: there is no free-text input anywhere, so there is nothing to type</li><li>The three-tier control test in an interface, with escalation drawn as an edge</li><li>A conformance test for this site's own claim, checkable in ten seconds in a browser's network panel</li></ul>
+    </div>
+    <div class="bench-col bench-col--not">
+      <div class="bench-col__k">What it does <b>not</b> prove</div>
+      <ul class="bench-list bench-list--no"><li><b>That the library covers anybody's real estate.</b> Scenario 5 has no tree to point at at all</li><li>That the assessment changes what anybody does — it has no backend, so it can measure none of its own success measures</li><li>That the acceptor model is sound: it offers a <b>role</b> where the pack's own standard asks for a named person</li></ul>
+    </div>
+  </div>
+  <div class="bench-gates"><b>Gates</b> — what keeps it honest when nobody is looking:
+    <ul class="bench-list"><li>no free-text input anywhere on the page, by construction</li><li>browser storage only — nothing leaves the visitor's machine</li></ul></div>
+  <div class="bench-meta">
+    <span>from the <a href='../packs/map-your-case/index.html'>Map Your Case pack</a></span>
+    <span>code: <code>assess/</code></span>
+    <span>on the bench since v0.1.16 · last moved v0.1.19</span>
+  </div>
+</div>
+<div class="bench-item" id="synthetic-readers">
+  <div class="bench-item__head">
+    <h3><a href="../packs/map-your-case/readers/index.html">Synthetic readers</a></h3>
+    <span class="bench-state bench-state--specified">specified</span>
+  </div>
+  <p class="bench-item__line">A programme that puts a page in front of an agent which receives pixels and nothing else — no text, no structure, no knowledge of the project — and watches where it goes.</p>
+  <div class="bench-cols">
+    <div class="bench-col">
+      <div class="bench-col__k">What it demonstrates</div>
+      <ul class="bench-list bench-list--yes"><li>The screenshot boundary as an <b>instrument</b> rather than a limitation</li><li>A patience budget set from outside the model, so abandonment is a measured event rather than a story the model tells about itself</li><li>One run performed, with four defects already folded back into change control</li></ul>
+    </div>
+    <div class="bench-col bench-col--not">
+      <div class="bench-col__k">What it does <b>not</b> prove</div>
+      <ul class="bench-list bench-list--no"><li><b>That synthetic readers can report preferences.</b> They find defects; a preference from a simulated reader is not evidence and the programme says so</li><li>That the findings generalise — one run, one archetype, one page</li><li>That the simulation marker survives export, which is the rule most likely to be broken by accident</li></ul>
+    </div>
+  </div>
+  <div class="bench-gates"><b>Gates</b> — what keeps it honest when nobody is looking:
+    <ul class="bench-list"><li>the simulation marker in the filename, the headers, and beside every quote</li><li>the page under test is authored before the run, so the model cannot be agreeing with itself</li></ul></div>
+  <div class="bench-meta">
+    <span>from the Map Your Case pack, document 08</span>
+    <span>code: <code>packs/map-your-case/readers/</code></span>
+    <span>on the bench since v0.1.23 · last moved v0.1.24</span>
+  </div>
+</div>
+
+<h2 id="adding">Putting something on the bench</h2>
+<p>Three requirements, and the third is the one that matters:</p>
+<ol>
+  <li><b>Its own folder, its own code.</b> An experiment that entangles itself with the site's other
+  machinery cannot be retired, and retiring things is most of what a bench is for.</li>
+  <li><b>An origin.</b> A brief, or a dev-pack document. Something that says what question it was built to
+  answer, so its result can disappoint.</li>
+  <li><b>A <code>does_not_prove</code> list, and gates.</b> Both are mandatory in
+  <code>admin/build/gen_bench.py</code>, and the generator refuses to build without them.</li>
+</ol>
+<p>Then add a dict to that generator and run it. The machine-readable index is
+<a href="llms.txt"><code>bench/llms.txt</code></a>.</p>
+
+<div class="note"><b>Why "the bench" and not "labs".</b> In this industry <em>labs</em> has come to mean
+<em>unsupported, may vanish, do not depend on it</em> — and the things below are the opposite: they are the
+most rigorously checked artefacts on this site. They are simply not finished products. A bench is where you
+put something to test it and read the result honestly, which is the same posture the rest of the site takes,
+and it sits naturally beside the estate's own vocabulary of measurement, evidence and gates.</div>
+
+<div class="pagenav">
+  <a href="../index.html">← Front page</a>
+  <a href="../packs/index.html">The dev packs →</a>
+</div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.32</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The bench</h4>
+    <a href="../bench/index.html">&#9679; What is built</a>
+    <a href="../registry/index.html">The register, live</a>
+    <a href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
+    <a href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
+    <a href="../assess/index.html">&#8594; Map your own case</a>
+  </div>
+  <div>
+    <h4>The registry</h4>
+    <a href="../failure/index.html">Why they don't exist</a>
+    <a href="../rules/index.html">The four rules</a>
+    <a href="../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../roadmap/index.html">Build order</a>
+    <a href="../rules/prior-art.html">Prior art</a>
+  </div>
+  <div>
+    <h4>The three layers</h4>
+    <a href="../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../enrolment/index.html">Enrolment</a>
+    <a href="../execution/index.html">The execution broker</a>
+    <a href="../shipped/index.html">What already ships</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../origins/index.html">Origins: 2026</a>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../packs/registry-mvp/index.html">The registry MVP pack</a>
+    <a href="../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
+    <a href="../packs/map-your-case/index.html">The Map Your Case pack</a>
+    <a href="../about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../llms.txt">llms.txt</a>
+  </div>
+</div></footer>
+
+</body>
+</html>
