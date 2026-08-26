@@ -1,0 +1,37 @@
+{
+  "allow": [
+    {
+      "capability": "repo.contents.push",
+      "constraints": {
+        "branches": [
+          "claude/**"
+        ]
+      },
+      "resource": "github.com/SGit-AI/SGit-AI__Website__PKI"
+    }
+  ],
+  "enforced_by": {
+    "how_to_reach_boundary": "the same allow-list evaluated where the agent cannot reach it: a branch protection rule, or a required CI check",
+    "point": ".githooks/pre-push",
+    "tier": "setting",
+    "why_not_boundary": "the hook file is inside the grant it bounds \u2014 the agent can edit it, unset core.hooksPath, or pass --no-verify. It moves the constraint from expectation to setting, which is exactly what the brief predicted, and no further"
+  },
+  "expires_at": "2026-12-31T00:00:00Z",
+  "issued_at": "2026-08-26T00:00:00Z",
+  "issuer": "sha256:90f97984b9cf3930",
+  "issuer_note": "the registry's operator root \u2014 a FIXTURE: its private half is published, so this mandate's ENFORCEMENT is real and its AUTHORITY is not. The two halves are independent; the second awaits a real enrolment",
+  "mandate_version": "1",
+  "note": "Deliberately narrower than the measured grant: the environment can push to dev (observed, node n3), this permits only claude/**. The delta is the point.",
+  "prohibitions": [
+    "will not push to any branch of this repository outside claude/**",
+    "will not push to any other repository",
+    "will not act on any resource other than github.com/SGit-AI/SGit-AI__Website__PKI"
+  ],
+  "prohibitions_rendered_at": "2026-08-26",
+  "prohibitions_rendered_over": "capability set v0 (registry/capabilities.json)",
+  "revocation": "an append to the issuer's registry record, carrying an effective_from date",
+  "sig": "kBMAV9fYfCobVxCGvSPtxHXfOsxSWr1f/wWIXU3ydJW896gVX7oWXelZPODxfz/xHkd6SY0qGAzs+sBX2t2ZOw==",
+  "subject": "sha256:f9facb4c94da6c19",
+  "subject_note": "the authoring session's identity (a real record: private_key_published false)",
+  "v": 0
+}

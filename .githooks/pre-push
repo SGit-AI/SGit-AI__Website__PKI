@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# The enforcement point. Git runs this before any push; it refuses by exit
+# code, from outside the agent's turn. The policy it evaluates is the signed
+# mandate at packs/grant-and-mandate/mandates/current.json — read at runtime
+# rather than compiled in, so the hook and the mandate cannot drift apart.
+#
+# Install:  git config core.hooksPath .githooks
+# Bypass:   git push --no-verify     <- which is why this is tier SETTING
+set -euo pipefail
+ROOT="$(git rev-parse --show-toplevel)"
+exec python3 "$ROOT/packs/grant-and-mandate/tools/mandate.py" pre-push "$@"
