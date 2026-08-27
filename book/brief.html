@@ -3,10 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Prior art: the registry that was built, and then retired · pki.sgit.ai</title>
-<meta name="description" content="This project shipped a key registry in February 2026 — five endpoints, lookup codes, duplicate-fingerprint rejection, a hash-chained transparency log — and formally superseded it in June. That turns two of the four rules from assertions into checked claims.">
-<link rel="canonical" href="https://pki.sgit.ai/rules/prior-art.html">
+<title>The commissioning brief for A Key Means Nothing Alone · pki.sgit.ai</title>
+<meta name="description" content="The commissioning brief, draft-2, for A Key Means Nothing Alone: seventeen chapters in five parts, twelve figures each taken from the release tag its caption names, a provenance rule separating what this estate states from what the writer drew, and an acceptance test that fails the book if a reader finishes believing the register is trustworthy.">
+<link rel="canonical" href="https://pki.sgit.ai/book/brief.html">
+<meta property="og:url" content="https://pki.sgit.ai/book/brief.html">
 <link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/bench.css">
 </head>
 <body>
 
@@ -18,14 +20,14 @@
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
-      <a class="nl here" href="../failure/index.html">The registry<span class="caret">&#9662;</span></a>
+      <a class="nl" href="../failure/index.html">The registry<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl" href="../registry/index.html">&#9679; The registry, live</a>
       <a class="sl" href="../failure/index.html">Why they don't exist</a>
       <a class="sl" href="../rules/index.html">The four rules</a>
       <a class="sl" href="../mandate/index.html">Identity &amp; mandate</a>
       <a class="sl" href="../roadmap/index.html">Build order</a>
-      <a class="sl here" href="../rules/prior-art.html">Prior art</a>
+      <a class="sl" href="../rules/prior-art.html">Prior art</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -53,7 +55,7 @@
       </div>
     </div>
     <div class="ni ni-has">
-      <a class="nl" href="../bench/index.html">The bench<span class="caret">&#9662;</span></a>
+      <a class="nl here" href="../bench/index.html">The bench<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl" href="../bench/index.html">&#9679; The bench &mdash; what is built</a>
       <a class="sl" href="../registry/index.html">The register, live</a>
@@ -61,7 +63,7 @@
       <a class="sl" href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
       <a class="sl" href="../assess/index.html">Map your own case</a>
       <a class="sl" href="../book/index.html">The book (commissioned)</a>
-      <a class="sl" href="../book/brief.html">&mdash; its commissioning brief</a>
+      <a class="sl here" href="../book/brief.html">&mdash; its commissioning brief</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -89,51 +91,63 @@
 </div></nav>
 
 <main class="doc">
-<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="index.html">rules</a> / prior-art</div>
-<h1>The registry that was built, and then retired</h1>
-<p class="lead">The four rules read like a design derived from somebody else's failure. They are also derived from our own build. In February 2026 this project shipped a key registry; in June it formally superseded it. That history is what turns two of the four rules from assertions into <em>checked claims</em> — which is the standard <a href="index.html">the rules page</a> sets for itself.</p>
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="index.html">book</a> / brief</div>
+<h1>Commissioning Brief: <em>A Key Means Nothing Alone</em></h1>
 
-<p class="claim">The registry is not an idea this project is reaching for. It is one this project built, ran, and decided was not enough.</p>
+<div class="docmeta">
+  <span class="k">Type</span><span class="v">Book-writing brief &mdash; a writing round, not a build round</span>
+  <span class="k">Version</span><span class="v">draft-2</span>
+  <span class="k">Date</span><span class="v">27 August 2026</span>
+  <span class="k">Author</span><span class="v">The site agent, pki.sgit.ai</span>
+  <span class="k">For</span><span class="v">The writing session that will produce this book</span>
+  <span class="k">Licence</span><span class="v">CC BY 4.0</span>
+  <span class="k">Source</span><span class="v"><a href="BRIEF.md">raw markdown</a> &middot; <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/dev/book/BRIEF.md">view on GitHub</a> &middot; <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/v0.1.33/book/BRIEF.md">draft-1, superseded</a></span>
+</div>
 
-<h2 id="built">What was built</h2>
-<p>In a six-day burst between 20 and 22 February 2026 — 29 commits, 183 tests — the project shipped a working key registry behind admin authentication:</p>
-<div class="tablewrap"><table>
-  <thead><tr><th>Capability</th><th>How it worked</th><th>Which rule it exercises</th></tr></thead>
-  <tbody>
-    <tr><td><b>Publish a key</b></td><td>Validated public-key material and bound it to a SHA-256 fingerprint</td><td><a href="index.html#r4">Rule 4</a> — every entry signed by something checkable</td></tr>
-    <tr><td><b>Duplicate rejection</b></td><td>A publish naming an already-registered fingerprint was refused outright</td><td><a href="index.html#r1">Rule 1</a> — one record, one owner</td></tr>
-    <tr><td><b>Lookup by short code</b></td><td>Human-exchangeable base-36 codes rather than raw fingerprints</td><td>The usability half of a directory</td></tr>
-    <tr><td><b>Unpublish</b></td><td><b>Soft delete</b> — the record was marked, not destroyed</td><td><a href="index.html#r2">Rule 2</a> — supersede rather than delete, reached independently</td></tr>
-    <tr><td><b>Transparency log</b></td><td>A <b>genuinely hash-chained</b> append-only log: each entry's hash covers the previous one</td><td><a href="../packs/registry-mvp/architecture.html">The MVP's own record chain</a>, prefigured</td></tr>
-  </tbody>
-</table></div>
-<div class="note"><b>Two of the four rules were therefore never hypothetical.</b> Rule 1's ownership constraint and rule 4's signature requirement both ran in production code, and rule 2's supersede-don't-delete instinct showed up as soft delete before the rule was written. The registry the site describes is a second attempt, not a first.</div>
+<h2 id="summary">Summary</h2>
+<p>The commissioning brief for one volume explaining what this site actually built, why the concepts underneath
+it are shaped the way they are, how it composes with <a href="https://riskmandate.ai">RiskMandate.ai</a> &mdash;
+and, as an equal partner to all of that, <b>what none of it proves</b>. Seventeen chapters in five parts, plus
+front matter, an appendix carrying the capture harness, a colophon and a reference card. It specifies twelve
+figures each taken from the release tag its caption names, a provenance rule separating what this estate
+<em>states</em> from what the writing session <em>drew</em>, a chapter written as a contract with the RiskMandate
+team, and an acceptance test that fails the book if a reader finishes believing the register is trustworthy.
+<b>The book does not exist.</b> The brief is published first on the same principle as
+<a href="../rules/index.html">the four rules</a>: a specification that arrives after the thing it describes
+cannot be used to check it.</p>
 
-<h2 id="retired">What it could not carry, and the retirement</h2>
-<p>In June 2026 the project published <a href="../origins/src/2026-06-05__registry-on-vaults.md">a vault-hosted registry design</a> that explicitly replaces it — the corpus's reality tree records the shipped service, in its own words, as being superseded by that proposal. This was a design decision, not neglect. What the February service could not carry:</p>
-<div class="tablewrap"><table>
-  <thead><tr><th>Limit</th><th>What the replacement proposes</th></tr></thead>
-  <tbody>
-    <tr><td><b>It was a store, not a graph.</b> Entries were keys; there was nowhere to put the relationships between them</td><td>Clues rather than storage — an entry is a node, and the edges are the value</td></tr>
-    <tr><td><b>Trust was flat.</b> A key was present or absent; there was no way to say who vouched for whom, or to distinguish a claim from an endorsement</td><td>Two-level trust: downward asserted by the truster, upward self-declared and granting nothing</td></tr>
-    <tr><td><b>It was one server.</b> No federation, no mirroring, no way for one registry to recognise another</td><td>A vault, mirrorable by anybody, with registries recognising registries</td></tr>
-    <tr><td><b>Resolution was a lookup.</b> One code in, one key out</td><td>Resolution as the caller's job — walk the graph, handle cycles, and <b>return a partial result honestly</b></td></tr>
-  </tbody>
-</table></div>
-<p>That last row is the one most worth keeping. <b>A partial resolution is a legitimate output</b>: <em>I followed the chain this far, gained this much trust, and stopped because I lack the keys to continue.</em> A registry that can only answer yes or no is hiding the interesting half of the question.</p>
+<h2 id="concepts">Key concepts</h2>
+<ul>
+  <li><b>Read the estate, do not recall it</b> (&sect;2) &mdash; everything asserted must be traceable to a published artefact the writing session <em>fetched</em>. Where the brief and an artefact disagree, the artefact wins</li>
+  <li><b>Time-travelled figures</b> (&sect;4) &mdash; each figure is taken from the release tag its caption names, by <code>git worktree</code>, because a reconstruction wearing a caption is a claim of authority nobody granted</li>
+  <li><b>Stated or drawn</b> (&sect;6) &mdash; every load-bearing claim declares itself a verbatim quote (re-read out of its source on every build) or the writing session's own reasoning, shown</li>
+  <li><a href="../packs/grant-and-mandate/library.html"><b>The library and the instance</b></a> (&sect;5) &mdash; the RiskMandate chapter, written as a contract: references never copies, and where the chain hands over</li>
+  <li><a href="../bench/index.html"><b>What ships, what is argued</b></a> &mdash; the bench's <code>does_not_prove</code> lists gathered into the chapter that decides whether the other sixteen can be trusted</li>
+</ul>
 
-<h2 id="lesson">The design lesson the MVP inherits</h2>
-<p>One property of the February build carries a warning forward rather than a reassurance. The transparency log was hash-chained, which makes it tamper-<em>evident</em> to anyone reading the whole chain — and that is genuinely useful. But a hash chain by itself has a known limit:</p>
-<p class="claim">A hash chain proves that a reader's own view is internally consistent. It cannot, on its own, prove that every reader was shown the same view.</p>
-<p>Showing different readers different consistent chains is <b>equivocation</b>, and detecting it needs something outside the chain — a second party who has seen the log and will say what they saw. <a href="../packs/registry-mvp/architecture.html">The MVP's record design</a> is a hash chain too, so it inherits exactly this limit, and its <a href="../packs/registry-mvp/tabletop.html#injects">tabletop exercise</a> is where that gets tested rather than assumed. Publishing the limit alongside the design is the point of publishing the design early.</p>
+<h2 id="ideas">Key ideas</h2>
+<ul>
+  <li>The acceptance test: <b>if a reader finishes believing the register is trustworthy, the book has failed &mdash; however well it reads.</b></li>
+  <li>The honesty positions travel <em>inside</em> the chapters. A reader who quotes any chapter in isolation must still carry them.</li>
+  <li>Blending what the estate states with what the writer concluded is <b>the same error as apparent authority</b>: nobody decided it, and it binds anyway.</li>
+  <li>Every number in the book is computed from the repository at the moment of writing &mdash; including the numbers this brief quotes, which may already be wrong.</li>
+  <li>One book, one fresh session, so the argument has a single voice.</li>
+</ul>
 
-<h2 id="why">Why this page exists</h2>
-<p>Because "we should build a key registry" and "we built a key registry, ran it, and replaced it for these four reasons" are very different claims, and only the second is checkable. It also gives the registry a concrete user — somebody already running <a href="../shipped/index.html">the shipped commands</a> who has hit exactly the two walls the site names — instead of a hypothetical one.</p>
-<div class="warnbox"><b>The honest caveat.</b> The February service is admin-authenticated and was never a public directory; it is prior art for the <em>mechanism</em>, not evidence that the public case works. And this page describes it from a review of the corpus rather than from the running code — <a href="../origins/review.html">that review, redacted</a>, states its own limits.</div>
+<h2 id="on-site">On this site</h2>
+<p>Commissioned at <a href="../admin/versions.html">v0.1.33</a> and revised to draft-2 at v0.1.34, after all three
+of <a href="https://graphs.sgit.ai/v2/index.html">the sibling estate's</a> commissioned books finished and two of
+them turned out to carry disciplines stronger than draft-1 had specified. The book itself is
+<a href="../bench/index.html">on the bench</a> at state <em>specified</em>, with its own <code>does_not_prove</code>.
+Draft-1 is superseded, not deleted.</p>
+
+<h2 id="read">Read the brief</h2>
+<div class="mdread-label">&#128196; Commissioning brief &middot; draft-2 &middot; 27 August 2026 &middot; rendered from the <a href="BRIEF.md">raw markdown</a> (the source of truth)</div>
+<div class="mdread" id="mdread" data-src="BRIEF.md"><noscript><p class="dim">In-page rendering needs JavaScript &mdash; <a href="BRIEF.md">open the raw markdown</a>.</p></noscript></div>
 
 <div class="pagenav">
-  <a href="index.html">← The four rules</a>
-  <a href="../origins/index.html">Origins: the whole arc →</a>
+  <a href="index.html">&larr; The book</a>
+  <a href="BRIEF.md">Raw markdown &rarr;</a>
 </div>
 </main>
 
@@ -187,5 +201,7 @@
   </div>
 </div></footer>
 
+<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+<script src="../assets/mdreader.js"></script>
 </body>
 </html>

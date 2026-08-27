@@ -120,7 +120,7 @@ BENCH = [
 
  dict(slug="the-book", name="A Key Means Nothing Alone (the book)", state="specified",
   where="../book/index.html", since="v0.1.33", updated="v0.1.34",
-  origin="a <a href='../book/BRIEF.md'>commissioning brief</a>, draft-2, modelled on graphs.sgit.ai's three finished books",
+  origin="a <a href='../book/brief.html'>commissioning brief</a>, draft-2, modelled on graphs.sgit.ai's three finished books",
   one_line="One volume explaining what this site built, how it composes with RiskMandate.ai, and what none "
            "of it proves — commissioned, with the brief published before the book exists.",
   demonstrates=[

@@ -66,6 +66,7 @@ NAV = [
         ("The building blocks", "packs/grant-and-mandate/blocks.html"),
         ("Map your own case", "assess/index.html"),
         ("The book (commissioned)", "book/index.html"),
+        ("&mdash; its commissioning brief", "book/brief.html"),
     ], ("bench/", "book/")),
     ("Docs", "documents/index.html", [
         ("The documents", "documents/index.html"),
@@ -90,6 +91,7 @@ FOOTER = [
         ("The building blocks", "packs/grant-and-mandate/blocks.html"),
         ("&#8594; Map your own case", "assess/index.html"),
         ("The book (commissioned)", "book/index.html"),
+        ("&mdash; its commissioning brief", "book/brief.html"),
     ]),
     ("The registry", [
         ("Why they don't exist", "failure/index.html"),
