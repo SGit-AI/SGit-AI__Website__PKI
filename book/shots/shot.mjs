@@ -72,7 +72,14 @@ function inkFraction(pngBuffer) {
 let browser;
 const results = [];
 try {
-  browser = await chromium.launch({ args: ['--force-color-profile=srgb'] });
+  browser = await chromium.launch({
+    // --font-render-hinting=none is the one that matters for figures: without
+    // it, text rendering varies with the host's font config and the same page
+    // captured twice can differ in bytes, which breaks a digest gate for a
+    // reason that has nothing to do with the page.
+    args: ['--force-color-profile=srgb', '--font-render-hinting=none',
+           '--disable-dev-shm-usage', '--no-sandbox'],
+  });
 
   for (const job of spec.jobs) {
     const scale = job.scale || 2;                       // legible in print

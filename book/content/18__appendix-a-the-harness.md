@@ -6,6 +6,10 @@
 
 Everything here is published with the book at `https://pki.sgit.ai/book/shots/`. Nothing in this book was measured by a method that is not in this appendix.
 
+**Where this harness comes from.** It is a re-implementation of Appendix C of the sibling estate's *Making a Book*, at `https://graphs.sgit.ai/v2/books/making-a-book/content/15__appendix-c-the-harness.md`, which is where the commissioning brief's §4 came from. That appendix states the two operational rules — never reuse a port, always kill what you spawned — and the reason behind them, and this book's brief carried them forward. Saying so is not a courtesy: a book that marks every borrowed sentence and then quietly presents a borrowed method as its own would be making exactly the mistake it spends seventeen chapters on. **The scripts below are this book's own; the technique is not.**
+
+Four things in this harness came from that appendix rather than from the brief's summary of it, and each is recorded at the point it applies: the `--font-render-hinting=none` launch flag (§A.2), the settle rule for anything laid out by script (§A.2), the tags-are-the-substrate refusal (§A.4), and the figure table (§A.7).
+
 ## A.1 · Time travel: a figure is taken from the version its caption names
 
 The problem this solves: several figures in this book show pages *as they were*. A figure captioned as the past but photographed today is a reconstruction, and a reconstruction wearing a caption is a claim of authority nobody granted.
@@ -72,6 +76,10 @@ Three details decide whether the figures are usable, and one of them changed dur
 
 **`deviceScaleFactor` is 2 or 3**, so figures are legible in print.
 
+**`--font-render-hinting=none`**, from the sibling appendix, and it is the flag that keeps a digest gate honest: without it, text rendering varies with the host's font configuration, so the same page captured on two machines differs in bytes and a gate fails for a reason that has nothing to do with the page.
+
+**A settle after load, for anything laid out by script.** The sibling estate's figures are of a graph laid out by a physics simulation, which is still moving when the network goes quiet; theirs waited six to nine seconds. Only one figure here is script-laid-out — `/assess/`, whose graph is hand-written SVG — and raising its settle from 1.2s to 6s produced a byte-identical capture, so the wait was already sufficient. That is recorded as a checked non-issue rather than left as an assumption.
+
 **`pageerror` and console errors are collected and printed beside each result**, because *a screenshot that looks fine, taken from a page that threw, is a figure you must not publish.* Any job with a problem is marked `ERR` and the batch exits non-zero.
 
 **The blank check is colour-agnostic**, and this is the part that changed. The specified rule was *anything under about 3 per cent ink is a white rectangle*, measured as the fraction of non-near-white pixels. That works for a web page and fails completely for a figure of a dark terminal, which scores ~100% ink by that measure — so a dark page that rendered nothing would have sailed straight through the gate. The metric is now the fraction of pixels that are **not the modal colour**, quantised to 5 bits per channel so anti-aliasing does not read as content:
@@ -127,6 +135,36 @@ Four gates, and each fails the build rather than warning.
 | **Figures — past** | Re-running `travel.sh` at the tag reproduces the recorded page digest. Never goes stale, because the tag does not move |
 | **Figures — fresh** | For `tag: current`, the recorded digest must match the live page. **This will break on the next release.** That is correct and it is inconvenient |
 | **Chapter hashes** | Every chapter's SHA-256 in `book.json` matches its markdown on disk |
+| **Stats** | Every count printed in the prose is a `gen:stat` marker regenerated from the repository. A marker whose printed value has drifted from the computed one fails `--check` |
+| **Tags** | A checkout with no tags **refuses** rather than computing zeros |
+
+### The tags refusal, and why it is a gate rather than a caution
+
+Every release number in this book, and every past figure, rests on git tags. A shallow clone has none, and many automated environments make one by default.
+
+**This book's writing session began against exactly that** — `git tag` returned nothing, and the harness §4 depends on `git worktree add <tag>`. The sibling estate's appendix warns about it in its own §3, having hit it too. So it is a gate here rather than a note:
+
+```
+$ python3 book/build.py --check          # in a shallow clone
+build.py: this checkout has NO TAGS, so no release number in the book can be
+computed and no past figure can be re-derived.
+  git fetch --unshallow origin && git fetch --tags origin
+Refusing rather than writing zeros into the prose.
+$ echo $?
+1
+```
+
+A silent `0` would have been written into the prose as a fact, in a chapter arguing that a gap must never render as an absence.
+
+### The counts in the prose are generated
+
+Adopted from the sibling estate's atlas volume, which carries its counts as `gen:stat` markers rather than as typed numbers:
+
+```markdown
+<!-- gen:stat:quotes -->65<!-- /gen:stat:quotes --> quotations, every one re-read…
+```
+
+The reason is not tidiness. A number typed into prose drifts the moment anything moves, silently, while still reading as a fact — and two of this book's own counts had already gone stale before the markers were adopted, including a release count that this book's own release falsified.
 
 The quote gate normalises exactly two things and nothing else: HTML tags are stripped, and runs of whitespace collapse to one space, because line wrapping and markup are not differences in the text. A quote needing more help than that is not a quote. It caught one error during writing — a passage attributed to the readiness report's Q2 section that had been conflated with its phase table.
 
@@ -240,6 +278,29 @@ Or one at a time, with a port you have not used:
 ```
 
 `shots.json` carries the retake command for every figure individually, alongside its tag, its gate, and the digest that gate checks.
+
+### The figures in this book
+
+| # | Tag | Gate | Page |
+|---|---|---|---|
+| 1 | current | fresh | `/bench/index.html` |
+| 2a | **v0.1.26** | re-derivable | `/registry/index.html` |
+| 2b | current | fresh | `/registry/index.html` |
+| 3 | current | fresh | `/registry/index.html`, the answers table |
+| 4 | current | fresh | terminal — the fixture flag, `jq` over a record |
+| 5 | current | fresh | terminal — `registry_tool.py validate` |
+| 6 | current | fresh | terminal — `sgit pki import` + `verify` |
+| 7 | current | fresh | terminal — the forgery |
+| 8 | **v0.1.28** | fresh | terminal — the refused push, re-run against that tag's `mandate-v1.json` |
+| 8b | **v0.1.28** | fresh | terminal — the same command against the mandate that tag ships |
+| 9 | current | fresh | the blocks gallery, tier badges |
+| 10 | current | fresh | the blocks gallery, the defeated boundary |
+| 11 | current | fresh | the blocks gallery, the authority/enforcement split |
+| 12 | current | fresh | `/assess/index.html` |
+
+Figures 8 and 8b are transcripts produced at `v0.1.28` and rendered today, so their gate is the freshness of the rendered page rather than the re-derivability of a page at a tag; the transcript bytes are what carry the tag, and `sha256sum book/shots/transcripts/*.txt` is what checks them.
+
+Every one of them can be re-taken, by anybody, with the scripts in this appendix. That is the property this book rests on: not that you should trust the figures, but that you do not have to.
 
 ## A.8 · What this harness does not establish
 

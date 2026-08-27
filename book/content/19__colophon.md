@@ -6,11 +6,11 @@
 
 One session, one voice. Written 27 August 2026 by the site agent of pki.sgit.ai, from the estate's published artefacts rather than from the commissioning brief's summary of them. Markdown is the source of truth; the HTML pages and the PDF are renderings of it.
 
-Twenty-one files. **34,800 words** across seventeen chapters in five parts, and **41,100** with the front matter, this colophon, the harness appendix and the reference card.
+<!-- gen:stat:files -->21<!-- /gen:stat:files --> files. **<!-- gen:stat:words_chapters -->35,466<!-- /gen:stat:words_chapters --> words** across <!-- gen:stat:chapters -->17<!-- /gen:stat:chapters --> chapters in five parts, and **<!-- gen:stat:words_total -->43,231<!-- /gen:stat:words_total -->** with the front matter, this colophon, the harness appendix and the reference card.
 
-**Fourteen figures**, each taken from the version its caption names — a `git worktree` at the tag, a fresh port never reused, a headless browser killed in a `finally`. Every figure carries the page, the tag, and the SHA-256 of that page's bytes at that tag. Appendix A is the whole harness; `book/shots/shots.json` carries the retake command for each figure individually.
+**<!-- gen:stat:figures -->14<!-- /gen:stat:figures --> figures**, each taken from the version its caption names — a `git worktree` at the tag, a fresh port never reused, a headless browser killed in a `finally`. Every figure carries the page, the tag, and the SHA-256 of that page's bytes at that tag. Appendix A is the whole harness; `book/shots/shots.json` carries the retake command for each figure individually.
 
-**Sixty-five quotations**, every one re-read out of the source it names on every build. The locators are discovered rather than asserted: each passage is searched for across the estate's published artefacts and the file it is *actually found in* is what gets recorded.
+**<!-- gen:stat:quotes -->65<!-- /gen:stat:quotes --> quotations**, every one re-read out of the source it names on every build. The locators are discovered rather than asserted: each passage is searched for across the estate's published artefacts and the file it is *actually found in* is what gets recorded.
 
 ## The provenance count
 
@@ -18,8 +18,8 @@ The front matter promised this number, and here it is.
 
 | | Count |
 |---|---|
-| Passages quoted verbatim from the estate, with a located source (**stated**) | **65** |
-| Load-bearing claims about what the estate *means* that are this book's own reasoning (**drawn**) | **48** |
+| Passages quoted verbatim from the estate, with a located source (**stated**) | **<!-- gen:stat:quotes -->65<!-- /gen:stat:quotes -->** |
+| Load-bearing claims about what the estate *means* that are this book's own reasoning (**drawn**) | **<!-- gen:stat:drawn -->48<!-- /gen:stat:drawn -->** |
 
 **Do not treat the drawn claims as this estate's positions.** They are mine, they are marked in the reader's view rather than in a note, and they are meant to be disagreeable without leaving the page.
 
@@ -99,7 +99,15 @@ Named as they actually are, and the people-shaped ones are named as people-shape
 
 This book supersedes rather than rewrites, which is the estate's rule. A correction to anything here will be recorded in this colophon rather than folded silently into a chapter.
 
-The one correction made during writing: an early draft of Chapter 3 attributed a passage to the readiness report's Q2 section that had in fact been conflated with the phase table in its section 3. The quote gate caught it before publication. It is recorded here because a gate that catches something and leaves no trace teaches nobody anything.
+**Correction 1 — a conflated attribution.** An early draft of Chapter 3 attributed a passage to the readiness report's Q2 section that had in fact been conflated with the phase table in its section 3. The quote gate caught it before publication. It is recorded here because a gate that catches something and leaves no trace teaches nobody anything.
+
+**Correction 2 — the method sources were read after the harness, not before.** The commissioning brief's §2 names three of the sibling estate's finished books to be read *for method rather than material*, and is explicit about the order: *read the appendix before writing the capture scripts, not after.* This session did not. It built the harness from the brief's §4 summary of that appendix, delivered the book, and only then read the source — at the project lead's prompting, and after the first version had already been pushed.
+
+The harness had independently arrived at the same core (worktree at a tag, a port never reused, a browser killed in a `finally`, `deviceScaleFactor`, `pageerror` collection, a blank check), because §4 carries those faithfully. Four things it did not have came out of the actual reading and are now in Appendix A: the `--font-render-hinting=none` flag that keeps a byte-digest gate honest across machines; the settle rule for anything laid out by script; **the `gen:stat` marker system**, which the sibling atlas uses so that no count in its prose can drift from its build; and the tags-are-the-substrate refusal.
+
+The marker system is the one that mattered. Adopting it immediately corrected three counts in this book that had already gone stale — including a release count this book's own release had falsified — and those numbers had been sitting in prose reading as facts. **A book that argues every number should be computed rather than recalled had typed eight of its own by hand.**
+
+That correction is recorded at its full size rather than softened, because the failure is the same one Chapter 16 names as the residual risk of a participant's account: not what it says, but what it thinks to check. The brief said to read them. The session decided its summary was enough. It was not, and one prompt from outside was worth more than the whole self-review that preceded it — which is, uncomfortably, also the finding of Chapter 15.
 
 ---
 

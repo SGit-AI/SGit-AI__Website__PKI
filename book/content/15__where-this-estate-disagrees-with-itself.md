@@ -226,7 +226,7 @@ Six of the site's thirty-five releases carry a page date earlier than the tag's 
 
 Contradictions are cheap to find. Absences are the ones that decide what the estate can become, and these are named rather than counted.
 
-### A9-b · There is no capability vocabulary
+### B1 · There is no capability vocabulary
 
 `registry/capabilities.json` is a fixture set, v0. *What a capability name is* is blocking question Q3, still open, and the readiness report argues the filing is wrong:
 
@@ -260,7 +260,7 @@ Chapter 1's fourth row. Identity, mandate and delta are all statements about *pe
 
 The estate's own doctrine appendix rates it against forty Wardley doctrines and reports the shape of the result as the finding: strong exactly where a documentation-heavy solo effort can be strong alone, weak on every doctrine that needs other people. It records that *"nobody outside the project has been asked whether this is a need"* and *"REP-0001 has no sponsor"* are the same doctrinal hole in two places.
 
-One outside session has ever read this material cold. It produced the readiness report, and six of the twelve contradictions above are findings from that single reading — three of which it found and are still open.
+One outside session has ever read this material cold. It produced the readiness report, and six of the <!-- gen:stat:contradictions -->12<!-- /gen:stat:contradictions --> contradictions above are findings from that single reading — three of which it found and are still open.
 
 *Drawn.* That ratio is the most useful number in this chapter. **One outside reader, one pass, produced half the open contradictions in an estate that reviews itself continuously and has recorded fifty-two corrections across two packs.** Not because the internal review is weak — it is unusually rigorous — but because it is the same reader every time. The estate's own doctrine appendix says asking five operators is a Phase I fix rather than a nice-to-have. On this evidence it is the highest-yield thing available, and it has not been done.
 
@@ -268,7 +268,7 @@ One outside session has ever read this material cold. It produced the readiness 
 
 ## What this chapter is worth
 
-Twelve contradictions and seven absences, from an estate that is forty hours old in its current form and has published thirty-five releases in eight days.
+<!-- gen:stat:contradictions -->12<!-- /gen:stat:contradictions --> contradictions and <!-- gen:stat:absences -->7<!-- /gen:stat:absences --> absences, from an estate that is <!-- gen:stat:release_hours -->40.0<!-- /gen:stat:release_hours --> hours old in its current form and has published <!-- gen:stat:releases -->35<!-- /gen:stat:releases --> releases in <!-- gen:stat:site_days -->8<!-- /gen:stat:site_days --> days.
 
 *Drawn.* I want to say plainly what I think this list means, because there are two wrong readings available.
 

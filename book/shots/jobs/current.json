@@ -66,7 +66,7 @@
       "id": "f12-assess-midflow",
       "path": "/assess/index.html",
       "scale": 2,
-      "settle": 1200,
+      "settle": 6000,
       "viewport": {
         "width": 1280,
         "height": 950

@@ -20,11 +20,28 @@
     "stated_quotations": 65,
     "drawn_claims": 48
   },
+  "stats": {
+    "quotes": 65,
+    "drawn": 48,
+    "figures": 14,
+    "chapters": 17,
+    "files": 21,
+    "words_chapters": "35,466",
+    "words_total": "43,231",
+    "contradictions": 12,
+    "absences": 7,
+    "records": 11,
+    "fixtures": 10,
+    "statements": 23,
+    "releases": 35,
+    "release_hours": "40.0",
+    "site_days": "8"
+  },
   "counts": {
     "files": 21,
     "chapters": 17,
-    "words_chapters": 35442,
-    "words_total": 41969,
+    "words_chapters": 35466,
+    "words_total": 43231,
     "figures": 14
   },
   "chapters": [
@@ -183,8 +200,8 @@
       "number": "15",
       "part": "Part five — Honesty, and a first step",
       "title": "15 · Where this estate disagrees with itself, and what it does not say",
-      "words": 2914,
-      "sha256": "d86fec47660e8a89ce0e355e8aeff7400b44f44a4723a63cf37f2d6374835167",
+      "words": 2938,
+      "sha256": "ba9b2deb115ed3380fd5ada20b2d683d3842418e93f29d05b23c6cfde4257e80",
       "stated_markers": 7,
       "drawn_markers": 2
     },
@@ -213,8 +230,8 @@
       "number": "18",
       "part": "Appendix",
       "title": "Appendix A · The harness",
-      "words": 2026,
-      "sha256": "f48ee16eed33403a767e7b6c5405329c3bcda8d5d84dd8b661dcea1eb191c436",
+      "words": 2901,
+      "sha256": "1f600808d04d3d3b113f08dc06856786a475bd8471f5bd5adbe3aacf0a1ca058",
       "stated_markers": 0,
       "drawn_markers": 0
     },
@@ -223,8 +240,8 @@
       "number": "19",
       "part": "End matter",
       "title": "Colophon · What was cut, what is open, and what this book got wrong",
-      "words": 1772,
-      "sha256": "cbb4c7b7f5314b9a376b3be947af20e9517d6ae184fd4cd971d1e4ee518637b4",
+      "words": 2135,
+      "sha256": "df94d31c447919f009dc2ba2590b6d41b2b50cba4b7247ec8b64724dc9062db8",
       "stated_markers": 1,
       "drawn_markers": 0
     },
@@ -296,7 +313,7 @@
       "tag": "current",
       "page_sha256": "1ff583569f0879bede6b1de0f8c5d10b612e1890f62be70d329f2c3fc5d6d4b5",
       "image": "shots/img/f05-validate.png",
-      "image_sha256": "3f4dff6dfad1e4e5c2bc67af76e5933a23d3fa0fa56e73c4902730f2da5cca4d",
+      "image_sha256": "ab2de37b93d009e59239d12d7a8fcaebc1f7fec548b5641a98ddcc6aac807b52",
       "gate": "fresh",
       "caption": "Six expected answers, six reproduced — and the fixture line printed for every record before any of them. The validator reads the flag first by construction, not by convention."
     },
@@ -326,7 +343,7 @@
       "tag": "current",
       "page_sha256": "2e1d58f1b48b8963aef8b27481918e49f0b90ae86667614dffd13bd0170b0ec2",
       "image": "shots/img/f08-refused-push.png",
-      "image_sha256": "142cc95067246e3e693092902ca4afb960f9d9e2dafcd456ba8a80f3ad988d06",
+      "image_sha256": "4385646e133a77d1b547a9d40582d590eb11510f3b2558aa4adaea3a1dd0536e",
       "gate": "fresh",
       "caption": "The last line before the banner is git's exit code, not the agent's decision. Read the Tier line at the bottom: the control names its own weakness on its own face."
     },
@@ -346,7 +363,7 @@
       "tag": "current",
       "page_sha256": "5f69b885e952fcadd303674c7b047fae8fb0a62efff71b49bad1fb1a08399c7e",
       "image": "shots/img/f09-tier-badges.png",
-      "image_sha256": "4ff3ae8fefd05346e6ae88ce819c8f5aaeff728f122e8a19c3b2657142877a50",
+      "image_sha256": "f97a9a66ad7c5977fb608926db574d662ac567f9ffd3099fc70a218b7fa125e0",
       "gate": "fresh",
       "caption": "Two channels, never one: the border style carries the state as well as the colour, and the word is always present. `unknown` renders as `unknown` — never as a blank, because a gap is a fact about the floor."
     },
