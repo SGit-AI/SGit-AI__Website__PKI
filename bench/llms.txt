@@ -5,7 +5,7 @@
 # collected demonstrations without their limits would manufacture the false
 # assurance this site exists to argue against.
 #
-# 5 of 6 are built and running. Hub: https://pki.sgit.ai/bench/index.html
+# 5 of 7 are built and running. Hub: https://pki.sgit.ai/bench/index.html
 
 ## The register — live
   where     https://pki.sgit.ai/registry/index.html
@@ -56,6 +56,16 @@
     - That the library covers anybody's real estate. Scenario 5 has no tree to point at at all
     - That the assessment changes what anybody does — it has no backend, so it can measure none of its own success measures
     - That the acceptor model is sound: it offers a role where the pack's own standard asks for a named person
+
+## A Key Means Nothing Alone (the book) — specified
+  where     https://pki.sgit.ai/book/index.html
+  code      book/BRIEF.md, book/
+  since     v0.1.33 (last moved v0.1.33)
+  is        One volume explaining what this site built, how it composes with RiskMandate.ai, and what none of it proves — commissioned, with the brief published before the book exists.
+  DOES NOT PROVE:
+    - That any of it is written. The brief is complete; the book does not exist, and a commissioning page is not a book
+    - That the estate is mature enough to deserve a book — four days, two environments, one agent, one mandate
+    - That a participant's account can be neutral: it is written by the project that builds the layer it argues for, and says so
 
 ## Synthetic readers — specified
   where     https://pki.sgit.ai/packs/map-your-case/readers/index.html

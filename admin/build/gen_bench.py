@@ -118,6 +118,23 @@ BENCH = [
          "browser storage only — nothing leaves the visitor's machine"],
   code="assess/"),
 
+ dict(slug="the-book", name="A Key Means Nothing Alone (the book)", state="specified",
+  where="../book/index.html", since="v0.1.33", updated="v0.1.33",
+  origin="a <a href='../book/BRIEF.md'>commissioning brief</a> modelled on graphs.sgit.ai's book round",
+  one_line="One volume explaining what this site built, how it composes with RiskMandate.ai, and what none "
+           "of it proves — commissioned, with the brief published before the book exists.",
+  demonstrates=[
+    "This estate's habit applied to itself: <b>the specification goes up before the thing</b>, so the thing can be checked against it",
+    "A screenshot gate — twelve figures each carrying the site version and the SHA-256 of the page, with the build failing when one stops matching",
+    "An acceptance test that <b>fails the book if a reader finishes believing the register is trustworthy</b>"],
+  does_not_prove=[
+    "<b>That any of it is written.</b> The brief is complete; the book does not exist, and a commissioning page is not a book",
+    "That the estate is mature enough to deserve a book — four days, two environments, one agent, one mandate",
+    "That a participant's account can be neutral: it is written by the project that builds the layer it argues for, and says so"],
+  gates=["the brief names the acceptance test and the honesty positions in advance, so a finished book can be held to them",
+         "the figure hash gate, which breaks the build rather than shipping a screenshot of a page that changed"],
+  code="book/BRIEF.md, book/"),
+
  dict(slug="synthetic-readers", name="Synthetic readers", state="specified",
   where="../packs/map-your-case/readers/index.html", since="v0.1.23", updated="v0.1.24",
   origin="the Map Your Case pack, document 08",

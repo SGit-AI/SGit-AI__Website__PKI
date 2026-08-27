@@ -65,7 +65,8 @@ NAV = [
         ("The mandate hook", "packs/grant-and-mandate/enforcement.html"),
         ("The building blocks", "packs/grant-and-mandate/blocks.html"),
         ("Map your own case", "assess/index.html"),
-    ], ("bench/",)),
+        ("The book (commissioned)", "book/index.html"),
+    ], ("bench/", "book/")),
     ("Docs", "documents/index.html", [
         ("The documents", "documents/index.html"),
         ("Dev packs", "packs/index.html"),
@@ -88,6 +89,7 @@ FOOTER = [
         ("The mandate hook", "packs/grant-and-mandate/enforcement.html"),
         ("The building blocks", "packs/grant-and-mandate/blocks.html"),
         ("&#8594; Map your own case", "assess/index.html"),
+        ("The book (commissioned)", "book/index.html"),
     ]),
     ("The registry", [
         ("Why they don't exist", "failure/index.html"),
