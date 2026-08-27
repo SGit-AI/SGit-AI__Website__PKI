@@ -14,7 +14,7 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.36</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.37</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -97,6 +97,42 @@
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
     <tr>
+<td class="vnum">v0.1.37</td>
+<td class="vdate">27 Aug 2026</td>
+<td><b>The book reads the method sources its brief named, and adopts what they taught.</b>
+The commissioning brief's §2 names three of the sibling estate's finished books to be read
+<i>for method rather than material</i>, and is explicit about the order &mdash; <i>read the appendix
+before writing the capture scripts, not after</i>. v0.1.36 did not: it built the harness from the
+brief's §4 summary and shipped. This release reads the source, at the project lead's prompting and
+after the book was already published, and acts on it. The harness had independently reached the same
+core, because §4 carries it faithfully &mdash; worktree at a tag, a port never reused, a browser
+killed in a <code>finally</code>, <code>deviceScaleFactor</code>, <code>pageerror</code> collection,
+a blank check. <b>Four things it did not have came out of the actual reading.</b>
+<b>The <code>gen:stat</code> marker system</b> is the one that mattered: the sibling atlas carries
+every count in its prose as a generated marker rather than a typed number, so a count cannot drift
+from its build while still reading as a fact. Adopting it <b>immediately corrected three counts in
+this book that had already gone stale</b>, including a release count this book's own release had
+falsified &mdash; a book arguing that every number should be computed rather than recalled had typed
+eight of its own by hand. Fifteen markers now, plus a generated STATS block in
+<code>book/llms.txt</code>; both fail <code>--check</code> on drift, verified by tampering with each.
+<b>The tags refusal</b>: every release number and every past figure rests on git tags, a shallow
+clone has none, and this session started against exactly that and had to notice &mdash; so a checkout
+with no tags now <b>refuses rather than computing zeros</b>, verified against a shallow clone,
+because a silent <code>0</code> would have been written into the prose as a fact in a chapter arguing
+that a gap must never render as an absence. <b><code>--font-render-hinting=none</code></b>, without
+which text rendering follows the host's font config and the same page captured on two machines
+differs in bytes, failing a digest gate for a reason that has nothing to do with the page. And
+<b>a settle for anything laid out by script</b> &mdash; only <code>/assess/</code> qualifies here, and
+raising it from 1.2s to 6s produced a byte-identical capture, recorded as a checked non-issue rather
+than left as an assumption. Also fixed: a numbering slip in chapter 15, where the first named absence
+was labelled A9-b and there was no B1. <b>Appendix A now credits the sibling appendix as the source
+of the technique</b> &mdash; a book that marks every borrowed sentence and then presents a borrowed
+method as its own would be making the mistake it spends seventeen chapters on &mdash; and carries the
+figure table. The colophon records the correction at full size: the brief said to read them, the
+session decided its summary was enough, and <b>one prompt from outside was worth more than the whole
+self-review that preceded it</b>, which is also the finding of chapter 15.</td>
+</tr>
+<tr>
 <td class="vnum">v0.1.36</td>
 <td class="vdate">27 Aug 2026</td>
 <td><b>The book, written.</b> <i>A Key Means Nothing Alone</i> is delivered against the
