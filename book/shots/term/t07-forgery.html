@@ -1,0 +1,23 @@
+<!doctype html><meta charset="utf-8"><title>t07-forgery · pki.sgit.ai</title>
+<link rel="canonical" href="https://pki.sgit.ai/book/shots/term/t07-forgery.html">
+<meta name="robots" content="noindex">
+<style>
+ html,body{margin:0;background:#0f1115}
+ .term{font:13px/1.55 ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+   color:#d8dee9;background:#0f1115;padding:22px 24px;white-space:pre;
+   -webkit-font-smoothing:antialiased}
+ .term .p{color:#7aa2f7}          /* the prompt */
+ .term .c{color:#5c6370;font-style:italic}  /* a comment */
+ .term .ok{color:#9ece6a}          /* an affirmative result */
+ .term .no{color:#f7768e}          /* a refusal */
+ .cap{font:11px/1.4 ui-monospace,monospace;color:#5c6370;
+   padding:0 24px 16px;background:#0f1115}
+ .sheet{display:inline-block;background:#0f1115;min-width:100%}
+</style>
+<div class="sheet"><div class="term"><span class="p">$ printf &#x27;{&quot;forged&quot;:&quot;anyone can sign this&quot;}&#x27; &gt; forged.json</span>
+<span class="p">$ openssl dgst -sha256 -sign $R/private/sign.pem forged.json &gt; forged.der</span>
+<span class="p">$ openssl dgst -sha256 -verify $R/public/sign.pem -signature forged.der forged.json</span>
+<span class="ok">Verified OK</span>
+
+<span class="c"># The private half is published in this repository. So is everybody&#x27;s.</span></div>
+<div class="cap">t07-forgery.txt · sha256:86d0ebd2ef04e01d43fcef06366832bf…</div></div>

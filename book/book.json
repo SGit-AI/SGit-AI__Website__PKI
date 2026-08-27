@@ -1,0 +1,386 @@
+{
+  "title": "A Key Means Nothing Alone",
+  "subtitle": "Identity, mandate, and the exposure nobody accepted",
+  "about": "What pki.sgit.ai built between site v0.1.25 and v0.1.32, why the concepts underneath it are shaped the way they are, how it composes with RiskMandate.ai, and — as an equal partner to all of that — what none of it proves.",
+  "written": "2026-08-27",
+  "licence": "CC BY 4.0",
+  "source_of_truth": "book/content/*.md — the HTML pages and the PDF are renderings of it",
+  "positions_that_travel_with_every_chapter": [
+    "The register is built; the trustworthy register is not. Ten of eleven records are fixtures with published private keys — every signature verifies and proves nothing.",
+    "The root is a fixture, and roots.json says so in its own entry. No chain in this register carries authority.",
+    "The enforcement is real and the authority is not, and they are independent halves. Anybody could forge the mandate the hook enforces.",
+    "The hook is a `setting`, not a `boundary` — it sits inside the grant it bounds, and --no-verify gets past it.",
+    "Every grant is a floor, not a census. An agent measuring its own grant reports what it can see.",
+    "Two environments, one agent, one mandate. Everything generalises from a sample that small.",
+    "The write path is a git commit reviewed by a human, not the account-less lane the design calls for.",
+    "This is a participant's account, published by the project that builds the layer it argues for."
+  ],
+  "provenance": {
+    "rule": "Every load-bearing claim about what this estate MEANS is marked `stated` or `drawn`. `stated` carries a verbatim quotation with a located source; `drawn` carries this book's own reasoning in the reader's view. DO NOT TREAT THE DRAWN CLAIMS AS THIS ESTATE'S POSITIONS — they are the book's.",
+    "stated_quotations": 65,
+    "drawn_claims": 48
+  },
+  "counts": {
+    "files": 21,
+    "chapters": 17,
+    "words_chapters": 35442,
+    "words_total": 41969,
+    "figures": 14
+  },
+  "chapters": [
+    {
+      "file": "content/00__front-matter.md",
+      "number": "00",
+      "part": "Front matter",
+      "title": "A Key Means Nothing Alone",
+      "words": 1540,
+      "sha256": "b6c48bea27fc6d8f99df56fb353690792d3a0fe9606da4cfa95a03a8e4e7a916",
+      "stated_markers": 1,
+      "drawn_markers": 0
+    },
+    {
+      "file": "content/01__a-key-means-nothing-alone.md",
+      "number": "01",
+      "part": "Part one — Why there is nothing to inherit",
+      "title": "1 · A key means nothing alone",
+      "words": 1693,
+      "sha256": "2433bddf96f1555a03693834c05faaaf02fd8a138fb6d652efe2104ec16b5515",
+      "stated_markers": 3,
+      "drawn_markers": 2
+    },
+    {
+      "file": "content/02__the-flood-and-the-four-rules.md",
+      "number": "02",
+      "part": "Part one — Why there is nothing to inherit",
+      "title": "2 · The flood, and the four rules it produced",
+      "words": 1528,
+      "sha256": "63327391c299a4916403ab84801f6db5ebf0835e7b3fd21b4e5bbbe0021ffa17",
+      "stated_markers": 2,
+      "drawn_markers": 2
+    },
+    {
+      "file": "content/03__the-bootstrap-trap.md",
+      "number": "03",
+      "part": "Part one — Why there is nothing to inherit",
+      "title": "3 · The bootstrap trap",
+      "words": 1978,
+      "sha256": "4d6e3f3ae242f9580d575e7412e2604c13c472bba585d2711e856bed2d2fa15c",
+      "stated_markers": 3,
+      "drawn_markers": 2
+    },
+    {
+      "file": "content/04__grant-is-not-mandate.md",
+      "number": "04",
+      "part": "Part two — The vocabulary, and why each word is load-bearing",
+      "title": "4 · Grant is not mandate",
+      "words": 1768,
+      "sha256": "e344d96cd41860b3984e9869a7588cb013beac1b618a9576ee94a8a5681fb327",
+      "stated_markers": 4,
+      "drawn_markers": 2
+    },
+    {
+      "file": "content/05__the-delta.md",
+      "number": "05",
+      "part": "Part two — The vocabulary, and why each word is load-bearing",
+      "title": "5 · The delta",
+      "words": 1677,
+      "sha256": "0eba63d24b45b1c6003d184d8043e6fd581407736f99adb9533f1e4d888b66dc",
+      "stated_markers": 4,
+      "drawn_markers": 2
+    },
+    {
+      "file": "content/06__boundary-setting-expectation.md",
+      "number": "06",
+      "part": "Part two — The vocabulary, and why each word is load-bearing",
+      "title": "6 · Boundary, setting, expectation",
+      "words": 1727,
+      "sha256": "7ec3674d86b17a6c60b86f7d16b69192d82172fe476570ae137e3a228ef7eb1e",
+      "stated_markers": 4,
+      "drawn_markers": 2
+    },
+    {
+      "file": "content/07__reality-before-the-risk-register.md",
+      "number": "07",
+      "part": "Part two — The vocabulary, and why each word is load-bearing",
+      "title": "7 · Reality before the risk register",
+      "words": 1470,
+      "sha256": "dfe964899b0a19e646309f088d2ffd91a6dfeae59461a002ca273c46522e7c6b",
+      "stated_markers": 2,
+      "drawn_markers": 2
+    },
+    {
+      "file": "content/08__the-register.md",
+      "number": "08",
+      "part": "Part three — What was built",
+      "title": "8 · The register",
+      "words": 3088,
+      "sha256": "0477199b653e73920f34581f0d86719d04ad5df37750a3940dcdf352288172fe",
+      "stated_markers": 4,
+      "drawn_markers": 2
+    },
+    {
+      "file": "content/09__a-grant-is-discovered.md",
+      "number": "09",
+      "part": "Part three — What was built",
+      "title": "9 · A grant is discovered, not authored",
+      "words": 2314,
+      "sha256": "39a470fb8307f69b8e5e70f0e6fbd8b7bdf1aac315ef0a8755be9c9f4ec9920f",
+      "stated_markers": 2,
+      "drawn_markers": 4
+    },
+    {
+      "file": "content/10__a-push-refused.md",
+      "number": "10",
+      "part": "Part three — What was built",
+      "title": "10 · A push refused by something that is not the agent",
+      "words": 2068,
+      "sha256": "41aeeb58e74b5ace24dd2d4e42dbde99be15f94bd59db06662ad83fbae0b4645",
+      "stated_markers": 3,
+      "drawn_markers": 3
+    },
+    {
+      "file": "content/11__the-building-blocks.md",
+      "number": "11",
+      "part": "Part three — What was built",
+      "title": "11 · The building blocks",
+      "words": 1913,
+      "sha256": "c9e7c157ede56a0dcae86707a193e41472b5f90e5278dc5fd8f3d6d6279aabb6",
+      "stated_markers": 3,
+      "drawn_markers": 3
+    },
+    {
+      "file": "content/12__the-library-and-the-instance.md",
+      "number": "12",
+      "part": "Part four — How it composes",
+      "title": "12 · The library and the instance",
+      "words": 2536,
+      "sha256": "6e24f82f67a1c7de049f194473734c3f1675947d5b167ff1e71599b738744698",
+      "stated_markers": 2,
+      "drawn_markers": 5
+    },
+    {
+      "file": "content/13__two-paths.md",
+      "number": "13",
+      "part": "Part four — How it composes",
+      "title": "13 · Two paths",
+      "words": 1787,
+      "sha256": "c3af73ee78fcf88b4468092423596a237506356c385bdf6b877f73bb8ead4e8c",
+      "stated_markers": 1,
+      "drawn_markers": 2
+    },
+    {
+      "file": "content/14__eight-releases-in-forty-hours.md",
+      "number": "14",
+      "part": "Part four — How it composes",
+      "title": "14 · Eight releases in forty hours",
+      "words": 2114,
+      "sha256": "2e296af97e6e3a57143b74d8929f677c692f7cf357b517e919b1ba68764be2e8",
+      "stated_markers": 0,
+      "drawn_markers": 4
+    },
+    {
+      "file": "content/15__where-this-estate-disagrees-with-itself.md",
+      "number": "15",
+      "part": "Part five — Honesty, and a first step",
+      "title": "15 · Where this estate disagrees with itself, and what it does not say",
+      "words": 2914,
+      "sha256": "d86fec47660e8a89ce0e355e8aeff7400b44f44a4723a63cf37f2d6374835167",
+      "stated_markers": 7,
+      "drawn_markers": 2
+    },
+    {
+      "file": "content/16__what-ships-what-is-argued.md",
+      "number": "16",
+      "part": "Part five — Honesty, and a first step",
+      "title": "16 · What ships, what is argued",
+      "words": 2944,
+      "sha256": "fa77f5f758d090d2c8031c27cc1adbffabfa7a08b32780b3b68fa5f2ca85720c",
+      "stated_markers": 7,
+      "drawn_markers": 5
+    },
+    {
+      "file": "content/17__your-first-mandate-tomorrow.md",
+      "number": "17",
+      "part": "Part five — Honesty, and a first step",
+      "title": "17 · Your first mandate, tomorrow",
+      "words": 1923,
+      "sha256": "a78e1fe99778709ff00363c6bd083b0c425e0246955bc55666fbd9fce949bd52",
+      "stated_markers": 0,
+      "drawn_markers": 4
+    },
+    {
+      "file": "content/18__appendix-a-the-harness.md",
+      "number": "18",
+      "part": "Appendix",
+      "title": "Appendix A · The harness",
+      "words": 2026,
+      "sha256": "f48ee16eed33403a767e7b6c5405329c3bcda8d5d84dd8b661dcea1eb191c436",
+      "stated_markers": 0,
+      "drawn_markers": 0
+    },
+    {
+      "file": "content/19__colophon.md",
+      "number": "19",
+      "part": "End matter",
+      "title": "Colophon · What was cut, what is open, and what this book got wrong",
+      "words": 1772,
+      "sha256": "cbb4c7b7f5314b9a376b3be947af20e9517d6ae184fd4cd971d1e4ee518637b4",
+      "stated_markers": 1,
+      "drawn_markers": 0
+    },
+    {
+      "file": "content/20__reference-card.md",
+      "number": "20",
+      "part": "End matter",
+      "title": "Reference card",
+      "words": 1189,
+      "sha256": "d6b67bcc85679e6d158d4cf1fb4da8f7a6be0b3d81b75778a2acae6d9e2494bc",
+      "stated_markers": 0,
+      "drawn_markers": 0
+    }
+  ],
+  "figures": [
+    {
+      "id": "f01-bench-two-columns",
+      "page": "/bench/index.html",
+      "tag": "current",
+      "page_sha256": "84cc7825f26cc8da7da51960248b6eb486ab06875fd8c0e342cca76c842fab3b",
+      "image": "shots/img/f01-bench-two-columns.png",
+      "image_sha256": "5b5008afa083b8f45fb39256139901bf7600ae4cef25c6d8afa82b25154c14d6",
+      "gate": "fresh",
+      "caption": "The two columns are the same width. The limits are not a footnote to the claims — they are set beside them, at equal weight, and the generator refuses to build an entry whose right-hand column is empty."
+    },
+    {
+      "id": "f02a-registry-at-v0.1.26",
+      "page": "/registry/index.html",
+      "tag": "v0.1.26",
+      "page_sha256": "669a13f39dc51f664c184cce20c2b3fa74da72c2d58f3b4083f282a2bd3066f1",
+      "image": "shots/img/f02a-registry-at-v0.1.26.png",
+      "image_sha256": "70abca52d89cc5bb8f75805aee1ba2ee61075811ea6441502b54f77743cbe331",
+      "gate": "re-derivable",
+      "caption": "The register on the day it shipped. Compare the status language with the panel below: this page already says the root is a fixture."
+    },
+    {
+      "id": "f02b-registry-now",
+      "page": "/registry/index.html",
+      "tag": "current",
+      "page_sha256": "b610fd4b1ee5aea8fd28ef1ab061a099fcb6f03baa28d01a3815b5fc4a4a6ef5",
+      "image": "shots/img/f02b-registry-now.png",
+      "image_sha256": "abbc64d0a1a2c28739e15654c7d7bf95fabd21b881db996560f46f24b1322941",
+      "gate": "fresh",
+      "caption": "The same page four days later. What changed is not the architecture but the number of places the page admits something — the corrections accumulated faster than the features."
+    },
+    {
+      "id": "f03-six-answers",
+      "page": "/registry/index.html",
+      "tag": "current",
+      "page_sha256": "b610fd4b1ee5aea8fd28ef1ab061a099fcb6f03baa28d01a3815b5fc4a4a6ef5",
+      "image": "shots/img/f03-six-answers.png",
+      "image_sha256": "0ce6308884bb0a14d63c1002ff981e1ac1132739e51cdedc3fed92668b4c01dc",
+      "gate": "fresh",
+      "caption": "Four of the six answers are NO, and they are NO for four different reasons — revoked, expired, never accepted, identity revoked. A verifier that collapses those into one failure state is wrong on three of them."
+    },
+    {
+      "id": "f04-identity-raw",
+      "page": "/book/shots/term/t04-identity-raw.html",
+      "tag": "current",
+      "page_sha256": "a71eb703924bcfec3d8c6547ba0523d85a918e33af1082e2b2f8b7735243e2ea",
+      "image": "shots/img/f04-identity-raw.png",
+      "image_sha256": "2cf1d9d29d0a372f1d1009881aed4c10f26a9496d688ff3cde986514852103e5",
+      "gate": "fresh",
+      "caption": "Read `private_key_published` before you read the signature. And note `publication_intent: deliberate` — a secret is defined by expectation, not by content, so the intention is recorded at issue, because afterwards a deliberate publication and a leak look identical."
+    },
+    {
+      "id": "f05-validate",
+      "page": "/book/shots/term/t05-validate.html",
+      "tag": "current",
+      "page_sha256": "1ff583569f0879bede6b1de0f8c5d10b612e1890f62be70d329f2c3fc5d6d4b5",
+      "image": "shots/img/f05-validate.png",
+      "image_sha256": "3f4dff6dfad1e4e5c2bc67af76e5933a23d3fa0fa56e73c4902730f2da5cca4d",
+      "gate": "fresh",
+      "caption": "Six expected answers, six reproduced — and the fixture line printed for every record before any of them. The validator reads the flag first by construction, not by convention."
+    },
+    {
+      "id": "f06-sgit-verify",
+      "page": "/book/shots/term/t06-sgit-verify.html",
+      "tag": "current",
+      "page_sha256": "f2096ec570b76679fdfdb038b6be62280c1618cefe7b667e42dd68a1b4940f26",
+      "image": "shots/img/f06-sgit-verify.png",
+      "image_sha256": "3b3d3de057d24d38a121adc6dedfc2365afafe7c3226f94447c045cb2a2ea1f9",
+      "gate": "fresh",
+      "caption": "The signer line names a fixture. The CLI is not wrong; it is answering the only question a signature can answer — who held the private half — and on this record the answer is everybody."
+    },
+    {
+      "id": "f07-forgery",
+      "page": "/book/shots/term/t07-forgery.html",
+      "tag": "current",
+      "page_sha256": "b7d853249cc14deb8f49b423bbaacefb51f7337205d57282b366b7d69029823f",
+      "image": "shots/img/f07-forgery.png",
+      "image_sha256": "6dc7432a125ecb6b3d79d050c530a4d671f2fe3a28d6b167ab23b46edfb52485",
+      "gate": "fresh",
+      "caption": "`Verified OK` on a document that says `anyone can sign this`. Nothing failed. That is the point: a signature anybody can produce conveys nothing, and the register verifies it exactly as diligently as any other."
+    },
+    {
+      "id": "f08-refused-push",
+      "page": "/book/shots/term/t08-refused-push.html",
+      "tag": "current",
+      "page_sha256": "2e1d58f1b48b8963aef8b27481918e49f0b90ae86667614dffd13bd0170b0ec2",
+      "image": "shots/img/f08-refused-push.png",
+      "image_sha256": "142cc95067246e3e693092902ca4afb960f9d9e2dafcd456ba8a80f3ad988d06",
+      "gate": "fresh",
+      "caption": "The last line before the banner is git's exit code, not the agent's decision. Read the Tier line at the bottom: the control names its own weakness on its own face."
+    },
+    {
+      "id": "f08b-amended",
+      "page": "/book/shots/term/t08b-amended.html",
+      "tag": "current",
+      "page_sha256": "c142320f828847bdb58c9cb1ce973aba231a44e9da040d138ae3687e651ad22a",
+      "image": "shots/img/f08b-amended.png",
+      "image_sha256": "0ef9e653a74d73d01c52ef41d4de232c23bca48d621cdbe79ad7bb015acb3a6d",
+      "gate": "fresh",
+      "caption": "The same tag, the same command, the mandate the release actually ships — and it PERMITS. The release documenting the refusal cannot contain the state that produced it, because the control refused the release carrying its own documentation until the mandate was amended."
+    },
+    {
+      "id": "f09-tier-badges",
+      "page": "/packs/grant-and-mandate/blocks.html",
+      "tag": "current",
+      "page_sha256": "5f69b885e952fcadd303674c7b047fae8fb0a62efff71b49bad1fb1a08399c7e",
+      "image": "shots/img/f09-tier-badges.png",
+      "image_sha256": "4ff3ae8fefd05346e6ae88ce819c8f5aaeff728f122e8a19c3b2657142877a50",
+      "gate": "fresh",
+      "caption": "Two channels, never one: the border style carries the state as well as the colour, and the word is always present. `unknown` renders as `unknown` — never as a blank, because a gap is a fact about the floor."
+    },
+    {
+      "id": "f10-defeated-boundary",
+      "page": "/packs/grant-and-mandate/blocks.html",
+      "tag": "current",
+      "page_sha256": "5f69b885e952fcadd303674c7b047fae8fb0a62efff71b49bad1fb1a08399c7e",
+      "image": "shots/img/f10-defeated-boundary.png",
+      "image_sha256": "96b87dbe63a0deb89c44fdb5f1d1fb90abd7ddbc95c7cf4891487aa4d2c97de8",
+      "gate": "fresh",
+      "caption": "The stored document says `boundary`. The block renders `setting`, with the defeat path attached. This is the rule working on real data that is wrong — the estate's own measurement tool produced the bad label."
+    },
+    {
+      "id": "f11-authority-split",
+      "page": "/packs/grant-and-mandate/blocks.html",
+      "tag": "current",
+      "page_sha256": "5f69b885e952fcadd303674c7b047fae8fb0a62efff71b49bad1fb1a08399c7e",
+      "image": "shots/img/f11-authority-split.png",
+      "image_sha256": "3e2471da04f46dfbdcfdb07df1d87ee221009b5af63a0f9a506ec5608387a716",
+      "gate": "fresh",
+      "caption": "Two indicators, never one. Averaging them into a single status is exactly how a demonstration gets mistaken for a control."
+    },
+    {
+      "id": "f12-assess-midflow",
+      "page": "/assess/index.html",
+      "tag": "current",
+      "page_sha256": "2e49b3f02e2dd4ffba4c1e0d2726ae446e8aa3d02967f029a6039853510bb577",
+      "image": "shots/img/f12-assess-midflow.png",
+      "image_sha256": "b5a6b0dce8531b0fc4a6161e223e4565b063ab45716e1c04a56f905c7d76c31c",
+      "gate": "fresh",
+      "caption": "Escalation is drawn as an edge, not written as a note — so the reader sees the path that goes around a stated control rather than reading that one exists."
+    }
+  ],
+  "harness": "book/shots/ — see Appendix A. Every figure can be re-taken rather than believed.",
+  "gates": "python3 book/build.py --check"
+}

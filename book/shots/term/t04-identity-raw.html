@@ -1,0 +1,43 @@
+<!doctype html><meta charset="utf-8"><title>t04-identity-raw · pki.sgit.ai</title>
+<link rel="canonical" href="https://pki.sgit.ai/book/shots/term/t04-identity-raw.html">
+<meta name="robots" content="noindex">
+<style>
+ html,body{margin:0;background:#0f1115}
+ .term{font:13px/1.55 ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+   color:#d8dee9;background:#0f1115;padding:22px 24px;white-space:pre;
+   -webkit-font-smoothing:antialiased}
+ .term .p{color:#7aa2f7}          /* the prompt */
+ .term .c{color:#5c6370;font-style:italic}  /* a comment */
+ .term .ok{color:#9ece6a}          /* an affirmative result */
+ .term .no{color:#f7768e}          /* a refusal */
+ .cap{font:11px/1.4 ui-monospace,monospace;color:#5c6370;
+   padding:0 24px 16px;background:#0f1115}
+ .sheet{display:inline-block;background:#0f1115;min-width:100%}
+</style>
+<div class="sheet"><div class="term"><span class="p">$ curl -s https://pki.sgit.ai/registry/records/sha256-90f97984b9cf3930/\</span>
+         01__identity.json | jq &#x27;del(.body.bundle, .sig)&#x27;
+{
+  &quot;body&quot;: {
+    &quot;agent_type&quot;: &quot;operator&quot;,
+    &quot;claims&quot;: {
+      &quot;note&quot;: &quot;FIXTURE — exists to exercise the plumbing; its signatures prove nothing (change-control C3)&quot;
+    },
+    &quot;private_key_paths&quot;: [
+      &quot;private/sign.pem&quot;,
+      &quot;private/encrypt.pem&quot;
+    ],
+    &quot;private_key_published&quot;: true,
+    &quot;publication_intent&quot;: &quot;deliberate&quot;
+  },
+  &quot;created_at&quot;: &quot;2026-08-25T09:00:00Z&quot;,
+  &quot;record&quot;: &quot;sha256:90f97984b9cf3930&quot;,
+  &quot;registry&quot;: &quot;pki.sgit.ai&quot;,
+  &quot;signer&quot;: &quot;sha256:90f97984b9cf3930&quot;,
+  &quot;type&quot;: &quot;identity&quot;,
+  &quot;v&quot;: 1
+}
+
+<span class="p">$ # ten of eleven records read like that. This is the eleventh:</span>
+<span class="p">$ jq &#x27;.body.private_key_published&#x27; records/sha256-f9facb4c94da6c19/01__identity.json</span>
+false</div>
+<div class="cap">t04-identity-raw.txt · sha256:ab74f162e929e093a97afc12fd5ae530…</div></div>

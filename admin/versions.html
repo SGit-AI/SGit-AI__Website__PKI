@@ -14,7 +14,7 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.35</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.36</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -60,8 +60,8 @@
       <a class="sl" href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
       <a class="sl" href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
       <a class="sl" href="../assess/index.html">Map your own case</a>
-      <a class="sl" href="../book/index.html">The book (commissioned)</a>
-      <a class="sl" href="../book/brief.html">&mdash; its commissioning brief</a>
+      <a class="sl" href="../book/index.html">&#9679; The book &mdash; A Key Means Nothing Alone</a>
+      <a class="sl" href="../book/brief.html">&mdash; the commissioning brief</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -97,6 +97,43 @@
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
     <tr>
+<td class="vnum">v0.1.36</td>
+<td class="vdate">27 Aug 2026</td>
+<td><b>The book, written.</b> <i>A Key Means Nothing Alone</i> is delivered against the
+commissioning brief published three releases ago: <b>seventeen chapters in five parts</b> plus front
+matter, a harness appendix, a colophon and a reference card &mdash; 35,000 words, with the markdown
+under <code>book/content/</code> as the source of truth and every chapter page rendering
+<b>its own file</b>, so a page cannot describe a chapter it did not render. <b>Fourteen figures,
+each taken from the release tag its caption names</b> by <code>git worktree</code> on a port used
+once and never again, with a headless browser killed in a block that runs whether the capture
+succeeded or failed &mdash; and two gates, because there are two claims: a figure of the past must
+<b>re-derive from its tag</b>, and a figure of the present must still match the live page
+<b>or the build fails</b>, which it will on the next release. <b>Sixty-five quotations, each re-read
+out of the source it names on every build</b>, with the locator discovered rather than asserted; a
+quote not found where it claims to be fails the build, and it caught a conflated attribution during
+writing. Against those, <b>48 claims declared as the writing session's own reasoning</b> rather than
+this estate's, because blending the two is the same error the book is about.
+<b>Every number computed, and four of them contradicted the brief</b> &mdash; most visibly
+&ldquo;eight releases in four days&rdquo;, which the repository says was <b>forty hours across two
+calendar days</b>; the repository won and the colophon lists all four. Chapter 15 is findings
+<b>computed rather than recalled</b>: twelve contradictions and seven named absences, both sides of
+each quoted, and <b>three of them are current artefacts breaking this estate's own load-bearing
+rules</b> &mdash; <code>params.json</code>&rsquo;s signature recipe fails against every statement in
+the register it governs; the delta block <b>authors part of a grant</b> from a literal in its
+generator, naming a branch the measurement never observed, in a pack whose first correction is that
+grants are discovered and never authored; and the shortfall column is a hardcoded string rendering a
+gap as a finding of no gap. Two were found by <b>running</b> the estate&rsquo;s own code rather than
+reading it. Chapter 12 is written to the RiskMandate team as a contract rather than a description,
+and names the open question GM-D32 did not settle: <b>who decides when the component contract needs
+to move</b>. One figure could not be taken as the brief specified, and the reason is a finding &mdash;
+<b>the release that documents the refused push cannot reproduce it</b>, because the control refused
+the release carrying its own documentation and the mandate had to be amended before that release
+could exist. Also: the bench entry moves from <i>specified</i> to <b>live</b> with a new
+<code>does_not_prove</code>, and this site&rsquo;s own <code>llms.txt</code> is corrected, having
+said six bench entries while the bench shipped seven &mdash; a contradiction the book found and
+chapter 15 records as fixed here.</td>
+</tr>
+<tr>
       <td class="vnum">v0.1.35</td>
       <td>27 Aug 2026</td>
       <td><b>The book brief gets a reader.</b> <a href="../book/brief.html">The commissioning brief</a> was published as raw markdown only &mdash; a link that opens as a wall of plain text, while every other document on this site has a rendered page. It now uses the same in-page reader as <a href="../documents/index.html">the documents</a>: metadata block, summary, key concepts and key ideas, then the markdown rendered by <code>assets/mdreader.js</code> with <b>the raw file still the source of truth</b> and a link to it in the header, the label above the render and the page footer. If rendering fails for any reason the page falls back to that link, so the brief is never unreachable. Also linked from the nav and footer under the bench, and in the sitemap.</td>
@@ -300,8 +337,8 @@
     <a href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
     <a href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
     <a href="../assess/index.html">&#8594; Map your own case</a>
-    <a href="../book/index.html">The book (commissioned)</a>
-    <a href="../book/brief.html">&mdash; its commissioning brief</a>
+    <a href="../book/index.html">&#9679; The book &mdash; A Key Means Nothing Alone</a>
+    <a href="../book/brief.html">&mdash; the commissioning brief</a>
   </div>
   <div>
     <h4>The registry</h4>

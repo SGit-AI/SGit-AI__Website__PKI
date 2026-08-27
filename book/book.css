@@ -1,0 +1,51 @@
+/* book.css — the book's own layer over the site stylesheet.
+   Everything here is typography and layout; nothing here changes what a page
+   says. The markdown under book/content/ is the source of truth. */
+
+.bk-part{font:600 .72rem/1.4 ui-sans-serif,system-ui,sans-serif;letter-spacing:.09em;
+  text-transform:uppercase;color:#8a8578;margin:.2rem 0 .9rem}
+
+.bk-meta{display:flex;flex-wrap:wrap;gap:.5rem .9rem;margin:1.1rem 0 1.4rem;
+  font:.86rem/1.5 ui-sans-serif,system-ui,sans-serif;color:#5f5a50}
+.bk-meta span{background:#f3f1ea;border:1px solid #e3dfd2;border-radius:.4rem;
+  padding:.28rem .6rem}
+.bk-meta b{color:#2f2c26}
+
+.bk-downloads{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:.7rem;margin:1.3rem 0 1.6rem}
+.bk-dl{display:block;padding:.75rem .9rem;border:1px solid #ddd8c9;border-radius:.5rem;
+  background:#fbfaf6;text-decoration:none;color:inherit}
+.bk-dl:hover{border-color:#b9b19c;background:#f6f4ec}
+.bk-dl b{display:block;font-size:.95rem;margin-bottom:.2rem}
+.bk-dl span{display:block;font-size:.8rem;line-height:1.45;color:#6b665b}
+
+.bk-honesty{margin:1.6rem 0;padding:.85rem 1rem;border:1px solid #d9c9a8;
+  border-left:4px solid #b08a3e;border-radius:.4rem;background:#fdf8ec;
+  font-size:.9rem;line-height:1.6}
+.bk-honesty--big{font-size:.95rem;margin:1.4rem 0 1.8rem}
+
+.bk-partrow{margin:1.5rem 0 .5rem;font:600 .74rem/1.4 ui-sans-serif,system-ui,sans-serif;
+  letter-spacing:.08em;text-transform:uppercase;color:#8a8578;
+  border-bottom:1px solid #e6e2d6;padding-bottom:.35rem}
+.bk-toclist{margin:.6rem 0 1.4rem}
+.bk-row{display:flex;align-items:baseline;gap:.75rem;padding:.42rem .55rem;
+  border-radius:.35rem;text-decoration:none;color:inherit}
+.bk-row:hover{background:#f4f2ea}
+.bk-num{flex:0 0 2ch;font:600 .82rem ui-monospace,monospace;color:#9b9484}
+.bk-title{flex:1 1 auto;font-size:.98rem}
+.bk-words{flex:0 0 auto;font:.76rem ui-monospace,monospace;color:#9b9484}
+
+.bk-nav{display:flex;flex-wrap:wrap;gap:.6rem;margin:2.2rem 0 .5rem;
+  padding-top:1.1rem;border-top:1px solid #e6e2d6}
+.bk-nav a{padding:.45rem .75rem;border:1px solid #ddd8c9;border-radius:.4rem;
+  background:#fbfaf6;text-decoration:none;font-size:.88rem;color:inherit}
+.bk-nav a:hover{border-color:#b9b19c}
+.bk-next{margin-left:auto}
+
+/* figures inside the rendered markdown */
+.mdread img{max-width:100%;height:auto;display:block;margin:1rem auto;
+  border:1px solid #e0dbcd;border-radius:.4rem;background:#fff}
+.mdread blockquote{border-left:3px solid #c9c2ad;margin:1.1rem 0;padding:.1rem 0 .1rem 1rem;
+  color:#4a463e}
+.mdread pre{overflow-x:auto}
+.mdread table{display:block;overflow-x:auto;max-width:100%}

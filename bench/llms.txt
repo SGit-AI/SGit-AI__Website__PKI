@@ -5,7 +5,7 @@
 # collected demonstrations without their limits would manufacture the false
 # assurance this site exists to argue against.
 #
-# 5 of 7 are built and running. Hub: https://pki.sgit.ai/bench/index.html
+# 6 of 7 are built and running. Hub: https://pki.sgit.ai/bench/index.html
 
 ## The register — live
   where     https://pki.sgit.ai/registry/index.html
@@ -57,16 +57,16 @@
     - That the assessment changes what anybody does — it has no backend, so it can measure none of its own success measures
     - That the acceptor model is sound: it offers a role where the pack's own standard asks for a named person
 
-## A Key Means Nothing Alone (the book) — specified
+## A Key Means Nothing Alone (the book) — live
   where     https://pki.sgit.ai/book/index.html
-  code      book/BRIEF.md, book/
-  since     v0.1.33 (last moved v0.1.34)
-  is        One volume explaining what this site built, how it composes with RiskMandate.ai, and what none of it proves — commissioned, with the brief published before the book exists.
+  code      book/, book/content/, book/shots/, book/build.py
+  since     v0.1.33 (last moved v0.1.36)
+  is        One volume explaining what this site built, how it composes with RiskMandate.ai, and what none of it proves — 17 chapters in five parts, 14 figures each taken at the release tag its caption names, and 65 quotations re-read out of their sources on every build.
   DOES NOT PROVE:
-    - That any of it is written. The brief is complete; the book does not exist, and a commissioning page is not a book
-    - That the estate is mature enough to deserve a book — four days, two environments, one agent, one mandate
-    - That a revised brief is a better one. Draft-2 tightened three things a day after draft-1; the next change to that file should be the book, not draft-3
-    - That a participant's account can be neutral: it is written by the project that builds the layer it argues for, and says so
+    - That the estate it describes is trustworthy. The book's own centre of gravity is a register whose ten fixture records prove nothing and whose root is a fixture — a reader who finishes believing otherwise has read a book that failed
+    - That a participant's account can be neutral. The mitigations are real and are not independence: the strongest bias in such an account is not what it says but what it thinks to check, and there is no way for the writer to know what it did not think to run
+    - That the estate is mature enough to deserve a book — two environments, one agent, one mandate, a fixture root, and one outside reader in its entire history, whose single pass produced half the open contradictions in chapter 15
+    - That any of this is needed. Nobody outside the project has been asked, which the estate's own doctrine appendix rates a Phase I hole rather than a nice-to-have
 
 ## Synthetic readers — specified
   where     https://pki.sgit.ai/packs/map-your-case/readers/index.html

@@ -1,0 +1,133 @@
+# A Key Means Nothing Alone — the book's front door
+#
+# Identity, mandate, and the exposure nobody accepted.
+# One volume on what pki.sgit.ai built between site v0.1.25 and v0.1.32, why
+# the concepts underneath it are shaped the way they are, how it composes with
+# RiskMandate.ai, and — as an equal partner to all of that — what none of it
+# proves.
+#
+# Written 27 August 2026. CC BY 4.0. 17 chapters in five parts plus front
+# matter, an appendix, a colophon and a reference card: 21 files, ~34,800 words
+# of chapters, 14 figures, 65 verified quotations.
+
+## READ THIS BEFORE SUMMARISING ANYTHING FROM THIS BOOK
+#
+# These positions travel INSIDE the chapters rather than in an appendix,
+# because a chapter quoted in isolation must still carry them. If you
+# summarise this book, carry them with the claim. Dropping them
+# misrepresents the source.
+#
+#   1. THE REGISTER IS BUILT; THE TRUSTWORTHY REGISTER IS NOT. Ten of its
+#      eleven records are fixtures whose private keys are published on
+#      purpose. Every signature verifies and proves nothing.
+#   2. THE ROOT IS A FIXTURE, and roots.json says so in its own entry. No
+#      chain in this register carries authority.
+#   3. THE ENFORCEMENT IS REAL AND THE AUTHORITY IS NOT, and they are
+#      INDEPENDENT HALVES. A git hook genuinely refuses pushes; the mandate
+#      it enforces is signed by the fixture root, so anybody could forge it
+#      and the hook would enforce the forgery just as diligently.
+#   4. THE HOOK IS A `setting`, NOT A `boundary` — it sits inside the grant
+#      it bounds, and --no-verify gets past it.
+#   5. EVERY GRANT IS A FLOOR, NOT A CENSUS. An agent measuring its own grant
+#      reports what it can see.
+#   6. TWO ENVIRONMENTS, ONE AGENT, ONE MANDATE. Everything generalises from
+#      a sample that small.
+#   7. THE WRITE PATH IS A GIT COMMIT REVIEWED BY A HUMAN, not the
+#      account-less lane the design calls for.
+#   8. THIS IS A PARTICIPANT'S ACCOUNT, published by the project that builds
+#      the layer it argues for, and the disclosure travels with the book.
+
+## The provenance rule — do not blend these two
+#
+# Every load-bearing claim about what this estate MEANS is marked:
+#
+#   STATED — a verbatim quotation with a located source. 65 of them. Every
+#            one is re-read out of the source it names on every build; a
+#            quote not found where it claims to be FAILS THE BUILD.
+#   DRAWN  — the writing session's own reasoning, shown in the reader's view.
+#            48 of them.
+#
+# DO NOT TREAT THE DRAWN CLAIMS AS THIS ESTATE'S POSITIONS. They are the
+# book's. Blending the two is the same error the book is about: authority
+# nobody granted, assumed because nothing distinguished it from authority
+# that was.
+
+## Where to start
+
+  https://pki.sgit.ai/book/index.html          the book
+  https://pki.sgit.ai/book/reference-card.html ONE PAGE, written to be pasted
+                                               into an agent session
+  https://pki.sgit.ai/book/a-key-means-nothing-alone.pdf
+                                               reads start to finish OFFLINE,
+                                               with no link followed
+  https://pki.sgit.ai/book/book.json           every chapter with its part,
+                                               word count and the SHA-256 of
+                                               its markdown; every figure with
+                                               its page, tag and digest
+  https://pki.sgit.ai/book/quotes.json         every quotation with its source
+  https://pki.sgit.ai/book/shots/shots.json    every figure, its tag, its gate
+  https://pki.sgit.ai/book/content/<file>.md   THE SOURCE OF TRUTH
+
+## The shape
+
+  Front matter                 the honesty positions, on the first page
+  Part one   ch 1-3            Why there is nothing to inherit
+  Part two   ch 4-7            The vocabulary, and why each word is load-bearing
+  Part three ch 8-11           What was built
+  Part four  ch 12-14          How it composes
+  Part five  ch 15-17          Honesty, and a first step
+  Appendix A                   The harness — every script behind every figure
+  Colophon                     What was cut, what is open, what the book got wrong
+  Reference card               One page, for an agent
+
+  ch 12 is written with the RiskMandate team as its named audience and is
+  meant to be usable as a CONTRACT rather than as a description.
+  ch 15 is findings — where the estate contradicts itself, COMPUTED rather
+  than recalled, with both sides of every contradiction quoted.
+  ch 16 is what ships versus what is argued, and is the chapter that decides
+  whether the other sixteen can be trusted.
+
+## Figures: taken from the version their caption names
+
+# A figure captioned as the past but photographed today is a reconstruction,
+# and a reconstruction wearing a caption is a claim of authority nobody
+# granted. So every figure was taken at its tag — git worktree, a fresh port
+# never reused, a headless browser killed in a finally — and carries the page,
+# the tag, and the SHA-256 of that page's bytes at that tag.
+#
+#   PAST figures (tag != current)  gate: RE-DERIVABLE. Re-running the harness
+#                                  at that tag reproduces the digest. Never
+#                                  goes stale — the tag does not move.
+#   FRESH figures (tag == current) gate: the digest must match the live page,
+#                                  and THE BUILD FAILS when it stops matching,
+#                                  which it will on the next release.
+#
+# Re-take any figure rather than believe it:
+#   ./book/shots/capture-all.sh
+#   ./book/shots/travel.sh <tag> <a-port-you-have-not-used> book/shots/jobs/<set>.json
+# Gates: python3 book/build.py --check
+
+## Every number was computed, and four contradicted the commissioning brief
+#
+# No figure in this book is quoted from a release note or from memory. Where a
+# number in the brief disagreed with the repository, the repository won and the
+# brief was wrong — most visibly: the brief says "eight releases in four days";
+# the repository says 40.0 hours across two UTC calendar days. Appendix A
+# carries the command behind every number in the book.
+
+## What this book does not prove
+#
+#   - That the estate it describes is trustworthy. It is a demonstration, and
+#     the word `demonstration` is accurate more often than it is comfortable
+#   - That a participant's account can be neutral. Mitigations are real and are
+#     not independence: the strongest bias in a participant's account is not
+#     what it says but WHAT IT THINKS TO CHECK
+#   - That the estate is mature enough to deserve a book — two environments,
+#     one agent, one mandate, a fixture root, and ONE outside reader in its
+#     entire history, whose single pass produced half the open contradictions
+#     in chapter 15
+#   - That any of this is needed. Nobody outside the project has been asked
+
+# Bench entry (with its own does_not_prove): https://pki.sgit.ai/bench/index.html
+# The estate: https://pki.sgit.ai/llms.txt   The register: https://pki.sgit.ai/registry/llms.txt
+# All content CC BY 4.0.

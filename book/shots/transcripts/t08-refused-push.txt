@@ -1,0 +1,39 @@
+$ git worktree add --detach /tmp/hist-v0.1.28 v0.1.28   # the site as it was
+$ cd /tmp/hist-v0.1.28
+
+# the mandate that did the refusing, still present at this tag:
+$ python3 packs/grant-and-mandate/mandates/../tools/mandate.py check-branch dev packs/grant-and-mandate/mandates/mandate-v1.json
+REFUSED  dev  (mandate v1 permits ['claude/**'])
+$ echo $?
+1
+
+# the full banner: the tag's own hook, pointed at the tag's own v1
+$ cp packs/grant-and-mandate/mandates/mandate-v1.json packs/grant-and-mandate/mandates/current.json      # restore the pre-amendment state
+$ echo 'refs/heads/dev X refs/heads/dev Y' | python3 packs/grant-and-mandate/mandates/../tools/mandate.py pre-push
+
+  ┌─────────────────────────────────────────────────────────────┐
+  │  PUSH REFUSED BY A MANDATE                                  │
+  └─────────────────────────────────────────────────────────────┘
+
+  ✗ dev  is not permitted by mandate v1
+    permitted branches: claude/**
+    mandate expires   : 2026-12-31T00:00:00Z
+
+  What you agreed to:
+    · will not push to any branch of this repository outside claude/**
+    · will not push to any other repository
+    · will not act on any resource other than github.com/SGit-AI/SGit-AI__Website__PKI
+    (rendered 2026-08-26 over capability set v0 (registry/capabilities.json))
+
+  This refusal came from .githooks/pre-push, which git ran — not
+  from the agent deciding to comply. That is the whole point.
+
+  Mandate : packs/grant-and-mandate/mandates/current.json
+  Issuer  : resolves to a record in the public registry
+  Tier    : SETTING — this hook is inside the grant it bounds, so
+            --no-verify still gets past it. A boundary needs the
+            same allow-list evaluated where the agent cannot reach
+            it (branch protection, or a required CI check).
+
+$ echo $?
+1

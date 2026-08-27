@@ -1,0 +1,76 @@
+{
+  "tag": "current",
+  "outdir": "img",
+  "jobs": [
+    {
+      "id": "f01-bench-two-columns",
+      "path": "/bench/index.html",
+      "selector": ".bench-item",
+      "scale": 3,
+      "viewport": {
+        "width": 1180,
+        "height": 1100
+      }
+    },
+    {
+      "id": "f02b-registry-now",
+      "path": "/registry/index.html",
+      "fullPage": false,
+      "scale": 2,
+      "viewport": {
+        "width": 1180,
+        "height": 1000
+      }
+    },
+    {
+      "id": "f03-six-answers",
+      "path": "/registry/index.html",
+      "selector": ".tablewrap",
+      "scale": 3,
+      "viewport": {
+        "width": 1180,
+        "height": 1000
+      }
+    },
+    {
+      "id": "f09-tier-badges",
+      "path": "/packs/grant-and-mandate/blocks.html",
+      "selector": "#b1 + .gm-spec + .gm-row",
+      "scale": 3,
+      "viewport": {
+        "width": 760,
+        "height": 900
+      }
+    },
+    {
+      "id": "f10-defeated-boundary",
+      "path": "/packs/grant-and-mandate/blocks.html",
+      "selector": ".gm-node:not(.gm-node--worst)",
+      "scale": 3,
+      "viewport": {
+        "width": 1100,
+        "height": 900
+      }
+    },
+    {
+      "id": "f11-authority-split",
+      "path": "/packs/grant-and-mandate/blocks.html",
+      "selector": ".gm-split",
+      "scale": 3,
+      "viewport": {
+        "width": 1100,
+        "height": 900
+      }
+    },
+    {
+      "id": "f12-assess-midflow",
+      "path": "/assess/index.html",
+      "scale": 2,
+      "settle": 1200,
+      "viewport": {
+        "width": 1280,
+        "height": 950
+      }
+    }
+  ]
+}

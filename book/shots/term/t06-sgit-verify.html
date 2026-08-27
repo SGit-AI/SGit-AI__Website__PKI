@@ -1,0 +1,26 @@
+<!doctype html><meta charset="utf-8"><title>t06-sgit-verify · pki.sgit.ai</title>
+<link rel="canonical" href="https://pki.sgit.ai/book/shots/term/t06-sgit-verify.html">
+<meta name="robots" content="noindex">
+<style>
+ html,body{margin:0;background:#0f1115}
+ .term{font:13px/1.55 ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+   color:#d8dee9;background:#0f1115;padding:22px 24px;white-space:pre;
+   -webkit-font-smoothing:antialiased}
+ .term .p{color:#7aa2f7}          /* the prompt */
+ .term .c{color:#5c6370;font-style:italic}  /* a comment */
+ .term .ok{color:#9ece6a}          /* an affirmative result */
+ .term .no{color:#f7768e}          /* a refusal */
+ .cap{font:11px/1.4 ui-monospace,monospace;color:#5c6370;
+   padding:0 24px 16px;background:#0f1115}
+ .sheet{display:inline-block;background:#0f1115;min-width:100%}
+</style>
+<div class="sheet"><div class="term"><span class="p">$ R=records/sha256-90f97984b9cf3930</span>
+<span class="p">$ jq -cS &#x27;del(.sig)&#x27; $R/02__mandate__pr-create__to-agent-a.json &gt; payload.bin</span>
+<span class="p">$ jq &#x27;{signature: .sig, fingerprint: .signer}&#x27; $R/02__…json &gt; payload.bin.sig</span>
+<span class="p">$ jq &#x27;.body.bundle&#x27; $R/01__identity.json &gt; op-bundle.json</span>
+<span class="p">$ sgit pki import op-bundle.json</span>
+<span class="ok">Imported contact: fixture-operator (pki.sgit.ai)</span>
+  Fingerprint: sha256:075693699f0694d0
+<span class="p">$ sgit pki verify payload.bin payload.bin.sig</span>
+<span class="ok">Signature valid (signer: fixture-operator (pki.sgit.ai))</span></div>
+<div class="cap">t06-sgit-verify.txt · sha256:20b595cbcf18b43bbacb3d111470ad64…</div></div>

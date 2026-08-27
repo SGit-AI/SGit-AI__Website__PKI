@@ -1,0 +1,26 @@
+$ curl -s https://pki.sgit.ai/registry/records/sha256-90f97984b9cf3930/\
+         01__identity.json | jq 'del(.body.bundle, .sig)'
+{
+  "body": {
+    "agent_type": "operator",
+    "claims": {
+      "note": "FIXTURE — exists to exercise the plumbing; its signatures prove nothing (change-control C3)"
+    },
+    "private_key_paths": [
+      "private/sign.pem",
+      "private/encrypt.pem"
+    ],
+    "private_key_published": true,
+    "publication_intent": "deliberate"
+  },
+  "created_at": "2026-08-25T09:00:00Z",
+  "record": "sha256:90f97984b9cf3930",
+  "registry": "pki.sgit.ai",
+  "signer": "sha256:90f97984b9cf3930",
+  "type": "identity",
+  "v": 1
+}
+
+$ # ten of eleven records read like that. This is the eleventh:
+$ jq '.body.private_key_published' records/sha256-f9facb4c94da6c19/01__identity.json
+false

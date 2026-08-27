@@ -1,0 +1,5 @@
+# the SAME tag, the SAME command, against the mandate v0.1.28 ships:
+$ python3 …/mandate.py check-branch dev packs/grant-and-mandate/mandates/current.json
+PERMIT   dev  (mandate v2, allow=['claude/**', 'dev'], expires 2026-12-31T00:00:00Z)
+$ python3 …/mandate.py check-branch claude/write-book-pdf packs/grant-and-mandate/mandates/mandate-v1.json
+PERMIT   claude/write-book-pdf  (mandate v1, allow=['claude/**'], expires 2026-12-31T00:00:00Z)
