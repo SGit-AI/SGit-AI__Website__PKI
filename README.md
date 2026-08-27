@@ -41,7 +41,11 @@ three pages to a site.
 2. `python3 admin/build/chrome.py` — propagates the version badge and any nav/footer change
    to every page. (`gen_documents.py` first, if a document was added.)
 3. `node admin/build/validate.js`
-4. `git commit -am "site vX.Y.Z: ..." && git push origin dev`
+4. `git commit -am "site vX.Y.Z: ..." && git push origin dev` — the `site vX.Y.Z:`
+   prefix is load-bearing, not decoration: `tag-release` finds the release commit by
+   scanning subjects for it, and refuses the release when the newest one it finds
+   disagrees with `version.txt`. A subject in any other shape fails the job after the
+   push, and nothing deploys until a commit carrying the prefix lands.
 
 Every push to `dev` runs `.github/workflows/deploy-pages.yml`: validate → auto-tag
 (`vX.Y.Z`, verified against version.txt and the commit subject, next-minor enforced) →
