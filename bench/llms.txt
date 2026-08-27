@@ -60,11 +60,12 @@
 ## A Key Means Nothing Alone (the book) — specified
   where     https://pki.sgit.ai/book/index.html
   code      book/BRIEF.md, book/
-  since     v0.1.33 (last moved v0.1.33)
+  since     v0.1.33 (last moved v0.1.34)
   is        One volume explaining what this site built, how it composes with RiskMandate.ai, and what none of it proves — commissioned, with the brief published before the book exists.
   DOES NOT PROVE:
     - That any of it is written. The brief is complete; the book does not exist, and a commissioning page is not a book
     - That the estate is mature enough to deserve a book — four days, two environments, one agent, one mandate
+    - That a revised brief is a better one. Draft-2 tightened three things a day after draft-1; the next change to that file should be the book, not draft-3
     - That a participant's account can be neutral: it is written by the project that builds the layer it argues for, and says so
 
 ## Synthetic readers — specified

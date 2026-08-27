@@ -16,7 +16,7 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.33</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.34</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -101,9 +101,17 @@ specification goes up before the thing exists, so the thing can be checked again
 <div class="bench-rule">
   <div class="bench-rule__k">Status</div>
   <p><b>Commissioned · not yet written.</b> The brief is complete enough to hand to a fresh writing session:
-  fifteen chapters in five parts, twelve figures with a hash gate that breaks the build when a screenshot
-  stops matching the page it shows, a chapter written as a contract with the RiskMandate team, and an
-  acceptance test that fails the book if a reader finishes believing the register is trustworthy.</p>
+  seventeen chapters in five parts, twelve figures each taken from the release tag its caption names, a
+  chapter written as a contract with the RiskMandate team, and an acceptance test that fails the book if a
+  reader finishes believing the register is trustworthy.</p>
+  <p><b>Draft-2, revised the same day.</b> The sibling estate finished all three of its commissioned books
+  hours after draft-1 was published, and two of them carry disciplines stronger than what this brief had
+  specified. Rather than leave the weaker version standing, the brief was tightened three times over: figures
+  are now <b>time-travelled</b> to the version they claim to show rather than photographed today; every
+  load-bearing claim about what this estate <em>means</em> must be marked <b>stated or drawn</b>, with a gate
+  that re-reads each quotation out of the source it names; and a chapter was added for
+  <b>where the estate contradicts itself and what it does not say</b>. Draft-1 is superseded, not deleted &mdash;
+  it is in this file's history at <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/v0.1.33/book/BRIEF.md">tag v0.1.33</a>.</p>
 </div>
 
 <h2 id="what">What it covers</h2>
@@ -114,7 +122,7 @@ specification goes up before the thing exists, so the thing can be checked again
     <tr><td><b>Two</b> — The vocabulary</td><td>Grant against mandate; the delta and its three directions; boundary, setting and expectation; reality before the risk register</td></tr>
     <tr><td><b>Three</b> — What was built</td><td>The register, the measurement, the refused push, the building blocks &mdash; <b>the part the screenshots serve</b></td></tr>
     <tr><td><b>Four</b> — How it composes</td><td>The library and the instance, the two paths, and eight releases in four days told through what each one learned</td></tr>
-    <tr><td><b>Five</b> — Honesty, and a first step</td><td><b>What ships, what is argued</b> &mdash; the chapter that decides whether the other fourteen can be trusted &mdash; and your first mandate, tomorrow</td></tr>
+    <tr><td><b>Five</b> — Honesty, and a first step</td><td>Where the estate contradicts itself and what it does not say; <b>what ships, what is argued</b> &mdash; the chapter that decides whether the other sixteen can be trusted &mdash; and your first mandate, tomorrow</td></tr>
   </tbody>
 </table></div>
 
@@ -122,8 +130,18 @@ specification goes up before the thing exists, so the thing can be checked again
 <p>The same reason <a href="../rules/index.html">the four rules</a> were published before the registry existed:
 a specification that appears after the thing it describes cannot be used to check it. The brief names the
 acceptance test, the honesty positions that must travel inside the chapters rather than in an appendix, and
-the twelve figures with the gate that keeps them honest. If the finished book misses any of those, this page
+the twelve figures with the gates that keep them honest. If the finished book misses any of those, this page
 is the evidence.</p>
+
+<h2 id="figures">Why a figure is taken from the past rather than of it</h2>
+<p>Several figures the book needs show pages <b>as they were</b>: the push was refused at v0.1.28, and the
+register shipped at v0.1.26 and has changed since. A picture captioned <i>the register on the day it shipped</i>
+that was in fact photographed today is a reconstruction &mdash; and a reconstruction wearing a caption is
+a claim of authority nobody granted, which is the exact thing this book is about. So the brief requires the
+harness instead: check the tag out into a git worktree, serve it on a port used once and never again, photograph
+it, and tear both down whether the capture worked or not. A figure of the past is then pinned to a tag that
+does not move and never goes stale; a figure of the present breaks the build on the next release. Two
+maintenance costs rather than none, taken on purpose.</p>
 
 <div class="note"><b>The positions the book must carry, stated here too</b>, because a commissioning page that
 omitted them would be doing the thing the book is not allowed to do: the register is built and the
@@ -136,7 +154,14 @@ it generalises from two environments, one agent and one mandate.</div>
 <p>The shape is borrowed from <a href="https://graphs.sgit.ai/v2/books/fsg/index.html">the sibling estate's
 book round</a> — a writing round rather than a build round, one book per fresh session, markdown as the source
 of truth, a PDF that reads start to finish with no link followed, a machine surface carrying hashes, and the
-honesty positions travelling with the text. What is borrowed is the discipline, not the content.</p>
+honesty positions travelling with the text. All three of those books
+are now finished, and draft-2 borrows two more things from the two that landed last: the
+<a href="https://graphs.sgit.ai/v2/books/making-a-book/index.html">making-of volume's</a> time-travel harness,
+which re-took every one of its twenty figures from the tag its caption names, and the
+<a href="https://graphs.sgit.ai/v2/books/fsg-universe/index.html">atlas volume's</a> provenance rule &mdash; it
+carries 17 connections anchored in a corpus quote against 151 authored by the writing session, and tells its
+reader in the front matter not to mistake the second kind for the first. What is borrowed is the discipline,
+not the content.</p>
 
 <div class="pagenav">
   <a href="../bench/index.html">← The bench</a>
@@ -150,7 +175,7 @@ honesty positions travelling with the text. What is borrowed is the discipline, 
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.33</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.34</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The bench</h4>

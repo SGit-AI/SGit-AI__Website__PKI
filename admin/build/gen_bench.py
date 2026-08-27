@@ -119,20 +119,23 @@ BENCH = [
   code="assess/"),
 
  dict(slug="the-book", name="A Key Means Nothing Alone (the book)", state="specified",
-  where="../book/index.html", since="v0.1.33", updated="v0.1.33",
-  origin="a <a href='../book/BRIEF.md'>commissioning brief</a> modelled on graphs.sgit.ai's book round",
+  where="../book/index.html", since="v0.1.33", updated="v0.1.34",
+  origin="a <a href='../book/BRIEF.md'>commissioning brief</a>, draft-2, modelled on graphs.sgit.ai's three finished books",
   one_line="One volume explaining what this site built, how it composes with RiskMandate.ai, and what none "
            "of it proves — commissioned, with the brief published before the book exists.",
   demonstrates=[
     "This estate's habit applied to itself: <b>the specification goes up before the thing</b>, so the thing can be checked against it",
-    "A screenshot gate — twelve figures each carrying the site version and the SHA-256 of the page, with the build failing when one stops matching",
+    "<b>Time-travelled figures</b> — each of the twelve is taken from the release tag its caption names, by git worktree, rather than photographed today and captioned as the past",
+    "A provenance rule that forces every load-bearing claim to declare itself <b>stated</b> (a verbatim quote, re-read out of its source on every build) or <b>drawn</b> (the writing session's own reasoning, shown)",
     "An acceptance test that <b>fails the book if a reader finishes believing the register is trustworthy</b>"],
   does_not_prove=[
     "<b>That any of it is written.</b> The brief is complete; the book does not exist, and a commissioning page is not a book",
     "That the estate is mature enough to deserve a book — four days, two environments, one agent, one mandate",
+    "That a revised brief is a better one. Draft-2 tightened three things a day after draft-1; the next change to that file should be the book, not draft-3",
     "That a participant's account can be neutral: it is written by the project that builds the layer it argues for, and says so"],
   gates=["the brief names the acceptance test and the honesty positions in advance, so a finished book can be held to them",
-         "the figure hash gate, which breaks the build rather than shipping a screenshot of a page that changed"],
+         "two figure gates: a past figure must be re-derivable from its tag, a present one must still match the live page or the build fails",
+         "the quote gate — every quotation is re-read out of the source it names, and one that is not found there fails the build"],
   code="book/BRIEF.md, book/"),
 
  dict(slug="synthetic-readers", name="Synthetic readers", state="specified",
