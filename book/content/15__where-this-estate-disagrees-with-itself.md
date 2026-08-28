@@ -268,7 +268,7 @@ One outside session has ever read this material cold. It produced the readiness 
 
 ## What this chapter is worth
 
-<!-- gen:stat:contradictions -->12<!-- /gen:stat:contradictions --> contradictions and <!-- gen:stat:absences -->7<!-- /gen:stat:absences --> absences, from an estate that is <!-- gen:stat:release_hours -->40.0<!-- /gen:stat:release_hours --> hours old in its current form and has published <!-- gen:stat:releases -->35<!-- /gen:stat:releases --> releases in <!-- gen:stat:site_days -->8<!-- /gen:stat:site_days --> days.
+<!-- gen:stat:contradictions -->12<!-- /gen:stat:contradictions --> contradictions and <!-- gen:stat:absences -->7<!-- /gen:stat:absences --> absences, from an estate that is <!-- gen:stat:release_hours -->40.0<!-- /gen:stat:release_hours --> hours old in its current form and has published <!-- gen:stat:releases -->37<!-- /gen:stat:releases --> releases in <!-- gen:stat:site_days -->8<!-- /gen:stat:site_days --> days.
 
 *Drawn.* I want to say plainly what I think this list means, because there are two wrong readings available.
 

@@ -399,6 +399,27 @@ DOCS = [
    "The runs worth publishing most are the abandoned ones, because those are the ones that changed the design.",
   ],
   pages="Became document 08 of the Map Your Case pack — the synthetic-reader programme — with the two simulation rules carried verbatim into the pack's principles."),
+ dict(slug="registry-not-thinking-in-graphs",
+  title="The Registry Is Not Thinking In Graphs: Trust Is A Confidence Computed From Independent Evidence, Not A Verdict",
+  md="v0.33.63__strategy-brief__the-registry-is-not-thinking-in-graphs-trust-is-a-computed-confidence-not-a-verdict.md",
+  version="v0.33.63", date="27 August 2026", dtype="Strategy brief",
+  summary="The project lead's reframe after reading the book: the registry has been built as an ORACLE and should have been built as a NODE. Trust is not a verdict handed down by a body of truth — it is a confidence the consumer computes from the independent evidence they can reach, it is a spectrum, and it is specific to the use case, because the assurance needed to accept a message is not the assurance needed to accept a contract. The registry's job is to be one more place that stores evidence and clues. The brief shows that this family's corpus already published the philosophy, older than this site: a public key in isolation gives you nothing, the confidence ladder makes assurance computable from connectivity, independence beats count, and when confidence is low the remedy is more edges rather than more validation rules. Four contradictions with the shipped register, three of them computed — roots.json is a gate where the corpus specifies an anchor with no authority; the verifier returns a verdict where the evidence should be the product; rule 2 is contradicted by the earliest graph-native sentence in the corpus, which is itself about PKI; and graphs.sgit.ai is mentioned zero times on this site's front door, which is the mechanical cause of the drift.",
+  concepts=[
+   ("Meaning through connectivity", "https://graphs.sgit.ai/network/index.html#pki", "a key in isolation gives you nothing — it is the graph it connects to, and this site's book is named after it"),
+   ("The four rules", "../rules/index.html", "rules 1 and 4 stand; rule 2 is qualified, and rule 3 stops being the load-bearing defence"),
+   ("The registry, live", "../registry/index.html", "roots.json as a gate, and the verifier's basis array as the seed of the right design"),
+   ("The attestation trade", "../rules/index.html#attestation", "the site's central open question, which independence weighting may dissolve"),
+  ],
+  ideas=[
+   "The registry should not be trusted by default — it is one more place that stores evidence and clues, not a source of truth.",
+   "Trust is a spectrum and it is context specific: what you need to accept a message is not what you need to accept a contract.",
+   "Weight by independence, not by count — ten citations of one source are one source, and DNS checked independently of TLS is why corroboration counts.",
+   "Revocation is the absence of trust, not the presence of a revocation entry; a revocation list can only tell you about the revocations it happens to know about.",
+   "When confidence is low the remedy is more edges, never more validation rules — enrichment, not enforcement.",
+   "Every path in this register terminates in the same published private key, so under independence weighting the whole register currently carries one origin.",
+  ],
+  pages="Proposes anchors.json in place of roots.json, a verifier that returns a rung, an evidence set and the gaps with the verdict left to the caller, a views/gaps.json, and closing ask N2 by linking graphs.sgit.ai from this site's front door."),
+
 ]
 
 PAGE = """<!doctype html>

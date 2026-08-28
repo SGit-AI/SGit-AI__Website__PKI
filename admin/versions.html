@@ -14,7 +14,7 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.37</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.38</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -97,6 +97,39 @@
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
     <tr>
+<td class="vnum">v0.1.38</td>
+<td class="vdate">27 Aug 2026</td>
+<td><b>The registry is not thinking in graphs</b> &mdash; strategy brief v0.33.63, from the project
+lead's memo after reading the book, with its instruction to read <code>graphs.sgit.ai</code>
+executed. The reframe: <b>the registry has been built as an ORACLE and should have been built as a
+NODE</b>. Trust is not a verdict handed down by a body of truth; it is a <b>confidence the consumer
+computes from the independent evidence they can reach</b>, it is a spectrum, and it is specific to
+the use case, because what you need to accept a message is not what you need to accept a contract.
+The registry's job is to be <i>one more place that stores evidence and clues</i>. The brief's
+uncomfortable finding is that <b>this family's corpus already published all of this, and it is older
+than this site</b>: <i>a public key in isolation does not give you anything; it is the graph it is
+connected to</i> (4 June 2026 &mdash; the sentence this site's book is named after), the
+<b>confidence ladder</b> making assurance computable from connectivity, <b>weight by independence,
+not by count</b>, and <b>enrichment, not enforcement</b> &mdash; when confidence is low the remedy is
+more edges, never more validation rules. Four contradictions with the shipped register, three
+computed from the repository: <code>roots.json</code> is a <b>gate</b> where the corpus specifies an
+anchor with <i>no authority at all</i>; the verifier returns a verdict where the evidence set should
+be the product (its <code>basis</code> array is the seed of the right design); <b>rule 2 is
+contradicted by the earliest graph-native sentence in the corpus, which is itself about PKI</b>
+&mdash; <i>revocation is the absence of trust, not the presence of a revocation entry</i>, and a
+revocation list <i>can only tell you about the revocations it happens to know about</i>; and
+<code>graphs.sgit.ai</code> is mentioned <b>zero times</b> on this site's front door, which is the
+mechanical cause of the drift and is tracked on the sibling estate as ask N2. Proposes
+<code>anchors.json</code> in place of <code>roots.json</code>, a verifier returning a rung, a typed
+evidence set and the gaps with <b>the verdict left to the caller</b>, and a
+<code>views/gaps.json</code>, on the corpus's rule that <i>an absence that is stated can be counted,
+queried, assigned and closed</i>. Rules 1 and 4 stand untouched; rule 3 stops being the load-bearing
+defence, because a flood of 150,000 attestations from one origin is <b>one edge</b> under
+independence weighting. Records what the register would have to say about itself today:
+<b><code>independent_paths: 0</code></b>, since every path terminates in the same published private
+key.</td>
+</tr>
+<tr>
 <td class="vnum">v0.1.37</td>
 <td class="vdate">27 Aug 2026</td>
 <td><b>The book reads the method sources its brief named, and adopts what they taught.</b>
