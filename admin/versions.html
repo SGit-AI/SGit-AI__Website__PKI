@@ -14,7 +14,7 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.39</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.40</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -97,6 +97,37 @@
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
     <tr>
+<td class="vnum">v0.1.40</td>
+<td class="vdate">27 Aug 2026</td>
+<td><b>The refactor brief goes to draft-2, on a constraint that was removed.</b> The project lead:
+<i>nobody is using this pki.sgit.ai website and artefacts/primitives, so we can change everything and
+don't worry about backwards compatibility.</i> That licence made three of draft-1's proposals visibly
+worse than they needed to be, and each change is a <b>simplification rather than an addition</b>.
+<b>Seven statement types collapse to one envelope in two genres</b> &mdash; <code>assertion</code> and
+<code>decision</code> &mdash; with the seven primitives carried as <b>predicates</b> rather than types.
+Draft-1 proposed adding <code>fact</code> and <code>evidence</code> to the register's existing five,
+which fails the corpus's own scale-invariance rule (<i>one validator, one query engine, one provenance
+rule &mdash; not a family of them per level</i>) and only existed to preserve the five. With nothing to
+preserve, the <b>recursion test passes</b>: evidence about a fact is an assertion whose subject is a
+statement, and nothing needs a new file type at any altitude. <b>Acceptance and revocation stop being
+types</b> &mdash; an acceptance is a decision about a mandate &mdash; so five collapse to two without
+losing a distinction. <code>roots.json</code> is <b>deleted</b> rather than renamed, since an anchor is
+an ordinary assertion; <code>answer</code> is <b>removed</b> rather than deprecated, with no compat
+shim; the fixture register is <b>regenerated</b> to exercise rungs, independence and staleness rather
+than migrated to preserve six verdicts it will no longer issue; the numbered statement filenames go,
+because C7 already made the commit graph the ordering authority and only fetchers kept the prefix; and
+<code>params.json</code>'s signature contradiction &mdash; the book's finding A1, where the normative
+recipe says DER and every signature on disk is raw <code>r||s</code> &mdash; is simply
+<b>corrected in place</b>, because nothing depends on the wrong text. A new §9 states what the freedom
+buys and the uncomfortable half of it: <b>the reason nothing needs migrating is that nothing has
+users</b>, which is this estate's own largest open finding rather than a new one, and
+<b>three of the brief's eight open questions are blocked on somebody outside this project</b> &mdash;
+none of which gets less blocked by a better envelope. The refactor is right and it is not the
+bottleneck. Scope stated precisely, because two rules look like they conflict and do not: no
+backwards compatibility applies to <b>artefacts</b>; supersede-never-rewrite still applies to
+<b>published claims</b>, which is why draft-1 is superseded above rather than edited.</td>
+</tr>
+<tr>
 <td class="vnum">v0.1.39</td>
 <td class="vdate">27 Aug 2026</td>
 <td><b>The registry has no opinion</b> &mdash; architecture brief v0.33.64, the refactor that follows

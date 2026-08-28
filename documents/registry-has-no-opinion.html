@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>The Registry Has No Opinion: Seven Signed Primitives, A Fractal Of Registries, And The Context That Belongs To The Consumer · documents · pki.sgit.ai</title>
-<meta name="description" content="Original document, readable in-page: summary, key concepts and key ideas, then the full markdown. Architecture brief — the refactor, v0.33.64, 27 August 2026. CC BY 4.0.">
+<meta name="description" content="Original document, readable in-page: summary, key concepts and key ideas, then the full markdown. Architecture brief — the refactor, v0.33.64 · draft-2, 27 August 2026. CC BY 4.0.">
 <link rel="canonical" href="https://pki.sgit.ai/documents/registry-has-no-opinion.html">
 <link rel="stylesheet" href="../assets/site.css">
 </head>
@@ -18,7 +18,7 @@
 
 <div class="docmeta">
   <span class="k">Type</span><span class="v">Architecture brief — the refactor</span>
-  <span class="k">Version</span><span class="v">v0.33.64</span>
+  <span class="k">Version</span><span class="v">v0.33.64 · draft-2</span>
   <span class="k">Date</span><span class="v">27 August 2026</span>
   <span class="k">Author</span><span class="v">Dinis Cruz (project lead) and collaborators</span>
   <span class="k">Licence</span><span class="v">CC BY 4.0</span>
@@ -26,7 +26,7 @@
 </div>
 
 <h2 id="summary">Summary</h2>
-<p>The refactor that follows v0.33.63's critique. The registry registers, and it does not have an opinion — structurally, not modestly, because an opinion needs context and the context lives with the consumer. The corpus supplies the mechanism: the grounding ladder's upward path says each step up is an interpretation somebody is accountable for, and a verdict is an upward step. What the registry supplies instead is signed nodes and edges whose worth to any consumer is a function of that consumer's trust in this registry, which is one of many in a fractal, on the shape of the root DNS servers with an eventually consistent SLA. Seven primitives in two layers that must not be blurred: three identities (agent, environment/provider, user) saying WHO; two evidence objects (fact, evidence) saying WHAT IS THE CASE; and two authority objects (grant, mandate) saying what is possible and what was decided. The biggest delta is environment identity: a grant becomes a signed fact about a keyed environment by a named measurer, which turns the book's floor-not-a-census caveat into a computable independence attribute — and makes the honest number visible, since both library entries state that the instrument IS the subject, so the library today holds zero independent measurements.</p>
+<p>The refactor that follows v0.33.63's critique, revised to draft-2 once the project lead removed the backwards-compatibility constraint: nobody is using this site, its artefacts or its primitives, so everything can change. That licence made three of draft-1's proposals visibly worse than they needed to be — so seven statement types collapse to ONE ENVELOPE IN TWO GENRES (assertion and decision) with the primitives carried as predicates, roots.json is deleted rather than renamed, answer is removed rather than deprecated, and the fixture register is regenerated rather than migrated. The registry registers, and it does not have an opinion — structurally, not modestly, because an opinion needs context and the context lives with the consumer. The corpus supplies the mechanism: the grounding ladder's upward path says each step up is an interpretation somebody is accountable for, and a verdict is an upward step. What the registry supplies instead is signed nodes and edges whose worth to any consumer is a function of that consumer's trust in this registry, which is one of many in a fractal, on the shape of the root DNS servers with an eventually consistent SLA. Seven primitives in two layers that must not be blurred: three identities (agent, environment/provider, user) saying WHO; two evidence objects (fact, evidence) saying WHAT IS THE CASE; and two authority objects (grant, mandate) saying what is possible and what was decided. The biggest delta is environment identity: a grant becomes a signed fact about a keyed environment by a named measurer, which turns the book's floor-not-a-census caveat into a computable independence attribute — and makes the honest number visible, since both library entries state that the instrument IS the subject, so the library today holds zero independent measurements.</p>
 
 <h2 id="concepts">Key concepts</h2>
 <ul>
@@ -40,6 +40,9 @@
 <h2 id="ideas">Key ideas</h2>
 <ul>
   <li>The registry registers. It does not have an opinion, because an opinion needs context and the context is the consumer's.</li>
+  <li>One envelope, two genres — assertion and decision — with the seven primitives as predicates rather than types, because seven types is the family-per-level the scale-invariance rule forbids.</li>
+  <li>Acceptance and revocation were never types: an acceptance is a decision about a mandate, and the five statement types collapse to two genres without losing a distinction.</li>
+  <li>The freedom to break everything and the absence of anybody to break it for are the same fact — which makes the refactor cheap and is also the strongest argument that it is not the bottleneck.</li>
   <li>A verdict is an upward step on the grounding ladder, and each step up is an interpretation somebody is accountable for — which the registry cannot discharge.</li>
   <li>PKI does not establish trust; it makes edges attributable, and attributable edges are the only thing independence weighting can operate on.</li>
   <li>A grant is not a new primitive — it is a fact whose subject is an environment, which is why the delta computes at all.</li>
@@ -52,7 +55,7 @@
 <p>Proposes fact and evidence as statement types, identities for environments and providers, synthetic user identities carrying a declared synthetic flag, anchors.json in place of roots.json, and a verifier returning statements, a rung, an independence count and the gaps with verdict null.</p>
 
 <h2 id="read">Read the document</h2>
-<div class="mdread-label">📄 Original document · v0.33.64 · 27 August 2026 · rendered from the <a href="../briefs/v0.33.64__arch-brief__the-registry-has-no-opinion-seven-signed-primitives-and-a-fractal-of-registries.md">raw markdown</a> (the source of truth)</div>
+<div class="mdread-label">📄 Original document · v0.33.64 · draft-2 · 27 August 2026 · rendered from the <a href="../briefs/v0.33.64__arch-brief__the-registry-has-no-opinion-seven-signed-primitives-and-a-fractal-of-registries.md">raw markdown</a> (the source of truth)</div>
 <div class="mdread" id="mdread" data-src="../briefs/v0.33.64__arch-brief__the-registry-has-no-opinion-seven-signed-primitives-and-a-fractal-of-registries.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="../briefs/v0.33.64__arch-brief__the-registry-has-no-opinion-seven-signed-primitives-and-a-fractal-of-registries.md">open the raw markdown</a>.</p></noscript></div>
 
 <div class="pagenav">
