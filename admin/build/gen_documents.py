@@ -420,6 +420,29 @@ DOCS = [
   ],
   pages="Proposes anchors.json in place of roots.json, a verifier that returns a rung, an evidence set and the gaps with the verdict left to the caller, a views/gaps.json, and closing ask N2 by linking graphs.sgit.ai from this site's front door."),
 
+ dict(slug="registry-has-no-opinion",
+  title="The Registry Has No Opinion: Seven Signed Primitives, A Fractal Of Registries, And The Context That Belongs To The Consumer",
+  md="v0.33.64__arch-brief__the-registry-has-no-opinion-seven-signed-primitives-and-a-fractal-of-registries.md",
+  version="v0.33.64", date="27 August 2026", dtype="Architecture brief — the refactor",
+  summary="The refactor that follows v0.33.63's critique. The registry registers, and it does not have an opinion — structurally, not modestly, because an opinion needs context and the context lives with the consumer. The corpus supplies the mechanism: the grounding ladder's upward path says each step up is an interpretation somebody is accountable for, and a verdict is an upward step. What the registry supplies instead is signed nodes and edges whose worth to any consumer is a function of that consumer's trust in this registry, which is one of many in a fractal, on the shape of the root DNS servers with an eventually consistent SLA. Seven primitives in two layers that must not be blurred: three identities (agent, environment/provider, user) saying WHO; two evidence objects (fact, evidence) saying WHAT IS THE CASE; and two authority objects (grant, mandate) saying what is possible and what was decided. The biggest delta is environment identity: a grant becomes a signed fact about a keyed environment by a named measurer, which turns the book's floor-not-a-census caveat into a computable independence attribute — and makes the honest number visible, since both library entries state that the instrument IS the subject, so the library today holds zero independent measurements.",
+  concepts=[
+   ("The grounding ladder", "https://graphs.sgit.ai/depth/index.html#ladder", "fact grounds to evidence grounds to measure — and upward, each step is an interpretation somebody is accountable for"),
+   ("Fractal, made falsifiable", "https://graphs.sgit.ai/depth/boundaries.html#fractal", "if zooming in needs a new format, a new validator or a special case, the claim is false — and roots.json is that special case"),
+   ("The register, live", "../registry/index.html", "five statement types, all authority objects; fact and evidence are what change the register's genre"),
+   ("Grant measurement", "../packs/grant-and-mandate/library.html", "two entries, unsigned, both measured from inside the thing they measure"),
+   ("The strategy brief this refactors from", "registry-not-thinking-in-graphs.html", "v0.33.63, which established the oracle problem and left this question open"),
+  ],
+  ideas=[
+   "The registry registers. It does not have an opinion, because an opinion needs context and the context is the consumer's.",
+   "A verdict is an upward step on the grounding ladder, and each step up is an interpretation somebody is accountable for — which the registry cannot discharge.",
+   "PKI does not establish trust; it makes edges attributable, and attributable edges are the only thing independence weighting can operate on.",
+   "A grant is not a new primitive — it is a fact whose subject is an environment, which is why the delta computes at all.",
+   "Cache the evidence, never the conclusion: a cached confidence with no staleness model is a stored trust value wearing a fresh name.",
+   "Attach, never mutate makes abundance a feature — you can accept a hundred evidence packs because accepting one costs nothing you cannot undo, which answers 2019 by arithmetic rather than by a size bound.",
+   "Cryptography gives a lower bound on origin-counting and cannot prove two keys are two parties, so independence is asserted rather than proven — the weakest joint in the design.",
+  ],
+  pages="Proposes fact and evidence as statement types, identities for environments and providers, synthetic user identities carrying a declared synthetic flag, anchors.json in place of roots.json, and a verifier returning statements, a rung, an independence count and the gaps with verdict null."),
+
 ]
 
 PAGE = """<!doctype html>

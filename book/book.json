@@ -281,9 +281,9 @@
       "id": "f02b-registry-now",
       "page": "/registry/index.html",
       "tag": "current",
-      "page_sha256": "e7ab29fdd57f4246eed40e67f8834526c66114da7008cf3fec96bc99d3d16baa",
+      "page_sha256": "051c4a8deb47de2b3108788105a4776fc549b319504c3fa7361226dfc889e7d4",
       "image": "shots/img/f02b-registry-now.png",
-      "image_sha256": "22ca06b3b3efe7da975a84ebf34b54b4dc61689c3f5fa51ab3cf0067c044be74",
+      "image_sha256": "144575644bc7dfcd8b2b606db0852f0f97d9282345ae700bc43699c257fe8cf4",
       "gate": "fresh",
       "caption": "The same page four days later. What changed is not the architecture but the number of places the page admits something — the corrections accumulated faster than the features."
     },
@@ -291,7 +291,7 @@
       "id": "f03-six-answers",
       "page": "/registry/index.html",
       "tag": "current",
-      "page_sha256": "e7ab29fdd57f4246eed40e67f8834526c66114da7008cf3fec96bc99d3d16baa",
+      "page_sha256": "051c4a8deb47de2b3108788105a4776fc549b319504c3fa7361226dfc889e7d4",
       "image": "shots/img/f03-six-answers.png",
       "image_sha256": "0ce6308884bb0a14d63c1002ff981e1ac1132739e51cdedc3fed92668b4c01dc",
       "gate": "fresh",
@@ -391,9 +391,9 @@
       "id": "f12-assess-midflow",
       "page": "/assess/index.html",
       "tag": "current",
-      "page_sha256": "bf1c20c712f233e64b27be1aa6ef9a879a8fd0b17f1363dff3cba4f5d27dcad5",
+      "page_sha256": "cff61ce0dfe27d614badf98daa5c8480533517e62ecc56893a14f98747fd947c",
       "image": "shots/img/f12-assess-midflow.png",
-      "image_sha256": "5fb78ed281f690ddd6772ea02093c22892e11691ee7e26dd38f0b2dec3cbb8a5",
+      "image_sha256": "f956186d78810af6d1915c0e24b7f894f818032ae66ecb30c0a5ff746451ad33",
       "gate": "fresh",
       "caption": "Escalation is drawn as an edge, not written as a note — so the reader sees the path that goes around a stated control rather than reading that one exists."
     }
