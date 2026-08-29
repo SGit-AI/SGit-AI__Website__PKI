@@ -5,7 +5,7 @@
 # collected demonstrations without their limits would manufacture the false
 # assurance this site exists to argue against.
 #
-# 9 of 10 are built and running. Hub: https://pki.sgit.ai/bench/index.html
+# 10 of 11 are built and running. Hub: https://pki.sgit.ai/bench/index.html
 
 ## The register — live
   where     https://pki.sgit.ai/registry/index.html
@@ -90,6 +90,17 @@
     - That the platform library exists: Codex, Lovable and the rest are named in the brief as future scenario.json files, and not one has been written — the fact-based variation catalogue is an argument, not an artefact
     - That a rung above 2 is reachable: independent evidence exists nowhere in this estate, so the scale's top rung has never been exercised
     - That an agent reads these pages — the memo's claim that agents would also appreciate the visual representation is untested for both humans and agents
+
+## The control room — live
+  where     https://pki.sgit.ai/experiments/the-control-room/index.html
+  code      experiments/the-control-room/, admin/build/gen_control.py
+  since     v0.1.45 (last moved v0.1.45)
+  is        Both scenario worlds on one operator board — mimic diagrams, annunciator tiles whose lamp colour is the tier and nothing else, faceplates on click, and the 26 August incident as a replayable sequence-of-events log with every verdict re-run through the enforcement tool at build time. One more renderer, zero new data.
+  DOES NOT PROVE:
+    - That an operator can run a plant from it. Two units and one recorded incident is a diorama with excellent manners, not a control room under load
+    - That the annunciator scales past twenty tiles a unit, or the log past one incident — the genre solves both (paging, filtering, alarm shelving) and this build implements neither
+    - That anyone reads a mimic faster than a table — the genre bet is now four implementations deep across two estates, still with zero user tests
+    - That REPLAY ever becomes LIVE: a live board needs the registry's write path, monitors feeding facts, and a mandate service — all still stated design, which is why the mode chip is pinned where it is
 
 ## A Key Means Nothing Alone (the book) — live
   where     https://pki.sgit.ai/book/index.html

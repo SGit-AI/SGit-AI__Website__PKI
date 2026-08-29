@@ -192,6 +192,33 @@ BENCH = [
          "the manifest gate: a scenario folder without a manifest entry, or an entry without a folder, fails the hub build"],
   code="experiments/push-to-github/scenario.json, experiments/the-deploy/scenario.json, admin/build/gen_scenario.py, experiments/scenario.css"),
 
+ dict(slug="the-control-room", name="The control room", state="live",
+  where="../experiments/the-control-room/index.html", since="v0.1.45", updated="v0.1.45",
+  origin="dev brief <a href='../documents/the-control-room.html'>v0.33.69</a> — the project lead's instruction: a new component and UX, thinking game UI and SCADA",
+  one_line="Both scenario worlds on one operator board — mimic diagrams, annunciator tiles whose lamp "
+           "colour is the tier and nothing else, faceplates on click, and the 26 August incident as a "
+           "replayable sequence-of-events log with every verdict re-run through the enforcement tool "
+           "at build time. One more renderer, zero new data.",
+  demonstrates=[
+    "<b>The scenario files are a world model, not a page config</b>: the board is drawn from the same scenario.json files and twins the deck pages use, with nothing added to make it possible — adding a way of seeing is adding a renderer",
+    "<b>SCADA's lamp grammar lands exactly on the tier vocabulary</b>: boundary is green (contained), setting amber, expectation amber flashing — one mistake from red — and a capability with <b>no control on it is the alarm state</b>: the CI runner's board lights red where the agent container's does not, visible from across the room",
+    "<b>FAULT as a first-class lamp</b>: a refused measurement renders as a hatched sensor-failure tile, never a blank — the industry's oldest honesty convention applied to the estate's most repeated sentence",
+    "<b>State at a glance</b>: Unit 1's egress wall is solid and its push line broken by a breaker in the setting position; Unit 2's wall prints NO WALL and its push line runs clean to the asset — the doors page proves this in numbers, the board shows it in geometry",
+    "<b>Forward is the simulation, backward is the audit — with transport controls</b>: play, step and reset over the recorded incident; the browser only steps through verdicts the build already re-proved, and with scripting off the board renders complete and final"],
+  does_not_prove=[
+    "<b>That an operator can run a plant from it.</b> Two units and one recorded incident is a diorama with excellent manners, not a control room under load",
+    "That the annunciator scales past twenty tiles a unit, or the log past one incident — the genre solves both (paging, filtering, alarm shelving) and this build implements neither",
+    "That anyone reads a mimic faster than a table — the genre bet is now four implementations deep across two estates, still with zero user tests",
+    "That REPLAY ever becomes LIVE: a live board needs the registry's write path, monitors feeding facts, and a mandate service — all still stated design, which is why the mode chip is pinned where it is"],
+  gates=["the tile gate: tiles == twin nodes exactly, per unit — the board may not simplify a world by omitting its embarrassing tiles",
+         "the lamp gate: every lamp class derives from a tier in the closed set; an unknown tier fails rather than guessing a colour",
+         "the mimic gate: the wall drawn must agree with the egress node's tier — NO WALL prints if and only if the tier is none",
+         "the resolution gate, live: mandate.py check-branch re-run for every push event, and the log may not claim what the tool does not reproduce",
+         "the transcript gate: every quoted reaction exists byte-for-byte in its source",
+         "the timestamp gate: times are derived (mandate issued_at, tag commit time) or an em-dash — the generator has no field for a typed clock time",
+         "the replay gate: the generator greps its own output for the REPLAY chip"],
+  code="experiments/the-control-room/, admin/build/gen_control.py"),
+
  dict(slug="the-book", name="A Key Means Nothing Alone (the book)", state="live",
   where="../book/index.html", since="v0.1.33", updated="v0.1.36",
   origin="a <a href='../book/brief.html'>commissioning brief</a>, draft-2, modelled on graphs.sgit.ai's three finished books",

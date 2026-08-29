@@ -8,7 +8,7 @@
 > but never delete anything — not a bug. This site publishes that history, and the
 > registry rules it produces, before the registry exists.
 
-Site version: v0.1.44 (29 August 2026). Published by the sgit project — participant
+Site version: v0.1.45 (29 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## Properties agents may rely on
@@ -35,10 +35,10 @@ against what ships — and the register is the first thing to check it against.
 ## The bench — MVPs and experiments (machine-readable: /bench/llms.txt)
 
 Where this site ships MVPs and experiments: https://pki.sgit.ai/bench/index.html
-Ten entries, nine of them built and running — the register, the mandate hook, grant
+Eleven entries, ten of them built and running — the register, the mandate hook, grant
 measurement, the building blocks, the assessment, the experiments (the chain room, the
-table, and the scenario engine's two worlds), the book, and the synthetic-reader
-programme. (This paragraph said "six entries" until v0.1.36, having missed the book
+table, the scenario engine's two worlds, and the control room), the book, and the
+synthetic-reader programme. (This paragraph said "six entries" until v0.1.36, having missed the book
 when it went on the bench at v0.1.33; the book's own findings chapter found the
 disagreement between this file and /bench/llms.txt, and it is corrected here.)
 
@@ -88,6 +88,16 @@ at build time; real and synthetic never blend.
   (hypothesis 0, self-observed 1, +documented 2, independent 3 — never typed)
   and a micro-animation of the capability acting (eight kinds; depiction, not
   simulation).
+- THE CONTROL ROOM (/experiments/the-control-room/): both worlds on one
+  operator board — A SECOND RENDERER OVER THE SAME scenario.json FILES, zero
+  new data, which is what makes the scenario files a world model rather than
+  a page config. SCADA conventions (annunciator tiles, mimic diagrams,
+  faceplates, a sequence-of-events log) plus a game's transport controls.
+  The lamp colour is THE TIER AND NOTHING ELSE — an unbounded capability is
+  the alarm state, and refused measurement is a hatched FAULT lamp, never a
+  blank. The 26 August incident replays with every verdict re-run through
+  mandate.py at build; timestamps derived or absent; mode chip pinned to
+  REPLAY because a live board needs what is still stated design.
 - THE TWIN CLAIM: a library entry IS a digital twin — a measured, dated
   representation of one environment, honest about where measurement was
   refused. A simulation is running a proposed action against the twin instead

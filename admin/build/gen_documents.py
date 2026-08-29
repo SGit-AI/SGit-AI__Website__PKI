@@ -529,6 +529,27 @@ DOCS = [
   ],
   pages="Adds the engine, two scenario worlds, the shared scenario.css with eight micro-animations, and six gates; amends the experiments convention to allow a shared engine driven by per-world scenario.json."),
 
+ dict(slug="the-control-room",
+  title="The Control Room: A SCADA Board And A Game HUD Over The Scenario Worlds",
+  md="v0.33.69__dev-brief__the-control-room-a-scada-board-and-game-hud-over-the-scenario-worlds.md",
+  version="v0.33.69", date="29 August 2026", dtype="Dev brief",
+  summary="The project lead's instruction, verbatim: create a new component and UX for that simulation — think game UI and SCADA control systems UIs. The answer: one board, both worlds, ZERO NEW DATA. The control room is a second renderer over the same scenario.json files the deck pages already use, which is the point — if it needed its own data file the scenario engine would be a page generator with a JSON config; because it does not, the scenario files are what v0.33.68 said they were: a world model, renderer-independent. Two genres borrowed, conventions only: from SCADA the annunciator panel, the mimic diagram, the faceplate, the sequence-of-events log, and the deepest convention of all — a sensor that cannot be read is a FAULT lamp, not a blank space. From games the HUD, the replay scrubber, and inspect-on-click. The mapping is exact: lamp colour is the tier and nothing else, which makes a capability with no control on it THE ALARM STATE — the CI runner's board lights red where the agent container's does not, and the memo's contrast becomes pre-verbal. The 26 August incident is the log, every verdict re-run through mandate.py at build; timestamps are derived or absent; the mode chip is pinned to REPLAY because a live board needs everything that is still stated design.",
+  concepts=[
+   ("The control room, live", "../experiments/the-control-room/index.html", "two units, nineteen tiles, four events — click a tile for its faceplate, play the incident"),
+   ("The worlds it renders", "../experiments/push-to-github/index.html", "the same scenario.json, seen as a deck — nothing was added to make the board possible"),
+   ("The incident it replays", "../experiments/the-table/index.html", "the table's four turns, now with transport controls"),
+   ("The enforcement tool it re-runs", "../packs/grant-and-mandate/enforcement.html", "mandate.py check-branch, executed at build for every push event on the log"),
+  ],
+  ideas=[
+   "Adding a world is adding a JSON file; adding a way of seeing is adding a renderer — and the data does not move.",
+   "In SCADA colour grammar green is contained and red is alarm: mapped onto tiers, an unbounded capability is the alarm condition, and the contrast between the two units becomes visible from across the room.",
+   "A sensor that cannot be read is a FAULT lamp, never a blank — industrial operators have always known what this estate keeps re-learning, that unknown is a state and it is displayed.",
+   "The replay is baked, not computed: JavaScript animates, it never adjudicates — the browser only steps through verdicts the build already re-proved.",
+   "Timestamps are derived or absent: the one signed, timestamped row on the log is the operator's DECIDES — which is the whole architecture in one line of a SOE log.",
+   "REPLAY never becomes LIVE on this page: the mode chip is the honest inverse of the roadmap — a live board needs the write path, monitors and a mandate service, all still shut doors.",
+  ],
+  pages="Adds /experiments/the-control-room/ (generated board, control.css, control.js — transport only), admin/build/gen_control.py with seven gates, and the manifest entry."),
+
 ]
 
 PAGE = """<!doctype html>

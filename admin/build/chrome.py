@@ -66,6 +66,7 @@ NAV = [
         ("&mdash; the table", "experiments/the-table/index.html"),
         ("&mdash; push to GitHub", "experiments/push-to-github/index.html"),
         ("&mdash; the deploy", "experiments/the-deploy/index.html"),
+        ("&mdash; the control room", "experiments/the-control-room/index.html"),
         ("The register, live", "registry/index.html"),
         ("The mandate hook", "packs/grant-and-mandate/enforcement.html"),
         ("The building blocks", "packs/grant-and-mandate/blocks.html"),

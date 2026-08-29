@@ -31,6 +31,12 @@
       "workflow": "the environment a permitted push lands in — a CI runner with no agent, no hooks, and one platform-enforced grant",
       "visualisation": "the same engine, a different scenario.json: nothing else changed, which is the claim the pair exists to prove",
       "honesty": "one hundred per cent real — the twin is the estate's CI runner, measured from inside by the same tool on the same day",
-      "brief": "v0.33.68" }
+      "brief": "v0.33.68" },
+    { "id": "the-control-room",
+      "title": "The control room",
+      "workflow": "both worlds at once, as an operator sees a plant — state at a glance, and the 26 August incident replayable on a sequence-of-events log",
+      "visualisation": "a SCADA board with a game HUD: mimic diagrams, annunciator tiles lit by tier, faceplates on click, transport controls over the replay",
+      "honesty": "one hundred per cent real, and zero new data — a second renderer over the same scenario.json worlds, every verdict re-run through mandate.py at build, mode chip pinned to REPLAY",
+      "brief": "v0.33.69" }
   ]
 }
