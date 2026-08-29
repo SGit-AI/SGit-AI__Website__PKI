@@ -1,0 +1,52 @@
+{
+  "_illustrative": "SYNTHETIC — EVERYTHING IN THIS FILE IS ILLUSTRATIVE. No risk has been derived, priced, accepted or monitored by anybody. This is the INSTANCE side of the library/instance contract (Grant & Mandate GM3), built as a fixture so the RiskMandate workflow's states and actions can be simulated before any live instance exists — the same move the register made with its ten labelled fixture records. The marker lives in this filename, in this header, and beside every value the room renders, because export is where markers die.",
+  "synthetic": true,
+  "v": 0,
+  "instance": "riskmandate.example/PKI-0001",
+  "as_of": "2026-08-27",
+
+  "references": {
+    "_rule": "REFERENCES, NEVER COPIES (GM3). This instance points at library artefacts by identifier and embeds nothing. A corrected entry improves this instance; a copy would keep the stale answer silently. The build gate parses this file and fails if a grant node is embedded anywhere in it.",
+    "library_entry": "claude-code-remote__ccr-container__2026-08-26",
+    "mandate": "packs/grant-and-mandate/mandates/current.json",
+    "excess_row_subject": "sha256:df2bb4d93af69e6a"
+  },
+
+  "risk": {
+    "title": "Site agent release-branch access",
+    "score": 58,
+    "band": "medium",
+    "altitude_reading": "An agent that can push to the branch that deploys a public site, where the only containment below boundary tier is a hook the agent can bypass.",
+    "blast_radius": "one public site, redeployed per push",
+    "derived_from": "the excess-authority finding referenced above, translated to the business altitude — the registry's half ends at finding; this translation is the instance's"
+  },
+
+  "decision": {
+    "_rule": "A decision requires a NAMED ACCEPTOR and an INTERVAL — without the first it is nobody's, without the second it is a grant under another name.",
+    "acceptor": "Project Lead, sgit",
+    "accepted_at": "2026-08-27T00:00:00Z",
+    "expires_at": "2026-12-31T00:00:00Z",
+    "reviewer": "Site agent (drafting) + Project Lead (deciding)",
+    "status": "active"
+  },
+
+  "conditions": [
+    { "id": "c1",
+      "text": "Pushes permitted only to claude/** and dev",
+      "maps_to": "mandate v2 allow-list, evaluated by .githooks/pre-push",
+      "observed_as_of": "2026-08-27", "holding": true },
+    { "id": "c2",
+      "text": "The mandate carries an interval and expires",
+      "maps_to": "mandate v2 expires_at",
+      "observed_as_of": "2026-08-27", "holding": true },
+    { "id": "c3",
+      "text": "Every release is validated and tagged before deploy",
+      "maps_to": "the CI pipeline: validate -> tag -> deploy; a failed gate stops the release",
+      "observed_as_of": "2026-08-27", "holding": true },
+    { "id": "c4",
+      "text": "The enforcement point reaches boundary tier",
+      "maps_to": "branch protection on the remote — the same allow-list evaluated where the agent cannot reach it",
+      "observed_as_of": null, "holding": false,
+      "why_not": "the hook is tier setting; the boundary version is proposed and unbuilt (GM-D26)" }
+  ]
+}

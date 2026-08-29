@@ -118,6 +118,29 @@ BENCH = [
          "browser storage only — nothing leaves the visitor's machine"],
   code="assess/"),
 
+ dict(slug="the-chain-room", name="The chain room", state="live",
+  where="../room/index.html", since="v0.1.42", updated="v0.1.42",
+  origin="dev brief <a href='../documents/the-chain-room.html'>v0.33.66</a>, at the project lead's direction; genre from newsroom.sgit.ai's floor debrief, CC BY 4.0",
+  one_line="The RiskMandate workflow walked end to end as a playable room — eight stations, the "
+           "product boundary drawn on the floor, four verbs, and a work item that travels the chain. "
+           "The left half is real artefacts; the right half is a marked simulation.",
+  demonstrates=[
+    "The full chain — <code>reality &rarr; twin &rarr; facts &rarr; finding</code> &#9474; <code>risks &rarr; decisions &rarr; monitoring</code> — as a place, with <b>the library/instance boundary drawn on the floor</b>: references cross, copies bounce, personal data never crosses up",
+    "<b>Every word the room speaks is derived at build time</b> from the same files the pipeline runs on — the measured library entry, the signed mandate, the computed excess row, the marked fixture. Nothing about state is hand-written",
+    "The handover in one image: left of the line the excess row reads <code>acceptor: none</code>; the exposure gains a named owner only at the acceptance desk, right of the line",
+    "<b>Simulate first, then support</b> — the workflow's states and actions exist as walkable, explainable things before any live instance does, the same move the register made with ten labelled fixtures"],
+  does_not_prove=[
+    "<b>That the workflow works.</b> The right half is synthetic and says so on every surface: no risk has been derived, priced, accepted or monitored by anybody",
+    "That a room gets read where a table gets skimmed — the genre's inherited bet, now two implementations old with zero user tests between them",
+    "That the conditions can be monitored for real: 3 of 4 hold by observation, and the fourth — the boundary-tier enforcement point — has never held anywhere in this estate",
+    "That the acceptance shown right of the line is RiskMandate's actual product behaviour: the shape is read off their positioning card, not their system"],
+  gates=["the route gate: the station order drawn must equal the declared chain, or the build fails — the room may not draw a route through a workflow that does not exist",
+         "the boundary gate (GM3): the instance fixture stores references, never copies — an embedded grant node fails the build",
+         "the decision gate: the fixture's acceptance carries a named acceptor AND an interval, or it is not a decision and the build fails",
+         "the observed gate: a condition claiming to hold without an observed_as_of fails — a status is observed, never typed",
+         "the marker gate: the generator greps its own output for the SYNTHETIC marker beside every synthetic line"],
+  code="room/, packs/grant-and-mandate/instance-fixture.synthetic.json, admin/build/gen_room.py"),
+
  dict(slug="the-book", name="A Key Means Nothing Alone (the book)", state="live",
   where="../book/index.html", since="v0.1.33", updated="v0.1.36",
   origin="a <a href='../book/brief.html'>commissioning brief</a>, draft-2, modelled on graphs.sgit.ai's three finished books",

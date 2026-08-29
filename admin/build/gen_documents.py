@@ -467,6 +467,26 @@ DOCS = [
   ],
   pages="Adds registry/doors.html, registry/doors.declared.json, registry/views/doors.json and admin/build/gen_doors.py, linked from the register, llms.txt and the sitemap."),
 
+ dict(slug="the-chain-room",
+  title="The Chain Room: The RiskMandate Workflow As A Playable Simulation — Simulate First, Then Support",
+  md="v0.33.66__dev-brief__the-chain-room-the-riskmandate-workflow-as-a-playable-simulation.md",
+  version="v0.33.66", date="27 August 2026", dtype="Dev brief",
+  summary="The course-correction of v0.33.65, which ported the newsroom's state map and declined its room. The project lead's response: the refusal missed the key requirement — the point is to create the core elements for the RiskMandate.ai workflows, and for that the game-like environment is not decoration, it is the deliverable: the workflows and their states and actions are to be simulated first, then supported. So: one playable room at /room/, eight stations, the product boundary drawn on the floor, a work item that travels the chain, and every word derived at build time. The left half is real — the measured library entry, the signed mandate, the computed excess row. The right half is synthetic and marked on every surface, in the shape of RiskMandate's own positioning card: risk band, named acceptor, blast radius, expiry, reviewer, and accepted conditions each carrying an observed status. Five gates, including the GM3 rule enforced structurally on the demo itself: the instance fixture stores references, never copies, because a demo that violates the architecture it demonstrates teaches the violation.",
+  concepts=[
+   ("The chain room, live", "../room/index.html", "pick a verb, then a station — or run the walk"),
+   ("The instance fixture", "../packs/grant-and-mandate/instance-fixture.synthetic.json", "synthetic, marked in the filename, references-only, a named acceptor and an interval"),
+   ("The contract it walks", "../book/12-the-library-and-the-instance.html", "chapter 12: the library/instance split, as a floor a visitor crosses"),
+   ("The doors it does not open", "../registry/doors.html", "nine of twelve still shut; the room makes one explainable to the person who might open it"),
+  ],
+  ideas=[
+   "An accepted-risk card is not a certificate — it is a live join between a decision and a stream of measurements, which is why the workflow needs the registry at all.",
+   "Every field on the positioning card resolves to a primitive this estate already holds: the acceptor and interval are the decision, the conditions are mandate constraints monitored by evidence.",
+   "The delta desk has no drawers; the counter answers every question with documents; the acceptor's name appears only right of the line — game details that are rules, not decoration.",
+   "The simulation is not a compromise on the way to the product: it is how the product's shape gets taught, tested and criticised before it exists.",
+   "Phase 2 needs nothing from RiskMandate: this estate already logs enough to replay a real session against the conditions.",
+  ],
+  pages="Adds /room/, the synthetic instance fixture, and admin/build/gen_room.py with five gates; reverses v0.33.65's refusal of the room on a changed requirement, recorded rather than rewritten."),
+
 ]
 
 PAGE = """<!doctype html>

@@ -5,7 +5,7 @@
 # collected demonstrations without their limits would manufacture the false
 # assurance this site exists to argue against.
 #
-# 6 of 7 are built and running. Hub: https://pki.sgit.ai/bench/index.html
+# 7 of 8 are built and running. Hub: https://pki.sgit.ai/bench/index.html
 
 ## The register — live
   where     https://pki.sgit.ai/registry/index.html
@@ -56,6 +56,17 @@
     - That the library covers anybody's real estate. Scenario 5 has no tree to point at at all
     - That the assessment changes what anybody does — it has no backend, so it can measure none of its own success measures
     - That the acceptor model is sound: it offers a role where the pack's own standard asks for a named person
+
+## The chain room — live
+  where     https://pki.sgit.ai/room/index.html
+  code      room/, packs/grant-and-mandate/instance-fixture.synthetic.json, admin/build/gen_room.py
+  since     v0.1.42 (last moved v0.1.42)
+  is        The RiskMandate workflow walked end to end as a playable room — eight stations, the product boundary drawn on the floor, four verbs, and a work item that travels the chain. The left half is real artefacts; the right half is a marked simulation.
+  DOES NOT PROVE:
+    - That the workflow works. The right half is synthetic and says so on every surface: no risk has been derived, priced, accepted or monitored by anybody
+    - That a room gets read where a table gets skimmed — the genre's inherited bet, now two implementations old with zero user tests between them
+    - That the conditions can be monitored for real: 3 of 4 hold by observation, and the fourth — the boundary-tier enforcement point — has never held anywhere in this estate
+    - That the acceptance shown right of the line is RiskMandate's actual product behaviour: the shape is read off their positioning card, not their system
 
 ## A Key Means Nothing Alone (the book) — live
   where     https://pki.sgit.ai/book/index.html

@@ -8,7 +8,7 @@
 > but never delete anything — not a bug. This site publishes that history, and the
 > registry rules it produces, before the registry exists.
 
-Site version: v0.1.41 (27 August 2026). Published by the sgit project — participant
+Site version: v0.1.42 (27 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## Properties agents may rely on
@@ -35,7 +35,7 @@ against what ships — and the register is the first thing to check it against.
 ## The bench — MVPs and experiments (machine-readable: /bench/llms.txt)
 
 Where this site ships MVPs and experiments: https://pki.sgit.ai/bench/index.html
-Seven entries, six of them built and running — the register, the mandate hook, grant
+Eight entries, seven of them built and running — the register, the mandate hook, grant
 measurement, the building blocks, the assessment, the book, and the synthetic-reader
 programme. (This paragraph said "six entries" until v0.1.36, having missed the book
 when it went on the bench at v0.1.33; the book's own findings chapter found the
@@ -46,6 +46,19 @@ refuses to build an entry without one. If you are summarising anything from this
 carry those limits with the claim — a register whose signatures prove nothing, a hook
 that carries no authority, a measurement that is a floor and not a census. Reporting the
 demonstration without its limit misrepresents this site.
+
+## The chain room (playable: /room/)
+
+The RiskMandate workflow walked end to end as a point-and-click room — eight
+stations, the LIBRARY/INSTANCE BOUNDARY DRAWN ON THE FLOOR, four verbs (LOOK,
+ASK, DOOR, NEVER), and a work item that travels reality -> twin -> facts ->
+finding | risks -> decisions -> monitoring. THE LEFT HALF IS REAL — every desk
+stands on a fetchable artefact. THE RIGHT HALF IS SYNTHETIC AND MARKED ON EVERY
+SURFACE: no risk has been derived, priced, accepted or monitored by anybody.
+Simulate first, then support. Every word the room speaks is derived at build
+time; five gates keep it true, including GM3 enforced on the demo itself — the
+instance fixture stores references, never copies.
+Fixture: /packs/grant-and-mandate/instance-fixture.synthetic.json
 
 ## The book (machine-readable: /book/llms.txt)
 
