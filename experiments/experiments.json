@@ -1,5 +1,5 @@
 {
-  "what_this_is": "The manifest behind /experiments/. One experiment, one folder, one workflow, one visualisation — each with its own generator, its own gates, and its own bench entry carrying a does_not_prove. The hub page is generated from this file so the listing cannot drift from the folders.",
+  "what_this_is": "The manifest behind /experiments/. One experiment, one folder, one workflow, one visualisation — each with its own generator (or a shared engine driven by its own scenario.json, per brief v0.33.68), its own gates, and a bench entry carrying a does_not_prove. The hub page is generated from this file so the listing cannot drift from the folders.",
   "rules": [
     "Every word derived at build time from the files the pipeline runs on; no typed counts.",
     "Real and synthetic never blend — a surface is derived from real artefacts, or it carries the SYNTHETIC marker beside every value.",
@@ -19,6 +19,18 @@
       "workflow": "actions resolving against grants and mandates, and the consequences — forward as replay, backward as audit",
       "visualisation": "a card table: six suits, players that include the systems, four turns of a real incident",
       "honesty": "one hundred per cent real — the estate's own 26 August incident, from the artefacts it left behind, with the enforcement tool re-run at build time",
-      "brief": "v0.33.67" }
+      "brief": "v0.33.67" },
+    { "id": "push-to-github",
+      "title": "Push to GitHub",
+      "workflow": "the grant chain behind a hosted agent changing a repository, and the three places a soft mandate could live",
+      "visualisation": "a scenario world rendered by one JSON-driven engine: players, a grant chain, a capability deck with one micro-animation per capability kind",
+      "honesty": "one hundred per cent real — the twin is this session's own environment, measured from inside; every card is a node in that library entry, gated one-to-one",
+      "brief": "v0.33.68" },
+    { "id": "the-deploy",
+      "title": "The Deploy",
+      "workflow": "the environment a permitted push lands in — a CI runner with no agent, no hooks, and one platform-enforced grant",
+      "visualisation": "the same engine, a different scenario.json: nothing else changed, which is the claim the pair exists to prove",
+      "honesty": "one hundred per cent real — the twin is the estate's CI runner, measured from inside by the same tool on the same day",
+      "brief": "v0.33.68" }
   ]
 }

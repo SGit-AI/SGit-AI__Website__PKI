@@ -1,0 +1,109 @@
+/* scenario.css — shared by every world the scenario engine renders.
+   Eight micro-animations, CSS-only, original; prefers-reduced-motion freezes
+   each to its end state. Two channels on every state. No external assets. */
+
+.doc--wide{max-width:1160px}
+.tdim{font:400 .85rem/1 var(--sans);color:var(--dim);letter-spacing:0}
+.rmark{margin:1rem 0 1.2rem;padding:.8rem 1rem;border:1px solid #d9c9a8;
+  border-left:4px solid var(--yellow);border-radius:.4rem;background:#fdf8ec;
+  font-size:.88rem;line-height:1.6}
+
+/* players + chain */
+.sc-players{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:.6rem;margin:.8rem 0}
+.sc-player{display:flex;gap:.6rem;border:1px solid var(--line);border-radius:.5rem;
+  background:var(--panel);padding:.6rem .75rem}
+.sc-glyph{font-size:1.3rem;line-height:1.2;color:var(--accent-dk)}
+.sc-pname{font:700 .92rem/1.4 var(--sans);display:flex;gap:.45rem;align-items:baseline;flex-wrap:wrap}
+.sc-pkind{font:600 .62rem/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;
+  color:var(--dim);border:1px dashed var(--line);border-radius:.3rem;padding:.18rem .38rem}
+.sc-twinbadge{font:700 .6rem/1 var(--mono);letter-spacing:.1em;color:var(--warm);
+  border:1.5px dashed var(--warm);border-radius:.3rem;padding:.18rem .38rem}
+.sc-pnote{font-size:.79rem;line-height:1.5;color:var(--dim);margin-top:.15rem}
+.sc-chain{margin:.7rem 0 1.4rem;padding:.6rem .8rem;border-radius:.4rem;background:#f2f0ea;
+  font:.82rem/1.9 var(--mono)}
+.sc-hop{white-space:nowrap}
+.sc-cn{font-weight:700;color:var(--fg)}
+.sc-cv{color:var(--dim);margin:0 .35rem}
+
+/* mandate slots */
+.sc-slots{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:.8rem;margin:.9rem 0 1.6rem}
+.sc-slot{border:1px solid var(--line);border-radius:.55rem;background:var(--panel);padding:.7rem .85rem}
+.sc-slot--shut{border:2px solid var(--red)}
+.sc-slot--absent{border-style:dashed;opacity:.85}
+.sc-shead{font:600 .85rem/1.5 var(--sans);display:flex;gap:.5rem;align-items:baseline;flex-wrap:wrap}
+.sc-stier{font:800 .66rem/1 var(--mono);letter-spacing:.1em;border:1.5px solid var(--fg);
+  border-radius:.3rem;padding:.22rem .42rem}
+.sc-sstate{font:700 .62rem/1 var(--mono);letter-spacing:.1em;border-radius:.3rem;padding:.22rem .42rem}
+.sc-sstate--live{color:var(--accent-dk);border:1px solid var(--accent)}
+.sc-sstate--shut{color:#fff;background:var(--red)}
+.sc-sstate--absent{color:var(--dim);border:1px dashed var(--line)}
+.sc-squote{margin-top:.45rem;font:italic .78rem/1.55 var(--serif);color:#4a463e}
+.sc-sread{margin-top:.4rem;font-size:.78rem;line-height:1.5;color:var(--dim);
+  border-top:1px dotted var(--line);padding-top:.35rem}
+
+/* the deck */
+.sc-deck{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:.8rem;margin:1rem 0 1.6rem}
+.sc-card{border:1.5px solid var(--line);border-radius:.65rem;background:var(--panel);
+  padding:.6rem .7rem;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.sc-ctop{display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem}
+.sc-cid{font:800 .68rem/1 var(--mono);color:var(--dim)}
+.sc-rung{display:flex;gap:.2rem;align-items:center}
+.sc-pip{width:.5rem;height:.5rem;border-radius:50%;border:1.5px solid var(--dim);display:inline-block}
+.sc-pip--on{background:var(--accent);border-color:var(--accent-dk)}
+.sc-rlabel{font:600 .62rem/1 var(--mono);color:var(--dim);margin-left:.25rem}
+.sc-ctitle{font:700 .88rem/1.35 var(--sans);margin:.35rem 0 .25rem}
+.sc-ccap{font-size:.76rem;line-height:1.5;color:var(--dim)}
+.sc-cmeta{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem;align-items:center}
+.sc-ev,.sc-date{font:600 .62rem/1.5 var(--mono);color:var(--dim)}
+.sc-tier{font:700 .62rem/1 var(--mono);letter-spacing:.06em;border-radius:.28rem;padding:.22rem .4rem}
+.sc-tier--boundary{border:2px solid var(--accent);color:var(--accent-dk)}
+.sc-tier--setting{border:2px dashed var(--warm);color:var(--warm)}
+.sc-tier--expectation{border:2px dotted var(--red);color:var(--red)}
+.sc-tier--none{border:1px solid var(--line);color:var(--dim)}
+.sc-tier--unknown{border:1px dashed var(--dim);color:var(--dim);
+  background:repeating-linear-gradient(45deg,transparent,transparent 3px,#eee 3px,#eee 5px)}
+
+/* the eight animations */
+.an{width:100%;height:auto;display:block;margin:.15rem 0 .2rem;background:#faf9f5;border-radius:.35rem}
+.an-box{fill:#fff;stroke:var(--fg);stroke-width:1.5}
+.an-line{stroke:var(--dim);stroke-width:1.5;stroke-dasharray:3 4}
+.an-dot{fill:var(--accent)}
+.an-fig{fill:none;stroke:var(--fg);stroke-width:2}
+.an-plate{fill:var(--fg)}
+.an-t{font:600 9px var(--mono);fill:var(--dim);text-anchor:middle}
+.an-t--inv{fill:#fff}
+.an-wall{stroke:var(--accent-dk);stroke-width:3;stroke-dasharray:5 4}
+.an-wall--solid{stroke:var(--red);stroke-dasharray:none;stroke-width:4}
+.an-wall-low{fill:none;stroke:var(--warm);stroke-width:2}
+.an-stroke{stroke:var(--fg);stroke-width:1.8;stroke-linecap:round}
+.an-fog{fill:none;stroke:var(--dim);stroke-width:1.5;stroke-dasharray:4 3}
+.an-q{font-size:16px;font-weight:800;fill:var(--dim)}
+
+@keyframes sc-travel{0%,15%{cx:46}70%,100%{cx:98}}
+.an-push .an-dot{animation:sc-travel 2.6s ease-in-out infinite}
+@keyframes sc-swap{0%,40%{opacity:0}60%,100%{opacity:1}}
+.an-actas .an-plate,.an-actas .an-t--inv{animation:sc-swap 2.4s ease infinite}
+@keyframes sc-write{0%{stroke-dashoffset:30}60%,100%{stroke-dashoffset:0}}
+.an-edit .an-stroke,.an-recall .an-stroke{stroke-dasharray:30;animation:sc-write 2.2s ease infinite}
+.an-edit .s2{animation-delay:.3s}.an-edit .s3{animation-delay:.6s}
+.an-recall .s2{animation-delay:.3s}.an-recall .s3{animation-delay:.6s}
+@keyframes sc-pass{0%,10%{cx:16;opacity:1}55%{cx:60}90%,100%{cx:100;opacity:1}}
+.an-egress .an-dot{animation:sc-pass 2.8s linear infinite}
+@keyframes sc-stop{0%,10%{cx:20}45%,100%{cx:66}}
+.an-blocked .an-dot--stop,.an-unknown .an-dot--stop{animation:sc-stop 2.4s ease-out infinite}
+.an-dot--stop{fill:var(--red)}
+@keyframes sc-hop{0%,20%{transform:translate(0,0)}50%{transform:translate(28px,-16px)}80%,100%{transform:translate(56px,0)}}
+.an-esc .an-hop{animation:sc-hop 2.6s ease-in-out infinite}
+@keyframes sc-pulse{0%,100%{opacity:.35}50%{opacity:1}}
+.an-unknown .an-q{animation:sc-pulse 2s ease infinite}
+
+@media (prefers-reduced-motion: reduce){
+  .an *{animation:none!important}
+  .an-push .an-dot{cx:98}.an-egress .an-dot{cx:100}
+  .an-blocked .an-dot--stop,.an-unknown .an-dot--stop{cx:66}
+}
+
+.sc-story li{margin:.5rem 0;line-height:1.55;font-size:.9rem}
+.dr-notprove{margin-top:1.4rem;padding:.85rem 1rem;border:1px solid var(--line);
+  border-radius:.4rem;background:var(--panel);font-size:.88rem;line-height:1.6}
+.dr-src{margin-top:1.2rem;font-size:.8rem;line-height:1.6;color:var(--dim)}

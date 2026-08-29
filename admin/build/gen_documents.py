@@ -508,6 +508,27 @@ DOCS = [
   ],
   pages="Declares /experiments/ and its five inherited rules, moves the room, and builds the table with its live resolution gate."),
 
+ dict(slug="the-scenario-engine",
+  title="The Scenario Engine: JSON-Driven Worlds, The Soft Mandate, And The Platform Library",
+  md="v0.33.68__dev-brief__the-scenario-engine-json-driven-worlds-the-soft-mandate-and-the-platform-library.md",
+  version="v0.33.68", date="29 August 2026", dtype="Dev brief",
+  summary="The third memo, processed: everything JSON-driven, nothing hardcoded, because the destination is tonnes of scenarios and a game engine that becomes a product. One engine (admin/build/gen_scenario.py) renders any world from a scenario.json that references a measured twin — the engine holds no capabilities of its own, and the deck gate forces cards == twin nodes exactly. Two worlds prove the claim by existing: PUSH TO GITHUB, the memo's worked example — this session's own grant chain, user → GitHub App → scoped token → container → Claude Code → Claude → repo — with the soft mandate shown as a place: the thing that keeps this world off the wrong branch is prose in the agent's context, an expectation-tier constraint living exactly where the memo says mistakes occur, beside the hook it could be and the platform boundary it is not. THE DEPLOY, the counter-world: the CI runner with no agent, no hook, unrestricted egress — and the estate's only boundary-tier grant. Plus the confidence rung computed from evidence (hypothesis 0 → independent 3), eight capability micro-animations, and the platform library rules for future fact-based variation entries — where the rung is the libel guard.",
+  concepts=[
+   ("Push to GitHub, live", "../experiments/push-to-github/index.html", "the worked example — this session's own chain, the soft mandate in its three possible rooms"),
+   ("The Deploy, live", "../experiments/the-deploy/index.html", "same engine, different JSON — the world without the guardrails"),
+   ("The twin it references", "../packs/grant-and-mandate/library/claude-code-remote__ccr-container__2026-08-26.json", "measured from inside this session's own environment"),
+   ("The doors view it must agree with", "../registry/doors.html", "the platform slot derives from enforcement_at_boundary, and the build fails on disagreement"),
+  ],
+  ideas=[
+   "The engine holds no capabilities of its own: it may decorate a card, never add, remove or restate one — adding a world is adding a JSON file.",
+   "The soft mandate is a place, not a strength: the same constraint is expectation-tier as prose in a context window, setting-tier as a hook, boundary-tier as platform config — and the slot it occupies decides what a mistake costs.",
+   "A capability shown acting is legible where a permission string is not — which is why each animation kind depicts the act, and why depiction is declared to be all it is.",
+   "The confidence rung is arithmetic over evidence origins, never typed: more independent places saying the same thing move a claim from hypothesis toward reality, and a rung above self-measurement is unreachable from inside.",
+   "The platform library's rule for writing about other people's products: every entry is a dated, evidenced scenario.json, an incident is evidence, and the rung is the libel guard.",
+   "The pair is the proof: one world rendered by an engine is a hardcoded page with extra steps; the second world is what makes nothing hardcoded falsifiable.",
+  ],
+  pages="Adds the engine, two scenario worlds, the shared scenario.css with eight micro-animations, and six gates; amends the experiments convention to allow a shared engine driven by per-world scenario.json."),
+
 ]
 
 PAGE = """<!doctype html>

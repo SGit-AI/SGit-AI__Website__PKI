@@ -8,7 +8,7 @@
 > but never delete anything — not a bug. This site publishes that history, and the
 > registry rules it produces, before the registry exists.
 
-Site version: v0.1.43 (27 August 2026). Published by the sgit project — participant
+Site version: v0.1.44 (29 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## Properties agents may rely on
@@ -35,8 +35,9 @@ against what ships — and the register is the first thing to check it against.
 ## The bench — MVPs and experiments (machine-readable: /bench/llms.txt)
 
 Where this site ships MVPs and experiments: https://pki.sgit.ai/bench/index.html
-Nine entries, eight of them built and running — the register, the mandate hook, grant
-measurement, the building blocks, the assessment, the book, and the synthetic-reader
+Ten entries, nine of them built and running — the register, the mandate hook, grant
+measurement, the building blocks, the assessment, the experiments (the chain room, the
+table, and the scenario engine's two worlds), the book, and the synthetic-reader
 programme. (This paragraph said "six entries" until v0.1.36, having missed the book
 when it went on the bench at v0.1.33; the book's own findings chapter found the
 disagreement between this file and /bench/llms.txt, and it is corrected here.)
@@ -50,8 +51,9 @@ demonstration without its limit misrepresents this site.
 ## The experiments (hub: /experiments/)
 
 Game-like environments for the workflows — one experiment, one folder, one
-workflow, one visualisation, each with its own generator, gates and bench
-entry. Every word derived at build time; real and synthetic never blend.
+workflow, one visualisation, each with its own generator (or a shared engine
+driven by its own scenario.json), gates and a bench entry. Every word derived
+at build time; real and synthetic never blend.
 
 - THE CHAIN ROOM (/experiments/the-room/): the RiskMandate workflow walked end
   to end — eight stations, the LIBRARY/INSTANCE BOUNDARY DRAWN ON THE FLOOR,
@@ -69,6 +71,23 @@ entry. Every word derived at build time; real and synthetic never blend.
 - The resolution order is the ordering rule as game mechanics: a DOES resolves
   against CAN, then MAY, and mints an IS backed by a SHOWS. Blast radius is the
   CAN cards face-up that no MAY card covers.
+- THE SCENARIO ENGINE (admin/build/gen_scenario.py): one engine, any world —
+  each world is a scenario.json REFERENCING A MEASURED TWIN; the engine holds
+  no capabilities of its own, and the deck gate forces cards == twin nodes
+  exactly. Two worlds so far:
+  - PUSH TO GITHUB (/experiments/push-to-github/): the grant chain behind a
+    hosted agent changing a repository — user → GitHub App → scoped token →
+    container → Claude Code → Claude → repo — and THE SOFT MANDATE AS A PLACE:
+    the constraint keeping this session off the wrong branch is prose in the
+    agent's context (expectation tier), shown beside the hook it could be
+    (setting) and the platform enforcement it is not (boundary, still shut).
+  - THE DEPLOY (/experiments/the-deploy/): the CI runner a permitted push
+    lands in — no agent, no hook, UNRESTRICTED EGRESS, and the estate's only
+    boundary-tier grant: the workflow's permissions: block.
+  Each capability card carries a CONFIDENCE RUNG computed from its evidence
+  (hypothesis 0, self-observed 1, +documented 2, independent 3 — never typed)
+  and a micro-animation of the capability acting (eight kinds; depiction, not
+  simulation).
 - THE TWIN CLAIM: a library entry IS a digital twin — a measured, dated
   representation of one environment, honest about where measurement was
   refused. A simulation is running a proposed action against the twin instead

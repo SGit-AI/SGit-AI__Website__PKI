@@ -12,12 +12,93 @@
 </head>
 <body>
 
-<nav class="site"><div class="row"></div></nav>
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
+  <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.44</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../failure/index.html">The registry<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../registry/index.html">&#9679; The registry, live</a>
+      <a class="sl" href="../failure/index.html">Why they don't exist</a>
+      <a class="sl" href="../rules/index.html">The four rules</a>
+      <a class="sl" href="../mandate/index.html">Identity &amp; mandate</a>
+      <a class="sl" href="../roadmap/index.html">Build order</a>
+      <a class="sl" href="../rules/prior-art.html">Prior art</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../bootstrap/index.html">The layers<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../bootstrap/index.html">The bootstrap trap</a>
+      <a class="sl" href="../enrolment/index.html">Enrolment</a>
+      <a class="sl" href="../execution/index.html">The execution broker</a>
+      <a class="sl" href="../shipped/index.html">What already ships</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../assess/index.html">Map your case<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../assess/index.html">Map your own case</a>
+      <a class="sl" href="../assess/library.html">The library of trees</a>
+      <a class="sl" href="../packs/map-your-case/readers/index.html">Synthetic readers</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../origins/index.html">Origins<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../origins/index.html">Origins: 2026</a>
+      <a class="sl" href="../origins/review.html">The review, redacted</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../bench/index.html">The bench<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl here" href="../bench/index.html">&#9679; The bench &mdash; what is built</a>
+      <a class="sl" href="../experiments/index.html">&#9679; Experiments</a>
+      <a class="sl" href="../experiments/the-room/index.html">&mdash; the chain room</a>
+      <a class="sl" href="../experiments/the-table/index.html">&mdash; the table</a>
+      <a class="sl" href="../experiments/push-to-github/index.html">&mdash; push to GitHub</a>
+      <a class="sl" href="../experiments/the-deploy/index.html">&mdash; the deploy</a>
+      <a class="sl" href="../registry/index.html">The register, live</a>
+      <a class="sl" href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
+      <a class="sl" href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
+      <a class="sl" href="../assess/index.html">Map your own case</a>
+      <a class="sl" href="../book/index.html">The book (commissioned)</a>
+      <a class="sl" href="../book/brief.html">&mdash; its commissioning brief</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../documents/index.html">The documents</a>
+      <a class="sl" href="../packs/index.html">Dev packs</a>
+      <a class="sl" href="../packs/registry-mvp/index.html">The registry MVP pack</a>
+      <a class="sl" href="../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
+      <a class="sl" href="../packs/map-your-case/index.html">The Map Your Case pack</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../admin/versions.html">Release history</a>
+      <a class="sl" href="../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+  <script src="../assets/nav.js" defer></script>
+</div></nav>
 
 <main class="doc">
 <div class="crumb"><a href="../index.html">pki.sgit.ai</a> / bench</div>
 <h1>The bench</h1>
-<p class="lead">Where this site ships MVPs and experiments. <b>8 of the 9 things below are
+<p class="lead">Where this site ships MVPs and experiments. <b>9 of the 10 things below are
 built and running right now</b> — you can fetch them, run them, and check them. Each one lives in its own
 folder with its own code, arrives from a brief or a dev pack, and is iterated release by release.</p>
 
@@ -33,7 +114,7 @@ folder with its own code, arrives from a brief or a dev pack, and is iterated re
 <div class="tablewrap"><table>
   <thead><tr><th>On the bench</th><th>State</th><th>What it is</th></tr></thead>
   <tbody>
-    <tr><td><a href="#registry">The register</a></td><td><span class="bench-state bench-state--live">live</span></td><td>A static register of agent identities, roles, mandates, grants, acceptances and revocations — eleven records and twenty-three signed statements at constructed public URLs, verifiable with the shipped <code>sgit pki</code> commands.</td></tr>    <tr><td><a href="#mandate-hook">The mandate hook</a></td><td><span class="bench-state bench-state--live">live</span></td><td>A signed mandate compiled into a <code>pre-push</code> hook that git runs — and that refused a real push to <code>dev</code> with <code>error: failed to push some refs</code>.</td></tr>    <tr><td><a href="#grant-measurement">Grant measurement</a></td><td><span class="bench-state bench-state--live">live</span></td><td>A tool that generates a grant document for the environment it runs in, and two measured entries — a hosted agent container and a CI runner — that join at the push edge.</td></tr>    <tr><td><a href="#building-blocks">The building blocks</a></td><td><span class="bench-state bench-state--live">live</span></td><td>Nine reusable components — tier and evidence badges, cards, the delta block, the grant tree — shipped as a stylesheet and a gallery that renders the real documents.</td></tr>    <tr><td><a href="#map-your-case">Map your own case</a></td><td><span class="bench-state bench-state--live">live</span></td><td>A visitor assembles their own agent installations as grant trees, sees the gap, and records a decision per gap — storing the choices and never the answers.</td></tr>    <tr><td><a href="#the-chain-room">The chain room</a></td><td><span class="bench-state bench-state--live">live</span></td><td>The RiskMandate workflow walked end to end as a playable room — eight stations, the product boundary drawn on the floor, four verbs, and a work item that travels the chain. The left half is real artefacts; the right half is a marked simulation.</td></tr>    <tr><td><a href="#the-table">The table</a></td><td><span class="bench-state bench-state--live">live</span></td><td>Actions resolving against grants and mandates, played as cards: six suits, four players including the systems, and the estate's real 26 August incident replayed forward as simulation and backward as audit — with every resolution re-run through the enforcement tool at build time.</td></tr>    <tr><td><a href="#the-book">A Key Means Nothing Alone (the book)</a></td><td><span class="bench-state bench-state--live">live</span></td><td>One volume explaining what this site built, how it composes with RiskMandate.ai, and what none of it proves — 17 chapters in five parts, 14 figures each taken at the release tag its caption names, and 65 quotations re-read out of their sources on every build.</td></tr>    <tr><td><a href="#synthetic-readers">Synthetic readers</a></td><td><span class="bench-state bench-state--specified">specified</span></td><td>A programme that puts a page in front of an agent which receives pixels and nothing else — no text, no structure, no knowledge of the project — and watches where it goes.</td></tr>
+    <tr><td><a href="#registry">The register</a></td><td><span class="bench-state bench-state--live">live</span></td><td>A static register of agent identities, roles, mandates, grants, acceptances and revocations — eleven records and twenty-three signed statements at constructed public URLs, verifiable with the shipped <code>sgit pki</code> commands.</td></tr>    <tr><td><a href="#mandate-hook">The mandate hook</a></td><td><span class="bench-state bench-state--live">live</span></td><td>A signed mandate compiled into a <code>pre-push</code> hook that git runs — and that refused a real push to <code>dev</code> with <code>error: failed to push some refs</code>.</td></tr>    <tr><td><a href="#grant-measurement">Grant measurement</a></td><td><span class="bench-state bench-state--live">live</span></td><td>A tool that generates a grant document for the environment it runs in, and two measured entries — a hosted agent container and a CI runner — that join at the push edge.</td></tr>    <tr><td><a href="#building-blocks">The building blocks</a></td><td><span class="bench-state bench-state--live">live</span></td><td>Nine reusable components — tier and evidence badges, cards, the delta block, the grant tree — shipped as a stylesheet and a gallery that renders the real documents.</td></tr>    <tr><td><a href="#map-your-case">Map your own case</a></td><td><span class="bench-state bench-state--live">live</span></td><td>A visitor assembles their own agent installations as grant trees, sees the gap, and records a decision per gap — storing the choices and never the answers.</td></tr>    <tr><td><a href="#the-chain-room">The chain room</a></td><td><span class="bench-state bench-state--live">live</span></td><td>The RiskMandate workflow walked end to end as a playable room — eight stations, the product boundary drawn on the floor, four verbs, and a work item that travels the chain. The left half is real artefacts; the right half is a marked simulation.</td></tr>    <tr><td><a href="#the-table">The table</a></td><td><span class="bench-state bench-state--live">live</span></td><td>Actions resolving against grants and mandates, played as cards: six suits, four players including the systems, and the estate's real 26 August incident replayed forward as simulation and backward as audit — with every resolution re-run through the enforcement tool at build time.</td></tr>    <tr><td><a href="#the-scenario-engine">The scenario engine (two worlds)</a></td><td><span class="bench-state bench-state--live">live</span></td><td>One engine, two worlds: <i>Push to GitHub</i> and <i>The Deploy</i> are rendered by the same generator from two scenario.json files, each referencing a measured twin — the engine holds no capabilities of its own, and every card is a twin node wearing scene clothes, with a confidence rung computed from its evidence and a micro-animation per capability kind.</td></tr>    <tr><td><a href="#the-book">A Key Means Nothing Alone (the book)</a></td><td><span class="bench-state bench-state--live">live</span></td><td>One volume explaining what this site built, how it composes with RiskMandate.ai, and what none of it proves — 17 chapters in five parts, 14 figures each taken at the release tag its caption names, and 65 quotations re-read out of their sources on every build.</td></tr>    <tr><td><a href="#synthetic-readers">Synthetic readers</a></td><td><span class="bench-state bench-state--specified">specified</span></td><td>A programme that puts a page in front of an agent which receives pixels and nothing else — no text, no structure, no knowledge of the project — and watches where it goes.</td></tr>
   </tbody>
 </table></div>
 
@@ -207,6 +288,30 @@ folder with its own code, arrives from a brief or a dev pack, and is iterated re
     <span>on the bench since v0.1.43 · last moved v0.1.43</span>
   </div>
 </div>
+<div class="bench-item" id="the-scenario-engine">
+  <div class="bench-item__head">
+    <h3><a href="../experiments/push-to-github/index.html">The scenario engine (two worlds)</a></h3>
+    <span class="bench-state bench-state--live">live</span>
+  </div>
+  <p class="bench-item__line">One engine, two worlds: <i>Push to GitHub</i> and <i>The Deploy</i> are rendered by the same generator from two scenario.json files, each referencing a measured twin — the engine holds no capabilities of its own, and every card is a twin node wearing scene clothes, with a confidence rung computed from its evidence and a micro-animation per capability kind.</p>
+  <div class="bench-cols">
+    <div class="bench-col">
+      <div class="bench-col__k">What it demonstrates</div>
+      <ul class="bench-list bench-list--yes"><li><b>Nothing hardcoded</b>: the engine reads players, grant chain, mandate slots, decor and story from scenario.json, and every capability from the twin the scenario references — adding a world is adding a JSON file, which is the memo's claim made falsifiable by the pair existing</li><li><b>The soft mandate as a place</b>: the constraint that keeps this session off the wrong branch shown in the room it actually occupies — prose in the agent's context (expectation tier), beside the hook it could be (setting) and the platform enforcement it is not (boundary, the doors view's shut door printed in situ)</li><li><b>The contrast the memo predicted</b>: the hosted agent world has a mandatory egress proxy and three occupied mandate slots; the CI runner world that deploys its work has unrestricted egress, no agent, no hook — and the estate's only boundary-tier grant, the workflow's <code>permissions:</code> block</li><li><b>The confidence rung as arithmetic</b>: hypothesis 0, self-observed 1, +documented 2, independent 3 — computed from each node's evidence class, never typed, and both decks print why their maximum is what it is</li><li><b>Capabilities that act</b>: eight micro-animation kinds (push, act-as, edit, egress, recall, escalate, blocked, unknown) — a capability shown acting is legible where a permission string is not, and every animation freezes to its end state under prefers-reduced-motion</li></ul>
+    </div>
+    <div class="bench-col bench-col--not">
+      <div class="bench-col__k">What it does <b>not</b> prove</div>
+      <ul class="bench-list bench-list--no"><li><b>That two worlds are many.</b> The memo says tonnes of scenarios; the engine has rendered exactly two, both from twins this estate measured itself</li><li>That the animations simulate anything — a travelling dot is a depiction of a capability, not an execution of one; no action is resolved here (that is the table's job)</li><li>That the platform library exists: Codex, Lovable and the rest are named in the brief as future scenario.json files, and not one has been written — the fact-based variation catalogue is an argument, not an artefact</li><li>That a rung above 2 is reachable: independent evidence exists nowhere in this estate, so the scale's top rung has never been exercised</li><li>That an agent reads these pages — the memo's claim that agents would also appreciate the visual representation is untested for both humans and agents</li></ul>
+    </div>
+  </div>
+  <div class="bench-gates"><b>Gates</b> — what keeps it honest when nobody is looking:
+    <ul class="bench-list"><li>the twin gate: the scenario's twin file must exist and parse, or the build fails</li><li>the deck gate: cards == twin nodes exactly — a twin node without decor, or decor naming an absent node, fails the build; the engine may decorate a capability, never add, remove or restate one</li><li>the slot gate: every mandate slot derives from a real file (the twin's control text, the signed mandate's enforced_by, the doors view) — and the platform slot must agree with the doors view's enforcement_at_boundary count</li><li>the anim gate: every animation kind must be one of the eight the engine defines</li><li>the story gate: every beat cites an artefact that exists on disk</li><li>the manifest gate: a scenario folder without a manifest entry, or an entry without a folder, fails the hub build</li></ul></div>
+  <div class="bench-meta">
+    <span>from dev brief <a href='../documents/the-scenario-engine.html'>v0.33.68</a> — JSON-driven worlds, the soft mandate as a place, the platform library</span>
+    <span>code: <code>experiments/push-to-github/scenario.json, experiments/the-deploy/scenario.json, admin/build/gen_scenario.py, experiments/scenario.css</code></span>
+    <span>on the bench since v0.1.44 · last moved v0.1.44</span>
+  </div>
+</div>
 <div class="bench-item" id="the-book">
   <div class="bench-item__head">
     <h3><a href="../book/index.html">A Key Means Nothing Alone (the book)</a></h3>
@@ -281,7 +386,55 @@ and it sits naturally beside the estate's own vocabulary of measurement, evidenc
 </div>
 </main>
 
-<footer class="site"></footer>
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.44</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The bench</h4>
+    <a href="../bench/index.html">&#9679; What is built</a>
+    <a href="../registry/index.html">The register, live</a>
+    <a href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
+    <a href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
+    <a href="../assess/index.html">&#8594; Map your own case</a>
+    <a href="../book/index.html">The book (commissioned)</a>
+    <a href="../book/brief.html">&mdash; its commissioning brief</a>
+  </div>
+  <div>
+    <h4>The registry</h4>
+    <a href="../failure/index.html">Why they don't exist</a>
+    <a href="../rules/index.html">The four rules</a>
+    <a href="../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../roadmap/index.html">Build order</a>
+    <a href="../rules/prior-art.html">Prior art</a>
+  </div>
+  <div>
+    <h4>The three layers</h4>
+    <a href="../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../enrolment/index.html">Enrolment</a>
+    <a href="../execution/index.html">The execution broker</a>
+    <a href="../shipped/index.html">What already ships</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../origins/index.html">Origins: 2026</a>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../packs/registry-mvp/index.html">The registry MVP pack</a>
+    <a href="../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
+    <a href="../packs/map-your-case/index.html">The Map Your Case pack</a>
+    <a href="../about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../llms.txt">llms.txt</a>
+  </div>
+</div></footer>
 
 </body>
 </html>

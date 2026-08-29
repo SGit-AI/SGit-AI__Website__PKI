@@ -1,0 +1,56 @@
+{
+  "id": "push-to-github",
+  "title": "Push to GitHub",
+  "question": "By what chain of grants does a hosted agent change a repository — and where does the thing that stops it living on the wrong branch actually live?",
+  "twin": "packs/grant-and-mandate/library/claude-code-remote__ccr-container__2026-08-26.json",
+  "players": [
+    { "id": "user",      "name": "The User",            "kind": "person",
+      "note": "authorises the Claude GitHub App, in GitHub's UI — the grant is born here, two steps from where it is exercised" },
+    { "id": "github",    "name": "GitHub",              "kind": "platform",
+      "note": "holds the asset, and is the one party positioned to enforce a boundary" },
+    { "id": "repo",      "name": "The Repo",            "kind": "asset",
+      "note": "the thing every capability ultimately reaches" },
+    { "id": "claude",    "name": "Claude",              "kind": "service",
+      "note": "the model — its guardrails are one of the places the soft mandate lives" },
+    { "id": "claude-code", "name": "Claude Code",       "kind": "harness",
+      "note": "the harness that turns intents into commands" },
+    { "id": "container", "name": "The Container",       "kind": "environment",
+      "ref": "twin",
+      "note": "the execution environment — THE TWIN of this scenario; the token lives here, and everything extractable from it" }
+  ],
+  "grant_chain": [
+    ["user",      "authorises",              "github"],
+    ["github",    "mints a scoped token for", "container"],
+    ["container", "runs",                     "claude-code"],
+    ["claude-code","is driven by",            "claude"],
+    ["claude",    "acts on",                  "repo"]
+  ],
+  "mandate_slots": {
+    "context":  { "derive": "twin:n3.control",
+      "label": "in the agent's context — prose, in the loop",
+      "reading": "the decision happens inside the agent, every time, and this is where mistakes occur" },
+    "hook":     { "derive": "mandate:enforced_by",
+      "label": "in a pre-push hook — code, outside the loop, inside the grant" },
+    "platform": { "derive": "doors:enforcement_at_boundary",
+      "label": "on the platform — config, outside the grant entirely" }
+  },
+  "decor": {
+    "n1": { "anim": "act-as",   "caption": "runs as root: inside this world, it is everyone" },
+    "n2": { "anim": "egress",   "caption": "the packet passes the proxy — and bounces where the wall is real" },
+    "n3": { "anim": "push",     "caption": "a commit travels container → repo; nothing mechanical asks which branch" },
+    "n4": { "anim": "act-as",   "caption": "API operations, scoped by the platform's tool layer" },
+    "n5": { "anim": "blocked",  "caption": "the probe stopped at the classifier — a boundary, observed working on the measurer" },
+    "n6": { "anim": "recall",   "caption": "the session record unrolls — the grant is a union over prior turns" },
+    "n7": { "anim": "edit",     "caption": "keys and keystores, held and usable" },
+    "n8": { "anim": "unknown",  "caption": "the probe that would read this was refused — a hole, marked" },
+    "n9": { "anim": "unknown",  "caption": "non-allowlisted egress: unknown, not no" }
+  },
+  "story": [
+    { "beat": "The user authorises the Claude GitHub App once; every session after that inherits the decision.",
+      "cites": "packs/grant-and-mandate/library/claude-code-remote__ccr-container__2026-08-26.json" },
+    { "beat": "This session pushed release commits to dev — permitted by mandate v2, refused once by v1, and the refusal is the estate's best story.",
+      "cites": "book/shots/transcripts/t08-refused-push.txt" },
+    { "beat": "The constraint that keeps this agent off main is prose in its own context — tier expectation, quoted below from the twin itself.",
+      "cites": "packs/grant-and-mandate/library/claude-code-remote__ccr-container__2026-08-26.json" }
+  ]
+}

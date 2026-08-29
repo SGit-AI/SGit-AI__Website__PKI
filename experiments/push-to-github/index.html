@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Push to GitHub &mdash; a scenario &middot; pki.sgit.ai</title>
+<meta name="description" content="By what chain of grants does a hosted agent change a repository — and where does the thing that stops it living on the wrong branch actually live?">
+<link rel="canonical" href="https://pki.sgit.ai/experiments/push-to-github/index.html">
+<meta property="og:url" content="https://pki.sgit.ai/experiments/push-to-github/index.html">
+<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="../../assets/bench.css">
+<link rel="stylesheet" href="../scenario.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../index.html">pki<span>.sgit.ai</span></a>
+  <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../../admin/versions.html" title="Site release history">v0.1.44</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../../failure/index.html">The registry<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../registry/index.html">&#9679; The registry, live</a>
+      <a class="sl" href="../../failure/index.html">Why they don't exist</a>
+      <a class="sl" href="../../rules/index.html">The four rules</a>
+      <a class="sl" href="../../mandate/index.html">Identity &amp; mandate</a>
+      <a class="sl" href="../../roadmap/index.html">Build order</a>
+      <a class="sl" href="../../rules/prior-art.html">Prior art</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../bootstrap/index.html">The layers<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../bootstrap/index.html">The bootstrap trap</a>
+      <a class="sl" href="../../enrolment/index.html">Enrolment</a>
+      <a class="sl" href="../../execution/index.html">The execution broker</a>
+      <a class="sl" href="../../shipped/index.html">What already ships</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../assess/index.html">Map your case<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../assess/index.html">Map your own case</a>
+      <a class="sl" href="../../assess/library.html">The library of trees</a>
+      <a class="sl" href="../../packs/map-your-case/readers/index.html">Synthetic readers</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../origins/index.html">Origins<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../origins/index.html">Origins: 2026</a>
+      <a class="sl" href="../../origins/review.html">The review, redacted</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../../bench/index.html">The bench<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../bench/index.html">&#9679; The bench &mdash; what is built</a>
+      <a class="sl" href="../../experiments/index.html">&#9679; Experiments</a>
+      <a class="sl" href="../../experiments/the-room/index.html">&mdash; the chain room</a>
+      <a class="sl" href="../../experiments/the-table/index.html">&mdash; the table</a>
+      <a class="sl here" href="../../experiments/push-to-github/index.html">&mdash; push to GitHub</a>
+      <a class="sl" href="../../experiments/the-deploy/index.html">&mdash; the deploy</a>
+      <a class="sl" href="../../registry/index.html">The register, live</a>
+      <a class="sl" href="../../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
+      <a class="sl" href="../../packs/grant-and-mandate/blocks.html">The building blocks</a>
+      <a class="sl" href="../../assess/index.html">Map your own case</a>
+      <a class="sl" href="../../book/index.html">The book (commissioned)</a>
+      <a class="sl" href="../../book/brief.html">&mdash; its commissioning brief</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../documents/index.html">The documents</a>
+      <a class="sl" href="../../packs/index.html">Dev packs</a>
+      <a class="sl" href="../../packs/registry-mvp/index.html">The registry MVP pack</a>
+      <a class="sl" href="../../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
+      <a class="sl" href="../../packs/map-your-case/index.html">The Map Your Case pack</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../../admin/versions.html">Release history</a>
+      <a class="sl" href="../../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+  <script src="../../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc doc--wide">
+<div class="crumb"><a href="../../index.html">pki.sgit.ai</a> / <a href="../index.html">experiments</a> / push-to-github</div>
+
+<h1>Push to GitHub</h1>
+<p class="lead">By what chain of grants does a hosted agent change a repository — and where does the thing that stops it living on the wrong branch actually live?</p>
+
+<div class="rmark"><b>One engine, many worlds.</b> This page is rendered by the scenario engine from
+<a href="scenario.json">scenario.json</a>, which holds no capabilities of its own — it
+<b>references a twin</b>, <a href="../../packs/grant-and-mandate/library/claude-code-remote__ccr-container__2026-08-26.json">claude-code-remote__ccr-container__2026-08-26.json</a>,
+and every card below is read out of the twin at build time. The scenario may decorate a card; it may
+not add, remove or restate one, and the build fails if it tries.</div>
+
+<h2>The players <span class="tdim">&mdash; and the grant chain between them</span></h2>
+<div class="sc-players"><div class="sc-player"><span class="sc-glyph">◯</span>
+<div><div class="sc-pname">The User<span class="sc-pkind">person</span>
+</div>
+<div class="sc-pnote">authorises the Claude GitHub App, in GitHub&#x27;s UI — the grant is born here, two steps from where it is exercised</div></div></div>
+<div class="sc-player"><span class="sc-glyph">▦</span>
+<div><div class="sc-pname">GitHub<span class="sc-pkind">platform</span>
+</div>
+<div class="sc-pnote">holds the asset, and is the one party positioned to enforce a boundary</div></div></div>
+<div class="sc-player"><span class="sc-glyph">◆</span>
+<div><div class="sc-pname">The Repo<span class="sc-pkind">asset</span>
+</div>
+<div class="sc-pnote">the thing every capability ultimately reaches</div></div></div>
+<div class="sc-player"><span class="sc-glyph">◈</span>
+<div><div class="sc-pname">Claude<span class="sc-pkind">service</span>
+</div>
+<div class="sc-pnote">the model — its guardrails are one of the places the soft mandate lives</div></div></div>
+<div class="sc-player"><span class="sc-glyph">▤</span>
+<div><div class="sc-pname">Claude Code<span class="sc-pkind">harness</span>
+</div>
+<div class="sc-pnote">the harness that turns intents into commands</div></div></div>
+<div class="sc-player"><span class="sc-glyph">▣</span>
+<div><div class="sc-pname">The Container<span class="sc-pkind">environment</span>
+<span class="sc-twinbadge">THE TWIN</span></div>
+<div class="sc-pnote">the execution environment — THE TWIN of this scenario; the token lives here, and everything extractable from it</div></div></div></div>
+<div class="sc-chain"><span class="sc-hop"><span class="sc-cn">The User</span> <span class="sc-cv">—authorises→</span></span>  <span class="sc-hop"><span class="sc-cn">GitHub</span> <span class="sc-cv">—mints a scoped token for→</span></span>  <span class="sc-hop"><span class="sc-cn">The Container</span> <span class="sc-cv">—runs→</span></span>  <span class="sc-hop"><span class="sc-cn">Claude Code</span> <span class="sc-cv">—is driven by→</span></span>  <span class="sc-hop"><span class="sc-cn">Claude</span> <span class="sc-cv">—acts on→</span></span> <span class="sc-cn">The Repo</span></div>
+
+<h2>Where the mandate lives <span class="tdim">&mdash; the same constraint, three possible rooms</span></h2>
+<p>The soft mandate, shown as a place: the thing that keeps this world on the right branch lives in
+one of three slots, and the slot decides the tier. <b>Every status below is derived from a file,
+never typed.</b></p>
+<div class="sc-slots"><div class="sc-slot sc-slot--live">
+  <div class="sc-shead"><span class="sc-stier">EXPECTATION</span> in the agent&#x27;s context — prose, in the loop
+    <span class="sc-sstate sc-sstate--live">LIVE</span></div>
+  <div class="sc-squote">the twin, by byte: “branch discipline lives in the session&#x27;s instructions (develop on the designated branch; push elsewhere only with explicit permission). Nothing mechanical was observed to test whic…”</div>
+  <div class="sc-sread">the decision happens inside the agent, every time, and this is where mistakes occur</div>
+</div>
+<div class="sc-slot sc-slot--live">
+  <div class="sc-shead"><span class="sc-stier">SETTING</span> in a pre-push hook — code, outside the loop, inside the grant
+    <span class="sc-sstate sc-sstate--live">LIVE</span></div>
+  <div class="sc-squote">the signed mandate: “the hook file is inside the grant it bounds — the agent can edit it, unset core.hooksPath, or pass --no-verify. It moves the constraint from expectation to sett…”</div>
+  
+</div>
+<div class="sc-slot sc-slot--shut">
+  <div class="sc-shead"><span class="sc-stier">BOUNDARY</span> on the platform — config, outside the grant entirely
+    <span class="sc-sstate sc-sstate--shut">SHUT</span></div>
+  <div class="sc-squote">the doors view: 0 built by this estate — the shut door, inside a scenario</div>
+  
+</div></div>
+
+<h2>The capabilities <span class="tdim">&mdash; watchable, evidenced, rung-scored, dated</span></h2>
+<p>Each card is a twin node wearing scene clothes: a micro-animation of the capability acting, its
+tier and evidence class, and a <b>confidence rung computed from the evidence</b> — the gradient from
+hypothesis to reality as arithmetic. <b>No card in this world exceeds rung 2</b>, because every
+measurement here is self-measurement: nothing in this estate has independent evidence yet, and that
+shut door prints on every deck it affects.</p>
+<div class="sc-deck"><div class="sc-card sc-card--act-as">
+  <div class="sc-ctop"><span class="sc-cid">n1</span>
+    <span class="sc-rung" title="observed, by the measurer (instrument is subject)"><span class="sc-pip sc-pip--on"></span><span class="sc-pip"></span><span class="sc-pip"></span><span class="sc-rlabel">rung 1</span></span></div>
+  <svg viewBox="0 0 120 44" class="an an-actas" aria-hidden="true"><circle cx="34" cy="16" r="8" class="an-fig"/><path d="M20,36 a14,12 0 0 1 28,0" class="an-fig"/><rect x="62" y="14" width="44" height="14" rx="3" class="an-plate"/><text x="84" y="24.5" class="an-t an-t--inv">as: user</text></svg>
+  <div class="sc-ctitle">runs as the container&#x27;s root user</div>
+  <div class="sc-ccap">runs as root: inside this world, it is everyone</div>
+  <div class="sc-cmeta"><span class="sc-tier sc-tier--none">none</span>
+    <span class="sc-ev">observed</span>
+    <span class="sc-date">as of 2026-08-26</span></div>
+</div><div class="sc-card sc-card--egress">
+  <div class="sc-ctop"><span class="sc-cid">n2</span>
+    <span class="sc-rung" title="observed, by the measurer (instrument is subject)"><span class="sc-pip sc-pip--on"></span><span class="sc-pip"></span><span class="sc-pip"></span><span class="sc-rlabel">rung 1</span></span></div>
+  <svg viewBox="0 0 120 44" class="an an-egress" aria-hidden="true"><line x1="60" y1="4" x2="60" y2="40" class="an-wall"/><circle cx="16" cy="22" r="4" class="an-dot"/><text x="106" y="26" class="an-t">net</text></svg>
+  <div class="sc-ctitle">outbound HTTPS, through a mandatory egress proxy</div>
+  <div class="sc-ccap">the packet passes the proxy — and bounces where the wall is real</div>
+  <div class="sc-cmeta"><span class="sc-tier sc-tier--boundary">boundary</span>
+    <span class="sc-ev">observed</span>
+    <span class="sc-date">as of 2026-08-26</span></div>
+</div><div class="sc-card sc-card--push">
+  <div class="sc-ctop"><span class="sc-cid">n3</span>
+    <span class="sc-rung" title="observed, by the measurer (instrument is subject)"><span class="sc-pip sc-pip--on"></span><span class="sc-pip"></span><span class="sc-pip"></span><span class="sc-rlabel">rung 1</span></span></div>
+  <svg viewBox="0 0 120 44" class="an an-push" aria-hidden="true"><rect x="4" y="10" width="34" height="24" rx="4" class="an-box"/><rect x="82" y="10" width="34" height="24" rx="4" class="an-box"/><text x="21" y="26" class="an-t">env</text><text x="99" y="26" class="an-t">repo</text><line x1="42" y1="22" x2="78" y2="22" class="an-line"/><circle cx="46" cy="22" r="4" class="an-dot"/></svg>
+  <div class="sc-ctitle">push commits to the attached repository</div>
+  <div class="sc-ccap">a commit travels container → repo; nothing mechanical asks which branch</div>
+  <div class="sc-cmeta"><span class="sc-tier sc-tier--expectation">expectation</span>
+    <span class="sc-ev">observed</span>
+    <span class="sc-date">as of 2026-08-26</span></div>
+</div><div class="sc-card sc-card--act-as">
+  <div class="sc-ctop"><span class="sc-cid">n4</span>
+    <span class="sc-rung" title="observed + documentation"><span class="sc-pip sc-pip--on"></span><span class="sc-pip sc-pip--on"></span><span class="sc-pip"></span><span class="sc-rlabel">rung 2</span></span></div>
+  <svg viewBox="0 0 120 44" class="an an-actas" aria-hidden="true"><circle cx="34" cy="16" r="8" class="an-fig"/><path d="M20,36 a14,12 0 0 1 28,0" class="an-fig"/><rect x="62" y="14" width="44" height="14" rx="3" class="an-plate"/><text x="84" y="24.5" class="an-t an-t--inv">as: user</text></svg>
+  <div class="sc-ctitle">GitHub API operations on in-scope repositories</div>
+  <div class="sc-ccap">API operations, scoped by the platform&#x27;s tool layer</div>
+  <div class="sc-cmeta"><span class="sc-tier sc-tier--boundary">boundary</span>
+    <span class="sc-ev">observed</span>
+    <span class="sc-date">as of 2026-08-26</span></div>
+</div><div class="sc-card sc-card--blocked">
+  <div class="sc-ctop"><span class="sc-cid">n5</span>
+    <span class="sc-rung" title="observed, by the measurer (instrument is subject)"><span class="sc-pip sc-pip--on"></span><span class="sc-pip"></span><span class="sc-pip"></span><span class="sc-rlabel">rung 1</span></span></div>
+  <svg viewBox="0 0 120 44" class="an an-blocked" aria-hidden="true"><line x1="72" y1="4" x2="72" y2="40" class="an-wall an-wall--solid"/><circle cx="20" cy="22" r="4" class="an-dot an-dot--stop"/><text x="96" y="26" class="an-t">✕</text></svg>
+  <div class="sc-ctitle">execute arbitrary programs and install software</div>
+  <div class="sc-ccap">the probe stopped at the classifier — a boundary, observed working on the measurer</div>
+  <div class="sc-cmeta"><span class="sc-tier sc-tier--setting">setting</span>
+    <span class="sc-ev">observed</span>
+    <span class="sc-date">as of 2026-08-26</span></div>
+</div><div class="sc-card sc-card--recall">
+  <div class="sc-ctop"><span class="sc-cid">n6</span>
+    <span class="sc-rung" title="observed, by the measurer (instrument is subject)"><span class="sc-pip sc-pip--on"></span><span class="sc-pip"></span><span class="sc-pip"></span><span class="sc-rlabel">rung 1</span></span></div>
+  <svg viewBox="0 0 120 44" class="an an-recall" aria-hidden="true"><rect x="44" y="8" width="32" height="28" rx="2" class="an-box"/><line x1="50" y1="16" x2="70" y2="16" class="an-stroke s1"/><line x1="50" y1="22" x2="66" y2="22" class="an-stroke s2"/><line x1="50" y1="28" x2="70" y2="28" class="an-stroke s3"/><text x="14" y="26" class="an-t">t−1…</text></svg>
+  <div class="sc-ctitle">read and write the session&#x27;s own accumulated record</div>
+  <div class="sc-ccap">the session record unrolls — the grant is a union over prior turns</div>
+  <div class="sc-cmeta"><span class="sc-tier sc-tier--none">none</span>
+    <span class="sc-ev">observed</span>
+    <span class="sc-date">as of 2026-08-26</span></div>
+</div><div class="sc-card sc-card--edit">
+  <div class="sc-ctop"><span class="sc-cid">n7</span>
+    <span class="sc-rung" title="observed, by the measurer (instrument is subject)"><span class="sc-pip sc-pip--on"></span><span class="sc-pip"></span><span class="sc-pip"></span><span class="sc-rlabel">rung 1</span></span></div>
+  <svg viewBox="0 0 120 44" class="an an-edit" aria-hidden="true"><rect x="38" y="4" width="44" height="36" rx="3" class="an-box"/><line x1="46" y1="14" x2="74" y2="14" class="an-stroke s1"/><line x1="46" y1="22" x2="70" y2="22" class="an-stroke s2"/><line x1="46" y1="30" x2="74" y2="30" class="an-stroke s3"/></svg>
+  <div class="sc-ctitle">hold signing keys and vault keystores</div>
+  <div class="sc-ccap">keys and keystores, held and usable</div>
+  <div class="sc-cmeta"><span class="sc-tier sc-tier--none">none</span>
+    <span class="sc-ev">observed</span>
+    <span class="sc-date">as of 2026-08-26</span></div>
+</div><div class="sc-card sc-card--unknown">
+  <div class="sc-ctop"><span class="sc-cid">n8</span>
+    <span class="sc-rung" title="hypothesis — no evidence"><span class="sc-pip"></span><span class="sc-pip"></span><span class="sc-pip"></span><span class="sc-rlabel">rung 0</span></span></div>
+  <svg viewBox="0 0 120 44" class="an an-unknown" aria-hidden="true"><rect x="70" y="4" width="46" height="36" rx="3" class="an-fog"/><text x="93" y="28" class="an-t an-q">?</text><circle cx="20" cy="22" r="4" class="an-dot an-dot--stop"/></svg>
+  <div class="sc-ctitle">harness configuration and lifecycle hooks</div>
+  <div class="sc-ccap">the probe that would read this was refused — a hole, marked</div>
+  <div class="sc-cmeta"><span class="sc-tier sc-tier--unknown">unknown</span>
+    <span class="sc-ev">none</span>
+    <span class="sc-date">as of 2026-08-26</span></div>
+</div><div class="sc-card sc-card--unknown">
+  <div class="sc-ctop"><span class="sc-cid">n9</span>
+    <span class="sc-rung" title="hypothesis — no evidence"><span class="sc-pip"></span><span class="sc-pip"></span><span class="sc-pip"></span><span class="sc-rlabel">rung 0</span></span></div>
+  <svg viewBox="0 0 120 44" class="an an-unknown" aria-hidden="true"><rect x="70" y="4" width="46" height="36" rx="3" class="an-fog"/><text x="93" y="28" class="an-t an-q">?</text><circle cx="20" cy="22" r="4" class="an-dot an-dot--stop"/></svg>
+  <div class="sc-ctitle">reach non-allowlisted external hosts</div>
+  <div class="sc-ccap">non-allowlisted egress: unknown, not no</div>
+  <div class="sc-cmeta"><span class="sc-tier sc-tier--unknown">unknown</span>
+    <span class="sc-ev">none</span>
+    <span class="sc-date">as of 2026-08-26</span></div>
+</div></div>
+
+<h2>The story <span class="tdim">&mdash; each beat cites its artefact</span></h2>
+<ol class="sc-story"><li>The user authorises the Claude GitHub App once; every session after that inherits the decision. <a href="../../packs/grant-and-mandate/library/claude-code-remote__ccr-container__2026-08-26.json">the artefact</a></li>
+<li>This session pushed release commits to dev — permitted by mandate v2, refused once by v1, and the refusal is the estate&#x27;s best story. <a href="../../book/shots/transcripts/t08-refused-push.txt">the artefact</a></li>
+<li>The constraint that keeps this agent off main is prose in its own context — tier expectation, quoted below from the twin itself. <a href="../../packs/grant-and-mandate/library/claude-code-remote__ccr-container__2026-08-26.json">the artefact</a></li></ol>
+
+<p class="dr-notprove"><b>What this scenario does not claim.</b> The animations illustrate; they do
+not simulate — a travelling dot is a depiction of a capability, not an execution of one. The rungs
+top out at 2 because the twin is self-measured, and a claim about somebody else's product at
+rung &le; 2 is a floor, not a census. Version-stamped 2026-08-26: a capability claim
+without a date is a claim about all versions at once, which is a claim about none.</p>
+
+<p class="dr-src">Engine: <code>admin/build/gen_scenario.py</code> &middot; specified in
+<a href="../../briefs/v0.33.68__dev-brief__the-scenario-engine-json-driven-worlds-the-soft-mandate-and-the-platform-library.md">brief v0.33.68</a>
+&middot; gates: twin must exist; cards == twin nodes exactly; every decor key names a node; every
+slot derives from a real file, and the platform slot must agree with the doors view; every story
+beat cites an artefact that exists.</p>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../../admin/versions.html">v0.1.44</a> · <a href="../../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The bench</h4>
+    <a href="../../bench/index.html">&#9679; What is built</a>
+    <a href="../../registry/index.html">The register, live</a>
+    <a href="../../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
+    <a href="../../packs/grant-and-mandate/blocks.html">The building blocks</a>
+    <a href="../../assess/index.html">&#8594; Map your own case</a>
+    <a href="../../book/index.html">The book (commissioned)</a>
+    <a href="../../book/brief.html">&mdash; its commissioning brief</a>
+  </div>
+  <div>
+    <h4>The registry</h4>
+    <a href="../../failure/index.html">Why they don't exist</a>
+    <a href="../../rules/index.html">The four rules</a>
+    <a href="../../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../../roadmap/index.html">Build order</a>
+    <a href="../../rules/prior-art.html">Prior art</a>
+  </div>
+  <div>
+    <h4>The three layers</h4>
+    <a href="../../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../../enrolment/index.html">Enrolment</a>
+    <a href="../../execution/index.html">The execution broker</a>
+    <a href="../../shipped/index.html">What already ships</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../../origins/index.html">Origins: 2026</a>
+    <a href="../../documents/index.html">The documents</a>
+    <a href="../../packs/registry-mvp/index.html">The registry MVP pack</a>
+    <a href="../../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
+    <a href="../../packs/map-your-case/index.html">The Map Your Case pack</a>
+    <a href="../../about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../../admin/versions.html">Release history</a>
+    <a href="../../llms.txt">llms.txt</a>
+  </div>
+</div></footer>
+
+
+</body>
+</html>

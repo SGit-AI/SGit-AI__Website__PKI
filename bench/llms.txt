@@ -5,7 +5,7 @@
 # collected demonstrations without their limits would manufacture the false
 # assurance this site exists to argue against.
 #
-# 8 of 9 are built and running. Hub: https://pki.sgit.ai/bench/index.html
+# 9 of 10 are built and running. Hub: https://pki.sgit.ai/bench/index.html
 
 ## The register — live
   where     https://pki.sgit.ai/registry/index.html
@@ -78,6 +78,18 @@
     - That a DOES card is a receipt: nothing is signed by the actor at the time of action. The table shows where receipts would sit, which is not the same as having them
     - That proposed-action simulation works — playing a hypothetical card against the twin is specified in the brief and deliberately not built here
     - That the card grammar survives a population: the genre bets are now three implementations deep across two estates, still with zero user tests
+
+## The scenario engine (two worlds) — live
+  where     https://pki.sgit.ai/experiments/push-to-github/index.html
+  code      experiments/push-to-github/scenario.json, experiments/the-deploy/scenario.json, admin/build/gen_scenario.py, experiments/scenario.css
+  since     v0.1.44 (last moved v0.1.44)
+  is        One engine, two worlds: Push to GitHub and The Deploy are rendered by the same generator from two scenario.json files, each referencing a measured twin — the engine holds no capabilities of its own, and every card is a twin node wearing scene clothes, with a confidence rung computed from its evidence and a micro-animation per capability kind.
+  DOES NOT PROVE:
+    - That two worlds are many. The memo says tonnes of scenarios; the engine has rendered exactly two, both from twins this estate measured itself
+    - That the animations simulate anything — a travelling dot is a depiction of a capability, not an execution of one; no action is resolved here (that is the table's job)
+    - That the platform library exists: Codex, Lovable and the rest are named in the brief as future scenario.json files, and not one has been written — the fact-based variation catalogue is an argument, not an artefact
+    - That a rung above 2 is reachable: independent evidence exists nowhere in this estate, so the scale's top rung has never been exercised
+    - That an agent reads these pages — the memo's claim that agents would also appreciate the visual representation is untested for both humans and agents
 
 ## A Key Means Nothing Alone (the book) — live
   where     https://pki.sgit.ai/book/index.html

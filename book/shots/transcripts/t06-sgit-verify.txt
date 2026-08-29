@@ -3,7 +3,6 @@ $ jq -cS 'del(.sig)' $R/02__mandate__pr-create__to-agent-a.json > payload.bin
 $ jq '{signature: .sig, fingerprint: .signer}' $R/02__…json > payload.bin.sig
 $ jq '.body.bundle' $R/01__identity.json > op-bundle.json
 $ sgit pki import op-bundle.json
-Imported contact: fixture-operator (pki.sgit.ai)
-  Fingerprint: sha256:075693699f0694d0
+./book/shots/transcripts.sh: line 57: sgit: command not found
 $ sgit pki verify payload.bin payload.bin.sig
-Signature valid (signer: fixture-operator (pki.sgit.ai))
+./book/shots/transcripts.sh: line 59: sgit: command not found

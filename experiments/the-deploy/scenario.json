@@ -1,0 +1,50 @@
+{
+  "id": "the-deploy",
+  "title": "The Deploy",
+  "question": "What world does a permitted push land in? The CI runner is the environment that does NOT have the same guardrails — and its grant is the only one in the library declared up front.",
+  "twin": "packs/grant-and-mandate/library/github-actions-runner__ci__2026-08-26.json",
+  "players": [
+    { "id": "github",  "name": "GitHub",       "kind": "platform",
+      "note": "spawns the runner on every push to dev" },
+    { "id": "runner",  "name": "The Runner",   "kind": "environment", "ref": "twin",
+      "note": "ephemeral, measured from inside by the same tool — THE TWIN of this scenario" },
+    { "id": "job",     "name": "The Job",      "kind": "harness",
+      "note": "validate → tag → deploy; its permissions block is the one grant declared before it runs" },
+    { "id": "pages",   "name": "GitHub Pages", "kind": "asset",
+      "note": "the public site — where the blast radius of a push ends up" }
+  ],
+  "grant_chain": [
+    ["github", "spawns",                 "runner"],
+    ["runner", "executes",              "job"],
+    ["job",    "publishes",             "pages"]
+  ],
+  "mandate_slots": {
+    "context":  { "derive": "none",
+      "label": "in an agent's context — there is no agent here",
+      "reading": "a runner holds no prose and makes no decisions; what is not forbidden by config simply happens" },
+    "hook":     { "derive": "none",
+      "label": "in a hook — none installed in this world" },
+    "platform": { "derive": "twin:permissions-block",
+      "label": "in the workflow's permissions: block — the one grant in the library declared before the job runs, in config the job cannot widen" }
+  },
+  "decor": {
+    "n1":  { "anim": "act-as",   "caption": "uid 1001 — a boundary the next card defeats" },
+    "n1a": { "anim": "escalate", "caption": "sudo -n true succeeded: the figure steps over the wall without a credential" },
+    "n2":  { "anim": "edit",     "caption": "read and write the home directory" },
+    "n3":  { "anim": "egress",   "caption": "NO WALL: github.com, pypi.org, example.com — every host reachable, unrestricted" },
+    "n4":  { "anim": "push",     "caption": "push to the configured remote" },
+    "n5":  { "anim": "unknown",  "caption": "harness configuration: unknown" },
+    "c1":  { "anim": "blocked",  "caption": "ephemerality — the runner is reclaimed; nothing persists" },
+    "c2":  { "anim": "act-as",   "caption": "the job's token, scoped by the permissions block" },
+    "c3":  { "anim": "recall",   "caption": "read the repository contents" },
+    "n6":  { "anim": "unknown",  "caption": "no session record — a tree over the present, not a union over the past" }
+  },
+  "story": [
+    { "beat": "Every push to dev spawns this world for about a minute; it deploys a public site and vanishes.",
+      "cites": "admin/versions.html" },
+    { "beat": "The contrast is the lesson: the hosted agent sits behind a mandatory proxy; the runner that deploys its work reaches every host, unrestricted.",
+      "cites": "packs/grant-and-mandate/library/github-actions-runner__ci__2026-08-26.json" },
+    { "beat": "And the one boundary here that was designed rather than discovered: a permissions block the job cannot widen — the shape the whole estate argues for, already shipping in one narrow place.",
+      "cites": "packs/grant-and-mandate/library/github-actions-runner__ci__2026-08-26.json" }
+  ]
+}

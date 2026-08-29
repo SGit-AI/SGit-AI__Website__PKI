@@ -17,13 +17,13 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.43</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.44</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
-      <a class="nl here" href="../failure/index.html">The registry<span class="caret">&#9662;</span></a>
+      <a class="nl" href="../failure/index.html">The registry<span class="caret">&#9662;</span></a>
       <div class="sub">
-      <a class="sl here" href="../registry/index.html">&#9679; The registry, live</a>
+      <a class="sl" href="../registry/index.html">&#9679; The registry, live</a>
       <a class="sl" href="../failure/index.html">Why they don't exist</a>
       <a class="sl" href="../rules/index.html">The four rules</a>
       <a class="sl" href="../mandate/index.html">Identity &amp; mandate</a>
@@ -56,18 +56,20 @@
       </div>
     </div>
     <div class="ni ni-has">
-      <a class="nl" href="../bench/index.html">The bench<span class="caret">&#9662;</span></a>
+      <a class="nl here" href="../bench/index.html">The bench<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl" href="../bench/index.html">&#9679; The bench &mdash; what is built</a>
-      <a class="sl" href="../experiments/index.html">&#9679; Experiments</a>
+      <a class="sl here" href="../experiments/index.html">&#9679; Experiments</a>
       <a class="sl" href="../experiments/the-room/index.html">&mdash; the chain room</a>
       <a class="sl" href="../experiments/the-table/index.html">&mdash; the table</a>
-      <a class="sl here" href="../registry/index.html">The register, live</a>
+      <a class="sl" href="../experiments/push-to-github/index.html">&mdash; push to GitHub</a>
+      <a class="sl" href="../experiments/the-deploy/index.html">&mdash; the deploy</a>
+      <a class="sl" href="../registry/index.html">The register, live</a>
       <a class="sl" href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
       <a class="sl" href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
       <a class="sl" href="../assess/index.html">Map your own case</a>
-      <a class="sl" href="../book/index.html">&#9679; The book &mdash; A Key Means Nothing Alone</a>
-      <a class="sl" href="../book/brief.html">&mdash; the commissioning brief</a>
+      <a class="sl" href="../book/index.html">The book (commissioned)</a>
+      <a class="sl" href="../book/brief.html">&mdash; its commissioning brief</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -109,6 +111,14 @@ generator, its own gates, and its own bench entry saying what it does not prove.
 <span><b>Workflow:</b> actions resolving against grants and mandates, and the consequences — forward as replay, backward as audit</span>
 <span><b>Visualisation:</b> a card table: six suits, players that include the systems, four turns of a real incident</span>
 <span><b>Honesty:</b> one hundred per cent real — the estate&#x27;s own 26 August incident, from the artefacts it left behind, with the enforcement tool re-run at build time &middot; brief v0.33.67</span></a>
+<a class="bk-dl" href="push-to-github/index.html"><b>Push to GitHub</b>
+<span><b>Workflow:</b> the grant chain behind a hosted agent changing a repository, and the three places a soft mandate could live</span>
+<span><b>Visualisation:</b> a scenario world rendered by one JSON-driven engine: players, a grant chain, a capability deck with one micro-animation per capability kind</span>
+<span><b>Honesty:</b> one hundred per cent real — the twin is this session&#x27;s own environment, measured from inside; every card is a node in that library entry, gated one-to-one &middot; brief v0.33.68</span></a>
+<a class="bk-dl" href="the-deploy/index.html"><b>The Deploy</b>
+<span><b>Workflow:</b> the environment a permitted push lands in — a CI runner with no agent, no hooks, and one platform-enforced grant</span>
+<span><b>Visualisation:</b> the same engine, a different scenario.json: nothing else changed, which is the claim the pair exists to prove</span>
+<span><b>Honesty:</b> one hundred per cent real — the twin is the estate&#x27;s CI runner, measured from inside by the same tool on the same day &middot; brief v0.33.68</span></a>
 </div>
 <h2>The rules every experiment inherits</h2>
 <ol><li>Every word derived at build time from the files the pipeline runs on; no typed counts.</li>
@@ -127,7 +137,7 @@ build. Convention declared in <a href="../briefs/v0.33.67__dev-brief__the-experi
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.35</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.44</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The bench</h4>
@@ -136,8 +146,8 @@ build. Convention declared in <a href="../briefs/v0.33.67__dev-brief__the-experi
     <a href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
     <a href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
     <a href="../assess/index.html">&#8594; Map your own case</a>
-    <a href="../book/index.html">&#9679; The book &mdash; A Key Means Nothing Alone</a>
-    <a href="../book/brief.html">&mdash; the commissioning brief</a>
+    <a href="../book/index.html">The book (commissioned)</a>
+    <a href="../book/brief.html">&mdash; its commissioning brief</a>
   </div>
   <div>
     <h4>The registry</h4>

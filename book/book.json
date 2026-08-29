@@ -33,9 +33,9 @@
     "records": 11,
     "fixtures": 10,
     "statements": 23,
-    "releases": 37,
+    "releases": 43,
     "release_hours": "40.0",
-    "site_days": "8"
+    "site_days": "10"
   },
   "counts": {
     "files": 21,
@@ -201,7 +201,7 @@
       "part": "Part five — Honesty, and a first step",
       "title": "15 · Where this estate disagrees with itself, and what it does not say",
       "words": 2938,
-      "sha256": "4a04e35fb73b81d4d6edd9780ea4232b06a828b5e1c8d45d5fdc505fae9643dc",
+      "sha256": "27aada8148cf0ed4668aba8b9eebde5a3c259266b41cb8e1445b978aaef9d598",
       "stated_markers": 7,
       "drawn_markers": 2
     },
@@ -261,9 +261,9 @@
       "id": "f01-bench-two-columns",
       "page": "/bench/index.html",
       "tag": "current",
-      "page_sha256": "dad79f499d893d7ca70277e849967c14e0a085eb7fbc721cfb7c3e6e2621d357",
+      "page_sha256": "749db0c151d8ff1360b5d4e99b2d6b48770994eb19affe210978dc07bf476752",
       "image": "shots/img/f01-bench-two-columns.png",
-      "image_sha256": "d258b44fe794b0df3c35b346114f434fa8dfa8780d50adfa10052f2a57c35d9a",
+      "image_sha256": "b798d7257e94a4281f6a3aa604c3fb93d8d3fe2af60014bc9ad3ff08a047c501",
       "gate": "fresh",
       "caption": "The two columns are the same width. The limits are not a footnote to the claims — they are set beside them, at equal weight, and the generator refuses to build an entry whose right-hand column is empty."
     },
@@ -281,9 +281,9 @@
       "id": "f02b-registry-now",
       "page": "/registry/index.html",
       "tag": "current",
-      "page_sha256": "ddbf06fb0b1f8c39100fdc8097974379e4aa71ffe512f0696dd5f8d211ed8d00",
+      "page_sha256": "7d119307399fb209c522e78c9de89b7c7452544ef5ecc1431892ad1d907d60e0",
       "image": "shots/img/f02b-registry-now.png",
-      "image_sha256": "b4fef0dc009f037c2657a7603ead660c9d61d28ff1753ee8d1c724cea5ea00a3",
+      "image_sha256": "348eff89ab58887284b930b28e351645c46c265157f743f2b79bc0b4fef67d9f",
       "gate": "fresh",
       "caption": "The same page four days later. What changed is not the architecture but the number of places the page admits something — the corrections accumulated faster than the features."
     },
@@ -291,7 +291,7 @@
       "id": "f03-six-answers",
       "page": "/registry/index.html",
       "tag": "current",
-      "page_sha256": "ddbf06fb0b1f8c39100fdc8097974379e4aa71ffe512f0696dd5f8d211ed8d00",
+      "page_sha256": "7d119307399fb209c522e78c9de89b7c7452544ef5ecc1431892ad1d907d60e0",
       "image": "shots/img/f03-six-answers.png",
       "image_sha256": "0ce6308884bb0a14d63c1002ff981e1ac1132739e51cdedc3fed92668b4c01dc",
       "gate": "fresh",
@@ -321,9 +321,9 @@
       "id": "f06-sgit-verify",
       "page": "/book/shots/term/t06-sgit-verify.html",
       "tag": "current",
-      "page_sha256": "f2096ec570b76679fdfdb038b6be62280c1618cefe7b667e42dd68a1b4940f26",
+      "page_sha256": "756d1878d1cdbacb1dd3e4f7b36d0e3bf776fd9153ad548cc41a5f2e0fabcb19",
       "image": "shots/img/f06-sgit-verify.png",
-      "image_sha256": "3b3d3de057d24d38a121adc6dedfc2365afafe7c3226f94447c045cb2a2ea1f9",
+      "image_sha256": "8fec7649cc375c5610e89320dc26a00e40a9042ef1196b9b21bf59e2b8549e1d",
       "gate": "fresh",
       "caption": "The signer line names a fixture. The CLI is not wrong; it is answering the only question a signature can answer — who held the private half — and on this record the answer is everybody."
     },
@@ -361,9 +361,9 @@
       "id": "f09-tier-badges",
       "page": "/packs/grant-and-mandate/blocks.html",
       "tag": "current",
-      "page_sha256": "5f69b885e952fcadd303674c7b047fae8fb0a62efff71b49bad1fb1a08399c7e",
+      "page_sha256": "8f6f7662afa86eb91a03b322f3de31d9ee8c4ef19c844875e18222614f03d376",
       "image": "shots/img/f09-tier-badges.png",
-      "image_sha256": "f97a9a66ad7c5977fb608926db574d662ac567f9ffd3099fc70a218b7fa125e0",
+      "image_sha256": "65c4d485cd7e9c5c32c4f3f8a1bafa6f4aac5a6f95dc255ef7fd0ec5b4fe878e",
       "gate": "fresh",
       "caption": "Two channels, never one: the border style carries the state as well as the colour, and the word is always present. `unknown` renders as `unknown` — never as a blank, because a gap is a fact about the floor."
     },
@@ -371,9 +371,9 @@
       "id": "f10-defeated-boundary",
       "page": "/packs/grant-and-mandate/blocks.html",
       "tag": "current",
-      "page_sha256": "5f69b885e952fcadd303674c7b047fae8fb0a62efff71b49bad1fb1a08399c7e",
+      "page_sha256": "8f6f7662afa86eb91a03b322f3de31d9ee8c4ef19c844875e18222614f03d376",
       "image": "shots/img/f10-defeated-boundary.png",
-      "image_sha256": "96b87dbe63a0deb89c44fdb5f1d1fb90abd7ddbc95c7cf4891487aa4d2c97de8",
+      "image_sha256": "7e433995f360d92422a6a60c7a1982dc64a50dfae07a6fe4b4ce49a428dd84b5",
       "gate": "fresh",
       "caption": "The stored document says `boundary`. The block renders `setting`, with the defeat path attached. This is the rule working on real data that is wrong — the estate's own measurement tool produced the bad label."
     },
@@ -381,9 +381,9 @@
       "id": "f11-authority-split",
       "page": "/packs/grant-and-mandate/blocks.html",
       "tag": "current",
-      "page_sha256": "5f69b885e952fcadd303674c7b047fae8fb0a62efff71b49bad1fb1a08399c7e",
+      "page_sha256": "8f6f7662afa86eb91a03b322f3de31d9ee8c4ef19c844875e18222614f03d376",
       "image": "shots/img/f11-authority-split.png",
-      "image_sha256": "3e2471da04f46dfbdcfdb07df1d87ee221009b5af63a0f9a506ec5608387a716",
+      "image_sha256": "1294f51e16a6da4aabf03fb08301c9b8a16e0ff28cd9f62eebadd3b7de8254a9",
       "gate": "fresh",
       "caption": "Two indicators, never one. Averaging them into a single status is exactly how a demonstration gets mistaken for a control."
     },
@@ -391,9 +391,9 @@
       "id": "f12-assess-midflow",
       "page": "/assess/index.html",
       "tag": "current",
-      "page_sha256": "e9476d549ed45a33a2a46405e5e423fd217db905cd14d7b65cd7f438cd242fb3",
+      "page_sha256": "116073dd0fd1f8ebd260d29b0ddc16cdbd819f462a2241ed9c40a953337e608f",
       "image": "shots/img/f12-assess-midflow.png",
-      "image_sha256": "6085c3b47a8a4b975c99cac4fff33830ae31e7e0f0f5d42d7733cf8311bc2c73",
+      "image_sha256": "faf2153f714151a276c29ddc98602fdea36414e759f067f4517de5cd977ef280",
       "gate": "fresh",
       "caption": "Escalation is drawn as an edge, not written as a note — so the reader sees the path that goes around a stated control rather than reading that one exists."
     }

@@ -165,6 +165,33 @@ BENCH = [
          "the manifest gate: a folder without a manifest entry, or an entry without a folder, fails the hub build"],
   code="experiments/the-table/, admin/build/gen_table.py"),
 
+ dict(slug="the-scenario-engine", name="The scenario engine (two worlds)", state="live",
+  where="../experiments/push-to-github/index.html", since="v0.1.44", updated="v0.1.44",
+  origin="dev brief <a href='../documents/the-scenario-engine.html'>v0.33.68</a> — JSON-driven worlds, the soft mandate as a place, the platform library",
+  one_line="One engine, two worlds: <i>Push to GitHub</i> and <i>The Deploy</i> are rendered by the same "
+           "generator from two scenario.json files, each referencing a measured twin — the engine holds "
+           "no capabilities of its own, and every card is a twin node wearing scene clothes, with a "
+           "confidence rung computed from its evidence and a micro-animation per capability kind.",
+  demonstrates=[
+    "<b>Nothing hardcoded</b>: the engine reads players, grant chain, mandate slots, decor and story from scenario.json, and every capability from the twin the scenario references — adding a world is adding a JSON file, which is the memo's claim made falsifiable by the pair existing",
+    "<b>The soft mandate as a place</b>: the constraint that keeps this session off the wrong branch shown in the room it actually occupies — prose in the agent's context (expectation tier), beside the hook it could be (setting) and the platform enforcement it is not (boundary, the doors view's shut door printed in situ)",
+    "<b>The contrast the memo predicted</b>: the hosted agent world has a mandatory egress proxy and three occupied mandate slots; the CI runner world that deploys its work has unrestricted egress, no agent, no hook — and the estate's only boundary-tier grant, the workflow's <code>permissions:</code> block",
+    "<b>The confidence rung as arithmetic</b>: hypothesis 0, self-observed 1, +documented 2, independent 3 — computed from each node's evidence class, never typed, and both decks print why their maximum is what it is",
+    "<b>Capabilities that act</b>: eight micro-animation kinds (push, act-as, edit, egress, recall, escalate, blocked, unknown) — a capability shown acting is legible where a permission string is not, and every animation freezes to its end state under prefers-reduced-motion"],
+  does_not_prove=[
+    "<b>That two worlds are many.</b> The memo says tonnes of scenarios; the engine has rendered exactly two, both from twins this estate measured itself",
+    "That the animations simulate anything — a travelling dot is a depiction of a capability, not an execution of one; no action is resolved here (that is the table's job)",
+    "That the platform library exists: Codex, Lovable and the rest are named in the brief as future scenario.json files, and not one has been written — the fact-based variation catalogue is an argument, not an artefact",
+    "That a rung above 2 is reachable: independent evidence exists nowhere in this estate, so the scale's top rung has never been exercised",
+    "That an agent reads these pages — the memo's claim that agents would also appreciate the visual representation is untested for both humans and agents"],
+  gates=["the twin gate: the scenario's twin file must exist and parse, or the build fails",
+         "the deck gate: cards == twin nodes exactly — a twin node without decor, or decor naming an absent node, fails the build; the engine may decorate a capability, never add, remove or restate one",
+         "the slot gate: every mandate slot derives from a real file (the twin's control text, the signed mandate's enforced_by, the doors view) — and the platform slot must agree with the doors view's enforcement_at_boundary count",
+         "the anim gate: every animation kind must be one of the eight the engine defines",
+         "the story gate: every beat cites an artefact that exists on disk",
+         "the manifest gate: a scenario folder without a manifest entry, or an entry without a folder, fails the hub build"],
+  code="experiments/push-to-github/scenario.json, experiments/the-deploy/scenario.json, admin/build/gen_scenario.py, experiments/scenario.css"),
+
  dict(slug="the-book", name="A Key Means Nothing Alone (the book)", state="live",
   where="../book/index.html", since="v0.1.33", updated="v0.1.36",
   origin="a <a href='../book/brief.html'>commissioning brief</a>, draft-2, modelled on graphs.sgit.ai's three finished books",
