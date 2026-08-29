@@ -50,6 +50,20 @@
   views/excess-authority.json       grant minus mandate, per subject — the
                                     consumable for risk products; NO
                                     AUTHORITY, recompute it yourself
+  doors.html                        THE DOORS: this estate's four ladders as
+                                    rungs with computed counts, and the door on
+                                    each — the condition the next rung will not
+                                    accept work without. NINE OF TWELVE ARE
+                                    SHUT; three could be opened by this project
+                                    alone and six need somebody who is not
+  doors.declared.json               the declaration behind it — ladders, rungs,
+                                    door text, and whether each door is
+                                    EXPECTED shut. Holds NO COUNTS
+  views/doors.json                  what was actually computed; NO AUTHORITY.
+                                    A door whose computed state disagrees with
+                                    the declaration FAILS THE BUILD, in either
+                                    direction — a door that opens breaks it as
+                                    loudly as one that closes
   records/<sha256-hex16>/           one directory per record, named by the
                                     owner's signing fingerprint with ':' as
                                     '-' (Windows-safe paths)

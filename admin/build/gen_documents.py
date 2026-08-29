@@ -446,6 +446,27 @@ DOCS = [
   ],
   pages="Proposes fact and evidence as statement types, identities for environments and providers, synthetic user identities carrying a declared synthetic flag, anchors.json in place of roots.json, and a verifier returning statements, a rung, an independence count and the gaps with verdict null."),
 
+ dict(slug="the-doors-page",
+  title="The Doors Page: A Computed State Map Of This Estate's Own Ladders, Where The Build Breaks When A Door Opens",
+  md="v0.33.65__dev-brief__the-doors-page-a-computed-state-map-where-the-build-breaks-when-a-door-opens.md",
+  version="v0.33.65", date="27 August 2026", dtype="Dev brief",
+  summary="Ported from newsroom.sgit.ai's debrief on rendering an agentic team as a point-and-click room — but the room is NOT what was ported. That debrief says its second surface, the state map, turned out to be the more useful of the two, and this estate agrees for a reason specific to it: our problem is not that our state is badly presented, it is that almost nothing has passed its own gates. So: one generated page rendering this estate's four declared ladders as rungs with computed instance counts, each carrying a DOOR — the condition the next rung will not accept work without. Nine of twelve doors are shut. The declaration holds no counts; the generator computes every number from the repository; and a door whose computed state disagrees with the declaration FAILS THE BUILD IN EITHER DIRECTION, so the build breaks when the estate makes progress — a door opening is news, and news that does not interrupt anybody is news nobody reads.",
+  concepts=[
+   ("The doors, live", "../registry/doors.html", "nine of twelve shut, every count derived at build time"),
+   ("The bootstrap gradient", "../bootstrap/index.html", "the ladder whose designed append lane nobody has ever walked"),
+   ("The tier ladder", "../packs/grant-and-mandate/concepts.html", "boundary observed four times in other people's products, built here zero"),
+   ("The register, live", "../registry/index.html", "eleven records and twenty-three statements, all terminating in one origin"),
+  ],
+  ideas=[
+   "The load-bearing idea is the DOOR: not what a rung is, but the condition the next rung will not accept work without.",
+   "A door opening breaks the build, exactly as a door closing does — the gate is symmetric by construction rather than by intention.",
+   "Nine of twelve doors are shut; three could be opened by this project alone and six need somebody who is not this project, and the page computes that split rather than asserting it.",
+   "The three that are ours are the more uncomfortable half, because nothing is stopping them.",
+   "A gate that compares a drawing to a declaration cannot check the declaration: name the wrong ladders and everything agrees and everything is wrong.",
+   "The room was declined, not deferred — a well-drawn room over a system where nothing has passed its own gates would make the estate look more finished, which is the one direction it must not move.",
+  ],
+  pages="Adds registry/doors.html, registry/doors.declared.json, registry/views/doors.json and admin/build/gen_doors.py, linked from the register, llms.txt and the sitemap."),
+
 ]
 
 PAGE = """<!doctype html>

@@ -1,0 +1,235 @@
+{
+  "what_this_is": "The DECLARATION behind /registry/doors.html. It names this estate's four ladders, their rungs, and — the load-bearing part — the DOOR on each: the condition the next rung will not accept work without. It contains NO COUNTS. Every count on the page is computed at build time by admin/build/gen_doors.py from registry/ and packs/, and a door whose computed state disagrees with the `expect` below FAILS THE BUILD — in either direction. A door opening is news, and news that does not interrupt anybody is news nobody reads.",
+  "ported_from": "newsroom.sgit.ai/briefs/10__the-newsroom-floor.md §8, CC BY 4.0 — the state map, not the room. See briefs/v0.33.65.",
+  "how_to_change_a_door": "Do not edit the count; there isn't one. If a door has genuinely opened, change its `expect` to \"open\" in the same commit that says so, and the build passes again.",
+  "v": 1,
+  "ladders": [
+    {
+      "id": "bootstrap",
+      "label": "The bootstrap gradient",
+      "asks": "How far can an agent get from nothing?",
+      "source": "pki.sgit.ai/bootstrap/index.html — the site's own three steps",
+      "rungs": [
+        {
+          "id": "keypair",
+          "label": "controls a private key",
+          "means": "Free. Proves possession, and nothing else.",
+          "metric": "records"
+        },
+        {
+          "id": "scarce",
+          "label": "…whose private half is scarce",
+          "means": "A signature's value is the scarcity of the private half.",
+          "metric": "records_scarce",
+          "door": {
+            "condition": "a keypair whose private half has a durable home",
+            "expect": "open",
+            "needs": "somebody else"
+          }
+        },
+        {
+          "id": "recognised",
+          "label": "recognised by the project",
+          "means": "A policy decision, not a computation — today a git commit reviewed by a human.",
+          "metric": "records"
+        },
+        {
+          "id": "lane",
+          "label": "…via the designed append lane",
+          "means": "The account-less narrow door the whole bootstrap argument rests on.",
+          "metric": "enrolled_via_lane",
+          "door": {
+            "condition": "an append lane that accepts a token holder with no account",
+            "expect": "shut",
+            "why": "the lane is unbuilt; the readiness report's Q2 — whether a lane with no anchors accepts any token holder — is unanswered, and one experiment would answer it",
+            "needs": "somebody else"
+          }
+        },
+        {
+          "id": "mandated",
+          "label": "delegated an accepted mandate",
+          "means": "Scoped, dated, revocable.",
+          "metric": "acceptances"
+        },
+        {
+          "id": "real_authority",
+          "label": "…on a non-fixture authority",
+          "means": "An issuer whose private half is not published.",
+          "metric": "mandates_real_issuer",
+          "door": {
+            "condition": "an issuer key that anybody cannot forge",
+            "expect": "shut",
+            "why": "every mandate in this register is signed by the fixture root, whose private half is published in this repository",
+            "needs": "somebody else"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tier",
+      "label": "The tier ladder",
+      "asks": "How strong is a control, and who enforces it?",
+      "source": "packs/grant-and-mandate/src/01__concepts.md — a control bounds a grant only when it is enforced by something the grant does not include",
+      "rungs": [
+        {
+          "id": "t_none",
+          "label": "no control at all",
+          "means": "An absence, stated.",
+          "metric": "nodes_none"
+        },
+        {
+          "id": "t_expectation",
+          "label": "expectation",
+          "means": "Written in a prompt or a policy file. It is a mandate, and a mandate is not a control.",
+          "metric": "nodes_expectation",
+          "door": {
+            "condition": "something must actually enforce it",
+            "expect": "open",
+            "needs": "this project"
+          }
+        },
+        {
+          "id": "t_setting",
+          "label": "setting",
+          "means": "Enforced by the tool itself, inside the grant. Bypassable by anything running as that grant.",
+          "metric": "nodes_setting",
+          "door": {
+            "condition": "it must be enforced outside the grant it bounds",
+            "expect": "open",
+            "needs": "this project"
+          }
+        },
+        {
+          "id": "t_boundary_obs",
+          "label": "boundary, observed",
+          "means": "Enforced by something outside the grant. Observed in somebody else's product, not built here.",
+          "metric": "nodes_boundary_surviving"
+        },
+        {
+          "id": "t_boundary_built",
+          "label": "boundary, built by this estate",
+          "means": "The same allow-list evaluated where the agent cannot reach it.",
+          "metric": "enforcement_at_boundary",
+          "door": {
+            "condition": "an enforcement point outside the grant — branch protection, or a required CI check",
+            "expect": "shut",
+            "why": "the only enforcement point built here is a pre-push hook, which sits inside the grant it bounds; reaching boundary is a change of location, not of policy",
+            "needs": "this project"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ordering",
+      "label": "The ordering rule",
+      "asks": "How far along the chain has anything actually travelled?",
+      "source": "packs/grant-and-mandate/src/01__concepts.md — reality → twin → facts → finding → risks → decisions",
+      "rungs": [
+        {
+          "id": "twin",
+          "label": "twin — environments measured",
+          "means": "The installation every fact attaches to.",
+          "metric": "library_entries"
+        },
+        {
+          "id": "facts",
+          "label": "facts — grants",
+          "means": "Measured, dated, provenance per node.",
+          "metric": "library_entries"
+        },
+        {
+          "id": "facts_signed",
+          "label": "…signed, with a subject identity",
+          "means": "A fact needs a stater to be weighable.",
+          "metric": "library_entries_signed",
+          "door": {
+            "condition": "a grant signed by a named measurer, about a keyed environment",
+            "expect": "shut",
+            "why": "both library entries are unsigned JSON outside the register, and their subject is a filename rather than an identity — v0.33.64 §4.2",
+            "needs": "this project"
+          }
+        },
+        {
+          "id": "excess",
+          "label": "finding — excess authority",
+          "means": "grant − mandate. The exposure nobody accepted.",
+          "metric": "excess_rows"
+        },
+        {
+          "id": "shortfall",
+          "label": "finding — shortfall",
+          "means": "mandate − grant. The operations direction, and where the next over-broad credential comes from.",
+          "metric": "shortfall_rows",
+          "door": {
+            "condition": "a capability vocabulary, so the mandate can be enumerated against real names",
+            "expect": "shut",
+            "why": "the shortfall column in the rendered delta block is a hardcoded string; what a capability name IS remains the estate's largest open question",
+            "needs": "this project"
+          }
+        },
+        {
+          "id": "blindspot",
+          "label": "finding — blind spots",
+          "means": "library − self-report. The only thing that makes a self-report falsifiable.",
+          "metric": "blindspot_rows",
+          "door": {
+            "condition": "two agents measuring against a common reference",
+            "expect": "shut",
+            "why": "there are two library entries and one agent; the three-term block renders its middle column empty on purpose",
+            "needs": "somebody else"
+          }
+        },
+        {
+          "id": "decisions",
+          "label": "decisions — with a named acceptor",
+          "means": "A separate node: named acceptor, interval.",
+          "metric": "rows_with_acceptor",
+          "door": {
+            "condition": "somebody willing to put their name against an exposure",
+            "expect": "shut",
+            "why": "acceptor is null on every excess row, by construction — excess authority is unaccepted by definition, and nobody has accepted any of it since",
+            "needs": "somebody else"
+          }
+        }
+      ]
+    },
+    {
+      "id": "confidence",
+      "label": "The confidence ladder",
+      "asks": "How much can any of this bear?",
+      "source": "graphs.sgit.ai — the confidence ladder, adopted for this estate in brief v0.33.64",
+      "rungs": [
+        {
+          "id": "edges",
+          "label": "an attributable edge",
+          "means": "A signed statement. PKI's contribution: not trust, but attribution.",
+          "metric": "statements"
+        },
+        {
+          "id": "independent",
+          "label": "an independent measurement",
+          "means": "Weight by independence, not by count — ten citations of one source are one source.",
+          "metric": "independent_measurements",
+          "door": {
+            "condition": "a measurement taken from outside the environment being measured",
+            "expect": "shut",
+            "why": "both library entries record that the instrument IS the subject, so every path in this register terminates in one origin",
+            "needs": "somebody else"
+          }
+        },
+        {
+          "id": "fractal",
+          "label": "a registry pointing at a registry",
+          "means": "Recursion: zoom into any node and it expands under identical rules.",
+          "metric": "registries_referenced",
+          "door": {
+            "condition": "a second registry, run by somebody else",
+            "expect": "shut",
+            "why": "the fractal claim is falsifiable and untestable with one instance — v0.33.64 §2",
+            "needs": "somebody else"
+          }
+        }
+      ]
+    }
+  ]
+}

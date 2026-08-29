@@ -14,7 +14,7 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.40</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.41</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -97,6 +97,39 @@
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
     <tr>
+<td class="vnum">v0.1.41</td>
+<td class="vdate">27 Aug 2026</td>
+<td><b>The doors &mdash; a computed state map where the build breaks when a door opens.</b> Ported
+from <a href="https://newsroom.sgit.ai/briefs/10__the-newsroom-floor.md">newsroom.sgit.ai's debrief</a>
+on rendering an agentic team as a point-and-click room &mdash; and <b>the room is not what was
+ported</b>. That debrief says its second surface, the state map, <i>turned out to be the more useful
+of the two</i>, and this estate agrees for a reason specific to it: the problem here is not that the
+state is badly presented, it is that <b>almost nothing has passed its own gates</b>, and a room drawn
+over that would make the estate look more finished, which is the one direction it must not move.
+The debrief's candidate mapping for this site &mdash; <i>a registry counter; issuer, subject,
+verifier, revoker</i> &mdash; was accurate for the site as published and was <b>overtaken by briefs
+v0.33.63 and v0.33.64</b>, which dismantled exactly that counter; the mapping it offered
+<code>risks.sgit.ai</code> (<i>the grounding ladder as a staircase, the likely shut door a rung with
+no instances</i>) now fits this site better. Specified in brief v0.33.65 and built:
+<a href="../registry/doors.html">/registry/doors.html</a> renders this estate's four declared ladders
+&mdash; the bootstrap gradient, the tier ladder, the ordering rule and the confidence ladder &mdash;
+as rungs with <b>computed instance counts</b>, each carrying a <b>door</b>: the condition the next
+rung will not accept work without. <b>Nine of twelve doors are shut</b> &mdash; and the page
+<b>computes the split rather than asserting it</b>: three could be opened by this project alone
+(sign the library entries, define a capability name, put a branch protection rule on the remote) and
+<b>six need somebody who is not this project</b>. The three that are ours are the more uncomfortable
+half, because nothing is stopping them. The declaration at
+<code>registry/doors.declared.json</code> holds <b>no counts</b>; every number comes from a named
+metric function in <code>admin/build/gen_doors.py</code>, so each one has code you can read, and a
+rung naming a metric that does not exist fails rather than rendering blank. <b>The gate is symmetric
+by construction</b>: a door declared shut that computes above zero fails as <i>A DOOR OPENED &mdash;
+that is news</i>, and a door declared open that computes zero fails as <i>A DOOR CLOSED &mdash; that
+is a regression</i>. All three failure paths were verified by breaking them, including opening a real
+door by signing a library entry. Two channels on every state, never colour alone. And one defect was
+found the way that debrief says defects are found &mdash; by rendering it, screenshotting it and
+reading the screenshot: metric names were breaking mid-word on the phone layout.</td>
+</tr>
+<tr>
 <td class="vnum">v0.1.40</td>
 <td class="vdate">27 Aug 2026</td>
 <td><b>The refactor brief goes to draft-2, on a constraint that was removed.</b> The project lead:
