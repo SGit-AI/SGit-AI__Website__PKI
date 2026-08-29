@@ -188,21 +188,21 @@ if errors:
 # ── the play-through (every caption derived, every stop linking its artefact) ─
 PLAY = [
  dict(at="reality", text=f"The environment enters: {entry['environment']['product']}, as installed on {entry['measured_at']}.",
-      href="../packs/grant-and-mandate/library/" + fx["references"]["library_entry"] + ".json", label="the library entry"),
+      href="../../packs/grant-and-mandate/library/" + fx["references"]["library_entry"] + ".json", label="the library entry"),
  dict(at="measurer", text=f"Measured from inside: {n_nodes} nodes, {n_unknown} unknown — the self-measurement probe was refused. A floor, not a census.",
-      href="../packs/grant-and-mandate/library.html", label="the measurement method"),
+      href="../../packs/grant-and-mandate/library.html", label="the measurement method"),
  dict(at="counter", text=f"Registered: the grant joins {n_stmts} signed statements in {n_records} records. The counter has no opinion about any of them.",
-      href="../registry/llms.txt", label="the register's front door"),
+      href="../../registry/llms.txt", label="the register's front door"),
  dict(at="issuer", text=f"Authorised: mandate v{mandate['mandate_version']} — {', '.join(branches)}, expiring {mandate['expires_at'][:10]}. Somebody decided, and signed.",
-      href="../packs/grant-and-mandate/mandates/current.json", label="the signed mandate"),
+      href="../../packs/grant-and-mandate/mandates/current.json", label="the signed mandate"),
  dict(at="delta", text=f"Computed on arrival: grant {g_res} resources − mandate {m_res} → excess {x_res}. Acceptor: none — nobody has accepted this, yet.",
-      href="../registry/views/excess-authority.json", label="the excess row"),
+      href="../../registry/views/excess-authority.json", label="the excess row"),
  dict(at="boundary", text="The finding crosses as a REFERENCE — a library identifier, not a copy. Personal data never crosses the other way.",
-      href="../book/12-the-library-and-the-instance.html", label="the contract (book ch. 12)"),
+      href="../../book/12-the-library-and-the-instance.html", label="the contract (book ch. 12)"),
  dict(at="acceptance", text=f"{SYN}Risk {fx['risk']['score']} · {fx['risk']['band']} is derived and ACCEPTED — by {dec['acceptor']}, for {days_left} days, reviewed by {dec['reviewer']}. The exposure has an owner for the first time in the chain.",
-      href="../packs/grant-and-mandate/instance-fixture.synthetic.json", label="the instance fixture (synthetic)"),
+      href="../../packs/grant-and-mandate/instance-fixture.synthetic.json", label="the instance fixture (synthetic)"),
  dict(at="monitor", text=f"{SYN}Monitored: {n_holding} of {n_conditions} conditions holding" + (f"; {never_held[0]['id']} has never held ({never_held[0]['why_not']})" if never_held else "") + f". In {days_left} days the interval ends and the item walks back across the line: re-measured, re-computed, re-decided.",
-      href="../packs/grant-and-mandate/instance-fixture.synthetic.json", label="the conditions (synthetic)"),
+      href="../../packs/grant-and-mandate/instance-fixture.synthetic.json", label="the conditions (synthetic)"),
 ]
 
 # ── svg ─────────────────────────────────────────────────────────────────────
@@ -293,8 +293,8 @@ DATA = json.dumps({"lines": lines, "names": names, "syn": syn_ids,
                    "coords": coords, "play": PLAY}, ensure_ascii=False)
 
 reg_src = open(os.path.join(ROOT, "registry", "index.html"), encoding="utf-8").read()
-nav = reg_src[reg_src.index('<nav class="site">'):reg_src.index('<main')]
-foot = reg_src[reg_src.index('<footer class="site">'):reg_src.index("</body>")]
+nav = reg_src[reg_src.index('<nav class="site">'):reg_src.index('<main')].replace('href="../', 'href="../../').replace('src="../', 'src="../../')
+foot = reg_src[reg_src.index('<footer class="site">'):reg_src.index("</body>")].replace('href="../', 'href="../../').replace('src="../', 'src="../../')
 
 transcript = "\n".join(
     f"<h3>{esc(names[i])}{' <em>(synthetic, illustrative)</em>' if i in syn_ids else ''}</h3><dl>"
@@ -312,16 +312,16 @@ page = f'''<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>The chain room &mdash; the RiskMandate workflow, playable &middot; pki.sgit.ai</title>
 <meta name="description" content="The full chain — reality, twin, facts, finding, risks, decisions, monitoring — as a room you can walk: eight stations, the product boundary drawn on the floor, a work item that travels it. The left half is real artefacts; the right half is a marked simulation, because the workflow is simulated first, then supported.">
-<link rel="canonical" href="https://pki.sgit.ai/room/index.html">
-<meta property="og:url" content="https://pki.sgit.ai/room/index.html">
-<link rel="stylesheet" href="../assets/site.css">
-<link rel="stylesheet" href="../assets/bench.css">
+<link rel="canonical" href="https://pki.sgit.ai/experiments/the-room/index.html">
+<meta property="og:url" content="https://pki.sgit.ai/experiments/the-room/index.html">
+<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="../../assets/bench.css">
 <link rel="stylesheet" href="room.css">
 </head>
 <body>
 
 {nav}<main class="doc doc--wide">
-<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / room</div>
+<div class="crumb"><a href="../../index.html">pki.sgit.ai</a> / <a href="../index.html">experiments</a> / the-room</div>
 
 <h1>The chain room</h1>
 <p class="lead">The workflow this estate exists to serve, walked end to end:
@@ -334,7 +334,7 @@ artefact: the measured library entry, the signed mandate, the computed excess ro
 <b>The right half is SYNTHETIC and marked on every surface</b>: no risk has been derived, priced,
 accepted or monitored by anybody. The workflow is <b>simulated first, then supported</b> &mdash;
 the same way this register taught its shape with ten labelled fixtures before one real record
-existed. Fixture: <a href="../packs/grant-and-mandate/instance-fixture.synthetic.json">instance-fixture.synthetic.json</a>.</div>
+existed. Fixture: <a href="../../packs/grant-and-mandate/instance-fixture.synthetic.json">instance-fixture.synthetic.json</a>.</div>
 
 <div class="rverbs" role="toolbar" aria-label="Verbs">
   <button class="rverb rverb--on" data-v="look">LOOK</button>
@@ -365,10 +365,10 @@ point-and-click adventure's grammar with this estate's own sentences, figures, p
 ported from <a href="https://newsroom.sgit.ai/briefs/10__the-newsroom-floor.md">newsroom.sgit.ai's
 debrief</a> (CC BY 4.0) whose own limits carry over: the genre has one prior implementation, unread
 by users, untested with screen readers. And the room opens none of
-<a href="../registry/doors.html">the nine shut doors</a> &mdash; it makes one of them, <i>nobody has
+<a href="../../registry/doors.html">the nine shut doors</a> &mdash; it makes one of them, <i>nobody has
 ever accepted an exposure</i>, explainable to the person who might.</p>
 
-<p class="dr-src">Specified in <a href="../briefs/v0.33.66__dev-brief__the-chain-room-the-riskmandate-workflow-as-a-playable-simulation.md">brief
+<p class="dr-src">Specified in <a href="../../briefs/v0.33.66__dev-brief__the-chain-room-the-riskmandate-workflow-as-a-playable-simulation.md">brief
 v0.33.66</a> &middot; generator <code>admin/build/gen_room.py</code> &middot; gates: route = declared
 chain; the fixture stores references, never copies (GM3); a decision carries a named acceptor and an
 interval; a condition's status is observed, never typed; the synthetic marker travels with every
@@ -410,8 +410,8 @@ document.getElementById("play").onclick=async()=>{{
 </body>
 </html>
 '''
-os.makedirs(os.path.join(ROOT, "room"), exist_ok=True)
-with open(os.path.join(ROOT, "room", "index.html"), "w", encoding="utf-8") as f:
+os.makedirs(os.path.join(ROOT, "experiments", "the-room"), exist_ok=True)
+with open(os.path.join(ROOT, "experiments", "the-room", "index.html"), "w", encoding="utf-8") as f:
     f.write(page)
 
 # marker gate on the OUTPUT, last: every synthetic dialogue line rendered must
@@ -432,4 +432,4 @@ if errors:
 
 print(f"gen_room: 8 stations + the boundary, route == declared chain, "
       f"{n_holding}/{n_conditions} conditions holding, {days_left} days to expiry "
-      f"-> room/index.html")
+      f"-> experiments/the-room/index.html")

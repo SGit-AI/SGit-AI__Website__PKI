@@ -8,7 +8,7 @@
 > but never delete anything — not a bug. This site publishes that history, and the
 > registry rules it produces, before the registry exists.
 
-Site version: v0.1.42 (27 August 2026). Published by the sgit project — participant
+Site version: v0.1.43 (27 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## Properties agents may rely on
@@ -35,7 +35,7 @@ against what ships — and the register is the first thing to check it against.
 ## The bench — MVPs and experiments (machine-readable: /bench/llms.txt)
 
 Where this site ships MVPs and experiments: https://pki.sgit.ai/bench/index.html
-Eight entries, seven of them built and running — the register, the mandate hook, grant
+Nine entries, eight of them built and running — the register, the mandate hook, grant
 measurement, the building blocks, the assessment, the book, and the synthetic-reader
 programme. (This paragraph said "six entries" until v0.1.36, having missed the book
 when it went on the bench at v0.1.33; the book's own findings chapter found the
@@ -47,18 +47,32 @@ carry those limits with the claim — a register whose signatures prove nothing,
 that carries no authority, a measurement that is a floor and not a census. Reporting the
 demonstration without its limit misrepresents this site.
 
-## The chain room (playable: /room/)
+## The experiments (hub: /experiments/)
 
-The RiskMandate workflow walked end to end as a point-and-click room — eight
-stations, the LIBRARY/INSTANCE BOUNDARY DRAWN ON THE FLOOR, four verbs (LOOK,
-ASK, DOOR, NEVER), and a work item that travels reality -> twin -> facts ->
-finding | risks -> decisions -> monitoring. THE LEFT HALF IS REAL — every desk
-stands on a fetchable artefact. THE RIGHT HALF IS SYNTHETIC AND MARKED ON EVERY
-SURFACE: no risk has been derived, priced, accepted or monitored by anybody.
-Simulate first, then support. Every word the room speaks is derived at build
-time; five gates keep it true, including GM3 enforced on the demo itself — the
-instance fixture stores references, never copies.
-Fixture: /packs/grant-and-mandate/instance-fixture.synthetic.json
+Game-like environments for the workflows — one experiment, one folder, one
+workflow, one visualisation, each with its own generator, gates and bench
+entry. Every word derived at build time; real and synthetic never blend.
+
+- THE CHAIN ROOM (/experiments/the-room/): the RiskMandate workflow walked end
+  to end — eight stations, the LIBRARY/INSTANCE BOUNDARY DRAWN ON THE FLOOR,
+  four verbs (LOOK, ASK, DOOR, NEVER). Left half real artefacts; right half
+  SYNTHETIC AND MARKED ON EVERY SURFACE
+  (fixture: /packs/grant-and-mandate/instance-fixture.synthetic.json).
+- THE TABLE (/experiments/the-table/): actions resolving against grants and
+  mandates, as cards. Six suits — CAN (grant), MAY (mandate), IS (fact),
+  SHOWS (evidence), DOES (action), DECIDES (decision) — four players INCLUDING
+  THE SYSTEMS, replaying the estate's real 26 August incident: push refused,
+  mandate amended, push landing. NOTHING SYNTHETIC: every resolution is re-run
+  through mandate.py at build time, every reaction byte-checked against the
+  captured transcripts. Forward is the simulation; backward is the audit; they
+  are the same cards.
+- The resolution order is the ordering rule as game mechanics: a DOES resolves
+  against CAN, then MAY, and mints an IS backed by a SHOWS. Blast radius is the
+  CAN cards face-up that no MAY card covers.
+- THE TWIN CLAIM: a library entry IS a digital twin — a measured, dated
+  representation of one environment, honest about where measurement was
+  refused. A simulation is running a proposed action against the twin instead
+  of reality. A twin that is not re-measured is a stale delta with a nicer name.
 
 ## The book (machine-readable: /book/llms.txt)
 

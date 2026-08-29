@@ -1,0 +1,24 @@
+{
+  "what_this_is": "The manifest behind /experiments/. One experiment, one folder, one workflow, one visualisation — each with its own generator, its own gates, and its own bench entry carrying a does_not_prove. The hub page is generated from this file so the listing cannot drift from the folders.",
+  "rules": [
+    "Every word derived at build time from the files the pipeline runs on; no typed counts.",
+    "Real and synthetic never blend — a surface is derived from real artefacts, or it carries the SYNTHETIC marker beside every value.",
+    "Every visual claim has a gate comparing the drawing to the declaration.",
+    "Genre, not work: a genre's conventions are for using; a specific game's art, names or wording are not.",
+    "Render it, screenshot it, read the screenshot before shipping."
+  ],
+  "experiments": [
+    { "id": "the-room",
+      "title": "The chain room",
+      "workflow": "the full chain, reality → monitoring, with the library/instance boundary drawn on the floor",
+      "visualisation": "a point-and-click room: eight desks, four verbs, a work item that travels",
+      "honesty": "left half real artefacts; right half SYNTHETIC, marked on every surface",
+      "brief": "v0.33.66" },
+    { "id": "the-table",
+      "title": "The table",
+      "workflow": "actions resolving against grants and mandates, and the consequences — forward as replay, backward as audit",
+      "visualisation": "a card table: six suits, players that include the systems, four turns of a real incident",
+      "honesty": "one hundred per cent real — the estate's own 26 August incident, from the artefacts it left behind, with the enforcement tool re-run at build time",
+      "brief": "v0.33.67" }
+  ]
+}

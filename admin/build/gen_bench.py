@@ -119,7 +119,7 @@ BENCH = [
   code="assess/"),
 
  dict(slug="the-chain-room", name="The chain room", state="live",
-  where="../room/index.html", since="v0.1.42", updated="v0.1.42",
+  where="../experiments/the-room/index.html", since="v0.1.42", updated="v0.1.43",
   origin="dev brief <a href='../documents/the-chain-room.html'>v0.33.66</a>, at the project lead's direction; genre from newsroom.sgit.ai's floor debrief, CC BY 4.0",
   one_line="The RiskMandate workflow walked end to end as a playable room — eight stations, the "
            "product boundary drawn on the floor, four verbs, and a work item that travels the chain. "
@@ -139,7 +139,31 @@ BENCH = [
          "the decision gate: the fixture's acceptance carries a named acceptor AND an interval, or it is not a decision and the build fails",
          "the observed gate: a condition claiming to hold without an observed_as_of fails — a status is observed, never typed",
          "the marker gate: the generator greps its own output for the SYNTHETIC marker beside every synthetic line"],
-  code="room/, packs/grant-and-mandate/instance-fixture.synthetic.json, admin/build/gen_room.py"),
+  code="experiments/the-room/, packs/grant-and-mandate/instance-fixture.synthetic.json, admin/build/gen_room.py"),
+
+ dict(slug="the-table", name="The table", state="live",
+  where="../experiments/the-table/index.html", since="v0.1.43", updated="v0.1.43",
+  origin="dev brief <a href='../documents/the-experiments-deck-table.html'>v0.33.67</a> — the deck, the players, and the estate's own incident",
+  one_line="Actions resolving against grants and mandates, played as cards: six suits, four players "
+           "including the systems, and the estate's real 26 August incident replayed forward as "
+           "simulation and backward as audit — with every resolution re-run through the enforcement "
+           "tool at build time.",
+  demonstrates=[
+    "<b>The object layer the room lacked</b>: grants, mandates, facts, evidence and actions each given a card form with a suit — CAN, MAY, IS, SHOWS, DOES, DECIDES — every field read from the artefact the card links",
+    "<b>The resolution order as game mechanics</b>: a DOES resolves against CAN, then MAY, and mints an IS backed by a SHOWS. Blast radius is the CAN cards face-up that no MAY card covers",
+    "<b>Systems as players</b>: the hook plays reactions, the CI runner holds its own alarming CAN cards, and the DECIDES suit is played only by people — the remedy for a refusal is a decision, never a bypass",
+    "<b>Forward is the simulation, backward is the audit, and they are the same cards</b> — the register's <i>was it valid last Tuesday?</i> promise, as play",
+    "<b>A live build gate</b>: every turn's resolution is re-run through <code>mandate.py check-branch</code> during the build; a claimed refusal the tool does not reproduce fails it"],
+  does_not_prove=[
+    "<b>Coverage.</b> One scenario, four turns, one agent, one control — the mechanics, not the space of plays",
+    "That a DOES card is a receipt: nothing is signed by the actor at the time of action. The table shows where receipts would sit, which is not the same as having them",
+    "That proposed-action simulation works — playing a hypothetical card against the twin is specified in the brief and deliberately not built here",
+    "That the card grammar survives a population: the genre bets are now three implementations deep across two estates, still with zero user tests"],
+  gates=["the resolution gate, live: mandate.py check-branch is executed for each turn at build time and must agree with the table",
+         "the transcript gate: every reaction quote must exist byte-for-byte in the captured transcript it cites",
+         "the source gate: every card cites a file that must exist, and its fields are read from it, never typed",
+         "the manifest gate: a folder without a manifest entry, or an entry without a folder, fails the hub build"],
+  code="experiments/the-table/, admin/build/gen_table.py"),
 
  dict(slug="the-book", name="A Key Means Nothing Alone (the book)", state="live",
   where="../book/index.html", since="v0.1.33", updated="v0.1.36",

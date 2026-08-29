@@ -17,7 +17,7 @@
 <main class="doc">
 <div class="crumb"><a href="../index.html">pki.sgit.ai</a> / bench</div>
 <h1>The bench</h1>
-<p class="lead">Where this site ships MVPs and experiments. <b>7 of the 8 things below are
+<p class="lead">Where this site ships MVPs and experiments. <b>8 of the 9 things below are
 built and running right now</b> — you can fetch them, run them, and check them. Each one lives in its own
 folder with its own code, arrives from a brief or a dev pack, and is iterated release by release.</p>
 
@@ -33,7 +33,7 @@ folder with its own code, arrives from a brief or a dev pack, and is iterated re
 <div class="tablewrap"><table>
   <thead><tr><th>On the bench</th><th>State</th><th>What it is</th></tr></thead>
   <tbody>
-    <tr><td><a href="#registry">The register</a></td><td><span class="bench-state bench-state--live">live</span></td><td>A static register of agent identities, roles, mandates, grants, acceptances and revocations — eleven records and twenty-three signed statements at constructed public URLs, verifiable with the shipped <code>sgit pki</code> commands.</td></tr>    <tr><td><a href="#mandate-hook">The mandate hook</a></td><td><span class="bench-state bench-state--live">live</span></td><td>A signed mandate compiled into a <code>pre-push</code> hook that git runs — and that refused a real push to <code>dev</code> with <code>error: failed to push some refs</code>.</td></tr>    <tr><td><a href="#grant-measurement">Grant measurement</a></td><td><span class="bench-state bench-state--live">live</span></td><td>A tool that generates a grant document for the environment it runs in, and two measured entries — a hosted agent container and a CI runner — that join at the push edge.</td></tr>    <tr><td><a href="#building-blocks">The building blocks</a></td><td><span class="bench-state bench-state--live">live</span></td><td>Nine reusable components — tier and evidence badges, cards, the delta block, the grant tree — shipped as a stylesheet and a gallery that renders the real documents.</td></tr>    <tr><td><a href="#map-your-case">Map your own case</a></td><td><span class="bench-state bench-state--live">live</span></td><td>A visitor assembles their own agent installations as grant trees, sees the gap, and records a decision per gap — storing the choices and never the answers.</td></tr>    <tr><td><a href="#the-chain-room">The chain room</a></td><td><span class="bench-state bench-state--live">live</span></td><td>The RiskMandate workflow walked end to end as a playable room — eight stations, the product boundary drawn on the floor, four verbs, and a work item that travels the chain. The left half is real artefacts; the right half is a marked simulation.</td></tr>    <tr><td><a href="#the-book">A Key Means Nothing Alone (the book)</a></td><td><span class="bench-state bench-state--live">live</span></td><td>One volume explaining what this site built, how it composes with RiskMandate.ai, and what none of it proves — 17 chapters in five parts, 14 figures each taken at the release tag its caption names, and 65 quotations re-read out of their sources on every build.</td></tr>    <tr><td><a href="#synthetic-readers">Synthetic readers</a></td><td><span class="bench-state bench-state--specified">specified</span></td><td>A programme that puts a page in front of an agent which receives pixels and nothing else — no text, no structure, no knowledge of the project — and watches where it goes.</td></tr>
+    <tr><td><a href="#registry">The register</a></td><td><span class="bench-state bench-state--live">live</span></td><td>A static register of agent identities, roles, mandates, grants, acceptances and revocations — eleven records and twenty-three signed statements at constructed public URLs, verifiable with the shipped <code>sgit pki</code> commands.</td></tr>    <tr><td><a href="#mandate-hook">The mandate hook</a></td><td><span class="bench-state bench-state--live">live</span></td><td>A signed mandate compiled into a <code>pre-push</code> hook that git runs — and that refused a real push to <code>dev</code> with <code>error: failed to push some refs</code>.</td></tr>    <tr><td><a href="#grant-measurement">Grant measurement</a></td><td><span class="bench-state bench-state--live">live</span></td><td>A tool that generates a grant document for the environment it runs in, and two measured entries — a hosted agent container and a CI runner — that join at the push edge.</td></tr>    <tr><td><a href="#building-blocks">The building blocks</a></td><td><span class="bench-state bench-state--live">live</span></td><td>Nine reusable components — tier and evidence badges, cards, the delta block, the grant tree — shipped as a stylesheet and a gallery that renders the real documents.</td></tr>    <tr><td><a href="#map-your-case">Map your own case</a></td><td><span class="bench-state bench-state--live">live</span></td><td>A visitor assembles their own agent installations as grant trees, sees the gap, and records a decision per gap — storing the choices and never the answers.</td></tr>    <tr><td><a href="#the-chain-room">The chain room</a></td><td><span class="bench-state bench-state--live">live</span></td><td>The RiskMandate workflow walked end to end as a playable room — eight stations, the product boundary drawn on the floor, four verbs, and a work item that travels the chain. The left half is real artefacts; the right half is a marked simulation.</td></tr>    <tr><td><a href="#the-table">The table</a></td><td><span class="bench-state bench-state--live">live</span></td><td>Actions resolving against grants and mandates, played as cards: six suits, four players including the systems, and the estate's real 26 August incident replayed forward as simulation and backward as audit — with every resolution re-run through the enforcement tool at build time.</td></tr>    <tr><td><a href="#the-book">A Key Means Nothing Alone (the book)</a></td><td><span class="bench-state bench-state--live">live</span></td><td>One volume explaining what this site built, how it composes with RiskMandate.ai, and what none of it proves — 17 chapters in five parts, 14 figures each taken at the release tag its caption names, and 65 quotations re-read out of their sources on every build.</td></tr>    <tr><td><a href="#synthetic-readers">Synthetic readers</a></td><td><span class="bench-state bench-state--specified">specified</span></td><td>A programme that puts a page in front of an agent which receives pixels and nothing else — no text, no structure, no knowledge of the project — and watches where it goes.</td></tr>
   </tbody>
 </table></div>
 
@@ -161,7 +161,7 @@ folder with its own code, arrives from a brief or a dev pack, and is iterated re
 </div>
 <div class="bench-item" id="the-chain-room">
   <div class="bench-item__head">
-    <h3><a href="../room/index.html">The chain room</a></h3>
+    <h3><a href="../experiments/the-room/index.html">The chain room</a></h3>
     <span class="bench-state bench-state--live">live</span>
   </div>
   <p class="bench-item__line">The RiskMandate workflow walked end to end as a playable room — eight stations, the product boundary drawn on the floor, four verbs, and a work item that travels the chain. The left half is real artefacts; the right half is a marked simulation.</p>
@@ -179,8 +179,32 @@ folder with its own code, arrives from a brief or a dev pack, and is iterated re
     <ul class="bench-list"><li>the route gate: the station order drawn must equal the declared chain, or the build fails — the room may not draw a route through a workflow that does not exist</li><li>the boundary gate (GM3): the instance fixture stores references, never copies — an embedded grant node fails the build</li><li>the decision gate: the fixture's acceptance carries a named acceptor AND an interval, or it is not a decision and the build fails</li><li>the observed gate: a condition claiming to hold without an observed_as_of fails — a status is observed, never typed</li><li>the marker gate: the generator greps its own output for the SYNTHETIC marker beside every synthetic line</li></ul></div>
   <div class="bench-meta">
     <span>from dev brief <a href='../documents/the-chain-room.html'>v0.33.66</a>, at the project lead's direction; genre from newsroom.sgit.ai's floor debrief, CC BY 4.0</span>
-    <span>code: <code>room/, packs/grant-and-mandate/instance-fixture.synthetic.json, admin/build/gen_room.py</code></span>
-    <span>on the bench since v0.1.42 · last moved v0.1.42</span>
+    <span>code: <code>experiments/the-room/, packs/grant-and-mandate/instance-fixture.synthetic.json, admin/build/gen_room.py</code></span>
+    <span>on the bench since v0.1.42 · last moved v0.1.43</span>
+  </div>
+</div>
+<div class="bench-item" id="the-table">
+  <div class="bench-item__head">
+    <h3><a href="../experiments/the-table/index.html">The table</a></h3>
+    <span class="bench-state bench-state--live">live</span>
+  </div>
+  <p class="bench-item__line">Actions resolving against grants and mandates, played as cards: six suits, four players including the systems, and the estate's real 26 August incident replayed forward as simulation and backward as audit — with every resolution re-run through the enforcement tool at build time.</p>
+  <div class="bench-cols">
+    <div class="bench-col">
+      <div class="bench-col__k">What it demonstrates</div>
+      <ul class="bench-list bench-list--yes"><li><b>The object layer the room lacked</b>: grants, mandates, facts, evidence and actions each given a card form with a suit — CAN, MAY, IS, SHOWS, DOES, DECIDES — every field read from the artefact the card links</li><li><b>The resolution order as game mechanics</b>: a DOES resolves against CAN, then MAY, and mints an IS backed by a SHOWS. Blast radius is the CAN cards face-up that no MAY card covers</li><li><b>Systems as players</b>: the hook plays reactions, the CI runner holds its own alarming CAN cards, and the DECIDES suit is played only by people — the remedy for a refusal is a decision, never a bypass</li><li><b>Forward is the simulation, backward is the audit, and they are the same cards</b> — the register's <i>was it valid last Tuesday?</i> promise, as play</li><li><b>A live build gate</b>: every turn's resolution is re-run through <code>mandate.py check-branch</code> during the build; a claimed refusal the tool does not reproduce fails it</li></ul>
+    </div>
+    <div class="bench-col bench-col--not">
+      <div class="bench-col__k">What it does <b>not</b> prove</div>
+      <ul class="bench-list bench-list--no"><li><b>Coverage.</b> One scenario, four turns, one agent, one control — the mechanics, not the space of plays</li><li>That a DOES card is a receipt: nothing is signed by the actor at the time of action. The table shows where receipts would sit, which is not the same as having them</li><li>That proposed-action simulation works — playing a hypothetical card against the twin is specified in the brief and deliberately not built here</li><li>That the card grammar survives a population: the genre bets are now three implementations deep across two estates, still with zero user tests</li></ul>
+    </div>
+  </div>
+  <div class="bench-gates"><b>Gates</b> — what keeps it honest when nobody is looking:
+    <ul class="bench-list"><li>the resolution gate, live: mandate.py check-branch is executed for each turn at build time and must agree with the table</li><li>the transcript gate: every reaction quote must exist byte-for-byte in the captured transcript it cites</li><li>the source gate: every card cites a file that must exist, and its fields are read from it, never typed</li><li>the manifest gate: a folder without a manifest entry, or an entry without a folder, fails the hub build</li></ul></div>
+  <div class="bench-meta">
+    <span>from dev brief <a href='../documents/the-experiments-deck-table.html'>v0.33.67</a> — the deck, the players, and the estate's own incident</span>
+    <span>code: <code>experiments/the-table/, admin/build/gen_table.py</code></span>
+    <span>on the bench since v0.1.43 · last moved v0.1.43</span>
   </div>
 </div>
 <div class="bench-item" id="the-book">

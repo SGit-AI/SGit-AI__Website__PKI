@@ -14,7 +14,7 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.42</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.43</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -56,7 +56,9 @@
       <a class="nl" href="../bench/index.html">The bench<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl" href="../bench/index.html">&#9679; The bench &mdash; what is built</a>
-      <a class="sl" href="../room/index.html">&#9679; The chain room</a>
+      <a class="sl" href="../experiments/index.html">&#9679; Experiments</a>
+      <a class="sl" href="../experiments/the-room/index.html">&mdash; the chain room</a>
+      <a class="sl" href="../experiments/the-table/index.html">&mdash; the table</a>
       <a class="sl" href="../registry/index.html">The register, live</a>
       <a class="sl" href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
       <a class="sl" href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
@@ -98,6 +100,40 @@
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
     <tr>
+<td class="vnum">v0.1.43</td>
+<td class="vdate">27 Aug 2026</td>
+<td><b>The experiments, the deck, and the table.</b> Three instructions from the project lead's
+endorsement of the chain room, delivered in brief v0.33.67. <b>A convention</b>:
+<a href="../experiments/index.html">/experiments/</a>, one folder per experiment, one workflow, one
+visualisation, each with its own generator, gates and bench entry &mdash; the hub generated from a
+manifest whose entries must match the folders in both directions, and the chain room moved in as
+first occupant, free because nothing is deployed. <b>The deck</b> &mdash; the object layer the room
+lacked, answering the direct question <i>have you added visual representations for grants, mandates,
+evidence, facts and actions?</i> honestly: it had not. Six suits now &mdash; <b>CAN</b> (grant),
+<b>MAY</b> (mandate), <b>IS</b> (fact), <b>SHOWS</b> (evidence), <b>DOES</b> (action),
+<b>DECIDES</b> (decision) &mdash; each card a rendering of a real artefact with every field read from
+the source it links, and the resolution order as game mechanics: <i>a DOES resolves against CAN,
+then MAY, and mints an IS backed by a SHOWS; blast radius is the CAN cards face-up that no MAY card
+covers</i>. The DOES suit is the genuinely new primitive &mdash; actions had no representation
+anywhere in the estate, which is the book's receipt gap surfacing again, and the card says on its
+face that it is the slot a receipt would fill. <b>The table</b>, at
+<a href="../experiments/the-table/index.html">/experiments/the-table/</a>: four players
+<b>including the systems</b> (the hook plays reactions; the CI runner holds its own alarming CAN
+cards), replaying <b>the estate's own 26 August incident</b> from the artefacts it left behind
+&mdash; push permitted, push refused, mandate amended citing the instruction quoted inside the
+mandate itself, push landing at tag v0.1.28. Forward is the simulation; <b>backward is the audit,
+and they are the same cards in the same order</b>, which is the register's <i>was it valid last
+Tuesday?</i> promise as play. Nothing on the table is synthetic, and the gate keeping that true is
+<b>live</b>: every turn's resolution is re-run through <code>mandate.py check-branch</code> during
+the build, every reaction byte-checked against the captured transcripts. <b>The twin claim answered
+from the corpus</b>: a library entry IS a digital twin &mdash; <i>measure is taken on a twin, a twin
+is grounded in its connection to reality</i> &mdash; the experiments are twin theatres, and a
+simulation is running a proposed action against the twin instead of reality. Proposed-action play is
+specified and deliberately not built; a twin that is not re-measured is a stale delta with a nicer
+name. One defect found by reading the screenshot: turn one quoted the CI runner's file-reach node
+where its unrestricted-egress node belongs.</td>
+</tr>
+<tr>
 <td class="vnum">v0.1.42</td>
 <td class="vdate">27 Aug 2026</td>
 <td><b>The chain room &mdash; the RiskMandate workflow as a playable simulation.</b> The
@@ -106,7 +142,7 @@ course-correction of v0.1.41's brief, at the project lead's direction: the doors
 RiskMandate.ai workflows</b> &mdash; and for that the room and the game-like environment are not
 decoration, they are the deliverable: <i>the workflows and multiple states / actions are to be
 simulated first, then supported</i>. Specified in brief v0.33.66 and built at
-<a href="../room/index.html">/room/</a>: <b>eight stations, boustrophedon, with the library/instance
+<a href="../experiments/the-room/index.html">/room/</a>: <b>eight stations, boustrophedon, with the library/instance
 boundary drawn on the floor</b> &mdash; the left zone this site's paper, the right zone the
 network's terminal dark, so crossing the line reads as changing products. Four verbs, ours
 (<code>LOOK &middot; ASK &middot; DOOR &middot; NEVER</code>), a dialogue console, and

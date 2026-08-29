@@ -473,7 +473,7 @@ DOCS = [
   version="v0.33.66", date="27 August 2026", dtype="Dev brief",
   summary="The course-correction of v0.33.65, which ported the newsroom's state map and declined its room. The project lead's response: the refusal missed the key requirement — the point is to create the core elements for the RiskMandate.ai workflows, and for that the game-like environment is not decoration, it is the deliverable: the workflows and their states and actions are to be simulated first, then supported. So: one playable room at /room/, eight stations, the product boundary drawn on the floor, a work item that travels the chain, and every word derived at build time. The left half is real — the measured library entry, the signed mandate, the computed excess row. The right half is synthetic and marked on every surface, in the shape of RiskMandate's own positioning card: risk band, named acceptor, blast radius, expiry, reviewer, and accepted conditions each carrying an observed status. Five gates, including the GM3 rule enforced structurally on the demo itself: the instance fixture stores references, never copies, because a demo that violates the architecture it demonstrates teaches the violation.",
   concepts=[
-   ("The chain room, live", "../room/index.html", "pick a verb, then a station — or run the walk"),
+   ("The chain room, live", "../experiments/the-room/index.html", "pick a verb, then a station — or run the walk"),
    ("The instance fixture", "../packs/grant-and-mandate/instance-fixture.synthetic.json", "synthetic, marked in the filename, references-only, a named acceptor and an interval"),
    ("The contract it walks", "../book/12-the-library-and-the-instance.html", "chapter 12: the library/instance split, as a floor a visitor crosses"),
    ("The doors it does not open", "../registry/doors.html", "nine of twelve still shut; the room makes one explainable to the person who might open it"),
@@ -486,6 +486,27 @@ DOCS = [
    "Phase 2 needs nothing from RiskMandate: this estate already logs enough to replay a real session against the conditions.",
   ],
   pages="Adds /room/, the synthetic instance fixture, and admin/build/gen_room.py with five gates; reverses v0.33.65's refusal of the room on a changed requirement, recorded rather than rewritten."),
+
+ dict(slug="the-experiments-deck-table",
+  title="The Experiments, The Deck, And The Table: Cards For Grants, Mandates, Facts, Evidence And Actions",
+  md="v0.33.67__dev-brief__the-experiments-the-deck-and-the-table-cards-for-grants-mandates-facts-evidence-and-actions.md",
+  version="v0.33.67", date="27 August 2026", dtype="Dev brief",
+  summary="Three things. A CONVENTION: /experiments/, one folder per experiment, each with its own generator, gates and bench entry — the chain room moves in as first occupant, free because nothing is deployed. THE DECK: the five objects the project lead names — grants, mandates, facts, evidence, actions — each given a card form with a suit (CAN, MAY, IS, SHOWS, DOES, DECIDES), because the room gave desks to the processes and nothing to the objects; a card is a rendering of a signed statement, and the resolution order is the ordering rule as game mechanics. THE TABLE: the second experiment, where players including the systems replay the estate's own 26 August incident — push refused, mandate amended, push landing — forward as simulation and backward as audit, with the enforcement tool re-run at build time. And the twin question answered from the corpus: a grant document IS a twin, the experiments are twin theatres, and a simulation is running a proposed action against the twin instead of reality.",
+  concepts=[
+   ("The experiments hub", "../experiments/index.html", "one folder, one workflow, one visualisation — generated from a manifest"),
+   ("The table, live", "../experiments/the-table/index.html", "six suits, four players, four turns, every resolution re-run"),
+   ("The chain room", "../experiments/the-room/index.html", "the first occupant, moved in"),
+   ("The grounding ladder", "https://graphs.sgit.ai/depth/index.html#ladder", "measure is taken on a twin, a twin is grounded in its connection to reality"),
+  ],
+  ideas=[
+   "The room visualised the process; the deck visualises the objects; the table visualises the actions — and actions had no representation anywhere in the estate.",
+   "A DOES card resolves against CAN, then MAY, and mints an IS backed by a SHOWS — the ordering rule as game mechanics.",
+   "Blast radius is the CAN cards face-up on the table that no MAY card covers.",
+   "Forward is the simulation, backward is the audit, and they are the same cards in the same order.",
+   "The library entry is a twin; a simulation is running a proposed action against the twin instead of against reality — which is what makes it a rehearsal rather than a cartoon.",
+   "A twin that is not re-measured is a stale delta with a nicer name.",
+  ],
+  pages="Declares /experiments/ and its five inherited rules, moves the room, and builds the table with its live resolution gate."),
 
 ]
 
