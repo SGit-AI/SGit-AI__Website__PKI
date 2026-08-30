@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>The Scenario Engine: JSON-Driven Worlds, The Soft Mandate, And The Platform Library · documents · pki.sgit.ai</title>
-<meta name="description" content="Original document, readable in-page: summary, key concepts and key ideas, then the full markdown. Dev brief, v0.33.68, 29 August 2026. CC BY 4.0.">
-<link rel="canonical" href="https://pki.sgit.ai/documents/the-scenario-engine.html">
+<title>Insurance For Agents: The Policy Replaces The Acceptance At The Foundation, And The Delta Is Where The Insurance Lives · documents · pki.sgit.ai</title>
+<meta name="description" content="Original document, readable in-page: summary, key concepts and key ideas, then the full markdown. Strategy brief — a pivot briefing, v0.33.71, 30 August 2026. CC BY 4.0.">
+<link rel="canonical" href="https://pki.sgit.ai/documents/agent-insurance.html">
 <link rel="stylesheet" href="../assets/site.css">
 </head>
 <body>
@@ -98,49 +98,49 @@
 </div></nav>
 
 <main class="doc">
-<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="index.html">documents</a> / the-scenario-engine</div>
-<h1>The Scenario Engine: JSON-Driven Worlds, The Soft Mandate, And The Platform Library</h1>
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="index.html">documents</a> / agent-insurance</div>
+<h1>Insurance For Agents: The Policy Replaces The Acceptance At The Foundation, And The Delta Is Where The Insurance Lives</h1>
 
 <div class="docmeta">
-  <span class="k">Type</span><span class="v">Dev brief</span>
-  <span class="k">Version</span><span class="v">v0.33.68</span>
-  <span class="k">Date</span><span class="v">29 August 2026</span>
+  <span class="k">Type</span><span class="v">Strategy brief — a pivot briefing</span>
+  <span class="k">Version</span><span class="v">v0.33.71</span>
+  <span class="k">Date</span><span class="v">30 August 2026</span>
   <span class="k">Author</span><span class="v">Dinis Cruz (project lead) and collaborators</span>
   <span class="k">Licence</span><span class="v">CC BY 4.0</span>
-  <span class="k">Source</span><span class="v"><a href="../briefs/v0.33.68__dev-brief__the-scenario-engine-json-driven-worlds-the-soft-mandate-and-the-platform-library.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/dev/briefs/v0.33.68__dev-brief__the-scenario-engine-json-driven-worlds-the-soft-mandate-and-the-platform-library.md">view on GitHub</a></span>
+  <span class="k">Source</span><span class="v"><a href="../briefs/v0.33.71__strategy-brief__insurance-for-agents-the-delta-is-where-the-insurance-lives.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/dev/briefs/v0.33.71__strategy-brief__insurance-for-agents-the-delta-is-where-the-insurance-lives.md">view on GitHub</a></span>
 </div>
 
 <h2 id="summary">Summary</h2>
-<p>The third memo, processed: everything JSON-driven, nothing hardcoded, because the destination is tonnes of scenarios and a game engine that becomes a product. One engine (admin/build/gen_scenario.py) renders any world from a scenario.json that references a measured twin — the engine holds no capabilities of its own, and the deck gate forces cards == twin nodes exactly. Two worlds prove the claim by existing: PUSH TO GITHUB, the memo's worked example — this session's own grant chain, user → GitHub App → scoped token → container → Claude Code → Claude → repo — with the soft mandate shown as a place: the thing that keeps this world off the wrong branch is prose in the agent's context, an expectation-tier constraint living exactly where the memo says mistakes occur, beside the hook it could be and the platform boundary it is not. THE DEPLOY, the counter-world: the CI runner with no agent, no hook, unrestricted egress — and the estate's only boundary-tier grant. Plus the confidence rung computed from evidence (hypothesis 0 → independent 3), eight capability micro-animations, and the platform library rules for future fact-based variation entries — where the rung is the libel guard.</p>
+<p>A pivot in the risk approach, recorded before anything is built on it: the foundation of the RiskMandate pyramid moves from risk acceptance to the insurance policy, on the argument that the delta between grant and mandate is where the insurance lives. The brief carries the voice memo verbatim, then reads it against the corpus: the register already publishes "acceptor": null on every measured delta, and the pivot names who sits in the empty seat — the insurer, an acceptor of last resort who accepts for money what no owner accepted. Two insurances are separated (harm inside the mandate is ordinary liability; harm from the delta is the agent-specific exposure nobody carries, and the memo's subject); the payout logic is identified as parametric insurance described without the word — the right first shape, because every trigger it would name is already computable from published evidence packs while loss data does not exist anywhere; and the memo's agentic insurance maturity model is read directly off the estate's existing rating variables: identity class, enforcement tier, twin freshness, delta size. The one primitive the estate lacks is the one insurance cannot do without: the loss event. Proposed into change control as GM-D35/36/37; four questions go back to the project lead, including who the insured actually is.</p>
 
 <h2 id="concepts">Key concepts</h2>
 <ul>
-  <li><a href="../experiments/push-to-github/index.html"><b>Push to GitHub, live</b></a> — the worked example — this session's own chain, the soft mandate in its three possible rooms</li>
-  <li><a href="../experiments/the-deploy/index.html"><b>The Deploy, live</b></a> — same engine, different JSON — the world without the guardrails</li>
-  <li><a href="../packs/grant-and-mandate/library/claude-code-remote__ccr-container__2026-08-26.json"><b>The twin it references</b></a> — measured from inside this session's own environment</li>
-  <li><a href="../registry/doors.html"><b>The doors view it must agree with</b></a> — the platform slot derives from enforcement_at_boundary, and the build fails on disagreement</li>
+  <li><a href="../registry/index.html"><b>The empty seat</b></a> — the excess-authority view's acceptor:null — the field a policy fills</li>
+  <li><a href="../packs/grant-and-mandate/concepts.html"><b>The delta</b></a> — grant − mandate: the insurable interest of Cover B</li>
+  <li><a href="../workbench/index.html"><b>The evidence pack</b></a> — underwriting evidence ex ante, proof of loss ex post — one schema, both jobs</li>
+  <li><a href="../admin/comms.html"><b>The maturity model</b></a> — bands 0–3 read off existing tiers; N11, N12 and GM-D16 become premium reductions</li>
 </ul>
 
 <h2 id="ideas">Key ideas</h2>
 <ul>
-  <li>The engine holds no capabilities of its own: it may decorate a card, never add, remove or restate one — adding a world is adding a JSON file.</li>
-  <li>The soft mandate is a place, not a strength: the same constraint is expectation-tier as prose in a context window, setting-tier as a hook, boundary-tier as platform config — and the slot it occupies decides what a mistake costs.</li>
-  <li>A capability shown acting is legible where a permission string is not — which is why each animation kind depicts the act, and why depiction is declared to be all it is.</li>
-  <li>The confidence rung is arithmetic over evidence origins, never typed: more independent places saying the same thing move a claim from hypothesis toward reality, and a rung above self-measurement is unreachable from inside.</li>
-  <li>The platform library's rule for writing about other people's products: every entry is a dated, evidenced scenario.json, an incident is evidence, and the rung is the libel guard.</li>
-  <li>The pair is the proof: one world rendered by an engine is a hardcoded page with extra steps; the second world is what makes nothing hardcoded falsifiable.</li>
+  <li>A premium cannot be theatre: an acceptance can be a signature over an exposure nobody measured, but someone loses money if a priced measurement is wrong — the pivot upgrades the audience for the estate's evidence from the owner who ought to read it to an underwriter paid to disbelieve it.</li>
+  <li>When grant equals mandate, Cover B's premium goes to zero — the delta is the rating variable, so narrowing a grant becomes a visible discount and least privilege becomes financially legible.</li>
+  <li>For rented agents the two-populations thesis meets its commercial completion: where control is unavailable, transfer is what remains — hand over a credential and hope, with the hope priced.</li>
+  <li>A parametric agent policy is, mechanically, a rule evaluated over evidence packs: the trigger data is strong and the loss data does not exist, which is exactly the trade parametric insurance was invented for.</li>
+  <li>Insurance answers an open decision by accident: policies renew on a date, so twins must re-measure on a date — GM-D16 gains the forcing function it lacked.</li>
+  <li>Whoever's schema records the loss events owns the eventual actuarial table — the strategic case for loss-event/v0 stated plainly.</li>
 </ul>
 
 <h2 id="on-site">On this site</h2>
-<p>Adds the engine, two scenario worlds, the shared scenario.css with eight micro-animations, and six gates; amends the experiments convention to allow a shared engine driven by per-world scenario.json.</p>
+<p>Recorded as proposed in Grant & Mandate change control (GM-D35 the policy as acceptor of last resort, GM-D36 the policy/v0 and loss-event/v0 schemas, GM-D37 parametric as the first demonstrable shape); comms rows T34 and N16. No published surface is rebuilt on the pivot until it is adopted.</p>
 
 <h2 id="read">Read the document</h2>
-<div class="mdread-label">📄 Original document · v0.33.68 · 29 August 2026 · rendered from the <a href="../briefs/v0.33.68__dev-brief__the-scenario-engine-json-driven-worlds-the-soft-mandate-and-the-platform-library.md">raw markdown</a> (the source of truth)</div>
-<div class="mdread" id="mdread" data-src="../briefs/v0.33.68__dev-brief__the-scenario-engine-json-driven-worlds-the-soft-mandate-and-the-platform-library.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="../briefs/v0.33.68__dev-brief__the-scenario-engine-json-driven-worlds-the-soft-mandate-and-the-platform-library.md">open the raw markdown</a>.</p></noscript></div>
+<div class="mdread-label">📄 Original document · v0.33.71 · 30 August 2026 · rendered from the <a href="../briefs/v0.33.71__strategy-brief__insurance-for-agents-the-delta-is-where-the-insurance-lives.md">raw markdown</a> (the source of truth)</div>
+<div class="mdread" id="mdread" data-src="../briefs/v0.33.71__strategy-brief__insurance-for-agents-the-delta-is-where-the-insurance-lives.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="../briefs/v0.33.71__strategy-brief__insurance-for-agents-the-delta-is-where-the-insurance-lives.md">open the raw markdown</a>.</p></noscript></div>
 
 <div class="pagenav">
   <a href="index.html">← All documents</a>
-  <a href="../briefs/v0.33.68__dev-brief__the-scenario-engine-json-driven-worlds-the-soft-mandate-and-the-platform-library.md">Raw markdown →</a>
+  <a href="../briefs/v0.33.71__strategy-brief__insurance-for-agents-the-delta-is-where-the-insurance-lives.md">Raw markdown →</a>
 </div>
 </main>
 

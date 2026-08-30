@@ -571,6 +571,27 @@ DOCS = [
   ],
   pages="Adds /simulator/ as a new base folder (generated index, sim.css, sim.js, resolutions.json) with five gates; makes the control room's mode chip computed and adds the LIVE ladder with a gate that fails the build when the last door opens."),
 
+ dict(slug="agent-insurance",
+  title="Insurance For Agents: The Policy Replaces The Acceptance At The Foundation, And The Delta Is Where The Insurance Lives",
+  md="v0.33.71__strategy-brief__insurance-for-agents-the-delta-is-where-the-insurance-lives.md",
+  version="v0.33.71", date="30 August 2026", dtype="Strategy brief — a pivot briefing",
+  summary="A pivot in the risk approach, recorded before anything is built on it: the foundation of the RiskMandate pyramid moves from risk acceptance to the insurance policy, on the argument that the delta between grant and mandate is where the insurance lives. The brief carries the voice memo verbatim, then reads it against the corpus: the register already publishes \"acceptor\": null on every measured delta, and the pivot names who sits in the empty seat — the insurer, an acceptor of last resort who accepts for money what no owner accepted. Two insurances are separated (harm inside the mandate is ordinary liability; harm from the delta is the agent-specific exposure nobody carries, and the memo's subject); the payout logic is identified as parametric insurance described without the word — the right first shape, because every trigger it would name is already computable from published evidence packs while loss data does not exist anywhere; and the memo's agentic insurance maturity model is read directly off the estate's existing rating variables: identity class, enforcement tier, twin freshness, delta size. The one primitive the estate lacks is the one insurance cannot do without: the loss event. Proposed into change control as GM-D35/36/37; four questions go back to the project lead, including who the insured actually is.",
+  concepts=[
+   ("The empty seat", "../registry/index.html", "the excess-authority view's acceptor:null — the field a policy fills"),
+   ("The delta", "../packs/grant-and-mandate/concepts.html", "grant − mandate: the insurable interest of Cover B"),
+   ("The evidence pack", "../workbench/index.html", "underwriting evidence ex ante, proof of loss ex post — one schema, both jobs"),
+   ("The maturity model", "../admin/comms.html", "bands 0–3 read off existing tiers; N11, N12 and GM-D16 become premium reductions"),
+  ],
+  ideas=[
+   "A premium cannot be theatre: an acceptance can be a signature over an exposure nobody measured, but someone loses money if a priced measurement is wrong — the pivot upgrades the audience for the estate's evidence from the owner who ought to read it to an underwriter paid to disbelieve it.",
+   "When grant equals mandate, Cover B's premium goes to zero — the delta is the rating variable, so narrowing a grant becomes a visible discount and least privilege becomes financially legible.",
+   "For rented agents the two-populations thesis meets its commercial completion: where control is unavailable, transfer is what remains — hand over a credential and hope, with the hope priced.",
+   "A parametric agent policy is, mechanically, a rule evaluated over evidence packs: the trigger data is strong and the loss data does not exist, which is exactly the trade parametric insurance was invented for.",
+   "Insurance answers an open decision by accident: policies renew on a date, so twins must re-measure on a date — GM-D16 gains the forcing function it lacked.",
+   "Whoever's schema records the loss events owns the eventual actuarial table — the strategic case for loss-event/v0 stated plainly.",
+  ],
+  pages="Recorded as proposed in Grant & Mandate change control (GM-D35 the policy as acceptor of last resort, GM-D36 the policy/v0 and loss-event/v0 schemas, GM-D37 parametric as the first demonstrable shape); comms rows T34 and N16. No published surface is rebuilt on the pivot until it is adopted."),
+
 ]
 
 PAGE = """<!doctype html>
