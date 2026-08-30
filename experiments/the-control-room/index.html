@@ -19,7 +19,7 @@
   <a class="brand" href="../../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../../admin/versions.html" title="Site release history">v0.1.45</a>
+  <a class="ver" href="../../admin/versions.html" title="Site release history">v0.1.46</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -61,6 +61,7 @@
       <a class="nl here" href="../../bench/index.html">The bench<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl" href="../../bench/index.html">&#9679; The bench &mdash; what is built</a>
+      <a class="sl" href="../../simulator/index.html">&#9679; The simulator &mdash; play a card</a>
       <a class="sl" href="../../experiments/index.html">&#9679; Experiments</a>
       <a class="sl" href="../../experiments/the-room/index.html">&mdash; the chain room</a>
       <a class="sl" href="../../experiments/the-table/index.html">&mdash; the table</a>
@@ -116,7 +117,7 @@ through <code>mandate.py</code> at build time. Click any tile for its faceplate.
 
 <div class="ctrl" id="board">
 <div class="ctrl-head"><span class="ctrl-title">GRANT &amp; MANDATE BOARD</span>
-  <span class="mode-chip" title="This board replays recorded artefacts. It is not a live feed: the registry write path, monitors and a mandate service — the things a LIVE board needs — are all still stated design.">REPLAY · 2026-08-26</span></div>
+  <span class="mode-chip mode-chip--replay" title="This chip is computed from the four doors a live board depends on, not typed: LIVE only when all four are open.">REPLAY · 2026-08-26</span></div>
 
 <div class="ctrl-units">
 <section class="unit" id="u1">
@@ -390,6 +391,45 @@ transcript records the refusal, not the clock, so those rows print a dash. The r
 computed — the browser only steps through verdicts the build already re-proved.</p>
 </div>
 
+<div class="live-ladder">
+<div class="ll-head">THE LADDER FROM <b>REPLAY</b> TO LIVE
+  <span class="ll-sub">&mdash; 4 of 4 doors still shut; the chip above is computed from them,
+  and when the last one opens <b>this build fails</b></span></div>
+<ol class="ll-list"><li class="ll-row ll-row--shut">
+  <span class="ll-state">SHUT</span>
+  <span class="ll-cond">an append lane that accepts a token holder with no account</span>
+  <span class="ll-needs">somebody else</span>
+  <div class="ll-why">how a measurement reaches the registry without a human committing it <span class="ll-metric">·
+    <a href="../../registry/doors.html">enrolled_via_lane</a> = 0</span></div>
+</li>
+<li class="ll-row ll-row--shut">
+  <span class="ll-state">SHUT</span>
+  <span class="ll-cond">an issuer key that anybody cannot forge</span>
+  <span class="ll-needs">somebody else</span>
+  <div class="ll-why">a live enforcement decision resting on a published fixture is theatre <span class="ll-metric">·
+    <a href="../../registry/doors.html">mandates_real_issuer</a> = 0</span></div>
+</li>
+<li class="ll-row ll-row--shut">
+  <span class="ll-state">SHUT</span>
+  <span class="ll-cond">a grant signed by a named measurer, about a keyed environment</span>
+  <span class="ll-needs">this project</span>
+  <div class="ll-why">a live lamp lit by an unsigned fact is an anonymous claim about the present <span class="ll-metric">·
+    <a href="../../registry/doors.html">library_entries_signed</a> = 0</span></div>
+</li>
+<li class="ll-row ll-row--shut">
+  <span class="ll-state">SHUT</span>
+  <span class="ll-cond">a measurement taken from outside the environment being measured</span>
+  <span class="ll-needs">somebody else</span>
+  <div class="ll-why">dated self-measurement carries a date you can check; a live self-report is a press release <span class="ll-metric">·
+    <a href="../../registry/doors.html">independent_measurements</a> = 0</span></div>
+</li></ol>
+<p class="ll-foot">These are doors on <a href="../../registry/doors.html">the state map</a>, not new
+claims: each one is the condition the next rung will not accept work without. Three of the
+4 need somebody other than this project, which is the honest reason the chip reads what it reads.
+The gate is symmetric, as it is there: a board that could claim LIVE and does not is as much a
+defect as one that claims it and cannot.</p>
+</div>
+
 <div class="ctrl-legend">LAMP GRAMMAR — the tier, and nothing else:
   <span class="lg lg--ok">contained</span> boundary ·
   <span class="lg lg--set">setting</span> outside the loop, inside the grant ·
@@ -419,11 +459,12 @@ byte-checked; timestamps derived or absent; the REPLAY chip checked in the outpu
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../../admin/versions.html">v0.1.45</a> · <a href="../../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../../admin/versions.html">v0.1.46</a> · <a href="../../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The bench</h4>
     <a href="../../bench/index.html">&#9679; What is built</a>
+    <a href="../../simulator/index.html">&#9679; The simulator</a>
     <a href="../../registry/index.html">The register, live</a>
     <a href="../../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
     <a href="../../packs/grant-and-mandate/blocks.html">The building blocks</a>

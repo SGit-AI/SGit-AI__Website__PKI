@@ -1,0 +1,106 @@
+/* sim.css — the simulator: a hand of cards, a board, a log.
+   Card-game grammar, this estate's sentences. The board is SVG rather than
+   <canvas> because a canvas is a blank rectangle with scripting off, and the
+   rule here is that the page tells the truth without JavaScript and that a
+   screenshot of it can be read. */
+
+.sim{--s-bg:#10151a;--s-panel:#161d24;--s-line:#2a3540;--s-fg:#cfd8dc;
+  --s-dim:#8aa0ab;--s-ok:#2fb26d;--s-warn:#dfa92e;--s-alarm:#e05252;
+  --s-unknown:#7f8fa0;--s-sel:#6db7d4;
+  background:var(--s-bg);color:var(--s-fg);border-radius:.6rem;
+  padding:.9rem 1rem 1.1rem;margin:1.4rem 0;
+  font-family:var(--mono,ui-monospace,monospace)}
+.sim a{color:var(--s-sel)}
+
+/* state bar + transport */
+.sim-bar{display:flex;flex-wrap:wrap;gap:.5rem .9rem;align-items:center;
+  border-bottom:1px solid var(--s-line);padding-bottom:.6rem;margin-bottom:.8rem;
+  font-size:.72rem;color:var(--s-dim)}
+.sim-state b{color:var(--s-fg)}
+.sim-bar select{background:#0c1116;color:var(--s-fg);border:1px solid var(--s-line);
+  border-radius:.25rem;padding:.1rem .3rem;font:inherit;font-size:.72rem}
+.sim-transport{margin-left:auto;display:flex;gap:.35rem}
+.sim-transport button{background:#0c1116;color:var(--s-fg);border:1px solid var(--s-line);
+  border-radius:.3rem;padding:.2rem .55rem;font:inherit;font-size:.7rem;cursor:pointer}
+.sim-transport button:hover{border-color:var(--s-sel)}
+.sim-transport button[disabled]{opacity:.35;cursor:default;border-color:var(--s-line)}
+
+/* boards */
+.sim-boards{display:grid;gap:.8rem}
+.world{background:var(--s-panel);border:1px solid var(--s-line);border-radius:.5rem;
+  padding:.6rem .7rem .7rem}
+.world[hidden]{display:none}
+.w-head{font-size:.78rem;font-weight:700;margin-bottom:.35rem}
+.w-note{display:block;font-weight:400;font-size:.68rem;color:var(--s-dim);margin-top:.12rem}
+.board{width:100%;height:auto;display:block;background:#0c1116;
+  border:1px solid var(--s-line);border-radius:.4rem}
+.b-st{fill:#131b23;stroke:var(--s-dim);stroke-width:1.1}
+.b-name{fill:var(--s-fg);font-size:9.5px;text-anchor:middle;font-family:inherit}
+.b-lbl{fill:var(--s-dim);font-size:7.5px;text-anchor:middle;letter-spacing:.08em;font-family:inherit}
+.b-lbl--l{text-anchor:start}
+.b-lbl--alarm{fill:var(--s-alarm);font-weight:700}
+.b-edge{stroke:var(--s-dim);stroke-width:1.3}
+.b-edge--push{stroke:var(--s-fg)}
+.b-term{fill:var(--s-fg)}
+.b-blade{stroke:var(--s-warn);stroke-width:2}
+.b-wall line{stroke:var(--s-ok);stroke-width:3}
+.b-token{fill:var(--s-sel);transition:transform .75s ease-in-out}
+/* where the work item stopped is legible on its own, without reading the log */
+.world[data-verdict="PERMIT"] .b-token,.world[data-verdict="HAPPENS"] .b-token{fill:var(--s-ok)}
+.world[data-verdict="REFUSED"] .b-token{fill:var(--s-alarm)}
+.world[data-verdict="UNKNOWN"] .b-token{fill:var(--s-unknown)}
+@media (prefers-reduced-motion: reduce){.b-token{transition:none}}
+/* the constraint moves rooms when the hook card is played: the blade closes
+   flat (a real interlock in the line) instead of standing open in the loop */
+.world[data-hook="true"] .b-blade{stroke:var(--s-ok);transform-box:fill-box;
+  transform-origin:0 100%;transform:rotate(38deg)}
+.world[data-verdict="REFUSED"] .b-blade{stroke:var(--s-alarm)}
+.w-radius{display:flex;gap:.5rem;align-items:baseline;margin-top:.45rem;font-size:.68rem}
+.wr-lbl{color:var(--s-dim);letter-spacing:.1em;white-space:nowrap}
+.wr-chips{display:flex;flex-wrap:wrap;gap:.3rem}
+.wr-none{color:var(--s-dim);opacity:.7}
+.wr-chip{border:1px solid var(--s-line);border-radius:.25rem;padding:0 .35rem;color:var(--s-fg)}
+.wr-chip--unknown{border-style:dashed;color:var(--s-unknown)}
+
+/* the hand */
+.sim-hand{margin-top:.9rem}
+.hand-head{font-size:.7rem;letter-spacing:.12em;color:var(--s-dim);margin:.7rem 0 .35rem}
+.hand-sub{letter-spacing:0;text-transform:none}
+.hand-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:.5rem}
+.card{display:flex;flex-direction:column;gap:.22rem;text-align:left;cursor:pointer;
+  background:#131b23;border:1px solid var(--s-line);border-left-width:3px;
+  border-radius:.35rem;padding:.5rem .55rem;font:inherit;color:var(--s-fg);min-height:5.2rem}
+.card:hover{border-color:var(--s-sel)}
+.card[disabled]{opacity:.4;cursor:default}
+.c-suit{font-size:.6rem;letter-spacing:.12em;color:var(--s-dim)}
+.c-title{font-size:.74rem;line-height:1.3}
+.c-blurb{font-size:.64rem;color:var(--s-dim);line-height:1.4;margin-top:auto}
+.card--does{border-left-color:var(--s-sel)}
+.card--decides{border-left-color:var(--s-warn)}
+.card--control{border-left-color:var(--s-ok)}
+
+/* the log */
+.sim-log{margin-top:1rem;border-top:1px solid var(--s-line);padding-top:.6rem}
+.log-head{font-size:.7rem;letter-spacing:.12em;color:var(--s-dim);margin-bottom:.4rem}
+.log-list{list-style:none;margin:0;padding:0;counter-reset:lg}
+.log-empty{color:var(--s-dim);font-size:.7rem;line-height:1.6}
+.log-row{border-bottom:1px dashed var(--s-line);padding:.45rem 0;font-size:.73rem}
+.log-row:last-child{border-bottom:0}
+.log-row.future{opacity:.25}
+.log-row.now{background:#0c1116;border-radius:.3rem;padding-left:.35rem;padding-right:.35rem}
+.log-top{display:flex;gap:.5rem;align-items:baseline;flex-wrap:wrap}
+.log-n{color:var(--s-dim);min-width:1.2rem}
+.log-title{color:var(--s-fg);flex:1;min-width:8rem}
+.log-v{font-weight:700;letter-spacing:.08em;font-size:.7rem}
+.log-v--permit,.log-v--happens{color:var(--s-ok)}
+.log-v--refused{color:var(--s-alarm)}
+.log-v--unknown{color:var(--s-unknown)}
+.log-v--absent{color:var(--s-dim)}
+.log-v--decides,.log-v--control{color:var(--s-warn)}
+.log-why{color:var(--s-dim);font-size:.67rem;margin-top:.15rem;line-height:1.55;
+  padding-left:1.7rem}
+.log-tool{margin-top:.15rem;padding-left:1.7rem;font-size:.65rem;color:var(--s-dim)}
+.log-tool code{color:var(--s-fg);background:#0c1116;padding:0 .3rem;border-radius:.2rem;
+  overflow-wrap:anywhere}
+
+@media (min-width:900px){.sim-boards{grid-template-columns:1fr}}

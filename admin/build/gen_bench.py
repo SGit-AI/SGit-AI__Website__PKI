@@ -157,7 +157,7 @@ BENCH = [
   does_not_prove=[
     "<b>Coverage.</b> One scenario, four turns, one agent, one control — the mechanics, not the space of plays",
     "That a DOES card is a receipt: nothing is signed by the actor at the time of action. The table shows where receipts would sit, which is not the same as having them",
-    "That proposed-action simulation works — playing a hypothetical card against the twin is specified in the brief and deliberately not built here",
+    "<s>That proposed-action simulation works — playing a hypothetical card against the twin is specified in the brief and deliberately not built here.</s> <b>RETIRED at v0.1.46</b>: it is built, at <a href='../simulator/index.html'>/simulator/</a>, where the cards are playable against either twin and every outcome is a precomputed verdict of the real tool. A does-not-prove retired by later work is recorded here, not quietly dropped",
     "That the card grammar survives a population: the genre bets are now three implementations deep across two estates, still with zero user tests"],
   gates=["the resolution gate, live: mandate.py check-branch is executed for each turn at build time and must agree with the table",
          "the transcript gate: every reaction quote must exist byte-for-byte in the captured transcript it cites",
@@ -218,6 +218,31 @@ BENCH = [
          "the timestamp gate: times are derived (mandate issued_at, tag commit time) or an em-dash — the generator has no field for a typed clock time",
          "the replay gate: the generator greps its own output for the REPLAY chip"],
   code="experiments/the-control-room/, admin/build/gen_control.py"),
+
+ dict(slug="the-simulator", name="The simulator", state="live",
+  where="../simulator/index.html", since="v0.1.46", updated="v0.1.46",
+  origin="dev brief <a href='../documents/the-simulator.html'>v0.33.70</a> — the project lead's instruction: a card-game view whose plays drive a board, with play and rewind",
+  one_line="The first surface here that answers to the visitor rather than replaying this estate's "
+           "history: play cards against a measured twin and watch what they do. Every outcome is a "
+           "verdict of the real enforcement tool, a reading of the twin, or UNKNOWN — precomputed at "
+           "build time, because the browser is not an enforcement point.",
+  demonstrates=[
+    "<b>It does not predict, it composes.</b> JavaScript cannot run <code>mandate.py</code>, so the whole resolution table — every card, in both worlds, under both mandate states — is precomputed at build and shipped as <a href='../simulator/resolutions.json'>resolutions.json</a> with the tool's own output line in each row. The browser looks answers up; a rule in the page that decided a verdict would be a bug",
+    "<b>UNKNOWN is a first-class outcome</b>: where measurement was refused the board says unknown, never <i>no</i> — a simulator that turns a hole into a denial manufactures comfort, and three cards here return holes",
+    "<b>The hook card is the argument in one move</b>: installing the pre-push hook changes <b>no verdict at all</b> — <code>dev</code> under mandate v1 is refused before and after — and changes <i>who refuses</i>, from the agent inside its own loop to a hook outside it. The verdict column does not move and the reliability does",
+    "<b>Questions history did not ask</b>: <code>push to main</code> is refused under both mandates, which no page here has ever shown, because the estate only ever made the two pushes it made",
+    "<b>Rewind is a computation, not an undo stack</b>: board state is a pure function of the event prefix, so stepping back is the same computation with a smaller n — forward is the simulation, backward is the audit, as one control"],
+  does_not_prove=[
+    "<b>That the simulation is predictive.</b> It composes measured facts and real verdicts; it cannot model an environment nobody measured, and every outcome carries the date of the measurement behind it",
+    "That the hand is the space of plays: eight cards, two worlds, one enforcement tool, and a blast radius that is the twin's own reachability rather than a discovered attack path",
+    "That anyone learns more by playing than by reading — the genre bet is now five implementations deep across two estates, still with zero user tests",
+    "That any of it is live: nothing is executed, and the ladder on the control room says exactly which four doors would have to open before a board here could claim to describe the present"],
+  gates=["the table gate: every reachable (card, world, mandate) triple must have a precomputed row, or the build fails rather than letting the browser improvise",
+         "the resolution gate, live: every push row is re-run through mandate.py check-branch at build and carries that run's own output line",
+         "the unknown gate: a card over a node with no evidence must resolve UNKNOWN — claiming a definite outcome there fails the build",
+         "the node gate: every capability card names a node that exists in the world it is offered in, or is declared absent-in-this-world explicitly",
+         "the hook gate: the hook card must move no verdict; if a change ever makes it move one, the lesson has changed and the card must be rewritten"],
+  code="simulator/, admin/build/gen_simulator.py"),
 
  dict(slug="the-book", name="A Key Means Nothing Alone (the book)", state="live",
   where="../book/index.html", since="v0.1.33", updated="v0.1.36",

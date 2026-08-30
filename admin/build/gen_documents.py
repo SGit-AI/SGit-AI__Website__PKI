@@ -550,6 +550,27 @@ DOCS = [
   ],
   pages="Adds /experiments/the-control-room/ (generated board, control.css, control.js — transport only), admin/build/gen_control.py with seven gates, and the manifest entry."),
 
+ dict(slug="the-simulator",
+  title="The Simulator: Playable Cards Against A Twin — And The Ladder From REPLAY To LIVE",
+  md="v0.33.70__dev-brief__the-simulator-playable-cards-against-a-twin-and-the-ladder-to-live.md",
+  version="v0.33.70", date="29 August 2026", dtype="Dev brief",
+  summary="Two instructions in one message. First, the control room's next step: its does-not-prove said REPLAY never becomes LIVE and named what LIVE would require — that prose is now a COMPUTED ladder of four doors (the append lane, a real issuer key, signed facts, an independent measurement) and the mode chip is derived from them rather than typed, with the doors page's symmetric gate in its sharpest form: when the last one opens, the build fails. Second, a card game: /simulator/, on its own base folder because it is a tool rather than an experiment — the first page here that answers to the visitor instead of replaying the estate's history. The load-bearing rule is that it does not predict, it COMPOSES: JavaScript cannot run mandate.py, so the entire resolution table is precomputed at build and shipped as resolutions.json with the tool's own output in each row; every outcome is a real verdict, a reading of the twin, or UNKNOWN, and there is no fourth. Eight cards in three suits, two worlds, play/step/rewind/reset — and the sharpest card in the deck, the pre-push hook, changes no verdict at all and everything about who refuses. It also retires a stated limit: v0.33.67 said proposed-action simulation was deliberately not built, and it is built here.",
+  concepts=[
+   ("The simulator, live", "../simulator/index.html", "play a card, watch the board, rewind"),
+   ("The resolution table", "../simulator/resolutions.json", "every answer the browser can give, precomputed by the real tool"),
+   ("The ladder to LIVE", "../experiments/the-control-room/index.html", "four doors, computed — and the chip that flips itself"),
+   ("The doors it reads", "../registry/doors.html", "the state map the ladder is drawn from; nothing new is claimed here"),
+  ],
+  ideas=[
+   "A simulator invites exactly one dishonesty — inventing consequences — and this one is built so that it cannot: the browser looks answers up and never adjudicates.",
+   "UNKNOWN is not no. A simulator that turns a hole in the measurement into a denial manufactures comfort, which is worse than having no simulator.",
+   "Installing the hook changes nothing about the answer and everything about whether you can rely on it — the whole argument of this estate, as one card.",
+   "The simulator can ask questions history did not: pushing to main was never attempted here, and is refused under both mandates.",
+   "Rewind is not an undo stack: board state is a pure function of the event prefix, so backwards is the same computation with a smaller n — forward is the simulation, backward is the audit.",
+   "A does-not-prove retired by later work is recorded as retired, with the version that retired it, never quietly dropped.",
+  ],
+  pages="Adds /simulator/ as a new base folder (generated index, sim.css, sim.js, resolutions.json) with five gates; makes the control room's mode chip computed and adds the LIVE ladder with a gate that fails the build when the last door opens."),
+
 ]
 
 PAGE = """<!doctype html>

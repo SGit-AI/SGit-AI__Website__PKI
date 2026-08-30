@@ -61,6 +61,7 @@ NAV = [
     ], ("origins/",)),
     ("The bench", "bench/index.html", [
         ("&#9679; The bench &mdash; what is built", "bench/index.html"),
+        ("&#9679; The simulator &mdash; play a card", "simulator/index.html"),
         ("&#9679; Experiments", "experiments/index.html"),
         ("&mdash; the chain room", "experiments/the-room/index.html"),
         ("&mdash; the table", "experiments/the-table/index.html"),
@@ -73,7 +74,7 @@ NAV = [
         ("Map your own case", "assess/index.html"),
         ("The book (commissioned)", "book/index.html"),
         ("&mdash; its commissioning brief", "book/brief.html"),
-    ], ("bench/", "book/", "experiments/")),
+    ], ("bench/", "book/", "experiments/", "simulator/")),
     ("Docs", "documents/index.html", [
         ("The documents", "documents/index.html"),
         ("Dev packs", "packs/index.html"),
@@ -92,6 +93,7 @@ NAV = [
 FOOTER = [
     ("The bench", [
         ("&#9679; What is built", "bench/index.html"),
+        ("&#9679; The simulator", "simulator/index.html"),
         ("The register, live", "registry/index.html"),
         ("The mandate hook", "packs/grant-and-mandate/enforcement.html"),
         ("The building blocks", "packs/grant-and-mandate/blocks.html"),

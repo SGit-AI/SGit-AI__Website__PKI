@@ -134,6 +134,31 @@
 @keyframes cr-travel{from{transform:translateX(0)}to{transform:translateX(84px)}}
 @keyframes cr-bounce{0%{transform:translateX(0)}55%{transform:translateX(38px)}100%{transform:translateX(0)}}
 
+/* the ladder from REPLAY to LIVE — the chip above is computed from these */
+.mode-chip--live{border-color:var(--cr-ok);color:var(--cr-ok)}
+.live-ladder{margin-top:1rem;border:1px solid var(--cr-line);border-radius:.5rem;
+  background:var(--cr-panel);padding:.6rem .75rem .7rem}
+.ll-head{font-size:.72rem;letter-spacing:.12em;color:var(--cr-fg);margin-bottom:.5rem}
+.ll-sub{display:block;letter-spacing:0;color:var(--cr-dim);font-size:.68rem;
+  margin-top:.2rem;line-height:1.5}
+.ll-list{list-style:none;margin:0;padding:0;counter-reset:ll}
+.ll-row{display:grid;grid-template-columns:4.2rem 1fr 7.5rem;gap:.5rem;align-items:baseline;
+  padding:.4rem 0;border-bottom:1px dashed var(--cr-line);font-size:.72rem}
+.ll-row:last-child{border-bottom:0}
+.ll-row>span{min-width:0;overflow-wrap:anywhere}
+.ll-state{font-weight:700;letter-spacing:.08em;font-size:.66rem}
+.ll-row--shut .ll-state{color:var(--cr-alarm)}
+.ll-row--open .ll-state{color:var(--cr-ok)}
+.ll-cond{color:var(--cr-fg)}
+.ll-needs{color:var(--cr-dim);font-size:.66rem;text-align:right}
+.ll-why{grid-column:2 / -1;color:var(--cr-dim);font-size:.67rem;margin-top:.12rem;line-height:1.5}
+.ll-metric{white-space:nowrap}
+.ll-foot{color:var(--cr-dim);font-size:.68rem;margin:.55rem 0 0;line-height:1.55}
+@media (max-width:700px){
+  .ll-row{grid-template-columns:4.2rem 1fr}
+  .ll-needs{display:none}
+}
+
 /* legend */
 .ctrl-legend{margin-top:.9rem;font-size:.68rem;color:var(--cr-dim);line-height:1.7}
 .lg{border:1px solid;border-radius:.25rem;padding:0 .35rem;letter-spacing:.08em;white-space:nowrap}

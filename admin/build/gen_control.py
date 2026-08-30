@@ -27,7 +27,11 @@ Gates (each fails the build):
   transcript  every quoted reaction must exist byte-for-byte in its source
   timestamps  derived (mandate issued_at, tag commit time) or an em-dash —
               there is no field for a typed clock time
-  replay      the generator greps its own output for the REPLAY chip
+  mode        THE MODE CHIP IS COMPUTED, never typed: LIVE if the four doors
+              that gate a live board are all open, REPLAY otherwise. And when
+              the last of them opens, THE BUILD FAILS — the board may then
+              claim LIVE and this generator has no live feed, so the thing to
+              fix is the board, not the gate (brief v0.33.70 §4)
 
 Set PY_BIN to a python with `cryptography` (as gen_table.py).
 Specified in brief v0.33.69. Genre: SCADA + game HUD conventions, this
@@ -50,6 +54,15 @@ TIERS = {"boundary": "ok", "setting": "set", "expectation": "exp",
          "none": "alarm", "unknown": "fault"}
 TIER_WORD = {"ok": "contained", "set": "setting", "exp": "expectation",
              "alarm": "UNBOUNDED", "fault": "FAULT"}
+
+# The four doors that gate a live board, with the reason each one gates it.
+# The mode chip is computed from their state; nobody types LIVE or REPLAY.
+LIVE_LADDER = [
+ ("lane", "how a measurement reaches the registry without a human committing it"),
+ ("real_authority", "a live enforcement decision resting on a published fixture is theatre"),
+ ("facts_signed", "a live lamp lit by an unsigned fact is an anonymous claim about the present"),
+ ("independent", "dated self-measurement carries a date you can check; a live self-report is a press release"),
+]
 
 V1 = "packs/grant-and-mandate/mandates/mandate-v1.json"
 V2 = "packs/grant-and-mandate/mandates/current.json"
@@ -295,8 +308,30 @@ def soe_html():
     return "\n".join(rows)
 
 
+def live_ladder():
+    """The mode chip, COMPUTED. Reads the doors view for the four doors a live
+    board depends on; LIVE only if every one is open. When the last opens this
+    returns mode LIVE and main() fails the build on it — a chip that flips
+    itself is only honest if somebody is forced to notice."""
+    doors = J(os.path.join(ROOT, "registry", "views", "doors.json"))
+    by_rung = {c["rung"]: c for c in doors["computed"] if c.get("door")}
+    rows = []
+    for rung, why in LIVE_LADDER:
+        c = by_rung.get(rung)
+        if c is None:
+            errors.append(f"mode: the doors view has no door on rung '{rung}' — the "
+                          f"LIVE ladder names a door that does not exist")
+            continue
+        d = c["door"]
+        rows.append(dict(rung=rung, why=why, cond=d["condition"], state=d["actual"],
+                         needs=d["needs"], metric=c["metric"], count=c["count"]))
+    mode = "LIVE" if rows and all(r["state"] == "open" for r in rows) else "REPLAY"
+    return mode, rows
+
+
 def main():
     units = [unit_data(i + 1, s, t) for i, (s, t) in enumerate(worlds)]
+    mode, ladder = live_ladder()
     if errors:
         print(f"gen_control: {len(errors)} GATE FAILURE(S):")
         for e in errors:
@@ -318,6 +353,20 @@ def main():
     foot = reg[reg.index('<footer class="site">'):reg.index("</body>")].replace('href="../', 'href="../../').replace('src="../', 'src="../../')
 
     incident_date = m2.get("issued_at", "")[:10]
+    shut_n = sum(1 for r in ladder if r["state"] != "open")
+    # computed, not typed: the screenshot-read caught "Three of the four" hand-
+    # written into this paragraph, on a page whose whole argument is that counts
+    # are derived
+    other_n = sum(1 for r in ladder if r["needs"] == "somebody else")
+    WORD = {0: "None", 1: "One", 2: "Two", 3: "Three", 4: "Four"}
+    other_w = WORD.get(other_n, str(other_n))
+    ladder_rows = "\n".join(f'''<li class="ll-row ll-row--{esc(r["state"])}">
+  <span class="ll-state">{esc(r["state"].upper())}</span>
+  <span class="ll-cond">{esc(r["cond"])}</span>
+  <span class="ll-needs">{esc(r["needs"])}</span>
+  <div class="ll-why">{esc(r["why"])} <span class="ll-metric">·
+    <a href="../../registry/doors.html">{esc(r["metric"])}</a> = {r["count"]}</span></div>
+</li>''' for r in ladder)
     page = f'''<!doctype html>
 <html lang="en">
 <head>
@@ -352,7 +401,7 @@ through <code>mandate.py</code> at build time. Click any tile for its faceplate.
 
 <div class="ctrl" id="board">
 <div class="ctrl-head"><span class="ctrl-title">GRANT &amp; MANDATE BOARD</span>
-  <span class="mode-chip" title="This board replays recorded artefacts. It is not a live feed: the registry write path, monitors and a mandate service — the things a LIVE board needs — are all still stated design.">REPLAY · {esc(incident_date)}</span></div>
+  <span class="mode-chip mode-chip--{esc(mode.lower())}" title="This chip is computed from the four doors a live board depends on, not typed: LIVE only when all four are open.">{esc(mode)} · {esc(incident_date)}</span></div>
 
 <div class="ctrl-units">
 {units and "".join(unit_html(u) for u in units)}
@@ -372,6 +421,18 @@ through <code>mandate.py</code> at build time. Click any tile for its faceplate.
 <code>issued_at</code>; the landing prints the <code>v0.1.28</code> tag's commit time from git; the
 transcript records the refusal, not the clock, so those rows print a dash. The replay is baked, not
 computed — the browser only steps through verdicts the build already re-proved.</p>
+</div>
+
+<div class="live-ladder">
+<div class="ll-head">THE LADDER FROM <b>{esc(mode)}</b> TO LIVE
+  <span class="ll-sub">&mdash; {shut_n} of {len(ladder)} doors still shut; the chip above is computed from them,
+  and when the last one opens <b>this build fails</b></span></div>
+<ol class="ll-list">{ladder_rows}</ol>
+<p class="ll-foot">These are doors on <a href="../../registry/doors.html">the state map</a>, not new
+claims: each one is the condition the next rung will not accept work without. {other_w} of the
+{len(ladder)} need somebody other than this project, which is the honest reason the chip reads what it reads.
+The gate is symmetric, as it is there: a board that could claim LIVE and does not is as much a
+defect as one that claims it and cannot.</p>
 </div>
 
 <div class="ctrl-legend">LAMP GRAMMAR — the tier, and nothing else:
@@ -403,8 +464,14 @@ byte-checked; timestamps derived or absent; the REPLAY chip checked in the outpu
 '''
 
     # ── self-grep gates on the finished drawing ─────────────────────────────
-    if "REPLAY ·" not in page:
-        errors.append("replay: the mode chip is absent from the board")
+    if f"{mode} ·" not in page:
+        errors.append("mode: the computed mode chip is absent from the board")
+    if mode == "LIVE":
+        errors.append(
+            "mode: THE LAST DOOR GATING A LIVE BOARD HAS OPENED. The chip now computes to LIVE "
+            "and this generator has no live feed — it renders dated artefacts. Wire the board to "
+            "a feed (or state plainly why it still replays); do not relax this gate. A door "
+            "opening is news, and news that does not interrupt anybody is news nobody reads.")
     for u in units:
         has_nowall = u["egress_tier"] == "none"
         if has_nowall and "NO WALL" not in page:
