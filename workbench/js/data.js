@@ -15,6 +15,13 @@ const P = {
   capabilities:'../registry/capabilities.json',
 };
 
+/* A document's page in the data viewer: rendered and raw, with the signature
+   checked where there is one. The .json stays one click away and is what an
+   agent should fetch. */
+export function viewerFor(relPath) {
+  return '../data/index.html?src=' + relPath.replace(/^\.\.\//, '');
+}
+
 async function fetchJson(url) {
   const r = await fetch(url, { cache: 'no-store' });
   if (!r.ok) throw new Error('HTTP ' + r.status + ' for ' + url);

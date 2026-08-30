@@ -4,7 +4,7 @@
    document or from localStorage — there is no display copy of anything that
    has a published home. User-typed text is escaped everywhere it is shown. */
 
-import { estate } from './data.js';
+import { estate, viewerFor } from './data.js';
 import { store, SEED_FACTS, SEED_ACTIONS, currentFacts } from './store.js';
 import { runDecision, enforcementTier, PACK_SCHEMA } from './engine.js';
 
@@ -112,7 +112,8 @@ class Grants extends Section {
           <span class="gm-date${age > 1 ? ' gm-date--stale' : ''}">twin measured ${esc(d.measured_at || '?')}${age !== null ? ' · ' + age + 'd old' : ''}</span></div>
         <p>${esc(d._what_this_is || '')}</p>
         <p class="dim">${esc(d.measured_by?.caveat_floor_not_census || 'a grant is a floor, not a census')}</p>
-        <a href="${esc(t.url)}">the entry, live (reference, not a copy) →</a>
+        <a href="${esc(viewerFor(t.url))}">the entry — rendered and raw →</a>
+        <span class="dim"> · <a href="${esc(t.url)}">the raw file</a>, which is the reference the risk product stores</span>
       </div>`;
     }).join('');
     this.innerHTML = `
@@ -160,13 +161,13 @@ class Mandates extends Section {
         against the signing key in the issuer's own record — and the issuer is a fixture whose private half is
         published, so it proves integrity and confers nothing. Two indicators, never one.</p>
         <div class="gm-prohib">${m2.prohibitions.map(p => '<span>' + esc(p) + '</span>').join('')}</div>
-        <a href="${esc(estate.sources.mandateV2)}">the document, live →</a>` : '<p class="dim">not loaded</p>'}
+        <a href="${esc(viewerFor(estate.sources.mandateV2))}">the document — rendered and raw →</a>` : '<p class="dim">not loaded</p>'}
       </div>
       <div class="wb-card wb-card--dim">
         <div class="wb-card-top"><b>Mandate v1 — superseded</b><span class="gm-interval gm-interval--expired">refused the v0.1.28 release, then was amended — never bypassed</span></div>
         ${m1 ? `<p class="dim">Allowed only ${esc(m1.allow?.[0]?.constraints?.branches?.join(', ') || '?')} — narrower than
         the authorisation that actually existed. The remedy for a refusal is to correct the mandate.</p>
-        <a href="${esc(estate.sources.mandateV1)}">the document, live →</a>` : ''}
+        <a href="${esc(viewerFor(estate.sources.mandateV1))}">the document — rendered and raw →</a>` : ''}
       </div>
       ${drafts}
       <div class="wb-card">
@@ -442,7 +443,7 @@ class Schemas extends Section {
       <div class="wb-card">
         <div class="wb-card-top"><b><code>${esc(r.name)}</code></b><span class="dim">${esc(r.status)}</span></div>
         <p>${esc(r.what)}</p>
-        ${r.live ? `<a href="${esc(r.live)}">a live instance →</a>` : '<span class="dim">instances: run the simulator, save a pack</span>'}
+        ${r.live ? `<a href="${esc(viewerFor(r.live))}">a live instance — rendered and raw →</a>` : '<span class="dim">instances: run the simulator, save a pack</span>'}
       </div>`).join('')}
     </div>
     <div class="note"><b>The next consumer is an agent.</b> An agent at a real decision point — this repo's pre-push

@@ -124,7 +124,8 @@ def statement_card(rec_dir, entry, st):
   <div class="rec-st-top">
     <b>{esc(t)}</b>
     <span class="dim">{esc(st.get('created_at', ''))}</span>
-    <a href="{esc(fn)}">the signed file &rarr;</a>
+    <a href="../../../data/index.html?src=registry/records/{esc(rec_dir.name)}/{esc(fn)}">rendered &amp; raw &rarr;</a>
+    <a href="{esc(fn)}" class="rec-rawlink">the signed file</a>
   </div>
   <p class="rec-note">{TYPE_NOTE.get(t, '')}</p>
   <div class="rec-kv">
@@ -237,7 +238,8 @@ and a superseded statement stays readable underneath it.</p>
 
 <h2 id="elsewhere">This record elsewhere</h2>
 <ul>
-  <li><a href="record.json">record.json</a> &mdash; the unsigned manifest (its own <code>_authority</code> field says
+  <li><a href="../../../data/index.html?src=registry/records/{esc(d.name)}/record.json">record.json</a>
+      (<a href="record.json">raw</a>) &mdash; the unsigned manifest (its own <code>_authority</code> field says
       NONE; it is regenerable from the statements)</li>
   <li><a href="../../index.html">The register</a> &mdash; all eleven records, and the verification walk</li>
   <li><a href="../../../workbench/index.html#identities">The workbench</a> &mdash; the same records as cards, and a
@@ -247,7 +249,7 @@ and a superseded statement stays readable underneath it.</p>
 
 <div class="pagenav">
   <a href="../../index.html">&larr; The register</a>
-  <a href="record.json">record.json &rarr;</a>
+  <a href="../../../data/index.html?src=registry/records/{esc(d.name)}/record.json">record.json &rarr;</a>
 </div>
 </main>"""
 

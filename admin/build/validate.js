@@ -68,9 +68,20 @@ for (const f of htmlFiles) {
   for (const m of t.matchAll(/(?:href|src)="([^"#]+)(?:#[^"]*)?"/g)) {
     const target = m[1];
     if (/^(https?:|mailto:|data:|\/\/)/.test(target) || target === '') continue;
-    const resolved = path.resolve(dir, target);
-    if (!fs.existsSync(resolved)) {
+    // A link may carry a query string. Resolve the path without it — and, for
+    // the data viewer, check the document it names actually exists, so a link
+    // to a moved or misspelled .json breaks the build like any other.
+    const q = target.indexOf('?');
+    const filePart = q === -1 ? target : target.slice(0, q);
+    if (filePart && !fs.existsSync(path.resolve(dir, filePart))) {
       errors.push(`${path.relative(ROOT, f)}: broken link -> ${target}`);
+      continue;
+    }
+    if (q !== -1) {
+      const srcParam = new URLSearchParams(target.slice(q + 1)).get('src');
+      if (srcParam && !fs.existsSync(path.join(ROOT, srcParam.replace(/^\/+/, '')))) {
+        errors.push(`${path.relative(ROOT, f)}: data viewer points at a missing document -> ${srcParam}`);
+      }
     }
   }
 }
@@ -90,6 +101,21 @@ for (const f of htmlFiles) {
   // every page must declare where it canonically lives
   if (!/rel="canonical"/.test(t)) {
     errors.push(`${path.relative(ROOT, f)}: no canonical link`);
+  }
+}
+
+// --- 3b. no script loaded twice -------------------------------------------
+// A page that loads the same script twice fetches it twice and runs it twice.
+// It is easy to introduce by hand and invisible in a diff of 150 pages, so it
+// is a check rather than a habit.
+for (const f of htmlFiles) {
+  const t = fs.readFileSync(f, 'utf8');
+  const seen = new Map();
+  for (const m of t.matchAll(/<script[^>]+src="([^"]+)"/g)) {
+    seen.set(m[1], (seen.get(m[1]) || 0) + 1);
+  }
+  for (const [src, n] of seen) if (n > 1) {
+    errors.push(`${path.relative(ROOT, f)}: loads ${src} ${n} times`);
   }
 }
 

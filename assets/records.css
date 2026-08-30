@@ -25,7 +25,9 @@
 .rec-st-top{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;margin-bottom:4px}
 .rec-st-top b{font-family:var(--mono);font-size:.86rem;letter-spacing:.04em;text-transform:uppercase}
 .rec-st-top .dim{color:var(--dim2);font-size:.85rem}
-.rec-st-top a{margin-left:auto;font-size:.86rem}
+.rec-st-top a{font-size:.86rem}
+.rec-st-top a:first-of-type{margin-left:auto}
+.rec-st-top .rec-rawlink{color:var(--dim);border-left:1px solid var(--line2);padding-left:12px}
 .rec-note{color:var(--dim);font-size:.88rem;margin:.2rem 0 .7rem;max-width:70ch}
 
 .rec-kv{display:grid;grid-template-columns:max-content 1fr;gap:5px 14px;font-size:.9rem;align-items:baseline}

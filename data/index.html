@@ -3,13 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>12 · The library and the instance — A Key Means Nothing Alone &middot; pki.sgit.ai</title>
-<meta name="description" content="12 · The library and the instance. What pki.sgit.ai built between site v0.1.25 and v0.1.32, why the concepts underneath it are shaped the way they are, how it composes with RiskMandate.">
-<link rel="canonical" href="https://pki.sgit.ai/book/12-the-library-and-the-instance.html">
-<meta property="og:url" content="https://pki.sgit.ai/book/12-the-library-and-the-instance.html">
+<title>The data viewer — any document on this site, rendered and raw · pki.sgit.ai</title>
+<meta name="description" content="One JSON document from this site, two ways: rendered for reading, and the raw bytes as published. Where the document carries a signature it is verified in your browser against the signer's registry record.">
+<link rel="canonical" href="https://pki.sgit.ai/data/index.html">
+<meta property="og:url" content="https://pki.sgit.ai/data/index.html">
 <link rel="stylesheet" href="../assets/site.css">
-<link rel="stylesheet" href="../assets/bench.css">
-<link rel="stylesheet" href="book.css">
+<link rel="stylesheet" href="../assets/jsonreader.css">
 </head>
 <body>
 
@@ -56,7 +55,7 @@
       </div>
     </div>
     <div class="ni ni-has">
-      <a class="nl here" href="../bench/index.html">The bench<span class="caret">&#9662;</span></a>
+      <a class="nl" href="../bench/index.html">The bench<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl" href="../bench/index.html">&#9679; The bench &mdash; what is built</a>
       <a class="sl" href="../simulator/index.html">&#9679; The simulator &mdash; play a card</a>
@@ -76,10 +75,10 @@
       </div>
     </div>
     <div class="ni ni-has">
-      <a class="nl" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <a class="nl here" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl" href="../documents/index.html">The documents</a>
-      <a class="sl" href="../data/index.html">The data viewer</a>
+      <a class="sl here" href="../data/index.html">The data viewer</a>
       <a class="sl" href="../packs/index.html">Dev packs</a>
       <a class="sl" href="../packs/registry-mvp/index.html">The registry MVP pack</a>
       <a class="sl" href="../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
@@ -101,24 +100,58 @@
 </div></nav>
 
 <main class="doc">
-<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="index.html">book</a> / 12</div>
-<div class="bk-part">Part four — How it composes</div>
-<div class="mdread-label">&#128214; <b>A Key Means Nothing Alone</b> &middot; 12 · The library and the instance
-&middot; 2,536 words &middot; rendered from <a href="content/12__the-library-and-the-instance.md">content/12__the-library-and-the-instance.md</a>
-(the source of truth) &middot; <code>sha256:6e24f82f67a1c7de&hellip;</code></div>
-<div class="mdread" id="mdread" data-src="content/12__the-library-and-the-instance.md"><noscript><p class="dim">In-page
-rendering needs JavaScript &mdash; <a href="content/12__the-library-and-the-instance.md">open the raw markdown</a>.</p></noscript></div>
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / data</div>
+<h1>The data viewer</h1>
+<p class="lead">One document from this site, rendered and raw.</p>
 
-<div class="bk-honesty">
-  <b>Carried from the front matter, because a chapter quoted in isolation must still carry it:</b>
-  the register is built and the trustworthy register is not; ten of eleven records are fixtures
-  with published private keys, and the root is a fixture. The enforcement is real and the
-  authority is not, and they are independent halves. Every grant is a floor, not a census.
-  This is a participant's account. <a href="00-front-matter.html">The full positions &rarr;</a>
+<div class="jr-head"><span class="dim">showing</span> <span id="jr-path"><code>&mdash;</code></span></div>
+<div class="jr-meta" id="jr-meta"></div>
+<div class="jr-sig" id="jr-sig" hidden></div>
+
+<div class="jr-bar">
+  <div class="jr-tabs" role="tablist">
+    <button id="tab-rendered" role="tab" aria-selected="true">Rendered</button>
+    <button id="tab-raw" role="tab" aria-selected="false">Raw</button>
+  </div>
+  <button id="jr-copy">copy raw</button>
+  <a id="jr-file" href="../index.html">the file itself &rarr;</a>
 </div>
 
-<nav class="bk-nav"><a class="bk-prev" href="11-the-building-blocks.html">&larr; 11 · The building blocks</a><a class="bk-next" href="13-two-paths.html">13 · Two paths &rarr;</a><a class="bk-toc" href="index.html">Contents</a></nav>
+<div id="jr">
+  <div id="jr-rendered"></div>
+  <pre id="jr-raw" hidden></pre>
+  <noscript><div class="note">This viewer renders a document in the page and needs JavaScript. The document it
+  was asked for is a static file on this site &mdash; the <b>the file itself</b> link above opens it directly, and
+  that file is the source of truth regardless.</div></noscript>
+</div>
+
+<h2 id="how">The two views, and why they differ</h2>
+<p><b>Rendered</b> is a reading of the parsed JSON: keys as labels, arrays as numbered cards, long strings and key
+material in their own blocks, and any key beginning <code>_</code> shown as a note rather than payload &mdash; on this
+estate those carry the sentence disclaiming the file's own authority. <b>Raw</b> is the file's <b>actual bytes</b>,
+fetched as text and shown verbatim, not re-serialised: a raw view that pretty-printed a re-serialisation would be
+showing you something the file does not contain. <b>The file is the source of truth</b>; this page is presentation and
+holds no authority, exactly like <a href="../documents/index.html">the markdown reader</a> it is modelled on.</p>
+
+<h2 id="what">What it will tell you</h2>
+<p>Where a document carries a <code>sig</code> and names its signer, the page <b>verifies that signature in your
+browser</b> &mdash; Web Crypto, ECDSA P-256/SHA-256, over the registry's canonical form, against the signing key
+published in the signer's own record. The check answers three ways and <b>the third is not the second</b>: verified,
+does-not-verify, and not-checked-here. An unavailable check is not a failed one, and this page will not render it as
+one. When a signature does verify, the page still says what that is worth: every root in this register is a fixture
+whose private half is published, so a verified signature carries <b>integrity, not authority</b>.</p>
+
+<h2 id="agents">For agents</h2>
+<p>Fetch the <code>.json</code> directly. This page is for people; the documents are at their own stable URLs and
+always were. Every path under <a href="../registry/llms.txt">the registry's machine front door</a> resolves without
+going through here.</p>
+
+<div class="pagenav">
+  <a href="../registry/index.html">&larr; The register</a>
+  <a href="?src=packs/grant-and-mandate/mandates/current.json">Try it: the live mandate &rarr;</a>
+</div>
 </main>
+<script src="../assets/jsonreader.js" defer></script>
 
 <footer class="site"><div class="cols">
   <div>
@@ -172,8 +205,6 @@ rendering needs JavaScript &mdash; <a href="content/12__the-library-and-the-inst
   </div>
 </div></footer>
 
-<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
-<script src="../assets/mdreader.js"></script>
 
 </body>
 </html>

@@ -78,11 +78,12 @@ NAV = [
     ], ("bench/", "book/", "experiments/", "simulator/", "workbench/")),
     ("Docs", "documents/index.html", [
         ("The documents", "documents/index.html"),
+        ("The data viewer", "data/index.html"),
         ("Dev packs", "packs/index.html"),
         ("The registry MVP pack", "packs/registry-mvp/index.html"),
         ("The Grant &amp; Mandate pack", "packs/grant-and-mandate/index.html"),
         ("The Map Your Case pack", "packs/map-your-case/index.html"),
-    ], ("documents/", "packs/")),
+    ], ("documents/", "packs/", "data/")),
     ("Site", "admin/comms.html", [
         ("Comms: tasks &amp; requests", "admin/comms.html"),
         ("Release history", "admin/versions.html"),

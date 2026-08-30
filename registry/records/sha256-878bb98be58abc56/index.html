@@ -15,7 +15,7 @@
   <a class="brand" href="../../../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../../../admin/versions.html" title="Site release history">v0.1.48</a>
+  <a class="ver" href="../../../admin/versions.html" title="Site release history">v0.1.49</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -77,6 +77,7 @@
       <a class="nl" href="../../../documents/index.html">Docs<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl" href="../../../documents/index.html">The documents</a>
+      <a class="sl" href="../../../data/index.html">The data viewer</a>
       <a class="sl" href="../../../packs/index.html">Dev packs</a>
       <a class="sl" href="../../../packs/registry-mvp/index.html">The registry MVP pack</a>
       <a class="sl" href="../../../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
@@ -130,7 +131,8 @@ and a superseded statement stays readable underneath it.</p>
   <div class="rec-st-top">
     <b>identity</b>
     <span class="dim">2026-08-25T10:00:00Z</span>
-    <a href="01__identity.json">the signed file &rarr;</a>
+    <a href="../../../data/index.html?src=registry/records/sha256-878bb98be58abc56/01__identity.json">rendered &amp; raw &rarr;</a>
+    <a href="01__identity.json" class="rec-rawlink">the signed file</a>
   </div>
   <p class="rec-note">The first statement in every record: the public halves, the agent type, and — read <b>before</b> any signature — whether the private half is published.</p>
   <div class="rec-kv">
@@ -147,7 +149,8 @@ and a superseded statement stays readable underneath it.</p>
   <div class="rec-st-top">
     <b>acceptance</b>
     <span class="dim">2026-08-25T10:10:00Z</span>
-    <a href="02__acceptance.json">the signed file &rarr;</a>
+    <a href="../../../data/index.html?src=registry/records/sha256-878bb98be58abc56/02__acceptance.json">rendered &amp; raw &rarr;</a>
+    <a href="02__acceptance.json" class="rec-rawlink">the signed file</a>
   </div>
   <p class="rec-note">The subject's own signature over the issuer's statement. A mandate the subject never accepted is inert (pack decision 8, provisional).</p>
   <div class="rec-kv">
@@ -171,7 +174,8 @@ published on purpose.</p>
 
 <h2 id="elsewhere">This record elsewhere</h2>
 <ul>
-  <li><a href="record.json">record.json</a> &mdash; the unsigned manifest (its own <code>_authority</code> field says
+  <li><a href="../../../data/index.html?src=registry/records/sha256-878bb98be58abc56/record.json">record.json</a>
+      (<a href="record.json">raw</a>) &mdash; the unsigned manifest (its own <code>_authority</code> field says
       NONE; it is regenerable from the statements)</li>
   <li><a href="../../index.html">The register</a> &mdash; all eleven records, and the verification walk</li>
   <li><a href="../../../workbench/index.html#identities">The workbench</a> &mdash; the same records as cards, and a
@@ -181,7 +185,7 @@ published on purpose.</p>
 
 <div class="pagenav">
   <a href="../../index.html">&larr; The register</a>
-  <a href="record.json">record.json &rarr;</a>
+  <a href="../../../data/index.html?src=registry/records/sha256-878bb98be58abc56/record.json">record.json &rarr;</a>
 </div>
 </main>
 
@@ -191,7 +195,7 @@ published on purpose.</p>
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../../../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../../../admin/versions.html">v0.1.48</a> · <a href="../../../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../../../admin/versions.html">v0.1.49</a> · <a href="../../../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The bench</h4>

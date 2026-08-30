@@ -245,3 +245,9 @@ include.
 
 # Pack: https://pki.sgit.ai/packs/registry-mvp/   Rules: https://pki.sgit.ai/rules/
 # All content CC BY 4.0.
+
+Every .json on this site also has a viewer page for people, at
+/data/index.html?src=<path> — rendered and raw side by side, with the
+signature verified in the browser where the document carries one. It is
+PRESENTATION and holds no authority. Agents should keep fetching the .json
+directly: the paths above are unchanged and always resolve.
