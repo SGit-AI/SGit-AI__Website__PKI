@@ -614,6 +614,29 @@ DOCS = [
   ],
   pages="Creates /insurance/ as a new base folder — manifest, hub, two doctrine documents, and a generator whose gates are symmetric in both directions plus one that refuses a doctrine document with no does-not-prove section. Proposes GM-D38 to GM-D41."),
 
+ dict(slug="insurance-ecosystem",
+  title="The Ecosystem Without The Money: Insurance As A Go-Live Gate, And The Roles Are The Integrity Mechanism",
+  md="v0.33.73__strategy-brief__the-ecosystem-without-the-money-insurance-as-a-go-live-gate.md",
+  version="v0.33.73", date="30 August 2026", dtype="Strategy brief — memo 2 of 8 on the insurance pivot",
+  summary="The structure memo 1's rating had no home in. The memo asks how an insurer-like ecosystem runs inside a company with no financial numbers, and answers by taking the industry's ROLES rather than its money — insurer, underwriter, the party carrying the capital — because the roles are what separate the party who wants to ship from the party who rates. That completes the rule from memo 1: a level nobody can recompute is theatre, AND a level computed by the party that wants to ship is theatre even when recomputable. Method and separation, both. The memo's most consequential move is putting the rating in the path of a deployment — do we go live, what would this have to reach, reduce the risk by this quantity — which makes it a GATE rather than a report, and drags in a requirement a report does not have: the derivation must decompose, or the instruction to reduce by a quantity cannot be given. The estate's own three-tier control test then applies to the insurance apparatus itself, unflatteringly: a gate on a dashboard is an expectation, a CI check the deploying team can edit is a setting, and only a check evaluated by a party they do not control is a boundary — so the roles and the tier turn out to be the same question asked twice. Also: reinsurance named as the fractal's three-century precedent, which supplies the rollup's shape but not the correlation arithmetic; and the control-to-premium loop, which the workbench already computes and which is scale-free, partly retracting the claim that the first MVP waits on the level scale.",
+  concepts=[
+   ("The ecosystem and the gate", "../insurance/the-ecosystem-and-the-gate.html", "doctrine 02: who rates, what it gates, and the gate's own tier"),
+   ("The three-tier control test", "../packs/grant-and-mandate/concepts.html", "the estate's own test, turned on the insurance apparatus"),
+   ("The control-to-premium loop", "../workbench/index.html", "flip a fact, watch the tier move — the loop, already running"),
+   ("Rating before money", "insurance-without-money.html", "memo 1, whose rule this memo completes"),
+  ],
+  ideas=[
+   "An assessment produced by the party that wants the answer to be yes is not an assessment — which is why an insurer is a third party for structural reasons, and why moving the ecosystem inside a company means the separation has to be manufactured rather than inherited.",
+   "Stage 1 is a captive insurer with the capital removed, which is exactly why it is unregulated — and names what stage 2 would become.",
+   "Reduce the risk by this quantity is unsayable unless the rating decomposes: the derivation is not only an audit artefact, it is the actionable half of the gate.",
+   "The roles and the enforcement tier are the same question asked twice — an underwriter who IS the deploying team produces a setting no matter how good the arithmetic.",
+   "The payout is the part that carries the moral hazard, so a rating that pays nothing cannot be used to stop caring. That is a better reason to defer the money than the regulatory one.",
+   "Reinsurance supplies the rollup's shape and none of its correlation: the connection between placements is the graph, not the org chart.",
+   "The control-to-premium counterfactual is scale-free — this control buys more than that one, here — so it needs no agreed range and does not wait on the level scale.",
+   "The rating prices one side of a two-sided question and says so: what risk you are buying, not whether it is worth it.",
+  ],
+  pages="Adds insurance doctrine 02; proposes GM-D42 (the rating is a gate and declares its own tier), GM-D43 (the rater is separated from the deployer) and GM-D44 (the derivation decomposes); narrows GM-D41; comms T36 and N18."),
+
 ]
 
 PAGE = """<!doctype html>

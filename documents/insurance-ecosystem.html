@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Enrolment: start with a keypair and nothing else · pki.sgit.ai</title>
-<meta name="description" content="How a key gets into the registry without borrowing a larger identity: a canonical signed enrolment request, delivered through an account-less append lane, processed by a trusted side that never exposes the issuing key.">
-<link rel="canonical" href="https://pki.sgit.ai/enrolment/index.html">
+<title>The Ecosystem Without The Money: Insurance As A Go-Live Gate, And The Roles Are The Integrity Mechanism · documents · pki.sgit.ai</title>
+<meta name="description" content="Original document, readable in-page: summary, key concepts and key ideas, then the full markdown. Strategy brief — memo 2 of 8 on the insurance pivot, v0.33.73, 30 August 2026. CC BY 4.0.">
+<link rel="canonical" href="https://pki.sgit.ai/documents/insurance-ecosystem.html">
 <link rel="stylesheet" href="../assets/site.css">
 </head>
 <body>
@@ -29,10 +29,10 @@
       </div>
     </div>
     <div class="ni ni-has">
-      <a class="nl here" href="../bootstrap/index.html">The layers<span class="caret">&#9662;</span></a>
+      <a class="nl" href="../bootstrap/index.html">The layers<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl" href="../bootstrap/index.html">The bootstrap trap</a>
-      <a class="sl here" href="../enrolment/index.html">Enrolment</a>
+      <a class="sl" href="../enrolment/index.html">Enrolment</a>
       <a class="sl" href="../execution/index.html">The execution broker</a>
       <a class="sl" href="../shipped/index.html">What already ships</a>
       </div>
@@ -81,11 +81,11 @@
       <a class="sl" href="../insurance/the-ecosystem-and-the-gate.html">&mdash; the ecosystem &amp; the gate</a>
       <a class="sl" href="../documents/agent-insurance.html">The pivot briefing (memo 0)</a>
       <a class="sl" href="../documents/insurance-without-money.html">Rating before money (memo 1)</a>
-      <a class="sl" href="../documents/insurance-ecosystem.html">The go-live gate (memo 2)</a>
+      <a class="sl here" href="../documents/insurance-ecosystem.html">The go-live gate (memo 2)</a>
       </div>
     </div>
     <div class="ni ni-has">
-      <a class="nl" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <a class="nl here" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl" href="../documents/index.html">The documents</a>
       <a class="sl" href="../data/index.html">The data viewer</a>
@@ -110,85 +110,51 @@
 </div></nav>
 
 <main class="doc">
-<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / enrolment</div>
-<h1>Enrolment: start with a keypair, and nothing else</h1>
-<p class="lead">The registry is where keys end up. This is how one arrives — without the agent first holding authority broader than the identity being created. The constraint on the initial state <em>is</em> the design: everything else follows from what the agent is allowed to start with.</p>
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="index.html">documents</a> / insurance-ecosystem</div>
+<h1>The Ecosystem Without The Money: Insurance As A Go-Live Gate, And The Roles Are The Integrity Mechanism</h1>
 
-<div class="note"><b>Status.</b> The transport is <a href="../shipped/index.html">shipped and account-less</a>. The canonical enrolment object, the trusted processor and the registry are <b>proposed</b>. This page keeps that boundary explicit throughout, because a page that blurs it produces a confidently wrong implementation.</div>
+<div class="docmeta">
+  <span class="k">Type</span><span class="v">Strategy brief — memo 2 of 8 on the insurance pivot</span>
+  <span class="k">Version</span><span class="v">v0.33.73</span>
+  <span class="k">Date</span><span class="v">30 August 2026</span>
+  <span class="k">Author</span><span class="v">Dinis Cruz (project lead) and collaborators</span>
+  <span class="k">Licence</span><span class="v">CC BY 4.0</span>
+  <span class="k">Source</span><span class="v"><a href="../briefs/v0.33.73__strategy-brief__the-ecosystem-without-the-money-insurance-as-a-go-live-gate.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/dev/briefs/v0.33.73__strategy-brief__the-ecosystem-without-the-money-insurance-as-a-go-live-gate.md">view on GitHub</a></span>
+</div>
 
-<h2 id="initial">The initial state is the design</h2>
-<pre class="shell">
-   <span class="y">UNKNOWN AGENT</span>
-     computation
-     randomness
-     its own newly generated private key
-     <span class="d">------------------------------------</span>
-     <span class="g">and nothing else</span>
-</pre>
-<p>Explicitly <b>not</b> required at the outset: a repository credential, repository read or write authority, a project token, the certificate authority's private key, the vault key, or an administrator identity. The reason to be strict is not purity — <b>every item on that list grants authority broader than the identity being created</b>, which is <a href="../bootstrap/index.html">the bootstrap trap</a> in one sentence.</p>
-<p class="claim">Possession of this private key lets the agent act <em>as itself</em>, rather than as the project or as the human operator. That is the difference between an identity and a borrowed credential.</p>
+<h2 id="summary">Summary</h2>
+<p>The structure memo 1's rating had no home in. The memo asks how an insurer-like ecosystem runs inside a company with no financial numbers, and answers by taking the industry's ROLES rather than its money — insurer, underwriter, the party carrying the capital — because the roles are what separate the party who wants to ship from the party who rates. That completes the rule from memo 1: a level nobody can recompute is theatre, AND a level computed by the party that wants to ship is theatre even when recomputable. Method and separation, both. The memo's most consequential move is putting the rating in the path of a deployment — do we go live, what would this have to reach, reduce the risk by this quantity — which makes it a GATE rather than a report, and drags in a requirement a report does not have: the derivation must decompose, or the instruction to reduce by a quantity cannot be given. The estate's own three-tier control test then applies to the insurance apparatus itself, unflatteringly: a gate on a dashboard is an expectation, a CI check the deploying team can edit is a setting, and only a check evaluated by a party they do not control is a boundary — so the roles and the tier turn out to be the same question asked twice. Also: reinsurance named as the fractal's three-century precedent, which supplies the rollup's shape but not the correlation arithmetic; and the control-to-premium loop, which the workbench already computes and which is scale-free, partly retracting the claim that the first MVP waits on the level scale.</p>
 
-<h2 id="request">The enrolment request</h2>
-<p>The agent constructs a canonical request and signs it with the key being enrolled. At minimum it carries:</p>
-<div class="tablewrap"><table>
-  <thead><tr><th>Field</th><th>Purpose</th></tr></thead>
-  <tbody>
-    <tr><td>Type and version</td><td>So the format can change</td></tr>
-    <tr><td>Project</td><td>Which project is being asked</td></tr>
-    <tr><td>Subject public key and fingerprint</td><td>What is being enrolled</td></tr>
-    <tr><td>Requested identity</td><td>An optional label and agent type</td></tr>
-    <tr><td>Requested mandate</td><td>An optional role and scope</td></tr>
-    <tr><td>Created at, and a nonce</td><td>Freshness and replay resistance</td></tr>
-    <tr><td>Proof of possession</td><td>A signature over the canonical request</td></tr>
-  </tbody>
-</table></div>
-<p class="claim">A signature over an enrolment request proves the submitter controls the corresponding private key. It does not prove that the project should trust the agent. Trust is a policy decision made afterwards.</p>
-<p>Conflating those two is the most likely way to misread this whole design, which is why the sentence is on the page rather than in a footnote.</p>
-<div class="warnbox"><b>Two details that are easy to leave out and expensive to omit.</b> <b>The nonce is not optional</b> — replay protection needs a nonce or sequence number <em>inside the signed payload</em>. And <b>the canonical form must be specified precisely</b>, because a signature over an ambiguously serialised object is a signature over whatever the verifier happens to reconstruct.</div>
-
-<h2 id="lane">The append lane is the narrow door</h2>
-<p>The request is delivered through a project append lane: a managed transport outside the commit history, with a small operation set — configure, write, list, fetch, mark processed, purge.</p>
-<p><b>The capability granted to the agent is to add an object to an inbox.</b> Not to read that inbox, not to alter what is there, not to reach anything else in the project. That is the smallest useful grant, and it is why the bootstrap does not require borrowing a larger identity.</p>
-<div class="evbox"><span class="evtag">Shipped</span>
-<p>Posting to a lane requires an <b>append token in the request body and no access token</b>. The response is a <b>blind acknowledgement</b>: the sender learns that the write succeeded, and nothing else. So the write-only property is enforced <em>in the response itself</em> rather than only in the permission model — a sender cannot use the write path to probe what is already in the lane.</p></div>
-<p>Worth being explicit about the consequence: a compromised or hostile agent can add junk to an enrolment inbox. It cannot read other requests, cannot see who else has enrolled, and cannot reach the registry or the certificate authority. <b>The blast radius of the ingress is a queue that needs draining</b> — the correct shape for a public door, and the reason spam and denial-of-service controls are a named open question rather than an afterthought.</p>
-
-<h2 id="trusted">The trusted side</h2>
-<p>The processing side holds everything that matters and is deliberately not reachable from the ingress:</p>
-<div class="tablewrap"><table>
-  <thead><tr><th>Component</th><th>Holds</th><th>Does</th></tr></thead>
-  <tbody>
-    <tr><td><b>Enrolment inbox</b></td><td>Submitted requests</td><td>Receives — nothing else</td></tr>
-    <tr><td><b>Trusted processor</b></td><td>Read access to the inbox</td><td>Verifies signatures, applies policy</td></tr>
-    <tr><td><b>Certificate authority</b></td><td>The issuing key</td><td>Signs certificates</td></tr>
-    <tr><td><b>Registry</b></td><td>Issued identities and mandates</td><td>Publishes what has been recognised</td></tr>
-  </tbody>
-</table></div>
-<p class="claim">The untrusted side never holds more than its own key, and the trusted side never exposes the issuing key to anything reachable from outside.</p>
-<p>That is the referee-and-player separation applied to enrolment: enforcement belongs at a layer that cannot be bypassed by the thing being enforced.</p>
-
-<h2 id="separate">What arrives: two statements, not one</h2>
-<p>What the registry records is not a single blob. Identity and mandate are separate signed statements from the start, because they are <a href="../mandate/index.html">issued, revoked and reasoned about independently</a>. An enrolment request may ask for both; the issuer may grant either, both, or neither.</p>
-
-<h2 id="addressing">Addressing, and the boundary</h2>
-<p>A lane is addressed by the hash of the recipient's public key, so <b>an agent's own key is its address</b> and no directory lookup is required to find where to send. An agent that has generated a keypair already knows its own lane address without asking anybody — which is precisely the property the bootstrap trap requires.</p>
-<div class="warnbox"><b>The derivation is proposed, not shipped.</b> No shipped command emits <code>append_token = H(recipient public key)</code>; today the token is agreed out of band. <b>Do not code against the derivation.</b> <a href="../shipped/index.html#proposed">The full shipped-versus-proposed split</a>.</div>
-
-<h2 id="smaller">Why this is a smaller project than it looks</h2>
-<p>The architecture's original milestones assume <em>building</em> a lane. Most of that is <em>configuring</em> one. What remains is the client sealing layer, the canonical enrolment object, the trusted processor and the registry — a materially smaller project than a from-scratch transport, and the reason <a href="../roadmap/index.html">the build order</a> puts a private registry next rather than someday.</p>
-
-<h2 id="open">Open questions</h2>
+<h2 id="concepts">Key concepts</h2>
 <ul>
-  <li>What stops the ingress being flooded? It is deliberately unauthenticated.</li>
-  <li>How is the return path secured? A write-only lane covers ingress only, and the certificate has to get back.</li>
-  <li>Can a rented agent persist a key between sessions? If not, every session is a new identity.</li>
-  <li>How is the binding between an agent and its key verified at all? The replacement keyserver used email; agents have no equivalent.</li>
-  <li>Who may be a trust root, in a structure of registries recognising registries? <a href="../rules/index.html#fractal">Unresolved, and published as unresolved.</a></li>
+  <li><a href="../insurance/the-ecosystem-and-the-gate.html"><b>The ecosystem and the gate</b></a> — doctrine 02: who rates, what it gates, and the gate's own tier</li>
+  <li><a href="../packs/grant-and-mandate/concepts.html"><b>The three-tier control test</b></a> — the estate's own test, turned on the insurance apparatus</li>
+  <li><a href="../workbench/index.html"><b>The control-to-premium loop</b></a> — flip a fact, watch the tier move — the loop, already running</li>
+  <li><a href="insurance-without-money.html"><b>Rating before money</b></a> — memo 1, whose rule this memo completes</li>
 </ul>
 
+<h2 id="ideas">Key ideas</h2>
+<ul>
+  <li>An assessment produced by the party that wants the answer to be yes is not an assessment — which is why an insurer is a third party for structural reasons, and why moving the ecosystem inside a company means the separation has to be manufactured rather than inherited.</li>
+  <li>Stage 1 is a captive insurer with the capital removed, which is exactly why it is unregulated — and names what stage 2 would become.</li>
+  <li>Reduce the risk by this quantity is unsayable unless the rating decomposes: the derivation is not only an audit artefact, it is the actionable half of the gate.</li>
+  <li>The roles and the enforcement tier are the same question asked twice — an underwriter who IS the deploying team produces a setting no matter how good the arithmetic.</li>
+  <li>The payout is the part that carries the moral hazard, so a rating that pays nothing cannot be used to stop caring. That is a better reason to defer the money than the regulatory one.</li>
+  <li>Reinsurance supplies the rollup's shape and none of its correlation: the connection between placements is the graph, not the org chart.</li>
+  <li>The control-to-premium counterfactual is scale-free — this control buys more than that one, here — so it needs no agreed range and does not wait on the level scale.</li>
+  <li>The rating prices one side of a two-sided question and says so: what risk you are buying, not whether it is worth it.</li>
+</ul>
+
+<h2 id="on-site">On this site</h2>
+<p>Adds insurance doctrine 02; proposes GM-D42 (the rating is a gate and declares its own tier), GM-D43 (the rater is separated from the deployer) and GM-D44 (the derivation decomposes); narrows GM-D41; comms T36 and N18.</p>
+
+<h2 id="read">Read the document</h2>
+<div class="mdread-label">📄 Original document · v0.33.73 · 30 August 2026 · rendered from the <a href="../briefs/v0.33.73__strategy-brief__the-ecosystem-without-the-money-insurance-as-a-go-live-gate.md">raw markdown</a> (the source of truth)</div>
+<div class="mdread" id="mdread" data-src="../briefs/v0.33.73__strategy-brief__the-ecosystem-without-the-money-insurance-as-a-go-live-gate.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="../briefs/v0.33.73__strategy-brief__the-ecosystem-without-the-money-insurance-as-a-go-live-gate.md">open the raw markdown</a>.</p></noscript></div>
+
 <div class="pagenav">
-  <a href="../bootstrap/index.html">← The bootstrap trap</a>
-  <a href="../shipped/index.html">Next: what already ships →</a>
+  <a href="index.html">← All documents</a>
+  <a href="../briefs/v0.33.73__strategy-brief__the-ecosystem-without-the-money-insurance-as-a-go-live-gate.md">Raw markdown →</a>
 </div>
 </main>
 
@@ -252,5 +218,7 @@
   </div>
 </div></footer>
 
+<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+<script src="../assets/mdreader.js"></script>
 </body>
 </html>

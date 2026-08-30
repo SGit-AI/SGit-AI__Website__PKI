@@ -14,7 +14,7 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.51</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.52</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -78,8 +78,10 @@
       <a class="sl" href="../insurance/index.html">&#9679; Insurance for agents</a>
       <a class="sl" href="../insurance/what-this-is.html">&mdash; what this is, and the rule</a>
       <a class="sl" href="../insurance/the-rating.html">&mdash; the rating</a>
+      <a class="sl" href="../insurance/the-ecosystem-and-the-gate.html">&mdash; the ecosystem &amp; the gate</a>
       <a class="sl" href="../documents/agent-insurance.html">The pivot briefing (memo 0)</a>
       <a class="sl" href="../documents/insurance-without-money.html">Rating before money (memo 1)</a>
+      <a class="sl" href="../documents/insurance-ecosystem.html">The go-live gate (memo 2)</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -115,6 +117,11 @@
 <div class="tablewrap"><table class="vers">
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
+    <tr>
+<td class="vnum">v0.1.52</td>
+<td class="vdate">30 Aug 2026</td>
+<td><b>Memo 2 of 8 &mdash; the rating becomes a gate, and the estate's own test turns on it.</b> <a href="../documents/insurance-ecosystem.html">Brief v0.33.73</a> asks how an insurer-like ecosystem runs inside a company with no money, and answers by taking the industry's <b>roles</b> rather than its capital: an insurer is a third party for a structural reason &mdash; <b>an assessment produced by the party that wants the answer to be yes is not an assessment</b> &mdash; so moving it in-house means that separation must be manufactured. That <b>completes the rule from memo 1</b>: a level nobody can recompute is theatre, <em>and</em> a level computed by the party that wants to ship is theatre even when recomputable. Method and separation, both (GM-D43). The memo's consequential move is putting the rating in the path of a deployment &mdash; <b>a gate, not a report</b> &mdash; which drags in a requirement a report never had: <em>reduce the risk by this quantity</em> is unsayable unless the rating <b>decomposes</b>, so the derivation stops being an audit artefact and becomes the actionable half of the gate (GM-D44). Then the pack's own three-tier test turns on the insurance apparatus, unflatteringly: a gate on a dashboard is an <b>expectation</b>, a CI check the deploying team can edit is a <b>setting</b> &mdash; the same failure as the pre-push hook &mdash; and only a check evaluated by a party they do not control is a <b>boundary</b>. The roles and the tier are the same question asked twice, so <b>the rating engine declares its own tier on its own face</b> (GM-D42). Three more: <b>reinsurance</b> named as the fractal's three-century precedent, which supplies the rollup's shape and <em>none</em> of its correlation &mdash; so GM-D41 narrows rather than closes, because the connection between placements is the graph, not the org chart; <b>the payout is the part that carries the moral hazard</b>, which is a better reason to defer the money than the regulatory one, since a rating that pays nothing cannot be used to stop caring; and the <b>control-to-premium loop is scale-free</b>, which <b>partly retracts last release's claim</b> that the first MVP waits on the level scale &mdash; ordering controls by how much they move a rating needs no agreed range, and the workbench already computes it.</td>
+    </tr>
     <tr>
 <td class="vnum">v0.1.51</td>
 <td class="vdate">30 Aug 2026</td>
@@ -683,7 +690,7 @@ chapter 15 records as fixed here.</td>
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.51</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.52</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The bench</h4>
@@ -702,6 +709,7 @@ chapter 15 records as fixed here.</td>
     <a href="../insurance/index.html">&#9679; Insurance for agents</a>
     <a href="../insurance/what-this-is.html">What this is, and the rule</a>
     <a href="../insurance/the-rating.html">The rating</a>
+    <a href="../insurance/the-ecosystem-and-the-gate.html">The ecosystem &amp; the gate</a>
     <a href="../documents/agent-insurance.html">The pivot briefing</a>
   </div>
   <div>

@@ -184,7 +184,10 @@ The mandate's issuer is the registry's operator root, whose private half is **pu
 | GM-D38 | **Stage 1 of the insurance work carries no money.** The deliverable is a rating (levels/points), not a premium — not a regulated activity, and needs no carrier | v0.33.72 memo 1, 30 Aug | **Proposed — it dissolves the blocker v0.33.71 called fatal** |
 | GM-D39 | **A rating is computed from published evidence and ships its derivation.** A level that cannot be re-run by somebody else is refused | v0.33.72 §2 — memo 1 removes the money that v0.33.71 said kept a claim honest | **Proposed — the load-bearing rule; it answers a real contradiction between memos 0 and 1** |
 | GM-D40 | **Rating inputs carry their evidence channel**: measured and declared (questionnaire/card) facts are weighted differently and never merged; unknown is never scored as absent | v0.33.72 §5 — `library − self-report = blind spots` applied to rating | **Proposed** |
-| GM-D41 | **Aggregation reads correlation off shared graph nodes** rather than summing independent micro ratings | v0.33.72 §4 — the aggregation trap memo 1 does not name | **Proposed — stated as a rule, implemented nowhere** |
+| GM-D41 | **Aggregation reads correlation off shared graph nodes** rather than summing independent micro ratings | v0.33.72 §4; narrowed by v0.33.73 §5 | **Proposed — narrowed: reinsurance supplies the hierarchy's SHAPE, not the correlation. The arithmetic is still unimplemented** |
+| GM-D42 | **The rating is a gate, not a report** — and being a control, it declares its own enforcement tier under the pack's three-tier test, on its own face | v0.33.73 §3 memo 2, 30 Aug | **Proposed — a gate that overstates its tier is worse than none, because it will be believed** |
+| GM-D43 | **The rating authority is separated from the deploying party.** A rating produced by the party that wants to ship is self-assessment wearing a number, however reproducible its arithmetic | v0.33.73 §1 | **Proposed — the other half of GM-D39: method AND separation** |
+| GM-D44 | **The derivation must decompose**, so a gate can say *reduce by this much, and here is what would do it* | v0.33.73 §2 — GM-D39 extended from audit to action | **Proposed** |
 
 ---
 

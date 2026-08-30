@@ -1,9 +1,9 @@
 {
   "_what_this_is": "The manifest for the insurance body of work. gen_insurance.py builds the hub from it and REFUSES to build when it disagrees with the folder: a doctrine document declared here with no file, a src/*.md nothing declares, an MVP folder that does not exist, or a memo marked processed with no brief. The count on the hub is computed from this file, never typed.",
-  "_authority": "NONE \u2014 a build input. The briefs under /briefs/ and the markdown under src/ are the sources of truth.",
+  "_authority": "NONE — a build input. The briefs under /briefs/ and the markdown under src/ are the sources of truth.",
   "v": 0,
   "stage": {
-    "now": "stage 1 \u2014 rating without money",
+    "now": "stage 1 — rating without money",
     "why": "A rating engine that emits levels rather than currency is not a regulated activity, needs no carrier and no loss history, and is therefore buildable today. Money is stage 2. See GM-D38.",
     "rule": "A level nobody can recompute is exactly the theatre a premium would have prevented. Every rating ships its derivation. See GM-D39."
   },
@@ -26,6 +26,14 @@
         "page": "../documents/insurance-without-money.html",
         "state": "processed",
         "gave": "Money decoupled from rating, which dissolves the regulatory blocker; micro-policies as the scale insurance never reached; the placement variables; the questionnaire as a declared-fact collector; the quasi-currency as the adoption path. Also contradicts memo 0 on why the pivot is honest, and the contradiction is answered rather than smoothed."
+      },
+      {
+        "n": 2,
+        "title": "The ecosystem without the money: insurance as a go-live gate",
+        "brief": "v0.33.73__strategy-brief__the-ecosystem-without-the-money-insurance-as-a-go-live-gate.md",
+        "page": "../documents/insurance-ecosystem.html",
+        "state": "processed",
+        "gave": "The industry's roles taken without its money, because the roles are what separate the rater from the party that wants to ship; the rating as a gate on go-live rather than a report, which requires a threshold and a decomposition; reinsurance named as the fractal's precedent; and the control-to-premium loop, which the workbench already computes."
       }
     ]
   },
@@ -34,7 +42,7 @@
       "slug": "what-this-is",
       "file": "00__what-this-is.md",
       "title": "What this is, and the rule it runs on",
-      "from": "memos 0\u20131",
+      "from": "memos 0–1",
       "one_line": "The body of work, its two stages, and the one rule that keeps a rating from becoming theatre."
     },
     {
@@ -43,13 +51,21 @@
       "title": "The rating: what is scored, from what evidence, and what must never merge",
       "from": "memo 1",
       "one_line": "The ratable unit is a placement, not an agent; inputs carry their evidence channel; measured and declared never merge; unknown is never absent."
+    },
+    {
+      "slug": "the-ecosystem-and-the-gate",
+      "file": "02__the-ecosystem-and-the-gate.md",
+      "title": "The ecosystem and the gate: who rates, what it gates, and the tier the gate itself has",
+      "from": "memo 2",
+      "one_line": "The roles are the integrity mechanism; the rating gates go-live rather than reporting; and a gate that overstates its own tier is worse than none."
     }
   ],
   "mvps": [],
   "does_not_prove": [
-    "That any of this is insurance. Stage 1 emits a rating, transfers no risk, and promises no payout \u2014 which is exactly why it needs no carrier and why calling it insurance would be the first dishonesty.",
+    "That any of this is insurance. Stage 1 emits a rating, transfers no risk, and promises no payout — which is exactly why it needs no carrier and why calling it insurance would be the first dishonesty.",
     "That the placement orderings are true. Claude-on-a-desktop is rated higher than Claude-on-the-web in the project lead's judgement; nobody has measured a desktop agent, so the estate cannot score its own leading example.",
     "That a level means the same thing to two organisations. Nothing here is calibrated against loss data, because no agent loss data exists anywhere.",
-    "That aggregation works yet. Correlated risk is named as a graph problem and not solved; summing micro ratings would be wrong in the dangerous direction."
+    "That aggregation works yet. Correlated risk is named as a graph problem and not solved; summing micro ratings would be wrong in the dangerous direction.",
+    "That an internal underwriter is independent. The separation between the rater and the party that wants to ship is an org-design outcome no schema can enforce — and a rating engine reporting to the deploying business is a setting with a nicer name."
   ]
 }
