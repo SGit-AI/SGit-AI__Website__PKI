@@ -5,7 +5,7 @@
 # collected demonstrations without their limits would manufacture the false
 # assurance this site exists to argue against.
 #
-# 5 of 7 are built and running. Hub: https://pki.sgit.ai/bench/index.html
+# 6 of 8 are built and running. Hub: https://pki.sgit.ai/bench/index.html
 
 ## The register — live
   where     https://pki.sgit.ai/registry/index.html
@@ -56,6 +56,17 @@
     - That the library covers anybody's real estate. Scenario 5 has no tree to point at at all
     - That the assessment changes what anybody does — it has no backend, so it can measure none of its own success measures
     - That the acceptor model is sound: it offers a role where the pack's own standard asks for a named person
+
+## The workbench — live
+  where     https://pki.sgit.ai/workbench/index.html
+  code      workbench/
+  since     v0.1.36 (last moved v0.1.36)
+  is        An experimental app: the primitives on a rail — identities, grants (the twin), mandates, facts, actions, a simulator — and every decision hands back an evidence pack, because the decision is disposable and the record is not.
+  DOES NOT PROVE:
+    - That anything is enforced. The simulator decides nothing outside the page; the live decision points remain the pre-push hook (setting) and a boundary that does not exist (N12) — and every pack says so about itself
+    - That the twin matches the environment now — it is a recording; the memo's real-time question needs a re-measurement at decision time, which this app cannot perform and says it cannot
+    - That a verified signature carries authority — the issuer is a fixture until N11
+    - That evidence-pack/v0 is settled — introduced here, proposed to the pack, adopted by nobody
 
 ## A Key Means Nothing Alone (the book) — specified
   where     https://pki.sgit.ai/book/index.html

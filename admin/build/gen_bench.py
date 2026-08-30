@@ -118,6 +118,28 @@ BENCH = [
          "browser storage only — nothing leaves the visitor's machine"],
   code="assess/"),
 
+ dict(slug="workbench", name="The workbench", state="live",
+  where="../workbench/index.html", since="v0.1.36", updated="v0.1.36",
+  origin="the 30 Aug voice memo: a mini-app over the primitives, evidence packs at decision time, the twin, and the schemas as the product",
+  one_line="An experimental app: the primitives on a rail — identities, grants (the twin), mandates, facts, "
+           "actions, a simulator — and every decision hands back an evidence pack, because the decision is "
+           "disposable and the record is not.",
+  demonstrates=[
+    "<b>A real real-time check:</b> the live mandate's signature is verified in the visitor's browser — Web Crypto, against the signing key fetched from the issuer's registry record, over the registry's canonical form — not rendered as a badge",
+    "The <b>evidence pack</b> (schema <code>evidence-pack/v0</code>, GM-D33): every check with its result, evidence and source; the delta; the twin's age; the enforcement tier; and <code>does_not_prove</code> inside the artefact itself",
+    "The <b>twin, operationalised</b>: obligations assessed against a recorded measurement whose age is printed on every pack, with facts attached — and flipping the branch-protection fact moves the enforcement tier from setting to boundary, live (GM-D29 as gameplay, and N12 rehearsable before anyone touches settings)",
+    "<b>Default-deny as pedagogy:</b> an unsigned draft mandate refuses everything while still showing the delta it would govern; force-push is refused because the vocabulary cannot express it",
+    "It found a real defect on first contact: the live mandate names <code>repo.contents.push</code>, the vocabulary declares <code>repo.contents.write</code> — outside the vocabulary under the registry's own exact-equality rule (GM19)"],
+  does_not_prove=[
+    "<b>That anything is enforced.</b> The simulator decides nothing outside the page; the live decision points remain the pre-push hook (setting) and a boundary that does not exist (N12) — and every pack says so about itself",
+    "That the twin matches the environment now — it is a recording; the memo's real-time question needs a re-measurement at decision time, which this app cannot perform and says it cannot",
+    "That a verified signature carries authority — the issuer is a fixture until N11",
+    "That <code>evidence-pack/v0</code> is settled — introduced here, proposed to the pack, adopted by nobody"],
+  gates=["the signature check is a real verification: corrupt the sig in the fetched document and the badge flips to does-not-verify",
+         "default-deny, exercised: no mandate, superseded v1, an unsigned draft and an unexpressible action all refuse — checked headless before every release",
+         "same-origin only: every fetch is a reference to a published estate document; nothing typed here leaves the browser"],
+  code="workbench/"),
+
  dict(slug="the-book", name="A Key Means Nothing Alone (the book)", state="specified",
   where="../book/index.html", since="v0.1.33", updated="v0.1.34",
   origin="a <a href='../book/brief.html'>commissioning brief</a>, draft-2, modelled on graphs.sgit.ai's three finished books",

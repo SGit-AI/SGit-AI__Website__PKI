@@ -14,7 +14,7 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.35</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.36</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -59,6 +59,7 @@
       <a class="sl" href="../registry/index.html">The register, live</a>
       <a class="sl" href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
       <a class="sl" href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
+      <a class="sl" href="../workbench/index.html">The workbench (app)</a>
       <a class="sl" href="../assess/index.html">Map your own case</a>
       <a class="sl" href="../book/index.html">The book (commissioned)</a>
       <a class="sl" href="../book/brief.html">&mdash; its commissioning brief</a>
@@ -96,6 +97,11 @@
 <div class="tablewrap"><table class="vers">
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
+    <tr>
+      <td class="vnum">v0.1.36</td>
+      <td>30 Aug 2026</td>
+      <td><b>The workbench &mdash; a mini-app over the primitives, from the 30 August voice memo.</b> <a href="../workbench/index.html">A separate experimental UI</a>: the key primitives on a left rail &mdash; identities, grants (the twin), mandates, facts, actions, a simulator, evidence packs, schemas, and risks (which are deliberately not here) &mdash; each a card surface over the <em>real published documents</em>, fetched by reference (GM3: references, never copies). The worked scenario is the memo's: a GitHub push. <b>The real-time check is real:</b> the live mandate's signature is verified in the visitor's browser with Web Crypto against the signing key fetched from the issuer's registry record, over the registry's canonical form &mdash; verified byte-identical against <code>jq -cS</code> before shipping, trailing newline and all. <b>Every decision hands back an evidence pack</b> (<code>evidence-pack/v0</code>, decision GM-D33, modelled on the service-twin brief's receipts): every check with its result, evidence and source, the delta, the twin's age, the enforcement tier computed from the facts, and <code>does_not_prove</code> inside the artefact. <b>The twin is finally operationalised as the corpus defines it</b> &mdash; the point where the graph meets reality, to which facts attach and against which obligations are assessed: flip the branch-protection fact and the enforcement tier moves from setting to boundary live, which makes N12 rehearsable before anyone touches repository settings. Default-deny is exercised rather than described: push to main refuses as excess authority, force-push refuses because the vocabulary cannot express it, an unsigned draft refuses everything while still showing the delta it would govern, and superseded v1 still refuses. Authoring lives in localStorage; every fetch is same-origin. <b>And first contact found a real defect:</b> the live mandate names <code>repo.contents.push</code> while the vocabulary declares <code>repo.contents.write</code> &mdash; different strings under the registry's own exact-equality rule, recorded as GM19 and deliberately not fixed by silent renaming, because that would invent the containment rule the registry refuses to define.</td>
+    </tr>
     <tr>
       <td class="vnum">v0.1.35</td>
       <td>27 Aug 2026</td>
@@ -291,7 +297,7 @@
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.35</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.36</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The bench</h4>
@@ -299,6 +305,7 @@
     <a href="../registry/index.html">The register, live</a>
     <a href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
     <a href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
+    <a href="../workbench/index.html">The workbench (app)</a>
     <a href="../assess/index.html">&#8594; Map your own case</a>
     <a href="../book/index.html">The book (commissioned)</a>
     <a href="../book/brief.html">&mdash; its commissioning brief</a>

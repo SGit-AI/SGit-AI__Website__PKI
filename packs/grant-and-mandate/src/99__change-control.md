@@ -132,6 +132,14 @@ The mandate's issuer is the registry's operator root, whose private half is **pu
 **What was done:** the three values corrected to the schema's classes (`none`, `none`, `observed`), with the correction recorded inside the entry's `measurement_honesty` block rather than applied silently. And `gen_blocks.py` gained a **hard guard**: an unrecognised tier or evidence class now **fails the build**, verified by injecting one and watching it exit non-zero. *"A schema change breaks the build rather than the integration"* stops being a promise in document 09 and becomes a check.
 **Status:** adopted; decision GM-D31.
 
+### GM19 — The live mandate names a capability the vocabulary does not contain
+
+**Source:** the workbench (../../workbench/index.html), 30 August 2026 — found while wiring the decision engine to the registry's comparison rule.
+**What happened:** `registry/capabilities.json` declares **exact string equality as the only comparison** (containment is deliberately undefined), and declares `repo.contents.write`. Mandate v2 — the estate's one live, signed mandate — allows **`repo.contents.push`**. Under the registry's own rule those are simply different strings: the primary mandate's capability is **outside the declared vocabulary**, and has been since it was issued.
+**Why nothing noticed:** the pre-push hook compares the mandate against the *attempted push*, never against the vocabulary — enforcement and vocabulary never met until an engine tried to use both. This is the admitted absence (a capability vocabulary that does not exist, pack decision 6 open) producing a concrete defect rather than an abstract gap.
+**What was done:** nothing silent. The workbench surfaces it as a `warn` on every relevant evidence pack rather than normalising `push` to `write`, because an engine that quietly maps one string onto another has invented the containment rule the registry refuses to define. The reconciliation — rename in the mandate, rename in the vocabulary, or define comparison — is the project lead's, since decision 6 is theirs.
+**Status:** recorded, deliberately unfixed; feeds decision 6.
+
 ## The decisions register
 
 | # | Decision | Made by / where | Status |
@@ -168,6 +176,8 @@ The mandate's issuer is the registry's operator root, whose private half is **pu
 | GM-D30 | Deliveries are recorded in a build record, beside the corrections | pack doc 08 (GM17) | **Settled — the discipline recorded corrections and no deliveries** |
 | GM-D31 | The block gallery renders real documents, and unrecognised vocabulary fails the build | pack doc 09 (GM18) | **Settled — verified by injecting a bad value** |
 | GM-D32 | Does the risk product consume this stylesheet, or fork it? | pack doc 09; project lead, 26 Aug | **Settled — RiskMandate CONSUMES it. The library/instance split argued for it and the project lead confirmed: two products, one component contract** |
+| GM-D33 | `evidence-pack/v0` — a decision emits a pack: checks with sources, delta, twin age, enforcement tier, `does_not_prove` | the workbench, from the 27 Aug memo (evidence packs, real-time checks) + the service-twin brief's receipts | **Proposed — introduced by the workbench, not yet adopted by the pack; the next consumer should be an agent at a real decision point, `mode: enforcement`** |
+| GM-D34 | How does the engine compare a mandate capability against the vocabulary? | GM19 — the live mandate's `repo.contents.push` vs the declared `repo.contents.write` | **Open — exact equality says they differ; silently mapping them would invent the containment rule the registry refuses to define. Feeds decision 6, the project lead's** |
 
 ---
 
