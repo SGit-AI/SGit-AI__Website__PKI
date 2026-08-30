@@ -14,7 +14,7 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.47</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.48</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -104,6 +104,11 @@
 <div class="tablewrap"><table class="vers">
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
+    <tr>
+<td class="vnum">v0.1.48</td>
+<td class="vdate">30 Aug 2026</td>
+<td><b>Every register record now has a page.</b> Reported from a phone by the project lead: the workbench's identity cards linked to <code>registry/records/&lt;fingerprint&gt;/</code> &mdash; a <b>directory</b>, which a static host answers with 404. The narrow fix was to point them at <code>record.json</code>. That was rejected as the wrong fix: raw JSON on a phone is a wall of braces, and the real gap was older and larger &mdash; <b>every other document on this site has a rendered page, and identities had none.</b> So <a href="../admin/index.html"><code>gen_records.py</code></a> now generates one <b>identity card</b> per record: the <b>fixture-or-real class first and loudest</b>, because whether the private half is published decides what every signature below it is worth; then what the register answers about that subject, pulled from <a href="../registry/views/expected-verifications.json">the expected-verifications view</a> the validator reproduces on every release; then <b>every signed statement rendered in append order</b> &mdash; identity, mandate, acceptance, revocation, grant &mdash; each with its own explanation of what that statement type does, its body as a field grid, its signer and its statement hash, and a link to the signed file. A revocation renders as a later card, never as a deletion, which is the append-only rule visible rather than asserted. <b>Key material is linked, never printed:</b> the fixture private halves are published on purpose and a rendered page still has no business carrying one. Eleven pages, 154 in the site. The workbench cards and the register's own verification table now point here, and so does the <code>source</code> link inside every saved evidence pack &mdash; which had been recording a dead URL into its own JSON.</td>
+    </tr>
     <tr>
 <td class="vnum">v0.1.47</td>
 <td class="vdate">30 Aug 2026</td>
@@ -652,7 +657,7 @@ chapter 15 records as fixed here.</td>
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.47</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.48</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The bench</h4>

@@ -1,0 +1,35 @@
+/* pki.sgit.ai — the identity-card pages under registry/records/.
+   Sits on site.css. The loudest element on the page is the class block,
+   because whether a keypair is a fixture decides what every signature below
+   it is worth. */
+
+.rec-class{border-radius:10px;padding:14px 17px;margin:16px 0;border:2px solid}
+.rec-class b{display:block;margin-bottom:6px;font-size:1.02rem}
+.rec-class p{margin:.5rem 0}
+.rec-class .dim{color:inherit;opacity:.72;font-size:.9rem}
+.rec-class--fixture{border-color:var(--red);background:rgba(185,28,28,.05);color:var(--red)}
+.rec-class--real{border-color:var(--accent);background:rgba(15,118,110,.06);color:var(--accent-dk)}
+
+.rec-yes{color:var(--accent-dk)}
+.rec-no{color:var(--red)}
+.rec-class--fixture .rec-yes{color:inherit}
+
+.rec-st{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--line2);
+  border-radius:10px;padding:13px 16px;margin:12px 0;box-shadow:var(--shadow)}
+.rec-st--identity{border-left-color:var(--dim)}
+.rec-st--mandate{border-left-color:var(--accent)}
+.rec-st--acceptance{border-left-color:var(--accent-dk)}
+.rec-st--revocation{border-left-color:var(--red)}
+.rec-st--grant{border-left-color:var(--warm)}
+
+.rec-st-top{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;margin-bottom:4px}
+.rec-st-top b{font-family:var(--mono);font-size:.86rem;letter-spacing:.04em;text-transform:uppercase}
+.rec-st-top .dim{color:var(--dim2);font-size:.85rem}
+.rec-st-top a{margin-left:auto;font-size:.86rem}
+.rec-note{color:var(--dim);font-size:.88rem;margin:.2rem 0 .7rem;max-width:70ch}
+
+.rec-kv{display:grid;grid-template-columns:max-content 1fr;gap:5px 14px;font-size:.9rem;align-items:baseline}
+@media (max-width:620px){.rec-kv{grid-template-columns:1fr;gap:1px 0}
+  .rec-kv>span:nth-child(odd){color:var(--dim2);font-size:.8rem;margin-top:7px}}
+.rec-kv>span:nth-child(odd){color:var(--dim)}
+.rec-kv code{font-size:.82rem;word-break:break-all}

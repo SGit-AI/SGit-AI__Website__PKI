@@ -86,7 +86,7 @@ class Identities extends Section {
   render() {
     const recs = estate.regIndex?.records || {};
     const rows = Object.entries(recs).map(([fp, r]) => `
-      <a class="wb-card" href="../registry/${esc(r.path)}">
+      <a class="wb-card" href="../registry/${esc(r.path)}index.html">
         <div class="wb-card-top"><b>${esc(r.label)}</b>
           <span class="gm-half ${r.fixture ? 'gm-half--fixture' : 'gm-half--real'}">${r.fixture ? 'fixture — private key published' : 'real — private half not published'}</span></div>
         <code>${esc(fp)}</code><span class="dim">${r.statements} signed statement${r.statements === 1 ? '' : 's'}</span>
@@ -94,7 +94,9 @@ class Identities extends Section {
     this.innerHTML = `
     <h2>Identities</h2>
     <p class="wb-lead">From the live register, just now. The fixture question is read <b>before</b> any signature:
-    a keypair whose private half is published is not a weak identity, it is no identity.</p>
+    a keypair whose private half is published is not a weak identity, it is no identity. Each card opens
+    <b>that record's own page</b> — its signed statements rendered in append order, with what the register answers
+    about it.</p>
     <div class="wb-cards">${rows || '<p class="dim">Register not loaded.</p>'}</div>`;
   }
 }

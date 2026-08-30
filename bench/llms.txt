@@ -10,7 +10,7 @@
 ## The register — live
   where     https://pki.sgit.ai/registry/index.html
   code      registry/, registry/tools/registry_tool.py
-  since     v0.1.26 (last moved v0.1.29)
+  since     v0.1.26 (last moved v0.1.48)
   is        A static register of agent identities, roles, mandates, grants, acceptances and revocations — eleven records and twenty-three signed statements at constructed public URLs, verifiable with the shipped sgit pki commands.
   DOES NOT PROVE:
     - That anything here is trustworthy. Ten of the eleven records are fixtures — private keys published on purpose — so every signature verifies and proves nothing

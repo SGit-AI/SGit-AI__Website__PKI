@@ -67,6 +67,11 @@
   records/<sha256-hex16>/           one directory per record, named by the
                                     owner's signing fingerprint with ':' as
                                     '-' (Windows-safe paths)
+    index.html                      the record RENDERED for a person: the
+                                    fixture/real class first, then every signed
+                                    statement in append order. Presentation
+                                    only — the .json files beside it are the
+                                    record, and this page holds NO AUTHORITY
     01__identity.json               statement 1, always the identity
     NN__<type>__<slug>.json         further statements; NN is display order
                                     only — ordering authority is the public

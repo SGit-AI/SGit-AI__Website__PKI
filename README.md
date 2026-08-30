@@ -28,6 +28,8 @@ Live site: https://pki.sgit.ai (GitHub Pages, deployed from `dev`).
 - `admin/` — engineering: comms (tasks & requests), versions, build tooling
 - `admin/build/chrome.py` — the single definition of nav and footer, applied across every page
 - `admin/build/gen_documents.py` — generates the `documents/` reader pages
+- `admin/build/gen_records.py` — generates one identity-card page per registry record
+  (`registry/records/<fp>/index.html`); the JSON files beside it stay the source of truth
 - `assets/site.css` — shared stylesheet (sgit.ai design language)
 
 Content was refactored across from the PKI section of
@@ -39,7 +41,8 @@ three pages to a site.
 1. Bump `admin/build/version.txt` (vX.Y.Z, exactly once per release) and add a row to
    `admin/versions.html`; update `admin/comms.html`.
 2. `python3 admin/build/chrome.py` — propagates the version badge and any nav/footer change
-   to every page. (`gen_documents.py` first, if a document was added.)
+   to every page. (`gen_documents.py` first, if a document was added; `gen_records.py`
+   if a registry record changed.)
 3. `node admin/build/validate.js`
 4. `git commit -am "site vX.Y.Z: ..." && git push origin dev` — the `site vX.Y.Z:`
    prefix is load-bearing, not decoration: `tag-release` finds the release commit by

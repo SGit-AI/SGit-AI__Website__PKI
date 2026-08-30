@@ -31,7 +31,7 @@ STATES = {
 
 BENCH = [
  dict(slug="registry", name="The register", state="live",
-  where="../registry/index.html", since="v0.1.26", updated="v0.1.29",
+  where="../registry/index.html", since="v0.1.26", updated="v0.1.48",
   origin=("the <a href='../packs/registry-mvp/index.html'>Registry MVP pack</a>, "
           "after a <a href='../packs/registry-mvp/readiness-report.md'>readiness report</a> "
           "returned six blocking questions"),
@@ -39,6 +39,7 @@ BENCH = [
            "revocations — eleven records and twenty-three signed statements at constructed "
            "public URLs, verifiable with the shipped <code>sgit pki</code> commands.",
   demonstrates=[
+    "<b>Every record has a rendered page</b> — the fixture/real class first, then each signed statement in append order, with the raw JSON one link away",
     "The four published rules, with entries under them at last — including the ownership rule as a test case: a valid signature by a non-owner is rejected",
     "C7's commit-graph record model, implemented rather than queued — the public git history is the chain",
     "Four <b>assumable roles</b>: a fresh session takes one on by copying a keystore",

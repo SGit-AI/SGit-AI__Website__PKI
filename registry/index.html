@@ -15,7 +15,7 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.47</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.48</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -109,12 +109,12 @@
 
 <div class="tablewrap"><table>
   <tr><th>Subject</th><th>Answer</th><th>Why</th></tr>
-  <tr><td><a href="records/sha256-df2bb4d93af69e6a/record.json">fixture-agent-a</a></td><td><span class="opt-verdict opt-yes">YES</span></td><td>Valid mandate, accepted, issuer is a declared root — until 2026&#8209;10&#8209;01, <b>after which this fixture genuinely expires</b> and the answer flips with no file changing</td></tr>
-  <tr><td><a href="records/sha256-1ccafd8f3f8906c4/record.json">fixture-agent-b</a></td><td><span class="opt-verdict opt-no">NO</span></td><td>Mandate revoked by its issuer — a signed append with an effective date (rule 2), never a deletion</td></tr>
-  <tr><td><a href="records/sha256-f32e7a1da4e098e0/record.json">fixture-agent-c</a></td><td><span class="opt-verdict opt-no">NO</span></td><td>Mandate expired 2026&#8209;08&#8209;01 — intervals end, and a mandate with no interval would not be a mandate at all</td></tr>
-  <tr><td><a href="records/sha256-b3ffc1f05803720b/record.json">fixture-agent-d</a></td><td><span class="opt-verdict opt-no">NO</span></td><td>Mandate issued and never accepted: <b>inert</b> (pack decision 8, taken provisionally)</td></tr>
-  <tr><td><a href="records/sha256-1d7edf604b98bcf2/record.json">fixture-agent-e</a></td><td><span class="opt-verdict opt-no">NO</span></td><td>Subject identity self-revoked on key compromise — and what it said before the effective date stays derivable</td></tr>
-  <tr><td><a href="records/sha256-878bb98be58abc56/record.json">role-site-agent</a></td><td><span class="opt-verdict opt-yes">YES</span></td><td>The role holds a valid accepted mandate — and anyone holding its published key can exercise it, which is the lesson</td></tr>
+  <tr><td><a href="records/sha256-df2bb4d93af69e6a/index.html">fixture-agent-a</a></td><td><span class="opt-verdict opt-yes">YES</span></td><td>Valid mandate, accepted, issuer is a declared root — until 2026&#8209;10&#8209;01, <b>after which this fixture genuinely expires</b> and the answer flips with no file changing</td></tr>
+  <tr><td><a href="records/sha256-1ccafd8f3f8906c4/index.html">fixture-agent-b</a></td><td><span class="opt-verdict opt-no">NO</span></td><td>Mandate revoked by its issuer — a signed append with an effective date (rule 2), never a deletion</td></tr>
+  <tr><td><a href="records/sha256-f32e7a1da4e098e0/index.html">fixture-agent-c</a></td><td><span class="opt-verdict opt-no">NO</span></td><td>Mandate expired 2026&#8209;08&#8209;01 — intervals end, and a mandate with no interval would not be a mandate at all</td></tr>
+  <tr><td><a href="records/sha256-b3ffc1f05803720b/index.html">fixture-agent-d</a></td><td><span class="opt-verdict opt-no">NO</span></td><td>Mandate issued and never accepted: <b>inert</b> (pack decision 8, taken provisionally)</td></tr>
+  <tr><td><a href="records/sha256-1d7edf604b98bcf2/index.html">fixture-agent-e</a></td><td><span class="opt-verdict opt-no">NO</span></td><td>Subject identity self-revoked on key compromise — and what it said before the effective date stays derivable</td></tr>
+  <tr><td><a href="records/sha256-878bb98be58abc56/index.html">role-site-agent</a></td><td><span class="opt-verdict opt-yes">YES</span></td><td>The role holds a valid accepted mandate — and anyone holding its published key can exercise it, which is the lesson</td></tr>
 </table></div>
 
 <p class="claim">Every answer a fixture register produces carries the same caveat: the walk is real, the proof is empty. A verifier that reports these YES rows without the fixture caveat has skipped the flag rule — and is wrong while looking right.</p>
@@ -149,7 +149,7 @@
 <p>role&#8209;site&#8209;agent also holds an accepted mandate — <code>repo.pull-request.create</code> on this repository, constrained to <code>registry/**</code> on <code>dev</code> — so one role demonstrates the whole loop: identity, mandate, acceptance, verification. And the limit rides along: <b>a role is a costume, not an identity.</b> The register can say what the role may do; it can never say who wore it.</p>
 
 <h2 id="real">The one real record, and how to enrol another</h2>
-<p><a href="records/sha256-f9facb4c94da6c19/record.json">One record</a> carries <code>private_key_published: false</code>: the authoring session's own identity, public halves only. Its claims record the honest finding — the private half lived only in that session's ephemeral container, so the identity is <b>session-scoped</b>, which is the pack's open persistence question (decision 28) as an executed fact. The validator enforces the class: a non&#8209;fixture record's directory must contain no private key material at all.</p>
+<p><a href="records/sha256-f9facb4c94da6c19/index.html">One record</a> carries <code>private_key_published: false</code>: the authoring session's own identity, public halves only. Its claims record the honest finding — the private half lived only in that session's ephemeral container, so the identity is <b>session-scoped</b>, which is the pack's open persistence question (decision 28) as an executed fact. The validator enforces the class: a non&#8209;fixture record's directory must contain no private key material at all.</p>
 
 <p>Enrolling a real identity of your own — one whose private half has a good place to live — is the helper plus a commit:</p>
 
@@ -195,7 +195,7 @@ because a door opening is news. Computed result: <a href="views/doors.json">view
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.47</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.48</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The bench</h4>

@@ -63,7 +63,7 @@ export async function runDecision({ action, mandate, mandateMeta, twin, facts, e
       pub === false
         ? subj + ' is a real record: private_key_published false. The register can be asked about it.'
         : subj + ' is a FIXTURE — its private half is published, so it is not a weak identity but no identity.',
-      '../registry/records/' + subj.replace(':', '-') + '/');
+      '../registry/records/' + subj.replace(':', '-') + '/index.html');
   } else {
     add('identity', 'Is the subject in the register, and is it an identity at all?',
       subj ? 'unknown' : 'fail',
