@@ -73,7 +73,11 @@ class Scenario extends Section {
       <a class="wb-tile" href="#schemas"><b>Read the schemas</b><span>the JSON shapes are the interface — including evidence-pack/v0, introduced here</span></a>
     </div>
     <p class="dim">Everything stays in this browser: same-origin fetches only, and localStorage for what you author.
-    ${store.ok ? '' : '<b>' + esc(store.why) + '</b>'}</p>`;
+    ${store.ok ? '' : '<b>' + esc(store.why) + '</b>'}</p>
+    <p class="dim">Sibling surfaces, built in parallel on this estate: <a href="../simulator/index.html">the card
+    simulator</a> and <a href="../experiments/index.html">the experiments</a> replay and play this estate's own
+    history; the workbench decides a <i>fresh</i> action and keeps the evidence. Same primitives, different verbs —
+    which is the point of a discovery phase.</p>`;
   }
 }
 
