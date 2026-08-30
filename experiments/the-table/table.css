@@ -1,0 +1,74 @@
+/* table.css — the card table. Six suits, each carrying its WORD and a border
+   treatment — two channels, never colour alone. Every card cites its source.
+   No external assets. */
+
+.doc--wide{max-width:1160px}
+.tdim{font:400 .85rem/1 var(--sans);color:var(--dim);letter-spacing:0}
+
+.rplay{font:600 .85rem/1 var(--sans);padding:.45rem .8rem;border-radius:.45rem;
+  border:1px solid var(--accent-dk);background:var(--accent);color:#fff;cursor:pointer}
+.rplay:hover{background:var(--accent-dk)}
+
+/* players */
+.tplayers{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.7rem;margin:.8rem 0 1.6rem}
+.tplayer{border:1px solid var(--line);border-radius:.55rem;background:var(--panel);padding:.7rem .85rem}
+.tp-name{font:700 .95rem/1.3 var(--sans);display:flex;gap:.5rem;align-items:baseline;flex-wrap:wrap}
+.tp-kind{font:600 .66rem/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;
+  color:var(--dim);border:1px dashed var(--line);border-radius:.3rem;padding:.2rem .4rem}
+.tp-desc{margin:.35rem 0 .4rem;font-size:.82rem;line-height:1.5;color:var(--dim)}
+
+/* the deck */
+.tdeck{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.8rem;margin:1rem 0 1.8rem}
+.tcard{border-radius:.7rem;background:var(--panel);padding:.7rem .8rem .6rem;position:relative;
+  border:1.5px solid var(--line);box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.tc-suit{font:800 .72rem/1 var(--mono);letter-spacing:.14em;display:flex;justify-content:space-between;
+  padding-bottom:.4rem;border-bottom:1px solid var(--line);margin-bottom:.5rem}
+.tc-kind{font:600 .62rem/1 var(--mono);letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+.tc-title{font:700 .92rem/1.35 var(--sans);margin-bottom:.45rem}
+.tc-kv{display:flex;gap:.5rem;font-size:.76rem;line-height:1.45;margin:.18rem 0}
+.tc-k{flex:0 0 7.2em;color:var(--dim);font-family:var(--mono);font-size:.68rem;padding-top:.1em}
+.tc-v{flex:1;min-width:0;overflow-wrap:break-word}
+.tc-note{margin-top:.5rem;font:italic .72rem/1.45 var(--serif);color:var(--dim);
+  border-top:1px dotted var(--line);padding-top:.4rem}
+.tc-src{font:600 .66rem/1 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+
+/* suit treatments: word + border style, never colour alone */
+.tcard--can    {border-color:var(--accent);border-style:solid}
+.tcard--can    .tc-suit{color:var(--accent-dk)}
+.tcard--may    {border-color:var(--warm);border-style:double;border-width:3.5px}
+.tcard--may    .tc-suit{color:var(--warm)}
+.tcard--is     {border-color:var(--fg);border-style:solid}
+.tcard--is     .tc-suit{color:var(--fg)}
+.tcard--shows  {border-color:var(--accent-dk);border-style:dashed}
+.tcard--shows  .tc-suit{color:var(--accent-dk)}
+.tcard--does   {border-color:var(--red);border-style:solid;border-width:2px}
+.tcard--does   .tc-suit{color:var(--red)}
+.tcard--decides{border-color:var(--yellow);border-style:double;border-width:3.5px}
+.tcard--decides .tc-suit{color:var(--yellow)}
+
+/* turns */
+.tturns{display:flex;flex-direction:column;gap:.9rem;margin:1rem 0 1.6rem}
+.tturn{border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:.5rem;
+  background:var(--panel);padding:.75rem .95rem;transition:opacity .4s}
+.tturn--hid{display:none}
+.tt-head{font-size:.95rem;line-height:1.5}
+.tt-n{font:800 .7rem/1 var(--mono);letter-spacing:.12em;color:var(--dim);margin-right:.5rem}
+.tt-player{font-weight:700}
+.tt-does{font-family:var(--mono);font-size:.85rem;background:#f2f0ea;border-radius:.3rem;padding:.15rem .4rem}
+.tt-chips{display:flex;gap:.5rem;flex-wrap:wrap;margin:.55rem 0}
+.tchip{font:600 .74rem/1.5 var(--mono);border-radius:.35rem;padding:.3rem .55rem}
+.tchip--yes{background:#eef6f2;border:1px solid var(--accent);color:var(--accent-dk)}
+.tchip--no{background:#fdf0ec;border:2px solid var(--red);color:var(--red)}
+.tchip--dec{background:#fdf8ec;border:3px double var(--yellow);color:var(--yellow)}
+.treact{border-radius:.4rem;overflow:hidden;border:1px solid #30363d;margin:.5rem 0}
+.tr-head{background:#161b22;color:var(--term-yellow);font:700 .68rem/1 var(--mono);
+  letter-spacing:.06em;padding:.4rem .7rem}
+.tr-head a{color:var(--term-cyan)}
+.tr-body{background:var(--term-bg);color:var(--term-green);font:.8rem/1.6 var(--mono);
+  padding:.55rem .7rem;white-space:pre-wrap;overflow-wrap:break-word}
+.tt-cons{font-size:.86rem;line-height:1.55;color:var(--fg)}
+
+.tback li{margin:.5rem 0;line-height:1.55;font-size:.9rem}
+.dr-notprove{margin-top:1.4rem;padding:.85rem 1rem;border:1px solid var(--line);
+  border-radius:.4rem;background:var(--panel);font-size:.88rem;line-height:1.6}
+.dr-src{margin-top:1.2rem;font-size:.8rem;line-height:1.6;color:var(--dim)}

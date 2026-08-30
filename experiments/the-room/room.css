@@ -1,0 +1,82 @@
+/* room.css — the chain room. Game-like by grammar, this site's palette by rule.
+   The LEFT zone is this site's paper; the RIGHT zone is the terminal dark the
+   network already uses for console output — which is also the world the
+   RiskMandate card lives in, so crossing the boundary reads as changing
+   products. Two channels on every state, never colour alone. No external
+   assets: a page arguing you can watch nothing leave has nothing leaving. */
+
+.doc--wide{max-width:1160px}
+
+.rplay{font:600 .85rem/1 var(--sans);padding:.45rem .8rem;border-radius:.45rem;
+  border:1px solid var(--accent-dk);background:var(--accent);color:#fff;cursor:pointer}
+.rplay:hover{background:var(--accent-dk)}
+
+.rmark{margin:1rem 0 1.2rem;padding:.8rem 1rem;border:1px solid #d9c9a8;
+  border-left:4px solid var(--yellow);border-radius:.4rem;background:#fdf8ec;
+  font-size:.88rem;line-height:1.6}
+
+.rverbs{display:flex;align-items:center;gap:.45rem;flex-wrap:wrap;margin:.9rem 0 .6rem}
+.rverb{font:700 .78rem/1 var(--mono);letter-spacing:.06em;padding:.5rem .85rem;
+  border-radius:.4rem;border:2px solid var(--line);background:var(--panel);
+  color:var(--fg);cursor:pointer}
+.rverb--on{border-color:var(--accent);background:var(--accent);color:#fff}
+.rverb-hint{font:.72rem/1.4 var(--sans);color:var(--dim)}
+
+.rwrap{border:1px solid var(--line);border-radius:.6rem;overflow-x:auto;background:var(--panel)}
+.room-svg{display:block;min-width:900px;width:100%;height:auto}
+
+/* zones — the two products, visibly two worlds */
+.rzone--pki{fill:var(--bg)}
+.rzone--rm{fill:var(--term-bg)}
+.rzlabel{font:600 11px var(--mono);letter-spacing:.08em;fill:var(--dim)}
+.rzlabel--syn{fill:var(--term-yellow)}
+
+/* the boundary */
+.rbound{cursor:pointer}
+.rbound-band{fill:#2a2118;stroke:var(--warm);stroke-width:1.5;stroke-dasharray:10 5}
+.rbound-t{font:700 12px var(--mono);letter-spacing:.05em;fill:#e8b45a;text-anchor:middle}
+.rbound:hover .rbound-band,.rbound:focus .rbound-band{stroke-width:3}
+
+/* route + token + expiry loop */
+.rroute{stroke:var(--dim);stroke-width:2;stroke-dasharray:3 7;stroke-linecap:round;opacity:.75}
+.rloop{stroke:var(--term-yellow);stroke-width:1.5;stroke-dasharray:2 6;opacity:.55}
+.rloop-t{font:italic 10.5px var(--serif);fill:var(--dim)}
+.rloop-t--dark{fill:var(--term-yellow);opacity:.8}
+.rtoken{fill:var(--accent);stroke:#fff;stroke-width:2}
+
+/* stations */
+.rst{cursor:pointer}
+.rhit{fill:transparent}                      /* an SVG group is not a hit area */
+.rdesk{fill:var(--panel);stroke:var(--line);stroke-width:1.5}
+.rst:hover .rdesk,.rst:focus .rdesk{stroke:var(--accent);stroke-width:2.5}
+.rst--here .rdesk{stroke:var(--accent);stroke-width:3}
+.rf,.rp{fill:none;stroke:var(--fg);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.rplate{fill:var(--fg)}
+.rname{font:700 11.5px var(--mono);letter-spacing:.04em;fill:#fff;text-anchor:middle}
+
+/* the synthetic side: dark desks, and the WORD on a badge — never colour alone */
+.rst--syn .rdesk{fill:#161b22;stroke:#30363d}
+.rst--syn .rf,.rst--syn .rp{stroke:var(--term-green)}
+.rst--syn .rplate{fill:#30363d}
+.rst--syn:hover .rdesk,.rst--syn:focus .rdesk{stroke:var(--term-green);stroke-width:2.5}
+.rst--syn.rst--here .rdesk{stroke:var(--term-green);stroke-width:3}
+.rsyn-badge rect{fill:none;stroke:var(--term-yellow);stroke-width:1.5;stroke-dasharray:4 3;rx:3}
+.rsyn-badge text{font:700 9.5px var(--mono);letter-spacing:.12em;fill:var(--term-yellow);text-anchor:middle}
+
+/* the dialogue box — the network's console style */
+.rsay{margin:.8rem 0 1.2rem;border-radius:.5rem;overflow:hidden;
+  border:1px solid #30363d;background:var(--term-bg)}
+.rsay-head{padding:.5rem .9rem;font:700 .74rem/1 var(--mono);letter-spacing:.06em;
+  color:var(--term-yellow);background:#161b22;border-bottom:1px solid #30363d}
+.rsay-body{padding:.8rem .95rem .9rem;font:.88rem/1.65 var(--mono);color:var(--term-green);
+  min-height:3.2rem;white-space:pre-wrap}
+
+.rplaylist{margin:1rem 0;font-size:.88rem}
+.rplaylist summary{cursor:pointer;color:var(--dim)}
+.rplaylist li{margin:.45rem 0;line-height:1.55}
+
+.dr-notprove{margin-top:1.4rem;padding:.85rem 1rem;border:1px solid var(--line);
+  border-radius:.4rem;background:var(--panel);font-size:.88rem;line-height:1.6}
+.dr-src{margin-top:1.2rem;font-size:.8rem;line-height:1.6;color:var(--dim)}
+
+@media (prefers-reduced-motion: reduce){ .rtoken{transition:none!important} }

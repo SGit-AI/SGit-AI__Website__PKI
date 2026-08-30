@@ -7,6 +7,29 @@
   <url><loc>https://pki.sgit.ai/book/index.html</loc><lastmod>2026-08-27</lastmod></url>
   <url><loc>https://pki.sgit.ai/workbench/index.html</loc><lastmod>2026-08-30</lastmod></url>
   <url><loc>https://pki.sgit.ai/book/brief.html</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://pki.sgit.ai/book/00-front-matter.html</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://pki.sgit.ai/book/01-a-key-means-nothing-alone.html</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://pki.sgit.ai/book/02-the-flood-and-the-four-rules.html</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://pki.sgit.ai/book/03-the-bootstrap-trap.html</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://pki.sgit.ai/book/04-grant-is-not-mandate.html</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://pki.sgit.ai/book/05-the-delta.html</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://pki.sgit.ai/book/06-boundary-setting-expectation.html</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://pki.sgit.ai/book/07-reality-before-the-risk-register.html</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://pki.sgit.ai/book/08-the-register.html</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://pki.sgit.ai/book/09-a-grant-is-discovered.html</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://pki.sgit.ai/book/10-a-push-refused.html</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://pki.sgit.ai/book/11-the-building-blocks.html</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://pki.sgit.ai/book/12-the-library-and-the-instance.html</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://pki.sgit.ai/book/13-two-paths.html</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://pki.sgit.ai/book/14-eight-releases-in-forty-hours.html</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://pki.sgit.ai/book/15-where-this-estate-disagrees-with-itself.html</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://pki.sgit.ai/book/16-what-ships-what-is-argued.html</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://pki.sgit.ai/book/17-your-first-mandate-tomorrow.html</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://pki.sgit.ai/book/18-appendix-a-the-harness.html</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://pki.sgit.ai/book/19-colophon.html</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://pki.sgit.ai/book/20-reference-card.html</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://pki.sgit.ai/book/a-key-means-nothing-alone.pdf</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://pki.sgit.ai/registry/doors.html</loc><lastmod>2026-08-27</lastmod></url>
   <url><loc>https://pki.sgit.ai/registry/index.html</loc><lastmod>2026-08-25</lastmod></url>
   <url><loc>https://pki.sgit.ai/packs/grant-and-mandate/index.html</loc><lastmod>2026-08-26</lastmod></url>
   <url><loc>https://pki.sgit.ai/packs/grant-and-mandate/enforcement.html</loc><lastmod>2026-08-26</lastmod></url>
@@ -22,6 +45,21 @@
   <url><loc>https://pki.sgit.ai/execution/index.html</loc><lastmod>2026-08-20</lastmod></url>
   <url><loc>https://pki.sgit.ai/shipped/index.html</loc><lastmod>2026-08-20</lastmod></url>
   <url><loc>https://pki.sgit.ai/roadmap/index.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://pki.sgit.ai/experiments/index.html</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://pki.sgit.ai/experiments/the-room/index.html</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://pki.sgit.ai/experiments/the-table/index.html</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://pki.sgit.ai/experiments/push-to-github/index.html</loc><lastmod>2026-08-29</lastmod></url>
+  <url><loc>https://pki.sgit.ai/experiments/the-deploy/index.html</loc><lastmod>2026-08-29</lastmod></url>
+  <url><loc>https://pki.sgit.ai/experiments/the-control-room/index.html</loc><lastmod>2026-08-29</lastmod></url>
+  <url><loc>https://pki.sgit.ai/simulator/index.html</loc><lastmod>2026-08-29</lastmod></url>
+  <url><loc>https://pki.sgit.ai/documents/the-experiments-deck-table.html</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://pki.sgit.ai/documents/the-scenario-engine.html</loc><lastmod>2026-08-29</lastmod></url>
+  <url><loc>https://pki.sgit.ai/documents/the-control-room.html</loc><lastmod>2026-08-29</lastmod></url>
+  <url><loc>https://pki.sgit.ai/documents/the-simulator.html</loc><lastmod>2026-08-29</lastmod></url>
+  <url><loc>https://pki.sgit.ai/documents/the-chain-room.html</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://pki.sgit.ai/documents/the-doors-page.html</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://pki.sgit.ai/documents/registry-has-no-opinion.html</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://pki.sgit.ai/documents/registry-not-thinking-in-graphs.html</loc><lastmod>2026-08-27</lastmod></url>
   <url><loc>https://pki.sgit.ai/documents/index.html</loc><lastmod>2026-08-20</lastmod></url>
   <url><loc>https://pki.sgit.ai/documents/briefing-pack.html</loc><lastmod>2026-08-20</lastmod></url>
   <url><loc>https://pki.sgit.ai/documents/site-review.html</loc><lastmod>2026-08-20</lastmod></url>

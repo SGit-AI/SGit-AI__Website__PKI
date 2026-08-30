@@ -1,0 +1,181 @@
+/* control.css — the control room board. Dark panel, SCADA lamp grammar,
+   game transport. Genre conventions only: no vendor's mimic art, no specific
+   game's HUD. The lamp colour is the tier and nothing else (gen_control.py).
+   Reduced motion: the flashing expectation lamp goes steady, the travelling
+   dot freezes at its end state — inherited discipline from scenario.css. */
+
+.ctrl{--cr-bg:#10151a;--cr-panel:#161d24;--cr-line:#2a3540;--cr-fg:#cfd8dc;
+  --cr-dim:#8aa0ab;--cr-ok:#2fb26d;--cr-set:#dfa92e;--cr-exp:#dfa92e;
+  --cr-alarm:#e05252;--cr-fault:#5c6b74;--cr-sel:#6db7d4;
+  background:var(--cr-bg);color:var(--cr-fg);border-radius:.6rem;
+  padding:1rem 1.1rem 1.2rem;margin:1.4rem 0;
+  font-family:var(--mono,ui-monospace,monospace)}
+.ctrl a{color:var(--cr-sel)}
+
+.ctrl-head{display:flex;justify-content:space-between;align-items:center;gap:.8rem;
+  border-bottom:1px solid var(--cr-line);padding-bottom:.6rem;margin-bottom:.9rem}
+.ctrl-title{font-weight:700;letter-spacing:.14em;font-size:.85rem}
+.mode-chip{border:1px solid var(--cr-set);color:var(--cr-set);border-radius:.3rem;
+  padding:.15rem .55rem;font-size:.72rem;letter-spacing:.12em;white-space:nowrap}
+
+/* units */
+.ctrl-units{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1rem}
+.unit{background:var(--cr-panel);border:1px solid var(--cr-line);border-radius:.5rem;
+  padding:.7rem .8rem .9rem;min-width:0}
+.unit-head{font-size:.8rem;font-weight:700}
+.unit-no{color:var(--cr-dim);letter-spacing:.12em;margin-right:.4rem}
+.unit-env{display:block;color:var(--cr-dim);font-weight:400;font-size:.7rem;margin-top:.15rem}
+.unit-hud{margin:.45rem 0 .3rem;font-size:.7rem;color:var(--cr-dim)}
+.hud{white-space:nowrap;margin-right:.45rem}
+.hud::before{content:"●";margin-right:.28rem}
+.hud--ok::before{color:var(--cr-ok)}.hud--set::before{color:var(--cr-set)}
+.hud--exp::before{color:var(--cr-exp)}.hud--alarm::before{color:var(--cr-alarm)}
+.hud--fault::before{color:var(--cr-fault)}
+
+/* mimic */
+.mimic{width:100%;height:auto;display:block;margin:.35rem 0 .6rem;
+  background:#0c1116;border:1px solid var(--cr-line);border-radius:.4rem}
+.m-st{fill:#131b23;stroke:var(--cr-dim);stroke-width:1.1}
+.m-st--twin{stroke:var(--cr-sel);stroke-width:1.6}
+.m-st--asset{stroke:var(--cr-fg);stroke-width:1.6}
+.m-name{fill:var(--cr-fg);font-size:9.5px;text-anchor:middle;font-family:inherit}
+.m-lbl{fill:var(--cr-dim);font-size:7.5px;text-anchor:middle;letter-spacing:.08em;font-family:inherit}
+.m-lbl--l{text-anchor:start}
+.m-lbl--alarm{fill:var(--cr-alarm);font-weight:700}
+.m-edge{stroke:var(--cr-dim);stroke-width:1.3}
+.m-edge--push{stroke:var(--cr-fg)}
+.m-term{fill:var(--cr-fg)}
+.m-blade{stroke-width:2}
+.m-blade--setting{stroke:var(--cr-set)}
+.m-blade--boundary{stroke:var(--cr-ok)}
+.m-blade--expectation{stroke:var(--cr-exp)}
+.m-wall{stroke:var(--cr-ok);stroke-width:3}
+.m-wall--dash{stroke:var(--cr-set);stroke-dasharray:4 3}
+.m-dot{fill:var(--cr-sel)}
+
+/* annunciator */
+.annun{display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:.45rem;
+  margin:.2rem 0 .7rem}
+.tile{display:flex;flex-direction:column;gap:.18rem;cursor:pointer;
+  border:1px solid var(--cr-line);border-radius:.35rem;background:#121920;
+  padding:.42rem .5rem;font-size:.66rem;line-height:1.25;min-height:4.6rem}
+.tile-id{color:var(--cr-dim);font-size:.62rem;letter-spacing:.1em}
+.tile-lamp{width:100%;height:.42rem;border-radius:.2rem;background:var(--cr-fault)}
+.tile-cap{color:var(--cr-fg)}
+.tile-word{margin-top:auto;font-size:.6rem;letter-spacing:.1em;color:var(--cr-dim)}
+.tile--ok .tile-lamp{background:var(--cr-ok)}
+.tile--ok .tile-word{color:var(--cr-ok)}
+.tile--set .tile-lamp{background:var(--cr-set)}
+.tile--set .tile-word{color:var(--cr-set)}
+.tile--exp .tile-lamp{background:var(--cr-exp);animation:cr-flash 1.6s steps(2,jump-none) infinite}
+.tile--exp .tile-word{color:var(--cr-exp)}
+.tile--alarm .tile-lamp{background:var(--cr-alarm)}
+.tile--alarm .tile-word{color:var(--cr-alarm);font-weight:700}
+.tile--fault .tile-lamp{background:repeating-linear-gradient(45deg,var(--cr-fault) 0 4px,#39454d 4px 8px)}
+.tile--fault .tile-word{color:var(--cr-fg)}
+/* a lamp that flashes to near-invisible is unreadable in any still frame —
+   .45 keeps the flash while every screenshot stays legible */
+@keyframes cr-flash{50%{opacity:.45}}
+
+/* faceplates (radio-driven; per-id rules are generated into the page head) */
+.fp-radio{position:absolute;opacity:0;pointer-events:none}
+.fp-bay{border-top:1px dashed var(--cr-line);padding-top:.55rem;min-height:7.2rem}
+.fp{display:none;font-size:.72rem;line-height:1.5}
+.fp-head{margin-bottom:.3rem}
+.fp-tier{border:1px solid;border-radius:.25rem;padding:0 .35rem;font-size:.62rem;
+  letter-spacing:.1em;margin-left:.35rem}
+.fp-tier--ok{color:var(--cr-ok)}.fp-tier--set{color:var(--cr-set)}
+.fp-tier--exp{color:var(--cr-exp)}.fp-tier--alarm{color:var(--cr-alarm)}
+.fp-tier--fault{color:var(--cr-dim)}
+.fp-row{color:var(--cr-dim)}
+.fp-k{display:inline-block;min-width:5.4em;color:var(--cr-fg);opacity:.75}
+.fp-rung .sc-pip{background:#39454d}
+.fp-rung .sc-pip--on{background:var(--cr-sel)}
+
+/* sequence of events */
+.soe{margin-top:1rem;border:1px solid var(--cr-line);border-radius:.5rem;
+  background:var(--cr-panel);padding:.6rem .75rem .7rem}
+.soe-head{display:flex;justify-content:space-between;align-items:center;gap:.6rem;
+  font-size:.72rem;letter-spacing:.12em;color:var(--cr-dim);margin-bottom:.45rem}
+.soe-ctl button{background:#0c1116;color:var(--cr-fg);border:1px solid var(--cr-line);
+  border-radius:.3rem;padding:.2rem .55rem;font:inherit;font-size:.7rem;cursor:pointer}
+.soe-ctl button:hover{border-color:var(--cr-sel)}
+.soe-cols,.soe-row{display:grid;grid-template-columns:1.6rem 9.5rem 11rem 1fr 6rem;
+  gap:.5rem;align-items:baseline}
+.soe-cols{font-size:.62rem;color:var(--cr-dim);letter-spacing:.1em;
+  border-bottom:1px solid var(--cr-line);padding-bottom:.25rem}
+.soe-log{list-style:none;margin:.2rem 0 0;padding:0}
+.soe-row{padding:.45rem 0;border-bottom:1px dashed var(--cr-line);font-size:.74rem}
+.soe-row:last-child{border-bottom:0}
+/* grid items default to min-width:auto, so a long unbroken token (an issuer
+   sha) overflowed its column and painted over the event text — the
+   screenshot-read caught row 3 doing it */
+.soe-row>span{min-width:0;overflow-wrap:anywhere}
+.soe-n{color:var(--cr-dim)}
+.soe-t{color:var(--cr-dim)}
+.soe-actor{color:var(--cr-dim)}
+.soe-ev{color:var(--cr-fg)}
+.soe-v{font-weight:700;letter-spacing:.08em}
+.soe-v--permit{color:var(--cr-ok)}
+.soe-v--refused{color:var(--cr-alarm)}
+.soe-v--decides{color:var(--cr-sel)}
+.soe-note,.soe-quote{grid-column:2 / -1;color:var(--cr-dim);font-size:.68rem;margin-top:.1rem}
+.soe code{color:var(--cr-fg);background:#0c1116;padding:0 .3rem;border-radius:.2rem}
+.soe-foot{color:var(--cr-dim);font-size:.68rem;margin:.6rem 0 0;line-height:1.55}
+
+/* replay states — the browser only steps through verdicts the build proved */
+.soe-row.future{opacity:.22}
+.soe-row.now{background:#0c1116;border-radius:.3rem;padding-left:.3rem;padding-right:.3rem}
+.ctrl[data-step="1"] #u1 .m-dot,.ctrl[data-step="4"] #u1 .m-dot{animation:cr-travel 1.4s ease-in-out both}
+.ctrl[data-step="2"] #u1 .m-dot{animation:cr-bounce 1.4s ease-in-out both}
+.ctrl[data-step="2"] #u1 .m-blade{stroke:var(--cr-alarm);animation:cr-flash 1s steps(2,jump-none) 3}
+.ctrl[data-step="3"] #u1 .m-blade{stroke:var(--cr-sel)}
+.ctrl[data-step="4"] #u1 .m-blade{stroke:var(--cr-ok)}
+@keyframes cr-travel{from{transform:translateX(0)}to{transform:translateX(84px)}}
+@keyframes cr-bounce{0%{transform:translateX(0)}55%{transform:translateX(38px)}100%{transform:translateX(0)}}
+
+/* the ladder from REPLAY to LIVE — the chip above is computed from these */
+.mode-chip--live{border-color:var(--cr-ok);color:var(--cr-ok)}
+.live-ladder{margin-top:1rem;border:1px solid var(--cr-line);border-radius:.5rem;
+  background:var(--cr-panel);padding:.6rem .75rem .7rem}
+.ll-head{font-size:.72rem;letter-spacing:.12em;color:var(--cr-fg);margin-bottom:.5rem}
+.ll-sub{display:block;letter-spacing:0;color:var(--cr-dim);font-size:.68rem;
+  margin-top:.2rem;line-height:1.5}
+.ll-list{list-style:none;margin:0;padding:0;counter-reset:ll}
+.ll-row{display:grid;grid-template-columns:4.2rem 1fr 7.5rem;gap:.5rem;align-items:baseline;
+  padding:.4rem 0;border-bottom:1px dashed var(--cr-line);font-size:.72rem}
+.ll-row:last-child{border-bottom:0}
+.ll-row>span{min-width:0;overflow-wrap:anywhere}
+.ll-state{font-weight:700;letter-spacing:.08em;font-size:.66rem}
+.ll-row--shut .ll-state{color:var(--cr-alarm)}
+.ll-row--open .ll-state{color:var(--cr-ok)}
+.ll-cond{color:var(--cr-fg)}
+.ll-needs{color:var(--cr-dim);font-size:.66rem;text-align:right}
+.ll-why{grid-column:2 / -1;color:var(--cr-dim);font-size:.67rem;margin-top:.12rem;line-height:1.5}
+.ll-metric{white-space:nowrap}
+.ll-foot{color:var(--cr-dim);font-size:.68rem;margin:.55rem 0 0;line-height:1.55}
+@media (max-width:700px){
+  .ll-row{grid-template-columns:4.2rem 1fr}
+  .ll-needs{display:none}
+}
+
+/* legend */
+.ctrl-legend{margin-top:.9rem;font-size:.68rem;color:var(--cr-dim);line-height:1.7}
+.lg{border:1px solid;border-radius:.25rem;padding:0 .35rem;letter-spacing:.08em;white-space:nowrap}
+.lg--ok{color:var(--cr-ok)}.lg--set{color:var(--cr-set)}
+.lg--exp{color:var(--cr-exp);animation:cr-flash 1.6s steps(2,jump-none) infinite}
+.lg--alarm{color:var(--cr-alarm)}.lg--fault{color:var(--cr-fg);
+  background:repeating-linear-gradient(45deg,transparent 0 4px,#39454d 4px 8px)}
+
+@media (prefers-reduced-motion: reduce){
+  .tile--exp .tile-lamp,.lg--exp,.ctrl .m-blade{animation:none}
+  .ctrl[data-step] #u1 .m-dot{animation:none;transform:translateX(84px)}
+  .ctrl[data-step="2"] #u1 .m-dot{transform:translateX(0)}
+}
+
+@media (max-width:700px){
+  .soe-cols,.soe-row{grid-template-columns:1.4rem 1fr 5rem}
+  .soe-t,.soe-cols span:nth-child(2){display:none}
+  .soe-cols span:nth-child(3){display:none}
+  .soe-actor{display:none}
+}

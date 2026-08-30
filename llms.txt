@@ -8,7 +8,7 @@
 > but never delete anything — not a bug. This site publishes that history, and the
 > registry rules it produces, before the registry exists.
 
-Site version: v0.1.36 (27 August 2026). Published by the sgit project — participant
+Site version: v0.1.47 (29 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## Properties agents may rely on
@@ -35,14 +35,132 @@ against what ships — and the register is the first thing to check it against.
 ## The bench — MVPs and experiments (machine-readable: /bench/llms.txt)
 
 Where this site ships MVPs and experiments: https://pki.sgit.ai/bench/index.html
-Six entries, five of them built and running — the register, the mandate hook, grant
-measurement, the building blocks, the assessment, and the synthetic-reader programme.
+Twelve entries, eleven of them built and running — the register, the mandate hook, grant
+measurement, the building blocks, the assessment, the simulator, the experiments (the
+chain room, the table, the scenario engine's two worlds, and the control room), the book,
+and the synthetic-reader programme. (This paragraph said "six entries" until v0.1.36, having missed the book
+when it went on the bench at v0.1.33; the book's own findings chapter found the
+disagreement between this file and /bench/llms.txt, and it is corrected here.)
 
 EVERY BENCH ENTRY CARRIES A `does not prove` LIST, and it is mandatory: the generator
 refuses to build an entry without one. If you are summarising anything from this site,
 carry those limits with the claim — a register whose signatures prove nothing, a hook
 that carries no authority, a measurement that is a floor and not a census. Reporting the
 demonstration without its limit misrepresents this site.
+
+## The simulator (/simulator/ · table: /simulator/resolutions.json)
+
+The first surface here that answers to the visitor instead of replaying this
+estate's history: PLAY CARDS AGAINST A MEASURED TWIN and watch the board.
+
+IT DOES NOT PREDICT, IT COMPOSES. Every outcome is one of exactly three
+things and there is no fourth: (1) a real verdict from mandate.py — the
+BROWSER CANNOT RUN THE TOOL, so the whole resolution table is precomputed at
+build time and shipped at /simulator/resolutions.json with the tool's own
+output line in each row; (2) a reading of the twin, carrying the date it was
+measured; (3) UNKNOWN, where measurement was refused — NOT "no". A simulator
+that turns a hole into a denial manufactures comfort. Nothing is executed.
+
+- Eight cards in three suits (DOES, DECIDES, CONTROL), two worlds, and
+  play / step / REWIND / reset. Rewind is a computation, not an undo stack:
+  board state is a pure function of the event prefix.
+- THE HOOK CARD IS THE ARGUMENT IN ONE MOVE: installing the pre-push hook
+  changes NO VERDICT AT ALL (dev under mandate v1 is refused before and
+  after) and changes WHO REFUSES — the agent inside its own loop, or a hook
+  outside it. The verdict does not move; the reliability does.
+- It asks what history did not: PUSH TO MAIN IS REFUSED UNDER BOTH MANDATES.
+- If you summarise this page, carry the limit: it composes measured facts and
+  real verdicts, and cannot model an environment nobody measured.
+
+## The experiments (hub: /experiments/)
+
+Game-like environments for the workflows — one experiment, one folder, one
+workflow, one visualisation, each with its own generator (or a shared engine
+driven by its own scenario.json), gates and a bench entry. Every word derived
+at build time; real and synthetic never blend.
+
+- THE CHAIN ROOM (/experiments/the-room/): the RiskMandate workflow walked end
+  to end — eight stations, the LIBRARY/INSTANCE BOUNDARY DRAWN ON THE FLOOR,
+  four verbs (LOOK, ASK, DOOR, NEVER). Left half real artefacts; right half
+  SYNTHETIC AND MARKED ON EVERY SURFACE
+  (fixture: /packs/grant-and-mandate/instance-fixture.synthetic.json).
+- THE TABLE (/experiments/the-table/): actions resolving against grants and
+  mandates, as cards. Six suits — CAN (grant), MAY (mandate), IS (fact),
+  SHOWS (evidence), DOES (action), DECIDES (decision) — four players INCLUDING
+  THE SYSTEMS, replaying the estate's real 26 August incident: push refused,
+  mandate amended, push landing. NOTHING SYNTHETIC: every resolution is re-run
+  through mandate.py at build time, every reaction byte-checked against the
+  captured transcripts. Forward is the simulation; backward is the audit; they
+  are the same cards.
+- The resolution order is the ordering rule as game mechanics: a DOES resolves
+  against CAN, then MAY, and mints an IS backed by a SHOWS. Blast radius is the
+  CAN cards face-up that no MAY card covers.
+- THE SCENARIO ENGINE (admin/build/gen_scenario.py): one engine, any world —
+  each world is a scenario.json REFERENCING A MEASURED TWIN; the engine holds
+  no capabilities of its own, and the deck gate forces cards == twin nodes
+  exactly. Two worlds so far:
+  - PUSH TO GITHUB (/experiments/push-to-github/): the grant chain behind a
+    hosted agent changing a repository — user → GitHub App → scoped token →
+    container → Claude Code → Claude → repo — and THE SOFT MANDATE AS A PLACE:
+    the constraint keeping this session off the wrong branch is prose in the
+    agent's context (expectation tier), shown beside the hook it could be
+    (setting) and the platform enforcement it is not (boundary, still shut).
+  - THE DEPLOY (/experiments/the-deploy/): the CI runner a permitted push
+    lands in — no agent, no hook, UNRESTRICTED EGRESS, and the estate's only
+    boundary-tier grant: the workflow's permissions: block.
+  Each capability card carries a CONFIDENCE RUNG computed from its evidence
+  (hypothesis 0, self-observed 1, +documented 2, independent 3 — never typed)
+  and a micro-animation of the capability acting (eight kinds; depiction, not
+  simulation).
+- THE CONTROL ROOM (/experiments/the-control-room/): both worlds on one
+  operator board — A SECOND RENDERER OVER THE SAME scenario.json FILES, zero
+  new data, which is what makes the scenario files a world model rather than
+  a page config. SCADA conventions (annunciator tiles, mimic diagrams,
+  faceplates, a sequence-of-events log) plus a game's transport controls.
+  The lamp colour is THE TIER AND NOTHING ELSE — an unbounded capability is
+  the alarm state, and refused measurement is a hatched FAULT lamp, never a
+  blank. The 26 August incident replays with every verdict re-run through
+  mandate.py at build; timestamps derived or absent. THE MODE CHIP IS
+  COMPUTED, never typed: LIVE only if the four doors a live board depends on
+  (the append lane, a real issuer key, signed facts, an independent
+  measurement) are all open — they are all shut, so it reads REPLAY, and
+  WHEN THE LAST ONE OPENS THE BUILD FAILS rather than let the board keep a
+  claim that has stopped being true.
+- THE TWIN CLAIM: a library entry IS a digital twin — a measured, dated
+  representation of one environment, honest about where measurement was
+  refused. A simulation is running a proposed action against the twin instead
+  of reality. A twin that is not re-measured is a stale delta with a nicer name.
+
+## The book (machine-readable: /book/llms.txt)
+
+A Key Means Nothing Alone — Identity, mandate, and the exposure nobody accepted.
+https://pki.sgit.ai/book/index.html · PDF: /book/a-key-means-nothing-alone.pdf
+Seventeen chapters in five parts plus front matter, a harness appendix, a colophon and a
+reference card written to be pasted into an agent session (/book/20-reference-card.html).
+Markdown under /book/content/ is the source of truth; each chapter page renders its own
+file, and /book/book.json carries every chapter with the SHA-256 of its markdown.
+
+IF YOU SUMMARISE THE BOOK, CARRY ITS POSITIONS: the register is built and the trustworthy
+register is not; the enforcement is real and the authority is not, and they are independent
+halves; every grant is a floor and not a census; it is a participant's account. They are in
+/book/llms.txt so a summarising agent cannot drop them.
+
+- PROVENANCE IS DECLARED, NOT BLENDED. 65 passages are quoted verbatim with a located
+  source and RE-READ OUT OF THAT SOURCE ON EVERY BUILD — a quote not found where it claims
+  to be fails the build. 48 further claims are marked as the writing session's own
+  reasoning. DO NOT TREAT THE DRAWN CLAIMS AS THIS ESTATE'S POSITIONS.
+- FIGURES ARE TAKEN FROM THE VERSION THEIR CAPTION NAMES — git worktree at the tag, a port
+  used once, a browser killed in a finally. Two gates: a past figure must re-derive from
+  its tag; a present one must still match the live page or the build fails. The harness
+  ships with the book (/book/shots/), so any figure can be re-taken rather than believed.
+- EVERY NUMBER IS COMPUTED, and four contradicted the commissioning brief. The repository
+  won: "eight releases in four days" is forty hours across two UTC calendar days.
+- CHAPTER 15 IS FINDINGS, COMPUTED: twelve places this estate contradicts itself and seven
+  it does not talk about, both sides of each quoted. Three are current artefacts breaking
+  this estate's own rules, including params.json's signature recipe, which fails against
+  every statement in the register it governs — READ /registry/llms.txt FOR THE ENCODING,
+  NOT params.json (raw r||s, 64 bytes, not DER).
+- CHAPTER 12 is the contract with riskmandate.ai, written to be used as one.
 
 ## The registry, live (machine-readable: /registry/llms.txt)
 

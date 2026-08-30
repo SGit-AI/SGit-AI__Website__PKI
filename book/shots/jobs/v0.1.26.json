@@ -1,0 +1,9 @@
+{
+  "tag": "v0.1.26",
+  "outdir": "img",
+  "jobs": [
+    { "id": "f02a-registry-at-v0.1.26", "path": "/registry/index.html",
+      "fullPage": false, "scale": 2,
+      "viewport": {"width": 1180, "height": 1000} }
+  ]
+}

@@ -1,0 +1,36 @@
+<!doctype html><meta charset="utf-8"><title>t05-validate · pki.sgit.ai</title>
+<link rel="canonical" href="https://pki.sgit.ai/book/shots/term/t05-validate.html">
+<meta name="robots" content="noindex">
+<style>
+ html,body{margin:0;background:#0f1115}
+ .term{font:13px/1.55 ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+   color:#d8dee9;background:#0f1115;padding:22px 24px;white-space:pre;
+   -webkit-font-smoothing:antialiased}
+ .term .p{color:#7aa2f7}          /* the prompt */
+ .term .c{color:#5c6370;font-style:italic}  /* a comment */
+ .term .ok{color:#9ece6a}          /* an affirmative result */
+ .term .no{color:#f7768e}          /* a refusal */
+ .cap{font:11px/1.4 ui-monospace,monospace;color:#5c6370;
+   padding:0 24px 16px;background:#0f1115}
+ .sheet{display:inline-block;background:#0f1115;min-width:100%}
+</style>
+<div class="sheet"><div class="term"><span class="p">$ cd registry &amp;&amp; python3 tools/registry_tool.py validate</span>
+<span class="ok">  ✓ fixture-agent-a — valid, accepted mandate: YES (expected YES) — valid until 2026-10-01T00:00:00Z, on the authority of sha256:90f97984b9cf3930, a declared root of this registry</span>
+<span class="ok">  ✓ fixture-agent-b — mandate revoked by issuer: NO (expected NO) — mandate revoked (policy), effective 2026-08-20T00:00:00Z</span>
+<span class="ok">  ✓ fixture-agent-c — mandate expired: NO (expected NO) — mandate expired 2026-08-01T00:00:00Z</span>
+<span class="ok">  ✓ fixture-agent-d — mandate issued, never accepted: NO (expected NO) — a mandate exists and its subject has never accepted it — inert (decision 8, provisional)</span>
+<span class="ok">  ✓ fixture-agent-e — identity self-revoked: NO (expected NO) — subject identity revoked (key-compromise), effective 2026-08-24T00:00:00Z</span>
+<span class="ok">  ✓ role: site-agent: YES (expected YES) — valid until 2026-12-31T00:00:00Z, on the authority of sha256:90f97984b9cf3930, a declared root of this registry</span>
+  · sha256-1ccafd8f3f8906c4: FIXTURE (private key published)
+  · sha256-1d7edf604b98bcf2: FIXTURE (private key published)
+  · sha256-33aae8150b3628ea: FIXTURE (private key published)
+  · sha256-878bb98be58abc56: FIXTURE (private key published)
+  · sha256-90f97984b9cf3930: FIXTURE (private key published)
+  · sha256-9953ff45429350bc: FIXTURE (private key published)
+  · sha256-a940ea382b258d86: FIXTURE (private key published)
+  · sha256-b3ffc1f05803720b: FIXTURE (private key published)
+  · sha256-df2bb4d93af69e6a: FIXTURE (private key published)
+  · sha256-f32e7a1da4e098e0: FIXTURE (private key published)
+  · sha256-f9facb4c94da6c19: REAL identity (private half not published)
+<span class="ok">registry validate: OK — 11 records (10 fixtures, 1 real), 23 statements, every signature verified, every reference resolves, no private material outside fixture records, all 6 expected answers reproduced</span></div>
+<div class="cap">t05-validate.txt · sha256:c6c681d2b358f820ce2e59ae3839f578…</div></div>

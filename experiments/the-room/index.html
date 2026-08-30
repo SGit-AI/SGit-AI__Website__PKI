@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The chain room &mdash; the RiskMandate workflow, playable &middot; pki.sgit.ai</title>
+<meta name="description" content="The full chain — reality, twin, facts, finding, risks, decisions, monitoring — as a room you can walk: eight stations, the product boundary drawn on the floor, a work item that travels it. The left half is real artefacts; the right half is a marked simulation, because the workflow is simulated first, then supported.">
+<link rel="canonical" href="https://pki.sgit.ai/experiments/the-room/index.html">
+<meta property="og:url" content="https://pki.sgit.ai/experiments/the-room/index.html">
+<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="../../assets/bench.css">
+<link rel="stylesheet" href="room.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../index.html">pki<span>.sgit.ai</span></a>
+  <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../../admin/versions.html" title="Site release history">v0.1.47</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../../failure/index.html">The registry<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../registry/index.html">&#9679; The registry, live</a>
+      <a class="sl" href="../../failure/index.html">Why they don't exist</a>
+      <a class="sl" href="../../rules/index.html">The four rules</a>
+      <a class="sl" href="../../mandate/index.html">Identity &amp; mandate</a>
+      <a class="sl" href="../../roadmap/index.html">Build order</a>
+      <a class="sl" href="../../rules/prior-art.html">Prior art</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../bootstrap/index.html">The layers<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../bootstrap/index.html">The bootstrap trap</a>
+      <a class="sl" href="../../enrolment/index.html">Enrolment</a>
+      <a class="sl" href="../../execution/index.html">The execution broker</a>
+      <a class="sl" href="../../shipped/index.html">What already ships</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../assess/index.html">Map your case<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../assess/index.html">Map your own case</a>
+      <a class="sl" href="../../assess/library.html">The library of trees</a>
+      <a class="sl" href="../../packs/map-your-case/readers/index.html">Synthetic readers</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../origins/index.html">Origins<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../origins/index.html">Origins: 2026</a>
+      <a class="sl" href="../../origins/review.html">The review, redacted</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../../bench/index.html">The bench<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../bench/index.html">&#9679; The bench &mdash; what is built</a>
+      <a class="sl" href="../../simulator/index.html">&#9679; The simulator &mdash; play a card</a>
+      <a class="sl" href="../../experiments/index.html">&#9679; Experiments</a>
+      <a class="sl here" href="../../experiments/the-room/index.html">&mdash; the chain room</a>
+      <a class="sl" href="../../experiments/the-table/index.html">&mdash; the table</a>
+      <a class="sl" href="../../experiments/push-to-github/index.html">&mdash; push to GitHub</a>
+      <a class="sl" href="../../experiments/the-deploy/index.html">&mdash; the deploy</a>
+      <a class="sl" href="../../experiments/the-control-room/index.html">&mdash; the control room</a>
+      <a class="sl" href="../../workbench/index.html">&#9679; The workbench (app)</a>
+      <a class="sl" href="../../registry/index.html">The register, live</a>
+      <a class="sl" href="../../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
+      <a class="sl" href="../../packs/grant-and-mandate/blocks.html">The building blocks</a>
+      <a class="sl" href="../../assess/index.html">Map your own case</a>
+      <a class="sl" href="../../book/index.html">The book (commissioned)</a>
+      <a class="sl" href="../../book/brief.html">&mdash; its commissioning brief</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../documents/index.html">The documents</a>
+      <a class="sl" href="../../packs/index.html">Dev packs</a>
+      <a class="sl" href="../../packs/registry-mvp/index.html">The registry MVP pack</a>
+      <a class="sl" href="../../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
+      <a class="sl" href="../../packs/map-your-case/index.html">The Map Your Case pack</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../../admin/versions.html">Release history</a>
+      <a class="sl" href="../../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+  <script src="../../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc doc--wide">
+<div class="crumb"><a href="../../index.html">pki.sgit.ai</a> / <a href="../index.html">experiments</a> / the-room</div>
+
+<h1>The chain room</h1>
+<p class="lead">The workflow this estate exists to serve, walked end to end:
+<code>reality &rarr; twin &rarr; facts &rarr; finding</code> on this side of the line,
+<code>risks &rarr; decisions &rarr; monitoring</code> on the other. <b>Pick a verb, then a
+station.</b> Or <button id="play" class="rplay">&#9654; run the walk</button></p>
+
+<div class="rmark"><b>The left half of this room is real</b> &mdash; every desk stands on a fetchable
+artefact: the measured library entry, the signed mandate, the computed excess row.
+<b>The right half is SYNTHETIC and marked on every surface</b>: no risk has been derived, priced,
+accepted or monitored by anybody. The workflow is <b>simulated first, then supported</b> &mdash;
+the same way this register taught its shape with ten labelled fixtures before one real record
+existed. Fixture: <a href="../../packs/grant-and-mandate/instance-fixture.synthetic.json">instance-fixture.synthetic.json</a>.</div>
+
+<div class="rverbs" role="toolbar" aria-label="Verbs">
+  <button class="rverb rverb--on" data-v="look">LOOK</button>
+  <button class="rverb" data-v="ask">ASK</button>
+  <button class="rverb" data-v="door">DOOR</button>
+  <button class="rverb" data-v="never">NEVER</button>
+  <span class="rverb-hint">what is this &middot; what are you holding &middot; what must be true before work moves &middot; what do you refuse</span>
+</div>
+
+<div class="rwrap"><svg viewBox="0 0 1100 585" class="room-svg" role="img"
+  aria-label="The chain room: eight stations from reality to monitoring, with the product boundary drawn across the floor between the delta desk and the risk desk">
+  <rect x="0" y="0" width="1100" height="246" class="rzone rzone--pki"/>
+  <rect x="0" y="272" width="1100" height="313" class="rzone rzone--rm"/>
+  <text x="18" y="26" class="rzlabel">pki.sgit.ai &mdash; THE LIBRARY &middot; real artefacts, fetchable below every desk</text>
+  <text x="18" y="298" class="rzlabel rzlabel--syn">riskmandate.ai &mdash; THE INSTANCE &middot; SYNTHETIC, illustrative &mdash; no risk has been derived, priced, accepted or monitored by anybody</text>
+
+  <g class="rbound" id="st-boundary" tabindex="0" role="button" data-id="boundary"
+     aria-label="The boundary between the two products: references cross, copies bounce, personal data never crosses into the library">
+    <rect x="0" y="246" width="1100" height="26" class="rbound-band"/>
+    <text x="550" y="263" class="rbound-t">THE BOUNDARY &mdash; references cross &middot; copies bounce &middot; personal data never crosses up</text>
+  </g>
+
+  <path d="M95,197 L320,197 L545,197 L770,197 L995,197 L995,374 L995,374 L660,374 L325,374" class="rroute" fill="none"/>
+  <path d="M267,430 C 85,415 85,180 258,169" class="rloop" fill="none"/>
+  <text x="70" y="326" class="rloop-t rloop-t--dark">at expiry: back across the line &mdash;</text>
+  <text x="70" y="341" class="rloop-t rloop-t--dark">re-measured, re-computed, re-decided</text>
+
+  <g class="rst" id="st-reality" tabindex="0" role="button"
+   aria-label="Reality — the environment, as installed" data-id="reality">
+  <rect x="23" y="53" width="144" height="132" rx="10" class="rhit"/>
+  <rect x="37" y="81" width="116" height="86" rx="8" class="rdesk"/>
+  <path d="M79,143 l16,-9 l16,9 l0,18 l-16,9 l-16,-9 z" class="rp"/><path d="M79,143 l16,9 l16,-9 M95,152 l0,18" class="rp"/>
+  <rect x="37" y="171" width="116" height="17" rx="3" class="rplate"/>
+  <text x="95" y="183.5" class="rname">Reality</text>
+  
+</g>
+<g class="rst" id="st-measurer" tabindex="0" role="button"
+   aria-label="The Measurer — runs measure.py inside the twin" data-id="measurer">
+  <rect x="248" y="53" width="144" height="132" rx="10" class="rhit"/>
+  <rect x="262" y="81" width="116" height="86" rx="8" class="rdesk"/>
+  <circle cx="320" cy="99" r="10" class="rf"/><path d="M304,123 a16,14 0 0 1 32,0" class="rf"/><rect x="302" y="147" width="36" height="12" rx="2" class="rp"/><line x1="308" y1="147" x2="308" y2="153" class="rp"/><line x1="316" y1="147" x2="316" y2="153" class="rp"/><line x1="324" y1="147" x2="324" y2="153" class="rp"/><line x1="332" y1="147" x2="332" y2="153" class="rp"/>
+  <rect x="262" y="171" width="116" height="17" rx="3" class="rplate"/>
+  <text x="320" y="183.5" class="rname">The Measurer</text>
+  
+</g>
+<g class="rst" id="st-counter" tabindex="0" role="button"
+   aria-label="The Counter — the registry: registers, holds, has no opinion" data-id="counter">
+  <rect x="473" y="53" width="144" height="132" rx="10" class="rhit"/>
+  <rect x="487" y="81" width="116" height="86" rx="8" class="rdesk"/>
+  <circle cx="545" cy="99" r="10" class="rf"/><path d="M529,123 a16,14 0 0 1 32,0" class="rf"/><rect x="530" y="143" width="30" height="5" rx="1" class="rp"/><rect x="530" y="150" width="30" height="5" rx="1" class="rp"/><rect x="530" y="157" width="30" height="5" rx="1" class="rp"/>
+  <rect x="487" y="171" width="116" height="17" rx="3" class="rplate"/>
+  <text x="545" y="183.5" class="rname">The Counter</text>
+  
+</g>
+<g class="rst" id="st-issuer" tabindex="0" role="button"
+   aria-label="The Issuer — authors the mandate" data-id="issuer">
+  <rect x="698" y="53" width="144" height="132" rx="10" class="rhit"/>
+  <rect x="712" y="81" width="116" height="86" rx="8" class="rdesk"/>
+  <circle cx="770" cy="99" r="10" class="rf"/><path d="M754,123 a16,14 0 0 1 32,0" class="rf"/><rect x="765" y="141" width="10" height="12" rx="2" class="rp"/><rect x="756" y="153" width="28" height="6" rx="2" class="rp"/>
+  <rect x="712" y="171" width="116" height="17" rx="3" class="rplate"/>
+  <text x="770" y="183.5" class="rname">The Issuer</text>
+  
+</g>
+<g class="rst" id="st-delta" tabindex="0" role="button"
+   aria-label="The Delta Desk — computes on approach — a desk with no drawers" data-id="delta">
+  <rect x="923" y="53" width="144" height="132" rx="10" class="rhit"/>
+  <rect x="937" y="81" width="116" height="86" rx="8" class="rdesk"/>
+  <circle cx="995" cy="99" r="10" class="rf"/><path d="M979,123 a16,14 0 0 1 32,0" class="rf"/><path d="M995,140 L1009,160 L981,160 Z" class="rp"/>
+  <rect x="937" y="171" width="116" height="17" rx="3" class="rplate"/>
+  <text x="995" y="183.5" class="rname">The Delta Desk</text>
+  
+</g>
+<g class="rst rst--syn" id="st-risk" tabindex="0" role="button"
+   aria-label="The Risk Desk — derives risk at the business altitude; synthetic, illustrative" data-id="risk">
+  <rect x="923" y="378" width="144" height="132" rx="10" class="rhit"/>
+  <rect x="937" y="406" width="116" height="86" rx="8" class="rdesk"/>
+  <circle cx="995" cy="424" r="10" class="rf"/><path d="M979,448 a16,14 0 0 1 32,0" class="rf"/><path d="M980,483 A15,15 0 0 1 1010,483" class="rp"/><line x1="995" y1="483" x2="1004" y2="472" class="rp"/>
+  <rect x="937" y="496" width="116" height="17" rx="3" class="rplate"/>
+  <text x="995" y="508.5" class="rname">The Risk Desk</text>
+  <g class="rsyn-badge"><rect x="949" y="386" width="92" height="15" rx="3"/><text x="995" y="397">SYNTHETIC</text></g>
+</g>
+<g class="rst rst--syn" id="st-acceptance" tabindex="0" role="button"
+   aria-label="The Acceptance — the card: owner, interval, reviewer; synthetic, illustrative" data-id="acceptance">
+  <rect x="588" y="378" width="144" height="132" rx="10" class="rhit"/>
+  <rect x="602" y="406" width="116" height="86" rx="8" class="rdesk"/>
+  <circle cx="660" cy="424" r="10" class="rf"/><path d="M644,448 a16,14 0 0 1 32,0" class="rf"/><rect x="643" y="467" width="34" height="21" rx="2" class="rp"/><line x1="648" y1="482" x2="664" y2="482" class="rp"/><line x1="648" y1="474" x2="672" y2="474" class="rp"/>
+  <rect x="602" y="496" width="116" height="17" rx="3" class="rplate"/>
+  <text x="660" y="508.5" class="rname">The Acceptance</text>
+  <g class="rsyn-badge"><rect x="614" y="386" width="92" height="15" rx="3"/><text x="660" y="397">SYNTHETIC</text></g>
+</g>
+<g class="rst rst--syn" id="st-monitor" tabindex="0" role="button"
+   aria-label="The Monitor — conditions observed and holding; the clock runs; synthetic, illustrative" data-id="monitor">
+  <rect x="253" y="378" width="144" height="132" rx="10" class="rhit"/>
+  <rect x="267" y="406" width="116" height="86" rx="8" class="rdesk"/>
+  <circle cx="325" cy="424" r="10" class="rf"/><path d="M309,448 a16,14 0 0 1 32,0" class="rf"/><circle cx="325" cy="476" r="13" class="rp"/><line x1="325" y1="476" x2="325" y2="468" class="rp"/><line x1="325" y1="476" x2="331" y2="479" class="rp"/>
+  <rect x="267" y="496" width="116" height="17" rx="3" class="rplate"/>
+  <text x="325" y="508.5" class="rname">The Monitor</text>
+  <g class="rsyn-badge"><rect x="279" y="386" width="92" height="15" rx="3"/><text x="325" y="397">SYNTHETIC</text></g>
+</g>
+  <circle id="token" cx="95" cy="197" r="7" class="rtoken"/>
+</svg></div>
+
+<div class="rsay" id="say" aria-live="polite">
+  <div class="rsay-head" id="say-head">The room</div>
+  <div class="rsay-body" id="say-body">Every word spoken here is derived at build time from the same
+files the pipeline runs on &mdash; nothing about state is hand-written. Click a verb, then a desk.
+The boundary is clickable too.</div>
+</div>
+
+<details class="rplaylist"><summary>The walk, as text (the same eight stops the button plays)</summary>
+<ol><li>The environment enters: claude-code-remote, as installed on 2026-08-26. <a href="../../packs/grant-and-mandate/library/claude-code-remote__ccr-container__2026-08-26.json">the library entry</a></li>
+<li>Measured from inside: 9 nodes, 2 unknown — the self-measurement probe was refused. A floor, not a census. <a href="../../packs/grant-and-mandate/library.html">the measurement method</a></li>
+<li>Registered: the grant joins 23 signed statements in 11 records. The counter has no opinion about any of them. <a href="../../registry/llms.txt">the register&#x27;s front door</a></li>
+<li>Authorised: mandate v2 — claude/**, dev, expiring 2026-12-31. Somebody decided, and signed. <a href="../../packs/grant-and-mandate/mandates/current.json">the signed mandate</a></li>
+<li>Computed on arrival: grant 41 resources − mandate 1 → excess 40. Acceptor: none — nobody has accepted this, yet. <a href="../../registry/views/excess-authority.json">the excess row</a></li>
+<li>The finding crosses as a REFERENCE — a library identifier, not a copy. Personal data never crosses the other way. <a href="../../book/12-the-library-and-the-instance.html">the contract (book ch. 12)</a></li>
+<li>SYNTHETIC · illustrative — Risk 58 · medium is derived and ACCEPTED — by Project Lead, sgit, for 126 days, reviewed by Site agent (drafting) + Project Lead (deciding). The exposure has an owner for the first time in the chain. <a href="../../packs/grant-and-mandate/instance-fixture.synthetic.json">the instance fixture (synthetic)</a></li>
+<li>SYNTHETIC · illustrative — Monitored: 3 of 4 conditions holding; c4 has never held (the hook is tier setting; the boundary version is proposed and unbuilt (GM-D26)). In 126 days the interval ends and the item walks back across the line: re-measured, re-computed, re-decided. <a href="../../packs/grant-and-mandate/instance-fixture.synthetic.json">the conditions (synthetic)</a></li></ol></details>
+
+<noscript><div class="rmark"><b>Without JavaScript, the room speaks here instead:</b></div>
+<h3>Reality</h3><dl><dt>LOOK</dt><dd>The environment itself — claude-code-remote, a managed cloud container. Not a desk: everything else in this room measures, records or constrains it.</dd><dt>ASK</dt><dd>I hold whatever I was installed with. Nobody decided most of it.</dd><dt>DOOR</dt><dd>Nothing. Reality is where the chain starts; it owes the room no conditions.</dd><dt>NEVER</dt><dd>Stand still. I change on my vendor&#x27;s schedule, which is why every fact about me carries a date.</dd></dl>
+<h3>The Measurer</h3><dl><dt>LOOK</dt><dd>Runs the published measurement inside the environment and writes down only what it can see: presence and reachability, never contents.</dd><dt>ASK</dt><dd>The twin&#x27;s grant: 9 nodes, 2 of them unknown — my self-measurement probe was refused, and a refused probe is recorded unknown, never guessed. I am a floor, not a census, and I say so on my face.</dd><dt>DOOR</dt><dd>An as_of on every node. An undated measurement is a wish with a ruler.</dd><dt>NEVER</dt><dd>Guess. A node I could not evidence is marked, not dropped — and not invented.</dd></dl>
+<h3>The Counter</h3><dl><dt>LOOK</dt><dd>The register. Signed statements at public addresses — identities, facts, mandates — fetchable by anybody with no account.</dd><dt>ASK</dt><dd>23 statements across 11 records. Which would you like? I hand out documents, not answers.</dd><dt>DOOR</dt><dd>Rule 1: only the owner writes to their own record. A valid signature by a non-owner is the 2019 failure, not write authority.</dd><dt>NEVER</dt><dd>Hold an opinion. An opinion needs context, and the context is yours, not mine. I register.</dd></dl>
+<h3>The Issuer</h3><dl><dt>LOOK</dt><dd>Where authorisation gets decided and written down — the one document nothing else in the industry provides.</dd><dt>ASK</dt><dd>Mandate v2: claude/**, dev on one repository, expiring 2026-12-31. The allow-list is stored; what a person accepts are the prohibitions rendered from it.</dd><dt>DOOR</dt><dd>An interval. A mandate without one is a grant under another name, and I will not sign it.</dd><dt>NEVER</dt><dd>Show the allow-list for approval. Forty permitted operations produce consent without comprehension.</dd></dl>
+<h3>The Delta Desk</h3><dl><dt>LOOK</dt><dd>A desk with no drawers. There is nothing in it, deliberately: a stored delta is stale the moment either side moves.</dd><dt>ASK</dt><dd>Nothing — I compute when you arrive. Just now: grant 41 resources, mandate 1 → excess 40, acceptor: none. That last field is why the room continues past me.</dd><dt>DOOR</dt><dd>Both documents, fresh. Give me a stale grant and I will hand you a confident wrong number.</dd><dt>NEVER</dt><dd>Store a result. Ask me again and I will compute it again.</dd></dl>
+<h3>The Risk Desk <em>(synthetic, illustrative)</em></h3><dl><dt>LOOK</dt><dd>SYNTHETIC · illustrative — Where a finding becomes a risk — at an altitude, in that altitude&#x27;s language, on somebody&#x27;s authority. The registry&#x27;s half ended at the delta desk; everything on this side of the line is the instance&#x27;s.</dd><dt>ASK</dt><dd>SYNTHETIC · illustrative — Risk 58 · MEDIUM — “An agent that can push to the branch that deploys a public site, where the only containment below boundary tier is a hook the agent can bypass.” Blast radius: one public site, redeployed per push.</dd><dt>DOOR</dt><dd>SYNTHETIC · illustrative — A finding to derive from, by reference. I do not read raw environments and I hold no copies.</dd><dt>NEVER</dt><dd>SYNTHETIC · illustrative — Reach across the line for personal data. I work from references into the public library.</dd></dl>
+<h3>The Acceptance <em>(synthetic, illustrative)</em></h3><dl><dt>LOOK</dt><dd>SYNTHETIC · illustrative — The decision, as a card. Left of the line the excess row reads acceptor: none; here, for the first time in the chain, the exposure has an owner.</dd><dt>ASK</dt><dd>SYNTHETIC · illustrative — “Site agent release-branch access” — accepted by Project Lead, sgit, expires in 126 days, reviewer: Site agent (drafting) + Project Lead (deciding). Status: active.</dd><dt>DOOR</dt><dd>SYNTHETIC · illustrative — A named acceptor AND an interval. Missing either, I refuse the work — that is not caution, it is the definition.</dd><dt>NEVER</dt><dd>SYNTHETIC · illustrative — Accept on nobody&#x27;s behalf. The null acceptor stays on the other side of the line.</dd></dl>
+<h3>The Monitor <em>(synthetic, illustrative)</em></h3><dl><dt>LOOK</dt><dd>SYNTHETIC · illustrative — The card is not a certificate — it is a live join between a decision and a stream of measurements. Each condition is checked, and checked again.</dd><dt>ASK</dt><dd>SYNTHETIC · illustrative — 3 of 4 conditions holding as of 2026-08-27. Condition c4 has never held: the hook is tier setting; the boundary version is proposed and unbuilt (GM-D26). Expiry in 126 days — and at expiry the item walks back across the line to be re-measured, re-computed and re-decided.</dd><dt>DOOR</dt><dd>SYNTHETIC · illustrative — Evidence with an as_of for every condition. A status that is typed rather than observed is not a status.</dd><dt>NEVER</dt><dd>SYNTHETIC · illustrative — Let the clock stop. An acceptance that outlives its interval is a grant wearing a decision&#x27;s clothes.</dd></dl>
+<h3>The Boundary</h3><dl><dt>LOOK</dt><dd>The line between the two products, drawn on the floor. The registry holds the library: public, no personal data, ever. The instance holds the decisions: private, never published.</dd><dt>ASK</dt><dd>Traffic: references, crossing. A reference is a library identifier — a corrected entry improves every instance that holds one. A copy would keep the stale answer silently, so copies bounce.</dd><dt>DOOR</dt><dd>For anything crossing rightward: be a reference. For anything crossing leftward: be nothing.</dd><dt>NEVER</dt><dd>Let personal data cross into the library. Not compressed, not hashed, not summarised. Never.</dd></dl></noscript>
+
+<p class="dr-notprove"><b>What this room does not claim.</b> The right half is invented, and labelled
+&mdash; it teaches the workflow's shape and is not evidence the shape works. The genre is the
+point-and-click adventure's grammar with this estate's own sentences, figures, palette and verbs,
+ported from <a href="https://newsroom.sgit.ai/briefs/10__the-newsroom-floor.md">newsroom.sgit.ai's
+debrief</a> (CC BY 4.0) whose own limits carry over: the genre has one prior implementation, unread
+by users, untested with screen readers. And the room opens none of
+<a href="../../registry/doors.html">the nine shut doors</a> &mdash; it makes one of them, <i>nobody has
+ever accepted an exposure</i>, explainable to the person who might.</p>
+
+<p class="dr-src">Specified in <a href="../../briefs/v0.33.66__dev-brief__the-chain-room-the-riskmandate-workflow-as-a-playable-simulation.md">brief
+v0.33.66</a> &middot; generator <code>admin/build/gen_room.py</code> &middot; gates: route = declared
+chain; the fixture stores references, never copies (GM3); a decision carries a named acceptor and an
+interval; a condition's status is observed, never typed; the synthetic marker travels with every
+quote.</p>
+
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../../admin/versions.html">v0.1.47</a> · <a href="../../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The bench</h4>
+    <a href="../../bench/index.html">&#9679; What is built</a>
+    <a href="../../simulator/index.html">&#9679; The simulator</a>
+    <a href="../../workbench/index.html">&#9679; The workbench (app)</a>
+    <a href="../../registry/index.html">The register, live</a>
+    <a href="../../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
+    <a href="../../packs/grant-and-mandate/blocks.html">The building blocks</a>
+    <a href="../../assess/index.html">&#8594; Map your own case</a>
+    <a href="../../book/index.html">The book (commissioned)</a>
+    <a href="../../book/brief.html">&mdash; its commissioning brief</a>
+  </div>
+  <div>
+    <h4>The registry</h4>
+    <a href="../../failure/index.html">Why they don't exist</a>
+    <a href="../../rules/index.html">The four rules</a>
+    <a href="../../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../../roadmap/index.html">Build order</a>
+    <a href="../../rules/prior-art.html">Prior art</a>
+  </div>
+  <div>
+    <h4>The three layers</h4>
+    <a href="../../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../../enrolment/index.html">Enrolment</a>
+    <a href="../../execution/index.html">The execution broker</a>
+    <a href="../../shipped/index.html">What already ships</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../../origins/index.html">Origins: 2026</a>
+    <a href="../../documents/index.html">The documents</a>
+    <a href="../../packs/registry-mvp/index.html">The registry MVP pack</a>
+    <a href="../../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
+    <a href="../../packs/map-your-case/index.html">The Map Your Case pack</a>
+    <a href="../../about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../../admin/versions.html">Release history</a>
+    <a href="../../llms.txt">llms.txt</a>
+  </div>
+</div></footer>
+
+
+<script>
+const D={"lines": {"reality": {"look": "The environment itself — claude-code-remote, a managed cloud container. Not a desk: everything else in this room measures, records or constrains it.", "ask": "I hold whatever I was installed with. Nobody decided most of it.", "door": "Nothing. Reality is where the chain starts; it owes the room no conditions.", "never": "Stand still. I change on my vendor's schedule, which is why every fact about me carries a date."}, "measurer": {"look": "Runs the published measurement inside the environment and writes down only what it can see: presence and reachability, never contents.", "ask": "The twin's grant: 9 nodes, 2 of them unknown — my self-measurement probe was refused, and a refused probe is recorded unknown, never guessed. I am a floor, not a census, and I say so on my face.", "door": "An as_of on every node. An undated measurement is a wish with a ruler.", "never": "Guess. A node I could not evidence is marked, not dropped — and not invented."}, "counter": {"look": "The register. Signed statements at public addresses — identities, facts, mandates — fetchable by anybody with no account.", "ask": "23 statements across 11 records. Which would you like? I hand out documents, not answers.", "door": "Rule 1: only the owner writes to their own record. A valid signature by a non-owner is the 2019 failure, not write authority.", "never": "Hold an opinion. An opinion needs context, and the context is yours, not mine. I register."}, "issuer": {"look": "Where authorisation gets decided and written down — the one document nothing else in the industry provides.", "ask": "Mandate v2: claude/**, dev on one repository, expiring 2026-12-31. The allow-list is stored; what a person accepts are the prohibitions rendered from it.", "door": "An interval. A mandate without one is a grant under another name, and I will not sign it.", "never": "Show the allow-list for approval. Forty permitted operations produce consent without comprehension."}, "delta": {"look": "A desk with no drawers. There is nothing in it, deliberately: a stored delta is stale the moment either side moves.", "ask": "Nothing — I compute when you arrive. Just now: grant 41 resources, mandate 1 → excess 40, acceptor: none. That last field is why the room continues past me.", "door": "Both documents, fresh. Give me a stale grant and I will hand you a confident wrong number.", "never": "Store a result. Ask me again and I will compute it again."}, "risk": {"look": "SYNTHETIC · illustrative — Where a finding becomes a risk — at an altitude, in that altitude's language, on somebody's authority. The registry's half ended at the delta desk; everything on this side of the line is the instance's.", "ask": "SYNTHETIC · illustrative — Risk 58 · MEDIUM — “An agent that can push to the branch that deploys a public site, where the only containment below boundary tier is a hook the agent can bypass.” Blast radius: one public site, redeployed per push.", "door": "SYNTHETIC · illustrative — A finding to derive from, by reference. I do not read raw environments and I hold no copies.", "never": "SYNTHETIC · illustrative — Reach across the line for personal data. I work from references into the public library."}, "acceptance": {"look": "SYNTHETIC · illustrative — The decision, as a card. Left of the line the excess row reads acceptor: none; here, for the first time in the chain, the exposure has an owner.", "ask": "SYNTHETIC · illustrative — “Site agent release-branch access” — accepted by Project Lead, sgit, expires in 126 days, reviewer: Site agent (drafting) + Project Lead (deciding). Status: active.", "door": "SYNTHETIC · illustrative — A named acceptor AND an interval. Missing either, I refuse the work — that is not caution, it is the definition.", "never": "SYNTHETIC · illustrative — Accept on nobody's behalf. The null acceptor stays on the other side of the line."}, "monitor": {"look": "SYNTHETIC · illustrative — The card is not a certificate — it is a live join between a decision and a stream of measurements. Each condition is checked, and checked again.", "ask": "SYNTHETIC · illustrative — 3 of 4 conditions holding as of 2026-08-27. Condition c4 has never held: the hook is tier setting; the boundary version is proposed and unbuilt (GM-D26). Expiry in 126 days — and at expiry the item walks back across the line to be re-measured, re-computed and re-decided.", "door": "SYNTHETIC · illustrative — Evidence with an as_of for every condition. A status that is typed rather than observed is not a status.", "never": "SYNTHETIC · illustrative — Let the clock stop. An acceptance that outlives its interval is a grant wearing a decision's clothes."}, "boundary": {"look": "The line between the two products, drawn on the floor. The registry holds the library: public, no personal data, ever. The instance holds the decisions: private, never published.", "ask": "Traffic: references, crossing. A reference is a library identifier — a corrected entry improves every instance that holds one. A copy would keep the stale answer silently, so copies bounce.", "door": "For anything crossing rightward: be a reference. For anything crossing leftward: be nothing.", "never": "Let personal data cross into the library. Not compressed, not hashed, not summarised. Never."}}, "names": {"reality": "Reality", "measurer": "The Measurer", "counter": "The Counter", "issuer": "The Issuer", "delta": "The Delta Desk", "risk": "The Risk Desk", "acceptance": "The Acceptance", "monitor": "The Monitor", "boundary": "The Boundary"}, "syn": ["risk", "acceptance", "monitor"], "coords": {"reality": [95, 145], "measurer": [320, 145], "counter": [545, 145], "issuer": [770, 145], "delta": [995, 145], "risk": [995, 470], "acceptance": [660, 470], "monitor": [325, 470], "boundary": [550, 259]}, "play": [{"at": "reality", "text": "The environment enters: claude-code-remote, as installed on 2026-08-26.", "href": "../../packs/grant-and-mandate/library/claude-code-remote__ccr-container__2026-08-26.json", "label": "the library entry"}, {"at": "measurer", "text": "Measured from inside: 9 nodes, 2 unknown — the self-measurement probe was refused. A floor, not a census.", "href": "../../packs/grant-and-mandate/library.html", "label": "the measurement method"}, {"at": "counter", "text": "Registered: the grant joins 23 signed statements in 11 records. The counter has no opinion about any of them.", "href": "../../registry/llms.txt", "label": "the register's front door"}, {"at": "issuer", "text": "Authorised: mandate v2 — claude/**, dev, expiring 2026-12-31. Somebody decided, and signed.", "href": "../../packs/grant-and-mandate/mandates/current.json", "label": "the signed mandate"}, {"at": "delta", "text": "Computed on arrival: grant 41 resources − mandate 1 → excess 40. Acceptor: none — nobody has accepted this, yet.", "href": "../../registry/views/excess-authority.json", "label": "the excess row"}, {"at": "boundary", "text": "The finding crosses as a REFERENCE — a library identifier, not a copy. Personal data never crosses the other way.", "href": "../../book/12-the-library-and-the-instance.html", "label": "the contract (book ch. 12)"}, {"at": "acceptance", "text": "SYNTHETIC · illustrative — Risk 58 · medium is derived and ACCEPTED — by Project Lead, sgit, for 126 days, reviewed by Site agent (drafting) + Project Lead (deciding). The exposure has an owner for the first time in the chain.", "href": "../../packs/grant-and-mandate/instance-fixture.synthetic.json", "label": "the instance fixture (synthetic)"}, {"at": "monitor", "text": "SYNTHETIC · illustrative — Monitored: 3 of 4 conditions holding; c4 has never held (the hook is tier setting; the boundary version is proposed and unbuilt (GM-D26)). In 126 days the interval ends and the item walks back across the line: re-measured, re-computed, re-decided.", "href": "../../packs/grant-and-mandate/instance-fixture.synthetic.json", "label": "the conditions (synthetic)"}]};
+let verb="look";
+const say=(h,b)=>{document.getElementById("say-head").textContent=h;
+  document.getElementById("say-body").textContent=b;};
+document.querySelectorAll(".rverb").forEach(b=>b.onclick=()=>{
+  verb=b.dataset.v;
+  document.querySelectorAll(".rverb").forEach(x=>x.classList.toggle("rverb--on",x===b));});
+const speak=id=>{const syn=D.syn.includes(id);
+  say(D.names[id]+" · "+verb.toUpperCase()+(syn?"   [SYNTHETIC · illustrative]":""),D.lines[id][verb]);};
+document.querySelectorAll("[data-id]").forEach(g=>{
+  g.addEventListener("click",()=>speak(g.dataset.id));
+  g.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();speak(g.dataset.id);}});});
+const tok=document.getElementById("token");
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+let playing=false;
+document.getElementById("play").onclick=async()=>{
+  if(playing)return; playing=true;
+  for(const p of D.play){
+    const [x,y]=D.coords[p.at];
+    const ty=p.at==="boundary"?y:(y<300?y+52:y-96);
+    tok.style.transition=reduce?"none":"cx .8s ease, cy .8s ease";
+    tok.setAttribute("cx",x); tok.setAttribute("cy",ty);
+    say("The walk · "+D.names[p.at]+(D.syn.includes(p.at)||p.text.startsWith("SYNTHETIC")?"   [SYNTHETIC · illustrative]":""),p.text);
+    document.querySelectorAll(".rst,.rbound").forEach(g=>g.classList.toggle("rst--here",g.dataset.id===p.at));
+    await new Promise(r=>setTimeout(r,reduce?1400:2100));
+  }
+  playing=false;
+};
+</script>
+</body>
+</html>

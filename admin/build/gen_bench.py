@@ -118,8 +118,134 @@ BENCH = [
          "browser storage only — nothing leaves the visitor's machine"],
   code="assess/"),
 
+ dict(slug="the-chain-room", name="The chain room", state="live",
+  where="../experiments/the-room/index.html", since="v0.1.42", updated="v0.1.43",
+  origin="dev brief <a href='../documents/the-chain-room.html'>v0.33.66</a>, at the project lead's direction; genre from newsroom.sgit.ai's floor debrief, CC BY 4.0",
+  one_line="The RiskMandate workflow walked end to end as a playable room — eight stations, the "
+           "product boundary drawn on the floor, four verbs, and a work item that travels the chain. "
+           "The left half is real artefacts; the right half is a marked simulation.",
+  demonstrates=[
+    "The full chain — <code>reality &rarr; twin &rarr; facts &rarr; finding</code> &#9474; <code>risks &rarr; decisions &rarr; monitoring</code> — as a place, with <b>the library/instance boundary drawn on the floor</b>: references cross, copies bounce, personal data never crosses up",
+    "<b>Every word the room speaks is derived at build time</b> from the same files the pipeline runs on — the measured library entry, the signed mandate, the computed excess row, the marked fixture. Nothing about state is hand-written",
+    "The handover in one image: left of the line the excess row reads <code>acceptor: none</code>; the exposure gains a named owner only at the acceptance desk, right of the line",
+    "<b>Simulate first, then support</b> — the workflow's states and actions exist as walkable, explainable things before any live instance does, the same move the register made with ten labelled fixtures"],
+  does_not_prove=[
+    "<b>That the workflow works.</b> The right half is synthetic and says so on every surface: no risk has been derived, priced, accepted or monitored by anybody",
+    "That a room gets read where a table gets skimmed — the genre's inherited bet, now two implementations old with zero user tests between them",
+    "That the conditions can be monitored for real: 3 of 4 hold by observation, and the fourth — the boundary-tier enforcement point — has never held anywhere in this estate",
+    "That the acceptance shown right of the line is RiskMandate's actual product behaviour: the shape is read off their positioning card, not their system"],
+  gates=["the route gate: the station order drawn must equal the declared chain, or the build fails — the room may not draw a route through a workflow that does not exist",
+         "the boundary gate (GM3): the instance fixture stores references, never copies — an embedded grant node fails the build",
+         "the decision gate: the fixture's acceptance carries a named acceptor AND an interval, or it is not a decision and the build fails",
+         "the observed gate: a condition claiming to hold without an observed_as_of fails — a status is observed, never typed",
+         "the marker gate: the generator greps its own output for the SYNTHETIC marker beside every synthetic line"],
+  code="experiments/the-room/, packs/grant-and-mandate/instance-fixture.synthetic.json, admin/build/gen_room.py"),
+
+ dict(slug="the-table", name="The table", state="live",
+  where="../experiments/the-table/index.html", since="v0.1.43", updated="v0.1.43",
+  origin="dev brief <a href='../documents/the-experiments-deck-table.html'>v0.33.67</a> — the deck, the players, and the estate's own incident",
+  one_line="Actions resolving against grants and mandates, played as cards: six suits, four players "
+           "including the systems, and the estate's real 26 August incident replayed forward as "
+           "simulation and backward as audit — with every resolution re-run through the enforcement "
+           "tool at build time.",
+  demonstrates=[
+    "<b>The object layer the room lacked</b>: grants, mandates, facts, evidence and actions each given a card form with a suit — CAN, MAY, IS, SHOWS, DOES, DECIDES — every field read from the artefact the card links",
+    "<b>The resolution order as game mechanics</b>: a DOES resolves against CAN, then MAY, and mints an IS backed by a SHOWS. Blast radius is the CAN cards face-up that no MAY card covers",
+    "<b>Systems as players</b>: the hook plays reactions, the CI runner holds its own alarming CAN cards, and the DECIDES suit is played only by people — the remedy for a refusal is a decision, never a bypass",
+    "<b>Forward is the simulation, backward is the audit, and they are the same cards</b> — the register's <i>was it valid last Tuesday?</i> promise, as play",
+    "<b>A live build gate</b>: every turn's resolution is re-run through <code>mandate.py check-branch</code> during the build; a claimed refusal the tool does not reproduce fails it"],
+  does_not_prove=[
+    "<b>Coverage.</b> One scenario, four turns, one agent, one control — the mechanics, not the space of plays",
+    "That a DOES card is a receipt: nothing is signed by the actor at the time of action. The table shows where receipts would sit, which is not the same as having them",
+    "<s>That proposed-action simulation works — playing a hypothetical card against the twin is specified in the brief and deliberately not built here.</s> <b>RETIRED at v0.1.46</b>: it is built, at <a href='../simulator/index.html'>/simulator/</a>, where the cards are playable against either twin and every outcome is a precomputed verdict of the real tool. A does-not-prove retired by later work is recorded here, not quietly dropped",
+    "That the card grammar survives a population: the genre bets are now three implementations deep across two estates, still with zero user tests"],
+  gates=["the resolution gate, live: mandate.py check-branch is executed for each turn at build time and must agree with the table",
+         "the transcript gate: every reaction quote must exist byte-for-byte in the captured transcript it cites",
+         "the source gate: every card cites a file that must exist, and its fields are read from it, never typed",
+         "the manifest gate: a folder without a manifest entry, or an entry without a folder, fails the hub build"],
+  code="experiments/the-table/, admin/build/gen_table.py"),
+
+ dict(slug="the-scenario-engine", name="The scenario engine (two worlds)", state="live",
+  where="../experiments/push-to-github/index.html", since="v0.1.44", updated="v0.1.44",
+  origin="dev brief <a href='../documents/the-scenario-engine.html'>v0.33.68</a> — JSON-driven worlds, the soft mandate as a place, the platform library",
+  one_line="One engine, two worlds: <i>Push to GitHub</i> and <i>The Deploy</i> are rendered by the same "
+           "generator from two scenario.json files, each referencing a measured twin — the engine holds "
+           "no capabilities of its own, and every card is a twin node wearing scene clothes, with a "
+           "confidence rung computed from its evidence and a micro-animation per capability kind.",
+  demonstrates=[
+    "<b>Nothing hardcoded</b>: the engine reads players, grant chain, mandate slots, decor and story from scenario.json, and every capability from the twin the scenario references — adding a world is adding a JSON file, which is the memo's claim made falsifiable by the pair existing",
+    "<b>The soft mandate as a place</b>: the constraint that keeps this session off the wrong branch shown in the room it actually occupies — prose in the agent's context (expectation tier), beside the hook it could be (setting) and the platform enforcement it is not (boundary, the doors view's shut door printed in situ)",
+    "<b>The contrast the memo predicted</b>: the hosted agent world has a mandatory egress proxy and three occupied mandate slots; the CI runner world that deploys its work has unrestricted egress, no agent, no hook — and the estate's only boundary-tier grant, the workflow's <code>permissions:</code> block",
+    "<b>The confidence rung as arithmetic</b>: hypothesis 0, self-observed 1, +documented 2, independent 3 — computed from each node's evidence class, never typed, and both decks print why their maximum is what it is",
+    "<b>Capabilities that act</b>: eight micro-animation kinds (push, act-as, edit, egress, recall, escalate, blocked, unknown) — a capability shown acting is legible where a permission string is not, and every animation freezes to its end state under prefers-reduced-motion"],
+  does_not_prove=[
+    "<b>That two worlds are many.</b> The memo says tonnes of scenarios; the engine has rendered exactly two, both from twins this estate measured itself",
+    "That the animations simulate anything — a travelling dot is a depiction of a capability, not an execution of one; no action is resolved here (that is the table's job)",
+    "That the platform library exists: Codex, Lovable and the rest are named in the brief as future scenario.json files, and not one has been written — the fact-based variation catalogue is an argument, not an artefact",
+    "That a rung above 2 is reachable: independent evidence exists nowhere in this estate, so the scale's top rung has never been exercised",
+    "That an agent reads these pages — the memo's claim that agents would also appreciate the visual representation is untested for both humans and agents"],
+  gates=["the twin gate: the scenario's twin file must exist and parse, or the build fails",
+         "the deck gate: cards == twin nodes exactly — a twin node without decor, or decor naming an absent node, fails the build; the engine may decorate a capability, never add, remove or restate one",
+         "the slot gate: every mandate slot derives from a real file (the twin's control text, the signed mandate's enforced_by, the doors view) — and the platform slot must agree with the doors view's enforcement_at_boundary count",
+         "the anim gate: every animation kind must be one of the eight the engine defines",
+         "the story gate: every beat cites an artefact that exists on disk",
+         "the manifest gate: a scenario folder without a manifest entry, or an entry without a folder, fails the hub build"],
+  code="experiments/push-to-github/scenario.json, experiments/the-deploy/scenario.json, admin/build/gen_scenario.py, experiments/scenario.css"),
+
+ dict(slug="the-control-room", name="The control room", state="live",
+  where="../experiments/the-control-room/index.html", since="v0.1.45", updated="v0.1.45",
+  origin="dev brief <a href='../documents/the-control-room.html'>v0.33.69</a> — the project lead's instruction: a new component and UX, thinking game UI and SCADA",
+  one_line="Both scenario worlds on one operator board — mimic diagrams, annunciator tiles whose lamp "
+           "colour is the tier and nothing else, faceplates on click, and the 26 August incident as a "
+           "replayable sequence-of-events log with every verdict re-run through the enforcement tool "
+           "at build time. One more renderer, zero new data.",
+  demonstrates=[
+    "<b>The scenario files are a world model, not a page config</b>: the board is drawn from the same scenario.json files and twins the deck pages use, with nothing added to make it possible — adding a way of seeing is adding a renderer",
+    "<b>SCADA's lamp grammar lands exactly on the tier vocabulary</b>: boundary is green (contained), setting amber, expectation amber flashing — one mistake from red — and a capability with <b>no control on it is the alarm state</b>: the CI runner's board lights red where the agent container's does not, visible from across the room",
+    "<b>FAULT as a first-class lamp</b>: a refused measurement renders as a hatched sensor-failure tile, never a blank — the industry's oldest honesty convention applied to the estate's most repeated sentence",
+    "<b>State at a glance</b>: Unit 1's egress wall is solid and its push line broken by a breaker in the setting position; Unit 2's wall prints NO WALL and its push line runs clean to the asset — the doors page proves this in numbers, the board shows it in geometry",
+    "<b>Forward is the simulation, backward is the audit — with transport controls</b>: play, step and reset over the recorded incident; the browser only steps through verdicts the build already re-proved, and with scripting off the board renders complete and final"],
+  does_not_prove=[
+    "<b>That an operator can run a plant from it.</b> Two units and one recorded incident is a diorama with excellent manners, not a control room under load",
+    "That the annunciator scales past twenty tiles a unit, or the log past one incident — the genre solves both (paging, filtering, alarm shelving) and this build implements neither",
+    "That anyone reads a mimic faster than a table — the genre bet is now four implementations deep across two estates, still with zero user tests",
+    "That REPLAY ever becomes LIVE: a live board needs the registry's write path, monitors feeding facts, and a mandate service — all still stated design, which is why the mode chip is pinned where it is"],
+  gates=["the tile gate: tiles == twin nodes exactly, per unit — the board may not simplify a world by omitting its embarrassing tiles",
+         "the lamp gate: every lamp class derives from a tier in the closed set; an unknown tier fails rather than guessing a colour",
+         "the mimic gate: the wall drawn must agree with the egress node's tier — NO WALL prints if and only if the tier is none",
+         "the resolution gate, live: mandate.py check-branch re-run for every push event, and the log may not claim what the tool does not reproduce",
+         "the transcript gate: every quoted reaction exists byte-for-byte in its source",
+         "the timestamp gate: times are derived (mandate issued_at, tag commit time) or an em-dash — the generator has no field for a typed clock time",
+         "the replay gate: the generator greps its own output for the REPLAY chip"],
+  code="experiments/the-control-room/, admin/build/gen_control.py"),
+
+ dict(slug="the-simulator", name="The simulator", state="live",
+  where="../simulator/index.html", since="v0.1.46", updated="v0.1.46",
+  origin="dev brief <a href='../documents/the-simulator.html'>v0.33.70</a> — the project lead's instruction: a card-game view whose plays drive a board, with play and rewind",
+  one_line="The first surface here that answers to the visitor rather than replaying this estate's "
+           "history: play cards against a measured twin and watch what they do. Every outcome is a "
+           "verdict of the real enforcement tool, a reading of the twin, or UNKNOWN — precomputed at "
+           "build time, because the browser is not an enforcement point.",
+  demonstrates=[
+    "<b>It does not predict, it composes.</b> JavaScript cannot run <code>mandate.py</code>, so the whole resolution table — every card, in both worlds, under both mandate states — is precomputed at build and shipped as <a href='../simulator/resolutions.json'>resolutions.json</a> with the tool's own output line in each row. The browser looks answers up; a rule in the page that decided a verdict would be a bug",
+    "<b>UNKNOWN is a first-class outcome</b>: where measurement was refused the board says unknown, never <i>no</i> — a simulator that turns a hole into a denial manufactures comfort, and three cards here return holes",
+    "<b>The hook card is the argument in one move</b>: installing the pre-push hook changes <b>no verdict at all</b> — <code>dev</code> under mandate v1 is refused before and after — and changes <i>who refuses</i>, from the agent inside its own loop to a hook outside it. The verdict column does not move and the reliability does",
+    "<b>Questions history did not ask</b>: <code>push to main</code> is refused under both mandates, which no page here has ever shown, because the estate only ever made the two pushes it made",
+    "<b>Rewind is a computation, not an undo stack</b>: board state is a pure function of the event prefix, so stepping back is the same computation with a smaller n — forward is the simulation, backward is the audit, as one control"],
+  does_not_prove=[
+    "<b>That the simulation is predictive.</b> It composes measured facts and real verdicts; it cannot model an environment nobody measured, and every outcome carries the date of the measurement behind it",
+    "That the hand is the space of plays: eight cards, two worlds, one enforcement tool, and a blast radius that is the twin's own reachability rather than a discovered attack path",
+    "That anyone learns more by playing than by reading — the genre bet is now five implementations deep across two estates, still with zero user tests",
+    "That any of it is live: nothing is executed, and the ladder on the control room says exactly which four doors would have to open before a board here could claim to describe the present"],
+  gates=["the table gate: every reachable (card, world, mandate) triple must have a precomputed row, or the build fails rather than letting the browser improvise",
+         "the resolution gate, live: every push row is re-run through mandate.py check-branch at build and carries that run's own output line",
+         "the unknown gate: a card over a node with no evidence must resolve UNKNOWN — claiming a definite outcome there fails the build",
+         "the node gate: every capability card names a node that exists in the world it is offered in, or is declared absent-in-this-world explicitly",
+         "the hook gate: the hook card must move no verdict; if a change ever makes it move one, the lesson has changed and the card must be rewritten"],
+  code="simulator/, admin/build/gen_simulator.py"),
+
  dict(slug="workbench", name="The workbench", state="live",
-  where="../workbench/index.html", since="v0.1.36", updated="v0.1.36",
+  where="../workbench/index.html", since="v0.1.47", updated="v0.1.47",
   origin="the 30 Aug voice memo: a mini-app over the primitives, evidence packs at decision time, the twin, and the schemas as the product",
   one_line="An experimental app: the primitives on a rail — identities, grants (the twin), mandates, facts, "
            "actions, a simulator — and every decision hands back an evidence pack, because the decision is "
@@ -140,25 +266,28 @@ BENCH = [
          "same-origin only: every fetch is a reference to a published estate document; nothing typed here leaves the browser"],
   code="workbench/"),
 
- dict(slug="the-book", name="A Key Means Nothing Alone (the book)", state="specified",
-  where="../book/index.html", since="v0.1.33", updated="v0.1.34",
+ dict(slug="the-book", name="A Key Means Nothing Alone (the book)", state="live",
+  where="../book/index.html", since="v0.1.33", updated="v0.1.36",
   origin="a <a href='../book/brief.html'>commissioning brief</a>, draft-2, modelled on graphs.sgit.ai's three finished books",
   one_line="One volume explaining what this site built, how it composes with RiskMandate.ai, and what none "
-           "of it proves — commissioned, with the brief published before the book exists.",
+           "of it proves — 17 chapters in five parts, 14 figures each taken at the release tag its caption "
+           "names, and 65 quotations re-read out of their sources on every build.",
   demonstrates=[
-    "This estate's habit applied to itself: <b>the specification goes up before the thing</b>, so the thing can be checked against it",
-    "<b>Time-travelled figures</b> — each of the twelve is taken from the release tag its caption names, by git worktree, rather than photographed today and captioned as the past",
-    "A provenance rule that forces every load-bearing claim to declare itself <b>stated</b> (a verbatim quote, re-read out of its source on every build) or <b>drawn</b> (the writing session's own reasoning, shown)",
-    "An acceptance test that <b>fails the book if a reader finishes believing the register is trustworthy</b>"],
+    "This estate's habit applied to itself: <b>the specification went up before the thing</b>, and the thing was then checked against it — the brief and the book disagree about four numbers, and the book prints the repository's",
+    "<b>Time-travelled figures</b> — each is taken from the release tag its caption names, by git worktree on a port used once, rather than photographed today and captioned as the past. Two gates: a past figure must re-derive from its tag, a present one must still match the live page <b>or the build fails</b>",
+    "A provenance rule that forces every load-bearing claim to declare itself <b>stated</b> (a verbatim quote, re-read out of its source on every build — 65 of them) or <b>drawn</b> (the writing session's own reasoning, shown in the reader's view — 48 of them)",
+    "A findings chapter <b>computed rather than recalled</b>: twelve places where this estate contradicts itself and seven it does not talk about, both sides of each quoted — including three current artefacts that break the estate's own load-bearing rules",
+    "<b>The harness published with the book</b>, so any figure can be re-taken rather than believed, and any number re-derived rather than accepted"],
   does_not_prove=[
-    "<b>That any of it is written.</b> The brief is complete; the book does not exist, and a commissioning page is not a book",
-    "That the estate is mature enough to deserve a book — four days, two environments, one agent, one mandate",
-    "That a revised brief is a better one. Draft-2 tightened three things a day after draft-1; the next change to that file should be the book, not draft-3",
-    "That a participant's account can be neutral: it is written by the project that builds the layer it argues for, and says so"],
-  gates=["the brief names the acceptance test and the honesty positions in advance, so a finished book can be held to them",
-         "two figure gates: a past figure must be re-derivable from its tag, a present one must still match the live page or the build fails",
-         "the quote gate — every quotation is re-read out of the source it names, and one that is not found there fails the build"],
-  code="book/BRIEF.md, book/"),
+    "<b>That the estate it describes is trustworthy.</b> The book's own centre of gravity is a register whose ten fixture records prove nothing and whose root is a fixture — a reader who finishes believing otherwise has read a book that failed",
+    "That a participant's account can be neutral. The mitigations are real and are not independence: <b>the strongest bias in such an account is not what it says but what it thinks to check</b>, and there is no way for the writer to know what it did not think to run",
+    "That the estate is mature enough to deserve a book — two environments, one agent, one mandate, a fixture root, and <b>one outside reader in its entire history</b>, whose single pass produced half the open contradictions in chapter 15",
+    "That any of this is needed. Nobody outside the project has been asked, which the estate's own doctrine appendix rates a Phase I hole rather than a nice-to-have"],
+  gates=["the quote gate — every one of the 65 quotations is re-read out of the source it names, and one not found there fails the build (it caught a conflated attribution during writing)",
+         "two figure gates: a past figure must be re-derivable from its tag, a present one must still match the live page or the build fails — which it will, on the next release",
+         "the hash gate — every chapter's SHA-256 in book.json must match its markdown, so a page cannot describe a chapter it did not render",
+         "the caption gate — every figure must carry a caption saying what to notice, never merely what the image is of"],
+  code="book/, book/content/, book/shots/, book/build.py"),
 
  dict(slug="synthetic-readers", name="Synthetic readers", state="specified",
   where="../packs/map-your-case/readers/index.html", since="v0.1.23", updated="v0.1.24",

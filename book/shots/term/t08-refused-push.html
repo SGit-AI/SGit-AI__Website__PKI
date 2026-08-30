@@ -1,0 +1,56 @@
+<!doctype html><meta charset="utf-8"><title>t08-refused-push · pki.sgit.ai</title>
+<link rel="canonical" href="https://pki.sgit.ai/book/shots/term/t08-refused-push.html">
+<meta name="robots" content="noindex">
+<style>
+ html,body{margin:0;background:#0f1115}
+ .term{font:13px/1.55 ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+   color:#d8dee9;background:#0f1115;padding:22px 24px;white-space:pre;
+   -webkit-font-smoothing:antialiased}
+ .term .p{color:#7aa2f7}          /* the prompt */
+ .term .c{color:#5c6370;font-style:italic}  /* a comment */
+ .term .ok{color:#9ece6a}          /* an affirmative result */
+ .term .no{color:#f7768e}          /* a refusal */
+ .cap{font:11px/1.4 ui-monospace,monospace;color:#5c6370;
+   padding:0 24px 16px;background:#0f1115}
+ .sheet{display:inline-block;background:#0f1115;min-width:100%}
+</style>
+<div class="sheet"><div class="term"><span class="p">$ git worktree add --detach /tmp/hist-v0.1.28 v0.1.28   # the site as it was</span>
+<span class="p">$ cd /tmp/hist-v0.1.28</span>
+
+<span class="c"># the mandate that did the refusing, still present at this tag:</span>
+<span class="p">$ python3 packs/grant-and-mandate/mandates/../tools/mandate.py check-branch dev packs/grant-and-mandate/mandates/mandate-v1.json</span>
+<span class="no">REFUSED  dev  (mandate v1 permits [&#x27;claude/**&#x27;])</span>
+<span class="p">$ echo $?</span>
+1
+
+<span class="c"># the full banner: the tag&#x27;s own hook, pointed at the tag&#x27;s own v1</span>
+<span class="p">$ cp packs/grant-and-mandate/mandates/mandate-v1.json packs/grant-and-mandate/mandates/current.json      # restore the pre-amendment state</span>
+<span class="p">$ echo &#x27;refs/heads/dev X refs/heads/dev Y&#x27; | python3 packs/grant-and-mandate/mandates/../tools/mandate.py pre-push</span>
+
+  ┌─────────────────────────────────────────────────────────────┐
+<span class="no">  │  PUSH REFUSED BY A MANDATE                                  │</span>
+  └─────────────────────────────────────────────────────────────┘
+
+<span class="no">  ✗ dev  is not permitted by mandate v1</span>
+    permitted branches: claude/**
+    mandate expires   : 2026-12-31T00:00:00Z
+
+  What you agreed to:
+    · will not push to any branch of this repository outside claude/**
+    · will not push to any other repository
+    · will not act on any resource other than github.com/SGit-AI/SGit-AI__Website__PKI
+    (rendered 2026-08-26 over capability set v0 (registry/capabilities.json))
+
+  This refusal came from .githooks/pre-push, which git ran — not
+  from the agent deciding to comply. That is the whole point.
+
+  Mandate : packs/grant-and-mandate/mandates/current.json
+  Issuer  : resolves to a record in the public registry
+  Tier    : SETTING — this hook is inside the grant it bounds, so
+            --no-verify still gets past it. A boundary needs the
+            same allow-list evaluated where the agent cannot reach
+            it (branch protection, or a required CI check).
+
+<span class="p">$ echo $?</span>
+1</div>
+<div class="cap">t08-refused-push.txt · sha256:4b3dd15163b45f1912844a205ec8e5f9…</div></div>

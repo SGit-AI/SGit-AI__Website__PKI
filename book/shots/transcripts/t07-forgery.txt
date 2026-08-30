@@ -1,0 +1,6 @@
+$ printf '{"forged":"anyone can sign this"}' > forged.json
+$ openssl dgst -sha256 -sign $R/private/sign.pem forged.json > forged.der
+$ openssl dgst -sha256 -verify $R/public/sign.pem -signature forged.der forged.json
+Verified OK
+
+# The private half is published in this repository. So is everybody's.

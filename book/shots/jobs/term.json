@@ -1,0 +1,66 @@
+{
+  "tag": "current",
+  "outdir": "img",
+  "jobs": [
+    {
+      "id": "f04-identity-raw",
+      "path": "/book/shots/term/t04-identity-raw.html",
+      "scale": 3,
+      "viewport": {
+        "width": 820,
+        "height": 400
+      },
+      "selector": ".sheet"
+    },
+    {
+      "id": "f05-validate",
+      "path": "/book/shots/term/t05-validate.html",
+      "scale": 3,
+      "viewport": {
+        "width": 980,
+        "height": 400
+      },
+      "selector": ".sheet"
+    },
+    {
+      "id": "f06-sgit-verify",
+      "path": "/book/shots/term/t06-sgit-verify.html",
+      "scale": 3,
+      "viewport": {
+        "width": 900,
+        "height": 400
+      },
+      "selector": ".sheet"
+    },
+    {
+      "id": "f07-forgery",
+      "path": "/book/shots/term/t07-forgery.html",
+      "scale": 3,
+      "viewport": {
+        "width": 900,
+        "height": 400
+      },
+      "selector": ".sheet"
+    },
+    {
+      "id": "f08-refused-push",
+      "path": "/book/shots/term/t08-refused-push.html",
+      "scale": 3,
+      "viewport": {
+        "width": 900,
+        "height": 400
+      },
+      "selector": ".sheet"
+    },
+    {
+      "id": "f08b-amended",
+      "path": "/book/shots/term/t08b-amended.html",
+      "scale": 3,
+      "viewport": {
+        "width": 900,
+        "height": 400
+      },
+      "selector": ".sheet"
+    }
+  ]
+}

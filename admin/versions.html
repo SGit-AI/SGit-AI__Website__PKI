@@ -14,7 +14,7 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.36</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.47</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -56,10 +56,17 @@
       <a class="nl" href="../bench/index.html">The bench<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl" href="../bench/index.html">&#9679; The bench &mdash; what is built</a>
+      <a class="sl" href="../simulator/index.html">&#9679; The simulator &mdash; play a card</a>
+      <a class="sl" href="../experiments/index.html">&#9679; Experiments</a>
+      <a class="sl" href="../experiments/the-room/index.html">&mdash; the chain room</a>
+      <a class="sl" href="../experiments/the-table/index.html">&mdash; the table</a>
+      <a class="sl" href="../experiments/push-to-github/index.html">&mdash; push to GitHub</a>
+      <a class="sl" href="../experiments/the-deploy/index.html">&mdash; the deploy</a>
+      <a class="sl" href="../experiments/the-control-room/index.html">&mdash; the control room</a>
+      <a class="sl" href="../workbench/index.html">&#9679; The workbench (app)</a>
       <a class="sl" href="../registry/index.html">The register, live</a>
       <a class="sl" href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
       <a class="sl" href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
-      <a class="sl" href="../workbench/index.html">The workbench (app)</a>
       <a class="sl" href="../assess/index.html">Map your own case</a>
       <a class="sl" href="../book/index.html">The book (commissioned)</a>
       <a class="sl" href="../book/brief.html">&mdash; its commissioning brief</a>
@@ -98,11 +105,359 @@
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
     <tr>
-      <td class="vnum">v0.1.36</td>
-      <td>30 Aug 2026</td>
-      <td><b>The workbench &mdash; a mini-app over the primitives, from the 30 August voice memo.</b> <a href="../workbench/index.html">A separate experimental UI</a>: the key primitives on a left rail &mdash; identities, grants (the twin), mandates, facts, actions, a simulator, evidence packs, schemas, and risks (which are deliberately not here) &mdash; each a card surface over the <em>real published documents</em>, fetched by reference (GM3: references, never copies). The worked scenario is the memo's: a GitHub push. <b>The real-time check is real:</b> the live mandate's signature is verified in the visitor's browser with Web Crypto against the signing key fetched from the issuer's registry record, over the registry's canonical form &mdash; verified byte-identical against <code>jq -cS</code> before shipping, trailing newline and all. <b>Every decision hands back an evidence pack</b> (<code>evidence-pack/v0</code>, decision GM-D33, modelled on the service-twin brief's receipts): every check with its result, evidence and source, the delta, the twin's age, the enforcement tier computed from the facts, and <code>does_not_prove</code> inside the artefact. <b>The twin is finally operationalised as the corpus defines it</b> &mdash; the point where the graph meets reality, to which facts attach and against which obligations are assessed: flip the branch-protection fact and the enforcement tier moves from setting to boundary live, which makes N12 rehearsable before anyone touches repository settings. Default-deny is exercised rather than described: push to main refuses as excess authority, force-push refuses because the vocabulary cannot express it, an unsigned draft refuses everything while still showing the delta it would govern, and superseded v1 still refuses. Authoring lives in localStorage; every fetch is same-origin. <b>And first contact found a real defect:</b> the live mandate names <code>repo.contents.push</code> while the vocabulary declares <code>repo.contents.write</code> &mdash; different strings under the registry's own exact-equality rule, recorded as GM19 and deliberately not fixed by silent renaming, because that would invent the containment rule the registry refuses to define.</td>
+<td class="vnum">v0.1.47</td>
+<td class="vdate">30 Aug 2026</td>
+<td><b>The workbench &mdash; a mini-app over the primitives, from the 30 August voice memo.</b> <a href="../workbench/index.html">A separate experimental UI</a>, built in parallel with the simulator and the experiments and merged beside them: the key primitives on a left rail &mdash; identities, grants (the twin), mandates, facts, actions, a simulator, evidence packs, schemas, and risks (which are deliberately not here) &mdash; each a card surface over the <em>real published documents</em>, fetched by reference (GM3: references, never copies). The worked scenario is the memo's: a GitHub push. <b>The real-time check is real:</b> the live mandate's signature is verified in the visitor's browser with Web Crypto against the signing key fetched from the issuer's registry record, over the registry's canonical form &mdash; verified byte-identical against <code>jq -cS</code> before shipping, trailing newline and all. <b>Every decision hands back an evidence pack</b> (<code>evidence-pack/v0</code>, decision GM-D33, modelled on the service-twin brief's receipts): every check with its result, evidence and source, the delta, the twin's age, the enforcement tier computed from the facts, and <code>does_not_prove</code> inside the artefact. <b>The twin is operationalised as the corpus defines it</b> &mdash; the point where the graph meets reality, to which facts attach and against which obligations are assessed: flip the branch-protection fact and the enforcement tier moves from setting to boundary live, which makes N12 rehearsable before anyone touches repository settings. Default-deny is exercised rather than described: push to main refuses as excess authority, force-push refuses because the vocabulary cannot express it, an unsigned draft refuses everything while still showing the delta it would govern, and superseded v1 still refuses. Authoring lives in localStorage; every fetch is same-origin. <b>And first contact found a real defect:</b> the live mandate names <code>repo.contents.push</code> while the vocabulary declares <code>repo.contents.write</code> &mdash; different strings under the registry's own exact-equality rule, recorded as GM19 and deliberately not fixed by silent renaming, because that would invent the containment rule the registry refuses to define. GM-D34 opened; feeds pack decision 6.</td>
     </tr>
     <tr>
+<td class="vnum">v0.1.46</td>
+<td class="vdate">29 Aug 2026</td>
+<td><b>The simulator, and the ladder from REPLAY to LIVE.</b> Two instructions, brief v0.33.70.
+<b>The next step first</b>: the control room's does-not-prove said REPLAY never becomes LIVE and
+named what LIVE would need &mdash; that prose is now a <b>computed ladder of four doors</b> (the
+append lane, an unforgeable issuer key, signed facts, an independent measurement), the mode chip is
+<b>derived from them rather than typed</b>, and the doors page's symmetric gate arrives in its
+sharpest form: <b>when the last of those doors opens, the build fails</b>, because a board that
+could claim LIVE and does not is as much a defect as one that claims it and cannot. Proven by
+flipping all four open in a scratch copy and watching the build refuse. <b>Then the card game</b>:
+<a href="../simulator/index.html">/simulator/</a>, on its own base folder because it is a tool
+rather than an experiment &mdash; the first page here that answers to the visitor instead of
+replaying this estate's history. Eight cards in three suits, two worlds, a board, and
+play/step/<b>rewind</b>/reset. The load-bearing rule is that <b>it does not predict, it composes</b>:
+the browser cannot run <code>mandate.py</code>, so the entire resolution table is precomputed at
+build &mdash; every card, in both worlds, under both mandate states &mdash; and shipped as
+<a href="../simulator/resolutions.json">resolutions.json</a> with the tool's own output in each row.
+Every outcome is a real verdict, a reading of the twin, or <b>UNKNOWN</b> where measurement was
+refused, and there is no fourth: a simulator that turns a hole into a denial manufactures comfort.
+The sharpest card is the pre-push hook, which <b>changes no verdict at all</b> and changes who
+refuses; and the deck asks what history did not &mdash; <code>push to main</code> is refused under
+both mandates, which no page here had ever shown. Five gates. It also <b>retires a stated limit</b>:
+v0.33.67 declared proposed-action simulation deliberately unbuilt, and the bench entry now records
+that line as retired rather than dropping it. Screenshot-read caught six defects, including a token
+painted over a station's label, an egress path sent off the bottom of the board by an absolute
+coordinate used as a delta, and a hand-typed count on the very panel arguing that counts are
+computed.</td>
+    </tr>
+    <tr>
+<td class="vnum">v0.1.45</td>
+<td class="vdate">29 Aug 2026</td>
+<td><b>The control room: one board, both worlds, zero new data.</b> The project lead's instruction —
+<i>create a new component and UX for that simulation; think about a game UI and SCADA control
+systems UIs</i> — answered in brief v0.33.69 with the claim that completes v0.33.68's: adding a
+world is adding a JSON file, and <b>adding a way of seeing is adding a renderer</b>.
+<a href="../experiments/the-control-room/index.html">/experiments/the-control-room/</a> is a second
+renderer over the <i>same</i> <code>scenario.json</code> files the deck pages use: mimic diagrams
+drawn from the grant chains (Unit 1's egress wall solid and its push line broken by a breaker in
+the setting position; Unit 2's printing <b>NO WALL</b> with a clean line to the asset), annunciator
+tiles in strict bijection with the twin nodes, and the lamp grammar that makes the memo's contrast
+pre-verbal: <b>the colour is the tier and nothing else</b>, so a capability with no control on it is
+the alarm state and refused measurement is a hatched FAULT lamp, never a blank. Faceplates on
+click; the 26 August incident as a sequence-of-events log with game transport (play, step, reset)
+where <b>the replay is baked, not computed</b> — every verdict re-run through
+<code>mandate.py check-branch</code> at build, every quote byte-checked, timestamps derived
+(mandate v2's <code>issued_at</code>, the v0.1.28 tag's commit time) or an em-dash, and the whole
+board pinned to <b>REPLAY</b> because a live board needs the write path, monitors and a mandate
+service that remain stated design. Seven gates, one proven by tampering before shipping; the
+screenshot-read caught five defects including a JSON null printing as <code>None</code> on a
+faceplate and a breaker painted over a station at the uniform pitch. Bench entry with four
+does-not-proves.</td>
+    </tr>
+    <tr>
+<td class="vnum">v0.1.44</td>
+<td class="vdate">29 Aug 2026</td>
+<td><b>The scenario engine: one engine, two worlds.</b> The project lead's third memo, processed in
+brief v0.33.68: everything JSON-driven, nothing hardcoded, because the destination is tonnes of
+scenarios and a game engine that becomes a product. One generator,
+<code>admin/build/gen_scenario.py</code>, renders any world from a <code>scenario.json</code> that
+references a measured twin &mdash; the engine holds no capabilities of its own, and the deck gate
+forces cards == twin nodes exactly. Two worlds prove the claim by existing:
+<a href="../experiments/push-to-github/index.html">Push to GitHub</a> &mdash; the memo's worked
+example, this session's own grant chain (user &rarr; GitHub App &rarr; scoped token &rarr; container
+&rarr; Claude Code &rarr; Claude &rarr; repo) with <b>the soft mandate shown as a place</b>: the
+constraint keeping this world off the wrong branch is prose in the agent's context, expectation
+tier, exactly where the memo says mistakes occur, rendered beside the hook it could be and the
+platform boundary it is not &mdash; and
+<a href="../experiments/the-deploy/index.html">The Deploy</a>, the counter-world: the CI runner a
+permitted push lands in, no agent, no hook, unrestricted egress, and the estate's only
+boundary-tier grant, the workflow's <code>permissions:</code> block. Every capability card carries
+a confidence rung computed from its evidence (hypothesis 0 &rarr; independent 3, never typed) and a
+micro-animation of the capability acting &mdash; eight kinds, each freezing to its end state under
+reduced motion, declared depiction and not simulation. Six gates; the site chrome regenerated by
+its owner (<code>chrome.py</code>), retiring a footer version line frozen at v0.1.35 and moving the
+experiments into the nav's bench group. Bench entry with five does-not-proves, including that two
+worlds are not tonnes, and that the platform library (Codex, Lovable, the rest as fact-based
+<code>scenario.json</code> variations) remains an argument, not an artefact.</td>
+    </tr>
+    <tr>
+<td class="vnum">v0.1.43</td>
+<td class="vdate">27 Aug 2026</td>
+<td><b>The experiments, the deck, and the table.</b> Three instructions from the project lead's
+endorsement of the chain room, delivered in brief v0.33.67. <b>A convention</b>:
+<a href="../experiments/index.html">/experiments/</a>, one folder per experiment, one workflow, one
+visualisation, each with its own generator, gates and bench entry &mdash; the hub generated from a
+manifest whose entries must match the folders in both directions, and the chain room moved in as
+first occupant, free because nothing is deployed. <b>The deck</b> &mdash; the object layer the room
+lacked, answering the direct question <i>have you added visual representations for grants, mandates,
+evidence, facts and actions?</i> honestly: it had not. Six suits now &mdash; <b>CAN</b> (grant),
+<b>MAY</b> (mandate), <b>IS</b> (fact), <b>SHOWS</b> (evidence), <b>DOES</b> (action),
+<b>DECIDES</b> (decision) &mdash; each card a rendering of a real artefact with every field read from
+the source it links, and the resolution order as game mechanics: <i>a DOES resolves against CAN,
+then MAY, and mints an IS backed by a SHOWS; blast radius is the CAN cards face-up that no MAY card
+covers</i>. The DOES suit is the genuinely new primitive &mdash; actions had no representation
+anywhere in the estate, which is the book's receipt gap surfacing again, and the card says on its
+face that it is the slot a receipt would fill. <b>The table</b>, at
+<a href="../experiments/the-table/index.html">/experiments/the-table/</a>: four players
+<b>including the systems</b> (the hook plays reactions; the CI runner holds its own alarming CAN
+cards), replaying <b>the estate's own 26 August incident</b> from the artefacts it left behind
+&mdash; push permitted, push refused, mandate amended citing the instruction quoted inside the
+mandate itself, push landing at tag v0.1.28. Forward is the simulation; <b>backward is the audit,
+and they are the same cards in the same order</b>, which is the register's <i>was it valid last
+Tuesday?</i> promise as play. Nothing on the table is synthetic, and the gate keeping that true is
+<b>live</b>: every turn's resolution is re-run through <code>mandate.py check-branch</code> during
+the build, every reaction byte-checked against the captured transcripts. <b>The twin claim answered
+from the corpus</b>: a library entry IS a digital twin &mdash; <i>measure is taken on a twin, a twin
+is grounded in its connection to reality</i> &mdash; the experiments are twin theatres, and a
+simulation is running a proposed action against the twin instead of reality. Proposed-action play is
+specified and deliberately not built; a twin that is not re-measured is a stale delta with a nicer
+name. One defect found by reading the screenshot: turn one quoted the CI runner's file-reach node
+where its unrestricted-egress node belongs.</td>
+</tr>
+<tr>
+<td class="vnum">v0.1.42</td>
+<td class="vdate">27 Aug 2026</td>
+<td><b>The chain room &mdash; the RiskMandate workflow as a playable simulation.</b> The
+course-correction of v0.1.41's brief, at the project lead's direction: the doors page answered
+<i>what has this estate passed</i>, but the assignment was <b>to create the core elements for the
+RiskMandate.ai workflows</b> &mdash; and for that the room and the game-like environment are not
+decoration, they are the deliverable: <i>the workflows and multiple states / actions are to be
+simulated first, then supported</i>. Specified in brief v0.33.66 and built at
+<a href="../experiments/the-room/index.html">/room/</a>: <b>eight stations, boustrophedon, with the library/instance
+boundary drawn on the floor</b> &mdash; the left zone this site's paper, the right zone the
+network's terminal dark, so crossing the line reads as changing products. Four verbs, ours
+(<code>LOOK &middot; ASK &middot; DOOR &middot; NEVER</code>), a dialogue console, and
+<b>&ldquo;run the walk&rdquo;</b>: a work item travels the declared chain with a derived caption and
+the raw artefact linked at every stop &mdash; the measured library entry, the signed mandate, the
+computed excess row, then across the line into <b>a marked simulation</b>. Game details that are
+rules rather than decoration: <b>the delta desk has no drawers</b> (a delta is computed, never
+stored); <b>the counter answers every question with documents</b> (the registry has no opinion);
+<b>copies bounce at the boundary</b> (references, never copies); and <b>the acceptor's name appears
+only right of the line</b> &mdash; left of it the excess row reads <code>acceptor: none</code>, which
+is the handover in one image. The right half is a fixture in the shape of RiskMandate's own
+positioning card &mdash; risk band, named acceptor, blast radius, expiry, reviewer, accepted
+conditions with observed status &mdash; and <b>more honest than the card it mirrors</b>: 3 of 4
+conditions hold, because the fourth (boundary-tier enforcement) has never held anywhere in this
+estate. <b>Five gates</b>: the route drawn must equal the declared chain; the fixture stores
+references, never copies (GM3, enforced on the demo itself, because a demo that violates the
+architecture it demonstrates teaches the violation); a decision carries a named acceptor and an
+interval or it is not one; a condition's status is observed, never typed; and the SYNTHETIC marker
+travels with every quote, per the simulation rules &mdash; the marker lives in the filename, the
+headers and beside every value, because export is where markers die. One defect found by rendering,
+screenshotting and reading the screenshot: the expiry loop cut a stray diagonal and the route ran
+through the SYNTHETIC badges. On the bench with its own <code>does_not_prove</code>, and the doors
+page stands beside it: the room opens none of the nine shut doors &mdash; it makes one of them,
+<i>nobody has ever accepted an exposure</i>, explainable to the person who might.</td>
+</tr>
+<tr>
+<td class="vnum">v0.1.41</td>
+<td class="vdate">27 Aug 2026</td>
+<td><b>The doors &mdash; a computed state map where the build breaks when a door opens.</b> Ported
+from <a href="https://newsroom.sgit.ai/briefs/10__the-newsroom-floor.md">newsroom.sgit.ai's debrief</a>
+on rendering an agentic team as a point-and-click room &mdash; and <b>the room is not what was
+ported</b>. That debrief says its second surface, the state map, <i>turned out to be the more useful
+of the two</i>, and this estate agrees for a reason specific to it: the problem here is not that the
+state is badly presented, it is that <b>almost nothing has passed its own gates</b>, and a room drawn
+over that would make the estate look more finished, which is the one direction it must not move.
+The debrief's candidate mapping for this site &mdash; <i>a registry counter; issuer, subject,
+verifier, revoker</i> &mdash; was accurate for the site as published and was <b>overtaken by briefs
+v0.33.63 and v0.33.64</b>, which dismantled exactly that counter; the mapping it offered
+<code>risks.sgit.ai</code> (<i>the grounding ladder as a staircase, the likely shut door a rung with
+no instances</i>) now fits this site better. Specified in brief v0.33.65 and built:
+<a href="../registry/doors.html">/registry/doors.html</a> renders this estate's four declared ladders
+&mdash; the bootstrap gradient, the tier ladder, the ordering rule and the confidence ladder &mdash;
+as rungs with <b>computed instance counts</b>, each carrying a <b>door</b>: the condition the next
+rung will not accept work without. <b>Nine of twelve doors are shut</b> &mdash; and the page
+<b>computes the split rather than asserting it</b>: three could be opened by this project alone
+(sign the library entries, define a capability name, put a branch protection rule on the remote) and
+<b>six need somebody who is not this project</b>. The three that are ours are the more uncomfortable
+half, because nothing is stopping them. The declaration at
+<code>registry/doors.declared.json</code> holds <b>no counts</b>; every number comes from a named
+metric function in <code>admin/build/gen_doors.py</code>, so each one has code you can read, and a
+rung naming a metric that does not exist fails rather than rendering blank. <b>The gate is symmetric
+by construction</b>: a door declared shut that computes above zero fails as <i>A DOOR OPENED &mdash;
+that is news</i>, and a door declared open that computes zero fails as <i>A DOOR CLOSED &mdash; that
+is a regression</i>. All three failure paths were verified by breaking them, including opening a real
+door by signing a library entry. Two channels on every state, never colour alone. And one defect was
+found the way that debrief says defects are found &mdash; by rendering it, screenshotting it and
+reading the screenshot: metric names were breaking mid-word on the phone layout.</td>
+</tr>
+<tr>
+<td class="vnum">v0.1.40</td>
+<td class="vdate">27 Aug 2026</td>
+<td><b>The refactor brief goes to draft-2, on a constraint that was removed.</b> The project lead:
+<i>nobody is using this pki.sgit.ai website and artefacts/primitives, so we can change everything and
+don't worry about backwards compatibility.</i> That licence made three of draft-1's proposals visibly
+worse than they needed to be, and each change is a <b>simplification rather than an addition</b>.
+<b>Seven statement types collapse to one envelope in two genres</b> &mdash; <code>assertion</code> and
+<code>decision</code> &mdash; with the seven primitives carried as <b>predicates</b> rather than types.
+Draft-1 proposed adding <code>fact</code> and <code>evidence</code> to the register's existing five,
+which fails the corpus's own scale-invariance rule (<i>one validator, one query engine, one provenance
+rule &mdash; not a family of them per level</i>) and only existed to preserve the five. With nothing to
+preserve, the <b>recursion test passes</b>: evidence about a fact is an assertion whose subject is a
+statement, and nothing needs a new file type at any altitude. <b>Acceptance and revocation stop being
+types</b> &mdash; an acceptance is a decision about a mandate &mdash; so five collapse to two without
+losing a distinction. <code>roots.json</code> is <b>deleted</b> rather than renamed, since an anchor is
+an ordinary assertion; <code>answer</code> is <b>removed</b> rather than deprecated, with no compat
+shim; the fixture register is <b>regenerated</b> to exercise rungs, independence and staleness rather
+than migrated to preserve six verdicts it will no longer issue; the numbered statement filenames go,
+because C7 already made the commit graph the ordering authority and only fetchers kept the prefix; and
+<code>params.json</code>'s signature contradiction &mdash; the book's finding A1, where the normative
+recipe says DER and every signature on disk is raw <code>r||s</code> &mdash; is simply
+<b>corrected in place</b>, because nothing depends on the wrong text. A new §9 states what the freedom
+buys and the uncomfortable half of it: <b>the reason nothing needs migrating is that nothing has
+users</b>, which is this estate's own largest open finding rather than a new one, and
+<b>three of the brief's eight open questions are blocked on somebody outside this project</b> &mdash;
+none of which gets less blocked by a better envelope. The refactor is right and it is not the
+bottleneck. Scope stated precisely, because two rules look like they conflict and do not: no
+backwards compatibility applies to <b>artefacts</b>; supersede-never-rewrite still applies to
+<b>published claims</b>, which is why draft-1 is superseded above rather than edited.</td>
+</tr>
+<tr>
+<td class="vnum">v0.1.39</td>
+<td class="vdate">27 Aug 2026</td>
+<td><b>The registry has no opinion</b> &mdash; architecture brief v0.33.64, the refactor that follows
+v0.33.63's critique. <b>The registry registers</b>, and it does not hold a verdict &mdash;
+structurally rather than modestly, because an opinion needs context and the context lives with the
+consumer. The corpus supplies the mechanism: the grounding ladder's upward path says <i>each step up
+is an interpretation somebody is accountable for</i>, and a verdict is an upward step, so the
+register's <code>answer: YES</code> is <b>a claim of accountability it cannot discharge</b>. What it
+supplies instead is signed nodes and edges whose worth to a consumer is a function of that
+consumer's trust in <i>this</i> registry &mdash; one of many, in a <b>fractal</b>, on the shape of the
+root DNS servers with an <b>eventually consistent</b> SLA. The fractal claim is made falsifiable
+against the register and <b>fails in one place</b>: <code>roots.json</code> is the special case, and
+once it becomes prunable pointers the test passes. <b>Seven primitives in two layers that must not be
+blurred</b> &mdash; three identities (agent, environment/provider, user) saying WHO; two evidence
+objects (<b>fact</b>, <b>evidence</b>, both new) saying WHAT IS THE CASE; and two authority objects
+(grant, mandate) saying what is possible and what was decided. Adding fact and evidence changes the
+register's <b>genre</b>, from a permission database to an evidence store. The biggest delta is
+<b>environment identity</b>: a grant becomes a signed fact about a keyed environment by a named
+measurer, which turns the book's <i>floor, not a census</i> caveat from a confession into a
+<b>computable independence attribute</b> &mdash; and makes the honest number visible, since both
+library entries state that <i>the instrument IS the subject</i>, so the library today holds
+<b>zero independent measurements</b>. Rules 1 and 4 stop being constraints and become the mechanism
+<i>attach, never mutate</i> runs on, which makes <b>abundance a feature</b> and answers 2019 by
+arithmetic rather than by a size bound. States plainly what PKI is for here: <b>it does not establish
+trust, it makes edges attributable</b>, and attributable edges are the only thing independence
+weighting can operate on &mdash; while conceding the weakest joint, that cryptography cannot prove two
+keys are two parties. Six open questions left for the project lead, including whether a second
+&ldquo;Grants&rdquo; in the source memo meant an eighth primitive.</td>
+</tr>
+<tr>
+<td class="vnum">v0.1.38</td>
+<td class="vdate">27 Aug 2026</td>
+<td><b>The registry is not thinking in graphs</b> &mdash; strategy brief v0.33.63, from the project
+lead's memo after reading the book, with its instruction to read <code>graphs.sgit.ai</code>
+executed. The reframe: <b>the registry has been built as an ORACLE and should have been built as a
+NODE</b>. Trust is not a verdict handed down by a body of truth; it is a <b>confidence the consumer
+computes from the independent evidence they can reach</b>, it is a spectrum, and it is specific to
+the use case, because what you need to accept a message is not what you need to accept a contract.
+The registry's job is to be <i>one more place that stores evidence and clues</i>. The brief's
+uncomfortable finding is that <b>this family's corpus already published all of this, and it is older
+than this site</b>: <i>a public key in isolation does not give you anything; it is the graph it is
+connected to</i> (4 June 2026 &mdash; the sentence this site's book is named after), the
+<b>confidence ladder</b> making assurance computable from connectivity, <b>weight by independence,
+not by count</b>, and <b>enrichment, not enforcement</b> &mdash; when confidence is low the remedy is
+more edges, never more validation rules. Four contradictions with the shipped register, three
+computed from the repository: <code>roots.json</code> is a <b>gate</b> where the corpus specifies an
+anchor with <i>no authority at all</i>; the verifier returns a verdict where the evidence set should
+be the product (its <code>basis</code> array is the seed of the right design); <b>rule 2 is
+contradicted by the earliest graph-native sentence in the corpus, which is itself about PKI</b>
+&mdash; <i>revocation is the absence of trust, not the presence of a revocation entry</i>, and a
+revocation list <i>can only tell you about the revocations it happens to know about</i>; and
+<code>graphs.sgit.ai</code> is mentioned <b>zero times</b> on this site's front door, which is the
+mechanical cause of the drift and is tracked on the sibling estate as ask N2. Proposes
+<code>anchors.json</code> in place of <code>roots.json</code>, a verifier returning a rung, a typed
+evidence set and the gaps with <b>the verdict left to the caller</b>, and a
+<code>views/gaps.json</code>, on the corpus's rule that <i>an absence that is stated can be counted,
+queried, assigned and closed</i>. Rules 1 and 4 stand untouched; rule 3 stops being the load-bearing
+defence, because a flood of 150,000 attestations from one origin is <b>one edge</b> under
+independence weighting. Records what the register would have to say about itself today:
+<b><code>independent_paths: 0</code></b>, since every path terminates in the same published private
+key.</td>
+</tr>
+<tr>
+<td class="vnum">v0.1.37</td>
+<td class="vdate">27 Aug 2026</td>
+<td><b>The book reads the method sources its brief named, and adopts what they taught.</b>
+The commissioning brief's §2 names three of the sibling estate's finished books to be read
+<i>for method rather than material</i>, and is explicit about the order &mdash; <i>read the appendix
+before writing the capture scripts, not after</i>. v0.1.36 did not: it built the harness from the
+brief's §4 summary and shipped. This release reads the source, at the project lead's prompting and
+after the book was already published, and acts on it. The harness had independently reached the same
+core, because §4 carries it faithfully &mdash; worktree at a tag, a port never reused, a browser
+killed in a <code>finally</code>, <code>deviceScaleFactor</code>, <code>pageerror</code> collection,
+a blank check. <b>Four things it did not have came out of the actual reading.</b>
+<b>The <code>gen:stat</code> marker system</b> is the one that mattered: the sibling atlas carries
+every count in its prose as a generated marker rather than a typed number, so a count cannot drift
+from its build while still reading as a fact. Adopting it <b>immediately corrected three counts in
+this book that had already gone stale</b>, including a release count this book's own release had
+falsified &mdash; a book arguing that every number should be computed rather than recalled had typed
+eight of its own by hand. Fifteen markers now, plus a generated STATS block in
+<code>book/llms.txt</code>; both fail <code>--check</code> on drift, verified by tampering with each.
+<b>The tags refusal</b>: every release number and every past figure rests on git tags, a shallow
+clone has none, and this session started against exactly that and had to notice &mdash; so a checkout
+with no tags now <b>refuses rather than computing zeros</b>, verified against a shallow clone,
+because a silent <code>0</code> would have been written into the prose as a fact in a chapter arguing
+that a gap must never render as an absence. <b><code>--font-render-hinting=none</code></b>, without
+which text rendering follows the host's font config and the same page captured on two machines
+differs in bytes, failing a digest gate for a reason that has nothing to do with the page. And
+<b>a settle for anything laid out by script</b> &mdash; only <code>/assess/</code> qualifies here, and
+raising it from 1.2s to 6s produced a byte-identical capture, recorded as a checked non-issue rather
+than left as an assumption. Also fixed: a numbering slip in chapter 15, where the first named absence
+was labelled A9-b and there was no B1. <b>Appendix A now credits the sibling appendix as the source
+of the technique</b> &mdash; a book that marks every borrowed sentence and then presents a borrowed
+method as its own would be making the mistake it spends seventeen chapters on &mdash; and carries the
+figure table. The colophon records the correction at full size: the brief said to read them, the
+session decided its summary was enough, and <b>one prompt from outside was worth more than the whole
+self-review that preceded it</b>, which is also the finding of chapter 15.</td>
+</tr>
+<tr>
+<td class="vnum">v0.1.36</td>
+<td class="vdate">27 Aug 2026</td>
+<td><b>The book, written.</b> <i>A Key Means Nothing Alone</i> is delivered against the
+commissioning brief published three releases ago: <b>seventeen chapters in five parts</b> plus front
+matter, a harness appendix, a colophon and a reference card &mdash; 35,000 words, with the markdown
+under <code>book/content/</code> as the source of truth and every chapter page rendering
+<b>its own file</b>, so a page cannot describe a chapter it did not render. <b>Fourteen figures,
+each taken from the release tag its caption names</b> by <code>git worktree</code> on a port used
+once and never again, with a headless browser killed in a block that runs whether the capture
+succeeded or failed &mdash; and two gates, because there are two claims: a figure of the past must
+<b>re-derive from its tag</b>, and a figure of the present must still match the live page
+<b>or the build fails</b>, which it will on the next release. <b>Sixty-five quotations, each re-read
+out of the source it names on every build</b>, with the locator discovered rather than asserted; a
+quote not found where it claims to be fails the build, and it caught a conflated attribution during
+writing. Against those, <b>48 claims declared as the writing session's own reasoning</b> rather than
+this estate's, because blending the two is the same error the book is about.
+<b>Every number computed, and four of them contradicted the brief</b> &mdash; most visibly
+&ldquo;eight releases in four days&rdquo;, which the repository says was <b>forty hours across two
+calendar days</b>; the repository won and the colophon lists all four. Chapter 15 is findings
+<b>computed rather than recalled</b>: twelve contradictions and seven named absences, both sides of
+each quoted, and <b>three of them are current artefacts breaking this estate's own load-bearing
+rules</b> &mdash; <code>params.json</code>&rsquo;s signature recipe fails against every statement in
+the register it governs; the delta block <b>authors part of a grant</b> from a literal in its
+generator, naming a branch the measurement never observed, in a pack whose first correction is that
+grants are discovered and never authored; and the shortfall column is a hardcoded string rendering a
+gap as a finding of no gap. Two were found by <b>running</b> the estate&rsquo;s own code rather than
+reading it. Chapter 12 is written to the RiskMandate team as a contract rather than a description,
+and names the open question GM-D32 did not settle: <b>who decides when the component contract needs
+to move</b>. One figure could not be taken as the brief specified, and the reason is a finding &mdash;
+<b>the release that documents the refused push cannot reproduce it</b>, because the control refused
+the release carrying its own documentation and the mandate had to be amended before that release
+could exist. Also: the bench entry moves from <i>specified</i> to <b>live</b> with a new
+<code>does_not_prove</code>, and this site&rsquo;s own <code>llms.txt</code> is corrected, having
+said six bench entries while the bench shipped seven &mdash; a contradiction the book found and
+chapter 15 records as fixed here.</td>
+</tr>
+<tr>
       <td class="vnum">v0.1.35</td>
       <td>27 Aug 2026</td>
       <td><b>The book brief gets a reader.</b> <a href="../book/brief.html">The commissioning brief</a> was published as raw markdown only &mdash; a link that opens as a wall of plain text, while every other document on this site has a rendered page. It now uses the same in-page reader as <a href="../documents/index.html">the documents</a>: metadata block, summary, key concepts and key ideas, then the markdown rendered by <code>assets/mdreader.js</code> with <b>the raw file still the source of truth</b> and a link to it in the header, the label above the render and the page footer. If rendering fails for any reason the page falls back to that link, so the brief is never unreachable. Also linked from the nav and footer under the bench, and in the sitemap.</td>
@@ -297,15 +652,16 @@
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.36</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.47</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The bench</h4>
     <a href="../bench/index.html">&#9679; What is built</a>
+    <a href="../simulator/index.html">&#9679; The simulator</a>
+    <a href="../workbench/index.html">&#9679; The workbench (app)</a>
     <a href="../registry/index.html">The register, live</a>
     <a href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
     <a href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
-    <a href="../workbench/index.html">The workbench (app)</a>
     <a href="../assess/index.html">&#8594; Map your own case</a>
     <a href="../book/index.html">The book (commissioned)</a>
     <a href="../book/brief.html">&mdash; its commissioning brief</a>

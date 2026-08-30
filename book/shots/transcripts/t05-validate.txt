@@ -1,0 +1,19 @@
+$ cd registry && python3 tools/registry_tool.py validate
+  ✓ fixture-agent-a — valid, accepted mandate: YES (expected YES) — valid until 2026-10-01T00:00:00Z, on the authority of sha256:90f97984b9cf3930, a declared root of this registry
+  ✓ fixture-agent-b — mandate revoked by issuer: NO (expected NO) — mandate revoked (policy), effective 2026-08-20T00:00:00Z
+  ✓ fixture-agent-c — mandate expired: NO (expected NO) — mandate expired 2026-08-01T00:00:00Z
+  ✓ fixture-agent-d — mandate issued, never accepted: NO (expected NO) — a mandate exists and its subject has never accepted it — inert (decision 8, provisional)
+  ✓ fixture-agent-e — identity self-revoked: NO (expected NO) — subject identity revoked (key-compromise), effective 2026-08-24T00:00:00Z
+  ✓ role: site-agent: YES (expected YES) — valid until 2026-12-31T00:00:00Z, on the authority of sha256:90f97984b9cf3930, a declared root of this registry
+  · sha256-1ccafd8f3f8906c4: FIXTURE (private key published)
+  · sha256-1d7edf604b98bcf2: FIXTURE (private key published)
+  · sha256-33aae8150b3628ea: FIXTURE (private key published)
+  · sha256-878bb98be58abc56: FIXTURE (private key published)
+  · sha256-90f97984b9cf3930: FIXTURE (private key published)
+  · sha256-9953ff45429350bc: FIXTURE (private key published)
+  · sha256-a940ea382b258d86: FIXTURE (private key published)
+  · sha256-b3ffc1f05803720b: FIXTURE (private key published)
+  · sha256-df2bb4d93af69e6a: FIXTURE (private key published)
+  · sha256-f32e7a1da4e098e0: FIXTURE (private key published)
+  · sha256-f9facb4c94da6c19: REAL identity (private half not published)
+registry validate: OK — 11 records (10 fixtures, 1 real), 23 statements, every signature verified, every reference resolves, no private material outside fixture records, all 6 expected answers reproduced

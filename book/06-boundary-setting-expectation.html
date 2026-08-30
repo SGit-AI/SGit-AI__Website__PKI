@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>6 · Boundary, setting, expectation — A Key Means Nothing Alone &middot; pki.sgit.ai</title>
+<meta name="description" content="6 · Boundary, setting, expectation. What pki.sgit.ai built between site v0.1.25 and v0.1.32, why the concepts underneath it are shaped the way they are, how it composes with RiskMandate.">
+<link rel="canonical" href="https://pki.sgit.ai/book/06-boundary-setting-expectation.html">
+<meta property="og:url" content="https://pki.sgit.ai/book/06-boundary-setting-expectation.html">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/bench.css">
+<link rel="stylesheet" href="book.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
+  <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.47</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../failure/index.html">The registry<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../registry/index.html">&#9679; The registry, live</a>
+      <a class="sl" href="../failure/index.html">Why they don't exist</a>
+      <a class="sl" href="../rules/index.html">The four rules</a>
+      <a class="sl" href="../mandate/index.html">Identity &amp; mandate</a>
+      <a class="sl" href="../roadmap/index.html">Build order</a>
+      <a class="sl" href="../rules/prior-art.html">Prior art</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../bootstrap/index.html">The layers<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../bootstrap/index.html">The bootstrap trap</a>
+      <a class="sl" href="../enrolment/index.html">Enrolment</a>
+      <a class="sl" href="../execution/index.html">The execution broker</a>
+      <a class="sl" href="../shipped/index.html">What already ships</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../assess/index.html">Map your case<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../assess/index.html">Map your own case</a>
+      <a class="sl" href="../assess/library.html">The library of trees</a>
+      <a class="sl" href="../packs/map-your-case/readers/index.html">Synthetic readers</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../origins/index.html">Origins<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../origins/index.html">Origins: 2026</a>
+      <a class="sl" href="../origins/review.html">The review, redacted</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../bench/index.html">The bench<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../bench/index.html">&#9679; The bench &mdash; what is built</a>
+      <a class="sl" href="../simulator/index.html">&#9679; The simulator &mdash; play a card</a>
+      <a class="sl" href="../experiments/index.html">&#9679; Experiments</a>
+      <a class="sl" href="../experiments/the-room/index.html">&mdash; the chain room</a>
+      <a class="sl" href="../experiments/the-table/index.html">&mdash; the table</a>
+      <a class="sl" href="../experiments/push-to-github/index.html">&mdash; push to GitHub</a>
+      <a class="sl" href="../experiments/the-deploy/index.html">&mdash; the deploy</a>
+      <a class="sl" href="../experiments/the-control-room/index.html">&mdash; the control room</a>
+      <a class="sl" href="../workbench/index.html">&#9679; The workbench (app)</a>
+      <a class="sl" href="../registry/index.html">The register, live</a>
+      <a class="sl" href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
+      <a class="sl" href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
+      <a class="sl" href="../assess/index.html">Map your own case</a>
+      <a class="sl" href="../book/index.html">The book (commissioned)</a>
+      <a class="sl" href="../book/brief.html">&mdash; its commissioning brief</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../documents/index.html">The documents</a>
+      <a class="sl" href="../packs/index.html">Dev packs</a>
+      <a class="sl" href="../packs/registry-mvp/index.html">The registry MVP pack</a>
+      <a class="sl" href="../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
+      <a class="sl" href="../packs/map-your-case/index.html">The Map Your Case pack</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../admin/versions.html">Release history</a>
+      <a class="sl" href="../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+  <script src="../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="index.html">book</a> / 06</div>
+<div class="bk-part">Part two — The vocabulary, and why each word is load-bearing</div>
+<div class="mdread-label">&#128214; <b>A Key Means Nothing Alone</b> &middot; 6 · Boundary, setting, expectation
+&middot; 1,727 words &middot; rendered from <a href="content/06__boundary-setting-expectation.md">content/06__boundary-setting-expectation.md</a>
+(the source of truth) &middot; <code>sha256:7ec3674d86b17a6c&hellip;</code></div>
+<div class="mdread" id="mdread" data-src="content/06__boundary-setting-expectation.md"><noscript><p class="dim">In-page
+rendering needs JavaScript &mdash; <a href="content/06__boundary-setting-expectation.md">open the raw markdown</a>.</p></noscript></div>
+
+<div class="bk-honesty">
+  <b>Carried from the front matter, because a chapter quoted in isolation must still carry it:</b>
+  the register is built and the trustworthy register is not; ten of eleven records are fixtures
+  with published private keys, and the root is a fixture. The enforcement is real and the
+  authority is not, and they are independent halves. Every grant is a floor, not a census.
+  This is a participant's account. <a href="00-front-matter.html">The full positions &rarr;</a>
+</div>
+
+<nav class="bk-nav"><a class="bk-prev" href="05-the-delta.html">&larr; 5 · The delta</a><a class="bk-next" href="07-reality-before-the-risk-register.html">7 · Reality before the risk register &rarr;</a><a class="bk-toc" href="index.html">Contents</a></nav>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.47</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The bench</h4>
+    <a href="../bench/index.html">&#9679; What is built</a>
+    <a href="../simulator/index.html">&#9679; The simulator</a>
+    <a href="../workbench/index.html">&#9679; The workbench (app)</a>
+    <a href="../registry/index.html">The register, live</a>
+    <a href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
+    <a href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
+    <a href="../assess/index.html">&#8594; Map your own case</a>
+    <a href="../book/index.html">The book (commissioned)</a>
+    <a href="../book/brief.html">&mdash; its commissioning brief</a>
+  </div>
+  <div>
+    <h4>The registry</h4>
+    <a href="../failure/index.html">Why they don't exist</a>
+    <a href="../rules/index.html">The four rules</a>
+    <a href="../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../roadmap/index.html">Build order</a>
+    <a href="../rules/prior-art.html">Prior art</a>
+  </div>
+  <div>
+    <h4>The three layers</h4>
+    <a href="../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../enrolment/index.html">Enrolment</a>
+    <a href="../execution/index.html">The execution broker</a>
+    <a href="../shipped/index.html">What already ships</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../origins/index.html">Origins: 2026</a>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../packs/registry-mvp/index.html">The registry MVP pack</a>
+    <a href="../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
+    <a href="../packs/map-your-case/index.html">The Map Your Case pack</a>
+    <a href="../about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../llms.txt">llms.txt</a>
+  </div>
+</div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+<script src="../assets/mdreader.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+<script src="../assets/mdreader.js"></script>
+</body>
+</html>

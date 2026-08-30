@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The doors &mdash; what this estate has and has not passed &middot; pki.sgit.ai</title>
+<meta name="description" content="This estate's four ladders, computed: the bootstrap gradient, the tier ladder, the ordering rule and the confidence ladder, with the door on each rung — the condition the next rung will not accept work without. Every count is derived at build time, and a door whose computed state disagrees with the declaration fails the build.">
+<link rel="canonical" href="https://pki.sgit.ai/registry/doors.html">
+<meta property="og:url" content="https://pki.sgit.ai/registry/doors.html">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/bench.css">
+<link rel="stylesheet" href="doors.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
+  <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.47</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl here" href="../failure/index.html">The registry<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../registry/index.html">&#9679; The registry, live</a>
+      <a class="sl" href="../failure/index.html">Why they don't exist</a>
+      <a class="sl" href="../rules/index.html">The four rules</a>
+      <a class="sl" href="../mandate/index.html">Identity &amp; mandate</a>
+      <a class="sl" href="../roadmap/index.html">Build order</a>
+      <a class="sl" href="../rules/prior-art.html">Prior art</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../bootstrap/index.html">The layers<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../bootstrap/index.html">The bootstrap trap</a>
+      <a class="sl" href="../enrolment/index.html">Enrolment</a>
+      <a class="sl" href="../execution/index.html">The execution broker</a>
+      <a class="sl" href="../shipped/index.html">What already ships</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../assess/index.html">Map your case<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../assess/index.html">Map your own case</a>
+      <a class="sl" href="../assess/library.html">The library of trees</a>
+      <a class="sl" href="../packs/map-your-case/readers/index.html">Synthetic readers</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../origins/index.html">Origins<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../origins/index.html">Origins: 2026</a>
+      <a class="sl" href="../origins/review.html">The review, redacted</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../bench/index.html">The bench<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../bench/index.html">&#9679; The bench &mdash; what is built</a>
+      <a class="sl" href="../simulator/index.html">&#9679; The simulator &mdash; play a card</a>
+      <a class="sl" href="../experiments/index.html">&#9679; Experiments</a>
+      <a class="sl" href="../experiments/the-room/index.html">&mdash; the chain room</a>
+      <a class="sl" href="../experiments/the-table/index.html">&mdash; the table</a>
+      <a class="sl" href="../experiments/push-to-github/index.html">&mdash; push to GitHub</a>
+      <a class="sl" href="../experiments/the-deploy/index.html">&mdash; the deploy</a>
+      <a class="sl" href="../experiments/the-control-room/index.html">&mdash; the control room</a>
+      <a class="sl" href="../workbench/index.html">&#9679; The workbench (app)</a>
+      <a class="sl" href="../registry/index.html">The register, live</a>
+      <a class="sl" href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
+      <a class="sl" href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
+      <a class="sl" href="../assess/index.html">Map your own case</a>
+      <a class="sl" href="../book/index.html">The book (commissioned)</a>
+      <a class="sl" href="../book/brief.html">&mdash; its commissioning brief</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../documents/index.html">The documents</a>
+      <a class="sl" href="../packs/index.html">Dev packs</a>
+      <a class="sl" href="../packs/registry-mvp/index.html">The registry MVP pack</a>
+      <a class="sl" href="../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
+      <a class="sl" href="../packs/map-your-case/index.html">The Map Your Case pack</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../admin/versions.html">Release history</a>
+      <a class="sl" href="../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+  <script src="../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="index.html">registry</a> / doors</div>
+
+<h1>The doors</h1>
+<p class="lead">This estate's four ladders, and the <b>door</b> on each rung &mdash; the condition the
+next rung will not accept work without. <b>9 of 12 doors are shut.</b></p>
+
+<div class="dr-rule">
+<b>Every number on this page is computed at build time</b> from <code>registry/</code> and
+<code>packs/</code>; the name beside each one is the function that produced it. The ladders, the door
+text and whether each door is <i>expected</i> shut are declared in
+<a href="doors.declared.json">doors.declared.json</a>, which holds <b>no counts</b>. The computed
+result is <a href="views/doors.json">views/doors.json</a>, which carries no authority.
+<b>A door whose computed state disagrees with the declaration fails the build, in either
+direction</b> &mdash; a door that opens breaks it just as loudly as one that closes, because a door
+opening is news, and news that does not interrupt anybody is news nobody reads.</div>
+
+<section class="dr-ladder" id="bootstrap">
+<h2>The bootstrap gradient</h2>
+<p class="dr-asks">How far can an agent get from nothing?</p>
+<p class="dr-source">Source: pki.sgit.ai/bootstrap/index.html — the site&#x27;s own three steps</p>
+  <div class="dr-row">
+    <div class="dr-n"><span class="dr-count">11</span><span class="dr-metric">records</span></div>
+    <div class="dr-body">
+      <div class="dr-label">controls a private key</div>
+      <div class="dr-means">Free. Proves possession, and nothing else.</div>
+      
+    </div>
+  </div>
+  <div class="dr-row">
+    <div class="dr-n"><span class="dr-count">1</span><span class="dr-metric">records_scarce</span></div>
+    <div class="dr-body">
+      <div class="dr-label">…whose private half is scarce<span class="dr-door dr-door--open">◻ OPEN</span></div>
+      <div class="dr-means">A signature&#x27;s value is the scarcity of the private half.</div>
+      <div class="dr-doorline"><b>The door:</b> a keypair whose private half has a durable home</div>
+    </div>
+  </div>
+  <div class="dr-row">
+    <div class="dr-n"><span class="dr-count">11</span><span class="dr-metric">records</span></div>
+    <div class="dr-body">
+      <div class="dr-label">recognised by the project</div>
+      <div class="dr-means">A policy decision, not a computation — today a git commit reviewed by a human.</div>
+      
+    </div>
+  </div>
+  <div class="dr-row dr-row--zero">
+    <div class="dr-n"><span class="dr-count">0</span><span class="dr-metric">enrolled_via_lane</span></div>
+    <div class="dr-body">
+      <div class="dr-label">…via the designed append lane<span class="dr-door dr-door--shut">◼ SHUT</span></div>
+      <div class="dr-means">The account-less narrow door the whole bootstrap argument rests on.</div>
+      <div class="dr-doorline"><b>The door:</b> an append lane that accepts a token holder with no account &mdash; <span class="dr-why">the lane is unbuilt; the readiness report&#x27;s Q2 — whether a lane with no anchors accepts any token holder — is unanswered, and one experiment would answer it</span></div>
+    </div>
+  </div>
+  <div class="dr-row">
+    <div class="dr-n"><span class="dr-count">4</span><span class="dr-metric">acceptances</span></div>
+    <div class="dr-body">
+      <div class="dr-label">delegated an accepted mandate</div>
+      <div class="dr-means">Scoped, dated, revocable.</div>
+      
+    </div>
+  </div>
+  <div class="dr-row dr-row--zero">
+    <div class="dr-n"><span class="dr-count">0</span><span class="dr-metric">mandates_real_issuer</span></div>
+    <div class="dr-body">
+      <div class="dr-label">…on a non-fixture authority<span class="dr-door dr-door--shut">◼ SHUT</span></div>
+      <div class="dr-means">An issuer whose private half is not published.</div>
+      <div class="dr-doorline"><b>The door:</b> an issuer key that anybody cannot forge &mdash; <span class="dr-why">every mandate in this register is signed by the fixture root, whose private half is published in this repository</span></div>
+    </div>
+  </div>
+</section>
+<section class="dr-ladder" id="tier">
+<h2>The tier ladder</h2>
+<p class="dr-asks">How strong is a control, and who enforces it?</p>
+<p class="dr-source">Source: packs/grant-and-mandate/src/01__concepts.md — a control bounds a grant only when it is enforced by something the grant does not include</p>
+  <div class="dr-row">
+    <div class="dr-n"><span class="dr-count">7</span><span class="dr-metric">nodes_none</span></div>
+    <div class="dr-body">
+      <div class="dr-label">no control at all</div>
+      <div class="dr-means">An absence, stated.</div>
+      
+    </div>
+  </div>
+  <div class="dr-row">
+    <div class="dr-n"><span class="dr-count">2</span><span class="dr-metric">nodes_expectation</span></div>
+    <div class="dr-body">
+      <div class="dr-label">expectation<span class="dr-door dr-door--open">◻ OPEN</span></div>
+      <div class="dr-means">Written in a prompt or a policy file. It is a mandate, and a mandate is not a control.</div>
+      <div class="dr-doorline"><b>The door:</b> something must actually enforce it</div>
+    </div>
+  </div>
+  <div class="dr-row">
+    <div class="dr-n"><span class="dr-count">1</span><span class="dr-metric">nodes_setting</span></div>
+    <div class="dr-body">
+      <div class="dr-label">setting<span class="dr-door dr-door--open">◻ OPEN</span></div>
+      <div class="dr-means">Enforced by the tool itself, inside the grant. Bypassable by anything running as that grant.</div>
+      <div class="dr-doorline"><b>The door:</b> it must be enforced outside the grant it bounds</div>
+    </div>
+  </div>
+  <div class="dr-row">
+    <div class="dr-n"><span class="dr-count">4</span><span class="dr-metric">nodes_boundary_surviving</span></div>
+    <div class="dr-body">
+      <div class="dr-label">boundary, observed</div>
+      <div class="dr-means">Enforced by something outside the grant. Observed in somebody else&#x27;s product, not built here.</div>
+      
+    </div>
+  </div>
+  <div class="dr-row dr-row--zero">
+    <div class="dr-n"><span class="dr-count">0</span><span class="dr-metric">enforcement_at_boundary</span></div>
+    <div class="dr-body">
+      <div class="dr-label">boundary, built by this estate<span class="dr-door dr-door--shut">◼ SHUT</span></div>
+      <div class="dr-means">The same allow-list evaluated where the agent cannot reach it.</div>
+      <div class="dr-doorline"><b>The door:</b> an enforcement point outside the grant — branch protection, or a required CI check &mdash; <span class="dr-why">the only enforcement point built here is a pre-push hook, which sits inside the grant it bounds; reaching boundary is a change of location, not of policy</span></div>
+    </div>
+  </div>
+</section>
+<section class="dr-ladder" id="ordering">
+<h2>The ordering rule</h2>
+<p class="dr-asks">How far along the chain has anything actually travelled?</p>
+<p class="dr-source">Source: packs/grant-and-mandate/src/01__concepts.md — reality → twin → facts → finding → risks → decisions</p>
+  <div class="dr-row">
+    <div class="dr-n"><span class="dr-count">2</span><span class="dr-metric">library_entries</span></div>
+    <div class="dr-body">
+      <div class="dr-label">twin — environments measured</div>
+      <div class="dr-means">The installation every fact attaches to.</div>
+      
+    </div>
+  </div>
+  <div class="dr-row">
+    <div class="dr-n"><span class="dr-count">2</span><span class="dr-metric">library_entries</span></div>
+    <div class="dr-body">
+      <div class="dr-label">facts — grants</div>
+      <div class="dr-means">Measured, dated, provenance per node.</div>
+      
+    </div>
+  </div>
+  <div class="dr-row dr-row--zero">
+    <div class="dr-n"><span class="dr-count">0</span><span class="dr-metric">library_entries_signed</span></div>
+    <div class="dr-body">
+      <div class="dr-label">…signed, with a subject identity<span class="dr-door dr-door--shut">◼ SHUT</span></div>
+      <div class="dr-means">A fact needs a stater to be weighable.</div>
+      <div class="dr-doorline"><b>The door:</b> a grant signed by a named measurer, about a keyed environment &mdash; <span class="dr-why">both library entries are unsigned JSON outside the register, and their subject is a filename rather than an identity — v0.33.64 §4.2</span></div>
+    </div>
+  </div>
+  <div class="dr-row">
+    <div class="dr-n"><span class="dr-count">1</span><span class="dr-metric">excess_rows</span></div>
+    <div class="dr-body">
+      <div class="dr-label">finding — excess authority</div>
+      <div class="dr-means">grant − mandate. The exposure nobody accepted.</div>
+      
+    </div>
+  </div>
+  <div class="dr-row dr-row--zero">
+    <div class="dr-n"><span class="dr-count">0</span><span class="dr-metric">shortfall_rows</span></div>
+    <div class="dr-body">
+      <div class="dr-label">finding — shortfall<span class="dr-door dr-door--shut">◼ SHUT</span></div>
+      <div class="dr-means">mandate − grant. The operations direction, and where the next over-broad credential comes from.</div>
+      <div class="dr-doorline"><b>The door:</b> a capability vocabulary, so the mandate can be enumerated against real names &mdash; <span class="dr-why">the shortfall column in the rendered delta block is a hardcoded string; what a capability name IS remains the estate&#x27;s largest open question</span></div>
+    </div>
+  </div>
+  <div class="dr-row dr-row--zero">
+    <div class="dr-n"><span class="dr-count">0</span><span class="dr-metric">blindspot_rows</span></div>
+    <div class="dr-body">
+      <div class="dr-label">finding — blind spots<span class="dr-door dr-door--shut">◼ SHUT</span></div>
+      <div class="dr-means">library − self-report. The only thing that makes a self-report falsifiable.</div>
+      <div class="dr-doorline"><b>The door:</b> two agents measuring against a common reference &mdash; <span class="dr-why">there are two library entries and one agent; the three-term block renders its middle column empty on purpose</span></div>
+    </div>
+  </div>
+  <div class="dr-row dr-row--zero">
+    <div class="dr-n"><span class="dr-count">0</span><span class="dr-metric">rows_with_acceptor</span></div>
+    <div class="dr-body">
+      <div class="dr-label">decisions — with a named acceptor<span class="dr-door dr-door--shut">◼ SHUT</span></div>
+      <div class="dr-means">A separate node: named acceptor, interval.</div>
+      <div class="dr-doorline"><b>The door:</b> somebody willing to put their name against an exposure &mdash; <span class="dr-why">acceptor is null on every excess row, by construction — excess authority is unaccepted by definition, and nobody has accepted any of it since</span></div>
+    </div>
+  </div>
+</section>
+<section class="dr-ladder" id="confidence">
+<h2>The confidence ladder</h2>
+<p class="dr-asks">How much can any of this bear?</p>
+<p class="dr-source">Source: graphs.sgit.ai — the confidence ladder, adopted for this estate in brief v0.33.64</p>
+  <div class="dr-row">
+    <div class="dr-n"><span class="dr-count">23</span><span class="dr-metric">statements</span></div>
+    <div class="dr-body">
+      <div class="dr-label">an attributable edge</div>
+      <div class="dr-means">A signed statement. PKI&#x27;s contribution: not trust, but attribution.</div>
+      
+    </div>
+  </div>
+  <div class="dr-row dr-row--zero">
+    <div class="dr-n"><span class="dr-count">0</span><span class="dr-metric">independent_measurements</span></div>
+    <div class="dr-body">
+      <div class="dr-label">an independent measurement<span class="dr-door dr-door--shut">◼ SHUT</span></div>
+      <div class="dr-means">Weight by independence, not by count — ten citations of one source are one source.</div>
+      <div class="dr-doorline"><b>The door:</b> a measurement taken from outside the environment being measured &mdash; <span class="dr-why">both library entries record that the instrument IS the subject, so every path in this register terminates in one origin</span></div>
+    </div>
+  </div>
+  <div class="dr-row dr-row--zero">
+    <div class="dr-n"><span class="dr-count">0</span><span class="dr-metric">registries_referenced</span></div>
+    <div class="dr-body">
+      <div class="dr-label">a registry pointing at a registry<span class="dr-door dr-door--shut">◼ SHUT</span></div>
+      <div class="dr-means">Recursion: zoom into any node and it expands under identical rules.</div>
+      <div class="dr-doorline"><b>The door:</b> a second registry, run by somebody else &mdash; <span class="dr-why">the fractal claim is falsifiable and untestable with one instance — v0.33.64 §2</span></div>
+    </div>
+  </div>
+</section>
+
+<h2 id="reading">What the shape says</h2>
+<p>The count is not the finding; the split is. Of the 9 shut doors, <b>3 could be opened by
+this project alone</b> and <b>6 need somebody who is not this project</b> &mdash; a second
+measurer, a second registry, an issuer whose key would be worth forging, a person willing to put their
+name against an exposure. That is not 6 problems. It is one problem with 6 faces, and it
+is this estate's own longest-standing finding rather than a new one: nobody outside the project has
+been asked whether any of this is a need.</p>
+<p>The 3 that are ours are the more uncomfortable half, because nothing is stopping them.</p>
+
+<p class="dr-notprove"><b>This page does not prove anything is wrong.</b> A shut door is a statement
+about instances, not about design, and not a commitment to open one. It adds no claim this estate has
+not already published elsewhere &mdash; its whole contribution is putting them in one place and
+letting a gate keep them true. It also cannot check its own declaration: if
+<code>doors.declared.json</code> names the wrong ladders, everything agrees and everything is wrong.
+Each rung names the published source its definition comes from; there is no mitigation for choosing
+the wrong sources.</p>
+
+<p class="dr-src">Ported from <a href="https://newsroom.sgit.ai/briefs/10__the-newsroom-floor.md">newsroom.sgit.ai brief 10</a>
+&sect;8 &mdash; the state map, not the room &mdash; CC BY 4.0, with attribution kept per its &sect;11.
+Specified in <a href="../briefs/v0.33.65__dev-brief__the-doors-page-a-computed-state-map-where-the-build-breaks-when-a-door-opens.md">brief v0.33.65</a>.
+Generator: <code>admin/build/gen_doors.py</code>.</p>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.47</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The bench</h4>
+    <a href="../bench/index.html">&#9679; What is built</a>
+    <a href="../simulator/index.html">&#9679; The simulator</a>
+    <a href="../workbench/index.html">&#9679; The workbench (app)</a>
+    <a href="../registry/index.html">The register, live</a>
+    <a href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
+    <a href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
+    <a href="../assess/index.html">&#8594; Map your own case</a>
+    <a href="../book/index.html">The book (commissioned)</a>
+    <a href="../book/brief.html">&mdash; its commissioning brief</a>
+  </div>
+  <div>
+    <h4>The registry</h4>
+    <a href="../failure/index.html">Why they don't exist</a>
+    <a href="../rules/index.html">The four rules</a>
+    <a href="../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../roadmap/index.html">Build order</a>
+    <a href="../rules/prior-art.html">Prior art</a>
+  </div>
+  <div>
+    <h4>The three layers</h4>
+    <a href="../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../enrolment/index.html">Enrolment</a>
+    <a href="../execution/index.html">The execution broker</a>
+    <a href="../shipped/index.html">What already ships</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../origins/index.html">Origins: 2026</a>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../packs/registry-mvp/index.html">The registry MVP pack</a>
+    <a href="../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
+    <a href="../packs/map-your-case/index.html">The Map Your Case pack</a>
+    <a href="../about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../llms.txt">llms.txt</a>
+  </div>
+</div></footer>
+
+
+</body>
+</html>

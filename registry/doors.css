@@ -1,0 +1,51 @@
+/* doors.css — the state map. Two channels on every state, never colour alone:
+   the WORD and the border style, per the tier-badge rule in Grant & Mandate
+   document 09. This page is read in print, in greyscale, and in this estate's
+   own book. No external assets. */
+
+.dr-rule{margin:1.4rem 0 2rem;padding:.9rem 1.1rem;border:1px solid #d9c9a8;
+  border-left:4px solid #b08a3e;border-radius:.4rem;background:#fdf8ec;
+  font-size:.9rem;line-height:1.62}
+
+.dr-ladder{margin:2.4rem 0}
+.dr-ladder h2{margin-bottom:.15rem}
+.dr-asks{margin:.1rem 0 .15rem;font-size:1rem;color:#4a463d}
+.dr-source{margin:0 0 1rem;font:.78rem/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;
+  color:#8a8578}
+
+.dr-row{display:flex;gap:1rem;align-items:flex-start;padding:.7rem .2rem;
+  border-top:1px solid #e6e2d6}
+.dr-row--zero{background:#fbf9f4}
+
+.dr-n{flex:0 0 9.5rem;text-align:right}
+.dr-count{display:block;font:700 1.5rem/1.1 ui-sans-serif,system-ui,sans-serif;
+  color:#2f2c26;font-variant-numeric:tabular-nums}
+.dr-row--zero .dr-count{color:#a8341f}
+.dr-metric{display:block;margin-top:.15rem;font:.66rem/1.45 ui-monospace,monospace;
+  color:#9b9484;word-break:normal;overflow-wrap:break-word;hyphens:none}
+
+.dr-body{flex:1 1 auto;min-width:0}
+.dr-label{font-size:1rem;font-weight:600;color:#2f2c26;display:flex;
+  flex-wrap:wrap;gap:.5rem;align-items:center}
+.dr-means{margin-top:.2rem;font-size:.88rem;line-height:1.55;color:#5f5a50}
+.dr-doorline{margin-top:.45rem;font-size:.85rem;line-height:1.55;
+  padding:.4rem .6rem;border-radius:.3rem;background:#f4f2ea;
+  border-left:2px solid #c9c2ad}
+.dr-why{color:#5f5a50}
+
+/* two channels: the word, and the border style */
+.dr-door{font:600 .68rem/1 ui-monospace,monospace;letter-spacing:.06em;
+  padding:.28rem .5rem;border-radius:.28rem;white-space:nowrap}
+.dr-door--shut{color:#8f2d1a;background:#fdf0ec;border:2px solid #c0603f}
+.dr-door--open{color:#2c6b57;background:#eef6f2;border:1px dashed #7fae9b}
+
+.dr-notprove{margin-top:1.4rem;padding:.85rem 1rem;border:1px solid #ddd8c9;
+  border-radius:.4rem;background:#fbfaf6;font-size:.88rem;line-height:1.6}
+.dr-src{margin-top:1.6rem;font-size:.8rem;line-height:1.6;color:#6b665b}
+
+@media (max-width:620px){
+  .dr-row{gap:.7rem}
+  .dr-n{flex:0 0 5.4rem}
+  .dr-count{font-size:1.2rem}
+  .dr-metric{font-size:.6rem}
+}

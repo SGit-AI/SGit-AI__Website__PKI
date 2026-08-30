@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The control room &mdash; a SCADA board over the scenario worlds &middot; pki.sgit.ai</title>
+<meta name="description" content="Both scenario worlds on one operator board: mimic diagrams, annunciator tiles lit by tier, faceplates, and the 26 August incident as a replayable sequence of events — every verdict re-run through the enforcement tool at build time.">
+<link rel="canonical" href="https://pki.sgit.ai/experiments/the-control-room/index.html">
+<meta property="og:url" content="https://pki.sgit.ai/experiments/the-control-room/index.html">
+<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="../../assets/bench.css">
+<link rel="stylesheet" href="../scenario.css">
+<link rel="stylesheet" href="control.css">
+<style>#fp-u1-n1:checked ~ .fp-bay .fp-u1-n1{display:block}#fp-u1-n1:checked ~ .annun label[for="fp-u1-n1"]{outline:2px solid var(--cr-sel);outline-offset:1px}#fp-u1-n2:checked ~ .fp-bay .fp-u1-n2{display:block}#fp-u1-n2:checked ~ .annun label[for="fp-u1-n2"]{outline:2px solid var(--cr-sel);outline-offset:1px}#fp-u1-n3:checked ~ .fp-bay .fp-u1-n3{display:block}#fp-u1-n3:checked ~ .annun label[for="fp-u1-n3"]{outline:2px solid var(--cr-sel);outline-offset:1px}#fp-u1-n4:checked ~ .fp-bay .fp-u1-n4{display:block}#fp-u1-n4:checked ~ .annun label[for="fp-u1-n4"]{outline:2px solid var(--cr-sel);outline-offset:1px}#fp-u1-n5:checked ~ .fp-bay .fp-u1-n5{display:block}#fp-u1-n5:checked ~ .annun label[for="fp-u1-n5"]{outline:2px solid var(--cr-sel);outline-offset:1px}#fp-u1-n6:checked ~ .fp-bay .fp-u1-n6{display:block}#fp-u1-n6:checked ~ .annun label[for="fp-u1-n6"]{outline:2px solid var(--cr-sel);outline-offset:1px}#fp-u1-n7:checked ~ .fp-bay .fp-u1-n7{display:block}#fp-u1-n7:checked ~ .annun label[for="fp-u1-n7"]{outline:2px solid var(--cr-sel);outline-offset:1px}#fp-u1-n8:checked ~ .fp-bay .fp-u1-n8{display:block}#fp-u1-n8:checked ~ .annun label[for="fp-u1-n8"]{outline:2px solid var(--cr-sel);outline-offset:1px}#fp-u1-n9:checked ~ .fp-bay .fp-u1-n9{display:block}#fp-u1-n9:checked ~ .annun label[for="fp-u1-n9"]{outline:2px solid var(--cr-sel);outline-offset:1px}#fp-u2-n1:checked ~ .fp-bay .fp-u2-n1{display:block}#fp-u2-n1:checked ~ .annun label[for="fp-u2-n1"]{outline:2px solid var(--cr-sel);outline-offset:1px}#fp-u2-n1a:checked ~ .fp-bay .fp-u2-n1a{display:block}#fp-u2-n1a:checked ~ .annun label[for="fp-u2-n1a"]{outline:2px solid var(--cr-sel);outline-offset:1px}#fp-u2-n2:checked ~ .fp-bay .fp-u2-n2{display:block}#fp-u2-n2:checked ~ .annun label[for="fp-u2-n2"]{outline:2px solid var(--cr-sel);outline-offset:1px}#fp-u2-n3:checked ~ .fp-bay .fp-u2-n3{display:block}#fp-u2-n3:checked ~ .annun label[for="fp-u2-n3"]{outline:2px solid var(--cr-sel);outline-offset:1px}#fp-u2-n4:checked ~ .fp-bay .fp-u2-n4{display:block}#fp-u2-n4:checked ~ .annun label[for="fp-u2-n4"]{outline:2px solid var(--cr-sel);outline-offset:1px}#fp-u2-n5:checked ~ .fp-bay .fp-u2-n5{display:block}#fp-u2-n5:checked ~ .annun label[for="fp-u2-n5"]{outline:2px solid var(--cr-sel);outline-offset:1px}#fp-u2-c1:checked ~ .fp-bay .fp-u2-c1{display:block}#fp-u2-c1:checked ~ .annun label[for="fp-u2-c1"]{outline:2px solid var(--cr-sel);outline-offset:1px}#fp-u2-c2:checked ~ .fp-bay .fp-u2-c2{display:block}#fp-u2-c2:checked ~ .annun label[for="fp-u2-c2"]{outline:2px solid var(--cr-sel);outline-offset:1px}#fp-u2-c3:checked ~ .fp-bay .fp-u2-c3{display:block}#fp-u2-c3:checked ~ .annun label[for="fp-u2-c3"]{outline:2px solid var(--cr-sel);outline-offset:1px}#fp-u2-n6:checked ~ .fp-bay .fp-u2-n6{display:block}#fp-u2-n6:checked ~ .annun label[for="fp-u2-n6"]{outline:2px solid var(--cr-sel);outline-offset:1px}</style>
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../index.html">pki<span>.sgit.ai</span></a>
+  <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../../admin/versions.html" title="Site release history">v0.1.47</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../../failure/index.html">The registry<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../registry/index.html">&#9679; The registry, live</a>
+      <a class="sl" href="../../failure/index.html">Why they don't exist</a>
+      <a class="sl" href="../../rules/index.html">The four rules</a>
+      <a class="sl" href="../../mandate/index.html">Identity &amp; mandate</a>
+      <a class="sl" href="../../roadmap/index.html">Build order</a>
+      <a class="sl" href="../../rules/prior-art.html">Prior art</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../bootstrap/index.html">The layers<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../bootstrap/index.html">The bootstrap trap</a>
+      <a class="sl" href="../../enrolment/index.html">Enrolment</a>
+      <a class="sl" href="../../execution/index.html">The execution broker</a>
+      <a class="sl" href="../../shipped/index.html">What already ships</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../assess/index.html">Map your case<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../assess/index.html">Map your own case</a>
+      <a class="sl" href="../../assess/library.html">The library of trees</a>
+      <a class="sl" href="../../packs/map-your-case/readers/index.html">Synthetic readers</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../origins/index.html">Origins<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../origins/index.html">Origins: 2026</a>
+      <a class="sl" href="../../origins/review.html">The review, redacted</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../../bench/index.html">The bench<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../bench/index.html">&#9679; The bench &mdash; what is built</a>
+      <a class="sl" href="../../simulator/index.html">&#9679; The simulator &mdash; play a card</a>
+      <a class="sl" href="../../experiments/index.html">&#9679; Experiments</a>
+      <a class="sl" href="../../experiments/the-room/index.html">&mdash; the chain room</a>
+      <a class="sl" href="../../experiments/the-table/index.html">&mdash; the table</a>
+      <a class="sl" href="../../experiments/push-to-github/index.html">&mdash; push to GitHub</a>
+      <a class="sl" href="../../experiments/the-deploy/index.html">&mdash; the deploy</a>
+      <a class="sl here" href="../../experiments/the-control-room/index.html">&mdash; the control room</a>
+      <a class="sl" href="../../workbench/index.html">&#9679; The workbench (app)</a>
+      <a class="sl" href="../../registry/index.html">The register, live</a>
+      <a class="sl" href="../../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
+      <a class="sl" href="../../packs/grant-and-mandate/blocks.html">The building blocks</a>
+      <a class="sl" href="../../assess/index.html">Map your own case</a>
+      <a class="sl" href="../../book/index.html">The book (commissioned)</a>
+      <a class="sl" href="../../book/brief.html">&mdash; its commissioning brief</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../documents/index.html">The documents</a>
+      <a class="sl" href="../../packs/index.html">Dev packs</a>
+      <a class="sl" href="../../packs/registry-mvp/index.html">The registry MVP pack</a>
+      <a class="sl" href="../../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
+      <a class="sl" href="../../packs/map-your-case/index.html">The Map Your Case pack</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../../admin/versions.html">Release history</a>
+      <a class="sl" href="../../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+  <script src="../../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc doc--wide">
+<div class="crumb"><a href="../../index.html">pki.sgit.ai</a> / <a href="../index.html">experiments</a> / the-control-room</div>
+
+<h1>The control room</h1>
+<p class="lead">Both worlds on one operator board. The deck pages read a world one card at a time;
+the operator's question is different — <i>what is the state of the whole plant, right now, and what
+happened on the 26th?</i> That question has had a canonical answer for fifty years.</p>
+
+<div class="rmark"><b>One more renderer, zero new data.</b> This board is drawn from the <i>same</i>
+<code>scenario.json</code> files the deck pages use and the twins they reference — nothing was added
+to make it possible, which is what makes the scenario files a world model rather than a page config.
+A tile is a twin node; its lamp colour is its <b>tier and nothing else</b>; a sensor that refused
+measurement is a <b>FAULT</b> lamp, never a blank; and the log at the bottom re-runs every verdict
+through <code>mandate.py</code> at build time. Click any tile for its faceplate.</div>
+
+<div class="ctrl" id="board">
+<div class="ctrl-head"><span class="ctrl-title">GRANT &amp; MANDATE BOARD</span>
+  <span class="mode-chip mode-chip--replay" title="This chip is computed from the four doors a live board depends on, not typed: LIVE only when all four are open.">REPLAY · 2026-08-26</span></div>
+
+<div class="ctrl-units">
+<section class="unit" id="u1">
+<input type="radio" name="fp-u1" id="fp-u1-n1" class="fp-radio" checked><input type="radio" name="fp-u1" id="fp-u1-n2" class="fp-radio"><input type="radio" name="fp-u1" id="fp-u1-n3" class="fp-radio"><input type="radio" name="fp-u1" id="fp-u1-n4" class="fp-radio"><input type="radio" name="fp-u1" id="fp-u1-n5" class="fp-radio"><input type="radio" name="fp-u1" id="fp-u1-n6" class="fp-radio"><input type="radio" name="fp-u1" id="fp-u1-n7" class="fp-radio"><input type="radio" name="fp-u1" id="fp-u1-n8" class="fp-radio"><input type="radio" name="fp-u1" id="fp-u1-n9" class="fp-radio">
+<div class="unit-head"><span class="unit-no">UNIT 1</span> Push to GitHub
+  <span class="unit-env">claude-code-remote · measured 2026-08-26</span></div>
+<div class="unit-hud"><span class="hud hud--ok">2 contained</span> · <span class="hud hud--set">1 setting</span> · <span class="hud hud--exp">1 expectation</span> · <span class="hud hud--alarm">3 UNBOUNDED</span> · <span class="hud hud--fault">2 FAULT</span></div>
+<svg viewBox="0 0 696 108" class="mimic" role="img" aria-label="mimic diagram: the grant chain of Push to GitHub"><line x1="108" y1="72" x2="122" y2="72" class="m-edge"/><line x1="214" y1="72" x2="228" y2="72" class="m-edge"/><line x1="320" y1="72" x2="334" y2="72" class="m-edge"/><line x1="426" y1="72" x2="440" y2="72" class="m-edge"/><line x1="532" y1="72" x2="547.0" y2="72" class="m-edge m-edge--push"/><line x1="565.0" y1="72" x2="580" y2="72" class="m-edge m-edge--push"/><circle cx="547.0" cy="72" r="2.6" class="m-term"/><circle cx="565.0" cy="72" r="2.6" class="m-term"/><line x1="548.0" y1="71" x2="563.0" y2="60" class="m-blade m-blade--setting"><title>the mandate hook — setting tier</title></line><text x="556.0" y="90" class="m-lbl">hook · setting</text><circle cx="539" cy="72" r="4.5" class="m-dot"/><rect x="16" y="56" width="92" height="32" rx="4" class="m-st"><title>The User — person</title></rect><text x="62.0" y="76" class="m-name">The User</text><rect x="122" y="56" width="92" height="32" rx="4" class="m-st"><title>GitHub — platform</title></rect><text x="168.0" y="76" class="m-name">GitHub</text><rect x="228" y="56" width="92" height="32" rx="4" class="m-st m-st--twin"><title>The Container — environment</title></rect><text x="274.0" y="76" class="m-name">The Container</text><text x="274.0" y="100" class="m-lbl">THE TWIN</text><line x1="274.0" y1="56" x2="274.0" y2="26" class="m-edge"/><line x1="274.0" y1="26" x2="338.0" y2="26" class="m-edge"/><text x="344.0" y="30" class="m-lbl m-lbl--l">net</text><line x1="304.0" y1="12" x2="304.0" y2="40" class="m-wall"/><text x="304.0" y="8" class="m-lbl">proxy · boundary</text><rect x="334" y="56" width="92" height="32" rx="4" class="m-st"><title>Claude Code — harness</title></rect><text x="380.0" y="76" class="m-name">Claude Code</text><rect x="440" y="56" width="92" height="32" rx="4" class="m-st"><title>Claude — service</title></rect><text x="486.0" y="76" class="m-name">Claude</text><rect x="580" y="56" width="92" height="32" rx="4" class="m-st m-st--asset"><title>The Repo — asset</title></rect><text x="626.0" y="76" class="m-name">The Repo</text></svg>
+<div class="annun" role="list"><label for="fp-u1-n1" class="tile tile--alarm">
+  <span class="tile-id">n1</span><span class="tile-lamp" aria-hidden="true"></span>
+  <span class="tile-cap">runs as the container&#x27;s root user</span>
+  <span class="tile-word">UNBOUNDED</span></label><label for="fp-u1-n2" class="tile tile--ok">
+  <span class="tile-id">n2</span><span class="tile-lamp" aria-hidden="true"></span>
+  <span class="tile-cap">outbound HTTPS, through a mandatory egress…</span>
+  <span class="tile-word">contained</span></label><label for="fp-u1-n3" class="tile tile--exp">
+  <span class="tile-id">n3</span><span class="tile-lamp" aria-hidden="true"></span>
+  <span class="tile-cap">push commits to the attached repository</span>
+  <span class="tile-word">expectation</span></label><label for="fp-u1-n4" class="tile tile--ok">
+  <span class="tile-id">n4</span><span class="tile-lamp" aria-hidden="true"></span>
+  <span class="tile-cap">GitHub API operations on in-scope repositories</span>
+  <span class="tile-word">contained</span></label><label for="fp-u1-n5" class="tile tile--set">
+  <span class="tile-id">n5</span><span class="tile-lamp" aria-hidden="true"></span>
+  <span class="tile-cap">execute arbitrary programs and install…</span>
+  <span class="tile-word">setting</span></label><label for="fp-u1-n6" class="tile tile--alarm">
+  <span class="tile-id">n6</span><span class="tile-lamp" aria-hidden="true"></span>
+  <span class="tile-cap">read and write the session&#x27;s own accumulated…</span>
+  <span class="tile-word">UNBOUNDED</span></label><label for="fp-u1-n7" class="tile tile--alarm">
+  <span class="tile-id">n7</span><span class="tile-lamp" aria-hidden="true"></span>
+  <span class="tile-cap">hold signing keys and vault keystores</span>
+  <span class="tile-word">UNBOUNDED</span></label><label for="fp-u1-n8" class="tile tile--fault">
+  <span class="tile-id">n8</span><span class="tile-lamp" aria-hidden="true"></span>
+  <span class="tile-cap">harness configuration and lifecycle hooks</span>
+  <span class="tile-word">FAULT</span></label><label for="fp-u1-n9" class="tile tile--fault">
+  <span class="tile-id">n9</span><span class="tile-lamp" aria-hidden="true"></span>
+  <span class="tile-cap">reach non-allowlisted external hosts</span>
+  <span class="tile-word">FAULT</span></label></div>
+<div class="fp-bay"><div class="fp fp-u1-n1">
+  <div class="fp-head"><b>n1</b> · runs as the container&#x27;s root user
+    <span class="fp-tier fp-tier--alarm">none</span></div>
+  <div class="fp-row"><span class="fp-k">evidence</span>observed</div>
+  <div class="fp-row"><span class="fp-k">rung</span><span class="fp-rung"><span class="sc-pip sc-pip--on"></span><span class="sc-pip"></span><span class="sc-pip"></span></span> 1 — observed, by the measurer (instrument is subject)</div>
+  <div class="fp-row"><span class="fp-k">control</span>—</div>
+  <div class="fp-row"><span class="fp-k">as of</span>2026-08-26 ·
+    <a href="../../packs/grant-and-mandate/library/claude-code-remote__ccr-container__2026-08-26.json">the twin</a></div>
+</div><div class="fp fp-u1-n2">
+  <div class="fp-head"><b>n2</b> · outbound HTTPS, through a mandatory egress proxy
+    <span class="fp-tier fp-tier--ok">boundary</span></div>
+  <div class="fp-row"><span class="fp-k">evidence</span>observed</div>
+  <div class="fp-row"><span class="fp-k">rung</span><span class="fp-rung"><span class="sc-pip sc-pip--on"></span><span class="sc-pip"></span><span class="sc-pip"></span></span> 1 — observed, by the measurer (instrument is subject)</div>
+  <div class="fp-row"><span class="fp-k">control</span>an egress proxy configured above the session; the network policy is chosen when the environment is created, not by the agent</div>
+  <div class="fp-row"><span class="fp-k">as of</span>2026-08-26 ·
+    <a href="../../packs/grant-and-mandate/library/claude-code-remote__ccr-container__2026-08-26.json">the twin</a></div>
+</div><div class="fp fp-u1-n3">
+  <div class="fp-head"><b>n3</b> · push commits to the attached repository
+    <span class="fp-tier fp-tier--exp">expectation</span></div>
+  <div class="fp-row"><span class="fp-k">evidence</span>observed</div>
+  <div class="fp-row"><span class="fp-k">rung</span><span class="fp-rung"><span class="sc-pip sc-pip--on"></span><span class="sc-pip"></span><span class="sc-pip"></span></span> 1 — observed, by the measurer (instrument is subject)</div>
+  <div class="fp-row"><span class="fp-k">control</span>branch discipline lives in the session&#x27;s instructions (develop on the designated branch; push elsewhere only with explicit permission). Nothing mechanical was observed to test which branch a push targets — the same…</div>
+  <div class="fp-row"><span class="fp-k">as of</span>2026-08-26 ·
+    <a href="../../packs/grant-and-mandate/library/claude-code-remote__ccr-container__2026-08-26.json">the twin</a></div>
+</div><div class="fp fp-u1-n4">
+  <div class="fp-head"><b>n4</b> · GitHub API operations on in-scope repositories
+    <span class="fp-tier fp-tier--ok">boundary</span></div>
+  <div class="fp-row"><span class="fp-k">evidence</span>observed</div>
+  <div class="fp-row"><span class="fp-k">rung</span><span class="fp-rung"><span class="sc-pip sc-pip--on"></span><span class="sc-pip sc-pip--on"></span><span class="sc-pip"></span></span> 2 — observed + documentation</div>
+  <div class="fp-row"><span class="fp-k">control</span>repository scoping enforced by the platform&#x27;s tool layer above the session</div>
+  <div class="fp-row"><span class="fp-k">as of</span>2026-08-26 ·
+    <a href="../../packs/grant-and-mandate/library/claude-code-remote__ccr-container__2026-08-26.json">the twin</a></div>
+</div><div class="fp fp-u1-n5">
+  <div class="fp-head"><b>n5</b> · execute arbitrary programs and install software
+    <span class="fp-tier fp-tier--set">setting</span></div>
+  <div class="fp-row"><span class="fp-k">evidence</span>observed</div>
+  <div class="fp-row"><span class="fp-k">rung</span><span class="fp-rung"><span class="sc-pip sc-pip--on"></span><span class="sc-pip"></span><span class="sc-pip"></span></span> 1 — observed, by the measurer (instrument is subject)</div>
+  <div class="fp-row"><span class="fp-k">control</span>a permission classifier evaluates proposed commands and can refuse them; it runs outside the agent&#x27;s reasoning loop, but inside the platform the grant includes — for the agent it behaves as a boundary; for the platform…</div>
+  <div class="fp-row"><span class="fp-k">as of</span>2026-08-26 ·
+    <a href="../../packs/grant-and-mandate/library/claude-code-remote__ccr-container__2026-08-26.json">the twin</a></div>
+</div><div class="fp fp-u1-n6">
+  <div class="fp-head"><b>n6</b> · read and write the session&#x27;s own accumulated record
+    <span class="fp-tier fp-tier--alarm">none</span></div>
+  <div class="fp-row"><span class="fp-k">evidence</span>observed</div>
+  <div class="fp-row"><span class="fp-k">rung</span><span class="fp-rung"><span class="sc-pip sc-pip--on"></span><span class="sc-pip"></span><span class="sc-pip"></span></span> 1 — observed, by the measurer (instrument is subject)</div>
+  <div class="fp-row"><span class="fp-k">control</span>—</div>
+  <div class="fp-row"><span class="fp-k">as of</span>2026-08-26 ·
+    <a href="../../packs/grant-and-mandate/library/claude-code-remote__ccr-container__2026-08-26.json">the twin</a></div>
+</div><div class="fp fp-u1-n7">
+  <div class="fp-head"><b>n7</b> · hold signing keys and vault keystores
+    <span class="fp-tier fp-tier--alarm">none</span></div>
+  <div class="fp-row"><span class="fp-k">evidence</span>observed</div>
+  <div class="fp-row"><span class="fp-k">rung</span><span class="fp-rung"><span class="sc-pip sc-pip--on"></span><span class="sc-pip"></span><span class="sc-pip"></span></span> 1 — observed, by the measurer (instrument is subject)</div>
+  <div class="fp-row"><span class="fp-k">control</span>nothing inside the container prevents key material being written, read, or exfiltrated by the agent that holds it; durability is bounded by the container&#x27;s ephemeral life</div>
+  <div class="fp-row"><span class="fp-k">as of</span>2026-08-26 ·
+    <a href="../../packs/grant-and-mandate/library/claude-code-remote__ccr-container__2026-08-26.json">the twin</a></div>
+</div><div class="fp fp-u1-n8">
+  <div class="fp-head"><b>n8</b> · harness configuration and lifecycle hooks
+    <span class="fp-tier fp-tier--fault">unknown</span></div>
+  <div class="fp-row"><span class="fp-k">evidence</span>none</div>
+  <div class="fp-row"><span class="fp-k">rung</span><span class="fp-rung"><span class="sc-pip"></span><span class="sc-pip"></span><span class="sc-pip"></span></span> 0 — hypothesis — no evidence</div>
+  <div class="fp-row"><span class="fp-k">control</span>unknown</div>
+  <div class="fp-row"><span class="fp-k">as of</span>2026-08-26 ·
+    <a href="../../packs/grant-and-mandate/library/claude-code-remote__ccr-container__2026-08-26.json">the twin</a></div>
+</div><div class="fp fp-u1-n9">
+  <div class="fp-head"><b>n9</b> · reach non-allowlisted external hosts
+    <span class="fp-tier fp-tier--fault">unknown</span></div>
+  <div class="fp-row"><span class="fp-k">evidence</span>none</div>
+  <div class="fp-row"><span class="fp-k">rung</span><span class="fp-rung"><span class="sc-pip"></span><span class="sc-pip"></span><span class="sc-pip"></span></span> 0 — hypothesis — no evidence</div>
+  <div class="fp-row"><span class="fp-k">control</span>the egress proxy (n2) is the enforcement point; its policy breadth is configuration above the session</div>
+  <div class="fp-row"><span class="fp-k">as of</span>2026-08-26 ·
+    <a href="../../packs/grant-and-mandate/library/claude-code-remote__ccr-container__2026-08-26.json">the twin</a></div>
+</div></div>
+</section><section class="unit" id="u2">
+<input type="radio" name="fp-u2" id="fp-u2-n1" class="fp-radio" checked><input type="radio" name="fp-u2" id="fp-u2-n1a" class="fp-radio"><input type="radio" name="fp-u2" id="fp-u2-n2" class="fp-radio"><input type="radio" name="fp-u2" id="fp-u2-n3" class="fp-radio"><input type="radio" name="fp-u2" id="fp-u2-n4" class="fp-radio"><input type="radio" name="fp-u2" id="fp-u2-n5" class="fp-radio"><input type="radio" name="fp-u2" id="fp-u2-c1" class="fp-radio"><input type="radio" name="fp-u2" id="fp-u2-c2" class="fp-radio"><input type="radio" name="fp-u2" id="fp-u2-c3" class="fp-radio"><input type="radio" name="fp-u2" id="fp-u2-n6" class="fp-radio">
+<div class="unit-head"><span class="unit-no">UNIT 2</span> The Deploy
+  <span class="unit-env">github-actions-runner · measured 2026-08-26</span></div>
+<div class="unit-hud"><span class="hud hud--ok">3 contained</span> · <span class="hud hud--exp">1 expectation</span> · <span class="hud hud--alarm">4 UNBOUNDED</span> · <span class="hud hud--fault">2 FAULT</span></div>
+<svg viewBox="0 0 484 108" class="mimic" role="img" aria-label="mimic diagram: the grant chain of The Deploy"><line x1="108" y1="72" x2="122" y2="72" class="m-edge"/><line x1="214" y1="72" x2="228" y2="72" class="m-edge"/><line x1="320" y1="72" x2="368" y2="72" class="m-edge m-edge--push"/><text x="344.0" y="90" class="m-lbl m-lbl--alarm">no interlock</text><circle cx="327" cy="72" r="4.5" class="m-dot"/><rect x="16" y="56" width="92" height="32" rx="4" class="m-st"><title>GitHub — platform</title></rect><text x="62.0" y="76" class="m-name">GitHub</text><rect x="122" y="56" width="92" height="32" rx="4" class="m-st m-st--twin"><title>The Runner — environment</title></rect><text x="168.0" y="76" class="m-name">The Runner</text><text x="168.0" y="100" class="m-lbl">THE TWIN</text><line x1="168.0" y1="56" x2="168.0" y2="26" class="m-edge"/><line x1="168.0" y1="26" x2="232.0" y2="26" class="m-edge"/><text x="238.0" y="30" class="m-lbl m-lbl--l">net</text><text x="198.0" y="12" class="m-lbl m-lbl--alarm">NO WALL</text><rect x="228" y="56" width="92" height="32" rx="4" class="m-st"><title>The Job — harness</title></rect><text x="274.0" y="76" class="m-name">The Job</text><rect x="368" y="56" width="92" height="32" rx="4" class="m-st m-st--asset"><title>GitHub Pages — asset</title></rect><text x="414.0" y="76" class="m-name">GitHub Pages</text></svg>
+<div class="annun" role="list"><label for="fp-u2-n1" class="tile tile--ok">
+  <span class="tile-id">n1</span><span class="tile-lamp" aria-hidden="true"></span>
+  <span class="tile-cap">runs as uid 1001</span>
+  <span class="tile-word">contained</span></label><label for="fp-u2-n1a" class="tile tile--alarm">
+  <span class="tile-id">n1a</span><span class="tile-lamp" aria-hidden="true"></span>
+  <span class="tile-cap">escalate to administrator</span>
+  <span class="tile-word">UNBOUNDED</span></label><label for="fp-u2-n2" class="tile tile--alarm">
+  <span class="tile-id">n2</span><span class="tile-lamp" aria-hidden="true"></span>
+  <span class="tile-cap">read and write this user&#x27;s home directory</span>
+  <span class="tile-word">UNBOUNDED</span></label><label for="fp-u2-n3" class="tile tile--alarm">
+  <span class="tile-id">n3</span><span class="tile-lamp" aria-hidden="true"></span>
+  <span class="tile-cap">outbound network access</span>
+  <span class="tile-word">UNBOUNDED</span></label><label for="fp-u2-n4" class="tile tile--exp">
+  <span class="tile-id">n4</span><span class="tile-lamp" aria-hidden="true"></span>
+  <span class="tile-cap">push commits to the configured remote</span>
+  <span class="tile-word">expectation</span></label><label for="fp-u2-n5" class="tile tile--fault">
+  <span class="tile-id">n5</span><span class="tile-lamp" aria-hidden="true"></span>
+  <span class="tile-cap">agent harness configuration</span>
+  <span class="tile-word">FAULT</span></label><label for="fp-u2-c1" class="tile tile--ok">
+  <span class="tile-id">c1</span><span class="tile-lamp" aria-hidden="true"></span>
+  <span class="tile-cap">runs as an ephemeral CI job</span>
+  <span class="tile-word">contained</span></label><label for="fp-u2-c2" class="tile tile--ok">
+  <span class="tile-id">c2</span><span class="tile-lamp" aria-hidden="true"></span>
+  <span class="tile-cap">act on the repository with the job&#x27;s token</span>
+  <span class="tile-word">contained</span></label><label for="fp-u2-c3" class="tile tile--alarm">
+  <span class="tile-id">c3</span><span class="tile-lamp" aria-hidden="true"></span>
+  <span class="tile-cap">read the repository contents</span>
+  <span class="tile-word">UNBOUNDED</span></label><label for="fp-u2-n6" class="tile tile--fault">
+  <span class="tile-id">n6</span><span class="tile-lamp" aria-hidden="true"></span>
+  <span class="tile-cap">read this environment&#x27;s accumulated session…</span>
+  <span class="tile-word">FAULT</span></label></div>
+<div class="fp-bay"><div class="fp fp-u2-n1">
+  <div class="fp-head"><b>n1</b> · runs as uid 1001
+    <span class="fp-tier fp-tier--ok">boundary</span></div>
+  <div class="fp-row"><span class="fp-k">evidence</span>observed</div>
+  <div class="fp-row"><span class="fp-k">rung</span><span class="fp-rung"><span class="sc-pip sc-pip--on"></span><span class="sc-pip"></span><span class="sc-pip"></span></span> 1 — observed, by the measurer (instrument is subject)</div>
+  <div class="fp-row"><span class="fp-k">control</span>the OS user separation</div>
+  <div class="fp-row"><span class="fp-k">as of</span>2026-08-26 ·
+    <a href="../../packs/grant-and-mandate/library/github-actions-runner__ci__2026-08-26.json">the twin</a></div>
+</div><div class="fp fp-u2-n1a">
+  <div class="fp-head"><b>n1a</b> · escalate to administrator
+    <span class="fp-tier fp-tier--alarm">none</span></div>
+  <div class="fp-row"><span class="fp-k">evidence</span>observed</div>
+  <div class="fp-row"><span class="fp-k">rung</span><span class="fp-rung"><span class="sc-pip sc-pip--on"></span><span class="sc-pip"></span><span class="sc-pip"></span></span> 1 — observed, by the measurer (instrument is subject)</div>
+  <div class="fp-row"><span class="fp-k">control</span>—</div>
+  <div class="fp-row"><span class="fp-k">as of</span>2026-08-26 ·
+    <a href="../../packs/grant-and-mandate/library/github-actions-runner__ci__2026-08-26.json">the twin</a></div>
+</div><div class="fp fp-u2-n2">
+  <div class="fp-head"><b>n2</b> · read and write this user&#x27;s home directory
+    <span class="fp-tier fp-tier--alarm">none</span></div>
+  <div class="fp-row"><span class="fp-k">evidence</span>observed</div>
+  <div class="fp-row"><span class="fp-k">rung</span><span class="fp-rung"><span class="sc-pip sc-pip--on"></span><span class="sc-pip"></span><span class="sc-pip"></span></span> 1 — observed, by the measurer (instrument is subject)</div>
+  <div class="fp-row"><span class="fp-k">control</span>—</div>
+  <div class="fp-row"><span class="fp-k">as of</span>2026-08-26 ·
+    <a href="../../packs/grant-and-mandate/library/github-actions-runner__ci__2026-08-26.json">the twin</a></div>
+</div><div class="fp fp-u2-n3">
+  <div class="fp-head"><b>n3</b> · outbound network access
+    <span class="fp-tier fp-tier--alarm">none</span></div>
+  <div class="fp-row"><span class="fp-k">evidence</span>observed</div>
+  <div class="fp-row"><span class="fp-k">rung</span><span class="fp-rung"><span class="sc-pip sc-pip--on"></span><span class="sc-pip"></span><span class="sc-pip"></span></span> 1 — observed, by the measurer (instrument is subject)</div>
+  <div class="fp-row"><span class="fp-k">control</span>—</div>
+  <div class="fp-row"><span class="fp-k">as of</span>2026-08-26 ·
+    <a href="../../packs/grant-and-mandate/library/github-actions-runner__ci__2026-08-26.json">the twin</a></div>
+</div><div class="fp fp-u2-n4">
+  <div class="fp-head"><b>n4</b> · push commits to the configured remote
+    <span class="fp-tier fp-tier--exp">expectation</span></div>
+  <div class="fp-row"><span class="fp-k">evidence</span>observed</div>
+  <div class="fp-row"><span class="fp-k">rung</span><span class="fp-rung"><span class="sc-pip sc-pip--on"></span><span class="sc-pip"></span><span class="sc-pip"></span></span> 1 — observed, by the measurer (instrument is subject)</div>
+  <div class="fp-row"><span class="fp-k">control</span>branch discipline, if any, lives in prose</div>
+  <div class="fp-row"><span class="fp-k">as of</span>2026-08-26 ·
+    <a href="../../packs/grant-and-mandate/library/github-actions-runner__ci__2026-08-26.json">the twin</a></div>
+</div><div class="fp fp-u2-n5">
+  <div class="fp-head"><b>n5</b> · agent harness configuration
+    <span class="fp-tier fp-tier--fault">unknown</span></div>
+  <div class="fp-row"><span class="fp-k">evidence</span>none</div>
+  <div class="fp-row"><span class="fp-k">rung</span><span class="fp-rung"><span class="sc-pip"></span><span class="sc-pip"></span><span class="sc-pip"></span></span> 0 — hypothesis — no evidence</div>
+  <div class="fp-row"><span class="fp-k">control</span>—</div>
+  <div class="fp-row"><span class="fp-k">as of</span>2026-08-26 ·
+    <a href="../../packs/grant-and-mandate/library/github-actions-runner__ci__2026-08-26.json">the twin</a></div>
+</div><div class="fp fp-u2-c1">
+  <div class="fp-head"><b>c1</b> · runs as an ephemeral CI job
+    <span class="fp-tier fp-tier--ok">boundary</span></div>
+  <div class="fp-row"><span class="fp-k">evidence</span>observed</div>
+  <div class="fp-row"><span class="fp-k">rung</span><span class="fp-rung"><span class="sc-pip sc-pip--on"></span><span class="sc-pip"></span><span class="sc-pip"></span></span> 1 — observed, by the measurer (instrument is subject)</div>
+  <div class="fp-row"><span class="fp-k">control</span>the runner is provisioned per job and discarded; no state carries forward without an explicit artefact or commit</div>
+  <div class="fp-row"><span class="fp-k">as of</span>2026-08-26 ·
+    <a href="../../packs/grant-and-mandate/library/github-actions-runner__ci__2026-08-26.json">the twin</a></div>
+</div><div class="fp fp-u2-c2">
+  <div class="fp-head"><b>c2</b> · act on the repository with the job&#x27;s token
+    <span class="fp-tier fp-tier--ok">boundary</span></div>
+  <div class="fp-row"><span class="fp-k">evidence</span>observed</div>
+  <div class="fp-row"><span class="fp-k">rung</span><span class="fp-rung"><span class="sc-pip sc-pip--on"></span><span class="sc-pip"></span><span class="sc-pip"></span></span> 1 — observed, by the measurer (instrument is subject)</div>
+  <div class="fp-row"><span class="fp-k">control</span>the `permissions:` block, set in the workflow file above the job; the job cannot widen its own token at run time</div>
+  <div class="fp-row"><span class="fp-k">as of</span>2026-08-26 ·
+    <a href="../../packs/grant-and-mandate/library/github-actions-runner__ci__2026-08-26.json">the twin</a></div>
+</div><div class="fp fp-u2-c3">
+  <div class="fp-head"><b>c3</b> · read the repository contents
+    <span class="fp-tier fp-tier--alarm">none</span></div>
+  <div class="fp-row"><span class="fp-k">evidence</span>observed</div>
+  <div class="fp-row"><span class="fp-k">rung</span><span class="fp-rung"><span class="sc-pip sc-pip--on"></span><span class="sc-pip"></span><span class="sc-pip"></span></span> 1 — observed, by the measurer (instrument is subject)</div>
+  <div class="fp-row"><span class="fp-k">control</span>—</div>
+  <div class="fp-row"><span class="fp-k">as of</span>2026-08-26 ·
+    <a href="../../packs/grant-and-mandate/library/github-actions-runner__ci__2026-08-26.json">the twin</a></div>
+</div><div class="fp fp-u2-n6">
+  <div class="fp-head"><b>n6</b> · read this environment&#x27;s accumulated session record
+    <span class="fp-tier fp-tier--fault">unknown</span></div>
+  <div class="fp-row"><span class="fp-k">evidence</span>none</div>
+  <div class="fp-row"><span class="fp-k">rung</span><span class="fp-rung"><span class="sc-pip"></span><span class="sc-pip"></span><span class="sc-pip"></span></span> 0 — hypothesis — no evidence</div>
+  <div class="fp-row"><span class="fp-k">control</span>—</div>
+  <div class="fp-row"><span class="fp-k">as of</span>2026-08-26 ·
+    <a href="../../packs/grant-and-mandate/library/github-actions-runner__ci__2026-08-26.json">the twin</a></div>
+</div></div>
+</section>
+</div>
+
+<div class="soe">
+<div class="soe-head"><span>SEQUENCE OF EVENTS — the 26 August incident</span>
+  <span class="soe-ctl" hidden>
+    <button type="button" id="soe-play">▶ play</button>
+    <button type="button" id="soe-step">⏭ step</button>
+    <button type="button" id="soe-reset">↺ reset</button></span></div>
+<div class="soe-cols"><span>#</span><span>time (derived)</span><span>actor</span><span>event</span><span>verdict</span></div>
+<ol class="soe-log">
+<li class="soe-row" data-ev="1">
+  <span class="soe-n">1</span><span class="soe-t">—</span>
+  <span class="soe-actor">the agent</span>
+  <span class="soe-ev">git push origin claude/write-book-pdf</span>
+  <span class="soe-v soe-v--permit">PERMIT</span>
+  <div class="soe-note">permitted — and the work crosses to Unit 2, the world without the walls</div><div class="soe-quote">“PERMIT   claude/write-book-pdf  (mandate v1” — <a href="../../book/shots/transcripts/t08b-amended.txt">the transcript</a> · re-run at build: <code>PERMIT   claude/write-book-pdf  (mandate v1, allow=[&#x27;claude/**&#x27;], expires 2026-12-31T00:00:00Z)</code></div>
+</li>
+<li class="soe-row" data-ev="2">
+  <span class="soe-n">2</span><span class="soe-t">—</span>
+  <span class="soe-actor">the agent</span>
+  <span class="soe-ev">git push origin dev</span>
+  <span class="soe-v soe-v--refused">REFUSED</span>
+  <div class="soe-note">CAN said yes; MAY said no; MAY won — the breaker trips</div><div class="soe-quote">“✗ dev  is not permitted by mandate v1” — <a href="../../book/shots/transcripts/t08-refused-push.txt">the transcript</a> · re-run at build: <code>REFUSED  dev  (mandate v1 permits [&#x27;claude/**&#x27;])</code></div>
+</li>
+<li class="soe-row" data-ev="3">
+  <span class="soe-n">3</span><span class="soe-t">2026-08-26 15:00 UTC</span>
+  <span class="soe-actor">sha256:90f97984b9cf3930</span>
+  <span class="soe-ev">DECIDES: amend mandate v1 → v2</span>
+  <span class="soe-v soe-v--decides">DECIDES</span>
+  <div class="soe-note">the operator action — the only signed, timestamped row on this log</div>
+</li>
+<li class="soe-row" data-ev="4">
+  <span class="soe-n">4</span><span class="soe-t">2026-08-26 15:14 UTC</span>
+  <span class="soe-actor">the agent</span>
+  <span class="soe-ev">git push origin dev  (again)</span>
+  <span class="soe-v soe-v--permit">PERMIT</span>
+  <div class="soe-note">the site deploys; tag v0.1.28 records the landing</div><div class="soe-quote">“PERMIT   dev  (mandate v2” — <a href="../../book/shots/transcripts/t08b-amended.txt">the transcript</a> · re-run at build: <code>PERMIT   dev  (mandate v2, allow=[&#x27;claude/**&#x27;, &#x27;dev&#x27;], expires 2026-12-31T00:00:00Z)</code></div>
+</li>
+</ol>
+<p class="soe-foot">Times are derived or absent: the DECIDES row prints mandate v2's own
+<code>issued_at</code>; the landing prints the <code>v0.1.28</code> tag's commit time from git; the
+transcript records the refusal, not the clock, so those rows print a dash. The replay is baked, not
+computed — the browser only steps through verdicts the build already re-proved.</p>
+</div>
+
+<div class="live-ladder">
+<div class="ll-head">THE LADDER FROM <b>REPLAY</b> TO LIVE
+  <span class="ll-sub">&mdash; 4 of 4 doors still shut; the chip above is computed from them,
+  and when the last one opens <b>this build fails</b></span></div>
+<ol class="ll-list"><li class="ll-row ll-row--shut">
+  <span class="ll-state">SHUT</span>
+  <span class="ll-cond">an append lane that accepts a token holder with no account</span>
+  <span class="ll-needs">somebody else</span>
+  <div class="ll-why">how a measurement reaches the registry without a human committing it <span class="ll-metric">·
+    <a href="../../registry/doors.html">enrolled_via_lane</a> = 0</span></div>
+</li>
+<li class="ll-row ll-row--shut">
+  <span class="ll-state">SHUT</span>
+  <span class="ll-cond">an issuer key that anybody cannot forge</span>
+  <span class="ll-needs">somebody else</span>
+  <div class="ll-why">a live enforcement decision resting on a published fixture is theatre <span class="ll-metric">·
+    <a href="../../registry/doors.html">mandates_real_issuer</a> = 0</span></div>
+</li>
+<li class="ll-row ll-row--shut">
+  <span class="ll-state">SHUT</span>
+  <span class="ll-cond">a grant signed by a named measurer, about a keyed environment</span>
+  <span class="ll-needs">this project</span>
+  <div class="ll-why">a live lamp lit by an unsigned fact is an anonymous claim about the present <span class="ll-metric">·
+    <a href="../../registry/doors.html">library_entries_signed</a> = 0</span></div>
+</li>
+<li class="ll-row ll-row--shut">
+  <span class="ll-state">SHUT</span>
+  <span class="ll-cond">a measurement taken from outside the environment being measured</span>
+  <span class="ll-needs">somebody else</span>
+  <div class="ll-why">dated self-measurement carries a date you can check; a live self-report is a press release <span class="ll-metric">·
+    <a href="../../registry/doors.html">independent_measurements</a> = 0</span></div>
+</li></ol>
+<p class="ll-foot">These are doors on <a href="../../registry/doors.html">the state map</a>, not new
+claims: each one is the condition the next rung will not accept work without. Three of the
+4 need somebody other than this project, which is the honest reason the chip reads what it reads.
+The gate is symmetric, as it is there: a board that could claim LIVE and does not is as much a
+defect as one that claims it and cannot.</p>
+</div>
+
+<div class="ctrl-legend">LAMP GRAMMAR — the tier, and nothing else:
+  <span class="lg lg--ok">contained</span> boundary ·
+  <span class="lg lg--set">setting</span> outside the loop, inside the grant ·
+  <span class="lg lg--exp">expectation</span> flashing — one mistake from red ·
+  <span class="lg lg--alarm">UNBOUNDED</span> a capability with no control on it is the alarm state ·
+  <span class="lg lg--fault">FAULT</span> measurement refused — a hole, displayed</div>
+</div>
+
+<p class="dr-notprove"><b>What this board does not claim.</b> Two units and one recorded incident is
+a diorama with excellent manners, not a control room under load: nothing here shows the annunciator
+scaling past twenty tiles, the log past one incident, or an operator acting on any of it. REPLAY
+never becomes LIVE on this page — a live board needs the registry's write path, monitors feeding
+facts, and a mandate service, all still stated design. And the genre bet — that a mimic reads
+faster than a table — is now four implementations deep across two estates with zero user tests.</p>
+
+<p class="dr-src">Renderer: <code>admin/build/gen_control.py</code> &middot; specified in
+<a href="../../briefs/v0.33.69__dev-brief__the-control-room-a-scada-board-and-game-hud-over-the-scenario-worlds.md">brief v0.33.69</a>
+&middot; gates: tiles == twin nodes per unit; lamp classes closed over the five tiers; the wall
+drawn must agree with the egress tier; every verdict re-run through the tool; every quote
+byte-checked; timestamps derived or absent; the REPLAY chip checked in the output.</p>
+</main>
+
+<script src="control.js" defer></script>
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../../admin/versions.html">v0.1.47</a> · <a href="../../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The bench</h4>
+    <a href="../../bench/index.html">&#9679; What is built</a>
+    <a href="../../simulator/index.html">&#9679; The simulator</a>
+    <a href="../../workbench/index.html">&#9679; The workbench (app)</a>
+    <a href="../../registry/index.html">The register, live</a>
+    <a href="../../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
+    <a href="../../packs/grant-and-mandate/blocks.html">The building blocks</a>
+    <a href="../../assess/index.html">&#8594; Map your own case</a>
+    <a href="../../book/index.html">The book (commissioned)</a>
+    <a href="../../book/brief.html">&mdash; its commissioning brief</a>
+  </div>
+  <div>
+    <h4>The registry</h4>
+    <a href="../../failure/index.html">Why they don't exist</a>
+    <a href="../../rules/index.html">The four rules</a>
+    <a href="../../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../../roadmap/index.html">Build order</a>
+    <a href="../../rules/prior-art.html">Prior art</a>
+  </div>
+  <div>
+    <h4>The three layers</h4>
+    <a href="../../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../../enrolment/index.html">Enrolment</a>
+    <a href="../../execution/index.html">The execution broker</a>
+    <a href="../../shipped/index.html">What already ships</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../../origins/index.html">Origins: 2026</a>
+    <a href="../../documents/index.html">The documents</a>
+    <a href="../../packs/registry-mvp/index.html">The registry MVP pack</a>
+    <a href="../../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
+    <a href="../../packs/map-your-case/index.html">The Map Your Case pack</a>
+    <a href="../../about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../../admin/versions.html">Release history</a>
+    <a href="../../llms.txt">llms.txt</a>
+  </div>
+</div></footer>
+
+
+</body>
+</html>
