@@ -76,6 +76,13 @@ NAV = [
         ("The book (commissioned)", "book/index.html"),
         ("&mdash; its commissioning brief", "book/brief.html"),
     ], ("bench/", "book/", "experiments/", "simulator/", "workbench/")),
+    ("Insurance", "insurance/index.html", [
+        ("&#9679; Insurance for agents", "insurance/index.html"),
+        ("&mdash; what this is, and the rule", "insurance/what-this-is.html"),
+        ("&mdash; the rating", "insurance/the-rating.html"),
+        ("The pivot briefing (memo 0)", "documents/agent-insurance.html"),
+        ("Rating before money (memo 1)", "documents/insurance-without-money.html"),
+    ], ("insurance/",)),
     ("Docs", "documents/index.html", [
         ("The documents", "documents/index.html"),
         ("The data viewer", "data/index.html"),
@@ -103,6 +110,12 @@ FOOTER = [
         ("&#8594; Map your own case", "assess/index.html"),
         ("The book (commissioned)", "book/index.html"),
         ("&mdash; its commissioning brief", "book/brief.html"),
+    ]),
+    ("Insurance", [
+        ("&#9679; Insurance for agents", "insurance/index.html"),
+        ("What this is, and the rule", "insurance/what-this-is.html"),
+        ("The rating", "insurance/the-rating.html"),
+        ("The pivot briefing", "documents/agent-insurance.html"),
     ]),
     ("The registry", [
         ("Why they don't exist", "failure/index.html"),

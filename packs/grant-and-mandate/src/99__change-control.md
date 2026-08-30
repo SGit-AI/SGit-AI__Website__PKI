@@ -181,6 +181,10 @@ The mandate's issuer is the registry's operator root, whose private half is **pu
 | GM-D35 | The `acceptor` seat in the excess-authority view may be filled by a **policy reference** — the insurer as acceptor of last resort; the chain's terminal node reads *…risks → decisions / acceptances / policies* | the v0.33.71 insurance pivot brief, 30 Aug | **Proposed — the pivot is recorded, no surface is rebuilt on it until adopted** |
 | GM-D36 | `policy/v0` and `loss-event/v0` join the schema family: the registry defines the shapes, the instance holds the instances (GM3 unchanged) | v0.33.71 — the loss event named as the one primitive the estate lacks | **Proposed — shapes not yet drafted; whoever's schema records loss events owns the eventual actuarial table** |
 | GM-D37 | The first demonstrable insurance shape is **parametric**: triggers computed over evidence packs, payout table keyed to capability strings | v0.33.71 — the memo's payout logic, named | **Proposed — a workbench demonstration on fixtures awaits the project lead's yes (N16)** |
+| GM-D38 | **Stage 1 of the insurance work carries no money.** The deliverable is a rating (levels/points), not a premium — not a regulated activity, and needs no carrier | v0.33.72 memo 1, 30 Aug | **Proposed — it dissolves the blocker v0.33.71 called fatal** |
+| GM-D39 | **A rating is computed from published evidence and ships its derivation.** A level that cannot be re-run by somebody else is refused | v0.33.72 §2 — memo 1 removes the money that v0.33.71 said kept a claim honest | **Proposed — the load-bearing rule; it answers a real contradiction between memos 0 and 1** |
+| GM-D40 | **Rating inputs carry their evidence channel**: measured and declared (questionnaire/card) facts are weighted differently and never merged; unknown is never scored as absent | v0.33.72 §5 — `library − self-report = blind spots` applied to rating | **Proposed** |
+| GM-D41 | **Aggregation reads correlation off shared graph nodes** rather than summing independent micro ratings | v0.33.72 §4 — the aggregation trap memo 1 does not name | **Proposed — stated as a rule, implemented nowhere** |
 
 ---
 

@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Insurance for agents &mdash; the rating, before the money &middot; pki.sgit.ai</title>
+<meta name="description" content="A pivot: the foundation moves from risk acceptance to the insurance policy, because the delta between grant and mandate is where the insurance lives. Stage 1 emits a rating rather than a premium — not a regulated activity, and buildable today. Eight memos, read into doctrine.">
+<link rel="canonical" href="https://pki.sgit.ai/insurance/index.html">
+<meta property="og:url" content="https://pki.sgit.ai/insurance/index.html">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/insurance.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
+  <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.51</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../failure/index.html">The registry<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../registry/index.html">&#9679; The registry, live</a>
+      <a class="sl" href="../failure/index.html">Why they don't exist</a>
+      <a class="sl" href="../rules/index.html">The four rules</a>
+      <a class="sl" href="../mandate/index.html">Identity &amp; mandate</a>
+      <a class="sl" href="../roadmap/index.html">Build order</a>
+      <a class="sl" href="../rules/prior-art.html">Prior art</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../bootstrap/index.html">The layers<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../bootstrap/index.html">The bootstrap trap</a>
+      <a class="sl" href="../enrolment/index.html">Enrolment</a>
+      <a class="sl" href="../execution/index.html">The execution broker</a>
+      <a class="sl" href="../shipped/index.html">What already ships</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../assess/index.html">Map your case<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../assess/index.html">Map your own case</a>
+      <a class="sl" href="../assess/library.html">The library of trees</a>
+      <a class="sl" href="../packs/map-your-case/readers/index.html">Synthetic readers</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../origins/index.html">Origins<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../origins/index.html">Origins: 2026</a>
+      <a class="sl" href="../origins/review.html">The review, redacted</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../bench/index.html">The bench<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../bench/index.html">&#9679; The bench &mdash; what is built</a>
+      <a class="sl" href="../simulator/index.html">&#9679; The simulator &mdash; play a card</a>
+      <a class="sl" href="../experiments/index.html">&#9679; Experiments</a>
+      <a class="sl" href="../experiments/the-room/index.html">&mdash; the chain room</a>
+      <a class="sl" href="../experiments/the-table/index.html">&mdash; the table</a>
+      <a class="sl" href="../experiments/push-to-github/index.html">&mdash; push to GitHub</a>
+      <a class="sl" href="../experiments/the-deploy/index.html">&mdash; the deploy</a>
+      <a class="sl" href="../experiments/the-control-room/index.html">&mdash; the control room</a>
+      <a class="sl" href="../workbench/index.html">&#9679; The workbench (app)</a>
+      <a class="sl" href="../registry/index.html">The register, live</a>
+      <a class="sl" href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
+      <a class="sl" href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
+      <a class="sl" href="../assess/index.html">Map your own case</a>
+      <a class="sl" href="../book/index.html">The book (commissioned)</a>
+      <a class="sl" href="../book/brief.html">&mdash; its commissioning brief</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../insurance/index.html">Insurance<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl here" href="../insurance/index.html">&#9679; Insurance for agents</a>
+      <a class="sl" href="../insurance/what-this-is.html">&mdash; what this is, and the rule</a>
+      <a class="sl" href="../insurance/the-rating.html">&mdash; the rating</a>
+      <a class="sl" href="../documents/agent-insurance.html">The pivot briefing (memo 0)</a>
+      <a class="sl" href="../documents/insurance-without-money.html">Rating before money (memo 1)</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../documents/index.html">The documents</a>
+      <a class="sl" href="../data/index.html">The data viewer</a>
+      <a class="sl" href="../packs/index.html">Dev packs</a>
+      <a class="sl" href="../packs/registry-mvp/index.html">The registry MVP pack</a>
+      <a class="sl" href="../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
+      <a class="sl" href="../packs/map-your-case/index.html">The Map Your Case pack</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../admin/versions.html">Release history</a>
+      <a class="sl" href="../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+  <script src="../assets/nav.js" defer></script>
+</div></nav>
+
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / insurance</div>
+<h1>Insurance for agents</h1>
+<p class="lead">A pivot: the foundation of the risk approach moves from <b>risk acceptance</b> to the
+<b>insurance policy</b>, because the delta between what an agent <i>can</i> do and what it is <i>authorised</i>
+to do is where the insurance lives. Eight memos are being recorded on it. This is where they are read into
+something buildable.</p>
+
+<div class="ins-stage">
+  <div class="ins-stage-now">stage 1 — rating without money</div>
+  <p>A rating engine that emits levels rather than currency is not a regulated activity, needs no carrier and no loss history, and is therefore buildable today. Money is stage 2. See GM-D38.</p>
+  <p class="ins-rule">A level nobody can recompute is exactly the theatre a premium would have prevented. Every rating ships its derivation. See GM-D39.</p>
+</div>
+
+<h2 id="stages">Two stages, and only one of them is insurance</h2>
+<div class="tablewrap"><table>
+  <thead><tr><th></th><th>Stage 1 — the rating</th><th>Stage 2 — the policy</th></tr></thead>
+  <tbody>
+    <tr><td>Produces</td><td><b>A level, and its derivation</b></td><td>A premium, and a promise to pay</td></tr>
+    <tr><td>Risk transferred</td><td><b>None</b></td><td>To a carrier</td></tr>
+    <tr><td>Regulated activity</td><td><b>No</b></td><td>Yes — authorisation, capital, conduct rules</td></tr>
+    <tr><td>Needs loss history</td><td><b>No</b> — a relative ordering needs no absolute scale</td><td>Yes, and none exists for agents anywhere</td></tr>
+    <tr><td>Buildable here</td><td><b>Today</b></td><td>Not by this estate, and not soon</td></tr>
+  </tbody>
+</table></div>
+<p><b>Everything in this folder is stage 1.</b> Calling it insurance would be the first dishonesty: it transfers no
+risk and promises no payout. What it does is tell an operator that <i>this</i> placement is several levels worse than
+<i>that</i> one, and which single change moves it.</p>
+
+<h2 id="memos">The memos</h2>
+<p>Each is filed <b>verbatim as a brief</b> before it is read, because a transcript outranks any summary of it. The
+count below is computed from the manifest, never typed.</p>
+<div class="ins-memos">
+    <div class="ins-memo ins-memo--processed">
+      <div class="ins-memo-n">0</div>
+      <div>
+        <b>The pivot briefing: the delta is where the insurance lives</b>
+        <p>The policy replaces the acceptance at the foundation; the insurer as the acceptor of last resort filling the register&#x27;s acceptor:null; the two-insurances split; parametric as the payout shape; the loss event named as the missing primitive.</p>
+        <a href="../documents/agent-insurance.html">the brief, rendered &rarr;</a> <a class="ins-raw" href="../briefs/v0.33.71__strategy-brief__insurance-for-agents-the-delta-is-where-the-insurance-lives.md">raw</a>
+      </div>
+    </div>
+    <div class="ins-memo ins-memo--processed">
+      <div class="ins-memo-n">1</div>
+      <div>
+        <b>Insurance without money first: the rating is the product</b>
+        <p>Money decoupled from rating, which dissolves the regulatory blocker; micro-policies as the scale insurance never reached; the placement variables; the questionnaire as a declared-fact collector; the quasi-currency as the adoption path. Also contradicts memo 0 on why the pivot is honest, and the contradiction is answered rather than smoothed.</p>
+        <a href="../documents/insurance-without-money.html">the brief, rendered &rarr;</a> <a class="ins-raw" href="../briefs/v0.33.72__strategy-brief__insurance-without-money-first-the-rating-is-the-product-and-micro-policies-scale.md">raw</a>
+      </div>
+    </div>
+    <div class="ins-memo ins-memo--awaited">
+      <div class="ins-memo-n">&hellip;</div>
+      <div><b>6 more awaited</b>
+      <p>Listed as awaited rather than guessed at. Each will be filed verbatim as a brief before it is read,
+      and the doctrine will say which memo it came from.</p></div>
+    </div></div>
+
+<h2 id="doctrine">The doctrine</h2>
+<p>Derived from the memos, naming which memo each part came from. The markdown under
+<code>insurance/src/</code> is the source of truth; these pages render it.</p>
+<div class="ins-cards">
+    <a class="ins-card" href="what-this-is.html">
+      <div class="ins-card-top"><b>What this is, and the rule it runs on</b><span class="dim">from memos 0–1</span></div>
+      <p>The body of work, its two stages, and the one rule that keeps a rating from becoming theatre.</p>
+    </a>
+
+    <a class="ins-card" href="the-rating.html">
+      <div class="ins-card-top"><b>The rating: what is scored, from what evidence, and what must never merge</b><span class="dim">from memo 1</span></div>
+      <p>The ratable unit is a placement, not an agent; inputs carry their evidence channel; measured and declared never merge; unknown is never absent.</p>
+    </a></div>
+
+<h2 id="mvps">The MVPs</h2>
+<div class="note"><b>None yet, and that is the honest state.</b> The doctrine is two documents old and
+        the first MVP waits on one decision: whether a level rates 1&ndash;5, a continuous score, or letter grades
+        &mdash; because every surface built on it inherits that choice. The rating engine itself needs nothing
+        that is not already published.</div>
+
+<h2 id="reads">What it consumes</h2>
+<p>Nothing here starts from scratch — the rating's inputs are documents this estate already publishes:
+the <a href="../packs/grant-and-mandate/library.html">measured grant</a> (the twin),
+the <a href="../packs/grant-and-mandate/mandates/current.json">signed mandate</a>,
+the <a href="../registry/views/excess-authority.json">delta</a> with its
+<code>acceptor: null</code>, the enforcement tier computed in
+<a href="../workbench/index.html">the workbench</a>, and the fixture-or-real class read from
+<a href="../registry/index.html">the register</a> before any signature.</p>
+
+<h2 id="does-not-prove">What this does not prove</h2>
+<ul class="ins-dnp"><li>That any of this is insurance. Stage 1 emits a rating, transfers no risk, and promises no payout — which is exactly why it needs no carrier and why calling it insurance would be the first dishonesty.</li>
+<li>That the placement orderings are true. Claude-on-a-desktop is rated higher than Claude-on-the-web in the project lead&#x27;s judgement; nobody has measured a desktop agent, so the estate cannot score its own leading example.</li>
+<li>That a level means the same thing to two organisations. Nothing here is calibrated against loss data, because no agent loss data exists anywhere.</li>
+<li>That aggregation works yet. Correlated risk is named as a graph problem and not solved; summing micro ratings would be wrong in the dangerous direction.</li></ul>
+
+<div class="pagenav">
+  <a href="../bench/index.html">&larr; The bench</a>
+  <a href="what-this-is.html">Start with the doctrine &rarr;</a>
+</div>
+</main>
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.51</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The bench</h4>
+    <a href="../bench/index.html">&#9679; What is built</a>
+    <a href="../simulator/index.html">&#9679; The simulator</a>
+    <a href="../workbench/index.html">&#9679; The workbench (app)</a>
+    <a href="../registry/index.html">The register, live</a>
+    <a href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
+    <a href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
+    <a href="../assess/index.html">&#8594; Map your own case</a>
+    <a href="../book/index.html">The book (commissioned)</a>
+    <a href="../book/brief.html">&mdash; its commissioning brief</a>
+  </div>
+  <div>
+    <h4>Insurance</h4>
+    <a href="../insurance/index.html">&#9679; Insurance for agents</a>
+    <a href="../insurance/what-this-is.html">What this is, and the rule</a>
+    <a href="../insurance/the-rating.html">The rating</a>
+    <a href="../documents/agent-insurance.html">The pivot briefing</a>
+  </div>
+  <div>
+    <h4>The registry</h4>
+    <a href="../failure/index.html">Why they don't exist</a>
+    <a href="../rules/index.html">The four rules</a>
+    <a href="../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../roadmap/index.html">Build order</a>
+    <a href="../rules/prior-art.html">Prior art</a>
+  </div>
+  <div>
+    <h4>The three layers</h4>
+    <a href="../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../enrolment/index.html">Enrolment</a>
+    <a href="../execution/index.html">The execution broker</a>
+    <a href="../shipped/index.html">What already ships</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../origins/index.html">Origins: 2026</a>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../packs/registry-mvp/index.html">The registry MVP pack</a>
+    <a href="../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
+    <a href="../packs/map-your-case/index.html">The Map Your Case pack</a>
+    <a href="../about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../llms.txt">llms.txt</a>
+  </div>
+</div></footer>
+
+
+</body>
+</html>

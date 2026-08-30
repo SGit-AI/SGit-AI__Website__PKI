@@ -592,6 +592,28 @@ DOCS = [
   ],
   pages="Recorded as proposed in Grant & Mandate change control (GM-D35 the policy as acceptor of last resort, GM-D36 the policy/v0 and loss-event/v0 schemas, GM-D37 parametric as the first demonstrable shape); comms rows T34 and N16. No published surface is rebuilt on the pivot until it is adopted."),
 
+ dict(slug="insurance-without-money",
+  title="Insurance Without Money First: The Rating Is The Product, And Micro-Policies Scale Where Entity Cover Never Did",
+  md="v0.33.72__strategy-brief__insurance-without-money-first-the-rating-is-the-product-and-micro-policies-scale.md",
+  version="v0.33.72", date="30 August 2026", dtype="Strategy brief — memo 1 of 8 on the insurance pivot",
+  summary="The memo that makes the pivot buildable. It separates insurance from money and keeps the half that matters: a policy is first a decision-making mechanism and a way to assign a rating to an environment, expressed in points, tokens or levels inside an internal marketplace before any currency is attached. That dissolves the blocker v0.33.71 called fatal — a rating engine emitting levels rather than money transfers no risk, promises no payout, is therefore not a regulated activity, and needs no carrier, no capital and no loss history. It also CONTRADICTS the earlier brief's central argument, which said a premium cannot be theatre because someone loses money if the measurement is wrong; the contradiction is named rather than smoothed, and answered with the rule the folder now runs on: a level nobody can recompute is exactly the theatre a premium would have prevented, so every rating ships its derivation. Plus: micro-policies as the scale insurance never reached (the barrier was cost per unit, and for an agent placement that cost approaches zero); the placement variables named concretely enough to test — desktop under a user identity, asset accretion, network egress; the questionnaire identified as a declared-fact collector that must never merge with measured facts; and the aggregation trap the memo does not name, since micro risks do not add and correlation is readable off shared graph nodes.",
+  concepts=[
+   ("The insurance folder", "../insurance/index.html", "the body of work: the memos, the doctrine derived from them, the MVPs"),
+   ("The rating", "../insurance/the-rating.html", "what is scored, from what evidence, and what must never merge"),
+   ("The pivot briefing", "agent-insurance.html", "memo 0 — the position this memo materially changes"),
+   ("The measured grant", "../packs/grant-and-mandate/library.html", "the twin: the measured channel the rating reads"),
+  ],
+  ideas=[
+   "A rating engine that emits levels rather than money transfers no risk and promises no payout — so it is not insurance in the regulated sense, which is exactly why it can be built this week rather than in three years.",
+   "A relative ordering is easier than an absolute price and is most of the value: an operator does not need to know the exposure is worth £40,000, they need to know this placement is three levels worse than that one and which change moves it.",
+   "A level nobody can recompute is exactly the theatre a premium would have prevented — the rule that replaces money as the discipline, and the reason every rating ships its derivation.",
+   "Insurance never scaled below the entity because assessing each unit required a human; an agent placement's inputs are already machine-readable, so the marginal cost of rating one more approaches zero. That, not insurability, is what makes the micro reachable.",
+   "The wellness questionnaire is a declared-fact collector, and this estate already refuses to average declarations with measurements: library minus self-report equals blind spots.",
+   "Micro risks do not add. Five hundred placements summed will be wrong in the dangerous direction, because correlation is shared structure — and shared structure is a shared node the graph already knows about.",
+   "The ratable unit is a placement, not an agent: the same model is a different risk on a desktop and in a browser, which is what the memo's own examples actually say.",
+  ],
+  pages="Creates /insurance/ as a new base folder — manifest, hub, two doctrine documents, and a generator whose gates are symmetric in both directions plus one that refuses a doctrine document with no does-not-prove section. Proposes GM-D38 to GM-D41."),
+
 ]
 
 PAGE = """<!doctype html>

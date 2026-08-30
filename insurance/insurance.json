@@ -1,0 +1,55 @@
+{
+  "_what_this_is": "The manifest for the insurance body of work. gen_insurance.py builds the hub from it and REFUSES to build when it disagrees with the folder: a doctrine document declared here with no file, a src/*.md nothing declares, an MVP folder that does not exist, or a memo marked processed with no brief. The count on the hub is computed from this file, never typed.",
+  "_authority": "NONE \u2014 a build input. The briefs under /briefs/ and the markdown under src/ are the sources of truth.",
+  "v": 0,
+  "stage": {
+    "now": "stage 1 \u2014 rating without money",
+    "why": "A rating engine that emits levels rather than currency is not a regulated activity, needs no carrier and no loss history, and is therefore buildable today. Money is stage 2. See GM-D38.",
+    "rule": "A level nobody can recompute is exactly the theatre a premium would have prevented. Every rating ships its derivation. See GM-D39."
+  },
+  "memos": {
+    "expected": 8,
+    "note": "The project lead is recording eight memos on this pivot. Each is filed verbatim as a brief before it is read; the doctrine below is derived from them and says which memo it came from. A memo not yet recorded is listed as awaited rather than guessed at.",
+    "items": [
+      {
+        "n": 0,
+        "title": "The pivot briefing: the delta is where the insurance lives",
+        "brief": "v0.33.71__strategy-brief__insurance-for-agents-the-delta-is-where-the-insurance-lives.md",
+        "page": "../documents/agent-insurance.html",
+        "state": "processed",
+        "gave": "The policy replaces the acceptance at the foundation; the insurer as the acceptor of last resort filling the register's acceptor:null; the two-insurances split; parametric as the payout shape; the loss event named as the missing primitive."
+      },
+      {
+        "n": 1,
+        "title": "Insurance without money first: the rating is the product",
+        "brief": "v0.33.72__strategy-brief__insurance-without-money-first-the-rating-is-the-product-and-micro-policies-scale.md",
+        "page": "../documents/insurance-without-money.html",
+        "state": "processed",
+        "gave": "Money decoupled from rating, which dissolves the regulatory blocker; micro-policies as the scale insurance never reached; the placement variables; the questionnaire as a declared-fact collector; the quasi-currency as the adoption path. Also contradicts memo 0 on why the pivot is honest, and the contradiction is answered rather than smoothed."
+      }
+    ]
+  },
+  "doctrine": [
+    {
+      "slug": "what-this-is",
+      "file": "00__what-this-is.md",
+      "title": "What this is, and the rule it runs on",
+      "from": "memos 0\u20131",
+      "one_line": "The body of work, its two stages, and the one rule that keeps a rating from becoming theatre."
+    },
+    {
+      "slug": "the-rating",
+      "file": "01__the-rating.md",
+      "title": "The rating: what is scored, from what evidence, and what must never merge",
+      "from": "memo 1",
+      "one_line": "The ratable unit is a placement, not an agent; inputs carry their evidence channel; measured and declared never merge; unknown is never absent."
+    }
+  ],
+  "mvps": [],
+  "does_not_prove": [
+    "That any of this is insurance. Stage 1 emits a rating, transfers no risk, and promises no payout \u2014 which is exactly why it needs no carrier and why calling it insurance would be the first dishonesty.",
+    "That the placement orderings are true. Claude-on-a-desktop is rated higher than Claude-on-the-web in the project lead's judgement; nobody has measured a desktop agent, so the estate cannot score its own leading example.",
+    "That a level means the same thing to two organisations. Nothing here is calibrated against loss data, because no agent loss data exists anywhere.",
+    "That aggregation works yet. Correlated risk is named as a graph problem and not solved; summing micro ratings would be wrong in the dangerous direction."
+  ]
+}
