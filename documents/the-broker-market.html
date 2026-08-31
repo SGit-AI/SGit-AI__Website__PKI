@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Who is writing this — the participant disclosure · pki.sgit.ai</title>
-<meta name="description" content="pki.sgit.ai is published by the sgit project, which builds the vault layer this registry would be built on. The disclosure, what makes a participant's design worth reading, and where our own approach loses.">
-<link rel="canonical" href="https://pki.sgit.ai/about/participant.html">
+<title>The Broker Market Is Driven By Insurance, And A Broker Must Carry Its Own · documents · pki.sgit.ai</title>
+<meta name="description" content="Original document, readable in-page: summary, key concepts and key ideas, then the full markdown. Strategy brief — memo 6 of 8 on the insurance pivot, v0.33.77, 31 August 2026. CC BY 4.0.">
+<link rel="canonical" href="https://pki.sgit.ai/documents/the-broker-market.html">
 <link rel="stylesheet" href="../assets/site.css">
 </head>
 <body>
@@ -89,11 +89,11 @@
       <a class="sl" href="../documents/who-pays-for-the-delta.html">Who pays (memo 3)</a>
       <a class="sl" href="../documents/why-insurance.html">Why insurance (memo 4)</a>
       <a class="sl" href="../documents/not-in-line.html">Not in line (memo 5)</a>
-      <a class="sl" href="../documents/the-broker-market.html">The broker market (memo 6)</a>
+      <a class="sl here" href="../documents/the-broker-market.html">The broker market (memo 6)</a>
       </div>
     </div>
     <div class="ni ni-has">
-      <a class="nl" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <a class="nl here" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl" href="../documents/index.html">The documents</a>
       <a class="sl" href="../data/index.html">The data viewer</a>
@@ -104,12 +104,12 @@
       </div>
     </div>
     <div class="ni ni-has">
-      <a class="nl here" href="../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <a class="nl" href="../admin/comms.html">Site<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl" href="../admin/comms.html">Comms: tasks &amp; requests</a>
       <a class="sl" href="../admin/versions.html">Release history</a>
       <a class="sl" href="../admin/index.html">Admin &amp; engineering</a>
-      <a class="sl here" href="../about/participant.html">Where we lose</a>
+      <a class="sl" href="../about/participant.html">Where we lose</a>
       </div>
     </div>
   </div>
@@ -118,35 +118,52 @@
 </div></nav>
 
 <main class="doc">
-<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / about / participant</div>
-<h1>Who is writing this</h1>
-<p class="lead">This site is published by the <a href="https://sgit.ai">sgit</a> project — encrypted vaults with git workflows, for humans and AI agents. <b>The registry described here would be built on that vault layer</b>, and the argument for attempting it now is that vaults supply distribution, safe mirroring and versioning. So this is a participant publishing a design. You are told that here, upfront, because a reader who discovers an affiliation later discounts everything, while a reader told upfront can judge the work.</p>
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="index.html">documents</a> / the-broker-market</div>
+<h1>The Broker Market Is Driven By Insurance, And A Broker Must Carry Its Own</h1>
 
-<p>The discipline applies more lightly on this site than on <a href="https://nhi.sgit.ai/about/participant.html">nhi.sgit.ai</a>, and it is worth saying why: <b>the historical claims here are externally verifiable</b>. The 2019 attack, the ~150,000 signatures, the never-delete design goal and the replacement's trade are documented by third parties and <a href="../failure/index.html#sources">cited on the failure page</a>. What is ours is the design — and design claims are published as <a href="../rules/index.html">checkable rules, before the thing exists</a>, precisely so they can be held against whatever ships.</p>
+<div class="docmeta">
+  <span class="k">Type</span><span class="v">Strategy brief — memo 6 of 8 on the insurance pivot</span>
+  <span class="k">Version</span><span class="v">v0.33.77</span>
+  <span class="k">Date</span><span class="v">31 August 2026</span>
+  <span class="k">Author</span><span class="v">Dinis Cruz (project lead) and collaborators</span>
+  <span class="k">Licence</span><span class="v">CC BY 4.0</span>
+  <span class="k">Source</span><span class="v"><a href="../briefs/v0.33.77__strategy-brief__the-broker-market-is-driven-by-insurance-and-a-broker-must-carry-its-own.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/dev/briefs/v0.33.77__strategy-brief__the-broker-market-is-driven-by-insurance-and-a-broker-must-carry-its-own.md">view on GitHub</a></span>
+</div>
 
-<h2 id="credible">What makes a participant's design worth reading</h2>
+<h2 id="summary">Summary</h2>
+<p>The business case for access and execution brokers: their commercial argument is the insurance level they remove — use our product and your level drops by X — and the memo's key move is that the claim must not rest on the vendor saying so, because a broker should carry its own policy underwriting its failures. Read against the corpus, that is APPARENT AUTHORITY in the vendor channel: a vendor claiming to reduce exposure is asserting authority nobody granted, and it binds because the buyer acts on it. The policy converts the assertion into a warranty — but the sharper rule is that the claimed reduction is computed by the rating method, never by the broker, or every vendor measures its own reduction favourably. The memo also disproves a framing this estate had accepted: a broker does NOT narrow the grant, it changes the grant's topology, removing reach from one tree and adding a party with reach of its own — so a SaaS broker that narrows platform access while routing every request through a third party has MOVED exposure rather than removed it, the net may be positive, and deployment topology becomes a first-class rating variable. And it names a case the delta taxonomy could not hold — platforms that do offer the granularity and make it impractical to use — fixed here with a cost-to-close dimension on elective delta rather than a fourth class, because a rating treating all closable delta as equally the operator's fault is nearly as unfair as charging for structural. Finally: the broker market exists because dynamic, checkable, PKI-backed authorisation does not, which is the clearest commercial argument yet for the register and also makes the broker market transitional by construction.</p>
+
+<h2 id="concepts">Key concepts</h2>
 <ul>
-  <li><b>The rules precede the implementation.</b> The <a href="../rules/index.html">four rules</a> are published before the registry exists. Stating them afterwards would be describing what got built; stating them now makes them a commitment somebody else can check.</li>
-  <li><b>The failure is not ours to spin.</b> The history that produces the rules is other people's, documented and linked. Nothing on the failure page depends on trusting us.</li>
-  <li><b>The open questions stay open.</b> The <a href="../roadmap/index.html#open">unresolved decisions</a> are published unresolved rather than quietly settled — including the central one, whether the registry accepts third-party attestations at all.</li>
+  <li><a href="../insurance/the-broker-market.html"><b>The broker market</b></a> — doctrine 06: who backs the claim, and what a broker actually changes</li>
+  <li><a href="grant-vs-mandate.html"><b>Apparent authority</b></a> — the concept, arriving in the vendor channel</li>
+  <li><a href="execution-broker.html"><b>The execution broker</b></a> — designed as a security control; here, a product whose claims need backing</li>
+  <li><a href="../insurance/who-pays-and-the-moving-rating.html"><b>Who pays, and the moving rating</b></a> — doctrine 03, whose §6 this memo corrects</li>
 </ul>
 
-<h2 id="loses">Where our own approach loses</h2>
-<p>A site that only names other people's failures is not read as research. So, plainly — on this subject:</p>
+<h2 id="ideas">Key ideas</h2>
 <ul>
-  <li><b>Vaults do not supply the registry.</b> Distribution, safe mirroring and versioning come free; the ownership rule, the size bound and signature checking are logic still to build, and they are the part that failed last time. The infrastructure being ready is not the hard part being solved.</li>
-  <li><b>Vaults do not solve attestation.</b> A vault cannot verify which workload holds a key — whoever holds the key is the identity. A registry of agent keys inherits that limit: it can say <em>this key claims to be this agent</em>, not <em>this key is currently in the hands of that agent and nobody else</em>.</li>
-  <li><b>A mandate constrains authority, not behaviour.</b> A signed mandate says what an agent may be authorised to do. It does not constrain what the agent does within that authority, and it is <a href="../mandate/index.html#caution">one control among several</a> rather than a complete answer.</li>
-  <li><b>The public registry is not designed.</b> Only the private case is. A public registry inherits every hard problem of the private one plus trust roots, abuse and moderation — and this site says so rather than implying the second follows from the first.</li>
-  <li><b>The registry does not exist.</b> Everything here is stated design. There is no implementation to test the rules against yet, which is the honest status of the whole site.</li>
+  <li>A vendor claiming 'we reduce your exposure' is asserting authority nobody granted, and it binds because the buyer acts on it — apparent authority in the vendor channel rather than the agent channel.</li>
+  <li>A broker's claimed level reduction is computed by the rating method, never by the broker: otherwise the number is marketing wearing arithmetic.</li>
+  <li>A broker does not narrow the grant. It changes the grant's topology — removing reach from one tree and adding a party with reach of its own — so the net may be positive.</li>
+  <li>A SaaS broker that narrows platform access while routing every request through a third party has moved exposure rather than removed it. Whether that is an improvement depends on the placement, not the product.</li>
+  <li>A broker's rating is systemic: it is the one placement whose mis-rating propagates to every customer whose level it reduced. Which is why its policy is not optional.</li>
+  <li>Elective delta carries a cost to close, and 'latent' delta — offered but impractical — is its high-cost region. Treating all closable delta as equally the operator's fault is nearly as unfair as charging for structural.</li>
+  <li>A broker selling into structural delta sells capability the platform lacks; a broker selling into latent delta sells absorbed complexity — and the second is the larger market.</li>
+  <li>The broker market exists because dynamic, checkable, PKI-backed authorisation does not — which is the clearest commercial argument for the register, and makes the broker market transitional by construction.</li>
+  <li>A buyer cannot weigh one broker's claimed two bands against another's claimed three if they were computed differently: a shared method is what makes claims comparable, and comparability is what makes a market.</li>
 </ul>
 
-<h2 id="who">The people and agents behind the site</h2>
-<p>The corpus this site curates is authored by Dinis Cruz and collaborators, and published openly under CC BY 4.0 in the <a href="https://github.com/the-cyber-boardroom/SGraph-AI__App__Send">SGraph-AI__App__Send</a> repository. The <a href="../documents/pki-registry.html">brief that scoped this site</a> is captured here verbatim. The site itself is built and maintained with AI agents in the loop — the <a href="../admin/comms.html">comms page</a> is the working channel between the human project lead and the site agent, in public, which is itself an instance of the discipline this site describes.</p>
+<h2 id="on-site">On this site</h2>
+<p>Adds insurance doctrine 06; proposes GM-D58 (the method computes the vendor's claim), GM-D59 (a broker changes topology — corrects v0.33.74 §5), GM-D60 (elective delta carries a cost to close) and GM-D61 (a broker's rating is systemic).</p>
+
+<h2 id="read">Read the document</h2>
+<div class="mdread-label">📄 Original document · v0.33.77 · 31 August 2026 · rendered from the <a href="../briefs/v0.33.77__strategy-brief__the-broker-market-is-driven-by-insurance-and-a-broker-must-carry-its-own.md">raw markdown</a> (the source of truth)</div>
+<div class="mdread" id="mdread" data-src="../briefs/v0.33.77__strategy-brief__the-broker-market-is-driven-by-insurance-and-a-broker-must-carry-its-own.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="../briefs/v0.33.77__strategy-brief__the-broker-market-is-driven-by-insurance-and-a-broker-must-carry-its-own.md">open the raw markdown</a>.</p></noscript></div>
 
 <div class="pagenav">
-  <a href="../index.html">← Home</a>
-  <a href="../admin/comms.html">Comms: tasks &amp; requests →</a>
+  <a href="index.html">← All documents</a>
+  <a href="../briefs/v0.33.77__strategy-brief__the-broker-market-is-driven-by-insurance-and-a-broker-must-carry-its-own.md">Raw markdown →</a>
 </div>
 </main>
 
@@ -155,7 +172,7 @@
     <div class="brandline">pki<span>.sgit.ai</span></div>
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
-    <p class="partnote">⚠ Participant disclosure: published by the sgit project. You are on the disclosure page.</p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
     <p class="verline">site <a href="../admin/versions.html">v0.1.55</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
@@ -214,6 +231,7 @@
   </div>
 </div></footer>
 
-</body>
+<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+<script src="../assets/mdreader.js"></script>
 </body>
 </html>

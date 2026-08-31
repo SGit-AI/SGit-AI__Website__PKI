@@ -59,6 +59,14 @@
         "page": "../documents/not-in-line.html",
         "state": "processed",
         "gave": "The commercial position and the first SETTLED decision. The level scale is 1–5. The project sits outside the line — schemas, flows, connectors, evidence — never the carrier and never the execution broker, which forecloses it ever being a boundary itself. And openness is load-bearing rather than generous: with no money at stake, an attackable public method is the only honesty mechanism left."
+      },
+      {
+        "n": 6,
+        "title": "The broker market is driven by insurance, and a broker must carry its own",
+        "brief": "v0.33.77__strategy-brief__the-broker-market-is-driven-by-insurance-and-a-broker-must-carry-its-own.md",
+        "page": "../documents/the-broker-market.html",
+        "state": "processed",
+        "gave": "The broker market's commercial case is the level reduction it produces — and the broker's own policy is what stops that being apparent authority in the vendor channel. Corrects an earlier framing: a broker changes the grant's TOPOLOGY rather than narrowing it, adding a party with reach of its own, so the net may be positive and deployment topology is a rating variable. Names the case the delta taxonomy could not hold — granularity that exists but is impractical — and fixes it with a cost-to-close dimension rather than a fourth class."
       }
     ]
   },
@@ -104,6 +112,13 @@
       "title": "Not in line: the position, the scale, and what it forecloses",
       "from": "memo 5",
       "one_line": "The scale is 1–5, settled. The project supplies schemas rather than standing in the line — which means it can never itself be a boundary."
+    },
+    {
+      "slug": "the-broker-market",
+      "file": "06__the-broker-market.md",
+      "title": "The broker market: who backs the claim, and what a broker actually changes",
+      "from": "memo 6",
+      "one_line": "A broker's claimed reduction is computed by the method, not the broker — and a broker moves exposure as well as removing it, so the net may be positive."
     }
   ],
   "mvps": [],
@@ -117,6 +132,7 @@
     "That dynamic re-rating is close. The mapping from a published advisory to the grant nodes it widens exists nowhere, for anybody, and it is the hard part.",
     "That the estate's own grant measurement is complete. Memo 3 named a node measure.py misses — commit authorship — found by conversation rather than by the tool, and the honest reading is that there are others.",
     "That five bands are the right resolution. The scale is settled and argued for; nothing validates it against outcomes, because there are no outcomes yet.",
-    "That the not-in-line position is commercially viable. It is a coherent architecture and an unproven business — nobody has paid for a schema here."
+    "That the not-in-line position is commercially viable. It is a coherent architecture and an unproven business — nobody has paid for a schema here.",
+    "That a broker's netting can be computed today. Rating what a broker adds as well as what it removes needs a grant tree for the broker relationship, and no broker publishes one."
   ]
 }

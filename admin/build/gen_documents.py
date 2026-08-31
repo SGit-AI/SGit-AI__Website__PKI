@@ -706,6 +706,30 @@ DOCS = [
   ],
   pages="Adds insurance doctrine 05; records GM-D54 as SETTLED (the 1–5 scale, closing N17 q1); proposes GM-D55 (not in line, and never a boundary), GM-D56 (define the broker's disclosure, do not operate one) and GM-D57 (connectors label evidence class)."),
 
+ dict(slug="the-broker-market",
+  title="The Broker Market Is Driven By Insurance, And A Broker Must Carry Its Own",
+  md="v0.33.77__strategy-brief__the-broker-market-is-driven-by-insurance-and-a-broker-must-carry-its-own.md",
+  version="v0.33.77", date="31 August 2026", dtype="Strategy brief — memo 6 of 8 on the insurance pivot",
+  summary="The business case for access and execution brokers: their commercial argument is the insurance level they remove — use our product and your level drops by X — and the memo's key move is that the claim must not rest on the vendor saying so, because a broker should carry its own policy underwriting its failures. Read against the corpus, that is APPARENT AUTHORITY in the vendor channel: a vendor claiming to reduce exposure is asserting authority nobody granted, and it binds because the buyer acts on it. The policy converts the assertion into a warranty — but the sharper rule is that the claimed reduction is computed by the rating method, never by the broker, or every vendor measures its own reduction favourably. The memo also disproves a framing this estate had accepted: a broker does NOT narrow the grant, it changes the grant's topology, removing reach from one tree and adding a party with reach of its own — so a SaaS broker that narrows platform access while routing every request through a third party has MOVED exposure rather than removed it, the net may be positive, and deployment topology becomes a first-class rating variable. And it names a case the delta taxonomy could not hold — platforms that do offer the granularity and make it impractical to use — fixed here with a cost-to-close dimension on elective delta rather than a fourth class, because a rating treating all closable delta as equally the operator's fault is nearly as unfair as charging for structural. Finally: the broker market exists because dynamic, checkable, PKI-backed authorisation does not, which is the clearest commercial argument yet for the register and also makes the broker market transitional by construction.",
+  concepts=[
+   ("The broker market", "../insurance/the-broker-market.html", "doctrine 06: who backs the claim, and what a broker actually changes"),
+   ("Apparent authority", "grant-vs-mandate.html", "the concept, arriving in the vendor channel"),
+   ("The execution broker", "execution-broker.html", "designed as a security control; here, a product whose claims need backing"),
+   ("Who pays, and the moving rating", "../insurance/who-pays-and-the-moving-rating.html", "doctrine 03, whose §6 this memo corrects"),
+  ],
+  ideas=[
+   "A vendor claiming 'we reduce your exposure' is asserting authority nobody granted, and it binds because the buyer acts on it — apparent authority in the vendor channel rather than the agent channel.",
+   "A broker's claimed level reduction is computed by the rating method, never by the broker: otherwise the number is marketing wearing arithmetic.",
+   "A broker does not narrow the grant. It changes the grant's topology — removing reach from one tree and adding a party with reach of its own — so the net may be positive.",
+   "A SaaS broker that narrows platform access while routing every request through a third party has moved exposure rather than removed it. Whether that is an improvement depends on the placement, not the product.",
+   "A broker's rating is systemic: it is the one placement whose mis-rating propagates to every customer whose level it reduced. Which is why its policy is not optional.",
+   "Elective delta carries a cost to close, and 'latent' delta — offered but impractical — is its high-cost region. Treating all closable delta as equally the operator's fault is nearly as unfair as charging for structural.",
+   "A broker selling into structural delta sells capability the platform lacks; a broker selling into latent delta sells absorbed complexity — and the second is the larger market.",
+   "The broker market exists because dynamic, checkable, PKI-backed authorisation does not — which is the clearest commercial argument for the register, and makes the broker market transitional by construction.",
+   "A buyer cannot weigh one broker's claimed two bands against another's claimed three if they were computed differently: a shared method is what makes claims comparable, and comparability is what makes a market.",
+  ],
+  pages="Adds insurance doctrine 06; proposes GM-D58 (the method computes the vendor's claim), GM-D59 (a broker changes topology — corrects v0.33.74 §5), GM-D60 (elective delta carries a cost to close) and GM-D61 (a broker's rating is systemic)."),
+
 ]
 
 PAGE = """<!doctype html>

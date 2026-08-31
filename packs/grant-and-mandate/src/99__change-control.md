@@ -201,6 +201,10 @@ The mandate's issuer is the registry's operator root, whose private half is **pu
 | GM-D55 | **This project is not in line.** Schemas, flows, connectors, evidence — never the carrier, never the execution broker. Consequence: **it can never itself be a boundary**, only ship a check that becomes one when installed by somebody who is | v0.33.76 §2 | **Proposed — *instrument before you enforce*, applied to the business model** |
 | GM-D56 | **We define what a broker must be able to show; we do not operate one.** The disclosure format for structural-to-elective conversion is a schema | v0.33.76 §3 — the memo's own self-correction | **Proposed** |
 | GM-D57 | **A connector labels the evidence class of everything it imports**, so that *integrate with what exists* does not become *launder what exists* | v0.33.76 §5 | **Proposed — cheap on the first connector, expensive to retrofit onto the fifth** |
+| GM-D58 | **A broker's claimed level reduction is computed by the rating method, never by the broker.** GM-D43's separation applied to the vendor channel; the disclosure GM-D56 requires is the derivation of the claimed reduction | v0.33.77 §1 memo 6, 31 Aug | **Proposed — "we reduce your level by X" is apparent authority until something computes it** |
+| GM-D59 | **A broker changes the grant's topology, not only its width.** The rating nets what it removes against what it adds — the broker's own reach, and for a SaaS broker decisions crossing the boundary. **Deployment topology is a rating variable** | v0.33.77 §2 | **Proposed — CORRECTS the framing in v0.33.74 §5, which said a broker converts structural delta to elective and stopped there** |
+| GM-D60 | **Elective delta carries a cost to close**; *latent* delta — offered by the platform but impractical to adopt — is its high-cost region | v0.33.77 §3 — the case GM-D45's three classes could not hold | **Proposed — extends GM-D45 with a dimension rather than a fourth class** |
+| GM-D61 | **A broker's own rating is systemic**: the one placement whose mis-rating propagates to every customer whose level it reduced, which is why its policy is not optional | v0.33.77 §2 | **Proposed** |
 
 ---
 

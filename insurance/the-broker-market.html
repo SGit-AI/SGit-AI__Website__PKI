@@ -3,10 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Who is writing this — the participant disclosure · pki.sgit.ai</title>
-<meta name="description" content="pki.sgit.ai is published by the sgit project, which builds the vault layer this registry would be built on. The disclosure, what makes a participant's design worth reading, and where our own approach loses.">
-<link rel="canonical" href="https://pki.sgit.ai/about/participant.html">
+<title>The broker market: who backs the claim, and what a broker actually changes &middot; pki.sgit.ai</title>
+<meta name="description" content="A broker&#x27;s claimed reduction is computed by the method, not the broker — and a broker moves exposure as well as removing it, so the net may be positive.">
+<link rel="canonical" href="https://pki.sgit.ai/insurance/the-broker-market.html">
+<meta property="og:url" content="https://pki.sgit.ai/insurance/the-broker-market.html">
 <link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/insurance.css">
+<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+<script src="../assets/mdreader.js" defer></script>
 </head>
 <body>
 
@@ -73,7 +77,7 @@
       </div>
     </div>
     <div class="ni ni-has">
-      <a class="nl" href="../insurance/index.html">Insurance<span class="caret">&#9662;</span></a>
+      <a class="nl here" href="../insurance/index.html">Insurance<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl" href="../insurance/index.html">&#9679; Insurance for agents</a>
       <a class="sl" href="../insurance/what-this-is.html">&mdash; what this is, and the rule</a>
@@ -82,7 +86,7 @@
       <a class="sl" href="../insurance/who-pays-and-the-moving-rating.html">&mdash; who pays, &amp; the moving rating</a>
       <a class="sl" href="../insurance/why-insurance-and-what-broke-it.html">&mdash; why insurance</a>
       <a class="sl" href="../insurance/not-in-line.html">&mdash; not in line (scale 1&ndash;5)</a>
-      <a class="sl" href="../insurance/the-broker-market.html">&mdash; the broker market</a>
+      <a class="sl here" href="../insurance/the-broker-market.html">&mdash; the broker market</a>
       <a class="sl" href="../documents/agent-insurance.html">The pivot briefing (memo 0)</a>
       <a class="sl" href="../documents/insurance-without-money.html">Rating before money (memo 1)</a>
       <a class="sl" href="../documents/insurance-ecosystem.html">The go-live gate (memo 2)</a>
@@ -104,12 +108,12 @@
       </div>
     </div>
     <div class="ni ni-has">
-      <a class="nl here" href="../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <a class="nl" href="../admin/comms.html">Site<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl" href="../admin/comms.html">Comms: tasks &amp; requests</a>
       <a class="sl" href="../admin/versions.html">Release history</a>
       <a class="sl" href="../admin/index.html">Admin &amp; engineering</a>
-      <a class="sl here" href="../about/participant.html">Where we lose</a>
+      <a class="sl" href="../about/participant.html">Where we lose</a>
       </div>
     </div>
   </div>
@@ -117,45 +121,36 @@
   <script src="../assets/nav.js" defer></script>
 </div></nav>
 
+
 <main class="doc">
-<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / about / participant</div>
-<h1>Who is writing this</h1>
-<p class="lead">This site is published by the <a href="https://sgit.ai">sgit</a> project — encrypted vaults with git workflows, for humans and AI agents. <b>The registry described here would be built on that vault layer</b>, and the argument for attempting it now is that vaults supply distribution, safe mirroring and versioning. So this is a participant publishing a design. You are told that here, upfront, because a reader who discovers an affiliation later discounts everything, while a reader told upfront can judge the work.</p>
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="index.html">insurance</a> / the-broker-market</div>
+<h1>The broker market: who backs the claim, and what a broker actually changes</h1>
+<p class="lead">A broker&#x27;s claimed reduction is computed by the method, not the broker — and a broker moves exposure as well as removing it, so the net may be positive.</p>
 
-<p>The discipline applies more lightly on this site than on <a href="https://nhi.sgit.ai/about/participant.html">nhi.sgit.ai</a>, and it is worth saying why: <b>the historical claims here are externally verifiable</b>. The 2019 attack, the ~150,000 signatures, the never-delete design goal and the replacement's trade are documented by third parties and <a href="../failure/index.html#sources">cited on the failure page</a>. What is ours is the design — and design claims are published as <a href="../rules/index.html">checkable rules, before the thing exists</a>, precisely so they can be held against whatever ships.</p>
+<div class="docmeta">
+  <span class="k">Document</span><span class="v">06 of the insurance doctrine</span>
+  <span class="k">Derived from</span><span class="v">memo 6</span>
+  <span class="k">Status</span><span class="v">Proposed &mdash; GM-D38 to GM-D41 await the project lead</span>
+  <span class="k">Source</span><span class="v"><a href="../data/index.html?src=insurance/src/06__the-broker-market.md">rendered &amp; raw</a>
+    &middot; <a href="src/06__the-broker-market.md">the markdown</a>, which is the source of truth</span>
+</div>
 
-<h2 id="credible">What makes a participant's design worth reading</h2>
-<ul>
-  <li><b>The rules precede the implementation.</b> The <a href="../rules/index.html">four rules</a> are published before the registry exists. Stating them afterwards would be describing what got built; stating them now makes them a commitment somebody else can check.</li>
-  <li><b>The failure is not ours to spin.</b> The history that produces the rules is other people's, documented and linked. Nothing on the failure page depends on trusting us.</li>
-  <li><b>The open questions stay open.</b> The <a href="../roadmap/index.html#open">unresolved decisions</a> are published unresolved rather than quietly settled — including the central one, whether the registry accepts third-party attestations at all.</li>
-</ul>
-
-<h2 id="loses">Where our own approach loses</h2>
-<p>A site that only names other people's failures is not read as research. So, plainly — on this subject:</p>
-<ul>
-  <li><b>Vaults do not supply the registry.</b> Distribution, safe mirroring and versioning come free; the ownership rule, the size bound and signature checking are logic still to build, and they are the part that failed last time. The infrastructure being ready is not the hard part being solved.</li>
-  <li><b>Vaults do not solve attestation.</b> A vault cannot verify which workload holds a key — whoever holds the key is the identity. A registry of agent keys inherits that limit: it can say <em>this key claims to be this agent</em>, not <em>this key is currently in the hands of that agent and nobody else</em>.</li>
-  <li><b>A mandate constrains authority, not behaviour.</b> A signed mandate says what an agent may be authorised to do. It does not constrain what the agent does within that authority, and it is <a href="../mandate/index.html#caution">one control among several</a> rather than a complete answer.</li>
-  <li><b>The public registry is not designed.</b> Only the private case is. A public registry inherits every hard problem of the private one plus trust roots, abuse and moderation — and this site says so rather than implying the second follows from the first.</li>
-  <li><b>The registry does not exist.</b> Everything here is stated design. There is no implementation to test the rules against yet, which is the honest status of the whole site.</li>
-</ul>
-
-<h2 id="who">The people and agents behind the site</h2>
-<p>The corpus this site curates is authored by Dinis Cruz and collaborators, and published openly under CC BY 4.0 in the <a href="https://github.com/the-cyber-boardroom/SGraph-AI__App__Send">SGraph-AI__App__Send</a> repository. The <a href="../documents/pki-registry.html">brief that scoped this site</a> is captured here verbatim. The site itself is built and maintained with AI agents in the loop — the <a href="../admin/comms.html">comms page</a> is the working channel between the human project lead and the site agent, in public, which is itself an instance of the discipline this site describes.</p>
+<div class="mdread-label">&#128196; Rendered from <a href="src/06__the-broker-market.md">the markdown</a> &mdash; the file is
+the source of truth and this page is presentation.</div>
+<div class="mdread" id="mdread" data-src="src/06__the-broker-market.md"><noscript><p class="dim">In-page rendering needs
+JavaScript &mdash; <a href="src/06__the-broker-market.md">open the raw markdown</a>.</p></noscript></div>
 
 <div class="pagenav">
-  <a href="../index.html">← Home</a>
-  <a href="../admin/comms.html">Comms: tasks &amp; requests →</a>
+  <a href="index.html">&larr; Insurance</a>
+  <a href="src/06__the-broker-market.md">The markdown &rarr;</a>
 </div>
 </main>
-
 <footer class="site"><div class="cols">
   <div>
     <div class="brandline">pki<span>.sgit.ai</span></div>
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
-    <p class="partnote">⚠ Participant disclosure: published by the sgit project. You are on the disclosure page.</p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
     <p class="verline">site <a href="../admin/versions.html">v0.1.55</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
@@ -214,6 +209,6 @@
   </div>
 </div></footer>
 
-</body>
+
 </body>
 </html>
