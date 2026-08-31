@@ -801,6 +801,30 @@ DOCS = [
   ],
   pages="Adds insurance doctrine 09; widens the memo series from eight to ten with the reason recorded on the hub, after the build gate refused a ninth memo against an expected eight. Proposes GM-D72 (the positioning and its guard-rail), GM-D73 (the declared-measured gap as material non-disclosure), GM-D74 (a market observation is a dated measurement) and GM-D75 (the accepted format is the connector spec)."),
 
+ dict(slug="the-schemas-and-the-clocks",
+  title="The Schemas, The Clocks, And A Warranty Is A Fact With A Maximum Age",
+  md="v0.33.81__strategy-brief__the-schemas-the-clocks-and-a-warranty-is-a-fact-with-a-maximum-age.md",
+  version="v0.33.81", date="31 August 2026", dtype="Strategy brief — memo 10, the last of the series",
+  summary="Two memos in one — the project lead says so partway through and keeps recording. First the interfaces: the APIs and schemas the ecosystem needs, cover that holds only while stated preconditions hold, and real-time checks that matter more as the money rises. Then time: expiry, dynamic creation, activation, policies bought for a small window or for a fixed number of uses within one, office-hours cover, and requirements that are themselves time-bounded. The best thing in it is the backup example, which yields a definition sharper than anything the pivot had: A WARRANTY IS A FACT PLUS A MAXIMUM AGE — and it fails three ways, false, stale, or unknown, with unknown on the same side as false. That is the exact opposite of the rating rule, deliberately: for a rating, assuming absence manufactures comfort; for cover, assuming presence manufactures liability. It also completes a climb the pivot had been making without noticing — go-live gate, then running-agent gate, now PER-ACTION gate — and adds a third clock beside the policy interval and twin freshness: the warranty's own check interval, without which a policy in force against a fresh twin with a stale warranty looks covered and is not. Two more: metering USES is sound where metering verifications is not (a verification is not a use), but a usage-boxed policy needs an in-line counter this project is not, so we define the counting schema and somebody else holds the counter; and the reframe that answers the memo's own question — an API is operated, a schema is implemented, so the policy lifecycle ships as documents and appends, and the answer to 'what APIs do we need' is mostly none that we build.",
+  concepts=[
+   ("The schemas and the clocks", "../insurance/the-schemas-and-the-clocks.html", "doctrine 10, the last"),
+   ("The insurance folder", "../insurance/index.html", "ten memos, eleven doctrine documents"),
+   ("Observability", "observability.html", "the brief whose 'a verification is not a use' separates the two meterings"),
+   ("Not in line", "../insurance/not-in-line.html", "the position that forecloses holding the use counter"),
+  ],
+  ideas=[
+   "A warranty is a fact plus a maximum age, and it fails three ways: false, stale, or unknown — with unknown on the same side as false.",
+   "The asymmetry is deliberate: for a rating, assuming absence manufactures comfort; for cover, assuming presence manufactures liability.",
+   "A policy in force, computed against a fresh twin, with a warranty last checked eleven days ago, is NOT covered — and only a system keeping the third clock separately can say so.",
+   "The gate has been climbing without anyone noticing: go-live, then running-agent, now per-action.",
+   "Metering uses is what insurance has always done and prices what the buyer consumes; metering checks taxes the behaviour the system wants.",
+   "A usage-boxed policy needs an in-line counter, which this project is not — so we define the counting schema and the relying party or broker holds the counter.",
+   "An API is operated; a schema is implemented. The not-in-line position permits only the second, so the answer to 'what APIs do we need' is mostly: none that we build.",
+   "A recurring cover window without a timezone is ambiguous, and daylight saving moves it twice a year — ambiguity in a cover condition is the ground disputes are fought on.",
+   "A connector that flattened provenance into a spreadsheet would create the very defect this pivot exists to detect.",
+  ],
+  pages="Adds insurance doctrine 10, completing the series at ten, and generates insurance/llms.txt from the manifest. Proposes GM-D76 (a warranty is a fact plus a maximum age), GM-D77 (the third clock), GM-D78 (metering uses needs an in-line counter), GM-D79 (schemas not APIs) and GM-D80 (a recurring window states its timezone)."),
+
 ]
 
 PAGE = """<!doctype html>

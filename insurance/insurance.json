@@ -10,7 +10,7 @@
   },
   "memos": {
     "expected": 10,
-    "note": "Recorded as eight; the project lead added two more, so it is ten. The count on the hub is a CLAIM, so it was corrected here rather than quietly adjusted — and the build gate that refuses more processed memos than the manifest expects fired on the ninth, which is what it is for. Each memo is filed verbatim as a brief before it is read; the doctrine says which memo it came from, and where a memo and a document disagree the memo wins. The pivot briefing (—) precedes the series and is not counted in it.",
+    "note": "Recorded as eight; the project lead added two more, so it is ten — now all processed. The count on the hub is a CLAIM, so it was corrected here rather than quietly adjusted, and the build gate that refuses more processed memos than the manifest expects fired on the ninth, which is what it is for. Each memo is filed verbatim as a brief before it is read; the doctrine says which memo it came from, and where a memo and a document disagree the memo wins. The pivot briefing (—) precedes the series and is not counted in it.",
     "items": [
       {
         "n": 0,
@@ -91,6 +91,14 @@
         "page": "../documents/make-them-insurable.html",
         "state": "processed",
         "gave": "The positioning, and the first item in this series that would produce an EXTERNAL fact rather than a position — the pivot has seventy-one decisions and no evidence. Also the mapping that upgrades a rule: the declared-versus-measured gap is the shape of material non-disclosure, so the card-versus-twin gap decides voidability rather than merely worsening a level. And the survey specified as measure.py pointed at a market: dated, re-runnable, evidence-classed, where unknown is never absent."
+      },
+      {
+        "n": 10,
+        "title": "The schemas, the clocks, and a warranty is a fact with a maximum age",
+        "brief": "v0.33.81__strategy-brief__the-schemas-the-clocks-and-a-warranty-is-a-fact-with-a-maximum-age.md",
+        "page": "../documents/the-schemas-and-the-clocks.html",
+        "state": "processed",
+        "gave": "Two memos in one — the interfaces, then time. A warranty is defined precisely as a fact plus a maximum age, failing three ways (false, stale, unknown) with unknown on the same side as false — the opposite of the rating rule, and deliberately so. Cover is continuous, which adds a third clock beside the policy interval and twin freshness. Metering uses is sound where metering checks is not, but a usage-boxed policy needs an in-line counter this project is not. And the reframe: an API is operated, a schema is implemented, so the policy lifecycle ships as documents and appends rather than as an API surface."
       }
     ]
   },
@@ -164,6 +172,13 @@
       "title": "Make them insurable: the positioning, and the survey that would test it",
       "from": "memo 9",
       "one_line": "The first thing here that could be wrong in a way the world would correct — plus the guard-rail that stops “make them insurable” becoming “make them look insurable”."
+    },
+    {
+      "slug": "the-schemas-and-the-clocks",
+      "file": "10__the-schemas-and-the-clocks.md",
+      "title": "The schemas and the clocks: a warranty is a fact with a maximum age",
+      "from": "memo 10",
+      "one_line": "A warranty fails three ways and unknown counts as failure; cover runs on three clocks; and the deliverable is documents and appends, not an API."
     }
   ],
   "mvps": [],
@@ -182,7 +197,8 @@
     "That the handshake is a boundary anywhere today. It reaches that tier only where the relying party is genuinely independent of the requester, and nothing has been built or installed to test it.",
     "That a world explains better than a document. It is the memo's hypothesis and the site agent's agreement, and neither is evidence — which is why the 2D-first sequencing exists.",
     "That the emptiness rule survives contact with a demo. Showing what does not exist is easy to write down and hard to keep when somebody wants to impress a room. It is the first thing that will be argued away.",
-    "That anything here has been checked against the market. Seventy-one decisions and no external evidence: memo 9's survey is the first item in this series that could be wrong in a way the world would correct, and it has not been run.",
-    "That an agent placement can be insured at all today. The categories that exist generally insure firms and entities, not placements — and whether any carrier has since launched one is unresearched, and is deliberately not guessed at."
+    "That anything here has been checked against the market. The whole log and no external evidence: memo 9's survey is the first item in this series that could be wrong in a way the world would correct, and it has not been run. The decision count is printed in llms.txt and derived from the log, because it was typed once and was stale within a day.",
+    "That an agent placement can be insured at all today. The categories that exist generally insure firms and entities, not placements — and whether any carrier has since launched one is unresearched, and is deliberately not guessed at.",
+    "That any of the schemas exist. policy/v0 has a shape, loss-event/v0 does not, and the warranty set described in doctrine 10 has never been written down as a schema."
   ]
 }

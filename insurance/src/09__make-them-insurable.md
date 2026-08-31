@@ -6,7 +6,7 @@
 
 ## 1 · The first thing here that could be wrong
 
-**This pivot has produced seventy-one decisions and no external evidence.** Every document in this folder is reasoning — checked against the corpus, and entirely internal.
+**As of memo 9 this pivot had produced seventy-one decisions and no external evidence**, and the count has only grown since. Every document in this folder is reasoning — checked against the corpus, and entirely internal.
 
 *Can you insure a Claude Code session?* is different in kind: **the answer exists outside this estate and nobody here has looked.**
 

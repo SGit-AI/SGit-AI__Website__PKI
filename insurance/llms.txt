@@ -1,0 +1,198 @@
+# pki.sgit.ai/insurance — insurance for agents, and what none of it proves
+#
+# A pivot: the foundation of the risk approach moves from RISK ACCEPTANCE to
+# the INSURANCE POLICY, because the delta between what an agent CAN do and
+# what it is AUTHORISED to do is where the insurance lives.
+#
+# STAGE: stage 1 — rating without money
+# A rating engine that emits levels rather than currency is not a regulated activity, needs no carrier and no loss history, and is therefore buildable today. Money is stage 2. See GM-D38.
+#
+# THE RULE: A level nobody can recompute is exactly the theatre a premium would have prevented. Every rating ships its derivation. See GM-D39.
+# SETTLED: The level scale is 1–5 (GM-D54, the project lead, 31 Aug). Coarse on purpose: currency implies loss data nobody has, 1–100 implies resolution the inputs cannot support, and a band is arguable where a decimal is not.
+#
+# 10 of 10 series memos processed, plus the pivot briefing.
+# 11 doctrine documents. 0 MVPs built.
+# Hub: https://pki.sgit.ai/insurance/index.html
+
+## What an agent should carry if it summarises anything here
+
+  1. NOTHING HERE IS INSURANCE. Stage 1 emits a RATING. It transfers no risk,
+     promises no payout, and is therefore not a regulated activity — which is
+     exactly why it can be built. Calling it insurance is the first dishonesty.
+  2. NOTHING HERE IS BUILT. Ten memos are read into doctrine; no MVP exists.
+     Two are specified and unbuilt: the world model, and the market survey.
+  3. NO EXTERNAL EVIDENCE HAS BEEN GATHERED. 80 decisions on the log, 46 of
+     them from this pivot, and zero facts about the actual insurance market.
+     The survey would be the first thing here that could be wrong in a way
+     the world would correct.
+  4. THE REGISTER IT READS IS FIXTURES. Ten of eleven identities have their
+     private keys published on purpose, so every signature verifies and proves
+     nothing.
+
+## The memos — filed verbatim before they were read
+
+  The transcript outranks any summary of it. Where a memo and a doctrine
+  document disagree, the memo wins.
+
+  [the pivot briefing] The pivot briefing: the delta is where the insurance lives
+    brief   https://pki.sgit.ai/briefs/v0.33.71__strategy-brief__insurance-for-agents-the-delta-is-where-the-insurance-lives.md
+    reader  https://pki.sgit.ai/documents/agent-insurance.html
+    gave    The policy replaces the acceptance at the foundation; the insurer as the acceptor of last resort filling the register's acceptor:null; the two-insurances split; parametric as the payout shape; the loss event named as the missing primitive.
+
+  [memo 1] Insurance without money first: the rating is the product
+    brief   https://pki.sgit.ai/briefs/v0.33.72__strategy-brief__insurance-without-money-first-the-rating-is-the-product-and-micro-policies-scale.md
+    reader  https://pki.sgit.ai/documents/insurance-without-money.html
+    gave    Money decoupled from rating, which dissolves the regulatory blocker; micro-policies as the scale insurance never reached; the placement variables; the questionnaire as a declared-fact collector; the quasi-currency as the adoption path. Also contradicts memo 0 on why the pivot is honest, and the contradiction is answered rather than smoothed.
+
+  [memo 2] The ecosystem without the money: insurance as a go-live gate
+    brief   https://pki.sgit.ai/briefs/v0.33.73__strategy-brief__the-ecosystem-without-the-money-insurance-as-a-go-live-gate.md
+    reader  https://pki.sgit.ai/documents/insurance-ecosystem.html
+    gave    The industry's roles taken without its money, because the roles are what separate the rater from the party that wants to ship; the rating as a gate on go-live rather than a report, which requires a threshold and a decomposition; reinsurance named as the fractal's precedent; and the control-to-premium loop, which the workbench already computes.
+
+  [memo 3] Who pays for the delta nobody chose, and the rating that moves overnight
+    brief   https://pki.sgit.ai/briefs/v0.33.74__strategy-brief__who-pays-for-the-delta-nobody-chose-and-the-rating-that-moves-overnight.md
+    reader  https://pki.sgit.ai/documents/who-pays-for-the-delta.html
+    gave    The accountability question, answered as a taxonomy: the delta divides by who could have closed it — elective (the operator's), structural (the platform's finest grain), defect (a vulnerability, temporary). Platform granularity named as a library artefact and the one public good here. The rating made a function of the world as well as the twin, with independent freshness. And the estate's own measurement found holed: nothing measures commit authorship.
+
+  [memo 4] Why insurance — and the cautionary tale is cyber insurance itself
+    brief   https://pki.sgit.ai/briefs/v0.33.75__strategy-brief__why-insurance-and-the-cautionary-tale-is-cyber-insurance-itself.md
+    reader  https://pki.sgit.ai/documents/why-insurance.html
+    gave    The justification, carrying its own counter-example: cyber insurance grew on quantification nobody could check and hurt both sides at once — which is the empirical case for this folder's rule. Insurance's real virtue is that it DEMANDS trustworthy data rather than merely using it. And the enforcement tier is identified as an impact-reduction measure: the quantity security has never been able to articulate.
+
+  [memo 5] Not in line: the schemas are the product, and the scale is one to five
+    brief   https://pki.sgit.ai/briefs/v0.33.76__strategy-brief__not-in-line-the-schemas-are-the-product-and-the-scale-is-one-to-five.md
+    reader  https://pki.sgit.ai/documents/not-in-line.html
+    gave    The commercial position and the first SETTLED decision. The level scale is 1–5. The project sits outside the line — schemas, flows, connectors, evidence — never the carrier and never the execution broker, which forecloses it ever being a boundary itself. And openness is load-bearing rather than generous: with no money at stake, an attackable public method is the only honesty mechanism left.
+
+  [memo 6] The broker market is driven by insurance, and a broker must carry its own
+    brief   https://pki.sgit.ai/briefs/v0.33.77__strategy-brief__the-broker-market-is-driven-by-insurance-and-a-broker-must-carry-its-own.md
+    reader  https://pki.sgit.ai/documents/the-broker-market.html
+    gave    The broker market's commercial case is the level reduction it produces — and the broker's own policy is what stops that being apparent authority in the vendor channel. Corrects an earlier framing: a broker changes the grant's TOPOLOGY rather than narrowing it, adding a party with reach of its own, so the net may be positive and deployment topology is a rating variable. Names the case the delta taxonomy could not hold — granularity that exists but is impractical — and fixes it with a cost-to-close dimension rather than a fourth class.
+
+  [memo 7] The policy is a signed statement, and the relying party is the boundary
+    brief   https://pki.sgit.ai/briefs/v0.33.78__strategy-brief__the-policy-is-a-signed-statement-and-the-relying-party-is-the-boundary.md
+    reader  https://pki.sgit.ai/documents/the-policy-as-a-statement.html
+    gave    How it works with the primitives the estate already has. policy/v0 turns out to be a mandate-shaped statement issued by a rater — one more type, no new register machinery. A policy does not sign; its subject signs and the policy establishes what that is worth. And the handshake relocates enforcement to the RELYING PARTY, who is outside the requesting agent's grant — the first mechanism in this pivot that can reach tier boundary, resolving the limit memo 5 recorded.
+
+  [memo 8] The world model: an MVP that explains rather than calculates
+    brief   https://pki.sgit.ai/briefs/v0.33.79__strategy-brief__the-world-model-an-mvp-that-explains-and-must-show-its-own-emptiness.md
+    reader  https://pki.sgit.ai/documents/the-world-model.html
+    gave    The last memo, and it SPECIFIES the MVP rather than requesting one — correcting the shape the site agent had proposed for four releases. The first MVP is an explainer, not a calculator: an instrument answers a question somebody already knows how to ask, an explainer creates the person who can ask it. Cost needs assets, and stage 1 needs asset class rather than asset value. Insurer, underwriter and claim join the actor set. And the load-bearing requirement: a world must show its own emptiness, because a polished simulation is the most effective mechanism yet devised for making a demonstration look like a product.
+
+  [memo 9] Make your agents insurable — and the first fact this pivot would produce
+    brief   https://pki.sgit.ai/briefs/v0.33.80__strategy-brief__make-your-agents-insurable-and-the-first-fact-this-pivot-would-produce.md
+    reader  https://pki.sgit.ai/documents/make-them-insurable.html
+    gave    The positioning, and the first item in this series that would produce an EXTERNAL fact rather than a position — the pivot has seventy-one decisions and no evidence. Also the mapping that upgrades a rule: the declared-versus-measured gap is the shape of material non-disclosure, so the card-versus-twin gap decides voidability rather than merely worsening a level. And the survey specified as measure.py pointed at a market: dated, re-runnable, evidence-classed, where unknown is never absent.
+
+  [memo 10] The schemas, the clocks, and a warranty is a fact with a maximum age
+    brief   https://pki.sgit.ai/briefs/v0.33.81__strategy-brief__the-schemas-the-clocks-and-a-warranty-is-a-fact-with-a-maximum-age.md
+    reader  https://pki.sgit.ai/documents/the-schemas-and-the-clocks.html
+    gave    Two memos in one — the interfaces, then time. A warranty is defined precisely as a fact plus a maximum age, failing three ways (false, stale, unknown) with unknown on the same side as false — the opposite of the rating rule, and deliberately so. Cover is continuous, which adds a third clock beside the policy interval and twin freshness. Metering uses is sound where metering checks is not, but a usage-boxed policy needs an in-line counter this project is not. And the reframe: an API is operated, a schema is implemented, so the policy lifecycle ships as documents and appends rather than as an API surface.
+
+## The doctrine — derived, and naming which memo each came from
+
+  What this is, and the rule it runs on
+    where   https://pki.sgit.ai/insurance/what-this-is.html
+    source  https://pki.sgit.ai/insurance/src/00__what-this-is.md  (the markdown IS the source of truth)
+    from    memos 0–1
+    is      The body of work, its two stages, and the one rule that keeps a rating from becoming theatre.
+
+  The rating: what is scored, from what evidence, and what must never merge
+    where   https://pki.sgit.ai/insurance/the-rating.html
+    source  https://pki.sgit.ai/insurance/src/01__the-rating.md  (the markdown IS the source of truth)
+    from    memo 1
+    is      The ratable unit is a placement, not an agent; inputs carry their evidence channel; measured and declared never merge; unknown is never absent.
+
+  The ecosystem and the gate: who rates, what it gates, and the tier the gate itself has
+    where   https://pki.sgit.ai/insurance/the-ecosystem-and-the-gate.html
+    source  https://pki.sgit.ai/insurance/src/02__the-ecosystem-and-the-gate.md  (the markdown IS the source of truth)
+    from    memo 2
+    is      The roles are the integrity mechanism; the rating gates go-live rather than reporting; and a gate that overstates its own tier is worse than none.
+
+  Who pays, and the rating that moves: delta by who could close it, and the world as an input
+    where   https://pki.sgit.ai/insurance/who-pays-and-the-moving-rating.html
+    source  https://pki.sgit.ai/insurance/src/03__who-pays-and-the-moving-rating.md  (the markdown IS the source of truth)
+    from    memo 3
+    is      Only the delta an operator could have closed is theirs; platform granularity is a library artefact; and a rating states what changed and which way, never a multiplier.
+
+  Why insurance, and what broke it last time
+    where   https://pki.sgit.ai/insurance/why-insurance-and-what-broke-it.html
+    source  https://pki.sgit.ai/insurance/src/04__why-insurance-and-what-broke-it.md  (the markdown IS the source of truth)
+    from    memo 4
+    is      Cyber insurance is the warning, not the model — and its failure is the empirical case for this folder's rule.
+
+  Not in line: the position, the scale, and what it forecloses
+    where   https://pki.sgit.ai/insurance/not-in-line.html
+    source  https://pki.sgit.ai/insurance/src/05__not-in-line.md  (the markdown IS the source of truth)
+    from    memo 5
+    is      The scale is 1–5, settled. The project supplies schemas rather than standing in the line — which means it can never itself be a boundary.
+
+  The broker market: who backs the claim, and what a broker actually changes
+    where   https://pki.sgit.ai/insurance/the-broker-market.html
+    source  https://pki.sgit.ai/insurance/src/06__the-broker-market.md  (the markdown IS the source of truth)
+    from    memo 6
+    is      A broker's claimed reduction is computed by the method, not the broker — and a broker moves exposure as well as removing it, so the net may be positive.
+
+  The policy as a statement: the handshake, and where the boundary finally sits
+    where   https://pki.sgit.ai/insurance/the-policy-as-a-statement.html
+    source  https://pki.sgit.ai/insurance/src/07__the-policy-as-a-statement.md  (the markdown IS the source of truth)
+    from    memo 7
+    is      A policy is a mandate-shaped statement; a key signs and the policy says what that is worth; and the relying party is where this pivot can finally reach a boundary.
+
+  The world model: the MVP, and the rule that keeps it honest
+    where   https://pki.sgit.ai/insurance/the-world-model.html
+    source  https://pki.sgit.ai/insurance/src/08__the-world-model.md  (the markdown IS the source of truth)
+    from    memo 8
+    is      The first MVP explains rather than calculates — and the world it renders must show its own emptiness, because a polished simulation makes a demonstration look like a product.
+
+  Make them insurable: the positioning, and the survey that would test it
+    where   https://pki.sgit.ai/insurance/make-them-insurable.html
+    source  https://pki.sgit.ai/insurance/src/09__make-them-insurable.md  (the markdown IS the source of truth)
+    from    memo 9
+    is      The first thing here that could be wrong in a way the world would correct — plus the guard-rail that stops “make them insurable” becoming “make them look insurable”.
+
+  The schemas and the clocks: a warranty is a fact with a maximum age
+    where   https://pki.sgit.ai/insurance/the-schemas-and-the-clocks.html
+    source  https://pki.sgit.ai/insurance/src/10__the-schemas-and-the-clocks.md  (the markdown IS the source of truth)
+    from    memo 10
+    is      A warranty fails three ways and unknown counts as failure; cover runs on three clocks; and the deliverable is documents and appends, not an API.
+
+## MVPs
+
+  NONE BUILT. Two are specified and awaiting a go-ahead: the world model
+  (an explainer, not a calculator) and the market survey (the first thing
+  here capable of producing an external fact).
+
+## DOES NOT PROVE
+
+  - That any of this is insurance. Stage 1 emits a rating, transfers no risk, and promises no payout — which is exactly why it needs no carrier and why calling it insurance would be the first dishonesty.
+  - That the placement orderings are true. Claude-on-a-desktop is rated higher than Claude-on-the-web in the project lead's judgement; nobody has measured a desktop agent, so the estate cannot score its own leading example.
+  - That a level means the same thing to two organisations. Nothing here is calibrated against loss data, because no agent loss data exists anywhere.
+  - That aggregation works yet. Correlated risk is named as a graph problem and not solved; summing micro ratings would be wrong in the dangerous direction.
+  - That an internal underwriter is independent. The separation between the rater and the party that wants to ship is an org-design outcome no schema can enforce — and a rating engine reporting to the deploying business is a setting with a nicer name.
+  - That the delta classes can be told apart automatically. Distinguishing elective from structural needs a library of platform granularity that does not exist yet — today the classification is a judgement.
+  - That dynamic re-rating is close. The mapping from a published advisory to the grant nodes it widens exists nowhere, for anybody, and it is the hard part.
+  - That the estate's own grant measurement is complete. Memo 3 named a node measure.py misses — commit authorship — found by conversation rather than by the tool, and the honest reading is that there are others.
+  - That five bands are the right resolution. The scale is settled and argued for; nothing validates it against outcomes, because there are no outcomes yet.
+  - That the not-in-line position is commercially viable. It is a coherent architecture and an unproven business — nobody has paid for a schema here.
+  - That a broker's netting can be computed today. Rating what a broker adds as well as what it removes needs a grant tree for the broker relationship, and no broker publishes one.
+  - That the handshake is a boundary anywhere today. It reaches that tier only where the relying party is genuinely independent of the requester, and nothing has been built or installed to test it.
+  - That a world explains better than a document. It is the memo's hypothesis and the site agent's agreement, and neither is evidence — which is why the 2D-first sequencing exists.
+  - That the emptiness rule survives contact with a demo. Showing what does not exist is easy to write down and hard to keep when somebody wants to impress a room. It is the first thing that will be argued away.
+  - That anything here has been checked against the market. The whole log and no external evidence: memo 9's survey is the first item in this series that could be wrong in a way the world would correct, and it has not been run. The decision count is printed in llms.txt and derived from the log, because it was typed once and was stale within a day.
+  - That an agent placement can be insured at all today. The categories that exist generally insure firms and entities, not placements — and whether any carrier has since launched one is unresearched, and is deliberately not guessed at.
+  - That any of the schemas exist. policy/v0 has a shape, loss-event/v0 does not, and the warranty set described in doctrine 10 has never been written down as a schema.
+
+## Machine surface
+
+  https://pki.sgit.ai/insurance/insurance.json — the manifest this file is
+  generated from. It holds NO AUTHORITY: the briefs and the markdown under
+  src/ are the sources of truth. The build fails if the manifest and the
+  folder disagree in either direction, if a doctrine document carries no
+  does-not-prove section, or if two memos share a number.
+
+  Decisions from this pivot are GM-D35 to GM-D80 in
+  https://pki.sgit.ai/packs/grant-and-mandate/change-control.html
+  All are PROPOSED except GM-D54 (the 1-5 level scale), which is settled.
+
+  CC BY 4.0.

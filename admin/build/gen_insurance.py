@@ -27,6 +27,25 @@ ROOT = Path(__file__).resolve().parents[2]
 INS = ROOT / "insurance"
 SRC = INS / "src"
 BRIEFS = ROOT / "briefs"
+CHANGE_CONTROL = ROOT / "packs" / "grant-and-mandate" / "src" / "99__change-control.md"
+
+# The first decision of the pivot. Everything from here up was proposed by the
+# insurance memos; everything below predates them.
+PIVOT_FROM = 35
+
+
+def decision_counts():
+    """Read the change-control log rather than typing a number into a claim.
+
+    llms.txt prints "N decisions and zero external facts". That is a claim, and
+    it was already wrong once — written as seventy-one while the log had grown
+    to eighty. A claim this file makes about another file is derived from that
+    file or it is not made at all.
+    """
+    ns = sorted({int(x) for x in re.findall(r"GM-D(\d+)", CHANGE_CONTROL.read_text(encoding="utf-8"))})
+    if not ns:
+        sys.exit("gen_insurance: no GM-D decisions found in the change-control log")
+    return ns[-1], sum(1 for n in ns if n >= PIVOT_FROM)
 
 esc = lambda s: html.escape(str(s), quote=True)
 
@@ -258,6 +277,100 @@ JavaScript &mdash; <a href="src/{esc(d['file'])}">open the raw markdown</a>.</p>
                    '<script src="../assets/mdreader.js" defer></script>\n')
 
 
+def build_llms(m):
+    """insurance/llms.txt — the machine front door, generated from the manifest so
+    it cannot drift from the folder. Same convention as bench/llms.txt: every
+    entry carries what it does NOT prove, because a machine surface that listed
+    positions without their limits would be the exact thing this folder forbids."""
+    st = m["stage"]
+    n_proc = sum(1 for i in m["memos"]["items"] if i["state"] == "processed" and i["n"] >= 1)
+    total, pivot = decision_counts()
+    L = []
+    A = L.append
+    A("# pki.sgit.ai/insurance — insurance for agents, and what none of it proves")
+    A("#")
+    A("# A pivot: the foundation of the risk approach moves from RISK ACCEPTANCE to")
+    A("# the INSURANCE POLICY, because the delta between what an agent CAN do and")
+    A("# what it is AUTHORISED to do is where the insurance lives.")
+    A("#")
+    A(f"# STAGE: {st['now']}")
+    A(f"# {st['why']}")
+    A("#")
+    A(f"# THE RULE: {st['rule']}")
+    if st.get("settled"):
+        A(f"# SETTLED: {st['settled']}")
+    A("#")
+    A(f"# {n_proc} of {m['memos']['expected']} series memos processed, plus the pivot briefing.")
+    A(f"# {len(m['doctrine'])} doctrine documents. {len(m['mvps'])} MVPs built.")
+    A("# Hub: https://pki.sgit.ai/insurance/index.html")
+    A("")
+    A("## What an agent should carry if it summarises anything here")
+    A("")
+    A("  1. NOTHING HERE IS INSURANCE. Stage 1 emits a RATING. It transfers no risk,")
+    A("     promises no payout, and is therefore not a regulated activity — which is")
+    A("     exactly why it can be built. Calling it insurance is the first dishonesty.")
+    A("  2. NOTHING HERE IS BUILT. Ten memos are read into doctrine; no MVP exists.")
+    A("     Two are specified and unbuilt: the world model, and the market survey.")
+    A(f"  3. NO EXTERNAL EVIDENCE HAS BEEN GATHERED. {total} decisions on the log, {pivot} of")
+    A("     them from this pivot, and zero facts about the actual insurance market.")
+    A("     The survey would be the first thing here that could be wrong in a way")
+    A("     the world would correct.")
+    A("  4. THE REGISTER IT READS IS FIXTURES. Ten of eleven identities have their")
+    A("     private keys published on purpose, so every signature verifies and proves")
+    A("     nothing.")
+    A("")
+    A("## The memos — filed verbatim before they were read")
+    A("")
+    A("  The transcript outranks any summary of it. Where a memo and a doctrine")
+    A("  document disagree, the memo wins.")
+    A("")
+    for i in m["memos"]["items"]:
+        tag = f"memo {i['n']}" if i["n"] >= 1 else "the pivot briefing"
+        A(f"  [{tag}] {i['title']}")
+        A(f"    brief   https://pki.sgit.ai/briefs/{i['brief']}")
+        A(f"    reader  https://pki.sgit.ai/{i['page'].replace('../', '')}")
+        A(f"    gave    {i['gave']}")
+        A("")
+    A("## The doctrine — derived, and naming which memo each came from")
+    A("")
+    for d in m["doctrine"]:
+        A(f"  {d['title']}")
+        A(f"    where   https://pki.sgit.ai/insurance/{d['slug']}.html")
+        A(f"    source  https://pki.sgit.ai/insurance/src/{d['file']}  (the markdown IS the source of truth)")
+        A(f"    from    {d['from']}")
+        A(f"    is      {d['one_line']}")
+        A("")
+    A("## MVPs")
+    A("")
+    if m["mvps"]:
+        for x in m["mvps"]:
+            A(f"  {x['title']} — https://pki.sgit.ai/insurance/{x['id']}/index.html")
+    else:
+        A("  NONE BUILT. Two are specified and awaiting a go-ahead: the world model")
+        A("  (an explainer, not a calculator) and the market survey (the first thing")
+        A("  here capable of producing an external fact).")
+    A("")
+    A("## DOES NOT PROVE")
+    A("")
+    for x in m["does_not_prove"]:
+        A(f"  - {x}")
+    A("")
+    A("## Machine surface")
+    A("")
+    A("  https://pki.sgit.ai/insurance/insurance.json — the manifest this file is")
+    A("  generated from. It holds NO AUTHORITY: the briefs and the markdown under")
+    A("  src/ are the sources of truth. The build fails if the manifest and the")
+    A("  folder disagree in either direction, if a doctrine document carries no")
+    A("  does-not-prove section, or if two memos share a number.")
+    A("")
+    A("  Decisions from this pivot are GM-D35 to GM-D80 in")
+    A("  https://pki.sgit.ai/packs/grant-and-mandate/change-control.html")
+    A("  All are PROPOSED except GM-D54 (the 1-5 level scale), which is settled.")
+    A("")
+    A("  CC BY 4.0.")
+    return "\n".join(L) + "\n"
+
+
 def main():
     m = json.loads((INS / "insurance.json").read_text(encoding="utf-8"))
     errs = check(m)
@@ -268,11 +381,12 @@ def main():
         sys.exit(1)
 
     (INS / "index.html").write_text(build_hub(m), encoding="utf-8")
+    (INS / "llms.txt").write_text(build_llms(m), encoding="utf-8")
     for d in m["doctrine"]:
         (INS / f"{d['slug']}.html").write_text(build_doc(d, m), encoding="utf-8")
 
     n_proc = sum(1 for i in m["memos"]["items"] if i["state"] == "processed" and i["n"] >= 1)
-    print(f"gen_insurance: hub + {len(m['doctrine'])} doctrine page(s); "
+    print(f"gen_insurance: hub + llms.txt + {len(m['doctrine'])} doctrine page(s); "
           f"{n_proc} of {m['memos']['expected']} series memos processed "
           f"(+ the pivot briefing), {len(m['mvps'])} MVP(s)")
 

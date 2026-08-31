@@ -16,7 +16,7 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.58</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.59</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -88,6 +88,8 @@
       <a class="sl" href="../insurance/the-policy-as-a-statement.html">&mdash; the policy as a statement</a>
       <a class="sl" href="../insurance/the-world-model.html">&mdash; the world model (the MVP)</a>
       <a class="sl" href="../insurance/make-them-insurable.html">&mdash; make them insurable</a>
+      <a class="sl" href="../insurance/the-schemas-and-the-clocks.html">&mdash; the schemas &amp; the clocks</a>
+      <a class="sl" href="../insurance/llms.txt">insurance/llms.txt</a>
       <a class="sl" href="../documents/agent-insurance.html">The pivot briefing (memo 0)</a>
       <a class="sl" href="../documents/insurance-without-money.html">Rating before money (memo 1)</a>
       <a class="sl" href="../documents/insurance-ecosystem.html">The go-live gate (memo 2)</a>
@@ -98,6 +100,7 @@
       <a class="sl" href="../documents/the-policy-as-a-statement.html">The policy statement (memo 7)</a>
       <a class="sl" href="../documents/the-world-model.html">The world model (memo 8)</a>
       <a class="sl" href="../documents/make-them-insurable.html">Make them insurable (memo 9)</a>
+      <a class="sl" href="../documents/the-schemas-and-the-clocks.html">Schemas &amp; clocks (memo 10)</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -159,7 +162,7 @@ risk and promises no payout. What it does is tell an operator that <i>this</i> p
 <h2 id="memos">The memos</h2>
 <p>Each is filed <b>verbatim as a brief</b> before it is read, because a transcript outranks any summary of it. The
 count below is computed from the manifest, never typed.</p>
-<div class="note">Recorded as eight; the project lead added two more, so it is ten. The count on the hub is a CLAIM, so it was corrected here rather than quietly adjusted — and the build gate that refuses more processed memos than the manifest expects fired on the ninth, which is what it is for. Each memo is filed verbatim as a brief before it is read; the doctrine says which memo it came from, and where a memo and a document disagree the memo wins. The pivot briefing (—) precedes the series and is not counted in it.</div>
+<div class="note">Recorded as eight; the project lead added two more, so it is ten — now all processed. The count on the hub is a CLAIM, so it was corrected here rather than quietly adjusted, and the build gate that refuses more processed memos than the manifest expects fired on the ninth, which is what it is for. Each memo is filed verbatim as a brief before it is read; the doctrine says which memo it came from, and where a memo and a document disagree the memo wins. The pivot briefing (—) precedes the series and is not counted in it.</div>
 <div class="ins-memos">
     <div class="ins-memo ins-memo--processed">
       <div class="ins-memo-n">&mdash;</div>
@@ -241,11 +244,13 @@ count below is computed from the manifest, never typed.</p>
         <a href="../documents/make-them-insurable.html">the brief, rendered &rarr;</a> <a class="ins-raw" href="../briefs/v0.33.80__strategy-brief__make-your-agents-insurable-and-the-first-fact-this-pivot-would-produce.md">raw</a>
       </div>
     </div>
-    <div class="ins-memo ins-memo--awaited">
-      <div class="ins-memo-n">&hellip;</div>
-      <div><b>1 more awaited</b>
-      <p>Listed as awaited rather than guessed at. Each will be filed verbatim as a brief before it is read,
-      and the doctrine will say which memo it came from.</p></div>
+    <div class="ins-memo ins-memo--processed">
+      <div class="ins-memo-n">10</div>
+      <div>
+        <b>The schemas, the clocks, and a warranty is a fact with a maximum age</b>
+        <p>Two memos in one — the interfaces, then time. A warranty is defined precisely as a fact plus a maximum age, failing three ways (false, stale, unknown) with unknown on the same side as false — the opposite of the rating rule, and deliberately so. Cover is continuous, which adds a third clock beside the policy interval and twin freshness. Metering uses is sound where metering checks is not, but a usage-boxed policy needs an in-line counter this project is not. And the reframe: an API is operated, a schema is implemented, so the policy lifecycle ships as documents and appends rather than as an API surface.</p>
+        <a href="../documents/the-schemas-and-the-clocks.html">the brief, rendered &rarr;</a> <a class="ins-raw" href="../briefs/v0.33.81__strategy-brief__the-schemas-the-clocks-and-a-warranty-is-a-fact-with-a-maximum-age.md">raw</a>
+      </div>
     </div></div>
 
 <h2 id="doctrine">The doctrine</h2>
@@ -300,6 +305,11 @@ count below is computed from the manifest, never typed.</p>
     <a class="ins-card" href="make-them-insurable.html">
       <div class="ins-card-top"><b>Make them insurable: the positioning, and the survey that would test it</b><span class="dim">from memo 9</span></div>
       <p>The first thing here that could be wrong in a way the world would correct — plus the guard-rail that stops “make them insurable” becoming “make them look insurable”.</p>
+    </a>
+
+    <a class="ins-card" href="the-schemas-and-the-clocks.html">
+      <div class="ins-card-top"><b>The schemas and the clocks: a warranty is a fact with a maximum age</b><span class="dim">from memo 10</span></div>
+      <p>A warranty fails three ways and unknown counts as failure; cover runs on three clocks; and the deliverable is documents and appends, not an API.</p>
     </a></div>
 
 <h2 id="mvps">The MVPs</h2>
@@ -336,8 +346,9 @@ the <a href="../registry/views/excess-authority.json">delta</a> with its
 <li>That the handshake is a boundary anywhere today. It reaches that tier only where the relying party is genuinely independent of the requester, and nothing has been built or installed to test it.</li>
 <li>That a world explains better than a document. It is the memo&#x27;s hypothesis and the site agent&#x27;s agreement, and neither is evidence — which is why the 2D-first sequencing exists.</li>
 <li>That the emptiness rule survives contact with a demo. Showing what does not exist is easy to write down and hard to keep when somebody wants to impress a room. It is the first thing that will be argued away.</li>
-<li>That anything here has been checked against the market. Seventy-one decisions and no external evidence: memo 9&#x27;s survey is the first item in this series that could be wrong in a way the world would correct, and it has not been run.</li>
-<li>That an agent placement can be insured at all today. The categories that exist generally insure firms and entities, not placements — and whether any carrier has since launched one is unresearched, and is deliberately not guessed at.</li></ul>
+<li>That anything here has been checked against the market. The whole log and no external evidence: memo 9&#x27;s survey is the first item in this series that could be wrong in a way the world would correct, and it has not been run. The decision count is printed in llms.txt and derived from the log, because it was typed once and was stale within a day.</li>
+<li>That an agent placement can be insured at all today. The categories that exist generally insure firms and entities, not placements — and whether any carrier has since launched one is unresearched, and is deliberately not guessed at.</li>
+<li>That any of the schemas exist. policy/v0 has a shape, loss-event/v0 does not, and the warranty set described in doctrine 10 has never been written down as a schema.</li></ul>
 
 <div class="pagenav">
   <a href="../bench/index.html">&larr; The bench</a>
@@ -350,7 +361,7 @@ the <a href="../registry/views/excess-authority.json">delta</a> with its
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.58</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.59</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The bench</h4>
@@ -377,6 +388,8 @@ the <a href="../registry/views/excess-authority.json">delta</a> with its
     <a href="../insurance/the-policy-as-a-statement.html">The policy as a statement</a>
     <a href="../insurance/the-world-model.html">The world model (the MVP)</a>
     <a href="../insurance/make-them-insurable.html">Make them insurable</a>
+    <a href="../insurance/the-schemas-and-the-clocks.html">The schemas &amp; the clocks</a>
+    <a href="../insurance/llms.txt">insurance/llms.txt</a>
     <a href="../documents/agent-insurance.html">The pivot briefing</a>
   </div>
   <div>
