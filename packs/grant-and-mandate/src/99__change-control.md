@@ -215,6 +215,10 @@ The mandate's issuer is the registry's operator root, whose private half is **pu
 | GM-D69 | **The world shows its own emptiness.** Unmeasured places look unmeasured, fixtures look like fixtures, and absent mechanisms are visibly absent rather than smoothly rendered | v0.33.79 §5 | **Proposed — the estate's own *a control that overstates itself is worse than none*, arriving in the user interface** |
 | GM-D70 | **Insurer, underwriter and claim join the actor set**, each declaring fixture-or-real like every other identity. The claim is `loss-event/v0` and still does not exist | v0.33.79 §4 | **Proposed** |
 | GM-D71 | **Build the 2D world before the 3D one.** The explanatory risk is spatial rather than dimensional | v0.33.79 §6 | **Proposed — engineering advice rather than doctrine** |
+| GM-D72 | **The positioning is "make your agents insurable"** — with the guard-rail that it must not become *make your agents LOOK insurable*. Insurability comes from narrowing the delta or covering it, never from documenting it, and finding a placement that should not be insurable is a success of the method | v0.33.80 §2 memo 9, 31 Aug | **Proposed** |
+| GM-D73 | **The declared-versus-measured gap is the shape of material non-disclosure** — so the card-versus-twin gap decides *voidability*, not merely a worse level, and is the single most consequential quantity an underwriter would want computed | v0.33.80 §3 | **Proposed — UPGRADES GM-D40 from a rating rule to a cover rule; computable today, since twin and card are both held** |
+| GM-D74 | **A market observation is a dated, re-runnable measurement with evidence classes** — `measure.py`'s discipline pointed at a market: unknown is never absent, the survey is a floor not a census, its age is printed, and it reports what vendors publish rather than what anyone said in a call | v0.33.80 §4 | **Proposed** |
+| GM-D75 | **The survey's most valuable output is the format underwriters accept**, because that format is the connector specification — and the connector must carry evidence classes across, or it creates GM-D73's non-disclosure by itself | v0.33.80 §6 | **Proposed** |
 
 ---
 

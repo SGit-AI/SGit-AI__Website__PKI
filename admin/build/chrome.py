@@ -87,6 +87,7 @@ NAV = [
         ("&mdash; the broker market", "insurance/the-broker-market.html"),
         ("&mdash; the policy as a statement", "insurance/the-policy-as-a-statement.html"),
         ("&mdash; the world model (the MVP)", "insurance/the-world-model.html"),
+        ("&mdash; make them insurable", "insurance/make-them-insurable.html"),
         ("The pivot briefing (memo 0)", "documents/agent-insurance.html"),
         ("Rating before money (memo 1)", "documents/insurance-without-money.html"),
         ("The go-live gate (memo 2)", "documents/insurance-ecosystem.html"),
@@ -96,6 +97,7 @@ NAV = [
         ("The broker market (memo 6)", "documents/the-broker-market.html"),
         ("The policy statement (memo 7)", "documents/the-policy-as-a-statement.html"),
         ("The world model (memo 8)", "documents/the-world-model.html"),
+        ("Make them insurable (memo 9)", "documents/make-them-insurable.html"),
     ], ("insurance/",)),
     ("Docs", "documents/index.html", [
         ("The documents", "documents/index.html"),
@@ -136,6 +138,7 @@ FOOTER = [
         ("The broker market", "insurance/the-broker-market.html"),
         ("The policy as a statement", "insurance/the-policy-as-a-statement.html"),
         ("The world model (the MVP)", "insurance/the-world-model.html"),
+        ("Make them insurable", "insurance/make-them-insurable.html"),
         ("The pivot briefing", "documents/agent-insurance.html"),
     ]),
     ("The registry", [

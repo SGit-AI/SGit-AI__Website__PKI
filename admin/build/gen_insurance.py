@@ -189,6 +189,7 @@ risk and promises no payout. What it does is tell an operator that <i>this</i> p
 <h2 id="memos">The memos</h2>
 <p>Each is filed <b>verbatim as a brief</b> before it is read, because a transcript outranks any summary of it. The
 count below is computed from the manifest, never typed.</p>
+<div class="note">{esc(m['memos']['note'])}</div>
 <div class="ins-memos">{''.join(memo_rows)}</div>
 
 <h2 id="doctrine">The doctrine</h2>

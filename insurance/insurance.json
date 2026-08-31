@@ -9,8 +9,8 @@
     "settled": "The level scale is 1–5 (GM-D54, the project lead, 31 Aug). Coarse on purpose: currency implies loss data nobody has, 1–100 implies resolution the inputs cannot support, and a band is arguable where a decimal is not."
   },
   "memos": {
-    "expected": 8,
-    "note": "The project lead recorded eight memos on this pivot, preceded by the pivot briefing. All eight are now filed verbatim as briefs and read into the doctrine below. Each doctrine document says which memo it came from; where a memo and a document disagree, the memo wins.",
+    "expected": 10,
+    "note": "Recorded as eight; the project lead added two more, so it is ten. The count on the hub is a CLAIM, so it was corrected here rather than quietly adjusted — and the build gate that refuses more processed memos than the manifest expects fired on the ninth, which is what it is for. Each memo is filed verbatim as a brief before it is read; the doctrine says which memo it came from, and where a memo and a document disagree the memo wins. The pivot briefing (—) precedes the series and is not counted in it.",
     "items": [
       {
         "n": 0,
@@ -83,6 +83,14 @@
         "page": "../documents/the-world-model.html",
         "state": "processed",
         "gave": "The last memo, and it SPECIFIES the MVP rather than requesting one — correcting the shape the site agent had proposed for four releases. The first MVP is an explainer, not a calculator: an instrument answers a question somebody already knows how to ask, an explainer creates the person who can ask it. Cost needs assets, and stage 1 needs asset class rather than asset value. Insurer, underwriter and claim join the actor set. And the load-bearing requirement: a world must show its own emptiness, because a polished simulation is the most effective mechanism yet devised for making a demonstration look like a product."
+      },
+      {
+        "n": 9,
+        "title": "Make your agents insurable — and the first fact this pivot would produce",
+        "brief": "v0.33.80__strategy-brief__make-your-agents-insurable-and-the-first-fact-this-pivot-would-produce.md",
+        "page": "../documents/make-them-insurable.html",
+        "state": "processed",
+        "gave": "The positioning, and the first item in this series that would produce an EXTERNAL fact rather than a position — the pivot has seventy-one decisions and no evidence. Also the mapping that upgrades a rule: the declared-versus-measured gap is the shape of material non-disclosure, so the card-versus-twin gap decides voidability rather than merely worsening a level. And the survey specified as measure.py pointed at a market: dated, re-runnable, evidence-classed, where unknown is never absent."
       }
     ]
   },
@@ -149,6 +157,13 @@
       "title": "The world model: the MVP, and the rule that keeps it honest",
       "from": "memo 8",
       "one_line": "The first MVP explains rather than calculates — and the world it renders must show its own emptiness, because a polished simulation makes a demonstration look like a product."
+    },
+    {
+      "slug": "make-them-insurable",
+      "file": "09__make-them-insurable.md",
+      "title": "Make them insurable: the positioning, and the survey that would test it",
+      "from": "memo 9",
+      "one_line": "The first thing here that could be wrong in a way the world would correct — plus the guard-rail that stops “make them insurable” becoming “make them look insurable”."
     }
   ],
   "mvps": [],
@@ -166,6 +181,8 @@
     "That a broker's netting can be computed today. Rating what a broker adds as well as what it removes needs a grant tree for the broker relationship, and no broker publishes one.",
     "That the handshake is a boundary anywhere today. It reaches that tier only where the relying party is genuinely independent of the requester, and nothing has been built or installed to test it.",
     "That a world explains better than a document. It is the memo's hypothesis and the site agent's agreement, and neither is evidence — which is why the 2D-first sequencing exists.",
-    "That the emptiness rule survives contact with a demo. Showing what does not exist is easy to write down and hard to keep when somebody wants to impress a room. It is the first thing that will be argued away."
+    "That the emptiness rule survives contact with a demo. Showing what does not exist is easy to write down and hard to keep when somebody wants to impress a room. It is the first thing that will be argued away.",
+    "That anything here has been checked against the market. Seventy-one decisions and no external evidence: memo 9's survey is the first item in this series that could be wrong in a way the world would correct, and it has not been run.",
+    "That an agent placement can be insured at all today. The categories that exist generally insure firms and entities, not placements — and whether any carrier has since launched one is unresearched, and is deliberately not guessed at."
   ]
 }

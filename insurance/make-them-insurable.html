@@ -3,10 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Prior art: the registry that was built, and then retired · pki.sgit.ai</title>
-<meta name="description" content="This project shipped a key registry in February 2026 — five endpoints, lookup codes, duplicate-fingerprint rejection, a hash-chained transparency log — and formally superseded it in June. That turns two of the four rules from assertions into checked claims.">
-<link rel="canonical" href="https://pki.sgit.ai/rules/prior-art.html">
+<title>Make them insurable: the positioning, and the survey that would test it &middot; pki.sgit.ai</title>
+<meta name="description" content="The first thing here that could be wrong in a way the world would correct — plus the guard-rail that stops “make them insurable” becoming “make them look insurable”.">
+<link rel="canonical" href="https://pki.sgit.ai/insurance/make-them-insurable.html">
+<meta property="og:url" content="https://pki.sgit.ai/insurance/make-them-insurable.html">
 <link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/insurance.css">
+<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+<script src="../assets/mdreader.js" defer></script>
 </head>
 <body>
 
@@ -18,14 +22,14 @@
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
-      <a class="nl here" href="../failure/index.html">The registry<span class="caret">&#9662;</span></a>
+      <a class="nl" href="../failure/index.html">The registry<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl" href="../registry/index.html">&#9679; The registry, live</a>
       <a class="sl" href="../failure/index.html">Why they don't exist</a>
       <a class="sl" href="../rules/index.html">The four rules</a>
       <a class="sl" href="../mandate/index.html">Identity &amp; mandate</a>
       <a class="sl" href="../roadmap/index.html">Build order</a>
-      <a class="sl here" href="../rules/prior-art.html">Prior art</a>
+      <a class="sl" href="../rules/prior-art.html">Prior art</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -73,7 +77,7 @@
       </div>
     </div>
     <div class="ni ni-has">
-      <a class="nl" href="../insurance/index.html">Insurance<span class="caret">&#9662;</span></a>
+      <a class="nl here" href="../insurance/index.html">Insurance<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl" href="../insurance/index.html">&#9679; Insurance for agents</a>
       <a class="sl" href="../insurance/what-this-is.html">&mdash; what this is, and the rule</a>
@@ -85,7 +89,7 @@
       <a class="sl" href="../insurance/the-broker-market.html">&mdash; the broker market</a>
       <a class="sl" href="../insurance/the-policy-as-a-statement.html">&mdash; the policy as a statement</a>
       <a class="sl" href="../insurance/the-world-model.html">&mdash; the world model (the MVP)</a>
-      <a class="sl" href="../insurance/make-them-insurable.html">&mdash; make them insurable</a>
+      <a class="sl here" href="../insurance/make-them-insurable.html">&mdash; make them insurable</a>
       <a class="sl" href="../documents/agent-insurance.html">The pivot briefing (memo 0)</a>
       <a class="sl" href="../documents/insurance-without-money.html">Rating before money (memo 1)</a>
       <a class="sl" href="../documents/insurance-ecosystem.html">The go-live gate (memo 2)</a>
@@ -123,55 +127,30 @@
   <script src="../assets/nav.js" defer></script>
 </div></nav>
 
+
 <main class="doc">
-<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="index.html">rules</a> / prior-art</div>
-<h1>The registry that was built, and then retired</h1>
-<p class="lead">The four rules read like a design derived from somebody else's failure. They are also derived from our own build. In February 2026 this project shipped a key registry; in June it formally superseded it. That history is what turns two of the four rules from assertions into <em>checked claims</em> — which is the standard <a href="index.html">the rules page</a> sets for itself.</p>
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="index.html">insurance</a> / make-them-insurable</div>
+<h1>Make them insurable: the positioning, and the survey that would test it</h1>
+<p class="lead">The first thing here that could be wrong in a way the world would correct — plus the guard-rail that stops “make them insurable” becoming “make them look insurable”.</p>
 
-<p class="claim">The registry is not an idea this project is reaching for. It is one this project built, ran, and decided was not enough.</p>
+<div class="docmeta">
+  <span class="k">Document</span><span class="v">09 of the insurance doctrine</span>
+  <span class="k">Derived from</span><span class="v">memo 9</span>
+  <span class="k">Status</span><span class="v">Proposed &mdash; GM-D38 to GM-D41 await the project lead</span>
+  <span class="k">Source</span><span class="v"><a href="../data/index.html?src=insurance/src/09__make-them-insurable.md">rendered &amp; raw</a>
+    &middot; <a href="src/09__make-them-insurable.md">the markdown</a>, which is the source of truth</span>
+</div>
 
-<h2 id="built">What was built</h2>
-<p>In a six-day burst between 20 and 22 February 2026 — 29 commits, 183 tests — the project shipped a working key registry behind admin authentication:</p>
-<div class="tablewrap"><table>
-  <thead><tr><th>Capability</th><th>How it worked</th><th>Which rule it exercises</th></tr></thead>
-  <tbody>
-    <tr><td><b>Publish a key</b></td><td>Validated public-key material and bound it to a SHA-256 fingerprint</td><td><a href="index.html#r4">Rule 4</a> — every entry signed by something checkable</td></tr>
-    <tr><td><b>Duplicate rejection</b></td><td>A publish naming an already-registered fingerprint was refused outright</td><td><a href="index.html#r1">Rule 1</a> — one record, one owner</td></tr>
-    <tr><td><b>Lookup by short code</b></td><td>Human-exchangeable base-36 codes rather than raw fingerprints</td><td>The usability half of a directory</td></tr>
-    <tr><td><b>Unpublish</b></td><td><b>Soft delete</b> — the record was marked, not destroyed</td><td><a href="index.html#r2">Rule 2</a> — supersede rather than delete, reached independently</td></tr>
-    <tr><td><b>Transparency log</b></td><td>A <b>genuinely hash-chained</b> append-only log: each entry's hash covers the previous one</td><td><a href="../packs/registry-mvp/architecture.html">The MVP's own record chain</a>, prefigured</td></tr>
-  </tbody>
-</table></div>
-<div class="note"><b>Two of the four rules were therefore never hypothetical.</b> Rule 1's ownership constraint and rule 4's signature requirement both ran in production code, and rule 2's supersede-don't-delete instinct showed up as soft delete before the rule was written. The registry the site describes is a second attempt, not a first.</div>
-
-<h2 id="retired">What it could not carry, and the retirement</h2>
-<p>In June 2026 the project published <a href="../origins/src/2026-06-05__registry-on-vaults.md">a vault-hosted registry design</a> that explicitly replaces it — the corpus's reality tree records the shipped service, in its own words, as being superseded by that proposal. This was a design decision, not neglect. What the February service could not carry:</p>
-<div class="tablewrap"><table>
-  <thead><tr><th>Limit</th><th>What the replacement proposes</th></tr></thead>
-  <tbody>
-    <tr><td><b>It was a store, not a graph.</b> Entries were keys; there was nowhere to put the relationships between them</td><td>Clues rather than storage — an entry is a node, and the edges are the value</td></tr>
-    <tr><td><b>Trust was flat.</b> A key was present or absent; there was no way to say who vouched for whom, or to distinguish a claim from an endorsement</td><td>Two-level trust: downward asserted by the truster, upward self-declared and granting nothing</td></tr>
-    <tr><td><b>It was one server.</b> No federation, no mirroring, no way for one registry to recognise another</td><td>A vault, mirrorable by anybody, with registries recognising registries</td></tr>
-    <tr><td><b>Resolution was a lookup.</b> One code in, one key out</td><td>Resolution as the caller's job — walk the graph, handle cycles, and <b>return a partial result honestly</b></td></tr>
-  </tbody>
-</table></div>
-<p>That last row is the one most worth keeping. <b>A partial resolution is a legitimate output</b>: <em>I followed the chain this far, gained this much trust, and stopped because I lack the keys to continue.</em> A registry that can only answer yes or no is hiding the interesting half of the question.</p>
-
-<h2 id="lesson">The design lesson the MVP inherits</h2>
-<p>One property of the February build carries a warning forward rather than a reassurance. The transparency log was hash-chained, which makes it tamper-<em>evident</em> to anyone reading the whole chain — and that is genuinely useful. But a hash chain by itself has a known limit:</p>
-<p class="claim">A hash chain proves that a reader's own view is internally consistent. It cannot, on its own, prove that every reader was shown the same view.</p>
-<p>Showing different readers different consistent chains is <b>equivocation</b>, and detecting it needs something outside the chain — a second party who has seen the log and will say what they saw. <a href="../packs/registry-mvp/architecture.html">The MVP's record design</a> is a hash chain too, so it inherits exactly this limit, and its <a href="../packs/registry-mvp/tabletop.html#injects">tabletop exercise</a> is where that gets tested rather than assumed. Publishing the limit alongside the design is the point of publishing the design early.</p>
-
-<h2 id="why">Why this page exists</h2>
-<p>Because "we should build a key registry" and "we built a key registry, ran it, and replaced it for these four reasons" are very different claims, and only the second is checkable. It also gives the registry a concrete user — somebody already running <a href="../shipped/index.html">the shipped commands</a> who has hit exactly the two walls the site names — instead of a hypothetical one.</p>
-<div class="warnbox"><b>The honest caveat.</b> The February service is admin-authenticated and was never a public directory; it is prior art for the <em>mechanism</em>, not evidence that the public case works. And this page describes it from a review of the corpus rather than from the running code — <a href="../origins/review.html">that review, redacted</a>, states its own limits.</div>
+<div class="mdread-label">&#128196; Rendered from <a href="src/09__make-them-insurable.md">the markdown</a> &mdash; the file is
+the source of truth and this page is presentation.</div>
+<div class="mdread" id="mdread" data-src="src/09__make-them-insurable.md"><noscript><p class="dim">In-page rendering needs
+JavaScript &mdash; <a href="src/09__make-them-insurable.md">open the raw markdown</a>.</p></noscript></div>
 
 <div class="pagenav">
-  <a href="index.html">← The four rules</a>
-  <a href="../origins/index.html">Origins: the whole arc →</a>
+  <a href="index.html">&larr; Insurance</a>
+  <a href="src/09__make-them-insurable.md">The markdown &rarr;</a>
 </div>
 </main>
-
 <footer class="site"><div class="cols">
   <div>
     <div class="brandline">pki<span>.sgit.ai</span></div>
@@ -238,6 +217,7 @@
     <a href="../llms.txt">llms.txt</a>
   </div>
 </div></footer>
+
 
 </body>
 </html>

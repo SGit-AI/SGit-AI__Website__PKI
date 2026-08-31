@@ -778,6 +778,29 @@ DOCS = [
   ],
   pages="Adds insurance doctrine 08, completing the series; the hub's MVP block is rewritten from awaiting-a-decision to specified-and-awaiting-a-go-ahead. Proposes GM-D67 (the MVP explains rather than calculates), GM-D68 (asset class not asset value), GM-D69 (the world shows its own emptiness), GM-D70 (the three new actors) and GM-D71 (2D before 3D)."),
 
+ dict(slug="make-them-insurable",
+  title="Make Your Agents Insurable — And The First Fact This Pivot Would Produce",
+  md="v0.33.80__strategy-brief__make-your-agents-insurable-and-the-first-fact-this-pivot-would-produce.md",
+  version="v0.33.80", date="31 August 2026", dtype="Strategy brief — memo 9, first of two beyond the original eight",
+  summary="The positioning — make your agents insurable — and underneath it a research programme that is the first item in this whole series capable of producing an EXTERNAL fact. The pivot has generated seventy-one decisions and no evidence: every brief so far is reasoning, checked against the corpus and entirely internal. 'Can you insure this session?' is different in kind, because the answer exists outside this estate and nobody has looked. The tagline gets one guard-rail, mirroring the folder's rule about levels: it must not become MAKE YOUR AGENTS LOOK INSURABLE, since insurability comes from narrowing the delta or covering it and never from documenting it — and some placements should not be insurable, which is a success of the method rather than a failure of the customer. The memo's inverse question — what breaks the cover — maps onto the estate three ways, two familiar and one new: exclusions are the mandate's prohibitions, warranties are the facts, and MATERIAL NON-DISCLOSURE is the gap between the declared channel and the measured one. That upgrades the two-channel rule from a rating rule to a cover rule: a control declared on the card that the twin cannot find is not a weak input, it is what voids a policy. Finally the survey is specified as measure.py pointed at a market — dated, re-runnable, evidence-classed, where unknown is never absent and the survey is a floor rather than a census — and the brief explicitly refuses to predict its findings, because publishing a prediction as research would be the cardinal sin in the one document whose whole value is that somebody went and looked.",
+  concepts=[
+   ("Make them insurable", "../insurance/make-them-insurable.html", "doctrine 09: the positioning, and the survey that would test it"),
+   ("The rating's two channels", "../insurance/the-rating.html", "measured and declared — now also a voidability rule"),
+   ("Grant measurement", "../packs/grant-and-mandate/library.html", "measure.py, whose discipline the survey inherits"),
+   ("The world model", "../insurance/the-world-model.html", "memo 8's MVP, which the survey complements rather than competes with"),
+  ],
+  ideas=[
+   "The pivot has seventy-one decisions and no external evidence. The survey is the first thing in the series that could be wrong in a way the world would correct.",
+   "Make your agents insurable must not become make your agents look insurable: insurability comes from narrowing the delta or covering it, never from documenting it.",
+   "Some placements should not be insurable, and finding one is a success of the method rather than a failure of the customer.",
+   "A control declared on the card that the twin cannot find is not merely a weak rating input — it is the shape of material non-disclosure, which voids a policy rather than worsening a level.",
+   "The card-versus-twin gap is the single most consequential quantity an underwriter would want computed, because it decides whether a claim gets paid — and this estate can compute it today.",
+   "The survey is measure.py pointed at a market: unknown is never absent, it is a floor rather than a census, its age is printed, and it reports what vendors publish rather than what anyone said in a sales call.",
+   "Predicting the survey's answers and publishing them as research would be this estate's cardinal sin, committed in the one document whose entire value is that somebody went and looked.",
+   "An underwriter does not want a JSON document they cannot interpret — so the survey's most valuable output is the format the market accepts, because that format is the connector specification.",
+  ],
+  pages="Adds insurance doctrine 09; widens the memo series from eight to ten with the reason recorded on the hub, after the build gate refused a ninth memo against an expected eight. Proposes GM-D72 (the positioning and its guard-rail), GM-D73 (the declared-measured gap as material non-disclosure), GM-D74 (a market observation is a dated measurement) and GM-D75 (the accepted format is the connector spec)."),
+
 ]
 
 PAGE = """<!doctype html>
