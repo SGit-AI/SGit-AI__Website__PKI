@@ -1,0 +1,12 @@
+{
+ "tag": "current",
+ "outdir": "img",
+ "jobs": [
+  { "id": "f01-empty-seat", "path": "/insurance-book/shots/term/t01-empty-seat.html",
+    "scale": 3, "viewport": { "width": 860, "height": 400 }, "selector": ".sheet" },
+  { "id": "f02-the-rule", "path": "/insurance-book/shots/term/t02-the-rule.html",
+    "scale": 3, "viewport": { "width": 980, "height": 400 }, "selector": ".sheet" },
+  { "id": "f03-permit-refused", "path": "/insurance-book/shots/term/t03-permit-refused.html",
+    "scale": 3, "viewport": { "width": 900, "height": 400 }, "selector": ".sheet" }
+ ]
+}

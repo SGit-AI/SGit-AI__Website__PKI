@@ -1,0 +1,131 @@
+{
+  "what_this_is": "Every figure in The Delta Is Where the Insurance Lives, with the tag it was taken at and the SHA-256 of that page's bytes at that tag. A figure of the past is pinned to a tag and never goes stale; a figure of the present breaks the build on the next release. That is two maintenance costs rather than none, accepted deliberately.",
+  "harness": {
+    "capture": "insurance-book/shots/travel.sh",
+    "browser": "insurance-book/shots/shot.mjs",
+    "transcripts": "insurance-book/shots/transcripts.sh",
+    "gate": "insurance-book/build.py --check"
+  },
+  "rules": [
+    "A figure is taken from the version its caption names \u2014 git worktree at the tag, never photographed today and captioned as the past.",
+    "Never reuse a port: one capture, one port, forever.",
+    "Always kill what you spawned, in a block that runs whether the capture succeeded or failed.",
+    "A screenshot that looks fine, taken from a page that threw, is a figure you must not publish \u2014 pageerror is collected and fails the job.",
+    "A blank check runs over every batch: the fraction of pixels that are not the modal colour, so a blank page of ANY colour is caught, not only a white one."
+  ],
+  "count": 8,
+  "figures": [
+    {
+      "id": "f01-empty-seat",
+      "page": "/insurance-book/shots/term/t01-empty-seat.html",
+      "tag": "current",
+      "page_sha256": "1a4f2626ff578acaf45deab9639e825d09f69fe599414933a5edefa73b520fe3",
+      "image": "shots/img/f01-empty-seat.png",
+      "image_sha256": "d63312e3e738bbba770695f512346c5bd2c9751cf97eec9ebdff7f03a1f454c8",
+      "device_scale_factor": 3,
+      "ink_percent": 3.36,
+      "gate": "fresh",
+      "gate_note": "the recorded digest must match the live page; the build fails when it stops matching \u2014 which it will, on the next release",
+      "caption": "Read the excess_authority object: a grant reaching 41 resources, a mandate covering 1, and \"acceptor\": null \u2014 the register has been publishing the empty seat since before the pivot existed. The pivot is the observation that the rest of the economy has a name for whoever sits in it.",
+      "retake": "./insurance-book/shots/travel.sh current <fresh-port> insurance-book/shots/jobs/term.json"
+    },
+    {
+      "id": "f02-the-rule",
+      "page": "/insurance-book/shots/term/t02-the-rule.html",
+      "tag": "current",
+      "page_sha256": "68eb121d6ecf58e39f2967120cbd3e24286e860412e325865222cb560bc9f80f",
+      "image": "shots/img/f02-the-rule.png",
+      "image_sha256": "6c8c4b378293021fd00119a348f461c82c177aee74042e0605bbfbff3437f3fb",
+      "device_scale_factor": 3,
+      "ink_percent": 3.56,
+      "gate": "fresh",
+      "gate_note": "the recorded digest must match the live page; the build fails when it stops matching \u2014 which it will, on the next release",
+      "caption": "The machine surface states the stage, the rule and the settled scale before it lists a single memo \u2014 because an agent that reads only the header must still carry them. Note what stage 1 is not: a regulated activity, a carrier, a promise to pay.",
+      "retake": "./insurance-book/shots/travel.sh current <fresh-port> insurance-book/shots/jobs/term.json"
+    },
+    {
+      "id": "f03-permit-refused",
+      "page": "/insurance-book/shots/term/t03-permit-refused.html",
+      "tag": "current",
+      "page_sha256": "28f11414a45012eed6a3cf539edc7a89c3da1f13c6914c2ee0d98db635df7c64",
+      "image": "shots/img/f03-permit-refused.png",
+      "image_sha256": "2c72400573f66b85fdebc0f7c0953d1156de978010591a6480c01b7b6ac6e075",
+      "device_scale_factor": 3,
+      "ink_percent": 4.84,
+      "gate": "fresh",
+      "gate_note": "the recorded digest must match the live page; the build fails when it stops matching \u2014 which it will, on the next release",
+      "caption": "The same tool, two branches, two verdicts \u2014 computed from a signed mandate, dated, and reproducible by anyone with the file. A policy handshake would attach to answers of exactly this shape; nothing about the REFUSED line requires anyone to be trusted, only re-run.",
+      "retake": "./insurance-book/shots/travel.sh current <fresh-port> insurance-book/shots/jobs/term.json"
+    },
+    {
+      "id": "f04-insurance-hub",
+      "page": "/insurance/index.html",
+      "tag": "current",
+      "page_sha256": "b184a23758ac2316cdc7be74b5c6e4d71d428ac3e91128ea282d2acf685ff132",
+      "image": "shots/img/f04-insurance-hub.png",
+      "image_sha256": "921d395bf9278620bddcfc62c413c8e06b026ff6dfa3c6ab285ea790d17061a2",
+      "device_scale_factor": 2,
+      "ink_percent": 43.75,
+      "gate": "fresh",
+      "gate_note": "the recorded digest must match the live page; the build fails when it stops matching \u2014 which it will, on the next release",
+      "caption": "Ten of ten memos processed, and the count is computed from the manifest rather than typed \u2014 because this page printed a wrong count once, and the fix was a gate, not an edit. The hub also says what none of it proves, above the fold.",
+      "retake": "./insurance-book/shots/travel.sh current <fresh-port> insurance-book/shots/jobs/current.json"
+    },
+    {
+      "id": "f05-evidence-classes",
+      "page": "/packs/grant-and-mandate/blocks.html",
+      "tag": "current",
+      "page_sha256": "412ee64b844da274721359c5d1a3ab227a15a2ab3967f7541ce1d00f56e7a249",
+      "image": "shots/img/f05-evidence-classes.png",
+      "image_sha256": "7b1001af6f9da340cb7c82670e5369ee491451123d8977e1e7ff43fd4cf72bf9",
+      "device_scale_factor": 2,
+      "ink_percent": 24.28,
+      "gate": "fresh",
+      "gate_note": "the recorded digest must match the live page; the build fails when it stops matching \u2014 which it will, on the next release",
+      "caption": "The estate's evidence vocabulary, rendered: every block carries its tier and its evidence class, the border style carries the state as well as the colour, and unknown renders as unknown \u2014 never as a blank. The rating's two channels are this vocabulary pointed at inputs.",
+      "retake": "./insurance-book/shots/travel.sh current <fresh-port> insurance-book/shots/jobs/current.json"
+    },
+    {
+      "id": "f06-no-world-yet",
+      "page": "/simulator/index.html",
+      "tag": "current",
+      "page_sha256": "b4230b64e6201a6307fe31b5618252c62151ab6b2fd92a829bda65c1820d133d",
+      "image": "shots/img/f06-no-world-yet.png",
+      "image_sha256": "7adbef21be7a60d3457890d0364fae039537251f01d08d104d5b6f7e351e247e",
+      "device_scale_factor": 2,
+      "ink_percent": 43.08,
+      "gate": "fresh",
+      "gate_note": "the recorded digest must match the live page; the build fails when it stops matching \u2014 which it will, on the next release",
+      "caption": "The simulator: cards, verdicts, a board \u2014 an instrument, in memo 8's verdict, for somebody who already has the vocabulary. This estate has instruments and a card game. It has no world, and the chapter this figure sits in is the specification for one.",
+      "retake": "./insurance-book/shots/travel.sh current <fresh-port> insurance-book/shots/jobs/current.json"
+    },
+    {
+      "id": "f07-workbench",
+      "page": "/workbench/index.html",
+      "tag": "current",
+      "page_sha256": "f0d38918f17f95ccd67f67e9c01aed14d52ca694468fffb95cc540583156b997",
+      "image": "shots/img/f07-workbench.png",
+      "image_sha256": "7cd1a85a7949ee533d680f1aacdb0832ba3c2641c59d903e9905015097741547",
+      "device_scale_factor": 2,
+      "ink_percent": 33.16,
+      "gate": "fresh",
+      "gate_note": "the recorded digest must match the live page; the build fails when it stops matching \u2014 which it will, on the next release",
+      "caption": "The control-to-premium loop already runs here: flip the branch-protection fact and the enforcement tier recomputes from the facts rather than a stored label. Rename the output and the rating's counterfactual view exists.",
+      "retake": "./insurance-book/shots/travel.sh current <fresh-port> insurance-book/shots/jobs/current.json"
+    },
+    {
+      "id": "f08-hub-at-v0.1.51",
+      "page": "/insurance/index.html",
+      "tag": "v0.1.51",
+      "page_sha256": "e46e3f176f03e358f5fe6a0b7c7967a9cd01db61b6f0c1c7e9871b5b5d90a64f",
+      "image": "shots/img/f08-hub-at-v0.1.51.png",
+      "image_sha256": "454745da81df6c3bb283d36a36a30e574c9e0d15ac64ca1c256807326f8bd587",
+      "device_scale_factor": 2,
+      "ink_percent": 36.85,
+      "gate": "re-derivable",
+      "gate_note": "re-running travel.sh at v0.1.51 reproduces this digest; the tag does not move, so this never goes stale",
+      "caption": "The hub on the day the folder shipped, preserved at its tag: one memo processed, and a series the page then believed was eight. The count later proved wrong twice \u2014 this figure is what the audit chapter's arithmetic looked like before the gate existed.",
+      "retake": "./insurance-book/shots/travel.sh v0.1.51 <fresh-port> insurance-book/shots/jobs/v0.1.51.json"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+<!doctype html><meta charset="utf-8"><title>t01-empty-seat · pki.sgit.ai</title>
+<link rel="canonical" href="https://pki.sgit.ai/insurance-book/shots/term/t01-empty-seat.html">
+<meta name="robots" content="noindex">
+<style>
+ html,body{margin:0;background:#0f1115}
+ .term{font:13px/1.55 ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+   color:#d8dee9;background:#0f1115;padding:22px 24px;white-space:pre;
+   -webkit-font-smoothing:antialiased}
+ .term .p{color:#7aa2f7}          /* the prompt */
+ .term .c{color:#5c6370;font-style:italic}  /* a comment */
+ .term .ok{color:#9ece6a}          /* an affirmative result */
+ .term .no{color:#f7768e}          /* a refusal */
+ .cap{font:11px/1.4 ui-monospace,monospace;color:#5c6370;
+   padding:0 24px 16px;background:#0f1115}
+ .sheet{display:inline-block;background:#0f1115;min-width:100%}
+</style>
+<div class="sheet"><div class="term"><span class="p">$ curl -s https://pki.sgit.ai/registry/views/excess-authority.json | python3 -m json.tool</span>
+{
+    &quot;_authority&quot;: &quot;NONE \u2014 derived from the records; recompute it yourself (registry_tool.py validate does)&quot;,
+    &quot;generated_as_of&quot;: &quot;2026-08-25T12:00:00Z&quot;,
+    &quot;rows&quot;: [
+        {
+            &quot;excess_authority&quot;: {
+                &quot;acceptor&quot;: null,
+                &quot;note&quot;: &quot;the difference has no acceptor&quot;,
+                &quot;observed_at&quot;: &quot;2026-08-25&quot;,
+                &quot;resources&quot;: 40
+            },
+            &quot;grant&quot;: {
+                &quot;capability&quot;: &quot;repo.contents.write&quot;,
+                &quot;resources&quot;: 41,
+                &quot;statement&quot;: &quot;sha256:4dec940de3243f48ecd77de478b6fa24e09fe3f6095cf2e4023863dec944db3d&quot;
+            },
+            &quot;mandate&quot;: {
+                &quot;capability&quot;: &quot;repo.pull-request.create&quot;,
+                &quot;resource&quot;: &quot;github.com/SGit-AI/SGit-AI__Website__PKI&quot;,
+                &quot;resources&quot;: 1,
+                &quot;statement&quot;: &quot;sha256:e572d490272cc517d3fe0783193b539c06bb9f06bf19334ca02619a926e7c45d&quot;
+            },
+            &quot;subject&quot;: &quot;sha256:df2bb4d93af69e6a&quot;
+        }
+    ],
+    &quot;what_this_is&quot;: &quot;grant minus mandate, per subject: the exposure nobody accepted (change-control C1); built for downstream risk consumers&quot;
+}</div>
+<div class="cap">t01-empty-seat.txt · sha256:15cf28a7bf6cdcbba632b76ba1425033…</div></div>

@@ -1,0 +1,46 @@
+{
+ "tag": "current",
+ "outdir": "img",
+ "jobs": [
+  {
+   "id": "f04-insurance-hub",
+   "path": "/insurance/index.html",
+   "fullPage": false,
+   "scale": 2,
+   "viewport": {
+    "width": 1180,
+    "height": 1050
+   }
+  },
+  {
+   "id": "f05-evidence-classes",
+   "path": "/packs/grant-and-mandate/blocks.html",
+   "fullPage": false,
+   "scale": 2,
+   "viewport": {
+    "width": 1180,
+    "height": 950
+   }
+  },
+  {
+   "id": "f06-no-world-yet",
+   "path": "/simulator/index.html",
+   "fullPage": false,
+   "scale": 2,
+   "viewport": {
+    "width": 1180,
+    "height": 1000
+   }
+  },
+  {
+   "id": "f07-workbench",
+   "path": "/workbench/index.html",
+   "fullPage": false,
+   "scale": 2,
+   "viewport": {
+    "width": 1180,
+    "height": 950
+   }
+  }
+ ]
+}

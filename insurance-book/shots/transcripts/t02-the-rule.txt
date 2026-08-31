@@ -1,0 +1,18 @@
+$ curl -s https://pki.sgit.ai/insurance/llms.txt | sed -n '1,17p'
+# pki.sgit.ai/insurance — insurance for agents, and what none of it proves
+#
+# A pivot: the foundation of the risk approach moves from RISK ACCEPTANCE to
+# the INSURANCE POLICY, because the delta between what an agent CAN do and
+# what it is AUTHORISED to do is where the insurance lives.
+#
+# STAGE: stage 1 — rating without money
+# A rating engine that emits levels rather than currency is not a regulated activity, needs no carrier and no loss history, and is therefore buildable today. Money is stage 2. See GM-D38.
+#
+# THE RULE: A level nobody can recompute is exactly the theatre a premium would have prevented. Every rating ships its derivation. See GM-D39.
+# SETTLED: The level scale is 1–5 (GM-D54, the project lead, 31 Aug). Coarse on purpose: currency implies loss data nobody has, 1–100 implies resolution the inputs cannot support, and a band is arguable where a decimal is not.
+#
+# 10 of 10 series memos processed, plus the pivot briefing.
+# 11 doctrine documents. 0 MVPs built.
+# Hub: https://pki.sgit.ai/insurance/index.html
+
+## What an agent should carry if it summarises anything here

@@ -1,0 +1,7 @@
+$ python3 packs/grant-and-mandate/tools/mandate.py check-branch dev
+PERMIT   dev  (mandate v2, allow=['claude/**', 'dev'], expires 2026-12-31T00:00:00Z)
+
+$ python3 packs/grant-and-mandate/tools/mandate.py check-branch main
+REFUSED  main  (mandate v2 permits ['claude/**', 'dev'])
+$ echo "exit: $?"
+exit: 1

@@ -1,0 +1,339 @@
+{
+  "title": "The Delta Is Where the Insurance Lives",
+  "subtitle": "Rating agents without money, and the empty seat a policy fills",
+  "about": "Ten voice memos and a pivot briefing, recorded over two days at the end of August 2026, read into doctrine, audited against their own transcripts, and here made one argument: the gap between what an agent can do and what it was authorised to do is an insurable exposure — and the honest first product is a rating anybody can recompute, not a premium nobody can check.",
+  "written": "2026-08-31",
+  "licence": "CC BY 4.0",
+  "source_of_truth": "insurance-book/content/*.md — the HTML pages and the PDF are renderings of it",
+  "positions_that_travel_with_every_chapter": [
+    "Nothing here is insurance. Stage 1 emits a rating; it transfers no risk and promises no payout — which is exactly why it can be built, and calling it insurance would be the first dishonesty.",
+    "Nothing here is built. Ten memos are read into doctrine; the two specified MVPs — the world model and the market survey — remain unbuilt.",
+    "No external evidence has been gathered. Every decision on the log is internal reasoning; the survey that could be wrong in a way the world would correct has not been run.",
+    "The register the rating would read is fixtures. Ten of eleven identities have their private keys published on purpose, so every signature verifies and proves nothing.",
+    "The placement orderings are judgements. Nobody has measured a desktop agent, so the estate cannot score its own leading example.",
+    "A level is never declared, only derived — and a level nobody can recompute is exactly the theatre a premium would have prevented.",
+    "The readings were audited against their transcripts and six defects were found and fixed. The method held; the arithmetic and the housekeeping did not.",
+    "This is a participant's account, published by the project that would build the connective tissue it argues for."
+  ],
+  "provenance": {
+    "rule": "Every load-bearing claim about what the memos or the estate MEAN is marked `stated` or `drawn`. `stated` carries a verbatim quotation with a located source; `drawn` carries this book's own reasoning in the reader's view. DO NOT TREAT THE DRAWN CLAIMS AS THE PROJECT LEAD'S POSITIONS — they are the book's.",
+    "stated_quotations": 76,
+    "drawn_claims": 44
+  },
+  "stats": {
+    "quotes": 76,
+    "drawn": 44,
+    "figures": 8,
+    "chapters": 17,
+    "files": 20,
+    "words_chapters": "17,868",
+    "words_total": "20,150",
+    "memos": 10,
+    "doctrine": 11,
+    "decisions_total": 85,
+    "decisions_pivot": 51,
+    "audit_defects": 6,
+    "dnp": 20,
+    "grant_resources": "41",
+    "mandate_resources": "1",
+    "excess_resources": "40",
+    "records": 11,
+    "fixtures": 10,
+    "releases": 60,
+    "arc_releases": 11,
+    "arc_hours": "5.1"
+  },
+  "counts": {
+    "files": 20,
+    "chapters": 17,
+    "words_chapters": 17868,
+    "words_total": 20150,
+    "figures": 8
+  },
+  "chapters": [
+    {
+      "file": "content/00__front-matter.md",
+      "number": "00",
+      "part": "Front matter",
+      "title": "The Delta Is Where the Insurance Lives",
+      "words": 929,
+      "sha256": "51403a052da9dfa58e9055a966c2c1bc1e0b688de36ccd24a50aaa2a5d185d68",
+      "stated_markers": 1,
+      "drawn_markers": 0
+    },
+    {
+      "file": "content/01__the-empty-seat.md",
+      "number": "01",
+      "part": "Part one — The pivot",
+      "title": "1 · The empty seat",
+      "words": 1282,
+      "sha256": "2f5d9c8ed96795f07a6007128d845da2d59929aaec57ed2f21dba5cecbe5f3d5",
+      "stated_markers": 6,
+      "drawn_markers": 4
+    },
+    {
+      "file": "content/02__two-insurances-one-subject.md",
+      "number": "02",
+      "part": "Part one — The pivot",
+      "title": "2 · Two insurances, one subject",
+      "words": 789,
+      "sha256": "23e28cdedfe96e3210a4873cdc4c296fce8b34d72dc6bbb486536bb56fbdae96",
+      "stated_markers": 2,
+      "drawn_markers": 3
+    },
+    {
+      "file": "content/03__what-broke-it-last-time.md",
+      "number": "03",
+      "part": "Part one — The pivot",
+      "title": "3 · What broke it last time",
+      "words": 1110,
+      "sha256": "67e63c359c112658501bfc845559594a7f5bc82efc18f98450122aa3277b9da7",
+      "stated_markers": 6,
+      "drawn_markers": 3
+    },
+    {
+      "file": "content/04__the-rule-rating-without-money.md",
+      "number": "04",
+      "part": "Part two — The rating",
+      "title": "4 · The rule: rating without money",
+      "words": 1058,
+      "sha256": "3d94c1f381ada52d639a41ca4bce378d5fdf4a3f30c8f9208c0f3cf84c2f1b9d",
+      "stated_markers": 5,
+      "drawn_markers": 3
+    },
+    {
+      "file": "content/05__a-placement-not-an-agent.md",
+      "number": "05",
+      "part": "Part two — The rating",
+      "title": "5 · A placement, not an agent",
+      "words": 1138,
+      "sha256": "858a69a89992030fb43a11f8a3993eaa31c73e4899c2124c1bcc9526290b3407",
+      "stated_markers": 4,
+      "drawn_markers": 2
+    },
+    {
+      "file": "content/06__two-channels-that-never-merge.md",
+      "number": "06",
+      "part": "Part two — The rating",
+      "title": "6 · Two channels that never merge",
+      "words": 861,
+      "sha256": "0ba6cfeabe6df89536ab8a396077c68d43cab8b49bb005180681eb34efea44c5",
+      "stated_markers": 3,
+      "drawn_markers": 3
+    },
+    {
+      "file": "content/07__one-to-five-settled.md",
+      "number": "07",
+      "part": "Part two — The rating",
+      "title": "7 · One to five, settled",
+      "words": 834,
+      "sha256": "ed1af1945345eae92e58465e641ac6b956d4cb39306e38b71f9fa01d7c7fff3b",
+      "stated_markers": 3,
+      "drawn_markers": 4
+    },
+    {
+      "file": "content/08__the-roles-without-the-money.md",
+      "number": "08",
+      "part": "Part three — Who pays, who rates, who backs the claim",
+      "title": "8 · The roles without the money",
+      "words": 1114,
+      "sha256": "35eefa4d41c409367881f33e1486ae1947136c88b082706a29890592b6fcccc3",
+      "stated_markers": 6,
+      "drawn_markers": 2
+    },
+    {
+      "file": "content/09__who-pays-for-the-delta-nobody-chose.md",
+      "number": "09",
+      "part": "Part three — Who pays, who rates, who backs the claim",
+      "title": "9 · Who pays for the delta nobody chose",
+      "words": 1141,
+      "sha256": "b62809d24cb87313589ebd8c54795e06b471e29ae9917d7bf6b8682cd21cc8e1",
+      "stated_markers": 6,
+      "drawn_markers": 3
+    },
+    {
+      "file": "content/10__the-rating-that-moves.md",
+      "number": "10",
+      "part": "Part three — Who pays, who rates, who backs the claim",
+      "title": "10 · The rating that moves",
+      "words": 965,
+      "sha256": "9dbf18d9b2fce7b226361eeace80fa3faf9393ceb4e1f0ccdc914582a63285ca",
+      "stated_markers": 5,
+      "drawn_markers": 2
+    },
+    {
+      "file": "content/11__the-broker-market.md",
+      "number": "11",
+      "part": "Part three — Who pays, who rates, who backs the claim",
+      "title": "11 · The broker market",
+      "words": 914,
+      "sha256": "d9d3a6354b31bb94a3984dbd7d2ec9d69ebcaef4abd267d701af5249b64a7b33",
+      "stated_markers": 6,
+      "drawn_markers": 2
+    },
+    {
+      "file": "content/12__the-policy-is-a-statement.md",
+      "number": "12",
+      "part": "Part four — The machinery",
+      "title": "12 · The policy is a statement",
+      "words": 1230,
+      "sha256": "c8c3ae5dc476abbcdb68893d40fe75f085f7e952f733c6605dfdfc74b67e0c63",
+      "stated_markers": 7,
+      "drawn_markers": 2
+    },
+    {
+      "file": "content/13__the-three-clocks.md",
+      "number": "13",
+      "part": "Part four — The machinery",
+      "title": "13 · The three clocks",
+      "words": 1075,
+      "sha256": "ddde745affc6df72d7cd51ff489cc74adba334e27b8ce18e9875ff8e87e244bb",
+      "stated_markers": 4,
+      "drawn_markers": 2
+    },
+    {
+      "file": "content/14__not-in-line.md",
+      "number": "14",
+      "part": "Part four — The machinery",
+      "title": "14 · Not in line",
+      "words": 916,
+      "sha256": "3ef8a367b0f34544c57fd9f196a744c40d3de85dffa0fe6ae185b1a8b45c622b",
+      "stated_markers": 4,
+      "drawn_markers": 3
+    },
+    {
+      "file": "content/15__the-world-model.md",
+      "number": "15",
+      "part": "Part five — The proof and its absence",
+      "title": "15 · The world model",
+      "words": 1153,
+      "sha256": "3b55699975ad4e811ab6de783edbdff29997be32b269cf4a5e412077e346add5",
+      "stated_markers": 4,
+      "drawn_markers": 1
+    },
+    {
+      "file": "content/16__make-them-insurable.md",
+      "number": "16",
+      "part": "Part five — The proof and its absence",
+      "title": "16 · Make them insurable",
+      "words": 1157,
+      "sha256": "db1282470b039a691a47d904ec7fe40cfc2a3f271d2c41d0768f938a43334ed5",
+      "stated_markers": 7,
+      "drawn_markers": 3
+    },
+    {
+      "file": "content/17__what-none-of-this-proves.md",
+      "number": "17",
+      "part": "Part five — The proof and its absence",
+      "title": "17 · What none of this proves",
+      "words": 1131,
+      "sha256": "c0f8fdbef28481fee6e078cd2fa0634ee8b7fcd8f51210ae45526bbb59f4bbc0",
+      "stated_markers": 0,
+      "drawn_markers": 2
+    },
+    {
+      "file": "content/18__reference-card.md",
+      "number": "18",
+      "part": "End matter",
+      "title": "Reference card",
+      "words": 648,
+      "sha256": "f911ca86bbcf3bfe1e53b7882e222957adebf1715cf17c40ee833c0d4798dc35",
+      "stated_markers": 0,
+      "drawn_markers": 0
+    },
+    {
+      "file": "content/19__colophon.md",
+      "number": "19",
+      "part": "End matter",
+      "title": "Colophon",
+      "words": 705,
+      "sha256": "817484f3de6e4ff53782a2d78f0cfc5a9a8add6db925b8c0e28fe9324ae1a4d3",
+      "stated_markers": 1,
+      "drawn_markers": 0
+    }
+  ],
+  "figures": [
+    {
+      "id": "f01-empty-seat",
+      "page": "/insurance-book/shots/term/t01-empty-seat.html",
+      "tag": "current",
+      "page_sha256": "1a4f2626ff578acaf45deab9639e825d09f69fe599414933a5edefa73b520fe3",
+      "image": "shots/img/f01-empty-seat.png",
+      "image_sha256": "d63312e3e738bbba770695f512346c5bd2c9751cf97eec9ebdff7f03a1f454c8",
+      "gate": "fresh",
+      "caption": "Read the excess_authority object: a grant reaching 41 resources, a mandate covering 1, and \"acceptor\": null — the register has been publishing the empty seat since before the pivot existed. The pivot is the observation that the rest of the economy has a name for whoever sits in it."
+    },
+    {
+      "id": "f02-the-rule",
+      "page": "/insurance-book/shots/term/t02-the-rule.html",
+      "tag": "current",
+      "page_sha256": "68eb121d6ecf58e39f2967120cbd3e24286e860412e325865222cb560bc9f80f",
+      "image": "shots/img/f02-the-rule.png",
+      "image_sha256": "6c8c4b378293021fd00119a348f461c82c177aee74042e0605bbfbff3437f3fb",
+      "gate": "fresh",
+      "caption": "The machine surface states the stage, the rule and the settled scale before it lists a single memo — because an agent that reads only the header must still carry them. Note what stage 1 is not: a regulated activity, a carrier, a promise to pay."
+    },
+    {
+      "id": "f03-permit-refused",
+      "page": "/insurance-book/shots/term/t03-permit-refused.html",
+      "tag": "current",
+      "page_sha256": "28f11414a45012eed6a3cf539edc7a89c3da1f13c6914c2ee0d98db635df7c64",
+      "image": "shots/img/f03-permit-refused.png",
+      "image_sha256": "2c72400573f66b85fdebc0f7c0953d1156de978010591a6480c01b7b6ac6e075",
+      "gate": "fresh",
+      "caption": "The same tool, two branches, two verdicts — computed from a signed mandate, dated, and reproducible by anyone with the file. A policy handshake would attach to answers of exactly this shape; nothing about the REFUSED line requires anyone to be trusted, only re-run."
+    },
+    {
+      "id": "f04-insurance-hub",
+      "page": "/insurance/index.html",
+      "tag": "current",
+      "page_sha256": "b184a23758ac2316cdc7be74b5c6e4d71d428ac3e91128ea282d2acf685ff132",
+      "image": "shots/img/f04-insurance-hub.png",
+      "image_sha256": "921d395bf9278620bddcfc62c413c8e06b026ff6dfa3c6ab285ea790d17061a2",
+      "gate": "fresh",
+      "caption": "Ten of ten memos processed, and the count is computed from the manifest rather than typed — because this page printed a wrong count once, and the fix was a gate, not an edit. The hub also says what none of it proves, above the fold."
+    },
+    {
+      "id": "f05-evidence-classes",
+      "page": "/packs/grant-and-mandate/blocks.html",
+      "tag": "current",
+      "page_sha256": "412ee64b844da274721359c5d1a3ab227a15a2ab3967f7541ce1d00f56e7a249",
+      "image": "shots/img/f05-evidence-classes.png",
+      "image_sha256": "7b1001af6f9da340cb7c82670e5369ee491451123d8977e1e7ff43fd4cf72bf9",
+      "gate": "fresh",
+      "caption": "The estate's evidence vocabulary, rendered: every block carries its tier and its evidence class, the border style carries the state as well as the colour, and unknown renders as unknown — never as a blank. The rating's two channels are this vocabulary pointed at inputs."
+    },
+    {
+      "id": "f06-no-world-yet",
+      "page": "/simulator/index.html",
+      "tag": "current",
+      "page_sha256": "b4230b64e6201a6307fe31b5618252c62151ab6b2fd92a829bda65c1820d133d",
+      "image": "shots/img/f06-no-world-yet.png",
+      "image_sha256": "7adbef21be7a60d3457890d0364fae039537251f01d08d104d5b6f7e351e247e",
+      "gate": "fresh",
+      "caption": "The simulator: cards, verdicts, a board — an instrument, in memo 8's verdict, for somebody who already has the vocabulary. This estate has instruments and a card game. It has no world, and the chapter this figure sits in is the specification for one."
+    },
+    {
+      "id": "f07-workbench",
+      "page": "/workbench/index.html",
+      "tag": "current",
+      "page_sha256": "f0d38918f17f95ccd67f67e9c01aed14d52ca694468fffb95cc540583156b997",
+      "image": "shots/img/f07-workbench.png",
+      "image_sha256": "7cd1a85a7949ee533d680f1aacdb0832ba3c2641c59d903e9905015097741547",
+      "gate": "fresh",
+      "caption": "The control-to-premium loop already runs here: flip the branch-protection fact and the enforcement tier recomputes from the facts rather than a stored label. Rename the output and the rating's counterfactual view exists."
+    },
+    {
+      "id": "f08-hub-at-v0.1.51",
+      "page": "/insurance/index.html",
+      "tag": "v0.1.51",
+      "page_sha256": "e46e3f176f03e358f5fe6a0b7c7967a9cd01db61b6f0c1c7e9871b5b5d90a64f",
+      "image": "shots/img/f08-hub-at-v0.1.51.png",
+      "image_sha256": "454745da81df6c3bb283d36a36a30e574c9e0d15ac64ca1c256807326f8bd587",
+      "gate": "re-derivable",
+      "caption": "The hub on the day the folder shipped, preserved at its tag: one memo processed, and a series the page then believed was eight. The count later proved wrong twice — this figure is what the audit chapter's arithmetic looked like before the gate existed."
+    }
+  ],
+  "harness": "insurance-book/shots/ — every figure can be re-taken rather than believed.",
+  "gates": "python3 insurance-book/build.py --check"
+}

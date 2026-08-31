@@ -1,0 +1,28 @@
+$ curl -s https://pki.sgit.ai/registry/views/excess-authority.json | python3 -m json.tool
+{
+    "_authority": "NONE \u2014 derived from the records; recompute it yourself (registry_tool.py validate does)",
+    "generated_as_of": "2026-08-25T12:00:00Z",
+    "rows": [
+        {
+            "excess_authority": {
+                "acceptor": null,
+                "note": "the difference has no acceptor",
+                "observed_at": "2026-08-25",
+                "resources": 40
+            },
+            "grant": {
+                "capability": "repo.contents.write",
+                "resources": 41,
+                "statement": "sha256:4dec940de3243f48ecd77de478b6fa24e09fe3f6095cf2e4023863dec944db3d"
+            },
+            "mandate": {
+                "capability": "repo.pull-request.create",
+                "resource": "github.com/SGit-AI/SGit-AI__Website__PKI",
+                "resources": 1,
+                "statement": "sha256:e572d490272cc517d3fe0783193b539c06bb9f06bf19334ca02619a926e7c45d"
+            },
+            "subject": "sha256:df2bb4d93af69e6a"
+        }
+    ],
+    "what_this_is": "grant minus mandate, per subject: the exposure nobody accepted (change-control C1); built for downstream risk consumers"
+}

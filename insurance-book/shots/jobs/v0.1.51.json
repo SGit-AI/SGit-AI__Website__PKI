@@ -1,0 +1,8 @@
+{
+ "tag": "v0.1.51",
+ "outdir": "img",
+ "jobs": [
+  { "id": "f08-hub-at-v0.1.51", "path": "/insurance/index.html",
+    "fullPage": false, "scale": 2, "viewport": { "width": 1180, "height": 1050 } }
+ ]
+}

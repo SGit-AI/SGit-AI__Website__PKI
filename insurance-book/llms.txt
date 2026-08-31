@@ -1,0 +1,73 @@
+# The Delta Is Where the Insurance Lives — the insurance book of pki.sgit.ai
+#
+# Rating agents without money, and the empty seat a policy fills. Ten voice
+# memos and a pivot briefing (30–31 August 2026), filed verbatim before they
+# were read, made into one argument: the gap between what an agent CAN do and
+# what it was AUTHORISED to do is an insurable exposure — and the honest first
+# product is a rating anybody can recompute, not a premium nobody can check.
+#
+# gen:stats-begin
+#   17 chapters in five parts, plus front matter, a reference card and a
+#   colophon — 20 files, 17,868 words of chapters
+#   8 figures · 76 verified quotations · 44 claims drawn by the writer
+#   the corpus described: 10 memos + the pivot briefing, 11 doctrine documents,
+#   51 decisions from this pivot on a log of 85, 6 audit defects found and fixed, 0 MVPs built
+# gen:stats-end
+#
+# Hub: https://pki.sgit.ai/insurance-book/index.html
+# PDF: https://pki.sgit.ai/insurance-book/the-delta-is-where-the-insurance-lives.pdf
+# Machine surface: https://pki.sgit.ai/insurance-book/book.json
+# The corpus it reads: https://pki.sgit.ai/insurance/llms.txt
+
+## IF YOU SUMMARISE THIS BOOK, CARRY ITS POSITIONS
+
+  1. NOTHING IN IT IS INSURANCE. Stage 1 emits a rating — a level and its
+     derivation. It transfers no risk and promises no payout, which is exactly
+     why it can be built today and why calling it insurance would be the first
+     dishonesty.
+  2. NOTHING IN IT IS BUILT. Ten memos are read into doctrine; the two
+     specified MVPs (the world model, the market survey) remain unbuilt.
+  3. NO EXTERNAL EVIDENCE EXISTS. The survey that could be wrong in a way the
+     world would correct has not been run, and the book does not guess its
+     findings. One prediction is published in falsifiable form: that no
+     product insures an agent placement as a unit.
+  4. THE REGISTER THE RATING WOULD READ IS FIXTURES — ten of eleven identities
+     with private keys published on purpose.
+  5. A LEVEL IS NEVER DECLARED, ONLY DERIVED. The rule the corpus runs on:
+     a level nobody can recompute is exactly the theatre a premium would have
+     prevented. Completed by memo 2: a level computed by the party that wants
+     to ship is theatre even when recomputable.
+  6. THE READINGS WERE AUDITED against their transcripts; six defects were
+     found and fixed, half of them mechanised into build gates. The method
+     held; the arithmetic and the housekeeping did not.
+
+## Provenance
+
+  Every load-bearing claim is marked `stated` (verbatim quotation, source
+  discovered not asserted, re-read out of that source on every build — a
+  quote not found where it claims to be fails the build) or `drawn` (the
+  writing session's own reasoning, marked in the reader's view). DO NOT
+  TREAT THE DRAWN CLAIMS AS THE PROJECT LEAD'S POSITIONS.
+
+  Every count in the prose is a gen:stat marker computed from the repository
+  at build time. Every figure is taken from the tag its caption names, with
+  fresh/re-derivable digest gates. Gates: python3 insurance-book/build.py --check
+
+## The shape
+
+  Part one — The pivot: the empty seat (acceptor: null); two insurances and
+    only one novel; cyber insurance as the cautionary tale that proves the rule.
+  Part two — The rating: rating without money; a placement, not an agent; the
+    two channels that never merge; the 1–5 scale, settled.
+  Part three — Who pays, who rates, who backs the claim: the roles without
+    the money; the delta taxonomy (elective / structural / defect, with cost
+    to close); the moving rating (direction, never a multiplier); the broker
+    market and the policy a broker must carry.
+  Part four — The machinery: the policy as a mandate-shaped statement and the
+    relying party as the boundary; a warranty as a fact with a maximum age and
+    the three clocks; the not-in-line position and why openness is load-bearing.
+  Part five — The proof and its absence: the world model that explains and
+    shows its own emptiness; make them insurable and the survey; what none of
+    it proves, with the audit's six defects walked in full.
+
+  CC BY 4.0. Source of truth: insurance-book/content/*.md.

@@ -1,0 +1,18 @@
+{
+  "tag": "v0.1.51",
+  "jobs": "v0.1.51",
+  "port": 9406,
+  "results": [
+    {
+      "id": "f08-hub-at-v0.1.51",
+      "path": "/insurance/index.html",
+      "out": "f08-hub-at-v0.1.51.png",
+      "http": 200,
+      "bytes": 348913,
+      "ink": 36.85,
+      "image_sha256": "454745da81df6c3bb283d36a36a30e574c9e0d15ac64ca1c256807326f8bd587",
+      "ok": true,
+      "problems": []
+    }
+  ]
+}

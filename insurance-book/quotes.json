@@ -1,0 +1,464 @@
+{
+  "what_this_is": "Every quotation this book marks as `stated`, with the source it was found in. The locator is DISCOVERED, not asserted: each passage is searched for across the estate's published artefacts and the file it is actually found in is what is recorded. `book/build.py` re-reads every one of them out of the source it names on every build; a quote not found where it claims to be fails the build.",
+  "normalisation": "HTML tags stripped, entities unescaped, markdown blockquote markers removed, runs of whitespace collapsed to one space — and nothing else. Line wrapping and markup are not differences in the text.",
+  "count": 76,
+  "unlocated": 0,
+  "quotes": [
+    {
+      "chapter": "01__the-empty-seat.md",
+      "text": "the difference has no acceptor",
+      "source": "briefs/v0.33.71__strategy-brief__insurance-for-agents-the-delta-is-where-the-insurance-lives.md",
+      "verified": true
+    },
+    {
+      "chapter": "01__the-empty-seat.md",
+      "text": "so I want to do a little pivot on the on the risk mandate and the sort of the risk approach",
+      "source": "briefs/v0.33.71__strategy-brief__insurance-for-agents-the-delta-is-where-the-insurance-lives.md",
+      "verified": true
+    },
+    {
+      "chapter": "01__the-empty-seat.md",
+      "text": "the difference between what the agent can do, right, which is the the grant, and what we want the agent to do, which is the mandate, the delta of that, is where the insurance lives",
+      "source": "briefs/v0.33.71__strategy-brief__insurance-for-agents-the-delta-is-where-the-insurance-lives.md",
+      "verified": true
+    },
+    {
+      "chapter": "01__the-empty-seat.md",
+      "text": "what's cool about it is that we already have, I think, a lot of the primitives",
+      "source": "briefs/v0.33.71__strategy-brief__insurance-for-agents-the-delta-is-where-the-insurance-lives.md",
+      "verified": true
+    },
+    {
+      "chapter": "01__the-empty-seat.md",
+      "text": "we can say hey if this happens then you get this payout if that happens, then you get this, and then we can connect that straight away to those capabilities",
+      "source": "briefs/v0.33.71__strategy-brief__insurance-for-agents-the-delta-is-where-the-insurance-lives.md",
+      "verified": true
+    },
+    {
+      "chapter": "02__two-insurances-one-subject.md",
+      "text": "there's actually two risks here, right? Two two type of insurances",
+      "source": "briefs/v0.33.71__strategy-brief__insurance-for-agents-the-delta-is-where-the-insurance-lives.md",
+      "verified": true
+    },
+    {
+      "chapter": "02__two-insurances-one-subject.md",
+      "text": "**hand over a broad credential and hope.**",
+      "source": "briefs/v0.33.59__strategy-brief__nhi-site-two-populations-industry-answers-only-agents-you-run.md",
+      "verified": true
+    },
+    {
+      "chapter": "03__what-broke-it-last-time.md",
+      "text": "the cyber insurance is already a good example of a market that grew quite high when you know you couldn't really quantify things very well. That then a lot of people lost lost a lot of money, and there was a lot of cyber insurance policies that either were not worth what they they had, or actually had a lot of payouts that really hit the insurers because they they couldn't quantify what's happening",
+      "source": "briefs/v0.33.75__strategy-brief__why-insurance-and-the-cautionary-tale-is-cyber-insurance-itself.md",
+      "verified": true
+    },
+    {
+      "chapter": "03__what-broke-it-last-time.md",
+      "text": "A market can be enthusiastically data-driven and still be pricing fiction, if the data is not checkable.",
+      "source": "briefs/v0.33.75__strategy-brief__why-insurance-and-the-cautionary-tale-is-cyber-insurance-itself.md",
+      "verified": true
+    },
+    {
+      "chapter": "03__what-broke-it-last-time.md",
+      "text": "it's a market that demands the creation of trustworthy data",
+      "source": "briefs/v0.33.75__strategy-brief__why-insurance-and-the-cautionary-tale-is-cyber-insurance-itself.md",
+      "verified": true
+    },
+    {
+      "chapter": "03__what-broke-it-last-time.md",
+      "text": "if you invest in an incident response team, only what you're doing is you might not be reducing the number of incidents, but you're reducing the impact of those incidents",
+      "source": "briefs/v0.33.75__strategy-brief__why-insurance-and-the-cautionary-tale-is-cyber-insurance-itself.md",
+      "verified": true
+    },
+    {
+      "chapter": "03__what-broke-it-last-time.md",
+      "text": "The tier ranks how much of the grant is reachable in practice. That is blast-radius reduction, not severity reduction",
+      "source": "insurance/src/04__why-insurance-and-what-broke-it.md",
+      "verified": true
+    },
+    {
+      "chapter": "03__what-broke-it-last-time.md",
+      "text": "you can actually argue that what a company is is fundamentally a gigantic insurance sort of company",
+      "source": "briefs/v0.33.75__strategy-brief__why-insurance-and-the-cautionary-tale-is-cyber-insurance-itself.md",
+      "verified": true
+    },
+    {
+      "chapter": "04__the-rule-rating-without-money.md",
+      "text": "insurance only? It's a decision-making mechanism. It's a way to assign what's it called risk, and it's a way to assign, you know, a rating to a particular environment",
+      "source": "briefs/v0.33.72__strategy-brief__insurance-without-money-first-the-rating-is-the-product-and-micro-policies-scale.md",
+      "verified": true
+    },
+    {
+      "chapter": "04__the-rule-rating-without-money.md",
+      "text": "you have an insurance level three, insurance level five, insurance level one, because the point here is also to allow companies to know the risks that they're buying and to allow them to focus their efforts",
+      "source": "briefs/v0.33.72__strategy-brief__insurance-without-money-first-the-rating-is-the-product-and-micro-policies-scale.md",
+      "verified": true
+    },
+    {
+      "chapter": "04__the-rule-rating-without-money.md",
+      "text": "A premium cannot be theatre; someone loses money if the measurement is wrong.",
+      "source": "briefs/v0.33.71__strategy-brief__insurance-for-agents-the-delta-is-where-the-insurance-lives.md",
+      "verified": true
+    },
+    {
+      "chapter": "04__the-rule-rating-without-money.md",
+      "text": "A level nobody can recompute is exactly the theatre a premium would have prevented.",
+      "source": "briefs/v0.33.72__strategy-brief__insurance-without-money-first-the-rating-is-the-product-and-micro-policies-scale.md",
+      "verified": true
+    },
+    {
+      "chapter": "04__the-rule-rating-without-money.md",
+      "text": "A rating engine that emits levels rather than currency is not a regulated activity, needs no carrier and no loss history, and is therefore buildable today. Money is stage 2.",
+      "source": "insurance/llms.txt",
+      "verified": true
+    },
+    {
+      "chapter": "05__a-placement-not-an-agent.md",
+      "text": "the insurance for Claude running on a desktop under a user identity should be higher than the insurance of Claude running on the web",
+      "source": "briefs/v0.33.72__strategy-brief__insurance-without-money-first-the-rating-is-the-product-and-micro-policies-scale.md",
+      "verified": true
+    },
+    {
+      "chapter": "05__a-placement-not-an-agent.md",
+      "text": "A rating attaches to a placement — an agent in an environment under an identity — not to an agent and not to a vendor.",
+      "source": "insurance/src/01__the-rating.md",
+      "verified": true
+    },
+    {
+      "chapter": "05__a-placement-not-an-agent.md",
+      "text": "like when you have celebrities or you have somebody who they will insure, you know, you know, the right hand of an individual or a footballer or a golfer or a sportsman",
+      "source": "briefs/v0.33.72__strategy-brief__insurance-without-money-first-the-rating-is-the-product-and-micro-policies-scale.md",
+      "verified": true
+    },
+    {
+      "chapter": "06__two-channels-that-never-merge.md",
+      "text": "it's kind of like when you fill a questionnaire to get insurance. You know, like do you smoke? Do you do this? Like wellness insurance",
+      "source": "briefs/v0.33.72__strategy-brief__insurance-without-money-first-the-rating-is-the-product-and-micro-policies-scale.md",
+      "verified": true
+    },
+    {
+      "chapter": "06__two-channels-that-never-merge.md",
+      "text": "**The gap between the card and the twin is itself a rating input** — an operator who declares a containment control the twin cannot find has told you something.",
+      "source": "insurance/src/01__the-rating.md",
+      "verified": true
+    },
+    {
+      "chapter": "06__two-channels-that-never-merge.md",
+      "text": "A connector labels the evidence class of everything it imports.",
+      "source": "briefs/v0.33.76__strategy-brief__not-in-line-the-schemas-are-the-product-and-the-scale-is-one-to-five.md",
+      "verified": true
+    },
+    {
+      "chapter": "07__one-to-five-settled.md",
+      "text": "sometimes even mapping insurance level one to five is good enough, right? Because you you don't have that's less judgmental. Still allows big decisions versus one to 100, or to actually have pound signs, dollar signs connected directly to a particular event",
+      "source": "briefs/v0.33.76__strategy-brief__not-in-line-the-schemas-are-the-product-and-the-scale-is-one-to-five.md",
+      "verified": true
+    },
+    {
+      "chapter": "07__one-to-five-settled.md",
+      "text": "**A coarse band is arguable in a way a decimal is not.** A team told they are at level 3 argues about what the band means — the useful argument. A team told they are at 62.4 argues about arithmetic, which is not.",
+      "source": "insurance/src/05__not-in-line.md",
+      "verified": true
+    },
+    {
+      "chapter": "07__one-to-five-settled.md",
+      "text": "**What do the bands represent — even steps or widening ones?** — **open**, and it is the band-definition question already recorded as unanswered.",
+      "source": "insurance/src/08__the-world-model.md",
+      "verified": true
+    },
+    {
+      "chapter": "08__the-roles-without-the-money.md",
+      "text": "the components of the insurance industry have again they battle hardened. Like you know, we shouldn't be reinventing the wheel",
+      "source": "briefs/v0.33.73__strategy-brief__the-ecosystem-without-the-money-insurance-as-a-go-live-gate.md",
+      "verified": true
+    },
+    {
+      "chapter": "08__the-roles-without-the-money.md",
+      "text": "A level computed by the party that wants to ship is theatre even when it is recomputable.",
+      "source": "insurance/src/02__the-ecosystem-and-the-gate.md",
+      "verified": true
+    },
+    {
+      "chapter": "08__the-roles-without-the-money.md",
+      "text": "It's an insurance that can then be used to basically define: Do we go live with this product?",
+      "source": "briefs/v0.33.73__strategy-brief__the-ecosystem-without-the-money-insurance-as-a-go-live-gate.md",
+      "verified": true
+    },
+    {
+      "chapter": "08__the-roles-without-the-money.md",
+      "text": "**So the rating engine declares its own tier, on its own face** — as the mandate hook's refusal banner does. A control that overstates itself is worse than none; an insurance gate that overstates itself is worse still, because it will be believed",
+      "source": "insurance/src/02__the-ecosystem-and-the-gate.md",
+      "verified": true
+    },
+    {
+      "chapter": "08__the-roles-without-the-money.md",
+      "text": "Removing the payout removes one channel of moral hazard and opens another",
+      "source": "briefs/v0.33.82__audit-brief__the-eleven-readings-audited-against-their-transcripts.md",
+      "verified": true
+    },
+    {
+      "chapter": "08__the-roles-without-the-money.md",
+      "text": "The rating prices one side of a two-sided question, and says so.",
+      "source": "insurance/src/02__the-ecosystem-and-the-gate.md",
+      "verified": true
+    },
+    {
+      "chapter": "09__who-pays-for-the-delta-nobody-chose.md",
+      "text": "right now my only options is to give it read only or read write. Right, I don't have more granularity than that",
+      "source": "briefs/v0.33.74__strategy-brief__who-pays-for-the-delta-nobody-chose-and-the-rating-that-moves-overnight.md",
+      "verified": true
+    },
+    {
+      "chapter": "09__who-pays-for-the-delta-nobody-chose.md",
+      "text": "A rating that does not separate these is unfair and useless in one move.",
+      "source": "insurance/src/03__who-pays-and-the-moving-rating.md",
+      "verified": true
+    },
+    {
+      "chapter": "09__who-pays-for-the-delta-nobody-chose.md",
+      "text": "**Elective delta carries a cost to close.** *Latent* delta — offered but impractical — is simply its high-cost region",
+      "source": "insurance/src/06__the-broker-market.md",
+      "verified": true
+    },
+    {
+      "chapter": "09__who-pays-for-the-delta-nobody-chose.md",
+      "text": "is Claude going to actually have a policy on its own to cover any mistakes?",
+      "source": "briefs/v0.33.74__strategy-brief__who-pays-for-the-delta-nobody-chose-and-the-rating-that-moves-overnight.md",
+      "verified": true
+    },
+    {
+      "chapter": "09__who-pays-for-the-delta-nobody-chose.md",
+      "text": "any party claiming to reduce somebody else's exposure should carry cover against being wrong about it",
+      "source": "insurance/src/03__who-pays-and-the-moving-rating.md",
+      "verified": true
+    },
+    {
+      "chapter": "09__who-pays-for-the-delta-nobody-chose.md",
+      "text": "The estate cannot say who pays. **It can make the question answerable rather than a swearing contest**, which is what the parties actually lack.",
+      "source": "insurance/src/03__who-pays-and-the-moving-rating.md",
+      "verified": true
+    },
+    {
+      "chapter": "10__the-rating-that-moves.md",
+      "text": "There's a vulnerability on GitHub that allows Git, you know, any repo, any agent to now do a lot more damage on GitHub, right? Or even maybe access other GitHub accounts, right? Ultimately, it's your agent, it's the company's agent who's doing all that stuff, right? So we, you know, immediately the insurance here could change, right? It could change overnight, could change in an hour or in half an hour",
+      "source": "briefs/v0.33.74__strategy-brief__who-pays-for-the-delta-nobody-chose-and-the-rating-that-moves-overnight.md",
+      "verified": true
+    },
+    {
+      "chapter": "10__the-rating-that-moves.md",
+      "text": "**rating = f(placement twin, world state, mandate)** — and the twin and the world have **independent freshness**.",
+      "source": "briefs/v0.33.74__strategy-brief__who-pays-for-the-delta-nobody-chose-and-the-rating-that-moves-overnight.md",
+      "verified": true
+    },
+    {
+      "chapter": "10__the-rating-that-moves.md",
+      "text": "A re-rating states what changed, which way, and which controls are implicated. Never a multiplier",
+      "source": "insurance/src/03__who-pays-and-the-moving-rating.md",
+      "verified": true
+    },
+    {
+      "chapter": "10__the-rating-that-moves.md",
+      "text": "**a \"pull the plug\" that emails somebody is an expectation; one that revokes a mandate the agent's own hook honours is a setting; one the agent cannot reach is a boundary.** It declares which.",
+      "source": "insurance/src/03__who-pays-and-the-moving-rating.md",
+      "verified": true
+    },
+    {
+      "chapter": "10__the-rating-that-moves.md",
+      "text": "**Does not exist anywhere.** Advisory feeds describe software, not capability trees",
+      "source": "insurance/src/03__who-pays-and-the-moving-rating.md",
+      "verified": true
+    },
+    {
+      "chapter": "11__the-broker-market.md",
+      "text": "the practical and the business case for deploying these brokers is that they reduce the insurance level of a particular deployment",
+      "source": "briefs/v0.33.77__strategy-brief__the-broker-market-is-driven-by-insurance-and-a-broker-must-carry-its-own.md",
+      "verified": true
+    },
+    {
+      "chapter": "11__the-broker-market.md",
+      "text": "they should actually have an insurance policy at their end that will underwrite any mistakes",
+      "source": "briefs/v0.33.77__strategy-brief__the-broker-market-is-driven-by-insurance-and-a-broker-must-carry-its-own.md",
+      "verified": true
+    },
+    {
+      "chapter": "11__the-broker-market.md",
+      "text": "A broker's claimed level reduction is computed by the rating method, never by the broker",
+      "source": "briefs/v0.33.77__strategy-brief__the-broker-market-is-driven-by-insurance-and-a-broker-must-carry-its-own.md",
+      "verified": true
+    },
+    {
+      "chapter": "11__the-broker-market.md",
+      "text": "The rating nets what a broker removes against what it adds, and the net is not automatically negative",
+      "source": "briefs/v0.33.77__strategy-brief__the-broker-market-is-driven-by-insurance-and-a-broker-must-carry-its-own.md",
+      "verified": true
+    },
+    {
+      "chapter": "11__the-broker-market.md",
+      "text": "A broker's mis-rating propagates to every customer whose level it reduced.",
+      "source": "insurance/src/06__the-broker-market.md",
+      "verified": true
+    },
+    {
+      "chapter": "11__the-broker-market.md",
+      "text": "ideally the permission should be done dynamically, the grant should be done dynamically, and we should be using PKI and other authorization models and other modes to operate",
+      "source": "briefs/v0.33.77__strategy-brief__the-broker-market-is-driven-by-insurance-and-a-broker-must-carry-its-own.md",
+      "verified": true
+    },
+    {
+      "chapter": "12__the-policy-is-a-statement.md",
+      "text": "a policy becomes something that can sign something. So you. So what's cool about this is you can now, for example, say, hey, I'm only going to give you the data if you have a particular policy from an entity that I trust",
+      "source": "briefs/v0.33.78__strategy-brief__the-policy-is-a-signed-statement-and-the-relying-party-is-the-boundary.md",
+      "verified": true
+    },
+    {
+      "chapter": "12__the-policy-is-a-statement.md",
+      "text": "policy/v0 is a mandate-shaped statement issued by a rater rather than an operator",
+      "source": "briefs/v0.33.78__strategy-brief__the-policy-is-a-signed-statement-and-the-relying-party-is-the-boundary.md",
+      "verified": true
+    },
+    {
+      "chapter": "12__the-policy-is-a-statement.md",
+      "text": "A signature proves possession of a private key and proves nothing about trustworthiness.",
+      "source": "briefs/v0.33.78__strategy-brief__the-policy-is-a-signed-statement-and-the-relying-party-is-the-boundary.md",
+      "verified": true
+    },
+    {
+      "chapter": "12__the-policy-is-a-statement.md",
+      "text": "I'm only going to give you the data if you have a policy",
+      "source": "insurance/src/07__the-policy-as-a-statement.md",
+      "verified": true
+    },
+    {
+      "chapter": "12__the-policy-is-a-statement.md",
+      "text": "**The policy handshake is the first mechanism in this pivot that can reach tier `boundary`** — and it gets there without this project standing in the line, because the enforcement point is the counterparty",
+      "source": "insurance/src/07__the-policy-as-a-statement.md",
+      "verified": true
+    },
+    {
+      "chapter": "12__the-policy-is-a-statement.md",
+      "text": "revocation propagates only at the rate relying parties check, which makes the interval between a party's checks its effective revocation latency",
+      "source": "insurance/src/07__the-policy-as-a-statement.md",
+      "verified": true
+    },
+    {
+      "chapter": "12__the-policy-is-a-statement.md",
+      "text": "A per-verification price is a tax on the behaviour the system most wants",
+      "source": "briefs/v0.33.78__strategy-brief__the-policy-is-a-signed-statement-and-the-relying-party-is-the-boundary.md",
+      "verified": true
+    },
+    {
+      "chapter": "13__the-three-clocks.md",
+      "text": "it's only valid if you have a backup with less than 24 hours. So that means that you know you cannot make a change to the database if the backup, for example, last backup failed, or if you don't have evidence that the last backup is actually operating",
+      "source": "briefs/v0.33.81__strategy-brief__the-schemas-the-clocks-and-a-warranty-is-a-fact-with-a-maximum-age.md",
+      "verified": true
+    },
+    {
+      "chapter": "13__the-three-clocks.md",
+      "text": "**A warranty is a fact plus a maximum age** — `{fact: last_backup_succeeded, max_age: 24h}` — and it fails **three** ways: the fact is false, the fact is stale, or the fact is **unknown**.",
+      "source": "insurance/src/10__the-schemas-and-the-clocks.md",
+      "verified": true
+    },
+    {
+      "chapter": "13__the-three-clocks.md",
+      "text": "A usage-boxed policy needs an in-line counter, which this project is not",
+      "source": "insurance/src/10__the-schemas-and-the-clocks.md",
+      "verified": true
+    },
+    {
+      "chapter": "13__the-three-clocks.md",
+      "text": "An API is operated. A schema is implemented.",
+      "source": "briefs/v0.33.81__strategy-brief__the-schemas-the-clocks-and-a-warranty-is-a-fact-with-a-maximum-age.md",
+      "verified": true
+    },
+    {
+      "chapter": "14__not-in-line.md",
+      "text": "our job is to be the broker, right? Not the broker.",
+      "source": "briefs/v0.33.76__strategy-brief__not-in-line-the-schemas-are-the-product-and-the-scale-is-one-to-five.md",
+      "verified": true
+    },
+    {
+      "chapter": "14__not-in-line.md",
+      "text": "we basically are basically in in that loop, right? And and that's that's our bit",
+      "source": "briefs/v0.33.76__strategy-brief__not-in-line-the-schemas-are-the-product-and-the-scale-is-one-to-five.md",
+      "verified": true
+    },
+    {
+      "chapter": "14__not-in-line.md",
+      "text": "**This project can never itself be a boundary.** It ships a check that *becomes* one when installed by somebody who is in line.",
+      "source": "insurance/src/05__not-in-line.md",
+      "verified": true
+    },
+    {
+      "chapter": "14__not-in-line.md",
+      "text": "A rating does not replace acceptance. It makes acceptance specific.",
+      "source": "insurance/src/05__not-in-line.md",
+      "verified": true
+    },
+    {
+      "chapter": "15__the-world-model.md",
+      "text": "we need to now create this sort of gamification, this sort of environment, this sort of game we have that fundamentally allow us to simulate this",
+      "source": "briefs/v0.33.79__strategy-brief__the-world-model-an-mvp-that-explains-and-must-show-its-own-emptiness.md",
+      "verified": true
+    },
+    {
+      "chapter": "15__the-world-model.md",
+      "text": "An instrument answers a question somebody already knows how to ask. An explainer creates the person who can ask it.",
+      "source": "briefs/v0.33.79__strategy-brief__the-world-model-an-mvp-that-explains-and-must-show-its-own-emptiness.md",
+      "verified": true
+    },
+    {
+      "chapter": "15__the-world-model.md",
+      "text": "A polished simulation is the most effective mechanism yet devised for making a demonstration look like a product.",
+      "source": "briefs/v0.33.79__strategy-brief__the-world-model-an-mvp-that-explains-and-must-show-its-own-emptiness.md",
+      "verified": true
+    },
+    {
+      "chapter": "15__the-world-model.md",
+      "text": "unmeasured places look unmeasured. Fixture identities look like fixtures. Mechanisms that do not exist are visibly absent, not smoothly rendered.",
+      "source": "insurance/src/08__the-world-model.md",
+      "verified": true
+    },
+    {
+      "chapter": "16__make-them-insurable.md",
+      "text": "almost like the tagline is \"make your agents insurable, which is quite an interesting angle, because it also allows us to do a nice market research",
+      "source": "briefs/v0.33.80__strategy-brief__make-your-agents-insurable-and-the-first-fact-this-pivot-would-produce.md",
+      "verified": true
+    },
+    {
+      "chapter": "16__make-them-insurable.md",
+      "text": "what insurance exists for agents? Like, can you insure Claude? Can you insure you know my Claude code session? Can you insure this session? And how much does it cost? And what does it cover?",
+      "source": "briefs/v0.33.80__strategy-brief__make-your-agents-insurable-and-the-first-fact-this-pivot-would-produce.md",
+      "verified": true
+    },
+    {
+      "chapter": "16__make-them-insurable.md",
+      "text": "The survey is the first thing in this series that could be wrong in a way the world would correct.",
+      "source": "briefs/v0.33.80__strategy-brief__make-your-agents-insurable-and-the-first-fact-this-pivot-would-produce.md",
+      "verified": true
+    },
+    {
+      "chapter": "16__make-them-insurable.md",
+      "text": "\"Make your agents insurable\" must not become \"make your agents look insurable.\"",
+      "source": "briefs/v0.33.80__strategy-brief__make-your-agents-insurable-and-the-first-fact-this-pivot-would-produce.md",
+      "verified": true
+    },
+    {
+      "chapter": "16__make-them-insurable.md",
+      "text": "**A control declared on the card that the twin cannot find is not merely a weak input. It is the shape of material non-disclosure** — the thing that voids a policy rather than merely worsening a level",
+      "source": "insurance/src/09__make-them-insurable.md",
+      "verified": true
+    },
+    {
+      "chapter": "16__make-them-insurable.md",
+      "text": "The survey is measure.py pointed at a market instead of a container",
+      "source": "briefs/v0.33.80__strategy-brief__make-your-agents-insurable-and-the-first-fact-this-pivot-would-produce.md",
+      "verified": true
+    },
+    {
+      "chapter": "16__make-them-insurable.md",
+      "text": "the survey will find no product insuring an agent placement as a unit",
+      "source": "insurance/src/09__make-them-insurable.md",
+      "verified": true
+    }
+  ]
+}

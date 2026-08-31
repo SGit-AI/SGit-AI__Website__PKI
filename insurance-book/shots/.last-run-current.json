@@ -1,0 +1,51 @@
+{
+  "tag": "current",
+  "jobs": "current",
+  "port": 9521,
+  "results": [
+    {
+      "id": "f04-insurance-hub",
+      "path": "/insurance/index.html",
+      "out": "f04-insurance-hub.png",
+      "http": 200,
+      "bytes": 361957,
+      "ink": 43.75,
+      "image_sha256": "921d395bf9278620bddcfc62c413c8e06b026ff6dfa3c6ab285ea790d17061a2",
+      "ok": true,
+      "problems": []
+    },
+    {
+      "id": "f05-evidence-classes",
+      "path": "/packs/grant-and-mandate/blocks.html",
+      "out": "f05-evidence-classes.png",
+      "http": 200,
+      "bytes": 363759,
+      "ink": 24.28,
+      "image_sha256": "7b1001af6f9da340cb7c82670e5369ee491451123d8977e1e7ff43fd4cf72bf9",
+      "ok": true,
+      "problems": []
+    },
+    {
+      "id": "f06-no-world-yet",
+      "path": "/simulator/index.html",
+      "out": "f06-no-world-yet.png",
+      "http": 200,
+      "bytes": 333798,
+      "ink": 43.08,
+      "image_sha256": "7adbef21be7a60d3457890d0364fae039537251f01d08d104d5b6f7e351e247e",
+      "ok": true,
+      "problems": []
+    },
+    {
+      "id": "f07-workbench",
+      "path": "/workbench/index.html",
+      "out": "f07-workbench.png",
+      "http": 200,
+      "bytes": 455659,
+      "ink": 33.16,
+      "image_sha256": "7cd1a85a7949ee533d680f1aacdb0832ba3c2641c59d903e9905015097741547",
+      "ok": true,
+      "problems": []
+    }
+  ]
+}

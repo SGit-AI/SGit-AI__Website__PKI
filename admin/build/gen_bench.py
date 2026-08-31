@@ -267,6 +267,31 @@ BENCH = [
          "same-origin only: every fetch is a reference to a published estate document; nothing typed here leaves the browser"],
   code="workbench/"),
 
+ dict(slug="the-insurance-book", name="The Delta Is Where the Insurance Lives (the insurance book)", state="live",
+  where="../insurance-book/index.html", since="v0.1.61", updated="v0.1.61",
+  origin="commissioned in one sentence by the project lead on 31 August — <a href='../insurance-book/BRIEF.md'>preserved verbatim</a> — from the ten insurance memos and the pivot briefing",
+  one_line="The second volume, by the method of the first: ten voice memos and a pivot briefing, filed "
+           "verbatim before they were read, made into one argument — the gap between what an agent can "
+           "do and what it was authorised to do is an insurable exposure, and the honest first product "
+           "is a rating anybody can recompute, not a premium nobody can check. Seventeen chapters in "
+           "five parts, with the audit's six defects walked in full.",
+  demonstrates=[
+    "<b>The corpus's own disciplines applied to the corpus</b>: 76 quotations re-read out of the memo transcripts, doctrine and machine surfaces on every build — a quote not found where it claims to be fails the build, and 19 of the writing session's first attempts did fail it, mostly for dropping the sources' own emphasis",
+    "<b>Every count computed, never typed</b>: 20 gen:stat markers — memo and doctrine counts from the manifest, decision counts from the change-control sources, the 41-against-1 excess from the register's own view, the arc's release span from the tags. The first build corrected four of the writer's own numbers, hours after the writer had read an audit about writers typing numbers",
+    "<b>Figures from the version their caption names</b>: eight, including the insurance hub at v0.1.51 — preserved at its tag, believing the series was eight memos — beside the hub today, whose count is computed because believing turned out to be the wrong verb",
+    "<b>A coherent argument, not a compilation</b>: memo 1 contradicts memo 0 and the contradiction is kept and answered; memo 6 corrects memo 3 in both documents; the audit's six defects are the closing chapter rather than an appendix",
+    "<b>The PDF reads start to finish offline</b> — every figure a data URI, every URL that matters printed in full"],
+  does_not_prove=[
+    "<b>Anything the corpus does not prove.</b> The book inherits all twenty of the insurance folder's does-not-prove entries and adds none of its own evidence: nothing described is insurance, nothing described is built, and no external fact has been gathered",
+    "That the book's coherence is the corpus's. A book's job is the through-line, and a through-line is a choice — the five-part structure and the title are the writing session's, recorded as such in BRIEF.md",
+    "That a second volume means the method scales: same harness, same gates, one writer, zero readers so far",
+    "That anyone needed the book. The doctrine documents are shorter, the memos are primary, and the book's claim to exist is the argument between them — which is a claim about readers, tested by none yet"],
+  gates=["quotes: 76/76 re-read out of the source they name on every build; a miss fails",
+         "stats: 20 computed markers; a drifted count fails in check mode",
+         "figures: past figures re-derive at their tag; fresh figures must match the live page, and the build fails when the site moves on — which it will, next release",
+         "hashes: book.json records the SHA-256 of every chapter; captions: every figure says what to notice"],
+  code="insurance-book/ — content/, build.py, build_quotes.py, gen_pages.py, gen_pdf.mjs, shots/"),
+
  dict(slug="the-book", name="A Key Means Nothing Alone (the book)", state="live",
   where="../book/index.html", since="v0.1.33", updated="v0.1.36",
   origin="a <a href='../book/brief.html'>commissioning brief</a>, draft-2, modelled on graphs.sgit.ai's three finished books",

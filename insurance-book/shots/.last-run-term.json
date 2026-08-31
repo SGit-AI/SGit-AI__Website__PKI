@@ -1,0 +1,40 @@
+{
+  "tag": "current",
+  "jobs": "term",
+  "port": 9520,
+  "results": [
+    {
+      "id": "f01-empty-seat",
+      "path": "/insurance-book/shots/term/t01-empty-seat.html",
+      "out": "f01-empty-seat.png",
+      "http": 200,
+      "bytes": 347975,
+      "ink": 3.36,
+      "image_sha256": "d63312e3e738bbba770695f512346c5bd2c9751cf97eec9ebdff7f03a1f454c8",
+      "ok": true,
+      "problems": []
+    },
+    {
+      "id": "f02-the-rule",
+      "path": "/insurance-book/shots/term/t02-the-rule.html",
+      "out": "f02-the-rule.png",
+      "http": 200,
+      "bytes": 399024,
+      "ink": 3.56,
+      "image_sha256": "6c8c4b378293021fd00119a348f461c82c177aee74042e0605bbfbff3437f3fb",
+      "ok": true,
+      "problems": []
+    },
+    {
+      "id": "f03-permit-refused",
+      "path": "/insurance-book/shots/term/t03-permit-refused.html",
+      "out": "f03-permit-refused.png",
+      "http": 200,
+      "bytes": 125254,
+      "ink": 4.84,
+      "image_sha256": "2c72400573f66b85fdebc0f7c0953d1156de978010591a6480c01b7b6ac6e075",
+      "ok": true,
+      "problems": []
+    }
+  ]
+}

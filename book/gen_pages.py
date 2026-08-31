@@ -17,6 +17,9 @@ TPL = (BOOK / "brief.html").read_text(encoding="utf-8")
 head_open = TPL[:TPL.index("<title>")]
 nav = TPL[TPL.index('<nav class="site">'):TPL.index('<main class="doc">')]
 footer = TPL[TPL.index('<footer class="site">'):TPL.index("</body>")]
+# the lifted slice carries brief.html's own reader scripts; strip them, because
+# page() appends exactly one pair — rebuilt pages were doubling them otherwise
+footer = footer.split("<script")[0]
 
 book = json.loads((BOOK / "book.json").read_text())
 shots = json.loads((BOOK / "shots" / "shots.json").read_text())

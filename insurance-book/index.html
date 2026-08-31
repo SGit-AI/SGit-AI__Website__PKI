@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Delta Is Where the Insurance Lives — the insurance book &middot; pki.sgit.ai</title>
+<meta name="description" content="Rating agents without money, and the empty seat a policy fills. Ten voice memos and a pivot briefing, recorded over two days at the end of August 2026, read into doctrine, audited against their own transcripts, and here made one argument: the gap between what an agent can do and what it was authorised to do is an insurable exposure — and the honest first product is a rating anybody can recompute, not a premium nobody can check.">
+<link rel="canonical" href="https://pki.sgit.ai/insurance-book/index.html">
+<meta property="og:url" content="https://pki.sgit.ai/insurance-book/index.html">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/bench.css">
+<link rel="stylesheet" href="book.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
+  <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.61</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../failure/index.html">The registry<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../registry/index.html">&#9679; The registry, live</a>
+      <a class="sl" href="../failure/index.html">Why they don't exist</a>
+      <a class="sl" href="../rules/index.html">The four rules</a>
+      <a class="sl" href="../mandate/index.html">Identity &amp; mandate</a>
+      <a class="sl" href="../roadmap/index.html">Build order</a>
+      <a class="sl" href="../rules/prior-art.html">Prior art</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../bootstrap/index.html">The layers<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../bootstrap/index.html">The bootstrap trap</a>
+      <a class="sl" href="../enrolment/index.html">Enrolment</a>
+      <a class="sl" href="../execution/index.html">The execution broker</a>
+      <a class="sl" href="../shipped/index.html">What already ships</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../assess/index.html">Map your case<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../assess/index.html">Map your own case</a>
+      <a class="sl" href="../assess/library.html">The library of trees</a>
+      <a class="sl" href="../packs/map-your-case/readers/index.html">Synthetic readers</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../origins/index.html">Origins<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../origins/index.html">Origins: 2026</a>
+      <a class="sl" href="../origins/review.html">The review, redacted</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../bench/index.html">The bench<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../bench/index.html">&#9679; The bench &mdash; what is built</a>
+      <a class="sl" href="../simulator/index.html">&#9679; The simulator &mdash; play a card</a>
+      <a class="sl" href="../experiments/index.html">&#9679; Experiments</a>
+      <a class="sl" href="../experiments/the-room/index.html">&mdash; the chain room</a>
+      <a class="sl" href="../experiments/the-table/index.html">&mdash; the table</a>
+      <a class="sl" href="../experiments/push-to-github/index.html">&mdash; push to GitHub</a>
+      <a class="sl" href="../experiments/the-deploy/index.html">&mdash; the deploy</a>
+      <a class="sl" href="../experiments/the-control-room/index.html">&mdash; the control room</a>
+      <a class="sl" href="../workbench/index.html">&#9679; The workbench (app)</a>
+      <a class="sl" href="../registry/index.html">The register, live</a>
+      <a class="sl" href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
+      <a class="sl" href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
+      <a class="sl" href="../assess/index.html">Map your own case</a>
+      <a class="sl" href="../book/index.html">The book (commissioned)</a>
+      <a class="sl" href="../book/brief.html">&mdash; its commissioning brief</a>
+      <a class="sl here" href="../insurance-book/index.html">The insurance book</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../insurance/index.html">Insurance<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../insurance/index.html">&#9679; Insurance for agents</a>
+      <a class="sl here" href="../insurance-book/index.html">&#9679; The insurance book</a>
+      <a class="sl" href="../insurance/what-this-is.html">&mdash; what this is, and the rule</a>
+      <a class="sl" href="../insurance/the-rating.html">&mdash; the rating</a>
+      <a class="sl" href="../insurance/the-ecosystem-and-the-gate.html">&mdash; the ecosystem &amp; the gate</a>
+      <a class="sl" href="../insurance/who-pays-and-the-moving-rating.html">&mdash; who pays, &amp; the moving rating</a>
+      <a class="sl" href="../insurance/why-insurance-and-what-broke-it.html">&mdash; why insurance</a>
+      <a class="sl" href="../insurance/not-in-line.html">&mdash; not in line (scale 1&ndash;5)</a>
+      <a class="sl" href="../insurance/the-broker-market.html">&mdash; the broker market</a>
+      <a class="sl" href="../insurance/the-policy-as-a-statement.html">&mdash; the policy as a statement</a>
+      <a class="sl" href="../insurance/the-world-model.html">&mdash; the world model (the MVP)</a>
+      <a class="sl" href="../insurance/make-them-insurable.html">&mdash; make them insurable</a>
+      <a class="sl" href="../insurance/the-schemas-and-the-clocks.html">&mdash; the schemas &amp; the clocks</a>
+      <a class="sl" href="../insurance/llms.txt">insurance/llms.txt</a>
+      <a class="sl" href="../documents/agent-insurance.html">The pivot briefing (memo 0)</a>
+      <a class="sl" href="../documents/insurance-without-money.html">Rating before money (memo 1)</a>
+      <a class="sl" href="../documents/insurance-ecosystem.html">The go-live gate (memo 2)</a>
+      <a class="sl" href="../documents/who-pays-for-the-delta.html">Who pays (memo 3)</a>
+      <a class="sl" href="../documents/why-insurance.html">Why insurance (memo 4)</a>
+      <a class="sl" href="../documents/not-in-line.html">Not in line (memo 5)</a>
+      <a class="sl" href="../documents/the-broker-market.html">The broker market (memo 6)</a>
+      <a class="sl" href="../documents/the-policy-as-a-statement.html">The policy statement (memo 7)</a>
+      <a class="sl" href="../documents/the-world-model.html">The world model (memo 8)</a>
+      <a class="sl" href="../documents/make-them-insurable.html">Make them insurable (memo 9)</a>
+      <a class="sl" href="../documents/the-schemas-and-the-clocks.html">Schemas &amp; clocks (memo 10)</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../documents/index.html">The documents</a>
+      <a class="sl" href="../data/index.html">The data viewer</a>
+      <a class="sl" href="../packs/index.html">Dev packs</a>
+      <a class="sl" href="../packs/registry-mvp/index.html">The registry MVP pack</a>
+      <a class="sl" href="../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
+      <a class="sl" href="../packs/map-your-case/index.html">The Map Your Case pack</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../admin/versions.html">Release history</a>
+      <a class="sl" href="../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+  <script src="../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / insurance-book</div>
+<h1>The Delta Is Where the Insurance Lives</h1>
+<p class="lead">Rating agents without money, and the empty seat a policy fills. Ten voice memos and a pivot briefing, recorded over two days at the end of August 2026, read into doctrine, audited against their own transcripts, and here made one argument: the gap between what an agent can do and what it was authorised to do is an insurable exposure — and the honest first product is a rating anybody can recompute, not a premium nobody can check.</p>
+
+<div class="bk-meta">
+  <span><b>17</b> chapters in five parts</span>
+  <span><b>17,868</b> words</span>
+  <span><b>8</b> figures, each taken at the tag its caption names</span>
+  <span><b>76</b> verified quotations</span>
+  <span><b>44</b> claims drawn by the writer</span>
+</div>
+
+<div class="bk-downloads">
+  <a class="bk-dl" href="the-delta-is-where-the-insurance-lives.pdf"><b>&#128196; The PDF</b>
+    <span>Reads start to finish offline, with no link followed</span></a>
+  <a class="bk-dl" href="18-reference-card.html"><b>&#127183; The reference card</b>
+    <span>One page, written to be pasted into an agent session</span></a>
+  <a class="bk-dl" href="llms.txt"><b>&#129302; llms.txt</b>
+    <span>The book's front door, carrying the positions a summary must not drop</span></a>
+  <a class="bk-dl" href="book.json"><b>&#123;&#125; book.json</b>
+    <span>Every chapter with the SHA-256 of its markdown; every figure with its digest</span></a>
+</div>
+
+<div class="bk-honesty bk-honesty--big">
+<b>Before anything else.</b> Nothing this book describes <b>is insurance</b> &mdash; stage 1
+emits a rating, transfers no risk, and promises no payout, which is exactly why it can be
+built. <b>Nothing this book describes is built</b>: ten memos are read into doctrine, and the
+two specified MVPs remain specifications. <b>No external evidence has been gathered</b> &mdash;
+the market survey that could prove any of this wrong has not been run. The register the rating
+would read is <b>fixtures</b>, with private keys published on purpose. A reader who finishes
+believing an agent can be insured today has read a book that failed.
+<a href="00-front-matter.html">The front matter states all eight positions &rarr;</a>
+</div>
+
+<h2 id="contents">Contents</h2>
+<div class="bk-toclist"><div class="bk-partrow">Front matter</div><a class="bk-row" href="00-front-matter.html"><span class="bk-num">00</span><span class="bk-title">The Delta Is Where the Insurance Lives</span><span class="bk-words">929w</span></a><div class="bk-partrow">Part one — The pivot</div><a class="bk-row" href="01-the-empty-seat.html"><span class="bk-num">01</span><span class="bk-title">1 · The empty seat</span><span class="bk-words">1,282w</span></a><a class="bk-row" href="02-two-insurances-one-subject.html"><span class="bk-num">02</span><span class="bk-title">2 · Two insurances, one subject</span><span class="bk-words">789w</span></a><a class="bk-row" href="03-what-broke-it-last-time.html"><span class="bk-num">03</span><span class="bk-title">3 · What broke it last time</span><span class="bk-words">1,110w</span></a><div class="bk-partrow">Part two — The rating</div><a class="bk-row" href="04-the-rule-rating-without-money.html"><span class="bk-num">04</span><span class="bk-title">4 · The rule: rating without money</span><span class="bk-words">1,058w</span></a><a class="bk-row" href="05-a-placement-not-an-agent.html"><span class="bk-num">05</span><span class="bk-title">5 · A placement, not an agent</span><span class="bk-words">1,138w</span></a><a class="bk-row" href="06-two-channels-that-never-merge.html"><span class="bk-num">06</span><span class="bk-title">6 · Two channels that never merge</span><span class="bk-words">861w</span></a><a class="bk-row" href="07-one-to-five-settled.html"><span class="bk-num">07</span><span class="bk-title">7 · One to five, settled</span><span class="bk-words">834w</span></a><div class="bk-partrow">Part three — Who pays, who rates, who backs the claim</div><a class="bk-row" href="08-the-roles-without-the-money.html"><span class="bk-num">08</span><span class="bk-title">8 · The roles without the money</span><span class="bk-words">1,114w</span></a><a class="bk-row" href="09-who-pays-for-the-delta-nobody-chose.html"><span class="bk-num">09</span><span class="bk-title">9 · Who pays for the delta nobody chose</span><span class="bk-words">1,141w</span></a><a class="bk-row" href="10-the-rating-that-moves.html"><span class="bk-num">10</span><span class="bk-title">10 · The rating that moves</span><span class="bk-words">965w</span></a><a class="bk-row" href="11-the-broker-market.html"><span class="bk-num">11</span><span class="bk-title">11 · The broker market</span><span class="bk-words">914w</span></a><div class="bk-partrow">Part four — The machinery</div><a class="bk-row" href="12-the-policy-is-a-statement.html"><span class="bk-num">12</span><span class="bk-title">12 · The policy is a statement</span><span class="bk-words">1,230w</span></a><a class="bk-row" href="13-the-three-clocks.html"><span class="bk-num">13</span><span class="bk-title">13 · The three clocks</span><span class="bk-words">1,075w</span></a><a class="bk-row" href="14-not-in-line.html"><span class="bk-num">14</span><span class="bk-title">14 · Not in line</span><span class="bk-words">916w</span></a><div class="bk-partrow">Part five — The proof and its absence</div><a class="bk-row" href="15-the-world-model.html"><span class="bk-num">15</span><span class="bk-title">15 · The world model</span><span class="bk-words">1,153w</span></a><a class="bk-row" href="16-make-them-insurable.html"><span class="bk-num">16</span><span class="bk-title">16 · Make them insurable</span><span class="bk-words">1,157w</span></a><a class="bk-row" href="17-what-none-of-this-proves.html"><span class="bk-num">17</span><span class="bk-title">17 · What none of this proves</span><span class="bk-words">1,131w</span></a><div class="bk-partrow">End matter</div><a class="bk-row" href="18-reference-card.html"><span class="bk-num">18</span><span class="bk-title">Reference card</span><span class="bk-words">648w</span></a><a class="bk-row" href="19-colophon.html"><span class="bk-num">19</span><span class="bk-title">Colophon</span><span class="bk-words">705w</span></a></div>
+
+<h2 id="provenance">What the memos state, and what this book concluded</h2>
+<p>Every load-bearing claim about what the memos or the estate <i>mean</i> is marked, and the
+marking is a sentence rather than a sigil. <b>76 passages
+are quoted verbatim</b> &mdash; from the memo transcripts filed as briefs, the doctrine, and the
+estate's own artefacts &mdash; each with a source that is <i>discovered rather than asserted</i>
+and <b>re-read out of that source on every build</b>: a quote not found where it claims to be
+fails the build. <b>44 claims are the writing session's own
+reasoning</b>, shown in the reader's view rather than in a note.
+<b>Do not treat the drawn claims as the project lead's positions.</b>
+Every quotation and its source: <a href="quotes.json">quotes.json</a>.</p>
+
+<h2 id="figures">The figures, and the two gates</h2>
+<p>Every figure was taken from the version its caption names: a <code>git worktree</code> at the
+tag, a one-shot server on a port used once and never again, a headless browser killed in a block
+that runs whether the capture succeeded or failed. Each carries the page, the tag, and the
+SHA-256 of that page's bytes at that tag. A figure of a <b>past</b> version is
+<b>re-derivable</b> &mdash; re-running the harness at that tag reproduces the digest. A figure of
+the site <b>as it stands</b> is <b>fresh</b> &mdash; the digest must match the live page, and
+<b>the build fails when it stops matching</b>, which it will on the next release. That is
+correct and it is inconvenient.</p>
+<div class="tablewrap"><table>
+<tr><th>Figure</th><th>Tag</th><th>Gate</th><th>What to notice</th></tr>
+<tr><td><code>f01-empty-seat</code></td><td><code>current</code></td><td>fresh</td><td>Read the excess_authority object: a grant reaching 41 resources, a mandate covering 1, and &quot;acceptor&quot;: null — the register has been publishing the empty seat since before the pivot existed. The pivot is the observation that the rest of the economy has a name for whoever sits in it.</td></tr><tr><td><code>f02-the-rule</code></td><td><code>current</code></td><td>fresh</td><td>The machine surface states the stage, the rule and the settled scale before it lists a single memo — because an agent that reads only the header must still carry them. Note what stage 1 is not: a regulated activity, a carrier, a promise to pay.</td></tr><tr><td><code>f03-permit-refused</code></td><td><code>current</code></td><td>fresh</td><td>The same tool, two branches, two verdicts — computed from a signed mandate, dated, and reproducible by anyone with the file. A policy handshake would attach to answers of exactly this shape; nothing about the REFUSED line requires anyone to be trusted, only re-run.</td></tr><tr><td><code>f04-insurance-hub</code></td><td><code>current</code></td><td>fresh</td><td>Ten of ten memos processed, and the count is computed from the manifest rather than typed — because this page printed a wrong count once, and the fix was a gate, not an edit. The hub also says what none of it proves, above the fold.</td></tr><tr><td><code>f05-evidence-classes</code></td><td><code>current</code></td><td>fresh</td><td>The estate&#x27;s evidence vocabulary, rendered: every block carries its tier and its evidence class, the border style carries the state as well as the colour, and unknown renders as unknown — never as a blank. The rating&#x27;s two channels are this vocabulary pointed at inputs.</td></tr><tr><td><code>f06-no-world-yet</code></td><td><code>current</code></td><td>fresh</td><td>The simulator: cards, verdicts, a board — an instrument, in memo 8&#x27;s verdict, for somebody who already has the vocabulary. This estate has instruments and a card game. It has no world, and the chapter this figure sits in is the specification for one.</td></tr><tr><td><code>f07-workbench</code></td><td><code>current</code></td><td>fresh</td><td>The control-to-premium loop already runs here: flip the branch-protection fact and the enforcement tier recomputes from the facts rather than a stored label. Rename the output and the rating&#x27;s counterfactual view exists.</td></tr><tr><td><code>f08-hub-at-v0.1.51</code></td><td><code>v0.1.51</code></td><td>re-derivable</td><td>The hub on the day the folder shipped, preserved at its tag: one memo processed, and a series the page then believed was eight. The count later proved wrong twice — this figure is what the audit chapter&#x27;s arithmetic looked like before the gate existed.</td></tr>
+</table></div>
+<p class="dim">The harness is published with the book so any figure can be re-taken rather than
+believed: <a href="shots/travel.sh">travel.sh</a>, <a href="shots/shot.mjs">shot.mjs</a>,
+<a href="shots/transcripts.sh">transcripts.sh</a>, <a href="shots/shots.json">shots.json</a>.
+Gates: <code>python3 insurance-book/build.py --check</code>.</p>
+
+<h2 id="brief">The commission</h2>
+<p>This book was commissioned in one sentence and the sentence is preserved:
+<a href="BRIEF.md">BRIEF.md</a> records the instruction verbatim, what it inherits from the
+first volume's method, and which decisions are the writing session's own &mdash; so they can be
+argued with rather than mistaken for the project lead's.</p>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.61</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The bench</h4>
+    <a href="../bench/index.html">&#9679; What is built</a>
+    <a href="../simulator/index.html">&#9679; The simulator</a>
+    <a href="../workbench/index.html">&#9679; The workbench (app)</a>
+    <a href="../registry/index.html">The register, live</a>
+    <a href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
+    <a href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
+    <a href="../assess/index.html">&#8594; Map your own case</a>
+    <a href="../book/index.html">The book (commissioned)</a>
+    <a href="../book/brief.html">&mdash; its commissioning brief</a>
+    <a href="../insurance-book/index.html">The insurance book</a>
+  </div>
+  <div>
+    <h4>Insurance</h4>
+    <a href="../insurance/index.html">&#9679; Insurance for agents</a>
+    <a href="../insurance-book/index.html">&#9679; The insurance book</a>
+    <a href="../insurance/what-this-is.html">What this is, and the rule</a>
+    <a href="../insurance/the-rating.html">The rating</a>
+    <a href="../insurance/the-ecosystem-and-the-gate.html">The ecosystem &amp; the gate</a>
+    <a href="../insurance/who-pays-and-the-moving-rating.html">Who pays, &amp; the moving rating</a>
+    <a href="../insurance/why-insurance-and-what-broke-it.html">Why insurance</a>
+    <a href="../insurance/not-in-line.html">Not in line</a>
+    <a href="../insurance/the-broker-market.html">The broker market</a>
+    <a href="../insurance/the-policy-as-a-statement.html">The policy as a statement</a>
+    <a href="../insurance/the-world-model.html">The world model (the MVP)</a>
+    <a href="../insurance/make-them-insurable.html">Make them insurable</a>
+    <a href="../insurance/the-schemas-and-the-clocks.html">The schemas &amp; the clocks</a>
+    <a href="../insurance/llms.txt">insurance/llms.txt</a>
+    <a href="../documents/agent-insurance.html">The pivot briefing</a>
+  </div>
+  <div>
+    <h4>The registry</h4>
+    <a href="../failure/index.html">Why they don't exist</a>
+    <a href="../rules/index.html">The four rules</a>
+    <a href="../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../roadmap/index.html">Build order</a>
+    <a href="../rules/prior-art.html">Prior art</a>
+  </div>
+  <div>
+    <h4>The three layers</h4>
+    <a href="../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../enrolment/index.html">Enrolment</a>
+    <a href="../execution/index.html">The execution broker</a>
+    <a href="../shipped/index.html">What already ships</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../origins/index.html">Origins: 2026</a>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../packs/registry-mvp/index.html">The registry MVP pack</a>
+    <a href="../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
+    <a href="../packs/map-your-case/index.html">The Map Your Case pack</a>
+    <a href="../about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../llms.txt">llms.txt</a>
+  </div>
+</div></footer>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+<script src="../assets/mdreader.js"></script>
+</body>
+</html>

@@ -5,7 +5,7 @@
 # collected demonstrations without their limits would manufacture the false
 # assurance this site exists to argue against.
 #
-# 12 of 13 are built and running. Hub: https://pki.sgit.ai/bench/index.html
+# 13 of 14 are built and running. Hub: https://pki.sgit.ai/bench/index.html
 
 ## The register — live
   where     https://pki.sgit.ai/registry/index.html
@@ -123,6 +123,17 @@
     - That the twin matches the environment now — it is a recording; the memo's real-time question needs a re-measurement at decision time, which this app cannot perform and says it cannot
     - That a verified signature carries authority — the issuer is a fixture until N11
     - That evidence-pack/v0 is settled — introduced here, proposed to the pack, adopted by nobody
+
+## The Delta Is Where the Insurance Lives (the insurance book) — live
+  where     https://pki.sgit.ai/insurance-book/index.html
+  code      insurance-book/ — content/, build.py, build_quotes.py, gen_pages.py, gen_pdf.mjs, shots/
+  since     v0.1.61 (last moved v0.1.61)
+  is        The second volume, by the method of the first: ten voice memos and a pivot briefing, filed verbatim before they were read, made into one argument — the gap between what an agent can do and what it was authorised to do is an insurable exposure, and the honest first product is a rating anybody can recompute, not a premium nobody can check. Seventeen chapters in five parts, with the audit's six defects walked in full.
+  DOES NOT PROVE:
+    - Anything the corpus does not prove. The book inherits all twenty of the insurance folder's does-not-prove entries and adds none of its own evidence: nothing described is insurance, nothing described is built, and no external fact has been gathered
+    - That the book's coherence is the corpus's. A book's job is the through-line, and a through-line is a choice — the five-part structure and the title are the writing session's, recorded as such in BRIEF.md
+    - That a second volume means the method scales: same harness, same gates, one writer, zero readers so far
+    - That anyone needed the book. The doctrine documents are shorter, the memos are primary, and the book's claim to exist is the argument between them — which is a claim about readers, tested by none yet
 
 ## A Key Means Nothing Alone (the book) — live
   where     https://pki.sgit.ai/book/index.html
