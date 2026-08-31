@@ -188,6 +188,12 @@ The mandate's issuer is the registry's operator root, whose private half is **pu
 | GM-D42 | **The rating is a gate, not a report** — and being a control, it declares its own enforcement tier under the pack's three-tier test, on its own face | v0.33.73 §3 memo 2, 30 Aug | **Proposed — a gate that overstates its tier is worse than none, because it will be believed** |
 | GM-D43 | **The rating authority is separated from the deploying party.** A rating produced by the party that wants to ship is self-assessment wearing a number, however reproducible its arithmetic | v0.33.73 §1 | **Proposed — the other half of GM-D39: method AND separation** |
 | GM-D44 | **The derivation must decompose**, so a gate can say *reduce by this much, and here is what would do it* | v0.33.73 §2 — GM-D39 extended from audit to action | **Proposed** |
+| GM-D45 | **The delta is classified by who could have closed it** — elective (the operator's), structural (the platform's finest grain), defect (a vulnerability, temporary). Only elective delta is attributable to the operator | v0.33.74 §3 memo 3, 30 Aug | **Proposed — a rating that charges for structural delta rates a vendor's roadmap, not a customer's diligence** |
+| GM-D46 | **Platform granularity is a library artefact**, measured once and referenced by every placement — the library/instance rule one altitude up, and the only public good in this apparatus | v0.33.74 §4 | **Proposed** |
+| GM-D47 | **rating = f(twin, world state, mandate)**, with the twin and the world carrying independent freshness, both printed | v0.33.74 §6 — a zero-day changes the world, not the twin | **Proposed** |
+| GM-D48 | **A re-rating states what changed, which way, and which controls are implicated — never a magnitude multiplier**, until loss data exists | v0.33.74 §7 — the memo's "10x", declined as false precision | **Proposed** |
+| GM-D49 | **A rating crossing a threshold may emit a revocation** — the register already carries revocation as an append and the hook already enforces it; the gate declares its tier | v0.33.74 §8 — "pull the plug" | **Proposed — everything but the world-state input exists** |
+| GM-D50 | **`measure.py` gains a commit-authorship node.** A push credential confers authorship under any name absent signed-commit enforcement; neither library entry has a node for it | v0.33.74 §1 — named in passing by memo 3 | **Proposed — a defect in the discovery instrument, found by conversation rather than by the tool** |
 
 ---
 

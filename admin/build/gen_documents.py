@@ -637,6 +637,29 @@ DOCS = [
   ],
   pages="Adds insurance doctrine 02; proposes GM-D42 (the rating is a gate and declares its own tier), GM-D43 (the rater is separated from the deployer) and GM-D44 (the derivation decomposes); narrows GM-D41; comms T36 and N18."),
 
+ dict(slug="who-pays-for-the-delta",
+  title="Who Pays For The Delta Nobody Chose, And The Rating That Moves Overnight",
+  md="v0.33.74__strategy-brief__who-pays-for-the-delta-nobody-chose-and-the-rating-that-moves-overnight.md",
+  version="v0.33.74", date="30 August 2026", dtype="Strategy brief — memo 3 of 8 on the insurance pivot",
+  summary="The accountability question the first two memos deferred, worked through the GitHub example this estate already publishes — and the memo's answer turns out to be a taxonomy rather than a party. A code host offers read-only or read-write and nothing between, so an operator who needs to push at all must confer push to every branch. The operator did not choose that delta and cannot close it: no budget or diligence makes a platform offer a finer grain. So the delta divides by WHO COULD HAVE CLOSED IT — elective (the operator conferred more than needed or skipped an available control: theirs, and the part effort moves), structural (the platform's finest grain is coarser than the mandate: the platform's, or nobody's, identical in every customer's estate at once), and defect (a vulnerability temporarily widens the grant past its documented shape: the platform's, and temporary). A rating that does not separate these is unfair and useless in one move. Three more: platform granularity is a LIBRARY artefact — a fact about the platform, measured once, referenced by all, and the only genuinely public-good part of this apparatus; the rating is a function of the world as well as the placement, because a zero-day does not change the twin, it changes what the twin's reach is worth, so twin and world carry independent freshness; and the memo's '10x' is declined as false precision, because magnitude needs loss data nobody has while direction and mechanism are computable today. Also: checking the memo against the published twin found a defect in the estate's own instrument — measure.py does not measure commit authorship, which a push credential confers absent signed commits.",
+  concepts=[
+   ("Who pays, and the moving rating", "../insurance/who-pays-and-the-moving-rating.html", "doctrine 03: the delta taxonomy and the world as an input"),
+   ("The measured grant", "../packs/grant-and-mandate/library.html", "the twin whose node list was re-read to check the memo — and found holed"),
+   ("The execution broker", "execution-broker.html", "designed as a security control in August; named here as a product with a measurable value"),
+   ("The register's revocation", "../registry/index.html", "the append that already exists, and the far end of pull-the-plug"),
+  ],
+  ideas=[
+   "The operator did not choose the structural delta and cannot close it — so a rating that charges for it is not measuring their risk management, it is measuring their vendor's roadmap.",
+   "Structural delta's natural payer is not a party but a pool: a risk nobody can individually avoid and everybody shares is the textbook shape of pooled cover.",
+   "A platform that shipped branch-scoped tokens would convert a whole class of delta from structural to elective for every customer at once — and that conversion is countable.",
+   "A zero-day does not change the twin. The measurement recorded what it recorded; what changed is what that reach is worth. So the rating is a function of the twin AND the world, with independent freshness.",
+   "The magnitude is not computable and will not be for years, but the direction and mechanism are: 'your agent can now change repository visibility' beats '10x', because the first is actionable and the second is a number nobody can check.",
+   "A broker's value is exactly how much structural delta it converts to elective — the first commercially legible statement of what an execution broker is worth.",
+   "This estate cannot say who pays for a hallucination, and should not pretend to. It can make the question answerable rather than a swearing contest, which is what the parties actually lack.",
+   "Memo 3 named a grant node the estate's own measurement misses. The interesting fact is not the missing node but that a conversation found what the tool did not.",
+  ],
+  pages="Adds insurance doctrine 03; proposes GM-D45 (delta by who could close it), GM-D46 (platform granularity as a library artefact), GM-D47 (the world as a rating input), GM-D48 (direction not magnitude), GM-D49 (a rating may emit a revocation) and GM-D50 (measure.py gains a commit-authorship node); comms T37 and N19."),
+
 ]
 
 PAGE = """<!doctype html>

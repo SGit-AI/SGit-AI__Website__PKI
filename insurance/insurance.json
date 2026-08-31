@@ -34,6 +34,14 @@
         "page": "../documents/insurance-ecosystem.html",
         "state": "processed",
         "gave": "The industry's roles taken without its money, because the roles are what separate the rater from the party that wants to ship; the rating as a gate on go-live rather than a report, which requires a threshold and a decomposition; reinsurance named as the fractal's precedent; and the control-to-premium loop, which the workbench already computes."
+      },
+      {
+        "n": 3,
+        "title": "Who pays for the delta nobody chose, and the rating that moves overnight",
+        "brief": "v0.33.74__strategy-brief__who-pays-for-the-delta-nobody-chose-and-the-rating-that-moves-overnight.md",
+        "page": "../documents/who-pays-for-the-delta.html",
+        "state": "processed",
+        "gave": "The accountability question, answered as a taxonomy: the delta divides by who could have closed it — elective (the operator's), structural (the platform's finest grain), defect (a vulnerability, temporary). Platform granularity named as a library artefact and the one public good here. The rating made a function of the world as well as the twin, with independent freshness. And the estate's own measurement found holed: nothing measures commit authorship."
       }
     ]
   },
@@ -58,6 +66,13 @@
       "title": "The ecosystem and the gate: who rates, what it gates, and the tier the gate itself has",
       "from": "memo 2",
       "one_line": "The roles are the integrity mechanism; the rating gates go-live rather than reporting; and a gate that overstates its own tier is worse than none."
+    },
+    {
+      "slug": "who-pays-and-the-moving-rating",
+      "file": "03__who-pays-and-the-moving-rating.md",
+      "title": "Who pays, and the rating that moves: delta by who could close it, and the world as an input",
+      "from": "memo 3",
+      "one_line": "Only the delta an operator could have closed is theirs; platform granularity is a library artefact; and a rating states what changed and which way, never a multiplier."
     }
   ],
   "mvps": [],
@@ -66,6 +81,9 @@
     "That the placement orderings are true. Claude-on-a-desktop is rated higher than Claude-on-the-web in the project lead's judgement; nobody has measured a desktop agent, so the estate cannot score its own leading example.",
     "That a level means the same thing to two organisations. Nothing here is calibrated against loss data, because no agent loss data exists anywhere.",
     "That aggregation works yet. Correlated risk is named as a graph problem and not solved; summing micro ratings would be wrong in the dangerous direction.",
-    "That an internal underwriter is independent. The separation between the rater and the party that wants to ship is an org-design outcome no schema can enforce — and a rating engine reporting to the deploying business is a setting with a nicer name."
+    "That an internal underwriter is independent. The separation between the rater and the party that wants to ship is an org-design outcome no schema can enforce — and a rating engine reporting to the deploying business is a setting with a nicer name.",
+    "That the delta classes can be told apart automatically. Distinguishing elective from structural needs a library of platform granularity that does not exist yet — today the classification is a judgement.",
+    "That dynamic re-rating is close. The mapping from a published advisory to the grant nodes it widens exists nowhere, for anybody, and it is the hard part.",
+    "That the estate's own grant measurement is complete. Memo 3 named a node measure.py misses — commit authorship — found by conversation rather than by the tool, and the honest reading is that there are others."
   ]
 }
