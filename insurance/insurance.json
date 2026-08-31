@@ -5,7 +5,8 @@
   "stage": {
     "now": "stage 1 — rating without money",
     "why": "A rating engine that emits levels rather than currency is not a regulated activity, needs no carrier and no loss history, and is therefore buildable today. Money is stage 2. See GM-D38.",
-    "rule": "A level nobody can recompute is exactly the theatre a premium would have prevented. Every rating ships its derivation. See GM-D39."
+    "rule": "A level nobody can recompute is exactly the theatre a premium would have prevented. Every rating ships its derivation. See GM-D39.",
+    "settled": "The level scale is 1–5 (GM-D54, the project lead, 31 Aug). Coarse on purpose: currency implies loss data nobody has, 1–100 implies resolution the inputs cannot support, and a band is arguable where a decimal is not."
   },
   "memos": {
     "expected": 8,
@@ -42,6 +43,22 @@
         "page": "../documents/who-pays-for-the-delta.html",
         "state": "processed",
         "gave": "The accountability question, answered as a taxonomy: the delta divides by who could have closed it — elective (the operator's), structural (the platform's finest grain), defect (a vulnerability, temporary). Platform granularity named as a library artefact and the one public good here. The rating made a function of the world as well as the twin, with independent freshness. And the estate's own measurement found holed: nothing measures commit authorship."
+      },
+      {
+        "n": 4,
+        "title": "Why insurance — and the cautionary tale is cyber insurance itself",
+        "brief": "v0.33.75__strategy-brief__why-insurance-and-the-cautionary-tale-is-cyber-insurance-itself.md",
+        "page": "../documents/why-insurance.html",
+        "state": "processed",
+        "gave": "The justification, carrying its own counter-example: cyber insurance grew on quantification nobody could check and hurt both sides at once — which is the empirical case for this folder's rule. Insurance's real virtue is that it DEMANDS trustworthy data rather than merely using it. And the enforcement tier is identified as an impact-reduction measure: the quantity security has never been able to articulate."
+      },
+      {
+        "n": 5,
+        "title": "Not in line: the schemas are the product, and the scale is one to five",
+        "brief": "v0.33.76__strategy-brief__not-in-line-the-schemas-are-the-product-and-the-scale-is-one-to-five.md",
+        "page": "../documents/not-in-line.html",
+        "state": "processed",
+        "gave": "The commercial position and the first SETTLED decision. The level scale is 1–5. The project sits outside the line — schemas, flows, connectors, evidence — never the carrier and never the execution broker, which forecloses it ever being a boundary itself. And openness is load-bearing rather than generous: with no money at stake, an attackable public method is the only honesty mechanism left."
       }
     ]
   },
@@ -73,6 +90,20 @@
       "title": "Who pays, and the rating that moves: delta by who could close it, and the world as an input",
       "from": "memo 3",
       "one_line": "Only the delta an operator could have closed is theirs; platform granularity is a library artefact; and a rating states what changed and which way, never a multiplier."
+    },
+    {
+      "slug": "why-insurance-and-what-broke-it",
+      "file": "04__why-insurance-and-what-broke-it.md",
+      "title": "Why insurance, and what broke it last time",
+      "from": "memo 4",
+      "one_line": "Cyber insurance is the warning, not the model — and its failure is the empirical case for this folder's rule."
+    },
+    {
+      "slug": "not-in-line",
+      "file": "05__not-in-line.md",
+      "title": "Not in line: the position, the scale, and what it forecloses",
+      "from": "memo 5",
+      "one_line": "The scale is 1–5, settled. The project supplies schemas rather than standing in the line — which means it can never itself be a boundary."
     }
   ],
   "mvps": [],
@@ -84,6 +115,8 @@
     "That an internal underwriter is independent. The separation between the rater and the party that wants to ship is an org-design outcome no schema can enforce — and a rating engine reporting to the deploying business is a setting with a nicer name.",
     "That the delta classes can be told apart automatically. Distinguishing elective from structural needs a library of platform granularity that does not exist yet — today the classification is a judgement.",
     "That dynamic re-rating is close. The mapping from a published advisory to the grant nodes it widens exists nowhere, for anybody, and it is the hard part.",
-    "That the estate's own grant measurement is complete. Memo 3 named a node measure.py misses — commit authorship — found by conversation rather than by the tool, and the honest reading is that there are others."
+    "That the estate's own grant measurement is complete. Memo 3 named a node measure.py misses — commit authorship — found by conversation rather than by the tool, and the honest reading is that there are others.",
+    "That five bands are the right resolution. The scale is settled and argued for; nothing validates it against outcomes, because there are no outcomes yet.",
+    "That the not-in-line position is commercially viable. It is a coherent architecture and an unproven business — nobody has paid for a schema here."
   ]
 }

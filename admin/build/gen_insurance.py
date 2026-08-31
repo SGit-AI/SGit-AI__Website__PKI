@@ -158,6 +158,7 @@ something buildable.</p>
   <div class="ins-stage-now">{esc(st['now'])}</div>
   <p>{esc(st['why'])}</p>
   <p class="ins-rule">{esc(st['rule'])}</p>
+  {'<p class="ins-settled"><b>Settled:</b> ' + esc(st['settled']) + '</p>' if st.get('settled') else ''}
 </div>
 
 <h2 id="stages">Two stages, and only one of them is insurance</h2>

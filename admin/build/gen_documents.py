@@ -660,6 +660,52 @@ DOCS = [
   ],
   pages="Adds insurance doctrine 03; proposes GM-D45 (delta by who could close it), GM-D46 (platform granularity as a library artefact), GM-D47 (the world as a rating input), GM-D48 (direction not magnitude), GM-D49 (a rating may emit a revocation) and GM-D50 (measure.py gains a commit-authorship node); comms T37 and N19."),
 
+ dict(slug="why-insurance",
+  title="Why Insurance — And The Cautionary Tale Is Cyber Insurance Itself",
+  md="v0.33.75__strategy-brief__why-insurance-and-the-cautionary-tale-is-cyber-insurance-itself.md",
+  version="v0.33.75", date="31 August 2026", dtype="Strategy brief — memo 4 of 8 on the insurance pivot",
+  summary="The justification, and it arrives carrying its own counter-example. Cyber insurance is offered as the WARNING rather than the model: a market that grew fast on quantification nobody could check, sold policies worth less than buyers thought, and took payouts that hurt the insurers — the failure landing on both sides at once, which kills the comfortable reading that bad quantification only hurts the counterparty. That is the empirical case for this pivot's central rule: a market can be enthusiastically data-driven and still be pricing fiction, if the data is not checkable. Which fixes the priority — a rating engine's first obligation is not to be accurate, since nobody can be yet, but to be checkable, so that being wrong is discoverable rather than accumulating. Three more: insurance's real virtue is not that it uses data but that it DEMANDS trustworthy data, creating a party with money at stake in the data being true — a forcing function stage 1 gives up and must replace with a public, attackable method; the enforcement tier is identified as an impact-reduction measure, the quantity security has never been able to articulate, since an incident response team does not reduce incidents but shrinks them and the tier says nothing about how often an agent tries and everything about what a try achieves; and the firm is already a gigantic unpriced insurer, so an internal rating market makes an existing activity legible rather than adding a new one.",
+  concepts=[
+   ("Why insurance, and what broke it", "../insurance/why-insurance-and-what-broke-it.html", "doctrine 04"),
+   ("The three-tier control test", "../packs/grant-and-mandate/concepts.html", "which turns out to be an impact-reduction measure"),
+   ("The rule this folder runs on", "../insurance/what-this-is.html", "stated in memo 1, completed in memo 2, evidenced here"),
+   ("Not in line", "not-in-line.html", "memo 5, whose openness answers this memo's monoculture warning"),
+  ],
+  ideas=[
+   "A market can be enthusiastically data-driven and still be pricing fiction, if the data is not checkable — which is the thing whose absence broke the nearest comparable market.",
+   "A rating engine's first obligation is not to be accurate, which nobody can be yet. It is to be checkable, so that being wrong is discoverable rather than accumulating.",
+   "Insurance does not merely use trustworthy data, it demands it — by creating a party with money at stake in the data being true. Stage 1 has no such party, so a public attackable method is the only replacement.",
+   "The enforcement tier is an impact-reduction measure: it says nothing about how often an agent tries and everything about what a try achieves. That is the quantity security has never been able to articulate.",
+   "The tiers rank impact reduction; they do not price it. Ranking is what a level needs, and overstating it into a price would be the same error the cyber market made.",
+   "A company at scale already underwrites — in budget approvals, vendor choices and sign-offs — without a rating and usually without a record. An internal market does not add an activity; it makes one legible.",
+   "A rating that reduces activity has failed; one that redirects it has worked.",
+   "A single rating standard is itself a concentration risk — and a standard anyone can fork, audit and dispute is a monoculture that can be broken on purpose.",
+  ],
+  pages="Adds insurance doctrine 04; proposes GM-D51 (the cyber market as precedent), GM-D52 (the tier as impact reduction) and GM-D53 (multiple raters, disagreement as signal)."),
+
+ dict(slug="not-in-line",
+  title="Not In Line: The Schemas Are The Product, And The Scale Is One To Five",
+  md="v0.33.76__strategy-brief__not-in-line-the-schemas-are-the-product-and-the-scale-is-one-to-five.md",
+  version="v0.33.76", date="31 August 2026", dtype="Strategy brief — memo 5 of 8 on the insurance pivot",
+  summary="The commercial position, and the first SETTLED decision in this pivot: the level scale is 1–5. The reasoning is better than the answer — currency implies a loss distribution nobody has, 1–100 implies resolution the inputs cannot support, and a coarse band is arguable in a way a decimal is not: a team told they are at level 3 argues about what the band means, which is the useful argument, while a team told they are at 62.4 argues about arithmetic. The project places itself OUTSIDE THE LINE — not the carrier, not the insurance broker, not the execution broker — supplying schemas, flows, mappings and open-source connectors instead. That is a constraint with a consequence worth stating plainly: a party outside the line cannot enforce, so this project can never itself be a boundary; it ships a check that becomes one when installed by somebody who is in line. The memo's own self-correction — our job is to be the broker, not the broker — separates three things one word has been covering, and lands on the connective tissue: we do not operate the broker, we define what a broker must be able to show, without which every broker's claim is unfalsifiable marketing. Openness is then load-bearing rather than generous, for three reasons including one that is new: with no money at stake, an attackable public method is the only honesty mechanism left. And integrating with what a company already has carries a cost stated before it is paid — a connector must label the evidence class of everything it imports, or integrate-with-what-exists quietly becomes launder-what-exists.",
+  concepts=[
+   ("Not in line", "../insurance/not-in-line.html", "doctrine 05: the position, the scale, and what it forecloses"),
+   ("The insurance folder", "../insurance/index.html", "where the scale is now recorded as settled"),
+   ("The execution broker", "execution-broker.html", "one of the three brokers, and the one we are not"),
+   ("Why insurance", "why-insurance.html", "memo 4, whose monoculture warning this memo's openness answers"),
+  ],
+  ideas=[
+   "A five-band scale is honest about its own resolution: it says only what the evidence can carry, and coarseness is a feature rather than a compromise.",
+   "A coarse band is arguable in a way a decimal is not — level 3 provokes an argument about what the band means, which is useful; 62.4 provokes an argument about arithmetic, which is not.",
+   "A party outside the line cannot enforce, so this project can never itself be a boundary. It ships a check that becomes one when installed by somebody who is.",
+   "We do not operate the broker. We define what a broker must be able to show — without which every broker's claim about the delta it converts is unfalsifiable marketing.",
+   "The party defining a market's disclosure format decides what good is measurable as, while carrying none of the market's capital or liability.",
+   "A closed rating engine in a stage with no money has no honesty mechanism at all: openness is the substitute for capital, not a licensing preference.",
+   "A connector labels the evidence class of everything it imports, or integrate-with-what-exists quietly becomes launder-what-exists.",
+   "A rating does not replace acceptance; it makes acceptance specific. 'We accept the risk of this agent' cannot be checked; 'we accept a level 4 placement, this quarter, on this service' has a subject, a threshold and a date.",
+  ],
+  pages="Adds insurance doctrine 05; records GM-D54 as SETTLED (the 1–5 scale, closing N17 q1); proposes GM-D55 (not in line, and never a boundary), GM-D56 (define the broker's disclosure, do not operate one) and GM-D57 (connectors label evidence class)."),
+
 ]
 
 PAGE = """<!doctype html>

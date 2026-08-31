@@ -16,7 +16,7 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.53</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.54</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -82,10 +82,14 @@
       <a class="sl" href="../insurance/the-rating.html">&mdash; the rating</a>
       <a class="sl" href="../insurance/the-ecosystem-and-the-gate.html">&mdash; the ecosystem &amp; the gate</a>
       <a class="sl" href="../insurance/who-pays-and-the-moving-rating.html">&mdash; who pays, &amp; the moving rating</a>
+      <a class="sl" href="../insurance/why-insurance-and-what-broke-it.html">&mdash; why insurance</a>
+      <a class="sl" href="../insurance/not-in-line.html">&mdash; not in line (scale 1&ndash;5)</a>
       <a class="sl" href="../documents/agent-insurance.html">The pivot briefing (memo 0)</a>
       <a class="sl" href="../documents/insurance-without-money.html">Rating before money (memo 1)</a>
       <a class="sl" href="../documents/insurance-ecosystem.html">The go-live gate (memo 2)</a>
       <a class="sl" href="../documents/who-pays-for-the-delta.html">Who pays (memo 3)</a>
+      <a class="sl" href="../documents/why-insurance.html">Why insurance (memo 4)</a>
+      <a class="sl" href="../documents/not-in-line.html">Not in line (memo 5)</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -126,6 +130,7 @@ something buildable.</p>
   <div class="ins-stage-now">stage 1 — rating without money</div>
   <p>A rating engine that emits levels rather than currency is not a regulated activity, needs no carrier and no loss history, and is therefore buildable today. Money is stage 2. See GM-D38.</p>
   <p class="ins-rule">A level nobody can recompute is exactly the theatre a premium would have prevented. Every rating ships its derivation. See GM-D39.</p>
+  <p class="ins-settled"><b>Settled:</b> The level scale is 1–5 (GM-D54, the project lead, 31 Aug). Coarse on purpose: currency implies loss data nobody has, 1–100 implies resolution the inputs cannot support, and a band is arguable where a decimal is not.</p>
 </div>
 
 <h2 id="stages">Two stages, and only one of them is insurance</h2>
@@ -179,9 +184,25 @@ count below is computed from the manifest, never typed.</p>
         <a href="../documents/who-pays-for-the-delta.html">the brief, rendered &rarr;</a> <a class="ins-raw" href="../briefs/v0.33.74__strategy-brief__who-pays-for-the-delta-nobody-chose-and-the-rating-that-moves-overnight.md">raw</a>
       </div>
     </div>
+    <div class="ins-memo ins-memo--processed">
+      <div class="ins-memo-n">4</div>
+      <div>
+        <b>Why insurance — and the cautionary tale is cyber insurance itself</b>
+        <p>The justification, carrying its own counter-example: cyber insurance grew on quantification nobody could check and hurt both sides at once — which is the empirical case for this folder&#x27;s rule. Insurance&#x27;s real virtue is that it DEMANDS trustworthy data rather than merely using it. And the enforcement tier is identified as an impact-reduction measure: the quantity security has never been able to articulate.</p>
+        <a href="../documents/why-insurance.html">the brief, rendered &rarr;</a> <a class="ins-raw" href="../briefs/v0.33.75__strategy-brief__why-insurance-and-the-cautionary-tale-is-cyber-insurance-itself.md">raw</a>
+      </div>
+    </div>
+    <div class="ins-memo ins-memo--processed">
+      <div class="ins-memo-n">5</div>
+      <div>
+        <b>Not in line: the schemas are the product, and the scale is one to five</b>
+        <p>The commercial position and the first SETTLED decision. The level scale is 1–5. The project sits outside the line — schemas, flows, connectors, evidence — never the carrier and never the execution broker, which forecloses it ever being a boundary itself. And openness is load-bearing rather than generous: with no money at stake, an attackable public method is the only honesty mechanism left.</p>
+        <a href="../documents/not-in-line.html">the brief, rendered &rarr;</a> <a class="ins-raw" href="../briefs/v0.33.76__strategy-brief__not-in-line-the-schemas-are-the-product-and-the-scale-is-one-to-five.md">raw</a>
+      </div>
+    </div>
     <div class="ins-memo ins-memo--awaited">
       <div class="ins-memo-n">&hellip;</div>
-      <div><b>4 more awaited</b>
+      <div><b>2 more awaited</b>
       <p>Listed as awaited rather than guessed at. Each will be filed verbatim as a brief before it is read,
       and the doctrine will say which memo it came from.</p></div>
     </div></div>
@@ -208,6 +229,16 @@ count below is computed from the manifest, never typed.</p>
     <a class="ins-card" href="who-pays-and-the-moving-rating.html">
       <div class="ins-card-top"><b>Who pays, and the rating that moves: delta by who could close it, and the world as an input</b><span class="dim">from memo 3</span></div>
       <p>Only the delta an operator could have closed is theirs; platform granularity is a library artefact; and a rating states what changed and which way, never a multiplier.</p>
+    </a>
+
+    <a class="ins-card" href="why-insurance-and-what-broke-it.html">
+      <div class="ins-card-top"><b>Why insurance, and what broke it last time</b><span class="dim">from memo 4</span></div>
+      <p>Cyber insurance is the warning, not the model — and its failure is the empirical case for this folder&#x27;s rule.</p>
+    </a>
+
+    <a class="ins-card" href="not-in-line.html">
+      <div class="ins-card-top"><b>Not in line: the position, the scale, and what it forecloses</b><span class="dim">from memo 5</span></div>
+      <p>The scale is 1–5, settled. The project supplies schemas rather than standing in the line — which means it can never itself be a boundary.</p>
     </a></div>
 
 <h2 id="mvps">The MVPs</h2>
@@ -233,7 +264,9 @@ the <a href="../registry/views/excess-authority.json">delta</a> with its
 <li>That an internal underwriter is independent. The separation between the rater and the party that wants to ship is an org-design outcome no schema can enforce — and a rating engine reporting to the deploying business is a setting with a nicer name.</li>
 <li>That the delta classes can be told apart automatically. Distinguishing elective from structural needs a library of platform granularity that does not exist yet — today the classification is a judgement.</li>
 <li>That dynamic re-rating is close. The mapping from a published advisory to the grant nodes it widens exists nowhere, for anybody, and it is the hard part.</li>
-<li>That the estate&#x27;s own grant measurement is complete. Memo 3 named a node measure.py misses — commit authorship — found by conversation rather than by the tool, and the honest reading is that there are others.</li></ul>
+<li>That the estate&#x27;s own grant measurement is complete. Memo 3 named a node measure.py misses — commit authorship — found by conversation rather than by the tool, and the honest reading is that there are others.</li>
+<li>That five bands are the right resolution. The scale is settled and argued for; nothing validates it against outcomes, because there are no outcomes yet.</li>
+<li>That the not-in-line position is commercially viable. It is a coherent architecture and an unproven business — nobody has paid for a schema here.</li></ul>
 
 <div class="pagenav">
   <a href="../bench/index.html">&larr; The bench</a>
@@ -246,7 +279,7 @@ the <a href="../registry/views/excess-authority.json">delta</a> with its
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.53</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.54</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The bench</h4>
@@ -267,6 +300,8 @@ the <a href="../registry/views/excess-authority.json">delta</a> with its
     <a href="../insurance/the-rating.html">The rating</a>
     <a href="../insurance/the-ecosystem-and-the-gate.html">The ecosystem &amp; the gate</a>
     <a href="../insurance/who-pays-and-the-moving-rating.html">Who pays, &amp; the moving rating</a>
+    <a href="../insurance/why-insurance-and-what-broke-it.html">Why insurance</a>
+    <a href="../insurance/not-in-line.html">Not in line</a>
     <a href="../documents/agent-insurance.html">The pivot briefing</a>
   </div>
   <div>

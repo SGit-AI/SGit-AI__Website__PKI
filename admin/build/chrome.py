@@ -82,10 +82,14 @@ NAV = [
         ("&mdash; the rating", "insurance/the-rating.html"),
         ("&mdash; the ecosystem &amp; the gate", "insurance/the-ecosystem-and-the-gate.html"),
         ("&mdash; who pays, &amp; the moving rating", "insurance/who-pays-and-the-moving-rating.html"),
+        ("&mdash; why insurance", "insurance/why-insurance-and-what-broke-it.html"),
+        ("&mdash; not in line (scale 1&ndash;5)", "insurance/not-in-line.html"),
         ("The pivot briefing (memo 0)", "documents/agent-insurance.html"),
         ("Rating before money (memo 1)", "documents/insurance-without-money.html"),
         ("The go-live gate (memo 2)", "documents/insurance-ecosystem.html"),
         ("Who pays (memo 3)", "documents/who-pays-for-the-delta.html"),
+        ("Why insurance (memo 4)", "documents/why-insurance.html"),
+        ("Not in line (memo 5)", "documents/not-in-line.html"),
     ], ("insurance/",)),
     ("Docs", "documents/index.html", [
         ("The documents", "documents/index.html"),
@@ -121,6 +125,8 @@ FOOTER = [
         ("The rating", "insurance/the-rating.html"),
         ("The ecosystem &amp; the gate", "insurance/the-ecosystem-and-the-gate.html"),
         ("Who pays, &amp; the moving rating", "insurance/who-pays-and-the-moving-rating.html"),
+        ("Why insurance", "insurance/why-insurance-and-what-broke-it.html"),
+        ("Not in line", "insurance/not-in-line.html"),
         ("The pivot briefing", "documents/agent-insurance.html"),
     ]),
     ("The registry", [

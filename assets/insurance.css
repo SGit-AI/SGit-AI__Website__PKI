@@ -38,3 +38,8 @@
 @media (max-width:620px){.docmeta{grid-template-columns:1fr;gap:1px 0}
   .docmeta .k{margin-top:7px}}
 .docmeta .k{font-family:var(--mono);font-size:.78rem;letter-spacing:.04em;text-transform:uppercase;color:var(--dim2)}
+
+/* a decision that is settled rather than proposed — the estate has very few */
+.ins-settled{border-top:1px dashed var(--line2);padding-top:9px;margin-top:10px!important;
+  color:var(--accent-dk)}
+.ins-settled b{font-family:var(--mono);font-size:.78rem;letter-spacing:.05em;text-transform:uppercase}
