@@ -105,4 +105,4 @@ Charging for the check is real, and the estate's observability design anticipate
 
 ---
 
-*CC BY 4.0. Source: brief v0.33.78, memo 7 of 8. The three corpus quotations are verbatim and were re-read out of the briefs they name.*
+*CC BY 4.0. Source: brief v0.33.78, memo 7 of 10. The three corpus quotations are verbatim and were re-read out of the briefs they name.*

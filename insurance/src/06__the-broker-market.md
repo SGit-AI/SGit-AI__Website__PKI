@@ -84,4 +84,4 @@ A buyer cannot weigh broker A's claimed two bands against broker B's claimed thr
 
 ---
 
-*CC BY 4.0. Source: brief v0.33.77, memo 6 of 8. Everything here is derived from that memo and labelled where it extends it — including the correction to document 03.*
+*CC BY 4.0. Source: brief v0.33.77, memo 6 of 10. Everything here is derived from that memo and labelled where it extends it — including the correction to document 03.*

@@ -8,6 +8,8 @@
 
 Documents [01](the-rating.html) and [02](the-ecosystem-and-the-gate.html) rate the delta between grant and mandate. Memo 3 asks the question that was skipped: **whose delta is it?**
 
+> **One transcription artefact, flagged rather than repaired.** The memo reads *"I want to focus on the risks that exists **outside the main**"*, in a passage whose subject is what happens outside the **mandate** — the sentence before it names *"the authorised one, i.e. the mandates"*. Read as *outside the mandate*. Every other memo in the series had its artefacts flagged when it was read; this one did not, and the omission was found on audit rather than on the day.
+
 The worked example is this estate's own. A code host offers read-only or read-write and nothing between. An operator who needs an agent to push at all must confer the ability to push to **every branch** — and, absent signed-commit enforcement, to **author commits as anybody**. The mandate says *your own branch, and dev*. The gap between them is real, dangerous, and **the operator did not choose it and cannot close it.**
 
 No budget, care or diligence makes a platform offer a finer grain. So:
@@ -84,11 +86,31 @@ Memo 3 names *a broker service that facilitates access in a more privileged gran
 
 That is the first commercially legible statement of what an execution broker is worth. The original warning gets sharper with it: the broker holds usable credentials and becomes the highest-value target in the estate — **so the broker needs its own rating, and it is the one placement where a bad rating is systemic.**
 
+> **Superseded, in part.** [Document 06](the-broker-market.html) §2 shows this is true and incomplete: interposing a broker **removes reach from one tree and adds a party with reach of its own**, so the rating nets the two and the net is not automatically negative. The correction is recorded here as well as there, because a correction only one document knows about is not a correction.
+
 ## 7 · Liability: make the question answerable, do not answer it
 
 *Who is responsible for the hallucination?* is unsettled law, being worked out in courts and contracts. **This estate should not pretend to settle it.**
 
 There is a precise contribution available instead: any liability determination needs to know **what happened, under whose authority, against which mandate, with which controls in place** — and that is an evidence pack. The estate cannot say who pays. **It can make the question answerable rather than a swearing contest**, which is what the parties actually lack.
+
+## 8 · The model vendor as its own underwriter — the memo asked it first
+
+Memo 3 runs a list of candidate payers — *is it GitHub, is it the customer, is it the service provider* — and then asks one that stands apart from the rest:
+
+> is Claude that actually owns that risk, or underwrites that — **is Claude going to actually have a policy on its own to cover any mistakes?**
+
+**Today the answer is no.** Model vendors disclaim liability for output in their terms, which is the industry's settled position and not a gap somebody forgot to fill.
+
+But the question is the more interesting half, because of what an answer would mean:
+
+> **A vendor offering cover against its own model's mistakes would be making a falsifiable quality claim** — the first one in the category. Everything a model vendor currently publishes about reliability is a benchmark or a disclaimer. A policy is neither: it is a number somebody pays when they are wrong.
+
+**This is the same structure [document 06](the-broker-market.html) later makes central**, arriving three memos early and aimed at a different party. Memo 6 argues a broker claiming *we reduce your level* must carry its own policy or the claim is unbacked marketing. Memo 3 asked it of the **model vendor** first, and the reasoning transfers without modification: *a vendor who is wrong pays, so a vendor who is wrong has reason to be right.*
+
+> **The rule generalises: any party claiming to reduce somebody else's exposure should carry cover against being wrong about it** (GM-D83). Broker, platform, or model vendor — the argument does not care which.
+
+Flagged as speculation about the vendors, because it is. **The structural point is not speculation**, and it belongs in the taxonomy above rather than as an aside: a party that could close a delta and does not is one thing; a party that claims the delta is smaller than it is, is another, and only the second is answerable with a policy.
 
 ## What this does not prove
 
@@ -96,8 +118,9 @@ There is a precise contribution available instead: any liability determination n
 - **That anyone will accept the taxonomy.** "Structural delta is the platform's" is an argument, not a settled allocation, and platforms have not agreed to it.
 - **That dynamic re-rating is close.** The event-to-grant-node mapping exists nowhere, for anybody, and it is the hard part — not the trigger, not the notification.
 - **That the magnitude is knowable.** §4 is explicit: direction and mechanism, never a multiplier, until loss data exists.
+- **That any vendor would offer §8's cover.** Model vendors disclaim liability today, and the reasons are commercial and legal rather than oversight. The section argues what such a policy would *mean*, not that one is coming.
 - **That the estate's own measurement is complete.** Memo 3 named a grant node `measure.py` misses — commit authorship — which is a defect found by conversation rather than by the tool, and the honest reading is that there are probably others.
 
 ---
 
-*CC BY 4.0. Source: brief v0.33.74, memo 3 of 8. Everything here is derived from that memo and labelled where it extends it.*
+*CC BY 4.0. Source: brief v0.33.74, memo 3 of 10. Everything here is derived from that memo and labelled where it extends it.*

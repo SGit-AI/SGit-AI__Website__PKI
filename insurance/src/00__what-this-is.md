@@ -6,9 +6,9 @@
 
 ## The body of work
 
-A pivot recorded on 30 August 2026 moves the foundation of the risk approach from **risk acceptance** to the **insurance policy**, on one observation: the delta between what an agent *can* do and what it is *authorised* to do — grant minus mandate — is where the insurance lives. Eight memos are being recorded on it. This folder is where they are read into something buildable.
+A pivot recorded on 30 August 2026 moves the foundation of the risk approach from **risk acceptance** to the **insurance policy**, on one observation: the delta between what an agent *can* do and what it is *authorised* to do — grant minus mandate — is where the insurance lives. **Ten memos were recorded on it, and the series is complete.** It was announced as eight and grew twice; the count is stated here because it is checkable, and it was wrong in this document until it was audited. This folder is where the memos are read into something buildable.
 
-It is organised as this estate organises everything else. **The memos are filed verbatim as briefs before they are read**, because a transcript outranks any summary of it. **The doctrine here is derived from them and names which memo it came from.** A memo not yet recorded is listed as awaited, never guessed at.
+It is organised as this estate organises everything else. **The memos are filed verbatim as briefs before they are read**, because a transcript outranks any summary of it. **The doctrine here is derived from them and names which memo it came from.** A memo not yet recorded was listed as awaited and never guessed at; none now are.
 
 ## Two stages, and only one of them is insurance
 

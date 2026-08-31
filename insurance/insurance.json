@@ -10,7 +10,7 @@
   },
   "memos": {
     "expected": 10,
-    "note": "Recorded as eight; the project lead added two more, so it is ten — now all processed. The count on the hub is a CLAIM, so it was corrected here rather than quietly adjusted, and the build gate that refuses more processed memos than the manifest expects fired on the ninth, which is what it is for. Each memo is filed verbatim as a brief before it is read; the doctrine says which memo it came from, and where a memo and a document disagree the memo wins. The pivot briefing (—) precedes the series and is not counted in it.",
+    "note": "Recorded as eight; the project lead added two more, so it is ten — now all processed. The count on the hub is a CLAIM, so it was corrected here rather than quietly adjusted, and the build gate that refuses more processed memos than the manifest expects fired on the ninth, which is what it is for. Each memo is filed verbatim as a brief before it is read; the doctrine says which memo it came from, and where a memo and a document disagree the memo wins. The pivot briefing (—) precedes the series and is not counted in it. All eleven readings were audited against their transcripts at v0.33.82; the corrections are recorded in the documents themselves rather than appended, and as GM-D81 to GM-D85.",
     "items": [
       {
         "n": 0,
@@ -122,21 +122,21 @@
       "file": "02__the-ecosystem-and-the-gate.md",
       "title": "The ecosystem and the gate: who rates, what it gates, and the tier the gate itself has",
       "from": "memo 2",
-      "one_line": "The roles are the integrity mechanism; the rating gates go-live rather than reporting; and a gate that overstates its own tier is worse than none."
+      "one_line": "The roles are the integrity mechanism; the rating gates go-live rather than reporting; and a gate that overstates its own tier is worse than none. Removing the payout removes one channel of moral hazard and opens another; and a rider read as an endorsement is an append, which the register has done since v0.1.26."
     },
     {
       "slug": "who-pays-and-the-moving-rating",
       "file": "03__who-pays-and-the-moving-rating.md",
       "title": "Who pays, and the rating that moves: delta by who could close it, and the world as an input",
       "from": "memo 3",
-      "one_line": "Only the delta an operator could have closed is theirs; platform granularity is a library artefact; and a rating states what changed and which way, never a multiplier."
+      "one_line": "Only the delta an operator could have closed is theirs; platform granularity is a library artefact; and a rating states what changed and which way, never a multiplier. Memo 3 also asked whether a model vendor would carry a policy against its own mistakes — the same argument memo 6 later made about brokers, three memos early."
     },
     {
       "slug": "why-insurance-and-what-broke-it",
       "file": "04__why-insurance-and-what-broke-it.md",
       "title": "Why insurance, and what broke it last time",
       "from": "memo 4",
-      "one_line": "Cyber insurance is the warning, not the model — and its failure is the empirical case for this folder's rule."
+      "one_line": "Cyber insurance is the warning, not the model — and its failure is the empirical case for this folder's rule. The enforcement tier ranks REACHABILITY, which is the neighbouring quantity to the impact reduction the memo asked for, not the same one."
     },
     {
       "slug": "not-in-line",
@@ -197,8 +197,11 @@
     "That the handshake is a boundary anywhere today. It reaches that tier only where the relying party is genuinely independent of the requester, and nothing has been built or installed to test it.",
     "That a world explains better than a document. It is the memo's hypothesis and the site agent's agreement, and neither is evidence — which is why the 2D-first sequencing exists.",
     "That the emptiness rule survives contact with a demo. Showing what does not exist is easy to write down and hard to keep when somebody wants to impress a room. It is the first thing that will be argued away.",
-    "That anything here has been checked against the market. The whole log and no external evidence: memo 9's survey is the first item in this series that could be wrong in a way the world would correct, and it has not been run. The decision count is printed in llms.txt and derived from the log, because it was typed once and was stale within a day.",
+    "That anything here has been checked against the market. The whole log and no external evidence: memo 9's survey is the first item in this series that could be wrong in a way the world would correct, and it has not been run.",
+    "That the readings were right the first time. All eleven were audited against their transcripts at v0.33.82 and six defects were found and fixed — three stale counts, a claim identified with the wrong quantity, an over-claim of immunity to moral hazard, and a dropped question. The method held; the arithmetic and the housekeeping did not.",
     "That an agent placement can be insured at all today. The categories that exist generally insure firms and entities, not placements — and whether any carrier has since launched one is unresearched, and is deliberately not guessed at.",
-    "That any of the schemas exist. policy/v0 has a shape, loss-event/v0 does not, and the warranty set described in doctrine 10 has never been written down as a schema."
+    "That any of the schemas exist. policy/v0 has a shape, loss-event/v0 does not, and the warranty set described in doctrine 10 has never been written down as a schema.",
+    "That blast radius is a good proxy for severity. Doctrine 04 corrects the tier's identification with impact reduction and then leans on the proxy anyway. It is an argument, not a measurement, and it is weakest where a small reach touches something critical.",
+    "That anything here measures severity at all. Nothing in this folder computes how bad a loss is once it occurs. Memo 4 asked for that quantity and the estate does not have it."
   ]
 }

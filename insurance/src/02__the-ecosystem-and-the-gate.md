@@ -66,7 +66,11 @@ Memo 2's sharpest line separates **insurance as a risk decision mechanism** from
 
 Conventional cover has a documented failure mode: **cover substitutes for control.** If the loss is paid, the incentive to prevent it weakens — which is why insurers spend so much design effort on deductibles, exclusions, warranties and control credits.
 
-**Stage 1 is structurally immune, because there is no payout to offload into.** A rating that pays nothing cannot be used to stop caring. This is a second and better reason to defer the money than the regulatory one: **the payout is the part that carries the moral hazard**, and the discipline learned without it is what a money stage would have to carry.
+**Stage 1 is immune to that particular form of it, because there is no payout to offload into.** A rating that pays nothing cannot be used to stop paying attention *on the grounds that a loss would be covered*. This is a second and better reason to defer the money than the regulatory one: **the payout carries the classical moral hazard**, and the discipline learned without it is what a money stage would have to carry.
+
+**It is not immunity, and this document first claimed it was.** A level is a badge, and a badge substitutes for control in its own way: *we are a level 2* is available as a reason to stop looking, with no carrier involved. [Document 09](make-them-insurable.html) names the same hazard from the other end — **make your agents insurable must not become make your agents look insurable** — and that is this failure mode arriving without money.
+
+> **Removing the payout removes one channel of moral hazard and opens another** (GM-D84). The rating's is cheaper to police, because a derivation anybody can recompute is a badge anybody can dispute — which is the whole reason the rule in [document 00](what-this-is.html) is not optional.
 
 ## 6 · The fractal has a name, and it settles less than it looks like
 
@@ -79,7 +83,23 @@ Conventional cover has a documented failure mode: **cover substitutes for contro
 
 So [document 01's](the-rating.html) aggregation rule stands and narrows: **the fractal supplies the rollup's shape; shared-node detection still supplies its arithmetic.** Two placements whose grant trees converge on the same credential node are correlated, and the graph already says so. *"You should be able to connect all of them"* is right — **and the connection is the graph, not the org chart.**
 
-## 7 · The control-to-premium loop, which needs no new machinery
+## 7 · The rider, read the other way — and the mechanism was already here
+
+Memo 2 lists *the insurer and the rider and the ones that provide the money* among the roles. **In insurance a rider is not a person**: it is an endorsement, an amendment attached to a policy that adds or removes cover after issue. Between *insurer* and *the ones that provide the money* it most likely means underwriter or broker, and §1 takes that reading.
+
+**The other reading turns out to name a mechanism this estate already runs.** An endorsement changes a policy's terms without reissuing or rewriting it, and the register's rule since v0.1.26 is exactly that shape:
+
+| An endorsement does | The register does |
+|---|---|
+| Amend cover after issue | **Append a signed statement** to the issuer's record |
+| Leave the original readable | **Never edit.** The prior statement stands, superseded |
+| Carry its own effective date | `effective_from` on the append |
+
+> **An endorsement is an append. The estate has had the endorsement mechanism since before it had a policy to attach one to** (GM-D85).
+
+[Document 10](the-schemas-and-the-clocks.html) reaches the same place from memo 10 — *amending, activating, ending: appends, never edits* — arriving from the schema direction three memos later. **Recorded here because the connection was promised when memo 2 was read and never made**, and a forward reference that does not land is the same defect as a count that does not add up.
+
+## 8 · The control-to-premium loop, which needs no new machinery
 
 > when you invest in a control to reduce a risk, you ... [change] the insurance premium
 
@@ -90,7 +110,7 @@ Two consequences:
 - **It is scale-free.** Ordering controls by how much they move a rating — *this one buys more than that one, here* — needs no agreed range. It works on bands 1–5, a continuous score, or letter grades. **The counterfactual view does not wait on the scale question.**
 - **It is the honest form of the questionnaire.** [Document 01](the-rating.html) has the wellness questionnaire asking *do you have a control*; the loop asks **what would this control buy you here** — prospective, placement-specific, computed from that placement's own tree rather than a checkbox averaged across an industry.
 
-## 8 · One thing this cannot answer
+## 9 · One thing this cannot answer
 
 Memo 2 asks whether the value an agent adds exceeds the risk being bought. **The rating is one side of that.** Valuing the contribution — throughput, cost displaced, quality — needs a model this estate has no basis for and no data on.
 
@@ -103,8 +123,8 @@ It tells an operator what risk they are buying; whether it is worth it stays a j
 - **That an internal underwriter is actually independent.** §1 describes the separation; whether any given organisation achieves it is an org-design outcome no schema can enforce, and a captive that reports to the deploying business is a setting with a nicer name.
 - **That the gate would be honoured.** A gate is only worth its tier, and the tier depends on where it is installed — which is the operator's choice, not this estate's.
 - **That reinsurance solves aggregation.** §6 is explicit: it supplies shape, not correlation. Nothing here computes which placements fail together.
-- **That the rating answers the value question.** §8. It answers half, and the other half is not a modelling gap to be closed later — it is somebody else's judgement.
+- **That the rating answers the value question.** §9. It answers half, and the other half is not a modelling gap to be closed later — it is somebody else's judgement.
 
 ---
 
-*CC BY 4.0. Source: brief v0.33.73, memo 2 of 8. Everything here is derived from that memo and labelled where it extends it.*
+*CC BY 4.0. Source: brief v0.33.73, memo 2 of 10. Everything here is derived from that memo and labelled where it extends it.*

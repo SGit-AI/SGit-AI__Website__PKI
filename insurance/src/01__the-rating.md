@@ -83,7 +83,7 @@ That is a real contribution the graphs-of-graphs framing makes available and whi
 
 From the rule in [document 00](what-this-is.html): a level nobody can recompute is theatre. So a rating is not a number, it is a small document:
 
-- **The level**, on whatever scale is settled (open question — memo 1 says *"level three, level five"* without fixing a range).
+- **The level.** Memo 1 says *"level three, level five"* without fixing a range, and this document recorded that as open. **It is now settled at 1–5** by the project lead ([GM-D54](../packs/grant-and-mandate/change-control.html), and [document 05](not-in-line.html) §1). What each band *means* remains open, and that is where the argument will be.
 - **The inputs**, each with its channel — measured, declared, or unknown — and a link to the artefact it came from.
 - **The derivation**: which inputs moved the level, in which direction, by how much.
 - **The twin's age**, because a rating computed against a stale measurement is a rating of the past.
@@ -100,4 +100,4 @@ Which is very nearly the shape of `evidence-pack/v0` already emitted by [the wor
 
 ---
 
-*CC BY 4.0. Source: brief v0.33.72, memo 1 of 8. Everything here is derived from that memo and labelled where it extends it.*
+*CC BY 4.0. Source: brief v0.33.72, memo 1 of 10. Everything here is derived from that memo and labelled where it extends it.*

@@ -66,6 +66,27 @@ def check(m):
         if not re.search(r"^##+ .*does not prove", p.read_text(encoding="utf-8"), re.I | re.M):
             errs.append(f"insurance/src/{p.name} has no 'What this does not prove' section")
 
+    # A doctrine document that prints "memo 3 of 8" is making a claim about the
+    # series, and the series grew twice. Eight footers were stale before this
+    # gate existed, and one document twice called memo 8 the last of them.
+    for p in sorted(SRC.glob("*.md")):
+        for n, denom in re.findall(r"memo (\d+) of (\d+)", p.read_text(encoding="utf-8")):
+            if int(denom) != m["memos"]["expected"]:
+                errs.append(
+                    f"insurance/src/{p.name} says 'memo {n} of {denom}' but the series has "
+                    f"{m['memos']['expected']} memos"
+                )
+
+    # Only the highest-numbered memo may be called the last one.
+    last = max(i["n"] for i in m["memos"]["items"])
+    for p in sorted(SRC.glob("*.md")):
+        body = p.read_text(encoding="utf-8")
+        for n in re.findall(r"memo (\d+)[^.\n]{0,40}?last of the series", body):
+            if int(n) != last:
+                errs.append(
+                    f"insurance/src/{p.name} calls memo {n} the last of the series; memo {last} is"
+                )
+
     for item in m["memos"]["items"]:
         if item["state"] == "processed":
             if not (BRIEFS / item["brief"]).exists():
