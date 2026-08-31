@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>A Secret Is Defined By Expectation And A Signature By Scarcity · documents · pki.sgit.ai</title>
-<meta name="description" content="Original document, readable in-page: summary, key concepts and key ideas, then the full markdown. Architecture brief, v0.33.61, 20 August 2026. CC BY 4.0.">
-<link rel="canonical" href="https://pki.sgit.ai/documents/keys-and-signatures.html">
+<title>The World Model: An MVP That Explains Rather Than Calculates, And Why It Must Show Its Own Emptiness · documents · pki.sgit.ai</title>
+<meta name="description" content="Original document, readable in-page: summary, key concepts and key ideas, then the full markdown. Strategy brief — memo 8 of 8, the last of the series, v0.33.79, 31 August 2026. CC BY 4.0.">
+<link rel="canonical" href="https://pki.sgit.ai/documents/the-world-model.html">
 <link rel="stylesheet" href="../assets/site.css">
 </head>
 <body>
@@ -93,7 +93,7 @@
       <a class="sl" href="../documents/not-in-line.html">Not in line (memo 5)</a>
       <a class="sl" href="../documents/the-broker-market.html">The broker market (memo 6)</a>
       <a class="sl" href="../documents/the-policy-as-a-statement.html">The policy statement (memo 7)</a>
-      <a class="sl" href="../documents/the-world-model.html">The world model (memo 8)</a>
+      <a class="sl here" href="../documents/the-world-model.html">The world model (memo 8)</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -122,47 +122,52 @@
 </div></nav>
 
 <main class="doc">
-<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="index.html">documents</a> / keys-and-signatures</div>
-<h1>A Secret Is Defined By Expectation And A Signature By Scarcity</h1>
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="index.html">documents</a> / the-world-model</div>
+<h1>The World Model: An MVP That Explains Rather Than Calculates, And Why It Must Show Its Own Emptiness</h1>
 
 <div class="docmeta">
-  <span class="k">Type</span><span class="v">Architecture brief</span>
-  <span class="k">Version</span><span class="v">v0.33.61</span>
-  <span class="k">Date</span><span class="v">20 August 2026</span>
+  <span class="k">Type</span><span class="v">Strategy brief — memo 8 of 8, the last of the series</span>
+  <span class="k">Version</span><span class="v">v0.33.79</span>
+  <span class="k">Date</span><span class="v">31 August 2026</span>
   <span class="k">Author</span><span class="v">Dinis Cruz (project lead) and collaborators</span>
   <span class="k">Licence</span><span class="v">CC BY 4.0</span>
-  <span class="k">Source</span><span class="v"><a href="../briefs/v0.33.61__arch-brief__a-secret-is-defined-by-expectation-a-signature-by-scarcity.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/dev/briefs/v0.33.61__arch-brief__a-secret-is-defined-by-expectation-a-signature-by-scarcity.md">view on GitHub</a></span>
+  <span class="k">Source</span><span class="v"><a href="../briefs/v0.33.79__strategy-brief__the-world-model-an-mvp-that-explains-and-must-show-its-own-emptiness.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/dev/briefs/v0.33.79__strategy-brief__the-world-model-an-mvp-that-explains-and-must-show-its-own-emptiness.md">view on GitHub</a></span>
 </div>
 
 <h2 id="summary">Summary</h2>
-<p>A brief that adopts a proposal's opening principle and its closing pattern and rejects the proposal in between, and says so rather than smoothing the difference. The principle: a secret is defined by expectation rather than by content, which explains read-keys-yes and write-keys-never in one line and sorts key material by intention rather than by class — with the qualification that the intention has to be recorded at issue, since a deliberate publication and a leak are indistinguishable afterwards. The rejection: publishing a private half destroys the integrity it was meant to supply, because a signature's value comes entirely from scarcity, so what is left is a hash wearing a signature's clothes — worse than a hash, because a verifier checks it, succeeds, and concludes something false. And the closing pattern, promoted to the governing rule: an instance generates its own keypair and a project key endorses it, so a key belongs to whatever can keep a secret and everything else is signed by something that can.</p>
+<p>The last memo, and it SPECIFIES the MVP rather than requesting one — correcting the shape this site had been proposing across four releases. The site agent had repeatedly offered an instrument: a placement rated 1–5 with its derivation plus a which-control-buys-the-most view. The memo asks for an explainer instead, and says why twice — users are the first important thing, and this is what lets you walk somebody through the scenarios. An instrument answers a question somebody already knows how to ask; an explainer creates the person who can ask it, and nobody yet holds a mental model of grant-minus-mandate priced as insurance. Three more: cost cannot be discussed without assets, and the four dimensions named — time, money, recoverability, liability — are correctly the eventual requirement and correctly deferred, because a level is relative and ranking needs no absolute value while pricing does, so stage 1 needs asset CLASS rather than asset VALUE. The probable 'Fibonacci' turns out not to disturb the settled 1–5 scale at all, because it is a proposal about what the bands REPRESENT rather than what they are called — and that band-definition question was already open. And the strongest requirement in the brief is a reservation: a SimCity-like world with data flying between departments implies a working system, when ten of eleven identities here are fixtures, both twins are servers, the claim shape does not exist and the world-state feed exists nowhere for anybody. A polished simulation is the most effective mechanism yet devised for making a demonstration look like a product — so the world must show its own emptiness, with construction sites and empty lots rather than a finished skyline.</p>
 
 <h2 id="concepts">Key concepts</h2>
 <ul>
-  <li><a href="../packs/registry-mvp/keys-and-signatures.html"><b>A signature is made of scarcity</b></a> — publish the private half and verification stops carrying information</li>
-  <li><a href="../packs/registry-mvp/change-control.html"><b>A flag that is always true is a column</b></a> — publish-by-default would make the fixture flag true on every row</li>
-  <li><a href="../rules/prior-art.html"><b>Custody without access</b></a> — destroying a vault does not make the ciphertext other people already hold unreadable</li>
-  <li><a href="../packs/registry-mvp/observability.html"><b>Route to the issuer's lane</b></a> — the addressing benefit of per-object keys, without the keys</li>
+  <li><a href="../insurance/the-world-model.html"><b>The world model</b></a> — doctrine 08: the MVP, and the rule that keeps it honest</li>
+  <li><a href="../insurance/index.html"><b>The insurance folder</b></a> — all eight memos, now processed</li>
+  <li><a href="../simulator/index.html"><b>The simulator</b></a> — one of the instruments this memo distinguishes an explainer from</li>
+  <li><a href="../registry/index.html"><b>The register</b></a> — where fixtures declare themselves — the discipline the world must inherit</li>
 </ul>
 
 <h2 id="ideas">Key ideas</h2>
 <ul>
-  <li>A key belongs to whatever can keep a secret; everything else is signed by something that can.</li>
-  <li>The proposal's own use — sealing to a specific object — requires exactly the scarcity the proposal removes.</li>
-  <li>Sign by default, and publish which signatures anybody actually checks.</li>
-  <li>A memo has now raised per-object keys twice, which says the first explanation did not stick.</li>
+  <li>An instrument answers a question somebody already knows how to ask. An explainer creates the person who can ask it — which is why the rating engine has no audience yet.</li>
+  <li>This estate has instruments and a card game. It has no world.</li>
+  <li>A level is relative: ranking two placements needs no absolute value, pricing one does. So stage 1 needs asset class, not asset value.</li>
+  <li>Naming time, money, recoverability and liability matters even while deferring them — they are the columns a valuation would fill, and naming them stops a resource count being mistaken for a cost.</li>
+  <li>Fibonacci is a proposal about what the bands represent, not about what they are called — so it does not disturb the settled 1–5 scale, it answers the still-open band-definition question.</li>
+  <li>A polished simulation is the most effective mechanism yet devised for making a demonstration look like a product.</li>
+  <li>A rendered world is a continuous, wordless claim about how much of this exists — which is this corpus's own anxiety about apparent authority, arriving in the user interface.</li>
+  <li>A city with construction sites and empty lots explains where this work stands better than a finished skyline, and makes the roadmap part of the fiction rather than a footnote beneath it.</li>
+  <li>Most of the explanatory value is spatial, not dimensional: build the 2D world first, because a 3D world that explains badly is expensive to discover and expensive to abandon.</li>
 </ul>
 
 <h2 id="on-site">On this site</h2>
-<p>Became document 13 of the registry MVP pack. It reinforces the fixture flag rather than amending it: the flag survives precisely because per-object published keys are declined.</p>
+<p>Adds insurance doctrine 08, completing the series; the hub's MVP block is rewritten from awaiting-a-decision to specified-and-awaiting-a-go-ahead. Proposes GM-D67 (the MVP explains rather than calculates), GM-D68 (asset class not asset value), GM-D69 (the world shows its own emptiness), GM-D70 (the three new actors) and GM-D71 (2D before 3D).</p>
 
 <h2 id="read">Read the document</h2>
-<div class="mdread-label">📄 Original document · v0.33.61 · 20 August 2026 · rendered from the <a href="../briefs/v0.33.61__arch-brief__a-secret-is-defined-by-expectation-a-signature-by-scarcity.md">raw markdown</a> (the source of truth)</div>
-<div class="mdread" id="mdread" data-src="../briefs/v0.33.61__arch-brief__a-secret-is-defined-by-expectation-a-signature-by-scarcity.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="../briefs/v0.33.61__arch-brief__a-secret-is-defined-by-expectation-a-signature-by-scarcity.md">open the raw markdown</a>.</p></noscript></div>
+<div class="mdread-label">📄 Original document · v0.33.79 · 31 August 2026 · rendered from the <a href="../briefs/v0.33.79__strategy-brief__the-world-model-an-mvp-that-explains-and-must-show-its-own-emptiness.md">raw markdown</a> (the source of truth)</div>
+<div class="mdread" id="mdread" data-src="../briefs/v0.33.79__strategy-brief__the-world-model-an-mvp-that-explains-and-must-show-its-own-emptiness.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="../briefs/v0.33.79__strategy-brief__the-world-model-an-mvp-that-explains-and-must-show-its-own-emptiness.md">open the raw markdown</a>.</p></noscript></div>
 
 <div class="pagenav">
   <a href="index.html">← All documents</a>
-  <a href="../briefs/v0.33.61__arch-brief__a-secret-is-defined-by-expectation-a-signature-by-scarcity.md">Raw markdown →</a>
+  <a href="../briefs/v0.33.79__strategy-brief__the-world-model-an-mvp-that-explains-and-must-show-its-own-emptiness.md">Raw markdown →</a>
 </div>
 </main>
 

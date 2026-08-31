@@ -16,7 +16,7 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.56</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.57</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -86,6 +86,7 @@
       <a class="sl" href="../insurance/not-in-line.html">&mdash; not in line (scale 1&ndash;5)</a>
       <a class="sl" href="../insurance/the-broker-market.html">&mdash; the broker market</a>
       <a class="sl" href="../insurance/the-policy-as-a-statement.html">&mdash; the policy as a statement</a>
+      <a class="sl" href="../insurance/the-world-model.html">&mdash; the world model (the MVP)</a>
       <a class="sl" href="../documents/agent-insurance.html">The pivot briefing (memo 0)</a>
       <a class="sl" href="../documents/insurance-without-money.html">Rating before money (memo 1)</a>
       <a class="sl" href="../documents/insurance-ecosystem.html">The go-live gate (memo 2)</a>
@@ -94,6 +95,7 @@
       <a class="sl" href="../documents/not-in-line.html">Not in line (memo 5)</a>
       <a class="sl" href="../documents/the-broker-market.html">The broker market (memo 6)</a>
       <a class="sl" href="../documents/the-policy-as-a-statement.html">The policy statement (memo 7)</a>
+      <a class="sl" href="../documents/the-world-model.html">The world model (memo 8)</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -220,11 +222,13 @@ count below is computed from the manifest, never typed.</p>
         <a href="../documents/the-policy-as-a-statement.html">the brief, rendered &rarr;</a> <a class="ins-raw" href="../briefs/v0.33.78__strategy-brief__the-policy-is-a-signed-statement-and-the-relying-party-is-the-boundary.md">raw</a>
       </div>
     </div>
-    <div class="ins-memo ins-memo--awaited">
-      <div class="ins-memo-n">&hellip;</div>
-      <div><b>1 more awaited</b>
-      <p>Listed as awaited rather than guessed at. Each will be filed verbatim as a brief before it is read,
-      and the doctrine will say which memo it came from.</p></div>
+    <div class="ins-memo ins-memo--processed">
+      <div class="ins-memo-n">8</div>
+      <div>
+        <b>The world model: an MVP that explains rather than calculates</b>
+        <p>The last memo, and it SPECIFIES the MVP rather than requesting one — correcting the shape the site agent had proposed for four releases. The first MVP is an explainer, not a calculator: an instrument answers a question somebody already knows how to ask, an explainer creates the person who can ask it. Cost needs assets, and stage 1 needs asset class rather than asset value. Insurer, underwriter and claim join the actor set. And the load-bearing requirement: a world must show its own emptiness, because a polished simulation is the most effective mechanism yet devised for making a demonstration look like a product.</p>
+        <a href="../documents/the-world-model.html">the brief, rendered &rarr;</a> <a class="ins-raw" href="../briefs/v0.33.79__strategy-brief__the-world-model-an-mvp-that-explains-and-must-show-its-own-emptiness.md">raw</a>
+      </div>
     </div></div>
 
 <h2 id="doctrine">The doctrine</h2>
@@ -269,13 +273,22 @@ count below is computed from the manifest, never typed.</p>
     <a class="ins-card" href="the-policy-as-a-statement.html">
       <div class="ins-card-top"><b>The policy as a statement: the handshake, and where the boundary finally sits</b><span class="dim">from memo 7</span></div>
       <p>A policy is a mandate-shaped statement; a key signs and the policy says what that is worth; and the relying party is where this pivot can finally reach a boundary.</p>
+    </a>
+
+    <a class="ins-card" href="the-world-model.html">
+      <div class="ins-card-top"><b>The world model: the MVP, and the rule that keeps it honest</b><span class="dim">from memo 8</span></div>
+      <p>The first MVP explains rather than calculates — and the world it renders must show its own emptiness, because a polished simulation makes a demonstration look like a product.</p>
     </a></div>
 
 <h2 id="mvps">The MVPs</h2>
-<div class="note"><b>None yet, and that is the honest state.</b> The doctrine is two documents old and
-        the first MVP waits on one decision: whether a level rates 1&ndash;5, a continuous score, or letter grades
-        &mdash; because every surface built on it inherits that choice. The rating engine itself needs nothing
-        that is not already published.</div>
+<div class="note"><b>None built yet, and that is the honest state &mdash; but it is now specified.</b>
+        <a href="the-world-model.html">Memo 8</a> settles what the first one is, and corrects what this site had
+        been proposing: <b>an explainer, not a calculator.</b> A 2D world with places &mdash; the environment, the
+        operator, the underwriter, the relying party, and an empty lot marked <em>insurer, stage 2</em> &mdash;
+        walking one worked example from the delta through a rating to a refused request. Every step is a document
+        this estate already publishes, <b>except two</b>: the claim shape and the world-state feed, which appear as
+        construction sites rather than being drawn as though they worked. It awaits the go-ahead, not a
+        decision.</div>
 
 <h2 id="reads">What it consumes</h2>
 <p>Nothing here starts from scratch — the rating's inputs are documents this estate already publishes:
@@ -298,7 +311,9 @@ the <a href="../registry/views/excess-authority.json">delta</a> with its
 <li>That five bands are the right resolution. The scale is settled and argued for; nothing validates it against outcomes, because there are no outcomes yet.</li>
 <li>That the not-in-line position is commercially viable. It is a coherent architecture and an unproven business — nobody has paid for a schema here.</li>
 <li>That a broker&#x27;s netting can be computed today. Rating what a broker adds as well as what it removes needs a grant tree for the broker relationship, and no broker publishes one.</li>
-<li>That the handshake is a boundary anywhere today. It reaches that tier only where the relying party is genuinely independent of the requester, and nothing has been built or installed to test it.</li></ul>
+<li>That the handshake is a boundary anywhere today. It reaches that tier only where the relying party is genuinely independent of the requester, and nothing has been built or installed to test it.</li>
+<li>That a world explains better than a document. It is the memo&#x27;s hypothesis and the site agent&#x27;s agreement, and neither is evidence — which is why the 2D-first sequencing exists.</li>
+<li>That the emptiness rule survives contact with a demo. Showing what does not exist is easy to write down and hard to keep when somebody wants to impress a room. It is the first thing that will be argued away.</li></ul>
 
 <div class="pagenav">
   <a href="../bench/index.html">&larr; The bench</a>
@@ -311,7 +326,7 @@ the <a href="../registry/views/excess-authority.json">delta</a> with its
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.56</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.57</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The bench</h4>
@@ -336,6 +351,7 @@ the <a href="../registry/views/excess-authority.json">delta</a> with its
     <a href="../insurance/not-in-line.html">Not in line</a>
     <a href="../insurance/the-broker-market.html">The broker market</a>
     <a href="../insurance/the-policy-as-a-statement.html">The policy as a statement</a>
+    <a href="../insurance/the-world-model.html">The world model (the MVP)</a>
     <a href="../documents/agent-insurance.html">The pivot briefing</a>
   </div>
   <div>

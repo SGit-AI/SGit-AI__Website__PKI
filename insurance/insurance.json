@@ -10,7 +10,7 @@
   },
   "memos": {
     "expected": 8,
-    "note": "The project lead is recording eight memos on this pivot. Each is filed verbatim as a brief before it is read; the doctrine below is derived from them and says which memo it came from. A memo not yet recorded is listed as awaited rather than guessed at.",
+    "note": "The project lead recorded eight memos on this pivot, preceded by the pivot briefing. All eight are now filed verbatim as briefs and read into the doctrine below. Each doctrine document says which memo it came from; where a memo and a document disagree, the memo wins.",
     "items": [
       {
         "n": 0,
@@ -75,6 +75,14 @@
         "page": "../documents/the-policy-as-a-statement.html",
         "state": "processed",
         "gave": "How it works with the primitives the estate already has. policy/v0 turns out to be a mandate-shaped statement issued by a rater — one more type, no new register machinery. A policy does not sign; its subject signs and the policy establishes what that is worth. And the handshake relocates enforcement to the RELYING PARTY, who is outside the requesting agent's grant — the first mechanism in this pivot that can reach tier boundary, resolving the limit memo 5 recorded."
+      },
+      {
+        "n": 8,
+        "title": "The world model: an MVP that explains rather than calculates",
+        "brief": "v0.33.79__strategy-brief__the-world-model-an-mvp-that-explains-and-must-show-its-own-emptiness.md",
+        "page": "../documents/the-world-model.html",
+        "state": "processed",
+        "gave": "The last memo, and it SPECIFIES the MVP rather than requesting one — correcting the shape the site agent had proposed for four releases. The first MVP is an explainer, not a calculator: an instrument answers a question somebody already knows how to ask, an explainer creates the person who can ask it. Cost needs assets, and stage 1 needs asset class rather than asset value. Insurer, underwriter and claim join the actor set. And the load-bearing requirement: a world must show its own emptiness, because a polished simulation is the most effective mechanism yet devised for making a demonstration look like a product."
       }
     ]
   },
@@ -134,6 +142,13 @@
       "title": "The policy as a statement: the handshake, and where the boundary finally sits",
       "from": "memo 7",
       "one_line": "A policy is a mandate-shaped statement; a key signs and the policy says what that is worth; and the relying party is where this pivot can finally reach a boundary."
+    },
+    {
+      "slug": "the-world-model",
+      "file": "08__the-world-model.md",
+      "title": "The world model: the MVP, and the rule that keeps it honest",
+      "from": "memo 8",
+      "one_line": "The first MVP explains rather than calculates — and the world it renders must show its own emptiness, because a polished simulation makes a demonstration look like a product."
     }
   ],
   "mvps": [],
@@ -149,6 +164,8 @@
     "That five bands are the right resolution. The scale is settled and argued for; nothing validates it against outcomes, because there are no outcomes yet.",
     "That the not-in-line position is commercially viable. It is a coherent architecture and an unproven business — nobody has paid for a schema here.",
     "That a broker's netting can be computed today. Rating what a broker adds as well as what it removes needs a grant tree for the broker relationship, and no broker publishes one.",
-    "That the handshake is a boundary anywhere today. It reaches that tier only where the relying party is genuinely independent of the requester, and nothing has been built or installed to test it."
+    "That the handshake is a boundary anywhere today. It reaches that tier only where the relying party is genuinely independent of the requester, and nothing has been built or installed to test it.",
+    "That a world explains better than a document. It is the memo's hypothesis and the site agent's agreement, and neither is evidence — which is why the 2D-first sequencing exists.",
+    "That the emptiness rule survives contact with a demo. Showing what does not exist is easy to write down and hard to keep when somebody wants to impress a room. It is the first thing that will be argued away."
   ]
 }

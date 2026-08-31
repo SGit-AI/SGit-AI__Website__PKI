@@ -145,10 +145,14 @@ def build_hub(m):
       <div class="ins-card-top"><b>{esc(x['title'])}</b><span class="dim">{esc(x.get('state',''))}</span></div>
       <p>{esc(x.get('one_line',''))}</p></a>""" for x in m["mvps"])
         if m["mvps"] else
-        """<div class="note"><b>None yet, and that is the honest state.</b> The doctrine is two documents old and
-        the first MVP waits on one decision: whether a level rates 1&ndash;5, a continuous score, or letter grades
-        &mdash; because every surface built on it inherits that choice. The rating engine itself needs nothing
-        that is not already published.</div>""")
+        """<div class="note"><b>None built yet, and that is the honest state &mdash; but it is now specified.</b>
+        <a href="the-world-model.html">Memo 8</a> settles what the first one is, and corrects what this site had
+        been proposing: <b>an explainer, not a calculator.</b> A 2D world with places &mdash; the environment, the
+        operator, the underwriter, the relying party, and an empty lot marked <em>insurer, stage 2</em> &mdash;
+        walking one worked example from the delta through a rating to a refused request. Every step is a document
+        this estate already publishes, <b>except two</b>: the claim shape and the world-state feed, which appear as
+        construction sites rather than being drawn as though they worked. It awaits the go-ahead, not a
+        decision.</div>""")
 
     dnp = "\n".join(f"<li>{esc(x)}</li>" for x in m["does_not_prove"])
 

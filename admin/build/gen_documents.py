@@ -754,6 +754,30 @@ DOCS = [
   ],
   pages="Adds insurance doctrine 07; proposes GM-D62 (policy/v0 as a mandate-shaped statement, answering GM-D36), GM-D63 (a policy does not sign), GM-D64 (the relying party is the boundary, resolving GM-D55's limit), GM-D65 (verification is not metered by the check) and GM-D66 (a revocation SLA states its check interval)."),
 
+ dict(slug="the-world-model",
+  title="The World Model: An MVP That Explains Rather Than Calculates, And Why It Must Show Its Own Emptiness",
+  md="v0.33.79__strategy-brief__the-world-model-an-mvp-that-explains-and-must-show-its-own-emptiness.md",
+  version="v0.33.79", date="31 August 2026", dtype="Strategy brief — memo 8 of 8, the last of the series",
+  summary="The last memo, and it SPECIFIES the MVP rather than requesting one — correcting the shape this site had been proposing across four releases. The site agent had repeatedly offered an instrument: a placement rated 1–5 with its derivation plus a which-control-buys-the-most view. The memo asks for an explainer instead, and says why twice — users are the first important thing, and this is what lets you walk somebody through the scenarios. An instrument answers a question somebody already knows how to ask; an explainer creates the person who can ask it, and nobody yet holds a mental model of grant-minus-mandate priced as insurance. Three more: cost cannot be discussed without assets, and the four dimensions named — time, money, recoverability, liability — are correctly the eventual requirement and correctly deferred, because a level is relative and ranking needs no absolute value while pricing does, so stage 1 needs asset CLASS rather than asset VALUE. The probable 'Fibonacci' turns out not to disturb the settled 1–5 scale at all, because it is a proposal about what the bands REPRESENT rather than what they are called — and that band-definition question was already open. And the strongest requirement in the brief is a reservation: a SimCity-like world with data flying between departments implies a working system, when ten of eleven identities here are fixtures, both twins are servers, the claim shape does not exist and the world-state feed exists nowhere for anybody. A polished simulation is the most effective mechanism yet devised for making a demonstration look like a product — so the world must show its own emptiness, with construction sites and empty lots rather than a finished skyline.",
+  concepts=[
+   ("The world model", "../insurance/the-world-model.html", "doctrine 08: the MVP, and the rule that keeps it honest"),
+   ("The insurance folder", "../insurance/index.html", "all eight memos, now processed"),
+   ("The simulator", "../simulator/index.html", "one of the instruments this memo distinguishes an explainer from"),
+   ("The register", "../registry/index.html", "where fixtures declare themselves — the discipline the world must inherit"),
+  ],
+  ideas=[
+   "An instrument answers a question somebody already knows how to ask. An explainer creates the person who can ask it — which is why the rating engine has no audience yet.",
+   "This estate has instruments and a card game. It has no world.",
+   "A level is relative: ranking two placements needs no absolute value, pricing one does. So stage 1 needs asset class, not asset value.",
+   "Naming time, money, recoverability and liability matters even while deferring them — they are the columns a valuation would fill, and naming them stops a resource count being mistaken for a cost.",
+   "Fibonacci is a proposal about what the bands represent, not about what they are called — so it does not disturb the settled 1–5 scale, it answers the still-open band-definition question.",
+   "A polished simulation is the most effective mechanism yet devised for making a demonstration look like a product.",
+   "A rendered world is a continuous, wordless claim about how much of this exists — which is this corpus's own anxiety about apparent authority, arriving in the user interface.",
+   "A city with construction sites and empty lots explains where this work stands better than a finished skyline, and makes the roadmap part of the fiction rather than a footnote beneath it.",
+   "Most of the explanatory value is spatial, not dimensional: build the 2D world first, because a 3D world that explains badly is expensive to discover and expensive to abandon.",
+  ],
+  pages="Adds insurance doctrine 08, completing the series; the hub's MVP block is rewritten from awaiting-a-decision to specified-and-awaiting-a-go-ahead. Proposes GM-D67 (the MVP explains rather than calculates), GM-D68 (asset class not asset value), GM-D69 (the world shows its own emptiness), GM-D70 (the three new actors) and GM-D71 (2D before 3D)."),
+
 ]
 
 PAGE = """<!doctype html>
