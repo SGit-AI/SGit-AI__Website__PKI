@@ -85,6 +85,7 @@ NAV = [
         ("&mdash; why insurance", "insurance/why-insurance-and-what-broke-it.html"),
         ("&mdash; not in line (scale 1&ndash;5)", "insurance/not-in-line.html"),
         ("&mdash; the broker market", "insurance/the-broker-market.html"),
+        ("&mdash; the policy as a statement", "insurance/the-policy-as-a-statement.html"),
         ("The pivot briefing (memo 0)", "documents/agent-insurance.html"),
         ("Rating before money (memo 1)", "documents/insurance-without-money.html"),
         ("The go-live gate (memo 2)", "documents/insurance-ecosystem.html"),
@@ -92,6 +93,7 @@ NAV = [
         ("Why insurance (memo 4)", "documents/why-insurance.html"),
         ("Not in line (memo 5)", "documents/not-in-line.html"),
         ("The broker market (memo 6)", "documents/the-broker-market.html"),
+        ("The policy statement (memo 7)", "documents/the-policy-as-a-statement.html"),
     ], ("insurance/",)),
     ("Docs", "documents/index.html", [
         ("The documents", "documents/index.html"),
@@ -130,6 +132,7 @@ FOOTER = [
         ("Why insurance", "insurance/why-insurance-and-what-broke-it.html"),
         ("Not in line", "insurance/not-in-line.html"),
         ("The broker market", "insurance/the-broker-market.html"),
+        ("The policy as a statement", "insurance/the-policy-as-a-statement.html"),
         ("The pivot briefing", "documents/agent-insurance.html"),
     ]),
     ("The registry", [

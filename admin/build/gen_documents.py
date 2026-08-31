@@ -730,6 +730,30 @@ DOCS = [
   ],
   pages="Adds insurance doctrine 06; proposes GM-D58 (the method computes the vendor's claim), GM-D59 (a broker changes topology — corrects v0.33.74 §5), GM-D60 (elective delta carries a cost to close) and GM-D61 (a broker's rating is systemic)."),
 
+ dict(slug="the-policy-as-a-statement",
+  title="The Policy Is A Signed Statement, And The Relying Party Is The Boundary",
+  md="v0.33.78__strategy-brief__the-policy-is-a-signed-statement-and-the-relying-party-is-the-boundary.md",
+  version="v0.33.78", date="31 August 2026", dtype="Strategy brief — memo 7 of 8 on the insurance pivot",
+  summary="How the pivot works with primitives the estate already has — and it resolves a limit the pivot had recorded as hard. policy/v0 turns out to be a MANDATE-SHAPED statement issued by a rater rather than an operator: same five fields, same append-only record, same revocation-by-append, same verification walk, so the register needs no new machinery — one more statement type beside identity, mandate, acceptance, revocation and grant. A precision follows: a policy does not sign. A key signs, proving possession; the policy establishes what that signature is WORTH — which is exactly the 'afterwards' the corpus named on 19 August when it said a signature proves possession and proves nothing about trustworthiness. The consequential claim is structural: the handshake puts the check in the RELYING PARTY, who is by construction outside the requesting agent's grant — making it the first mechanism in this pivot that can reach tier boundary, and resolving memo 5's finding that a party outside the line can never be one. Also: trust as a path is a sentence the corpus published four days earlier, arrived at again from the insurance direction; the memo's ten-minute revocation is shown to be a CEILING bounded by relying-party check interval, with the handshake itself as the fix; and metering verification carries three hazards the observability brief anticipated, of which the quietest is that pricing a check discourages checking, raising the very latency the handshake exists to lower.",
+  concepts=[
+   ("The policy as a statement", "../insurance/the-policy-as-a-statement.html", "doctrine 07: the handshake, and where the boundary sits"),
+   ("Observability", "observability.html", "the brief that computed revocation latency before this memo needed it"),
+   ("Trust as a path", "../documents/index.html", "the v0.33.63 pivot, re-derived here from the insurance side"),
+   ("The register's statements", "../registry/index.html", "identity, mandate, acceptance, revocation, grant — and now policy"),
+  ],
+  ideas=[
+   "policy/v0 is a mandate-shaped statement issued by a rater rather than an operator: one more type, and no new register machinery at all.",
+   "A policy does not sign. A key signs, proving possession; the policy establishes what that signature is worth — which is the 'afterwards' the corpus said had to be filled by something other than the signature itself.",
+   "The relying party is the enforcement point, and is by construction outside the requesting agent's grant — so the handshake is the first mechanism in this pivot that can reach tier boundary, without this project standing in the line.",
+   "It is a boundary only where the relying party is genuinely independent of the requester: an internal service enforcing a check on an agent run by the same team is back to a setting.",
+   "Trust is a path and revocation is that path no longer existing — a sentence this corpus published on 27 August, and memo 7 arrives at it again from the insurance direction four days later.",
+   "A policy promising revocation in ten minutes delivers ten minutes only to parties who check that often. A revocation SLA that does not state a required check interval is a hope with a number on it.",
+   "The handshake is not only how you check — it is what makes fast revocation mean anything, because verifying on every request gives a revocation latency of one request.",
+   "A per-verification price is a tax on the behaviour the system most wants: it makes relying parties cache, batch and skip, raising the latency the handshake exists to lower.",
+   "The most valuable output of verification metrics is not the checks recorded but the parties holding a policy who have never once checked it.",
+  ],
+  pages="Adds insurance doctrine 07; proposes GM-D62 (policy/v0 as a mandate-shaped statement, answering GM-D36), GM-D63 (a policy does not sign), GM-D64 (the relying party is the boundary, resolving GM-D55's limit), GM-D65 (verification is not metered by the check) and GM-D66 (a revocation SLA states its check interval)."),
+
 ]
 
 PAGE = """<!doctype html>

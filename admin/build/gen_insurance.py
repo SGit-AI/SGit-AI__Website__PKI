@@ -55,9 +55,14 @@ def check(m):
             if not page.exists():
                 errs.append(f"memo {item['n']} names reader page {item['page']} and it does not exist")
 
-    n_proc = sum(1 for i in m["memos"]["items"] if i["state"] == "processed")
+    # Memo 0 is the pivot briefing that precedes the series; only n >= 1 counts
+    # toward the eight, because the hub's counter is a claim and it must be true.
+    n_proc = sum(1 for i in m["memos"]["items"] if i["state"] == "processed" and i["n"] >= 1)
     if n_proc > m["memos"]["expected"]:
-        errs.append(f"{n_proc} memos processed but the manifest expects only {m['memos']['expected']}")
+        errs.append(f"{n_proc} memos of the series processed but the manifest expects only {m['memos']['expected']}")
+    ns = [i["n"] for i in m["memos"]["items"]]
+    if len(ns) != len(set(ns)):
+        errs.append("two memo entries share a number")
 
     declared_mvps = {x["id"] for x in m["mvps"]}
     actual_mvps = {d.name for d in INS.iterdir() if d.is_dir() and d.name != "src"}
@@ -110,15 +115,16 @@ def build_hub(m):
         proc = i["state"] == "processed"
         memo_rows.append(f"""
     <div class="ins-memo ins-memo--{esc(i['state'])}">
-      <div class="ins-memo-n">{i['n']}</div>
+      <div class="ins-memo-n">{i['n'] if i['n'] >= 1 else '&mdash;'}</div>
       <div>
-        <b>{esc(i['title'])}</b>
+        <b>{esc(i['title'])}</b>{'' if i['n'] >= 1 else ' <span class="dim">— the pivot briefing, which precedes the series of eight</span>'}
         <p>{esc(i['gave'])}</p>
         {'<a href="' + esc(i['page']) + '">the brief, rendered &rarr;</a> <a class="ins-raw" href="../briefs/' + esc(i['brief']) + '">raw</a>'
          if proc else '<span class="dim">not yet recorded</span>'}
       </div>
     </div>""")
-    awaited = m["memos"]["expected"] - sum(1 for i in m["memos"]["items"] if i["state"] == "processed")
+    awaited = m["memos"]["expected"] - sum(
+        1 for i in m["memos"]["items"] if i["state"] == "processed" and i["n"] >= 1)
     if awaited > 0:
         memo_rows.append(f"""
     <div class="ins-memo ins-memo--awaited">
@@ -260,9 +266,10 @@ def main():
     for d in m["doctrine"]:
         (INS / f"{d['slug']}.html").write_text(build_doc(d, m), encoding="utf-8")
 
-    n_proc = sum(1 for i in m["memos"]["items"] if i["state"] == "processed")
+    n_proc = sum(1 for i in m["memos"]["items"] if i["state"] == "processed" and i["n"] >= 1)
     print(f"gen_insurance: hub + {len(m['doctrine'])} doctrine page(s); "
-          f"{n_proc} of {m['memos']['expected']} memos processed, {len(m['mvps'])} MVP(s)")
+          f"{n_proc} of {m['memos']['expected']} series memos processed "
+          f"(+ the pivot briefing), {len(m['mvps'])} MVP(s)")
 
 
 if __name__ == "__main__":

@@ -14,7 +14,7 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.55</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.56</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -83,6 +83,7 @@
       <a class="sl" href="../insurance/why-insurance-and-what-broke-it.html">&mdash; why insurance</a>
       <a class="sl" href="../insurance/not-in-line.html">&mdash; not in line (scale 1&ndash;5)</a>
       <a class="sl" href="../insurance/the-broker-market.html">&mdash; the broker market</a>
+      <a class="sl" href="../insurance/the-policy-as-a-statement.html">&mdash; the policy as a statement</a>
       <a class="sl" href="../documents/agent-insurance.html">The pivot briefing (memo 0)</a>
       <a class="sl" href="../documents/insurance-without-money.html">Rating before money (memo 1)</a>
       <a class="sl" href="../documents/insurance-ecosystem.html">The go-live gate (memo 2)</a>
@@ -90,6 +91,7 @@
       <a class="sl" href="../documents/why-insurance.html">Why insurance (memo 4)</a>
       <a class="sl" href="../documents/not-in-line.html">Not in line (memo 5)</a>
       <a class="sl" href="../documents/the-broker-market.html">The broker market (memo 6)</a>
+      <a class="sl" href="../documents/the-policy-as-a-statement.html">The policy statement (memo 7)</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -125,6 +127,11 @@
 <div class="tablewrap"><table class="vers">
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
+    <tr>
+<td class="vnum">v0.1.56</td>
+<td class="vdate">31 Aug 2026</td>
+<td><b>Memo 7 of 8 &mdash; the policy becomes a statement, and the boundary finally has a home.</b> <a href="../documents/the-policy-as-a-statement.html">Brief v0.33.78</a> works the pivot through the primitives the estate already has, and the answers are smaller than expected. <b><code>policy/v0</code> is a mandate-shaped statement</b> issued by a rater rather than an operator &mdash; same five fields, same append-only record, same revocation-by-append, same verification walk &mdash; so it needs <b>no new register machinery</b>, just one more statement type beside identity, mandate, acceptance, revocation and grant (GM-D62, answering GM-D36). A precision follows: <b>a policy does not sign.</b> A key signs, proving possession; the policy establishes what that signature is <em>worth</em> &mdash; which is exactly the <em>afterwards</em> this corpus named on 19 August when it said a signature proves possession and proves nothing about trustworthiness (GM-D63). <b>And the structural claim resolves a limit recorded two releases ago.</b> v0.33.76 established that a party outside the line can never itself be a boundary. Memo 7 names who can: the handshake puts the check in the <b>relying party</b>, who is by construction outside the requesting agent's grant &mdash; making it <b>the first mechanism in this pivot that can reach tier <code>boundary</code></b>, without this project standing in the line (GM-D64). Three findings from checking it against the corpus: <b>trust is a path</b> is a sentence this estate published on 27 August, arrived at again from the insurance direction four days later; the memo's <b>ten-minute revocation is a ceiling</b>, because the observability brief already computed that revocation propagates only at the rate relying parties check &mdash; so an SLA without a required check interval is a hope with a number on it, and <b>the handshake is itself the fix</b>, since verifying on every request gives a latency of one request (GM-D66); and <b>metering verification</b> carries three hazards the observability brief anticipated, the quietest being that <b>pricing a check discourages checking</b>, raising the very latency the handshake exists to lower (GM-D65). <b>Also fixed: a counter that had just become false.</b> The hub said <em>8 of 8 memos processed</em> because it was counting the pivot briefing as one of the eight. It is not &mdash; it precedes the series. The counter now counts only the numbered series, a gate refuses two memos sharing a number, and the hub reads <b>7 of 8</b>.</td>
+    </tr>
     <tr>
 <td class="vnum">v0.1.55</td>
 <td class="vdate">31 Aug 2026</td>
@@ -713,7 +720,7 @@ chapter 15 records as fixed here.</td>
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.55</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.56</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The bench</h4>
@@ -737,6 +744,7 @@ chapter 15 records as fixed here.</td>
     <a href="../insurance/why-insurance-and-what-broke-it.html">Why insurance</a>
     <a href="../insurance/not-in-line.html">Not in line</a>
     <a href="../insurance/the-broker-market.html">The broker market</a>
+    <a href="../insurance/the-policy-as-a-statement.html">The policy as a statement</a>
     <a href="../documents/agent-insurance.html">The pivot briefing</a>
   </div>
   <div>

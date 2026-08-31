@@ -67,6 +67,14 @@
         "page": "../documents/the-broker-market.html",
         "state": "processed",
         "gave": "The broker market's commercial case is the level reduction it produces — and the broker's own policy is what stops that being apparent authority in the vendor channel. Corrects an earlier framing: a broker changes the grant's TOPOLOGY rather than narrowing it, adding a party with reach of its own, so the net may be positive and deployment topology is a rating variable. Names the case the delta taxonomy could not hold — granularity that exists but is impractical — and fixes it with a cost-to-close dimension rather than a fourth class."
+      },
+      {
+        "n": 7,
+        "title": "The policy is a signed statement, and the relying party is the boundary",
+        "brief": "v0.33.78__strategy-brief__the-policy-is-a-signed-statement-and-the-relying-party-is-the-boundary.md",
+        "page": "../documents/the-policy-as-a-statement.html",
+        "state": "processed",
+        "gave": "How it works with the primitives the estate already has. policy/v0 turns out to be a mandate-shaped statement issued by a rater — one more type, no new register machinery. A policy does not sign; its subject signs and the policy establishes what that is worth. And the handshake relocates enforcement to the RELYING PARTY, who is outside the requesting agent's grant — the first mechanism in this pivot that can reach tier boundary, resolving the limit memo 5 recorded."
       }
     ]
   },
@@ -119,6 +127,13 @@
       "title": "The broker market: who backs the claim, and what a broker actually changes",
       "from": "memo 6",
       "one_line": "A broker's claimed reduction is computed by the method, not the broker — and a broker moves exposure as well as removing it, so the net may be positive."
+    },
+    {
+      "slug": "the-policy-as-a-statement",
+      "file": "07__the-policy-as-a-statement.md",
+      "title": "The policy as a statement: the handshake, and where the boundary finally sits",
+      "from": "memo 7",
+      "one_line": "A policy is a mandate-shaped statement; a key signs and the policy says what that is worth; and the relying party is where this pivot can finally reach a boundary."
     }
   ],
   "mvps": [],
@@ -133,6 +148,7 @@
     "That the estate's own grant measurement is complete. Memo 3 named a node measure.py misses — commit authorship — found by conversation rather than by the tool, and the honest reading is that there are others.",
     "That five bands are the right resolution. The scale is settled and argued for; nothing validates it against outcomes, because there are no outcomes yet.",
     "That the not-in-line position is commercially viable. It is a coherent architecture and an unproven business — nobody has paid for a schema here.",
-    "That a broker's netting can be computed today. Rating what a broker adds as well as what it removes needs a grant tree for the broker relationship, and no broker publishes one."
+    "That a broker's netting can be computed today. Rating what a broker adds as well as what it removes needs a grant tree for the broker relationship, and no broker publishes one.",
+    "That the handshake is a boundary anywhere today. It reaches that tier only where the relying party is genuinely independent of the requester, and nothing has been built or installed to test it."
   ]
 }

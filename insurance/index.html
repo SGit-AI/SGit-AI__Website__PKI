@@ -16,7 +16,7 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.55</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.56</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -85,6 +85,7 @@
       <a class="sl" href="../insurance/why-insurance-and-what-broke-it.html">&mdash; why insurance</a>
       <a class="sl" href="../insurance/not-in-line.html">&mdash; not in line (scale 1&ndash;5)</a>
       <a class="sl" href="../insurance/the-broker-market.html">&mdash; the broker market</a>
+      <a class="sl" href="../insurance/the-policy-as-a-statement.html">&mdash; the policy as a statement</a>
       <a class="sl" href="../documents/agent-insurance.html">The pivot briefing (memo 0)</a>
       <a class="sl" href="../documents/insurance-without-money.html">Rating before money (memo 1)</a>
       <a class="sl" href="../documents/insurance-ecosystem.html">The go-live gate (memo 2)</a>
@@ -92,6 +93,7 @@
       <a class="sl" href="../documents/why-insurance.html">Why insurance (memo 4)</a>
       <a class="sl" href="../documents/not-in-line.html">Not in line (memo 5)</a>
       <a class="sl" href="../documents/the-broker-market.html">The broker market (memo 6)</a>
+      <a class="sl" href="../documents/the-policy-as-a-statement.html">The policy statement (memo 7)</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -155,9 +157,9 @@ risk and promises no payout. What it does is tell an operator that <i>this</i> p
 count below is computed from the manifest, never typed.</p>
 <div class="ins-memos">
     <div class="ins-memo ins-memo--processed">
-      <div class="ins-memo-n">0</div>
+      <div class="ins-memo-n">&mdash;</div>
       <div>
-        <b>The pivot briefing: the delta is where the insurance lives</b>
+        <b>The pivot briefing: the delta is where the insurance lives</b> <span class="dim">— the pivot briefing, which precedes the series of eight</span>
         <p>The policy replaces the acceptance at the foundation; the insurer as the acceptor of last resort filling the register&#x27;s acceptor:null; the two-insurances split; parametric as the payout shape; the loss event named as the missing primitive.</p>
         <a href="../documents/agent-insurance.html">the brief, rendered &rarr;</a> <a class="ins-raw" href="../briefs/v0.33.71__strategy-brief__insurance-for-agents-the-delta-is-where-the-insurance-lives.md">raw</a>
       </div>
@@ -210,6 +212,14 @@ count below is computed from the manifest, never typed.</p>
         <a href="../documents/the-broker-market.html">the brief, rendered &rarr;</a> <a class="ins-raw" href="../briefs/v0.33.77__strategy-brief__the-broker-market-is-driven-by-insurance-and-a-broker-must-carry-its-own.md">raw</a>
       </div>
     </div>
+    <div class="ins-memo ins-memo--processed">
+      <div class="ins-memo-n">7</div>
+      <div>
+        <b>The policy is a signed statement, and the relying party is the boundary</b>
+        <p>How it works with the primitives the estate already has. policy/v0 turns out to be a mandate-shaped statement issued by a rater — one more type, no new register machinery. A policy does not sign; its subject signs and the policy establishes what that is worth. And the handshake relocates enforcement to the RELYING PARTY, who is outside the requesting agent&#x27;s grant — the first mechanism in this pivot that can reach tier boundary, resolving the limit memo 5 recorded.</p>
+        <a href="../documents/the-policy-as-a-statement.html">the brief, rendered &rarr;</a> <a class="ins-raw" href="../briefs/v0.33.78__strategy-brief__the-policy-is-a-signed-statement-and-the-relying-party-is-the-boundary.md">raw</a>
+      </div>
+    </div>
     <div class="ins-memo ins-memo--awaited">
       <div class="ins-memo-n">&hellip;</div>
       <div><b>1 more awaited</b>
@@ -254,6 +264,11 @@ count below is computed from the manifest, never typed.</p>
     <a class="ins-card" href="the-broker-market.html">
       <div class="ins-card-top"><b>The broker market: who backs the claim, and what a broker actually changes</b><span class="dim">from memo 6</span></div>
       <p>A broker&#x27;s claimed reduction is computed by the method, not the broker — and a broker moves exposure as well as removing it, so the net may be positive.</p>
+    </a>
+
+    <a class="ins-card" href="the-policy-as-a-statement.html">
+      <div class="ins-card-top"><b>The policy as a statement: the handshake, and where the boundary finally sits</b><span class="dim">from memo 7</span></div>
+      <p>A policy is a mandate-shaped statement; a key signs and the policy says what that is worth; and the relying party is where this pivot can finally reach a boundary.</p>
     </a></div>
 
 <h2 id="mvps">The MVPs</h2>
@@ -282,7 +297,8 @@ the <a href="../registry/views/excess-authority.json">delta</a> with its
 <li>That the estate&#x27;s own grant measurement is complete. Memo 3 named a node measure.py misses — commit authorship — found by conversation rather than by the tool, and the honest reading is that there are others.</li>
 <li>That five bands are the right resolution. The scale is settled and argued for; nothing validates it against outcomes, because there are no outcomes yet.</li>
 <li>That the not-in-line position is commercially viable. It is a coherent architecture and an unproven business — nobody has paid for a schema here.</li>
-<li>That a broker&#x27;s netting can be computed today. Rating what a broker adds as well as what it removes needs a grant tree for the broker relationship, and no broker publishes one.</li></ul>
+<li>That a broker&#x27;s netting can be computed today. Rating what a broker adds as well as what it removes needs a grant tree for the broker relationship, and no broker publishes one.</li>
+<li>That the handshake is a boundary anywhere today. It reaches that tier only where the relying party is genuinely independent of the requester, and nothing has been built or installed to test it.</li></ul>
 
 <div class="pagenav">
   <a href="../bench/index.html">&larr; The bench</a>
@@ -295,7 +311,7 @@ the <a href="../registry/views/excess-authority.json">delta</a> with its
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.55</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.56</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The bench</h4>
@@ -319,6 +335,7 @@ the <a href="../registry/views/excess-authority.json">delta</a> with its
     <a href="../insurance/why-insurance-and-what-broke-it.html">Why insurance</a>
     <a href="../insurance/not-in-line.html">Not in line</a>
     <a href="../insurance/the-broker-market.html">The broker market</a>
+    <a href="../insurance/the-policy-as-a-statement.html">The policy as a statement</a>
     <a href="../documents/agent-insurance.html">The pivot briefing</a>
   </div>
   <div>
