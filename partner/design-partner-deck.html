@@ -9,6 +9,16 @@
 <meta property="og:url" content="https://pki.sgit.ai/partner/design-partner-deck.html">
 <link rel="stylesheet" href="../assets/site.css">
 <link rel="stylesheet" href="../assets/insurance.css">
+<style>
+.deck{display:flex;flex-direction:column;gap:1.6rem;margin:1.5rem 0 2.5rem}
+.deck .slide{margin:0}
+.deck .slide a{display:block;border:1px solid var(--rule,#d8dbe1);border-radius:8px;
+  overflow:hidden;background:#fff;line-height:0}
+.deck .slide img{width:100%;height:auto;display:block}
+.deck figcaption{font-size:.8rem;color:var(--muted,#646b77);
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;padding-top:.4rem}
+@media (min-width:900px){.deck{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem}}
+</style>
 <script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
 <script src="../assets/mdreader.js" defer></script>
 </head>
@@ -18,7 +28,7 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.63</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.64</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -149,8 +159,93 @@
 <a href="src/riskmandate-design-partner-deck.pdf">download the PDF</a>. The build refuses to run if a
 single byte of it changes.</p>
 
-<p>Below is a <b>machine text extraction</b> of the PDF, produced with <code>pypdf</code>
-and unedited. It exists so the deck is searchable and quotable.
+<p>The slides below are <b>rendered from that PDF at build time</b> &mdash; they are
+pictures of the document, not a re-typesetting of it. Tap any slide for the
+full-resolution image.</p>
+
+<div class="deck">
+  <figure class="slide">
+    <a href="deck-pages/design-partner-deck/slide-01.webp">
+      <img src="deck-pages/design-partner-deck/slide-01.webp" alt="Slide 1 of 11"
+           width="1920" height="1080" loading="eager" decoding="async">
+    </a>
+    <figcaption>1 / 11</figcaption>
+  </figure>
+  <figure class="slide">
+    <a href="deck-pages/design-partner-deck/slide-02.webp">
+      <img src="deck-pages/design-partner-deck/slide-02.webp" alt="Slide 2 of 11"
+           width="1920" height="1080" loading="eager" decoding="async">
+    </a>
+    <figcaption>2 / 11</figcaption>
+  </figure>
+  <figure class="slide">
+    <a href="deck-pages/design-partner-deck/slide-03.webp">
+      <img src="deck-pages/design-partner-deck/slide-03.webp" alt="Slide 3 of 11"
+           width="1920" height="1080" loading="lazy" decoding="async">
+    </a>
+    <figcaption>3 / 11</figcaption>
+  </figure>
+  <figure class="slide">
+    <a href="deck-pages/design-partner-deck/slide-04.webp">
+      <img src="deck-pages/design-partner-deck/slide-04.webp" alt="Slide 4 of 11"
+           width="1920" height="1080" loading="lazy" decoding="async">
+    </a>
+    <figcaption>4 / 11</figcaption>
+  </figure>
+  <figure class="slide">
+    <a href="deck-pages/design-partner-deck/slide-05.webp">
+      <img src="deck-pages/design-partner-deck/slide-05.webp" alt="Slide 5 of 11"
+           width="1920" height="1080" loading="lazy" decoding="async">
+    </a>
+    <figcaption>5 / 11</figcaption>
+  </figure>
+  <figure class="slide">
+    <a href="deck-pages/design-partner-deck/slide-06.webp">
+      <img src="deck-pages/design-partner-deck/slide-06.webp" alt="Slide 6 of 11"
+           width="1920" height="1080" loading="lazy" decoding="async">
+    </a>
+    <figcaption>6 / 11</figcaption>
+  </figure>
+  <figure class="slide">
+    <a href="deck-pages/design-partner-deck/slide-07.webp">
+      <img src="deck-pages/design-partner-deck/slide-07.webp" alt="Slide 7 of 11"
+           width="1920" height="1080" loading="lazy" decoding="async">
+    </a>
+    <figcaption>7 / 11</figcaption>
+  </figure>
+  <figure class="slide">
+    <a href="deck-pages/design-partner-deck/slide-08.webp">
+      <img src="deck-pages/design-partner-deck/slide-08.webp" alt="Slide 8 of 11"
+           width="1920" height="1080" loading="lazy" decoding="async">
+    </a>
+    <figcaption>8 / 11</figcaption>
+  </figure>
+  <figure class="slide">
+    <a href="deck-pages/design-partner-deck/slide-09.webp">
+      <img src="deck-pages/design-partner-deck/slide-09.webp" alt="Slide 9 of 11"
+           width="1920" height="1080" loading="lazy" decoding="async">
+    </a>
+    <figcaption>9 / 11</figcaption>
+  </figure>
+  <figure class="slide">
+    <a href="deck-pages/design-partner-deck/slide-10.webp">
+      <img src="deck-pages/design-partner-deck/slide-10.webp" alt="Slide 10 of 11"
+           width="1920" height="1080" loading="lazy" decoding="async">
+    </a>
+    <figcaption>10 / 11</figcaption>
+  </figure>
+  <figure class="slide">
+    <a href="deck-pages/design-partner-deck/slide-11.webp">
+      <img src="deck-pages/design-partner-deck/slide-11.webp" alt="Slide 11 of 11"
+           width="1920" height="1080" loading="lazy" decoding="async">
+    </a>
+    <figcaption>11 / 11</figcaption>
+  </figure>
+</div>
+
+<h2>The text, for searching and quoting</h2>
+<p>A <b>machine text extraction</b> produced with <code>pypdf</code> and unedited.
+It loses the layout, which is why the slides are above.
 <b>Where the extraction and the PDF differ, the PDF wins.</b></p>
 
 <div class="mdreader" data-src="src/design-partner-deck.md">
@@ -168,7 +263,7 @@ with JavaScript &mdash; <a href="src/riskmandate-design-partner-deck.pdf">or ope
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.63</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.64</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The bench</h4>

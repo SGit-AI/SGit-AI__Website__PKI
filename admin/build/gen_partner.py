@@ -24,12 +24,18 @@ import html
 import hashlib
 import json
 import re
+import shutil
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 PARTNER = ROOT / "partner"
 SRC = PARTNER / "src"
+PAGES = PARTNER / "deck-pages"
+
+# Slides are rendered at 2x for a ~960px display column, which is retina-sharp
+# and still lands each 16:9 page around 45KB as WebP.
+RENDER_SCALE = 2
 
 esc = lambda s: html.escape(str(s), quote=True)
 
@@ -86,6 +92,40 @@ def check(m):
                 f"word and a manifest move from held to published, not a file copy"
             )
     return errs
+
+
+def render_pdf_pages(artefact):
+    """Rasterise a PDF artefact to page images, at build time, from the gated bytes.
+
+    A text extraction is not a deck. The slides carry layout, tables and emphasis
+    that flatten to nothing in extracted text, and a PDF in an iframe is unreliable
+    on mobile Safari — so the pages are rendered here and served as plain images
+    that need no plugin, no viewer script and no JavaScript at all.
+
+    This does not touch the artefact. The PDF's bytes are checksummed in check()
+    and these images are derived from them on every build, so they cannot drift
+    from the document they depict: if the PDF ever changes, the build stops before
+    it reaches this function.
+    """
+    import pypdfium2
+
+    out = PAGES / artefact["id"]
+    if out.exists():
+        shutil.rmtree(out)
+    out.mkdir(parents=True)
+
+    pdf = pypdfium2.PdfDocument(str(SRC / artefact["file"]))
+    n = len(pdf)
+    if n != artefact["pages"]:
+        sys.exit(f"gen_partner: {artefact['file']} has {n} pages, manifest says {artefact['pages']}")
+
+    written = []
+    for i in range(n):
+        img = pdf[i].render(scale=RENDER_SCALE).to_pil().convert("RGB")
+        name = f"slide-{i + 1:02d}.webp"
+        img.save(out / name, "WEBP", quality=86, method=6)
+        written.append(name)
+    return written
 
 
 def page_shell(title, desc, canon, body, extra_head=""):
@@ -251,7 +291,16 @@ mistaken for a page of this site, and so that nothing here can alter their marku
                       f"partner/{a['page']}.html", body)
 
 
-def build_deck_view(a):
+def build_deck_view(a, slides):
+    thumbs = "\n".join(
+        f"""  <figure class="slide">
+    <a href="deck-pages/{esc(a['id'])}/{esc(name)}">
+      <img src="deck-pages/{esc(a['id'])}/{esc(name)}" alt="Slide {i} of {len(slides)}"
+           width="1920" height="1080" loading="{'eager' if i <= 2 else 'lazy'}" decoding="async">
+    </a>
+    <figcaption>{i} / {len(slides)}</figcaption>
+  </figure>""" for i, name in enumerate(slides, 1))
+
     body = f"""<main>
 <h1>{esc(a['title'])}</h1>
 <p class="lede">{a['pages']} slides, reproduced as received.</p>
@@ -262,8 +311,17 @@ def build_deck_view(a):
 <a href="src/{esc(a['file'])}">download the PDF</a>. The build refuses to run if a
 single byte of it changes.</p>
 
-<p>Below is a <b>machine text extraction</b> of the PDF, produced with <code>pypdf</code>
-and unedited. It exists so the deck is searchable and quotable.
+<p>The slides below are <b>rendered from that PDF at build time</b> &mdash; they are
+pictures of the document, not a re-typesetting of it. Tap any slide for the
+full-resolution image.</p>
+
+<div class="deck">
+{thumbs}
+</div>
+
+<h2>The text, for searching and quoting</h2>
+<p>A <b>machine text extraction</b> produced with <code>pypdf</code> and unedited.
+It loses the layout, which is why the slides are above.
 <b>Where the extraction and the PDF differ, the PDF wins.</b></p>
 
 <div class="mdreader" data-src="src/{esc(a['text'])}">
@@ -275,10 +333,22 @@ with JavaScript &mdash; <a href="src/{esc(a['file'])}">or open the PDF</a>.</p><
   <a href="src/{esc(a['file'])}">The PDF &rarr;</a>
 </div>
 </main>"""
+    style = """<style>
+.deck{display:flex;flex-direction:column;gap:1.6rem;margin:1.5rem 0 2.5rem}
+.deck .slide{margin:0}
+.deck .slide a{display:block;border:1px solid var(--rule,#d8dbe1);border-radius:8px;
+  overflow:hidden;background:#fff;line-height:0}
+.deck .slide img{width:100%;height:auto;display:block}
+.deck figcaption{font-size:.8rem;color:var(--muted,#646b77);
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;padding-top:.4rem}
+@media (min-width:900px){.deck{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem}}
+</style>
+"""
     return page_shell(f"{esc(a['title'])} &middot; pki.sgit.ai",
                       "The RiskMandate partner's design partner deck, captured verbatim.",
                       f"partner/{a['page']}.html", body,
-                      extra_head='<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>\n'
+                      extra_head=style +
+                                 '<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>\n'
                                  '<script src="../assets/mdreader.js" defer></script>\n')
 
 
@@ -296,12 +366,18 @@ def main():
     for c in m["commentary"]:
         (PARTNER / f"{c['slug']}.html").write_text(build_commentary(c), encoding="utf-8")
         n += 1
+    rendered = 0
     for a in m["published"]:
-        html_out = build_landing_view(a) if a["kind"] == "html" else build_deck_view(a)
+        if a["kind"] == "html":
+            html_out = build_landing_view(a)
+        else:
+            slides = render_pdf_pages(a)
+            rendered += len(slides)
+            html_out = build_deck_view(a, slides)
         (PARTNER / f"{a['page']}.html").write_text(html_out, encoding="utf-8")
         n += 1
     print(f"gen_partner: {n} page(s); {len(m['published'])} artefact(s) published, "
-          f"{len(m['held'])} held, checksums verified")
+          f"{len(m['held'])} held, {rendered} slide(s) rendered, checksums verified")
 
 
 if __name__ == "__main__":
