@@ -89,4 +89,4 @@ Cheap to state on the first connector; expensive to retrofit onto the fifth.
 
 ---
 
-*CC BY 4.0. Source: brief v0.33.76, memo 5 of 10. GM-D54 is settled by the project lead; everything else here is derived and labelled where it extends the memo.*
+*CC BY 4.0. Source: brief v0.33.76, memo 5. GM-D54 is settled by the project lead; everything else here is derived and labelled where it extends the memo.*

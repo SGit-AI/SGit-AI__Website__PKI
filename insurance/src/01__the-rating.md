@@ -100,4 +100,4 @@ Which is very nearly the shape of `evidence-pack/v0` already emitted by [the wor
 
 ---
 
-*CC BY 4.0. Source: brief v0.33.72, memo 1 of 10. Everything here is derived from that memo and labelled where it extends it.*
+*CC BY 4.0. Source: brief v0.33.72, memo 1. Everything here is derived from that memo and labelled where it extends it.*

@@ -16,13 +16,13 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.61</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.62</a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
-      <a class="nl" href="../failure/index.html">The registry<span class="caret">&#9662;</span></a>
+      <a class="nl here" href="../failure/index.html">The registry<span class="caret">&#9662;</span></a>
       <div class="sub">
-      <a class="sl" href="../registry/index.html">&#9679; The registry, live</a>
+      <a class="sl here" href="../registry/index.html">&#9679; The registry, live</a>
       <a class="sl" href="../failure/index.html">Why they don't exist</a>
       <a class="sl" href="../rules/index.html">The four rules</a>
       <a class="sl" href="../mandate/index.html">Identity &amp; mandate</a>
@@ -66,7 +66,7 @@
       <a class="sl" href="../experiments/the-deploy/index.html">&mdash; the deploy</a>
       <a class="sl" href="../experiments/the-control-room/index.html">&mdash; the control room</a>
       <a class="sl" href="../workbench/index.html">&#9679; The workbench (app)</a>
-      <a class="sl" href="../registry/index.html">The register, live</a>
+      <a class="sl here" href="../registry/index.html">The register, live</a>
       <a class="sl" href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
       <a class="sl" href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
       <a class="sl" href="../assess/index.html">Map your own case</a>
@@ -76,9 +76,9 @@
       </div>
     </div>
     <div class="ni ni-has">
-      <a class="nl here" href="../insurance/index.html">Insurance<span class="caret">&#9662;</span></a>
+      <a class="nl" href="../insurance/index.html">Insurance<span class="caret">&#9662;</span></a>
       <div class="sub">
-      <a class="sl here" href="../insurance/index.html">&#9679; Insurance for agents</a>
+      <a class="sl" href="../insurance/index.html">&#9679; Insurance for agents</a>
       <a class="sl" href="../insurance-book/index.html">&#9679; The insurance book</a>
       <a class="sl" href="../insurance/what-this-is.html">&mdash; what this is, and the rule</a>
       <a class="sl" href="../insurance/the-rating.html">&mdash; the rating</a>
@@ -164,7 +164,7 @@ risk and promises no payout. What it does is tell an operator that <i>this</i> p
 <h2 id="memos">The memos</h2>
 <p>Each is filed <b>verbatim as a brief</b> before it is read, because a transcript outranks any summary of it. The
 count below is computed from the manifest, never typed.</p>
-<div class="note">Recorded as eight; the project lead added two more, so it is ten — now all processed. The count on the hub is a CLAIM, so it was corrected here rather than quietly adjusted, and the build gate that refuses more processed memos than the manifest expects fired on the ninth, which is what it is for. Each memo is filed verbatim as a brief before it is read; the doctrine says which memo it came from, and where a memo and a document disagree the memo wins. The pivot briefing (—) precedes the series and is not counted in it. All eleven readings were audited against their transcripts at v0.33.82; the corrections are recorded in the documents themselves rather than appended, and as GM-D81 to GM-D85.</div>
+<div class="note">Recorded as eight; the project lead added two more, so it is ten — now all processed. The count on the hub is a CLAIM, so it was corrected here rather than quietly adjusted, and the build gate that refuses more processed memos than the manifest expects fired on the ninth, which is what it is for. Each memo is filed verbatim as a brief before it is read; the doctrine says which memo it came from, and where a memo and a document disagree the memo wins. The pivot briefing (—) precedes the series and is not counted in it. All eleven readings were audited against their transcripts at v0.33.82; the corrections are recorded in the documents themselves rather than appended, and as GM-D81 to GM-D85. The series was called complete at ten and reopened by memo 11 on 1 September — the second time it has been declared finished and grown. The v0.33.82 gate fired on doctrine 10&#x27;s own &#x27;the last of the series&#x27; label when memo 11 was filed; a document should not assert the future.</div>
 <div class="ins-memos">
     <div class="ins-memo ins-memo--processed">
       <div class="ins-memo-n">&mdash;</div>
@@ -253,6 +253,14 @@ count below is computed from the manifest, never typed.</p>
         <p>Two memos in one — the interfaces, then time. A warranty is defined precisely as a fact plus a maximum age, failing three ways (false, stale, unknown) with unknown on the same side as false — the opposite of the rating rule, and deliberately so. Cover is continuous, which adds a third clock beside the policy interval and twin freshness. Metering uses is sound where metering checks is not, but a usage-boxed policy needs an in-line counter this project is not. And the reframe: an API is operated, a schema is implemented, so the policy lifecycle ships as documents and appends rather than as an API surface.</p>
         <a href="../documents/the-schemas-and-the-clocks.html">the brief, rendered &rarr;</a> <a class="ins-raw" href="../briefs/v0.33.81__strategy-brief__the-schemas-the-clocks-and-a-warranty-is-a-fact-with-a-maximum-age.md">raw</a>
       </div>
+    </div>
+    <div class="ins-memo ins-memo--processed">
+      <div class="ins-memo-n">11</div>
+      <div>
+        <b>The resource pool: a grant that depletes, and the first loss data this pivot can have</b>
+        <p>Consumption as a SECOND AXIS beside capability: a resource pool is a grant that DEPLETES, carrying a remaining no existing node has. The first real pooling mechanism in the pivot — variance absorption in a currency that is not money, so no carrier and no authorisation. A budget overage is a loss event that is already recorded by somebody else, which is the first loss data this estate can obtain and lets loss-event/v0 be drafted against a real instance. Resolves GM-D78&#x27;s collision (the counter exists, run by the supplier for billing) and finds doctrine 07&#x27;s first mover (the supplier has a reason to refuse: it is paying). Corrected: the memo says the pool defines the grant, and it does not — a pool bounds volume, never reach, and the cheapest catastrophic action is cheap.</p>
+        <a href="../documents/the-resource-pool.html">the brief, rendered &rarr;</a> <a class="ins-raw" href="../briefs/v0.33.83__strategy-brief__the-resource-pool-a-grant-that-depletes-and-the-first-loss-data-this-pivot-can-have.md">raw</a>
+      </div>
     </div></div>
 
 <h2 id="doctrine">The doctrine</h2>
@@ -312,6 +320,11 @@ count below is computed from the manifest, never typed.</p>
     <a class="ins-card" href="the-schemas-and-the-clocks.html">
       <div class="ins-card-top"><b>The schemas and the clocks: a warranty is a fact with a maximum age</b><span class="dim">from memo 10</span></div>
       <p>A warranty fails three ways and unknown counts as failure; cover runs on three clocks; and the deliverable is documents and appends, not an API.</p>
+    </a>
+
+    <a class="ins-card" href="the-resource-pool.html">
+      <div class="ins-card-top"><b>The resource pool: a grant that depletes</b><span class="dim">from memo 11</span></div>
+      <p>Consumption is a second axis the corpus never had; a pool bounds volume and never reach; and a budget overage is the first loss event this pivot can actually observe, because somebody else already meters it.</p>
     </a></div>
 
 <h2 id="mvps">The MVPs</h2>
@@ -353,7 +366,10 @@ the <a href="../registry/views/excess-authority.json">delta</a> with its
 <li>That an agent placement can be insured at all today. The categories that exist generally insure firms and entities, not placements — and whether any carrier has since launched one is unresearched, and is deliberately not guessed at.</li>
 <li>That any of the schemas exist. policy/v0 has a shape, loss-event/v0 does not, and the warranty set described in doctrine 10 has never been written down as a schema.</li>
 <li>That blast radius is a good proxy for severity. Doctrine 04 corrects the tier&#x27;s identification with impact reduction and then leans on the proxy anyway. It is an argument, not a measurement, and it is weakest where a small reach touches something critical.</li>
-<li>That anything here measures severity at all. Nothing in this folder computes how bad a loss is once it occurs. Memo 4 asked for that quantity and the estate does not have it.</li></ul>
+<li>That anything here measures severity at all. Nothing in this folder computes how bad a loss is once it occurs. Memo 4 asked for that quantity and the estate does not have it.</li>
+<li>That any pool has been built or run. Nothing in doctrine 11 is implemented — the estate has never metered its own consumption, and doing that is the honest first step before designing a policy over it.</li>
+<li>That agent consumption actually correlates. Doctrine 11 argues it would and names plausible shared causes, but it is a hypothesis, and it is the one the data would settle first.</li>
+<li>That consumption loss data transfers to capability loss data. A pool supplies loss events about SPEND. Nothing here produces a single data point about what a breach costs, which is what a stage-2 premium would need.</li></ul>
 
 <div class="pagenav">
   <a href="../bench/index.html">&larr; The bench</a>
@@ -366,7 +382,7 @@ the <a href="../registry/views/excess-authority.json">delta</a> with its
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.61</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.62</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The bench</h4>

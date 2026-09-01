@@ -110,4 +110,4 @@ Every step is a document or a computation the estate already has — **except tw
 
 ---
 
-*CC BY 4.0. Source: brief v0.33.79, memo 8 of 10. **This document twice described memo 8 as closing the series. Memos 9 and 10 followed it, and the claim stood uncorrected for two releases.** Everything here is derived from that memo and labelled where it extends it, including the correction to the site agent's own MVP proposal.*
+*CC BY 4.0. Source: brief v0.33.79, memo 8. **This document twice described memo 8 as closing the series. Memos 9 and 10 followed it, and the claim stood uncorrected for two releases.** Everything here is derived from that memo and labelled where it extends it, including the correction to the site agent's own MVP proposal.*

@@ -123,4 +123,4 @@ Flagged as speculation about the vendors, because it is. **The structural point 
 
 ---
 
-*CC BY 4.0. Source: brief v0.33.74, memo 3 of 10. Everything here is derived from that memo and labelled where it extends it.*
+*CC BY 4.0. Source: brief v0.33.74, memo 3. Everything here is derived from that memo and labelled where it extends it.*

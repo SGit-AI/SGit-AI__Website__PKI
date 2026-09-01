@@ -1,6 +1,6 @@
 # The Schemas And The Clocks: A Warranty Is A Fact With A Maximum Age
 
-*Doctrine document 10, from memo 10 — the last of the series ([brief v0.33.81](../briefs/v0.33.81__strategy-brief__the-schemas-the-clocks-and-a-warranty-is-a-fact-with-a-maximum-age.md)). Proposed, not adopted: GM-D76 to GM-D80 await the project lead.*
+*Doctrine document 10, from memo 10 ([brief v0.33.81](../briefs/v0.33.81__strategy-brief__the-schemas-the-clocks-and-a-warranty-is-a-fact-with-a-maximum-age.md)). Proposed, not adopted: GM-D76 to GM-D80 await the project lead.*
 
 ---
 
@@ -101,4 +101,4 @@ So the artefact is not *the policy API* — it is **the policy lifecycle as docu
 
 ---
 
-*CC BY 4.0. Source: brief v0.33.81, memo 10 — the last of the series. Everything here is derived from that memo and labelled where it extends it.*
+*CC BY 4.0. Source: brief v0.33.81, memo 10. **This document twice described memo 10 as closing the series, four releases after the same error was corrected in doctrine 08.** Memo 11 followed it, and the v0.33.82 gate caught both claims the moment memo 11 was filed. Everything here is derived from that memo and labelled where it extends it.*

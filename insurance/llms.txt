@@ -10,8 +10,8 @@
 # THE RULE: A level nobody can recompute is exactly the theatre a premium would have prevented. Every rating ships its derivation. See GM-D39.
 # SETTLED: The level scale is 1–5 (GM-D54, the project lead, 31 Aug). Coarse on purpose: currency implies loss data nobody has, 1–100 implies resolution the inputs cannot support, and a band is arguable where a decimal is not.
 #
-# 10 of 10 series memos processed, plus the pivot briefing.
-# 11 doctrine documents. 0 MVPs built.
+# 11 of 11 series memos processed, plus the pivot briefing.
+# 12 doctrine documents. 0 MVPs built.
 # Hub: https://pki.sgit.ai/insurance/index.html
 
 ## What an agent should carry if it summarises anything here
@@ -19,9 +19,10 @@
   1. NOTHING HERE IS INSURANCE. Stage 1 emits a RATING. It transfers no risk,
      promises no payout, and is therefore not a regulated activity — which is
      exactly why it can be built. Calling it insurance is the first dishonesty.
-  2. NOTHING HERE IS BUILT. Ten memos are read into doctrine; no MVP exists.
-     Two are specified and unbuilt: the world model, and the market survey.
-  3. NO EXTERNAL EVIDENCE HAS BEEN GATHERED. 85 decisions on the log, 51 of
+  2. NOTHING HERE IS BUILT. 11 memos are read into doctrine; no MVP exists.
+     Three are specified and unbuilt: the world model, the market survey, and
+     the resource pool — of which only the pool would produce data.
+  3. NO EXTERNAL EVIDENCE HAS BEEN GATHERED. 96 decisions on the log, 62 of
      them from this pivot, and zero facts about the actual insurance market.
      The survey would be the first thing here that could be wrong in a way
      the world would correct.
@@ -88,6 +89,11 @@
     brief   https://pki.sgit.ai/briefs/v0.33.81__strategy-brief__the-schemas-the-clocks-and-a-warranty-is-a-fact-with-a-maximum-age.md
     reader  https://pki.sgit.ai/documents/the-schemas-and-the-clocks.html
     gave    Two memos in one — the interfaces, then time. A warranty is defined precisely as a fact plus a maximum age, failing three ways (false, stale, unknown) with unknown on the same side as false — the opposite of the rating rule, and deliberately so. Cover is continuous, which adds a third clock beside the policy interval and twin freshness. Metering uses is sound where metering checks is not, but a usage-boxed policy needs an in-line counter this project is not. And the reframe: an API is operated, a schema is implemented, so the policy lifecycle ships as documents and appends rather than as an API surface.
+
+  [memo 11] The resource pool: a grant that depletes, and the first loss data this pivot can have
+    brief   https://pki.sgit.ai/briefs/v0.33.83__strategy-brief__the-resource-pool-a-grant-that-depletes-and-the-first-loss-data-this-pivot-can-have.md
+    reader  https://pki.sgit.ai/documents/the-resource-pool.html
+    gave    Consumption as a SECOND AXIS beside capability: a resource pool is a grant that DEPLETES, carrying a remaining no existing node has. The first real pooling mechanism in the pivot — variance absorption in a currency that is not money, so no carrier and no authorisation. A budget overage is a loss event that is already recorded by somebody else, which is the first loss data this estate can obtain and lets loss-event/v0 be drafted against a real instance. Resolves GM-D78's collision (the counter exists, run by the supplier for billing) and finds doctrine 07's first mover (the supplier has a reason to refuse: it is paying). Corrected: the memo says the pool defines the grant, and it does not — a pool bounds volume, never reach, and the cheapest catastrophic action is cheap.
 
 ## The doctrine — derived, and naming which memo each came from
 
@@ -157,11 +163,18 @@
     from    memo 10
     is      A warranty fails three ways and unknown counts as failure; cover runs on three clocks; and the deliverable is documents and appends, not an API.
 
+  The resource pool: a grant that depletes
+    where   https://pki.sgit.ai/insurance/the-resource-pool.html
+    source  https://pki.sgit.ai/insurance/src/11__the-resource-pool.md  (the markdown IS the source of truth)
+    from    memo 11
+    is      Consumption is a second axis the corpus never had; a pool bounds volume and never reach; and a budget overage is the first loss event this pivot can actually observe, because somebody else already meters it.
+
 ## MVPs
 
-  NONE BUILT. Two are specified and awaiting a go-ahead: the world model
-  (an explainer, not a calculator) and the market survey (the first thing
-  here capable of producing an external fact).
+  NONE BUILT. Three are specified and awaiting a go-ahead: the world model
+  (an explainer, not a calculator), the market survey (the first thing here
+  capable of producing an external fact), and the resource pool (the first
+  thing here capable of producing LOSS DATA, from meters that already exist).
 
 ## DOES NOT PROVE
 
@@ -185,6 +198,9 @@
   - That any of the schemas exist. policy/v0 has a shape, loss-event/v0 does not, and the warranty set described in doctrine 10 has never been written down as a schema.
   - That blast radius is a good proxy for severity. Doctrine 04 corrects the tier's identification with impact reduction and then leans on the proxy anyway. It is an argument, not a measurement, and it is weakest where a small reach touches something critical.
   - That anything here measures severity at all. Nothing in this folder computes how bad a loss is once it occurs. Memo 4 asked for that quantity and the estate does not have it.
+  - That any pool has been built or run. Nothing in doctrine 11 is implemented — the estate has never metered its own consumption, and doing that is the honest first step before designing a policy over it.
+  - That agent consumption actually correlates. Doctrine 11 argues it would and names plausible shared causes, but it is a hypothesis, and it is the one the data would settle first.
+  - That consumption loss data transfers to capability loss data. A pool supplies loss events about SPEND. Nothing here produces a single data point about what a breach costs, which is what a stage-2 premium would need.
 
 ## Machine surface
 

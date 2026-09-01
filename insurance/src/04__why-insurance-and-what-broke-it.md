@@ -85,4 +85,4 @@ The mitigation is the openness memo 5 proposes anyway: **a standard anyone can f
 
 ---
 
-*CC BY 4.0. Source: brief v0.33.75, memo 4 of 10. Everything here is derived from that memo and labelled where it extends it.*
+*CC BY 4.0. Source: brief v0.33.75, memo 4. Everything here is derived from that memo and labelled where it extends it.*

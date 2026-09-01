@@ -127,4 +127,4 @@ It tells an operator what risk they are buying; whether it is worth it stays a j
 
 ---
 
-*CC BY 4.0. Source: brief v0.33.73, memo 2 of 10. Everything here is derived from that memo and labelled where it extends it.*
+*CC BY 4.0. Source: brief v0.33.73, memo 2. Everything here is derived from that memo and labelled where it extends it.*

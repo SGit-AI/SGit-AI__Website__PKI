@@ -66,16 +66,20 @@ def check(m):
         if not re.search(r"^##+ .*does not prove", p.read_text(encoding="utf-8"), re.I | re.M):
             errs.append(f"insurance/src/{p.name} has no 'What this does not prove' section")
 
-    # A doctrine document that prints "memo 3 of 8" is making a claim about the
-    # series, and the series grew twice. Eight footers were stale before this
-    # gate existed, and one document twice called memo 8 the last of them.
+    # A doctrine document may not print a series denominator at all.
+    #
+    # v0.33.82 gated "memo N of M" against the manifest, which caught eight stale
+    # footers. Memo 11 then arrived and the gate fired on all eight again — because
+    # checking a hand-typed count still leaves a hand-typed count. A document about
+    # memo 5 gains nothing from "of 10", and "of N" is a claim about a series that
+    # has now moved twice. Don't gate a claim you can simply not make: the count
+    # lives in the hub and llms.txt, both derived from this manifest.
     for p in sorted(SRC.glob("*.md")):
         for n, denom in re.findall(r"memo (\d+) of (\d+)", p.read_text(encoding="utf-8")):
-            if int(denom) != m["memos"]["expected"]:
-                errs.append(
-                    f"insurance/src/{p.name} says 'memo {n} of {denom}' but the series has "
-                    f"{m['memos']['expected']} memos"
-                )
+            errs.append(
+                f"insurance/src/{p.name} says 'memo {n} of {denom}'; a doctrine document names "
+                f"its memo and never the series total, which only the manifest may state"
+            )
 
     # Only the highest-numbered memo may be called the last one.
     last = max(i["n"] for i in m["memos"]["items"])
@@ -330,8 +334,9 @@ def build_llms(m):
     A("  1. NOTHING HERE IS INSURANCE. Stage 1 emits a RATING. It transfers no risk,")
     A("     promises no payout, and is therefore not a regulated activity — which is")
     A("     exactly why it can be built. Calling it insurance is the first dishonesty.")
-    A("  2. NOTHING HERE IS BUILT. Ten memos are read into doctrine; no MVP exists.")
-    A("     Two are specified and unbuilt: the world model, and the market survey.")
+    A(f"  2. NOTHING HERE IS BUILT. {n_proc} memos are read into doctrine; no MVP exists.")
+    A("     Three are specified and unbuilt: the world model, the market survey, and")
+    A("     the resource pool — of which only the pool would produce data.")
     A(f"  3. NO EXTERNAL EVIDENCE HAS BEEN GATHERED. {total} decisions on the log, {pivot} of")
     A("     them from this pivot, and zero facts about the actual insurance market.")
     A("     The survey would be the first thing here that could be wrong in a way")
@@ -367,9 +372,10 @@ def build_llms(m):
         for x in m["mvps"]:
             A(f"  {x['title']} — https://pki.sgit.ai/insurance/{x['id']}/index.html")
     else:
-        A("  NONE BUILT. Two are specified and awaiting a go-ahead: the world model")
-        A("  (an explainer, not a calculator) and the market survey (the first thing")
-        A("  here capable of producing an external fact).")
+        A("  NONE BUILT. Three are specified and awaiting a go-ahead: the world model")
+        A("  (an explainer, not a calculator), the market survey (the first thing here")
+        A("  capable of producing an external fact), and the resource pool (the first")
+        A("  thing here capable of producing LOSS DATA, from meters that already exist).")
     A("")
     A("## DOES NOT PROVE")
     A("")
