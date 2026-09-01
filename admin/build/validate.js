@@ -31,7 +31,14 @@ function walk(dir, out = []) {
 }
 
 const files = walk(ROOT);
-const htmlFiles = files.filter(f => f.endsWith('.html'));
+// partner/src/ holds artefacts produced by somebody else, captured verbatim.
+// This estate's page rules — canonical links, chrome, its version stamp — are rules
+// for pages this estate wrote, and applying them to a third party's document would
+// mean editing a document we do not own. What guards those files instead is stricter:
+// gen_partner.js records a sha256 per artefact and fails the build if a single byte
+// moves. Their links are still checked below, via the OWN pages that reference them.
+const OWNED = f => !f.split(path.sep).join('/').includes('/partner/src/');
+const htmlFiles = files.filter(f => f.endsWith('.html')).filter(OWNED);
 
 // --- 1. version agreement -------------------------------------------------
 const VERSION = fs.readFileSync(path.join(ROOT, 'admin/build/version.txt'), 'utf8').trim();

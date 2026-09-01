@@ -1,0 +1,74 @@
+{
+  "_what_this_is": "Artefacts produced by the RiskMandate business partner, captured verbatim. NOTHING HERE IS THIS ESTATE'S WORK and nothing in it has been verified by this estate.",
+  "_authority": "The artefacts are the source of truth. This estate's commentary lives in src/00__provenance.md and src/01__concordance.md and is labelled as commentary.",
+  "v": 1,
+  "received": {
+    "date": "2026-08-31",
+    "from": "the RiskMandate business partner",
+    "context": "Produced in parallel with the project lead's memo series (briefs v0.33.71-83), after an in-person meeting on 31 August. Neither side saw the other's work while producing it."
+  },
+  "evidence_class": {
+    "that_the_partner_asserts_these": "observed - the documents are here and say what they say",
+    "the_market_claims_inside_them": "documented - a third party assertion, verified by nobody here",
+    "that_any_assertion_is_true": "unestablished"
+  },
+  "published": [
+    {
+      "id": "landing",
+      "title": "riskmandate.ai landing page",
+      "kind": "html",
+      "file": "riskmandate-landing.html",
+      "audience": "public",
+      "bytes": 37880,
+      "sha256": "15f5a33dcef7b502a8a56bc1e2b941a01ce0cfa5ebc53fc862cd9bccae4c6b0d",
+      "page": "riskmandate-landing"
+    },
+    {
+      "id": "design-partner-deck",
+      "title": "RiskMandate Design Partner Deck",
+      "kind": "pdf",
+      "file": "riskmandate-design-partner-deck.pdf",
+      "text": "design-partner-deck.md",
+      "pages": 11,
+      "audience": "prospects",
+      "bytes": 165286,
+      "sha256": "c8a200db9e50e1d3095c73a0fccd6a558bb535524f21c41378483e85ccde92d4",
+      "page": "design-partner-deck"
+    }
+  ],
+  "held": [
+    {
+      "id": "rammi-framework",
+      "title": "RAMM-I - The Agentic Insurability Maturity Model, framework v0.1",
+      "pages": 9,
+      "why": "Internal strategy. Names an existing customer under an active SOW, names acquisition and partnership targets, states a negotiating position on a contract clause, and characterises named competitors for a private audience."
+    },
+    {
+      "id": "rammi-deck",
+      "title": "RAMM-I deck",
+      "pages": 17,
+      "why": "Internal strategy, same content as the framework in presentation form, plus a named competitive landscape across four tiers."
+    }
+  ],
+  "held_note": "This site is public and serves every file in the repository, linked or not - so committing these would publish them, and git history would keep them after any deletion. Publishing another company's internal strategy, naming their customer, is the project lead's decision and their partner's. Both are staged and can be added in one commit. Their doctrinally relevant substance is carried in the concordance, with customer names, target lists and competitive characterisations omitted.",
+  "commentary": [
+    {
+      "file": "00__provenance.md",
+      "slug": "provenance",
+      "title": "Provenance: whose these are, and what class of evidence they carry"
+    },
+    {
+      "file": "01__concordance.md",
+      "slug": "concordance",
+      "title": "The concordance: where the partner's work meets the doctrine"
+    }
+  ],
+  "does_not_prove": [
+    "That any market claim in these artefacts is accurate. Not one has been checked against a primary source.",
+    "That the survey has been run. Somebody else's survey has been RECEIVED, which is a different thing, and collapsing the two would be the first dishonesty in this folder.",
+    "That the convergences are independent confirmation. Both bodies of work come from two people who met the day before, in one week, with model assistance - so agreement here is weaker evidence than it looks.",
+    "That the scale collision is resolved. The partner's Index is 0-100; GM-D54 settled 1-5 and explicitly refused 1-100. The concordance sketches a reconciliation and does not make one.",
+    "That the primitive mapping survives contact. Four of five primitives match on paper; nobody has scored one real placement both ways.",
+    "That either positioning is right. Neither side has a customer who has paid for a rating."
+  ]
+}

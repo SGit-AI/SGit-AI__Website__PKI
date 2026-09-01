@@ -263,6 +263,12 @@ def main():
     for path in sorted(ROOT.rglob("*.html")):
         if ".git" in path.parts:
             continue
+        # partner/src/ holds artefacts produced by somebody else, captured verbatim.
+        # This estate does not inject its nav, its footer or its version stamp into
+        # a document it does not own — and gen_partner.py fails the build if a single
+        # byte of one changes, so an edit here would stop the release anyway.
+        if path.parts[len(ROOT.parts):len(ROOT.parts) + 2] == ("partner", "src"):
+            continue
         rel = path.relative_to(ROOT).as_posix()
         up = "../" * (len(path.relative_to(ROOT).parts) - 1)
         text = path.read_text()
