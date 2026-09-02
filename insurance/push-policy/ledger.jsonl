@@ -1,0 +1,1 @@
+{"at": "2026-09-02T23:43:07+00:00", "day": "2026-09-02", "branch": "dev", "branch_kind": "dev", "bytes": 4328942, "blobs": 219, "verdict": "refused", "reason": "4,328,942 B is over the per-push maximum of 307,200 B", "bytes_drawn": 0, "push_drawn": false, "head": "78187ce56880f6e02703e80d792c86cf1606cf85"}
