@@ -99,6 +99,13 @@ def check(m):
             if not page.exists():
                 errs.append(f"memo {item['n']} names reader page {item['page']} and it does not exist")
 
+    for x in m["mvps"]:
+        rd = INS / x["id"] / "README.md"
+        if not rd.exists():
+            errs.append(f"MVP '{x['id']}' has no README.md — an MVP without a document saying what it does not prove is the theatre the rule forbids")
+        elif not re.search(r"^##+ .*does not prove", rd.read_text(encoding="utf-8"), re.I | re.M):
+            errs.append(f"insurance/{x['id']}/README.md has no 'What this does not prove' section")
+
     # Memo 0 is the pivot briefing that precedes the series; only n >= 1 counts
     # toward the eight, because the hub's counter is a claim and it must be true.
     n_proc = sum(1 for i in m["memos"]["items"] if i["state"] == "processed" and i["n"] >= 1)
@@ -302,6 +309,23 @@ JavaScript &mdash; <a href="src/{esc(d['file'])}">open the raw markdown</a>.</p>
                    '<script src="../assets/mdreader.js" defer></script>\n')
 
 
+def build_mvp_page(x):
+    body = f"""<main>
+<div class="mdreader" data-src="README.md">
+<noscript><p>This page renders <a href="README.md">README.md</a> with JavaScript &mdash;
+<a href="README.md">open the raw markdown</a>.</p></noscript></div>
+
+<div class="pagenav">
+  <a href="../index.html">&larr; Insurance</a>
+  <a href="README.md">The markdown &rarr;</a>
+</div>
+</main>"""
+    return page_shell(f"{esc(x['title'])} &middot; pki.sgit.ai", esc(x.get("one_line", "")),
+                      f"insurance/{x['id']}/index.html", 2, body,
+                      extra_head='<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>\n'
+                                 '<script src="../../assets/mdreader.js" defer></script>\n')
+
+
 def build_llms(m):
     """insurance/llms.txt — the machine front door, generated from the manifest so
     it cannot drift from the folder. Same convention as bench/llms.txt: every
@@ -334,9 +358,15 @@ def build_llms(m):
     A("  1. NOTHING HERE IS INSURANCE. Stage 1 emits a RATING. It transfers no risk,")
     A("     promises no payout, and is therefore not a regulated activity — which is")
     A("     exactly why it can be built. Calling it insurance is the first dishonesty.")
-    A(f"  2. NOTHING HERE IS BUILT. {n_proc} memos are read into doctrine; no MVP exists.")
-    A("     Three are specified and unbuilt: the world model, the market survey, and")
-    A("     the resource pool — of which only the pool would produce data.")
+    if m["mvps"]:
+        A(f"  2. ONE THING IS BUILT. {n_proc} memos are read into doctrine, and {len(m['mvps'])} MVP")
+        A(f"     exists: {'; '.join(x['title'] for x in m['mvps'])}. It is a SETTING, not")
+        A("     a boundary, and its README says so. The world model and the market survey")
+        A("     remain specified and unbuilt.")
+    else:
+        A(f"  2. NOTHING HERE IS BUILT. {n_proc} memos are read into doctrine; no MVP exists.")
+        A("     Three are specified and unbuilt: the world model, the market survey, and")
+        A("     the resource pool — of which only the pool would produce data.")
     A(f"  3. NO EXTERNAL EVIDENCE HAS BEEN GATHERED. {total} decisions on the log, {pivot} of")
     A("     them from this pivot, and zero facts about the actual insurance market.")
     A("     The survey would be the first thing here that could be wrong in a way")
@@ -409,6 +439,8 @@ def main():
 
     (INS / "index.html").write_text(build_hub(m), encoding="utf-8")
     (INS / "llms.txt").write_text(build_llms(m), encoding="utf-8")
+    for x in m["mvps"]:
+        (INS / x["id"] / "index.html").write_text(build_mvp_page(x), encoding="utf-8")
     for d in m["doctrine"]:
         (INS / f"{d['slug']}.html").write_text(build_doc(d, m), encoding="utf-8")
 

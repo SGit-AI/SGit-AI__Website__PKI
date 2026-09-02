@@ -1,0 +1,34 @@
+{
+  "_what_this_is": "A push policy: an insurance-shaped budget on what an agent may push to git. Mandate-shaped (doctrine 07): issuer, subject, scope, interval. The pool is shared by every agent pushing to this repository, because the ledger lives in the repository.",
+  "_authority": "This document is the policy. check.py computes a verdict from it and the ledger, and never from anything else. Numbers are the project lead's from memo 12 and are placeholders until the ledger has enough entries to re-fit them (doctrine 12 §5).",
+  "type": "policy/v0",
+  "issuer": "the project lead, memo 12, 2 September 2026",
+  "subject": "any agent pushing to this repository",
+  "interval": { "unit": "day", "timezone": "UTC" },
+  "resources": {
+    "pushes": {
+      "unit": "pushes per day",
+      "branches": {
+        "own":  { "normal": 10, "pool": 20, "note": "the agent's own branch. Memo 12 says 'five times a day, or ten' and 'a bucket of 20 or 50'; the larger normal and the smaller pool are taken, so the buffer is 2x normal" },
+        "dev":  { "normal": 3,  "pool": 10, "note": "memo 12: 'push to the dev branch three times a day' and 'maybe 10 for the dev branch'" }
+      }
+    },
+    "bytes": {
+      "unit": "bytes of new objects per push, uncompressed, measured by git before the push (a floor: wire bytes after packing are smaller)",
+      "normal_per_push": 51200,
+      "max_per_push": 307200,
+      "pool_per_day": 1048576,
+      "note": "memo 12: 50k normal, 'no commit should be more than 300k', 'a megabyte of budget'. The project lead's earlier message said 250k for the per-push maximum; the memo's 300k is used and the difference recorded"
+    }
+  },
+  "verdicts": {
+    "normal":   "within the normal band; nothing drawn",
+    "drawn":    "over the normal band, within the per-occurrence limit, pool had enough: the excess is DRAWN from the pool (a claim, paid in the resource, doctrine 12 §1)",
+    "refused":  "over the per-occurrence limit, or the pool cannot cover the excess: the push is refused and the agent must stop"
+  },
+  "does_not_prove": [
+    "That these numbers fit this repository. They are the memo's, and the backtest in README.md shows what they would have said about the estate's own recent pushes.",
+    "That the check is a boundary. The ledger is in the repository and the check runs where the agent runs, so an agent can edit both: this is a SETTING (doctrine 05). A boundary is the same check run by a party the agent cannot reach, such as a required CI check.",
+    "That bytes measured before the push equal bytes on the wire. git packs and compresses; this counts uncompressed new objects, which is the floor the estate's grant rule prefers."
+  ]
+}

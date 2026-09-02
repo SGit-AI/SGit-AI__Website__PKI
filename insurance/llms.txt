@@ -10,8 +10,8 @@
 # THE RULE: A level nobody can recompute is exactly the theatre a premium would have prevented. Every rating ships its derivation. See GM-D39.
 # SETTLED: The level scale is 1–5 (GM-D54, the project lead, 31 Aug). Coarse on purpose: currency implies loss data nobody has, 1–100 implies resolution the inputs cannot support, and a band is arguable where a decimal is not.
 #
-# 11 of 11 series memos processed, plus the pivot briefing.
-# 12 doctrine documents. 0 MVPs built.
+# 12 of 12 series memos processed, plus the pivot briefing.
+# 13 doctrine documents. 1 MVPs built.
 # Hub: https://pki.sgit.ai/insurance/index.html
 
 ## What an agent should carry if it summarises anything here
@@ -19,10 +19,11 @@
   1. NOTHING HERE IS INSURANCE. Stage 1 emits a RATING. It transfers no risk,
      promises no payout, and is therefore not a regulated activity — which is
      exactly why it can be built. Calling it insurance is the first dishonesty.
-  2. NOTHING HERE IS BUILT. 11 memos are read into doctrine; no MVP exists.
-     Three are specified and unbuilt: the world model, the market survey, and
-     the resource pool — of which only the pool would produce data.
-  3. NO EXTERNAL EVIDENCE HAS BEEN GATHERED. 96 decisions on the log, 62 of
+  2. ONE THING IS BUILT. 12 memos are read into doctrine, and 1 MVP
+     exists: The push policy. It is a SETTING, not
+     a boundary, and its README says so. The world model and the market survey
+     remain specified and unbuilt.
+  3. NO EXTERNAL EVIDENCE HAS BEEN GATHERED. 103 decisions on the log, 69 of
      them from this pivot, and zero facts about the actual insurance market.
      The survey would be the first thing here that could be wrong in a way
      the world would correct.
@@ -94,6 +95,11 @@
     brief   https://pki.sgit.ai/briefs/v0.33.83__strategy-brief__the-resource-pool-a-grant-that-depletes-and-the-first-loss-data-this-pivot-can-have.md
     reader  https://pki.sgit.ai/documents/the-resource-pool.html
     gave    Consumption as a SECOND AXIS beside capability: a resource pool is a grant that DEPLETES, carrying a remaining no existing node has. The first real pooling mechanism in the pivot — variance absorption in a currency that is not money, so no carrier and no authorisation. A budget overage is a loss event that is already recorded by somebody else, which is the first loss data this estate can obtain and lets loss-event/v0 be drafted against a real instance. Resolves GM-D78's collision (the counter exists, run by the supplier for billing) and finds doctrine 07's first mover (the supplier has a reason to refuse: it is paying). Corrected: the memo says the pool defines the grant, and it does not — a pool bounds volume, never reach, and the cheapest catastrophic action is cheap.
+
+  [memo 12] The claim is the draw: money as a metric, and a push budget Claude can run today
+    brief   https://pki.sgit.ai/briefs/v0.33.84__strategy-brief__the-claim-is-the-draw-money-as-a-metric-and-a-push-budget-claude-can-run-today.md
+    reader  https://pki.sgit.ai/documents/the-claim-is-the-draw.html
+    gave    The money in a policy is a metric for what the claim buys, so pay the claim in the resource itself: a draw on the pool IS the claim, paid in bytes or tokens, settled by the check in milliseconds because trigger, cover and payment are fields of one document. A worked policy with all four excess-of-loss parts for two resources, a pool shared per repository so pooled fate is deliberate, and 'let Claude manage it' read honestly as a SETTING. And the first MVP: insurance/push-policy, whose first finding is that twelve of twelve site releases would have been refused, because the release stamps the version into every page.
 
 ## The doctrine — derived, and naming which memo each came from
 
@@ -169,12 +175,15 @@
     from    memo 11
     is      Consumption is a second axis the corpus never had; a pool bounds volume and never reach; and a budget overage is the first loss event this pivot can actually observe, because somebody else already meters it.
 
+  The claim is the draw: money as a metric, and the first MVP
+    where   https://pki.sgit.ai/insurance/the-claim-is-the-draw.html
+    source  https://pki.sgit.ai/insurance/src/12__the-claim-is-the-draw.md  (the markdown IS the source of truth)
+    from    memo 12
+    is      A draw on the pool is a claim paid in the resource and settled by the check itself; the pool is shared per repository; the skill is a setting and says so; and the first MVP's first finding is about this estate.
+
 ## MVPs
 
-  NONE BUILT. Three are specified and awaiting a go-ahead: the world model
-  (an explainer, not a calculator), the market survey (the first thing here
-  capable of producing an external fact), and the resource pool (the first
-  thing here capable of producing LOSS DATA, from meters that already exist).
+  The push policy — https://pki.sgit.ai/insurance/push-policy/index.html
 
 ## DOES NOT PROVE
 
@@ -198,9 +207,10 @@
   - That any of the schemas exist. policy/v0 has a shape, loss-event/v0 does not, and the warranty set described in doctrine 10 has never been written down as a schema.
   - That blast radius is a good proxy for severity. Doctrine 04 corrects the tier's identification with impact reduction and then leans on the proxy anyway. It is an argument, not a measurement, and it is weakest where a small reach touches something critical.
   - That anything here measures severity at all. Nothing in this folder computes how bad a loss is once it occurs. Memo 4 asked for that quantity and the estate does not have it.
-  - That any pool has been built or run. Nothing in doctrine 11 is implemented — the estate has never metered its own consumption, and doing that is the honest first step before designing a policy over it.
+  - That the push policy is a boundary. It is the first MVP and it is a SETTING: the check runs where the agent runs, against a ledger the agent can edit. The same policy as a required CI check would be a boundary, and that has not been built.
   - That agent consumption actually correlates. Doctrine 11 argues it would and names plausible shared causes, but it is a hypothesis, and it is the one the data would settle first.
   - That consumption loss data transfers to capability loss data. A pool supplies loss events about SPEND. Nothing here produces a single data point about what a breach costs, which is what a stage-2 premium would need.
+  - That the policy's numbers fit this repository. The only fit so far, the checker replayed over twelve releases, refused all twelve; doctrine 12 argues the estate's release mechanism is at fault rather than the numbers, and that is an argument, not a calibration from a ledger that has no live entries yet.
 
 ## Machine surface
 

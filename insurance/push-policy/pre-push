@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# pre-push — a sample git hook that runs the push policy check before every push.
+#
+# SHIPPED, NOT INSTALLED. Installing it in this repository today would refuse every site
+# release, because the release stamps the version into ~180 pages (README.md, "What it found
+# first"). Fix the release first, then:  cp insurance/push-policy/pre-push .git/hooks/pre-push
+#
+# Tier: a hook in the agent's own clone is a SETTING — the agent can edit or delete it. The same
+# check as a required CI status is a boundary.
+remote="$1"
+while read -r local_ref local_sha remote_ref remote_sha; do
+  branch="${remote_ref#refs/heads/}"
+  python3 "$(git rev-parse --show-toplevel)/insurance/push-policy/check.py" --branch "$branch" --remote "$remote" || exit 1
+done
+exit 0

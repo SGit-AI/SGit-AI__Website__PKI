@@ -6,7 +6,7 @@
 > Anyone proposing a key registry now should be able to show they designed it with that
 > history in hand.
 
-*Source: <https://pki.sgit.ai/index.html> · site v0.1.64 · markdown twin of the front page.*
+*Source: <https://pki.sgit.ai/index.html> · site v0.1.65 · markdown twin of the front page.*
 
 ---
 
