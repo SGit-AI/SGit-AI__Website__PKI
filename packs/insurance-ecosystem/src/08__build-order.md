@@ -50,4 +50,22 @@ Carried from the specification, with the reason each stays excluded after the in
 
 ---
 
+*Added after publication, 3 September 2026, from memo 13.*
+
+## The adoption ladder, beside the build order
+
+The steps above build the ecosystem. Somebody outside it starts smaller, and the memo's ladder is the order: each step needs nothing above it.
+
+| Level | Take it by | Done here |
+|---|---|---|
+| 1 | Put the rule in the prompt: *before you commit, check the size* | The briefing |
+| 2 | Install the skill (`.claude/skills/push-policy/`) | Yes |
+| 3 | Install the hooks (`hooks/pre-commit`, `hooks/pre-push`, `core.hooksPath`) | Yes, in this repository |
+| 4 | Add the destination check (`.github/workflows/policy-report.yml`), first in report mode, then required | **Report mode**, on every pushed ref; required is the issuer's call |
+| 5 | Run the reconciliation (`tools/reconcile.py`), by the maintainer or from that workflow | Run 3 September: eleven commits, no catch |
+
+Two steps were added to the build order by the same memo: **level four in report mode** (done) and **level five** (done). Their acceptance test is a catch, and none has happened; the first will be the test.
+
+---
+
 *CC BY 4.0.*

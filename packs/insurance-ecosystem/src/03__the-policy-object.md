@@ -169,4 +169,29 @@ A policy against `input_tokens` would have priced this session at sixty-eight th
 
 ---
 
+*Added after publication, 3 September 2026, from memo 13. The schema above is unchanged; these are additions, and the git pilot policy was superseded rather than edited to carry them.*
+
+## `policy/v1` gains `layers`, and `event/v1` gains `level`
+
+A policy may name its **levels of enforcement**, each with what enforces it, its tier, its consequence and its buffer:
+
+```json
+"layers": {
+  "3": { "name": "hook", "enforced_by": "pre-commit, pre-push, the push check", "tier": "setting",
+         "consequence": "refuse; draws against the pool; a requested draw waits", "buffer": "the pool" },
+  "4": { "name": "destination", "enforced_by": "CI on the pushed ref, a host rule", "tier": "boundary",
+         "consequence": "refuse — and a catch here is an incident: the hook was bypassed or broken. No draw; escalate", "buffer": "none" },
+  "5": { "name": "post-action, out of band", "enforced_by": "tools/reconcile.py", "tier": "detection",
+         "consequence": "a catch is an incident and a candidate for suspension; the issuer decides", "buffer": "none" }
+}
+```
+
+Every event carries `level` (0–5), derived from its `point` when absent. A sixth verdict word, **`caught`**, belongs to levels 4 and 5 only: it never draws, it always escalates (IE-D19).
+
+**The git pilot policy was superseded**, per its own rule, by [`git-pilot-2026-09-03-r2`](../policies/pki-site-repo/git-pilot-2026-09-03-r2.json): the same bands, the `layers` block above, and one new unit — `files_per_commit` (normal 20, per occurrence 200, pool 200 per day), the memo's own example. The supersession is an event on the ledger, and the policyholder's re-acceptance (IE-D14) is request `2026-09-03T14-03-08Z__abedf6e0` and its decision, made under the pilot relaxation by the same session, and said so.
+
+**The meter does not weigh paperwork** (IE-C4, IE-C6): the pack's `ledger/` and the push policy's `ledger.jsonl` are excluded from every reading.
+
+---
+
 *CC BY 4.0.*

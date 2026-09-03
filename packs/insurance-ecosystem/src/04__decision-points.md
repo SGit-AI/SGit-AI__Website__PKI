@@ -115,4 +115,22 @@ For the pilot: **local script**, offline, no availability risk, ledger in a fold
 
 ---
 
+*Added after publication, 3 September 2026, from memo 13.*
+
+## The decision points, by level of enforcement
+
+| Level | Point | Enforced by | Tier | What it does here |
+|---|---|---|---|---|
+| 1 | `SessionStart` → the briefing | nobody | expectation | tells the session its terms |
+| 2 | the push-policy skill; `PreToolUse` on `git commit` / `git push` | nobody | expectation | the same verdict the hook will give, a second early, advisory |
+| 3 | `pre-commit`, `pre-push`, `check.py` | git, in the agent's clone | **setting** | refuses; draws; requests |
+| 4 | `.github/workflows/policy-report.yml` on every pushed ref | CI, which the agent cannot edit on the way | **boundary** | **report mode today**: prints what the policy would have said, fails nothing. Making it a required check that refuses is the issuer's decision (N31), and the day it does, a refusal here is a *catch* |
+| 5 | `tools/reconcile.py`, by the maintainer or by that workflow | a replay of history | **detection** | every commit since the hook was installed, checked once; a commit with no claim, or a claim that disagrees with the commit's weight, is a *catch* |
+
+**The rule that binds them (IE-D19): a verdict at a level above the one that should have refused is a catch, and a catch is an incident.** It draws nothing, it escalates, and the room shows it in its own card.
+
+**The push record precedes the push, now.** A push check runs after the commit it measures exists, so its entry could never be in that commit and the tree was dirty after every push (IE9, IE-C6). The entry now goes to a queue that git ignores, and the next commit's `pre-commit` hook drains the queue into the tracked ledgers and stages it (IE-C8). The loss data lags one commit; the tree is clean.
+
+---
+
 *CC BY 4.0.*

@@ -64,6 +64,11 @@ A claim, once published, is not edited. If it is wrong or overtaken, an entry he
 **What happened:** six natural units; two drawn (74,979 B and 86,056 B); two requested above the 200 KB threshold and approved under the approver's hat as the project lead allowed for the pilot (the briefs, 254,360 B → 203,160 B drawn; the pages, 216,832 B → 165,632 B drawn); two refused as exclusions and **not** accepted by the session — the wiring sources at 310,858 B, over the cap by 3,658 B, and the badge rewrite at about 4 MB. Escalation `2026-09-03T02-09-05Z__c7278eae` waits for a person. The wiring is preserved as `pending/2026-09-03__wiring-awaiting-acceptance.patch`.
 **Status:** recorded; the issuer's decision on the per-commit cap against this estate's large files is N30.
 
+### IE11 — Memo 13 arrived after the pack was published, and it names the ladder the pack was climbing
+**Source:** the project lead's voice memo of 3 September ([brief v0.33.85](../../../briefs/v0.33.85__strategy-brief__the-enforcement-ladder-six-levels-a-measured-assurance-and-a-catch-above-the-hook-is-an-incident.md), [doctrine 13](../../../insurance/the-enforcement-ladder.html)), recorded before the pack was read.
+**What it adds:** six levels of enforcement on the three tiers, with detection as a fourth; assurance per level as a measured quantity; a catch above the hook as an incident class; and out-of-band reconciliation as the control the pack lacked. **What was built the same day:** policy revision r2 (the `layers` block, `files_per_commit`), a `level` on every event and a `caught` verdict, `tools/reconcile.py`, the destination check in report mode, the room's sixth card, and the queue that ends the dirty-tree loop.
+**Status:** adopted into documents 01, 03, 04, 05, 06, 07 and 08 by appended sections; nothing above them was rewritten.
+
 ## The decisions register
 
 | # | Decision | Source | Status |
@@ -84,6 +89,13 @@ A claim, once published, is not edited. If it is wrong or overtaken, an entry he
 | IE-D14 | **A supersession must be re-accepted** by the policyholder; until then the room shows *awaiting acceptance* and cover continues under the old terms only inside the old interval | W7 · June's interval rule | **Proposed** |
 | IE-D15 | **Test events are visible, separate and excluded from the balance**, and the acceptance-run lane has its own balance so a run can see its own accumulation | Document 07, document 09 finding 1 | **Proposed** |
 | IE-D16 | **The session never accepts an action outside cover.** A requested draw inside the pool may be approved under the approver's hat in the pilot; an exclusion or an exhausted pool waits for a person, and the refused change is preserved beside the request as a patch | Document 09, *what the pack's own publication drew* | **Proposed — the line the pilot relaxation stops at** |
+| IE-D17 | **Every event carries its level of enforcement (0–5)**, derived from its point when absent; a policy may name its `layers` with tier, consequence and buffer | Memo 13 §1 · GM-D104 | **Proposed** |
+| IE-D18 | **Assurance per level is derived from the ledger**, as a catch rate on ordinary work, and shown in the room; never typed | Memo 13 §2 · GM-D105 | **Proposed** |
+| IE-D19 | **A catch above the hook is an incident**: the verdict `caught` belongs to levels 4 and 5, never draws, always escalates, and is answered by an explanation accepted or a suspension, never by an approval | Memo 13 §3 · GM-D106 | **Proposed** |
+| IE-D20 | **Reconciliation is the maintainer's job**, run at least daily and by CI in report mode; a commit with no claim, or a claim that disagrees with the commit's weight, is a catch dated to the commit | Memo 13 §4 · GM-D107 | **Proposed — built and run; eleven commits, no catch** |
+| IE-D21 | **The destination check ships in report mode.** Making `policy-report.yml` a required check that refuses is the issuer's decision (N31); the day it is, a refusal there is a catch | Document 04 | **Proposed** |
+| IE-D22 | **The git pilot policy was superseded, not edited**, to carry the layers and `files_per_commit`; the re-acceptance was made under the pilot relaxation by the same session, and says so | Document 03 · IE-D14 | **Done** |
+| IE-D23 | **The limits were raised for now, by the issuer, on the ledger's first day** — bands ×4 (200 KB normal per commit and per push), the exclusion at the vendor's recommended maximum file size (1 MB), pools ×4 (4 MB per day), counts ×2 — by supersession to `git-pilot-2026-09-03-r3` and a revision recorded inside the push policy's own file; to be reviewed against the ledger. The first re-fit from loss data (GM-D101): one pack's publication drew a whole pool, a one-line change to a large generator costs the whole file, a release weighs 250–300 KB | The project lead, 3 Sep, in chat | **Done — placeholders still, now with a day behind them** |
 
 ## Corrections
 
@@ -96,6 +108,11 @@ A claim, once published, is not edited. If it is wrong or overtaken, an entry he
 **Found:** decision `2026-09-03T02-06-11Z__5489fd4e` suspends the stale 784,174 B escalation and says the true reading for the pages alone is escalation `…37f7a0f5` — the stale one itself, because under the first matcher no new escalation had been written. The true readings are 310,858 B (the wiring, escalation `…c7278eae`) and 216,832 B (the pages, a requested draw, approved).
 **Change:** none to the ledger — files are only ever added. The correction is this entry, and document 09 carries it.
 **Status:** recorded.
+
+### IE-C8 — The push record precedes the push, through a queue
+**Found:** IE9 and IE-C6: a push check runs after the commit it measures exists, so its entry was the one uncommitted file after every push, forever.
+**Change:** `check.py` writes to `ledger.queue.jsonl` and the pack's `pre-push` point writes to `ledger/queue/`, both ignored by git; the next commit's `pre-commit` hook (and `policy.py drain`) moves them into the tracked ledgers and stages them, so the commit carries the previous pushes' records and the tree is clean after a push. Balances read the queue too, so nothing is missed in between.
+**Status:** done.
 
 ### IE-C7 — A script that pushes must check that the commit happened
 **Found:** the v0.1.67 release. The release commit came back as a requested draw and did not happen; the operator's script pushed anyway, sent nothing new to the branch (spending push 10 of 10 for 0 B) and sent the previous, non-release commit to `dev`, where it failed the same validate check. Two runbook lines: **check the commit's exit before any push**, and **never chain a `dev` push after a commit that can be refused**.

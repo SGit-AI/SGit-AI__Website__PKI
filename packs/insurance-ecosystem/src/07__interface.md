@@ -83,4 +83,16 @@ Everything in it is computed; a session reading it knows its terms, its balance,
 
 ---
 
+*Added after publication, 3 September 2026, from memo 13.*
+
+## The sixth card — catches by level
+
+| # | Card | Shows | From |
+|---|---|---|---|
+| 6 | **Catches by level** | For each level 0–5: events, draws, refusals, and **catches**; the last reconciliation run (when, by whom, commits checked, catches); every catch with its commit and its cause | The derivation over events' `level`, and `ledger/reconcile/` |
+
+Red when a catch exists, because a catch is an incident. The line under the table says *no catch above the hook: nothing has been seen that the hook should have refused* until that is no longer true. Assurance per level is this card read over a period, which is why the room and not the briefing carries it.
+
+---
+
 *CC BY 4.0.*

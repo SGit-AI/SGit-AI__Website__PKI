@@ -165,4 +165,22 @@ One session, reading only this pack, does W1, then W2 for a few commits, then W3
 
 ---
 
+*Added after publication, 3 September 2026, from memo 13.*
+
+## W8 · A catch above the hook
+
+Two ways in, one state. The destination check refuses something the hook should have refused; or the maintainer's reconciliation finds a commit that carries no claim, or whose weight disagrees with the claim it carries.
+
+```bash
+python3 $PACK/tools/reconcile.py                 # the maintainer, at least daily; or CI in report mode
+#   ✗ <sha> <when> <bytes> <files> <subject>
+#       CATCH no-claim: no pre-commit claim within the window: the hook did not run for this commit
+```
+
+Files written: an `event/v1` with `verdict: caught`, `level: 5` (or 4), `zone: outside`, dated to the commit; a run record under `ledger/reconcile/` so no commit is checked twice. **No draw.** The room's sixth card goes red. The insured stops that class of action. The issuer answers with an explanation accepted (`decide … --accept`, recorded as accepted-uninsured with the reason) or a suspension (`--suspend`), and the rating lands on the policyholder either way. A catch is never approved as a draw, because it was never inside cover.
+
+Run on 3 September over the eleven commits since the hook was installed: no catch. The first real one will calibrate levels four and five, which have caught nothing yet.
+
+---
+
 *CC BY 4.0.*

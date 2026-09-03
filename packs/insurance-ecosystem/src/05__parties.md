@@ -57,4 +57,20 @@ On the **policyholder**, by construction: the insured is indifferent to the loss
 
 ---
 
+*Added after publication, 3 September 2026, from memo 13.*
+
+## Incident response, by level
+
+*"Each of these should be connected to a different policy, and each of these should be connected to a different incident response and detection model."*
+
+| A catch at | Means | Who is told | Consequence |
+|---|---|---|---|
+| Level 3 (the hook refuses) | Ordinary: a volume event | Nobody, beyond the session's own report | A draw, a request, or a refusal with an escalation — the workflows of document 06 |
+| **Level 4** (the destination refuses what the hook should have) | The hook was bypassed, uninstalled or broken | **The policyholder and the issuer**, by the room's card and the escalation | No draw. The action is uninsured; the session stops that class of action; the issuer decides between an explanation and suspension |
+| **Level 5** (reconciliation finds a commit with no claim, or a claim that disagrees) | The same, found after the fact | The policyholder and the issuer | The same, and the catch is dated to the commit, not to the discovery |
+
+The maintainer runs level five; the issuer answers a catch; the policyholder carries the rating consequence, as always. In the pilot the same session may wear every hat, and the record says which one it wore.
+
+---
+
 *CC BY 4.0.*

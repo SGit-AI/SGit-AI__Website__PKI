@@ -115,4 +115,20 @@ Unchanged from the sibling lexicon: **what the environment can actually do**, me
 
 ---
 
+*Added after publication, 3 September 2026, from memo 13 ([doctrine 13](../../../insurance/the-enforcement-ladder.html)). No term above has been changed.*
+
+### Level of enforcement
+**Where a verdict was produced**, on a ladder of six: 0 nothing · 1 the prompt · 2 a skill or system prompt · 3 a hook in the agent's own clone · 4 the destination · 5 out of band, after the fact. Levels 0 to 2 are *expectations*, 3 is a *setting*, 4 a *boundary*, and 5 is **detection** — a tier the control test had not named because it does not prevent, it finds out. Every `event/v1` carries its `level` (IE-D17).
+
+### Assurance
+**How reliably a level does its job, measured.** The catch rate per level on ordinary work, derived from the ledger, never asserted. A prompt's worth is a number; until the number exists the tier test's answer stands (IE-D18).
+
+### Catch
+**A verdict at a level above the one that should have refused.** Not a draw and not a volume event: it means the lower level was bypassed, uninstalled or broken. A catch is an *incident* — no pool, a different policy, an escalation, and a candidate for suspension of the licence to operate (IE-D19). The verdict word is `caught`, and it is level 4's and level 5's alone.
+
+### Reconciliation
+**Level five, as a job:** replay the system of record (git) against the ledger and ask, for every commit, whether the claim the hook should have written is there and agrees with the commit's weight. A commit that carries no claim is the detection. `tools/reconcile.py`; the maintainer's job (IE-D20).
+
+---
+
 *CC BY 4.0.*
