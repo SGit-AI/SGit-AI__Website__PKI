@@ -252,5 +252,13 @@
     "That consumption loss data transfers to capability loss data. A pool supplies loss events about SPEND. Nothing here produces a single data point about what a breach costs, which is what a stage-2 premium would need.",
     "That the policy's numbers fit this repository. The only fit so far, the checker replayed over twelve releases, refused all twelve; doctrine 12 argues the estate's release mechanism is at fault rather than the numbers, and that is an argument, not a calibration from a ledger that has no live entries yet.",
     "That the vault cost in the case study is measured. It is arithmetic from sgit's design — content-addressed on plaintext, no delta packing across ciphertexts — applied to git's measured numbers; no vault of this site's history exists to weigh."
+  ],
+  "packs": [
+    {
+      "slug": "insurance-ecosystem",
+      "title": "The insurance ecosystem pack",
+      "state": "draft-1 · step 1 built and run",
+      "one_line": "The pack the fourth v0.33.62 brief specifies, written 3 September after the nine-item inventory: three vaults, a policy object generic on unit, a ledger that is only ever added to, git hooks as the enforcement point, Claude hooks as instrumentation, and a room of five cards. Step 1 is built: a 400 KB commit refused by git, the eleventh commit of the day recorded as a draw, a push outside the mandate refused. It supersedes nothing here; it generalises the push policy's verdict to any unit at commit and at push, and pins the signed mandate by hash."
+    }
   ]
 }

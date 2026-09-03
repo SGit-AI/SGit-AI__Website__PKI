@@ -185,6 +185,11 @@
 
   The push policy — https://pki.sgit.ai/insurance/push-policy/index.html
 
+## The dev pack
+
+  The insurance ecosystem pack — https://pki.sgit.ai/packs/insurance-ecosystem/index.html
+    draft-1 · step 1 built and run. The pack the fourth v0.33.62 brief specifies, written 3 September after the nine-item inventory: three vaults, a policy object generic on unit, a ledger that is only ever added to, git hooks as the enforcement point, Claude hooks as instrumentation, and a room of five cards. Step 1 is built: a 400 KB commit refused by git, the eleventh commit of the day recorded as a draw, a push outside the mandate refused. It supersedes nothing here; it generalises the push policy's verdict to any unit at commit and at push, and pins the signed mandate by hash.
+
 ## DOES NOT PROVE
 
   - That any of this is insurance. Stage 1 emits a rating, transfers no risk, and promises no payout — which is exactly why it needs no carrier and why calling it insurance would be the first dishonesty.

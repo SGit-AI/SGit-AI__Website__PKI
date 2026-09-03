@@ -513,6 +513,64 @@ https://pki.sgit.ai/packs/map-your-case/src/ — thirteen documents plus a chang
 - Change control: four corrections, eighteen decisions at draft-1. The registry pack records the
   same handover as its C32/decision 45: document 14 there remains the registry-side view.
 
+## The Insurance Ecosystem pack (dev pack: draft-1 + change control; step 1 built)
+
+- [Leading brief](https://pki.sgit.ai/packs/insurance-ecosystem/index.html): the pack
+  the fourth v0.33.62 brief specifies — a new agent session is told the rules, handed its
+  own policy, measured while it works, and refused by something that is not itself when it
+  exceeds cover, visible in a room. Written 3 September 2026 after the nine-item inventory
+  that brief demands, under the economics the third v0.33.62 brief settles, and under the
+  project lead's pilot relaxation: one session holding the vault key may run any role in
+  any vault; integrity deferred and detected by sgit's append-only history.
+- [The lexicon](https://pki.sgit.ai/packs/insurance-ecosystem/concepts.html): policy, unit,
+  band, per-occurrence limit, pool, reserve, draw (recorded | requested; silent overflow is
+  not a value), verdict (normal | drawn | refused | requested), zone (below | drawing |
+  OUTSIDE = uninsured, escalates), exclusion, correlation. QUESTION NINE SETTLED
+  PROVISIONALLY: `mandate` is the narrow thing, `grant` the union; August governs; June's
+  "Authority Envelope" is prose, never a field (IE-D9, the project lead's to reverse).
+- [Vault topology](https://pki.sgit.ai/packs/insurance-ecosystem/vault-topology.html):
+  three vaults — policies, ledger, room — with the key tier each needs; the ledger is an
+  append lane in the design (a write key grants purge; an append token grants write and a
+  blind acknowledgement) and a folder of files only ever added in the pilot, same schema.
+- [The policy object](https://pki.sgit.ai/packs/insurance-ecosystem/policy-object.html):
+  policy/v1 (rules version, issuer, policyholder, subject with the mandate pinned by sha256,
+  interval with timezone, draw_mode, units each naming its METER, exclusions each with a
+  REASON, reserve, rating, an unpublished rate table with an owner), event/v1 generic on
+  unit, request/v1, decision/v1, and the balance DERIVED and never stored. Two worked
+  policies: the git pilot (five units, in force) and tokens (four counters measured on this
+  session — input_tokens 68,356 vs cache_read_input_tokens 721,095,334 — no bands).
+- [Decision points](https://pki.sgit.ai/packs/insurance-ecosystem/decision-points.html):
+  thirty-three Claude Code hook events; SessionStart (briefing), PreToolUse (advisory) and
+  Stop (usage) are instrumentation. THE PLATFORM FAILS OPEN WHEN A HOOK TIMES OUT, so the
+  enforcement points are git's pre-commit and pre-push, which fail CLOSED for a draw.
+- [Parties](https://pki.sgit.ai/packs/insurance-ecosystem/parties.html): issuer,
+  policyholder, insured, approver, maintainer, auditor — runbooks now, key topology later;
+  the acceptor of every draw is the policyholder, never the session.
+- [Workflows](https://pki.sgit.ai/packs/insurance-ecosystem/workflows.html): session start,
+  ordinary work (silence), recorded draw, requested draw, EXHAUSTION (refuse + escalate;
+  accept-as-uninsured never touches the pool), the maintainer run, a repricing event.
+- [The interface](https://pki.sgit.ai/packs/insurance-ecosystem/interface.html): a room of
+  five cards (policy · zone and balance · draw frequency · correlation · events and
+  requests) as a read-only vault app; the briefing verbatim. Rendered live from the
+  acceptance run at https://pki.sgit.ai/packs/insurance-ecosystem/room/index.html
+- [Build order](https://pki.sgit.ai/packs/insurance-ecosystem/build-order.html): eight steps,
+  an acceptance test each; step 1 done; steps 2-8 are the pack's own acceptance test —
+  a session that has read only the pack builds it all and asks nobody a question.
+- [The first increment](https://pki.sgit.ai/packs/insurance-ecosystem/first-increment.html):
+  BUILT AND RUN 3 September — a 400 KB commit refused by git's pre-commit (exit 1, HEAD
+  unmoved, an escalation written); the eleventh commit of the day told a draw was recorded;
+  a push to main refused by the mandate; a requested draw refused, decided, drawn via the
+  decision; exhaustion at the fifth reading. Log: /packs/insurance-ecosystem/tests/acceptance-2026-09-03.log
+- [The eleven answers](https://pki.sgit.ai/packs/insurance-ecosystem/eleven-answers.html):
+  the inventory with evidence, and the specification's eleven questions answered.
+- [Change control](https://pki.sgit.ai/packs/insurance-ecosystem/change-control.html):
+  IE-D1 to IE-D15, all proposed except IE-D11 and IE-D12 (done); no corrections yet — the
+  first will be a question the implementing session had to ask.
+- Tools, all runnable: /packs/insurance-ecosystem/tools/policy.py (check | briefing |
+  request | decide | supersede | derive | validate | hook-pre-tool-use), usage.py,
+  room.py; hooks/pre-commit, hooks/pre-push; policies/<subject>/current.json.
+  THE HOOKS ARE A SETTING, NOT A BOUNDARY, and every refusal banner says so.
+
 ## Synthetic readers (simulated material — read the marker)
 
 Below the Map Your Case pack, and deliberately outside it, sits the instrument that TESTS the

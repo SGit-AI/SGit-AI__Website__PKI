@@ -704,6 +704,195 @@ model tells about itself. <b>One run has been performed</b> and its findings are
      "The corpus version is assigned on adoption — this is a first pass, for review.",
     ]),
   ]),
+ dict(slug="insurance-ecosystem",
+  name="The Insurance Ecosystem: A Session Told The Rules, Handed A Policy, Measured, And Refused By Something That Is Not Itself",
+  origin="Authored by the pki.sgit.ai site agent, 3 September 2026, at the project lead's request — the pack the fourth v0.33.62 brief specifies, written after the nine-item inventory that brief demands, under the economics the third v0.33.62 brief settles, and under the project lead's instruction of 3 September that for the pilot one session holding the vault key may run any role in any vault. Build-order step 1 is BUILT and its three acceptance tests were run the same day; steps 2–8 are the pack's own acceptance test for the next session. Corpus version assigned on adoption.",
+  date="3 September 2026 · draft-1 + change control",
+  origin_short="Site agent, this repo",
+  row_date="3 Sep 2026 · draft-1, step 1 built",
+  dl_blurb="",
+  one_line="An end-to-end ecosystem on vaults: three vaults, a policy object generic on unit, a ledger that is only ever added to, git hooks as the enforcement point, Claude hooks as instrumentation, and a room of five cards. Eleven documents plus change control; an evaluator, two hooks, a token meter and a room builder in <code>tools/</code>; and <a href='insurance-ecosystem/first-increment.html'>step 1 built and run</a> — a 400 KB commit refused by git, the eleventh commit of the day recorded as a draw, a push outside the mandate refused. <a href='insurance-ecosystem/room/index.html'>The room</a> renders from the run.",
+  meta_desc="The insurance ecosystem pack, readable in-page: the leading brief, the lexicon with question nine settled, the vault topology, the policy object, the decision points, the parties, the seven workflows, the room and the briefing, the build order, the first increment built and run, the eleven answers, and change control.",
+  three_sentences="The pack the fourth brief of 26 August specifies: <b>a new agent session is told the rules of the game, is handed its own policy, is measured against it while it works, and is refused by something that is not itself when it exceeds cover</b>, with the whole flow visible in a room somebody can watch. Written after the inventory the brief demands — which found <b>no board application</b> (so <a href='interface.html'>the room</a> is a vault app in the estate's shipped pattern) and found that <b>the platform fails open on a hook timeout</b> (so <a href='decision-points.html'>the git hooks refuse and the Claude hooks instrument</a>) — and under the project lead's pilot relaxation: one session holding the vault key may run any of the <a href='parties.html'>six roles</a> in any of the <a href='vault-topology.html'>three vaults</a>, integrity deferred and detected by sgit's append-only history, the <a href='workflows.html'>seven workflows</a> the thing being figured out, including running out and being uninsured. The <a href='policy-object.html'>policy object</a> is one schema for any unit the system already counts, with a normal band, a per-occurrence limit that becomes an exclusion where the loss is irreversible, a shared pool with a reserve no verdict can reach, a recorded draw by default and a requested one above a threshold, and the policyholder — never the session — as the acceptor of every draw. <a href='first-increment.html'>Document 09</a> is the receipt: three git policies compiled to two hooks, run on 3 September, with git's own output for each of the three refusals the specification asked for, and the two findings the run produced.",
+  site_relevance="This pack is the layer above <a href='../../insurance/push-policy/index.html'>the push policy</a> (the first MVP, doctrine 12) and beside the <a href='../grant-and-mandate/index.html'>Grant &amp; Mandate pack</a>, whose signed mandate it pins by hash and whose <code>pre-push</code> hook it chains: reach is the mandate's, volume is the policy's. Its economics are the <a href='../../documents/insurance-is-junes-underwriting.html'>26 August architecture brief</a>, not reopened; its specification is the <a href='../../documents/specification-for-the-insurance-ecosystem-pack.html'>26 August dev brief</a>, answered question by question in <a href='eleven-answers.html'>document 10</a>. It consumes what <a href='../../insurance/index.html'>the insurance folder</a> already publishes — the doctrine that a draw is a claim paid in the resource, the three-tier control test, the rule that a level is derived and never typed — and it adds the one thing the folder had not: <b>a ledger of events that a session's own commits write, and a room that shows them</b>.",
+  extra="""
+<h2 id="built">What is built, and where</h2>
+<div class="tablewrap"><table>
+  <thead><tr><th>Path</th><th>Is</th></tr></thead>
+  <tbody>
+    <tr><td><a href="tools/policy.py"><code>tools/policy.py</code></a></td><td>The evaluator: one verdict for any unit at <code>pre-commit</code> or <code>pre-push</code>; the briefing; request, decide, supersede, derive, validate; the Claude <code>PreToolUse</code> handler</td></tr>
+    <tr><td><a href="hooks/pre-commit"><code>hooks/pre-commit</code></a> · <a href="hooks/pre-push"><code>hooks/pre-push</code></a></td><td>The enforcement points — settings, and the banner says so</td></tr>
+    <tr><td><a href="policies/pki-site-repo/git-pilot-2026-09-03.json"><code>policies/pki-site-repo/</code></a> · <a href="policies/pki-site-session/tokens-measured-2026-09-03.json"><code>policies/pki-site-session/</code></a></td><td>The git pilot policy (in force) and the measured token policy (no bands)</td></tr>
+    <tr><td><a href="tools/usage.py"><code>tools/usage.py</code></a></td><td>The token meter: four counters from the transcript, never one</td></tr>
+    <tr><td><a href="room/index.html"><code>room/index.html</code></a> · <a href="tools/room.py"><code>tools/room.py</code></a></td><td>The room, as a vault app that also renders here, and the maintainer's derivation that feeds it</td></tr>
+    <tr><td><a href="ledger/"><code>ledger/</code></a> · <a href="tests/acceptance-2026-09-03.log"><code>tests/acceptance-2026-09-03.log</code></a></td><td>The acceptance run's events, requests and decisions (all marked as a test lane), and the run's full transcript</td></tr>
+  </tbody>
+</table></div>
+""",
+  docs=[
+   dict(slug="dev-brief", file="00__LEADING-BRIEF.md",
+    title="00 — The leading brief",
+    role="What this is for, the project lead's relaxation, what the inventory changed, the four findings re-checked, the economics not reopened",
+    summary="The pack scoped by the specification's own test — a session that has read only the pack builds the vaults, wires the hooks, authors a policy, runs a working day and produces a room showing a refusal, a recorded draw and a waiting request, asking nobody a question — and by the project lead's instruction of 3 September that for the pilot one session with the vault key may run any role in any vault, integrity deferred and detected rather than prevented. The inventory the specification demanded was done first and changed the design in three places: there is no board application, so the room is a vault app; the platform fails open when a hook times out, so the git hooks are the enforcement point and the Claude hooks are instrumentation; and the eighteen June briefs were read, and only the naming brief collides. The four inherited findings are each re-checked here, including the four token counters measured again on this session's own transcript: sixty-eight thousand on the obvious counter, seven hundred and fifty-seven million in all.",
+    concepts=[
+     ("The pilot relaxation", "parties.html", "one key, one session, every role — and every file shape unchanged"),
+     ("The platform fails open", "decision-points.html", "why the git hooks refuse and the Claude hooks do not"),
+     ("The four findings, re-measured", "policy-object.html", "lane, http, four counters, and the word that meant two things"),
+    ],
+    ideas=[
+     "Every question the implementing session has to ask is a gap in the pack, and is filed as an amendment rather than answered in chat.",
+     "Turning integrity on is a change of where things run, not what they say.",
+     "A session that moved 757 million tokens reads as 68 thousand on the obvious counter.",
+    ]),
+   dict(slug="concepts", file="01__concepts.md",
+    title="01 — The lexicon",
+    role="Policy, unit, band, limit, pool, draw, verdict, zone, exclusion, reserve, correlation, ledger, lane, room, briefing — and question nine settled",
+    summary="The scoped vocabulary in the graphs-site format, each term defined by its edges. The chain the sibling lexicon states gains one segment: grant, mandate, then the policy that prices what a session may consume, the meter the system already runs, the event that is one reading of it, the verdict that is a subtraction, and the zone derived from the day's verdicts. The three zones are named with their owners, and the third is not a larger second: outside cover is uninsured, and an unaccepted risk escalates without anybody escalating it. Question nine is decided in the entry for mandate: August governs, the mandate is the narrow thing, the grant is the union, and June's Authority Envelope survives as prose and never as a field.",
+    concepts=[
+     ("Draw", "workflows.html", "a claim paid in the resource, settled by the check; recorded by default, requested above a threshold"),
+     ("Zone", "interface.html", "below, drawing, outside — and outside means uninsured"),
+     ("Mandate, settled", "change-control.html", "IE-D9: the narrow thing, August governs"),
+    ],
+    ideas=[
+     "A policy written before a meter exists is a wish; a zone typed by hand is a lie.",
+     "Silent overflow is not a value: an evaluator that decrements without writing is not this pack's evaluator.",
+     "There is no insurer, and any page that borrows the vocabulary says so.",
+    ]),
+   dict(slug="vault-topology", file="02__vault-topology.md",
+    title="02 — Vault topology",
+    role="Three vaults, who holds which key, the pilot's one key set, the lane as the end state, and the anchors question",
+    summary="Policies, ledger and room: three vaults with three writers, kept separate now so that the key split later is a file change rather than a migration. The capability tiers each buys, the blind acknowledgement as a load-bearing property rather than tidiness, and the pilot relaxation applied line by line: one key set, a folder of files that are only ever added standing in for the lane, detection by sgit's history in place of prevention. Every file shape and folder name is the lane's, so the drain runbook is the only step that does not exist yet. The published lane limits are designed against, the unstated anchors question is assumed conservatively and marked, and retention is proposed.",
+    concepts=[
+     ("The blind acknowledgement", "../../enrolment/index.html#lane", "an insured cannot learn its remaining cover by writing"),
+     ("A folder for a lane", "change-control.html", "IE-D3: the same schema, a different location"),
+     ("No anchors, no writers", "eleven-answers.html", "assumed, marked, to be confirmed by one write at step 7"),
+    ],
+    ideas=[
+     "A write key grants purge, so the ledger's writer must not hold one.",
+     "The room holds nothing the other two vaults do not, so it can always be regenerated.",
+     "One thousand pending files per token makes draining an obligation.",
+    ]),
+   dict(slug="policy-object", file="03__the-policy-object.md",
+    title="03 — The policy object",
+    role="policy/v1, event/v1, request/v1, decision/v1, the derived balance, and two worked policies",
+    summary="Four documents and one derivation. The policy carries its rules version, its issuer and policyholder, the mandate it prices pinned by hash, an interval with a timezone, a draw mode whose default is recorded and whose threshold makes a draw requested, one entry per unit with a named meter, and an exclusion with a reason wherever the loss is irreversible. The event is generic on unit, names the policyholder as acceptor on every draw, and carries tokens as four counters. The balance is never stored: derived by the maintainer from the four documents with the reserve subtracted first, and where the evaluator's arithmetic at the time disagrees with the derivation, the derivation wins and the disagreement is a finding. The git pilot policy is built; the token policy is measured and deliberately unbanded.",
+    concepts=[
+     ("Every unit names its meter", "concepts.html", "a unit without one is refused by the schema"),
+     ("The reserve is subtracted first", "interface.html", "the catastrophe layer no verdict may reach"),
+     ("Four counters, no bands", "first-increment.html", "the token policy as instrumentation"),
+    ],
+    ideas=[
+     "A stored balance is stale the moment an event lands elsewhere, and a balance maintained inside the insured is the insured marking its own homework.",
+     "A hard cap on bytes into history is not the top of the buffer; it is the boundary of insurability.",
+     "The request threshold is two-thirds of the exclusion so that the requested-draw workflow is exercised on real commits.",
+    ]),
+   dict(slug="decision-points", file="04__decision-points.md",
+    title="04 — Decision points",
+    role="Thirty-three lifecycle events, four hooked, and the two that refuse are git's",
+    summary="The published schema and hooks reference give thirty-three events; SessionStart carries the briefing, PreToolUse an advisory copy of the verdict, Stop the usage flush. But a PreToolUse hook that times out does not block the tool, which the documentation states: the platform fails open. A draw whose balance cannot be derived is not a draw, and a Claude hook cannot express fail-closed. A git hook can, because it owns its exit code. So pre-commit and pre-push are the enforcement points, both settings and both say so; the http variant moves the decision off the machine but not the refusal, so any service sits behind the git hook. Local script for the pilot, as the specification recommended.",
+    concepts=[
+     ("Fails open on timeout", "../../packs/grant-and-mandate/concepts.html", "the tier test applied to a platform property"),
+     ("The service behind the hook", "build-order.html", "step 7's shape"),
+     ("Advisory, not enforcement", "workflows.html", "the PreToolUse handler returns the same verdict a second early"),
+    ],
+    ideas=[
+     "A commit made by a subagent or a script is seen by git and not by the Claude hook, which is why git is the enforcement point.",
+     "Whether project-level hooks run without a prompt is not documented and is to be observed.",
+    ]),
+   dict(slug="parties", file="05__parties.md",
+    title="05 — Parties",
+    role="Six roles as runbooks, who each is today, and what the keys will prevent once split",
+    summary="Issuer, policyholder, insured, approver, maintainer, auditor — each mapped to a responsibility that exists today (the project lead, the estate, the site agent) and each with the runbook a session executes and the prevention the key topology will impose. The pilot lifts the prevention on the project lead's word: one session may run any role, the same hand may ask and answer under two hats, and the record names both. What that costs is stated: every acceptance in the pilot is self-accepted, which the economics say a draw must never be; the acceptor is still named as the policyholder so the record is right even when the hand is the same. Experience rating lands on the policyholder because the session is indifferent to the loss.",
+    concepts=[
+     ("Prevention deferred, not dropped", "vault-topology.html", "roles as runbooks until the key split"),
+     ("The acceptor is the policyholder", "policy-object.html", "the agent spends, the team carries"),
+     ("Never approve an exclusion", "workflows.html", "the answer to an escalation is acceptance as uninsured or suspension, never a larger draw"),
+    ],
+    ideas=[
+     "The RiskMandate team holds the instance a policy is written against and is not a party to the policy.",
+     "A session-held enumeration key is a session-scoped identity, which the registry pack already found to be the wrong lifetime.",
+    ]),
+   dict(slug="workflows", file="06__workflows.md",
+    title="06 — Workflows",
+    role="Session start, ordinary work, a recorded draw, a requested draw, exhaustion, the maintainer run, a repricing event — as commands",
+    summary="Seven workflows, each as the commands a session runs, the files it leaves and what the room then shows. Ordinary work writes a countable event and says nothing, because silence below cover is a requirement. A recorded draw prints one line and names the policyholder. A requested draw refuses the commit, writes a request with an id, waits for a decision file and draws via it on retry. Exhaustion, by exclusion or by an empty pool, refuses, writes an escalation and leaves the insured uninsured for that class of action; the approver's answers are acceptance as uninsured, which never touches the pool, or suspension. The maintainer run derives everything; a repricing event supersedes the policy with a new file the policyholder must re-accept.",
+    concepts=[
+     ("W4 — the requested draw", "first-increment.html", "run end to end on 3 September, under two hats"),
+     ("W5 — uninsured", "concepts.html", "an escalation, not only a refusal"),
+     ("W7 — repricing", "change-control.html", "IE-D14: a supersession must be re-accepted"),
+    ],
+    ideas=[
+     "Do not split a commit to get under a threshold; ask, quote the id, wait.",
+     "An accepted-uninsured action is not a draw: the pool did not cover it, a person did.",
+     "The working day is the acceptance test: W1 to W6, then the room shows the three things.",
+    ]),
+   dict(slug="interface", file="07__interface.md",
+    title="07 — The interface",
+    role="The room's five cards, three rules it keeps, and the briefing verbatim",
+    summary="A vault app in the estate's shipped pattern, read-only, one page: policy, zone and balance, draw frequency, correlation, events and requests. The zone is the headline and the balance sits under it, because balance is the metric everybody builds and the wrong one to lead with. Silence below cover, nothing typed, and test events visible in their own lane and excluded from the balance. The briefing a session is handed at start is printed verbatim, computed field by field, ending with the tier on its face. What is reused is the skeleton; what is new is five cards and one text; the chat-thread component that exists is not used because the pilot's thread is a folder.",
+    concepts=[
+     ("Draw frequency before balance", "policy-object.html", "the leading indicator, and the issuer's input at the period boundary"),
+     ("Correlation from week one", "../../insurance/the-resource-pool.html", "because nobody builds it later"),
+     ("The briefing", "workflows.html", "W1, injected by SessionStart"),
+    ],
+    ideas=[
+     "The room is quiet by design and loud in exactly two colours.",
+     "If the room disagrees with the ledger, the room is wrong and the ledger commit in the footer is how you prove it.",
+    ]),
+   dict(slug="build-order", file="08__build-order.md",
+    title="08 — Build order",
+    role="Eight steps by dependency, an acceptance test each, and what stays excluded",
+    summary="Step 1 (three git policies to two hooks) is built and run. Steps 2 to 4 are the three vaults, a morning. Step 5 is the Claude hooks. Step 6 is the working day and the pack's own acceptance test. Steps 7 and 8 are the lane and the key split, which wait on the anchors answer and a session-independent identity for the maintainer. Every step names a test that can fail and the rule that it is written before, run after, recorded with the commit it ran at. The exclusions from the specification are carried with the reason each stays excluded after the inventory.",
+    concepts=[
+     ("Step 1, done", "first-increment.html", "with git's own output"),
+     ("Step 6, the pack's test", "dev-brief.html", "nobody is asked a question"),
+     ("Steps 7 and 8", "vault-topology.html", "the pilot becoming the design"),
+    ],
+    ideas=[
+     "A step whose test cannot fail is not a step.",
+     "If a test passed for the wrong reason, say so; the sibling pack's setting-that-reads-like-a-boundary was found exactly that way.",
+    ]),
+   dict(slug="first-increment", file="09__first-increment.md",
+    title="09 — The first increment, built and run",
+    role="Three git policies, two hooks, and the three refusals the specification asked for — with git's own output",
+    summary="Run on 3 September in a scratch clone with both hooks installed and every event marked as a test lane. A 400 KB commit was refused by pre-commit with the exclusion's reason printed and HEAD unmoved; the eleventh commit of the day was told a draw was recorded, seventeen of eighteen left because the reserve holds ten per cent back; a push to main was refused by the mandate before a byte was counted and a push to a permitted branch succeeded in the same minute. Then the whole requested-draw workflow: refused, a request with an id, a decision, a retry that drew via it, and a commit that carried its own two claims. Then exhaustion at the fifth reading, with the earlier escalation found already waiting, and a commit inside the band still proceeding. Five findings, including that a test lane needs its own balance, found because the first run of the eleventh commit reported nothing.",
+    concepts=[
+     ("The acceptance log", "tests/acceptance-2026-09-03.log", "every number on the page is copied from it"),
+     ("A commit carries its own claim", "change-control.html", "IE-D12"),
+     ("Setting, not boundary", "../grant-and-mandate/enforcement.html", "the same tier the two enforcement points before it reached"),
+    ],
+    ideas=[
+     "exit=1 is git's, from a hook that ran before the commit object existed.",
+     "The count pool drew three times on an ordinary session; the rating rule will say the band is wrong, which is the loop working.",
+     "Nothing on GitHub was refused: the remote was a folder, the hooks and the refusals were real.",
+    ]),
+   dict(slug="eleven-answers", file="10__the-eleven-answers.md",
+    title="10 — The eleven answers",
+    role="The nine-item inventory with evidence, and the specification's eleven questions answered",
+    summary="What was found on 3 September, item by item: no board application; the messaging vault is the append lane with its client-side derivation still proposed; sgit 0.16.0's command surface with no lane command; thirty-three hook events and the fail-open finding; the risk product holding the instance; the real parties; all eighteen June briefs read; the graphs-site lexicon format; and the anchors question still unstated. Then the eleven questions, each answered with the evidence it came from and the decision it produced, question nine marked as a decision taken provisionally on the specification's recommendation and the project lead's to reverse. The one thing the specification said was attached and was not available — the measured primitives reference — was substituted by measuring again.",
+    concepts=[
+     ("Question nine", "concepts.html", "mandate is the narrow thing; August governs"),
+     ("Where policies live", "vault-topology.html", "a new vault, not the risk product, not the credential store"),
+     ("The first refusal", "first-increment.html", "a 400 KB commit, to the project lead, with git's output"),
+    ],
+    ideas=[
+     "The inventory looked at four repositories and one sparse checkout in a day; the estate has nineteen sites.",
+     "The eleven answers are evidenced, which is different from right; the evidence column is what to argue with.",
+    ]),
+   dict(slug="change-control", file="99__change-control.md",
+    title="99 — Change control",
+    role="What the specification settles, what the project lead's instruction changes, what the build added — fifteen decisions, no corrections yet",
+    summary="The appendix in the estate's discipline: the pack supersedes rather than rewrites. IE1 to IE5 are inherited from the two briefs and not argued; IE6 is the project lead's relaxation and what it changes and does not; IE7 to IE10 are what the inventory and the build added, including the fail-open finding and the commit that carries its own claim. The decisions register runs to fifteen, all proposed except the two that are done. The first correction will be a question the implementing session had to ask.",
+    concepts=[
+     ("IE-D4 — git refuses, Claude instruments", "decision-points.html", "the decision the inventory most changed"),
+     ("IE-D9 — August governs", "concepts.html", "the naming decision, taken provisionally"),
+     ("IE-D12 — a commit carries its own claim", "first-increment.html", "done"),
+    ],
+    ideas=[
+     "Read it second if building, last if reading through, never not at all.",
+     "An implementing session that has to ask files the question and the answer it took here.",
+    ]),
+  ]),
 ]
 
 NAV_STUB = '<nav class="site"><div class="row"></div></nav>'

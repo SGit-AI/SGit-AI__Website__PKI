@@ -212,6 +212,10 @@ def build_hub(m):
         decision.</div>""")
 
     dnp = "\n".join(f"<li>{esc(x)}</li>" for x in m["does_not_prove"])
+    pack_block = ("<h2 id=\"packs\">The dev pack</h2>\n" + "\n".join(f"""
+    <a class="ins-card" href="../packs/{esc(x['slug'])}/index.html">
+      <div class="ins-card-top"><b>{esc(x['title'])}</b><span class="dim">{esc(x.get('state',''))}</span></div>
+      <p>{esc(x.get('one_line',''))}</p></a>""" for x in m.get("packs", []))) if m.get("packs") else ""
 
     body = f"""<main class="doc">
 <div class="crumb"><a href="../index.html">pki.sgit.ai</a> / insurance</div>
@@ -256,6 +260,7 @@ count below is computed from the manifest, never typed.</p>
 
 <h2 id="mvps">The MVPs</h2>
 {mvp_block}
+{pack_block}
 
 <h2 id="reads">What it consumes</h2>
 <p>Nothing here starts from scratch — the rating's inputs are documents this estate already publishes:
@@ -414,6 +419,13 @@ def build_llms(m):
         A("  capable of producing an external fact), and the resource pool (the first")
         A("  thing here capable of producing LOSS DATA, from meters that already exist).")
     A("")
+    if m.get("packs"):
+        A("## The dev pack")
+        A("")
+        for x in m["packs"]:
+            A(f"  {x['title']} — https://pki.sgit.ai/packs/{x['slug']}/index.html")
+            A(f"    {x.get('state','')}. {x.get('one_line','')}")
+        A("")
     A("## DOES NOT PROVE")
     A("")
     for x in m["does_not_prove"]:
