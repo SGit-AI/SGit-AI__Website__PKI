@@ -1,0 +1,25 @@
+{
+ "acceptor": "the project lead",
+ "amount": 4511911,
+ "at": "2026-09-03T03:16:26+00:00",
+ "day": "2026-09-03",
+ "drawn": 0,
+ "id": "2026-09-03T03-16-26Z__4ba5182a",
+ "point": "pre-commit",
+ "policy": "git-pilot-2026-09-03",
+ "policyholder": "the pki.sgit.ai estate",
+ "pool_left": 276101,
+ "reason": "4,511,911 B is over the per-occurrence limit of 307,200 B \u2014 an EXCLUSION; accepted as UNINSURED by the project lead on request 2026-09-03T03-16-00Z__8c7fcd4f",
+ "ref": {
+  "blobs": 229,
+  "branch": "claude/registry-mvp-brief-hpbap8"
+ },
+ "rules_version": "insurance-ecosystem/draft-1",
+ "subject": "session:844f4a2f",
+ "test": false,
+ "type": "event/v1",
+ "unit": "bytes_per_commit",
+ "verdict": "accepted_outside",
+ "via_request": "2026-09-03T03-16-00Z__8c7fcd4f",
+ "zone": "outside"
+}

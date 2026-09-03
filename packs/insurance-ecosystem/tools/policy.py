@@ -242,10 +242,11 @@ def staged_bytes():
     raw = git("diff", "--cached", "--raw", "--diff-filter=AMCR", check=False)
     shas = []
     for line in raw.splitlines():
-        m = re.match(r":\d+ \d+ ([0-9a-f]+) ([0-9a-f]+) (\w+)", line)
+        m = re.match(r":\d+ \d+ ([0-9a-f]+) ([0-9a-f]+) (\w+)\t(.*)$", line)
         if not m: continue
-        src, dst = m.group(1), m.group(2)
+        src, dst, path = m.group(1), m.group(2), m.group(4)
         if set(dst) == {"0"} or src == dst: continue
+        if "/ledger/" in "/" + path: continue          # the claim's own paperwork is never weighed (IE-C4)
         shas.append(dst)
     if not shas: return 0, 0
     out = subprocess.run(["git", "cat-file", "--batch-check=%(objecttype) %(objectsize)"], input="\n".join(shas), capture_output=True, text=True).stdout

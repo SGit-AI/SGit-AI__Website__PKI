@@ -1,0 +1,10 @@
+{
+ "at": "2026-09-03T03:16:00+00:00",
+ "by": "the site agent, under the approver's hat (pilot relaxation)",
+ "decision": "suspend",
+ "id": "2026-09-03T03-16-00Z__015e120c",
+ "note": "voided as a reading: the accepted decision's own file was staged into the retry and raised the reading by 1,472 B above the accepted amount (IE-C4). The acceptance on 2026-09-03T03-15-02Z__7b050945 stands; the ledger's files are no longer weighed.",
+ "request": "2026-09-03T03-15-03Z__76196baf",
+ "test": false,
+ "type": "decision/v1"
+}

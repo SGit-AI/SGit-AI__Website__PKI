@@ -1,0 +1,10 @@
+{
+ "at": "2026-09-03T03:14:37+00:00",
+ "by": "the project lead",
+ "decision": "accept",
+ "id": "2026-09-03T03-14-37Z__28fd2e36",
+ "note": "the project lead, 3 Sep 2026, in chat: 'Yes please push these and I accept those exclusions' \u2014 the wiring sources, 310,858 B, accepted as uninsured; the per-commit cap against this estate's large files is N30's first decision",
+ "request": "2026-09-03T02-09-05Z__c7278eae",
+ "test": false,
+ "type": "decision/v1"
+}

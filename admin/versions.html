@@ -14,7 +14,7 @@
   <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.65</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history" data-site-version></a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
@@ -111,6 +111,7 @@
       <a class="sl" href="../packs/index.html">Dev packs</a>
       <a class="sl" href="../packs/registry-mvp/index.html">The registry MVP pack</a>
       <a class="sl" href="../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
+      <a class="sl" href="../packs/insurance-ecosystem/index.html">The Insurance Ecosystem pack</a>
       <a class="sl" href="../packs/map-your-case/index.html">The Map Your Case pack</a>
       </div>
     </div>
@@ -125,6 +126,7 @@
     </div>
   </div>
   <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+  <script src="../assets/version.js" defer></script>
   <script src="../assets/nav.js" defer></script>
 </div></nav>
 
@@ -136,6 +138,11 @@
 <div class="tablewrap"><table class="vers">
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
+    <tr>
+<td class="vnum">v0.1.66</td>
+<td class="vdate">3 Sep 2026</td>
+<td><b>The insurance ecosystem pack &mdash; and the release stops touching every page.</b> The pack the <a href="../documents/specification-for-the-insurance-ecosystem-pack.html">fourth v0.33.62 brief</a> specifies, written after the nine-item inventory it demands, under the economics of the <a href="../documents/insurance-is-junes-underwriting.html">third</a>, and under the project lead's instruction that for the pilot <b>one session holding the vault key may run any role in any vault</b>: eleven documents and change control at <a href="../packs/insurance-ecosystem/index.html">packs/insurance-ecosystem</a>. Two findings from the inventory changed the design: <b>there is no board application</b>, so <a href="../packs/insurance-ecosystem/interface.html">the room</a> is a vault app of five cards; and <b>the platform fails open when a hook times out</b>, so <a href="../packs/insurance-ecosystem/decision-points.html">the git hooks refuse and the Claude hooks instrument</a>. Question nine settled provisionally (<code>mandate</code> is the narrow thing; August governs). <b>Build-order step 1 is built and run</b>: <a href="../packs/insurance-ecosystem/first-increment.html">a 400 KB commit refused by git, the eleventh commit of the day recorded as a draw, a push outside the mandate refused</a>, plus a requested draw decided and drawn via the decision and exhaustion at the fifth reading &mdash; with git's own output. <b>Then the pack published itself under its own hook</b>, and the ledger shows what that cost: two commits drawn, two requested and approved under the approver's hat (the relaxation), and two refused as exclusions &mdash; <b>the wiring sources at 310,858 B, over the cap by 3,658 B because a one-line change to a large generator costs the whole file, and the badge rewrite</b>. The rewrite is the last one: <code>chrome.py</code> now writes the version into <code>assets/version.js</code> and the badge is filled at load time, so a release ships <code>version.txt</code>, <code>version.js</code>, <code>llms.txt</code>, <code>index.md</code> and what actually changed. The release itself needed one acceptance and one override, both the project lead's, and both are on the ledgers.</td>
+    </tr>
     <tr>
 <td class="vnum">v0.1.65</td>
 <td class="vdate">2 Sep 2026</td>
@@ -793,7 +800,7 @@ chapter 15 records as fixed here.</td>
     <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.65</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html" data-site-version>release history</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The bench</h4>
@@ -847,6 +854,7 @@ chapter 15 records as fixed here.</td>
     <a href="../documents/index.html">The documents</a>
     <a href="../packs/registry-mvp/index.html">The registry MVP pack</a>
     <a href="../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
+    <a href="../packs/insurance-ecosystem/index.html">The Insurance Ecosystem pack</a>
     <a href="../packs/map-your-case/index.html">The Map Your Case pack</a>
     <a href="../about/participant.html">Where we lose</a>
   </div>

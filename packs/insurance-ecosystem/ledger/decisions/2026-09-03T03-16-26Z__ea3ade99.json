@@ -1,0 +1,10 @@
+{
+ "at": "2026-09-03T03:16:26+00:00",
+ "by": "the project lead",
+ "decision": "accept",
+ "id": "2026-09-03T03-16-26Z__ea3ade99",
+ "note": "the project lead, 3 Sep 2026, in chat: 'Yes please push these and I accept those exclusions' \u2014 the same acceptance as 7b050945, re-recorded because the reading moved from 4,461,039 B to 4,511,911 B when the operator added the IE-C4 fix and its correction to the commit; an acceptance is of a reading, and nothing is changed after it now",
+ "request": "2026-09-03T03-16-00Z__8c7fcd4f",
+ "test": false,
+ "type": "decision/v1"
+}

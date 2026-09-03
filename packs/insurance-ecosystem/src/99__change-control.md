@@ -97,6 +97,11 @@ A claim, once published, is not edited. If it is wrong or overtaken, an entry he
 **Change:** none to the ledger — files are only ever added. The correction is this entry, and document 09 carries it.
 **Status:** recorded.
 
+### IE-C4 — The ledger's own files are never weighed
+**Found:** the release commit of 3 September. The escalation for the 4,461,039 B rewrite was accepted, the decision file was staged into the same commit, and the retry read 4,462,511 B — larger than the accepted amount by the size of the decision and the escalation themselves — so it was refused again and wrote a second escalation (`2026-09-03T03-15-03Z__76196baf`, suspended with a note).
+**Change:** `staged_bytes` skips every path under `ledger/`. A commit's claim, request and decision are the paperwork of the reading, not part of it.
+**Status:** done; the second escalation stands suspended, and this entry is the correction.
+
 ### IE-C3 — The dry run said *has been written* about files it did not write
 **Found:** `check --dry-run` printed the request and escalation paths as written. Nothing is written in a dry run.
 **Change:** the wording is now *would be written* under `--dry-run`.
