@@ -58,6 +58,14 @@ def main():
     else: print("no --since, no --last, and no .githooks/pre-commit in history: nothing to reconcile"); return 0
     log = git("log", "--format=%H|%cI|%s", "--no-merges", *rng).splitlines()
     commits = [l.split("|", 2) for l in log if l.strip()][::-1]
+    # A commit made before the hook existed carries no claim and is not a catch: it predates the policy.
+    # Whatever the range, only commits after the installing commit are judged (IE-C9).
+    install = hook_install_commit()
+    if install:
+        policed = set(git("rev-list", f"{install}..HEAD").split())
+        before = [c for c in commits if c[0] not in policed]
+        commits = [c for c in commits if c[0] in policed]
+        if before: print(f"  {len(before)} commit(s) in range predate the hook ({install[:12]}) and are not judged: before the policy is not a bypass")
     already = set()
     for r in P.read_dir(a.ledger, "reconcile"): already.update(r.get("checked", []))
     events = [e for e in P.read_dir(a.ledger, "events") if not e.get("test")]

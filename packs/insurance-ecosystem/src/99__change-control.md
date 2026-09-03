@@ -109,6 +109,11 @@ A claim, once published, is not edited. If it is wrong or overtaken, an entry he
 **Change:** none to the ledger — files are only ever added. The correction is this entry, and document 09 carries it.
 **Status:** recorded.
 
+### IE-C9 — A commit that predates the hook is not a bypass
+**Found:** the first run of the level-four report on the pushed release: *checked 14, catches 8*. The workflow asks for the last twenty-five commits, the tool judged the six made before `.githooks/pre-commit` existed, and every one of them, having no claim, was a catch; two were also over the exclusion. Locally, the default range starts at the installing commit and found none.
+**Change:** whatever the range asked for, `reconcile.py` judges only commits after the installing commit and says how many it left unjudged. Before the policy is not a bypass.
+**Status:** done. The live report on `dev` shows the eight until the next release carries this.
+
 ### IE-C8 — The push record precedes the push, through a queue
 **Found:** IE9 and IE-C6: a push check runs after the commit it measures exists, so its entry was the one uncommitted file after every push, forever.
 **Change:** `check.py` writes to `ledger.queue.jsonl` and the pack's `pre-push` point writes to `ledger/queue/`, both ignored by git; the next commit's `pre-commit` hook (and `policy.py drain`) moves them into the tracked ledgers and stages them, so the commit carries the previous pushes' records and the tree is clean after a push. Balances read the queue too, so nothing is missed in between.
