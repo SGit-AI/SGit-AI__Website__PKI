@@ -9,7 +9,7 @@
     "settled": "The level scale is 1–5 (GM-D54, the project lead, 31 Aug). Coarse on purpose: currency implies loss data nobody has, 1–100 implies resolution the inputs cannot support, and a band is arguable where a decimal is not."
   },
   "memos": {
-    "expected": 12,
+    "expected": 13,
     "note": "Recorded as eight; the project lead added two more, so it is ten — now all processed. The count on the hub is a CLAIM, so it was corrected here rather than quietly adjusted, and the build gate that refuses more processed memos than the manifest expects fired on the ninth, which is what it is for. Each memo is filed verbatim as a brief before it is read; the doctrine says which memo it came from, and where a memo and a document disagree the memo wins. The pivot briefing (—) precedes the series and is not counted in it. All eleven readings were audited against their transcripts at v0.33.82; the corrections are recorded in the documents themselves rather than appended, and as GM-D81 to GM-D85. The series was called complete at ten and reopened by memo 11 on 1 September — the second time it has been declared finished and grown. The v0.33.82 gate fired on doctrine 10's own 'the last of the series' label when memo 11 was filed; a document should not assert the future. Memo 12 on 2 September asked for something operational and got it: the push policy, the first MVP, run against this estate's own releases before its doctrine was written.",
     "items": [
       {
@@ -115,6 +115,14 @@
         "brief": "v0.33.84__strategy-brief__the-claim-is-the-draw-money-as-a-metric-and-a-push-budget-claude-can-run-today.md",
         "page": "../documents/the-claim-is-the-draw.html",
         "gave": "The money in a policy is a metric for what the claim buys, so pay the claim in the resource itself: a draw on the pool IS the claim, paid in bytes or tokens, settled by the check in milliseconds because trigger, cover and payment are fields of one document. A worked policy with all four excess-of-loss parts for two resources, a pool shared per repository so pooled fate is deliberate, and 'let Claude manage it' read honestly as a SETTING. And the first MVP: insurance/push-policy, whose first finding is that twelve of twelve site releases would have been refused, because the release stamps the version into every page."
+      },
+      {
+        "n": 13,
+        "state": "processed",
+        "title": "The enforcement ladder: six levels, a measured assurance, and a catch above the hook is an incident",
+        "brief": "v0.33.85__strategy-brief__the-enforcement-ladder-six-levels-a-measured-assurance-and-a-catch-above-the-hook-is-an-incident.md",
+        "page": "../documents/the-enforcement-ladder.html",
+        "gave": "One policy walked up every place it can be enforced: nothing, a prompt, a skill, a git hook, the destination, out-of-band verification. The levels are the tier test refined, with detection as a tier the test had not named. Assurance per level is measured from the ledger's catch rate on ordinary work, never asserted. A catch above the hook is an incident rather than a volume event: no draw, a different policy, escalation, a candidate for suspension. And level five, replaying git against the ledger, is the control that turns a setting into a detector; built the same day and run over the eleven commits since the hook: no catch."
       }
     ]
   },
@@ -209,6 +217,13 @@
       "title": "The claim is the draw: money as a metric, and the first MVP",
       "from": "memo 12",
       "one_line": "A draw on the pool is a claim paid in the resource and settled by the check itself; the pool is shared per repository; the skill is a setting and says so; and the first MVP's first finding is about this estate."
+    },
+    {
+      "file": "13__the-enforcement-ladder.md",
+      "slug": "the-enforcement-ladder",
+      "title": "The enforcement ladder: six levels, a measured assurance, and a catch above the hook is an incident",
+      "from": "memo 13",
+      "one_line": "Six levels of enforcement on the three tiers, with detection as a fourth; assurance per level measured from the ledger; a catch above the hook is an incident; and reconciliation against git as the maintainer's job, built and run the same day."
     }
   ],
   "mvps": [
