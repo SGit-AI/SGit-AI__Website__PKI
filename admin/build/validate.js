@@ -45,11 +45,24 @@ const VERSION = fs.readFileSync(path.join(ROOT, 'admin/build/version.txt'), 'utf
 if (!/^v\d+\.\d+\.\d+$/.test(VERSION)) {
   errors.push(`version.txt does not carry a vX.Y.Z version: "${VERSION}"`);
 }
+// Since v0.1.66 the badge is filled at load time from assets/version.js — the ONE
+// place a release stamps the version into something pages load — so a release no
+// longer rewrites every page. A page may still carry a literal badge (pages built
+// before the change, until they are next touched); if it does, the literal must
+// agree. A page that carries none must load version.js, or its badge is empty forever.
+const VJS = path.join(ROOT, 'assets/version.js');
+if (!fs.existsSync(VJS) || !fs.readFileSync(VJS, 'utf8').includes(`"${VERSION}"`)) {
+  errors.push(`assets/version.js does not carry ${VERSION} (run admin/build/chrome.py)`);
+}
 for (const f of htmlFiles) {
   const t = fs.readFileSync(f, 'utf8');
+  if (!/<nav class="site">/.test(t)) continue;               // no chrome: a vault app, a fixture page
   const badges = [...t.matchAll(/class="ver"[^>]*>(v\d+\.\d+\.\d+)</g)].map(m => m[1]);
   for (const b of badges) if (b !== VERSION) {
     errors.push(`${path.relative(ROOT, f)}: version badge ${b} != ${VERSION}`);
+  }
+  if (!badges.length && !/assets\/version\.js/.test(t)) {
+    errors.push(`${path.relative(ROOT, f)}: no version badge and no assets/version.js — the badge would be empty forever`);
   }
 }
 for (const extra of ['llms.txt', 'index.md']) {

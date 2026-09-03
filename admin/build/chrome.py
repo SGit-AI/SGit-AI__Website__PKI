@@ -110,6 +110,7 @@ NAV = [
         ("Dev packs", "packs/index.html"),
         ("The registry MVP pack", "packs/registry-mvp/index.html"),
         ("The Grant &amp; Mandate pack", "packs/grant-and-mandate/index.html"),
+        ("The Insurance Ecosystem pack", "packs/insurance-ecosystem/index.html"),
         ("The Map Your Case pack", "packs/map-your-case/index.html"),
     ], ("documents/", "packs/", "data/")),
     ("Site", "admin/comms.html", [
@@ -168,6 +169,7 @@ FOOTER = [
         ("The documents", "documents/index.html"),
         ("The registry MVP pack", "packs/registry-mvp/index.html"),
         ("The Grant &amp; Mandate pack", "packs/grant-and-mandate/index.html"),
+        ("The Insurance Ecosystem pack", "packs/insurance-ecosystem/index.html"),
         ("The Map Your Case pack", "packs/map-your-case/index.html"),
         ("Where we lose", "about/participant.html"),
     ]),
@@ -210,10 +212,11 @@ def nav_html(rel, up):
             f'  <a class="brand" href="{up}index.html">pki<span>.sgit.ai</span></a>\n'
             f'  <a class="parent" href="{PARENT}" title="{PARENT_TITLE}">↗ part of <b>sgit.ai</b></a>\n'
             f'  <span class="stage-pill">mvp draft</span>\n'
-            f'  <a class="ver" href="{up}admin/versions.html" title="Site release history">{VERSION}</a>\n'
+            f'  <a class="ver" href="{up}admin/versions.html" title="Site release history" data-site-version></a>\n'
             f'  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>\n'
             f'  <div class="nav-items">\n{rows}\n  </div>\n'
             f'  <a class="gh" href="{GH}">★ GitHub</a>\n'
+            f'  <script src="{up}assets/version.js" defer></script>\n'
             f'  <script src="{up}assets/nav.js" defer></script>\n'
             f'</div></nav>')
 
@@ -233,7 +236,7 @@ def footer_html(rel, up):
             f'    <p>{BLURB}</p>\n'
             f'    <p class="netline">{NETLINE}</p>\n'
             f'    <p class="partnote">{partnote}</p>\n'
-            f'    <p class="verline">site <a href="{up}admin/versions.html">{VERSION}</a> · '
+            f'    <p class="verline">site <a href="{up}admin/versions.html" data-site-version>release history</a> · '
             f'<a href="{up}admin/index.html">engineering</a>{md_twin}</p>\n'
             f'  </div>\n{cols}\n</div></footer>')
 
@@ -241,8 +244,21 @@ def footer_html(rel, up):
 def stamp_text_twins():
     """The version also appears in llms.txt and index.md, and validate.js enforces
     that it agrees. Nothing used to SET it there, so it was hand-edited every
-    release — and hand-editing it silently missed twice. Own it here instead."""
+    release — and hand-editing it silently missed twice. Own it here instead.
+
+    And since v0.1.66 the version appears in ONE more place and in no page at all:
+    assets/version.js, which every page loads and nav.js reads to fill the badge
+    and the footer at load time. Before this, the badge was stamped into every
+    page, so a one-line release rewrote ~200 files and the estate's own push
+    policy refused 62 of its 67 releases (insurance/push-policy/case-study.md).
+    Now a release ships version.txt, version.js, llms.txt, index.md and whatever
+    actually changed."""
     out = []
+    vjs = ROOT / "assets/version.js"
+    want = f'window.SITE_VERSION = "{VERSION}";\n'
+    if not vjs.exists() or vjs.read_text() != want:
+        vjs.write_text(want)
+        out.append("assets/version.js")
     llms = ROOT / "llms.txt"
     t = llms.read_text()
     t2, n = re.subn(r"Site version: v\d+\.\d+\.\d+", f"Site version: {VERSION}", t, count=1)

@@ -5,6 +5,15 @@
    group label is a link to that section's own page. */
 (function () {
   'use strict';
+  /* The version badge and the footer's version link are filled here from assets/version.js
+     (window.SITE_VERSION), the one place a release stamps it. Without JavaScript the badge is
+     empty (and hidden by CSS) and the footer link reads "release history" — nothing is wrong,
+     nothing is stale. Before v0.1.66 the version was stamped into every page, and a one-line
+     release rewrote ~200 files. */
+  if (window.SITE_VERSION) {
+    var els = document.querySelectorAll('[data-site-version]');
+    for (var i = 0; i < els.length; i++) els[i].textContent = window.SITE_VERSION;
+  }
   var nav = document.querySelector('nav.site');
   if (!nav) return;
   var toggle = nav.querySelector('.nav-toggle');

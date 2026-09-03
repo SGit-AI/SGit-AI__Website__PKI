@@ -301,3 +301,6 @@ pre.mermaid{background:var(--panel);border:1px solid var(--line);border-radius:1
   padding:.75rem 1.3rem;font-weight:700;font-size:.9rem}
 .dlbtn span{font-family:var(--mono);font-size:.68rem;font-weight:400;opacity:.85;letter-spacing:.04em}
 .dlbtn:hover{background:var(--accent-dk);border-color:var(--accent-dk);text-decoration:none}
+
+/* v0.1.66: the version badge is filled at load time from assets/version.js; empty without JS */
+nav.site a.ver:empty{display:none}
