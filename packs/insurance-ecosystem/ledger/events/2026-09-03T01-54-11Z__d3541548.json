@@ -1,0 +1,26 @@
+{
+ "acceptor": null,
+ "amount": 1,
+ "at": "2026-09-03T01:54:11+00:00",
+ "band": "own",
+ "day": "2026-09-03",
+ "drawn": 0,
+ "id": "2026-09-03T01-54-11Z__d3541548",
+ "point": "pre-push",
+ "policy": "git-pilot-2026-09-03",
+ "policyholder": "the pki.sgit.ai estate",
+ "pool_left": 18,
+ "reason": "pushes 1 of 10 in the normal band",
+ "ref": {
+  "blobs": 22,
+  "branch": "claude/ie-test",
+  "head": "99e73bbc2704",
+  "remote": "test"
+ },
+ "rules_version": "insurance-ecosystem/draft-1",
+ "subject": "session:844f4a2f",
+ "test": true,
+ "type": "event/v1",
+ "unit": "pushes",
+ "verdict": "normal"
+}

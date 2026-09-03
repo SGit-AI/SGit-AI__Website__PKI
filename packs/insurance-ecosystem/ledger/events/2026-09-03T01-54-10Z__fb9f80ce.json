@@ -1,0 +1,23 @@
+{
+ "acceptor": null,
+ "amount": 1,
+ "at": "2026-09-03T01:54:10+00:00",
+ "day": "2026-09-03",
+ "drawn": 0,
+ "id": "2026-09-03T01-54-10Z__fb9f80ce",
+ "point": "pre-commit",
+ "policy": "git-pilot-2026-09-03",
+ "policyholder": "the pki.sgit.ai estate",
+ "pool_left": 18,
+ "reason": "commits 5 of 10 in the normal band",
+ "ref": {
+  "blobs": 1,
+  "branch": "claude/registry-mvp-brief-hpbap8"
+ },
+ "rules_version": "insurance-ecosystem/draft-1",
+ "subject": "session:844f4a2f",
+ "test": true,
+ "type": "event/v1",
+ "unit": "commits",
+ "verdict": "normal"
+}

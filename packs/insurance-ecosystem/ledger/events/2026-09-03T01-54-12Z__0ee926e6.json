@@ -1,0 +1,21 @@
+{
+ "acceptor": null,
+ "amount": 200000,
+ "at": "2026-09-03T01:54:12+00:00",
+ "day": "2026-09-03",
+ "drawn": 0,
+ "id": "2026-09-03T01-54-12Z__0ee926e6",
+ "point": "manual",
+ "policy": "git-pilot-2026-09-03",
+ "policyholder": "the pki.sgit.ai estate",
+ "pool_left": 143718,
+ "reason": "148,800 B over normal but only 143,718 left in today's pool of 943,718 (reserve held back) \u2014 the pool is exhausted for every session on this repository today",
+ "ref": {},
+ "rules_version": "insurance-ecosystem/draft-1",
+ "subject": "session:844f4a2f",
+ "test": true,
+ "type": "event/v1",
+ "unit": "bytes_per_commit",
+ "verdict": "refused",
+ "zone": "outside"
+}

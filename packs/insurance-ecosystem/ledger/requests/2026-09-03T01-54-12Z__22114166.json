@@ -1,0 +1,14 @@
+{
+ "amount": 230000,
+ "at": "2026-09-03T01:54:12+00:00",
+ "excess": 178800,
+ "id": "2026-09-03T01-54-12Z__22114166",
+ "kind": "draw",
+ "policy": "git-pilot-2026-09-03",
+ "status": "waiting",
+ "subject": "session:844f4a2f",
+ "test": true,
+ "type": "request/v1",
+ "unit": "bytes_per_commit",
+ "why": "the generated pages are one natural unit (left waiting so the room shows one)"
+}

@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# pre-commit — the insurance ecosystem's enforcement point for bytes_per_commit and commits.
+#
+# Git runs this before the commit object exists; it refuses by exit code, from outside the agent's turn.
+# The policy it evaluates is packs/insurance-ecosystem/policies/<subject>/current.json, read at run time,
+# so the hook and the policy cannot drift apart. The event it writes is staged into the same commit,
+# so a commit carries its own claim (IE-D12).
+#
+# Install:  cp packs/insurance-ecosystem/hooks/pre-commit .githooks/ && git config core.hooksPath .githooks
+# Bypass:   git commit --no-verify        <- which is why this is tier SETTING, and the banner says so
+#
+# DEFAULT-DENY on its own dependencies: no python3, no policy, an invalid or expired policy → refuse.
+set -uo pipefail
+ROOT="$(git rev-parse --show-toplevel)"
+TOOL="$ROOT/packs/insurance-ecosystem/tools/policy.py"
+if ! command -v python3 >/dev/null 2>&1; then
+  echo "  ✗ COMMIT REFUSED: python3 is required to evaluate the policy and is not present (default-deny)." >&2; exit 1
+fi
+[ -f "$TOOL" ] || { echo "  ✗ COMMIT REFUSED: $TOOL is missing (default-deny)." >&2; exit 1; }
+exec python3 "$TOOL" check --point pre-commit ${IE_LEDGER:+--ledger "$IE_LEDGER"} ${IE_POLICIES:+--policies "$IE_POLICIES"} ${IE_TEST:+--test}

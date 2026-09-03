@@ -1,0 +1,30 @@
+{
+  "_what_this_is": "The token policy: one unit, four counters, no bands. Instrumentation only, because nobody has measured a working day yet and a band typed before the meter has run is the mistake this estate exists to stop. tools/usage.py appends a tokens event per session turn; the issuer writes bands once the ledger has a week.",
+  "type": "policy/v1",
+  "id": "tokens-measured-2026-09-03",
+  "rules_version": "insurance-ecosystem/draft-1",
+  "issuer": { "who": "the project lead", "basis": "the 26 August specification's third finding, re-measured 3 September", "record": null },
+  "policyholder": { "who": "the pki.sgit.ai estate", "note": "the account that pays for the sessions" },
+  "subject": { "who": "any Claude Code session working on this estate", "mandate": null, "mandate_sha256": null },
+  "interval": { "from": "2026-09-03", "until": "2026-12-31", "reinstatement": "day", "timezone": "UTC" },
+  "draw_mode": { "default": "recorded", "requested_above": {}, "acceptor": "policyholder" },
+  "units": [
+    {
+      "unit": "tokens", "kind": "measure",
+      "meter": "the transcript JSONL at transcript_path: message.usage on every assistant line, four counters summed by tools/usage.py — input_tokens, cache_creation_input_tokens, cache_read_input_tokens, output_tokens. Undocumented; verified on 1,850 lines, 3 September 2026",
+      "counters": ["input_tokens", "cache_creation_input_tokens", "cache_read_input_tokens", "output_tokens"],
+      "bands": null,
+      "note": "four counters need four prices, and cache reads grow with conversation length rather than with work: a token policy measures duration at least as much as activity, and the issuer decides whether that is intended before any band is written"
+    }
+  ],
+  "reserve": { "share": 0.0, "released_by": null, "note": "no pool, no reserve" },
+  "rating": { "period": "week", "owner": "the issuer", "rule": "none until bands exist" },
+  "rate_table": { "owner": "the issuer", "published": false },
+  "supersedes": null,
+  "does_not_prove": [
+    "That the transcript is the right meter. It is the only one this environment has; a hook receives no usage fields of its own.",
+    "That the four counters mean the same across vendors, surfaces or dates. One vendor, one surface, one week.",
+    "Anything about bands. There are none; the first week of events is what they will be fitted from."
+  ],
+  "sig": null
+}

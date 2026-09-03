@@ -1,0 +1,10 @@
+{
+ "at": "2026-09-03T01:54:11+00:00",
+ "by": "the project lead (acceptance run)",
+ "decision": "approved",
+ "id": "2026-09-03T01-54-11Z__c270221f",
+ "note": "once; an acceptance run, the same session under the approver's hat",
+ "request": "2026-09-03T01-54-11Z__a7040934",
+ "test": true,
+ "type": "decision/v1"
+}

@@ -1,0 +1,58 @@
+{
+  "_what_this_is": "The git pilot policy: five units the estate already meters, from memo 12 and the signed mandate. Document 03 of the insurance-ecosystem pack is the schema; tools/policy.py evaluates this file and nothing else. Numbers are the project lead's placeholders until the ledger re-fits them (GM-D101).",
+  "type": "policy/v1",
+  "id": "git-pilot-2026-09-03",
+  "rules_version": "insurance-ecosystem/draft-1",
+  "issuer": { "who": "the project lead", "basis": "memo 12, 2 September 2026, and the mandate of 26 August", "record": null },
+  "policyholder": { "who": "the pki.sgit.ai estate", "note": "the owner of this repository, where the pool lives; every draw names it as acceptor; experience rating lands here" },
+  "subject": {
+    "who": "any session committing to github.com/SGit-AI/SGit-AI__Website__PKI",
+    "mandate": "packs/grant-and-mandate/mandates/current.json",
+    "mandate_sha256": "05762fa3371cecbb3a641dde9710ea93013f78cb1af7eba91a63b3a7f4fa5e25"
+  },
+  "interval": { "from": "2026-09-03", "until": "2026-12-31", "reinstatement": "day", "timezone": "UTC" },
+  "draw_mode": { "default": "recorded", "requested_above": { "bytes_per_commit": 204800 }, "acceptor": "policyholder" },
+  "units": [
+    {
+      "unit": "bytes_per_commit", "kind": "volume",
+      "meter": "git, at pre-commit: the uncompressed size of the blobs the index adds or changes versus HEAD (git diff --cached --raw, then cat-file sizes). A floor, never a bill",
+      "normal": 51200, "per_occurrence": 307200, "pool": 1048576, "pool_scope": "per repository, per day",
+      "exclusion": { "above": "per_occurrence", "reason": "bytes committed into history are a stock, not a rate: irreversible without rewriting history others hold, and paid by every clone forever. The vendor's published maximum file size is 1 MB recommended and 100 MB hard; this cap sits well inside it. Not the top of the buffer — the boundary of insurability" }
+    },
+    {
+      "unit": "commits", "kind": "count",
+      "meter": "the ledger: this repository's non-refused commit events today, counted by the evaluator (each commit appends one)",
+      "normal": 10, "per_occurrence": 1, "pool": 20, "pool_scope": "per repository, per day",
+      "note": "memo 12 says five to ten a day; ten is taken, and the pool is 2x"
+    },
+    {
+      "unit": "bytes_per_push", "kind": "volume",
+      "meter": "git, at pre-push: the uncompressed size of objects reachable from the pushed sha and not from the remote ref (rev-list --objects, cat-file sizes). The existing push-policy MVP's measurement, unchanged",
+      "normal": 51200, "per_occurrence": 307200, "pool": 1048576, "pool_scope": "per repository, per day",
+      "exclusion": { "above": "per_occurrence", "reason": "the same stock as bytes_per_commit, at the point where it leaves the machine" }
+    },
+    {
+      "unit": "pushes", "kind": "count",
+      "meter": "the ledger: this repository's non-refused push events today, per branch kind",
+      "bands": { "own": { "normal": 10, "pool": 20 }, "dev": { "normal": 3, "pool": 10 } },
+      "per_occurrence": 1, "pool_scope": "per repository, per day, per branch kind",
+      "note": "the push-policy MVP's bands: own 10/20, dev 3/10"
+    },
+    {
+      "unit": "branch", "kind": "reach",
+      "meter": "git, at pre-push: the ref being pushed, against the allow-list of the signed mandate (mandate.py pre-push)",
+      "exclusion": { "above": "the mandate's allow-list", "reason": "a branch is reach, not volume: the mandate governs it and the pool has nothing to say (GM-D87). A push outside the mandate is refused before any byte is counted" }
+    }
+  ],
+  "reserve": { "share": 0.1, "released_by": "the issuer, by a decision on a request of kind 'reserve'", "note": "the catastrophe layer: no verdict may draw on it; it is subtracted from every pool before the arithmetic" },
+  "rating": { "period": "week", "owner": "the issuer", "rule": "draw frequency is the metric. A pool drawn on most days of the period has the wrong normal band; the response is to raise the band and shrink the pool, never to enlarge the pool" },
+  "rate_table": { "owner": "the issuer", "published": false, "note": "excluded from the pack; the evaluator never converts between units" },
+  "supersedes": null,
+  "does_not_prove": [
+    "That these numbers fit this repository. They are memo 12's; the push MVP's replay of history says the estate breaches them on every release because the release rewrites every page, and the fix is in the release.",
+    "That the hooks are a boundary. They are a setting: the agent can edit them, unset core.hooksPath, or --no-verify. The banner says so.",
+    "That bytes measured in the index or before a push are the cost. They are a floor on what is asked.",
+    "That one policyholder is a pool. Pooling across policyholders and the correlation card need a second one."
+  ],
+  "sig": null
+}

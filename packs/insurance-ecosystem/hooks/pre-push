@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# pre-push — reach first, then volume.
+#
+#   1. the branch constraint: packs/grant-and-mandate/tools/mandate.py pre-push  (the signed mandate; refuses a ref outside its allow-list)
+#   2. the volume policy:     packs/insurance-ecosystem/tools/policy.py check --point pre-push  (bytes_per_push and pushes, per branch kind)
+#
+# Git runs this with <remote> <url> as arguments and one "<local ref> <local sha> <remote ref> <remote sha>" per line on stdin.
+# Install:  cp packs/insurance-ecosystem/hooks/pre-push .githooks/ && git config core.hooksPath .githooks
+# Bypass:   git push --no-verify        <- tier SETTING; the banner says so
+set -uo pipefail
+ROOT="$(git rev-parse --show-toplevel)"
+MANDATE="$ROOT/packs/grant-and-mandate/tools/mandate.py"
+POLICY="$ROOT/packs/insurance-ecosystem/tools/policy.py"
+remote="${1:-origin}"; url="${2:-}"
+input="$(cat)"
+command -v python3 >/dev/null 2>&1 || { echo "  ✗ PUSH REFUSED: python3 is required (default-deny)." >&2; exit 1; }
+if [ -f "$MANDATE" ]; then
+  printf '%s\n' "$input" | python3 "$MANDATE" pre-push "$remote" "$url" || exit 1
+else
+  echo "  ✗ PUSH REFUSED: the mandate tool is missing at $MANDATE (default-deny)." >&2; exit 1
+fi
+while read -r lref lsha rref rsha; do
+  [ -z "${lref:-}" ] && continue
+  branch="${rref#refs/heads/}"
+  python3 "$POLICY" check --point pre-push --branch "$branch" --remote "$remote" --local-sha "$lsha" --remote-sha "$rsha" \
+    ${IE_LEDGER:+--ledger "$IE_LEDGER"} ${IE_POLICIES:+--policies "$IE_POLICIES"} ${IE_TEST:+--test} || exit 1
+done <<< "$input"
+exit 0

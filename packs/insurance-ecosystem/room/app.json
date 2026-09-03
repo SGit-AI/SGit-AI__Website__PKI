@@ -1,0 +1,8 @@
+{
+  "entry": "index.html",
+  "present": true,
+  "auto_open": true,
+  "title": "The room — insurance for agents, pki.sgit.ai",
+  "hud": { "mode": "minimal" },
+  "permissions": { "fs": { "read": true } }
+}

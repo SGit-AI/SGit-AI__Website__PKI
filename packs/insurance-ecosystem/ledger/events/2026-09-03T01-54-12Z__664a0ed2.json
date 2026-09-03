@@ -1,0 +1,20 @@
+{
+ "acceptor": "the pki.sgit.ai estate",
+ "amount": 200000,
+ "at": "2026-09-03T01:54:12+00:00",
+ "day": "2026-09-03",
+ "drawn": 148800,
+ "id": "2026-09-03T01-54-12Z__664a0ed2",
+ "point": "manual",
+ "policy": "git-pilot-2026-09-03",
+ "policyholder": "the pki.sgit.ai estate",
+ "pool_left": 143718,
+ "reason": "148,800 B drawn from today's pool (143,718 B left)",
+ "ref": {},
+ "rules_version": "insurance-ecosystem/draft-1",
+ "subject": "session:844f4a2f",
+ "test": true,
+ "type": "event/v1",
+ "unit": "bytes_per_commit",
+ "verdict": "drawn"
+}
