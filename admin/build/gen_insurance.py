@@ -105,6 +105,12 @@ def check(m):
             errs.append(f"MVP '{x['id']}' has no README.md — an MVP without a document saying what it does not prove is the theatre the rule forbids")
         elif not re.search(r"^##+ .*does not prove", rd.read_text(encoding="utf-8"), re.I | re.M):
             errs.append(f"insurance/{x['id']}/README.md has no 'What this does not prove' section")
+        for d in x.get("docs", []):
+            dp = INS / x["id"] / d["file"]
+            if not dp.exists():
+                errs.append(f"MVP '{x['id']}' declares {d['file']} and it does not exist")
+            elif not re.search(r"^##+ .*(does not prove|would \*not\* have caught)", dp.read_text(encoding="utf-8"), re.I | re.M):
+                errs.append(f"insurance/{x['id']}/{d['file']} has no section saying what it does not prove")
 
     # Memo 0 is the pivot briefing that precedes the series; only n >= 1 counts
     # toward the eight, because the hub's counter is a claim and it must be true.
@@ -309,19 +315,20 @@ JavaScript &mdash; <a href="src/{esc(d['file'])}">open the raw markdown</a>.</p>
                    '<script src="../assets/mdreader.js" defer></script>\n')
 
 
-def build_mvp_page(x):
+def build_mvp_page(x, src="README.md", title=None):
     body = f"""<main>
-<div class="mdreader" data-src="README.md">
-<noscript><p>This page renders <a href="README.md">README.md</a> with JavaScript &mdash;
-<a href="README.md">open the raw markdown</a>.</p></noscript></div>
+<div class="mdreader" data-src="{esc(src)}">
+<noscript><p>This page renders <a href="{esc(src)}">{esc(src)}</a> with JavaScript &mdash;
+<a href="{esc(src)}">open the raw markdown</a>.</p></noscript></div>
 
 <div class="pagenav">
   <a href="../index.html">&larr; Insurance</a>
-  <a href="README.md">The markdown &rarr;</a>
+  <a href="{esc(src)}">The markdown &rarr;</a>
 </div>
 </main>"""
-    return page_shell(f"{esc(x['title'])} &middot; pki.sgit.ai", esc(x.get("one_line", "")),
-                      f"insurance/{x['id']}/index.html", 2, body,
+    out = "index.html" if src == "README.md" else src.rsplit(".", 1)[0] + ".html"
+    return page_shell(f"{esc(title or x['title'])} &middot; pki.sgit.ai", esc(x.get("one_line", "")),
+                      f"insurance/{x['id']}/{out}", 2, body,
                       extra_head='<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>\n'
                                  '<script src="../../assets/mdreader.js" defer></script>\n')
 
@@ -441,6 +448,8 @@ def main():
     (INS / "llms.txt").write_text(build_llms(m), encoding="utf-8")
     for x in m["mvps"]:
         (INS / x["id"] / "index.html").write_text(build_mvp_page(x), encoding="utf-8")
+        for d in x.get("docs", []):
+            (INS / x["id"] / f"{d['slug']}.html").write_text(build_mvp_page(x, d["file"], d["title"]), encoding="utf-8")
     for d in m["doctrine"]:
         (INS / f"{d['slug']}.html").write_text(build_doc(d, m), encoding="utf-8")
 

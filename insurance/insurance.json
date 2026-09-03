@@ -216,7 +216,14 @@
       "id": "push-policy",
       "title": "The push policy",
       "state": "built · a setting, not a boundary",
-      "one_line": "A budget on pushes per day and bytes per push with a shared daily pool: a policy document, a checker that measures what git would send, an append-only ledger, a hook shipped and not installed, and a skill that makes Claude the enforcement point. First finding: twelve of twelve site releases would have been refused."
+      "one_line": "A budget on pushes per day and bytes per push with a shared daily pool: a policy document, a checker that measures what git would send, an append-only ledger, a hook shipped and not installed, and a skill that makes Claude the enforcement point. First finding: twelve of twelve site releases would have been refused.",
+      "docs": [
+        {
+          "file": "case-study.md",
+          "slug": "case-study",
+          "title": "Case study: the release that shipped 198 unchanged pages"
+        }
+      ]
     }
   ],
   "does_not_prove": [
@@ -243,6 +250,7 @@
     "That the push policy is a boundary. It is the first MVP and it is a SETTING: the check runs where the agent runs, against a ledger the agent can edit. The same policy as a required CI check would be a boundary, and that has not been built.",
     "That agent consumption actually correlates. Doctrine 11 argues it would and names plausible shared causes, but it is a hypothesis, and it is the one the data would settle first.",
     "That consumption loss data transfers to capability loss data. A pool supplies loss events about SPEND. Nothing here produces a single data point about what a breach costs, which is what a stage-2 premium would need.",
-    "That the policy's numbers fit this repository. The only fit so far, the checker replayed over twelve releases, refused all twelve; doctrine 12 argues the estate's release mechanism is at fault rather than the numbers, and that is an argument, not a calibration from a ledger that has no live entries yet."
+    "That the policy's numbers fit this repository. The only fit so far, the checker replayed over twelve releases, refused all twelve; doctrine 12 argues the estate's release mechanism is at fault rather than the numbers, and that is an argument, not a calibration from a ledger that has no live entries yet.",
+    "That the vault cost in the case study is measured. It is arithmetic from sgit's design — content-addressed on plaintext, no delta packing across ciphertexts — applied to git's measured numbers; no vault of this site's history exists to weigh."
   ]
 }

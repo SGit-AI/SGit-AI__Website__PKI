@@ -40,6 +40,8 @@ The measurement is the uncompressed size of objects reachable from `HEAD` and no
 
 ## What it found first: this estate
 
+*The full account, with every release replayed, is the [case study](case-study.html): 62 of 67 releases would have been refused, and the first is the release that introduced the stamp.*
+
 Run against the last twelve releases on `dev` before this page was written:
 
 ```

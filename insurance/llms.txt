@@ -211,6 +211,7 @@
   - That agent consumption actually correlates. Doctrine 11 argues it would and names plausible shared causes, but it is a hypothesis, and it is the one the data would settle first.
   - That consumption loss data transfers to capability loss data. A pool supplies loss events about SPEND. Nothing here produces a single data point about what a breach costs, which is what a stage-2 premium would need.
   - That the policy's numbers fit this repository. The only fit so far, the checker replayed over twelve releases, refused all twelve; doctrine 12 argues the estate's release mechanism is at fault rather than the numbers, and that is an argument, not a calibration from a ledger that has no live entries yet.
+  - That the vault cost in the case study is measured. It is arithmetic from sgit's design — content-addressed on plaintext, no delta packing across ciphertexts — applied to git's measured numbers; no vault of this site's history exists to weigh.
 
 ## Machine surface
 

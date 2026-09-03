@@ -80,6 +80,9 @@ def main():
         replay = []
         for line in commits:
             h, when, *subj = line.split(" ", 2); subj = subj[0] if subj else ""
+            # a root commit, or the boundary of a shallow clone, has no parent to diff against
+            if subprocess.run(["git", "rev-parse", "--verify", "-q", f"{h}~1"], capture_output=True).returncode != 0:
+                print(f"  {when[:10]} skipped {'':>9}   {'':>4}        {subj[:60]}  — no parent (root commit or shallow boundary)"); continue
             nbytes, nblobs = bytes_between(f"{h}~1", h)
             day = when[:10]
             v, d = verdict(policy, replay, kind, nbytes, day)
