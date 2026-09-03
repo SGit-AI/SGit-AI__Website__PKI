@@ -97,6 +97,15 @@ A claim, once published, is not edited. If it is wrong or overtaken, an entry he
 **Change:** none to the ledger — files are only ever added. The correction is this entry, and document 09 carries it.
 **Status:** recorded.
 
+### IE-C7 — A script that pushes must check that the commit happened
+**Found:** the v0.1.67 release. The release commit came back as a requested draw and did not happen; the operator's script pushed anyway, sent nothing new to the branch (spending push 10 of 10 for 0 B) and sent the previous, non-release commit to `dev`, where it failed the same validate check. Two runbook lines: **check the commit's exit before any push**, and **never chain a `dev` push after a commit that can be refused**.
+**Status:** recorded; the runbook in document 06 is amended by this entry.
+
+### IE-C6 — The push-policy ledger is paperwork too, and it moved a reading
+**Found:** the v0.1.67 release. IE-C4 excepted the pack's `ledger/` from the meter; `insurance/push-policy/ledger.jsonl` is the other ledger in this repository, is not under that path, and gained two lines between a request and its commit, moving the reading from 244,808 B to 245,386 B and voiding the decision. The release was re-requested and re-decided at the new reading.
+**Change:** none to the meter yet. The two ledgers are one subject for N30: either the push-policy MVP's ledger folds into the pack's, or the meter excepts both. Until then the rule is IE-C5's: nothing is staged after a decision.
+**Status:** recorded.
+
 ### IE-C5 — An acceptance is of a reading, and nothing is changed after it
 **Found:** the same release commit. After the first acceptance (4,461,039 B) the operator added the IE-C4 fix and its correction to the commit, the reading moved to 4,511,911 B, and the hook refused again because a decision covers a reading only up to the amount that was accepted. The acceptance was re-recorded on the new escalation (`2026-09-03T03-16-00Z__8c7fcd4f`) in the project lead's same words, and the commit was made with nothing further added.
 **Rule:** once a person has accepted a reading, the commit is made as read. A correction found in the meantime is the next commit. The bound is deliberate: an acceptance of *the release* without an amount would cover a forty-megabyte commit as readily as a four-megabyte one.
