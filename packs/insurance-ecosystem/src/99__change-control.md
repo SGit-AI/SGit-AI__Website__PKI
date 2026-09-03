@@ -97,6 +97,11 @@ A claim, once published, is not edited. If it is wrong or overtaken, an entry he
 **Change:** none to the ledger — files are only ever added. The correction is this entry, and document 09 carries it.
 **Status:** recorded.
 
+### IE-C5 — An acceptance is of a reading, and nothing is changed after it
+**Found:** the same release commit. After the first acceptance (4,461,039 B) the operator added the IE-C4 fix and its correction to the commit, the reading moved to 4,511,911 B, and the hook refused again because a decision covers a reading only up to the amount that was accepted. The acceptance was re-recorded on the new escalation (`2026-09-03T03-16-00Z__8c7fcd4f`) in the project lead's same words, and the commit was made with nothing further added.
+**Rule:** once a person has accepted a reading, the commit is made as read. A correction found in the meantime is the next commit. The bound is deliberate: an acceptance of *the release* without an amount would cover a forty-megabyte commit as readily as a four-megabyte one.
+**Status:** recorded; no code change.
+
 ### IE-C4 — The ledger's own files are never weighed
 **Found:** the release commit of 3 September. The escalation for the 4,461,039 B rewrite was accepted, the decision file was staged into the same commit, and the retry read 4,462,511 B — larger than the accepted amount by the size of the decision and the escalation themselves — so it was refused again and wrote a second escalation (`2026-09-03T03-15-03Z__76196baf`, suspended with a note).
 **Change:** `staged_bytes` skips every path under `ledger/`. A commit's claim, request and decision are the paperwork of the reading, not part of it.
