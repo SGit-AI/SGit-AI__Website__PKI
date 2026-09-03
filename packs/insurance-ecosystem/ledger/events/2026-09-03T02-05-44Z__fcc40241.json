@@ -1,0 +1,24 @@
+{
+ "acceptor": "the pki.sgit.ai estate",
+ "amount": 254360,
+ "at": "2026-09-03T02:05:44+00:00",
+ "day": "2026-09-03",
+ "drawn": 203160,
+ "id": "2026-09-03T02-05-44Z__fcc40241",
+ "point": "pre-commit",
+ "policy": "git-pilot-2026-09-03",
+ "policyholder": "the pki.sgit.ai estate",
+ "pool_left": 579523,
+ "reason": "203,160 B drawn from today's pool (579,523 B left) \u2014 via request 2026-09-03T02-04-39Z__04375181, approved by the site agent, under the approver's hat (pilot relaxation: the project lead, 3 Sep 2026, in chat)",
+ "ref": {
+  "blobs": 6,
+  "branch": "claude/registry-mvp-brief-hpbap8"
+ },
+ "rules_version": "insurance-ecosystem/draft-1",
+ "subject": "session:844f4a2f",
+ "test": false,
+ "type": "event/v1",
+ "unit": "bytes_per_commit",
+ "verdict": "drawn",
+ "via_request": "2026-09-03T02-04-39Z__04375181"
+}

@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Brief For The pki.sgit.ai Site Agent: Specification For The Insurance Ecosystem Pack, What To Inventory Before Writing It, And The Four Findings That Are Already Established · documents · pki.sgit.ai</title>
+<meta name="description" content="Original document, readable in-page: summary, key concepts and key ideas, then the full markdown. Dev brief — the fourth of 26 August, handed over rather than read there, v0.33.62, 26 August 2026 (received 3 September). CC BY 4.0.">
+<link rel="canonical" href="https://pki.sgit.ai/documents/specification-for-the-insurance-ecosystem-pack.html">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
+  <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.65</a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../failure/index.html">The registry<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../registry/index.html">&#9679; The registry, live</a>
+      <a class="sl" href="../failure/index.html">Why they don't exist</a>
+      <a class="sl" href="../rules/index.html">The four rules</a>
+      <a class="sl" href="../mandate/index.html">Identity &amp; mandate</a>
+      <a class="sl" href="../roadmap/index.html">Build order</a>
+      <a class="sl" href="../rules/prior-art.html">Prior art</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../bootstrap/index.html">The layers<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../bootstrap/index.html">The bootstrap trap</a>
+      <a class="sl" href="../enrolment/index.html">Enrolment</a>
+      <a class="sl" href="../execution/index.html">The execution broker</a>
+      <a class="sl" href="../shipped/index.html">What already ships</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../assess/index.html">Map your case<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../assess/index.html">Map your own case</a>
+      <a class="sl" href="../assess/library.html">The library of trees</a>
+      <a class="sl" href="../packs/map-your-case/readers/index.html">Synthetic readers</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../origins/index.html">Origins<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../origins/index.html">Origins: 2026</a>
+      <a class="sl" href="../origins/review.html">The review, redacted</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../bench/index.html">The bench<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../bench/index.html">&#9679; The bench &mdash; what is built</a>
+      <a class="sl" href="../simulator/index.html">&#9679; The simulator &mdash; play a card</a>
+      <a class="sl" href="../experiments/index.html">&#9679; Experiments</a>
+      <a class="sl" href="../experiments/the-room/index.html">&mdash; the chain room</a>
+      <a class="sl" href="../experiments/the-table/index.html">&mdash; the table</a>
+      <a class="sl" href="../experiments/push-to-github/index.html">&mdash; push to GitHub</a>
+      <a class="sl" href="../experiments/the-deploy/index.html">&mdash; the deploy</a>
+      <a class="sl" href="../experiments/the-control-room/index.html">&mdash; the control room</a>
+      <a class="sl" href="../workbench/index.html">&#9679; The workbench (app)</a>
+      <a class="sl" href="../registry/index.html">The register, live</a>
+      <a class="sl" href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
+      <a class="sl" href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
+      <a class="sl" href="../assess/index.html">Map your own case</a>
+      <a class="sl" href="../book/index.html">The book (commissioned)</a>
+      <a class="sl" href="../book/brief.html">&mdash; its commissioning brief</a>
+      <a class="sl" href="../insurance-book/index.html">The insurance book</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../insurance/index.html">Insurance<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../insurance/index.html">&#9679; Insurance for agents</a>
+      <a class="sl" href="../insurance-book/index.html">&#9679; The insurance book</a>
+      <a class="sl" href="../insurance/what-this-is.html">&mdash; what this is, and the rule</a>
+      <a class="sl" href="../insurance/the-rating.html">&mdash; the rating</a>
+      <a class="sl" href="../insurance/the-ecosystem-and-the-gate.html">&mdash; the ecosystem &amp; the gate</a>
+      <a class="sl" href="../insurance/who-pays-and-the-moving-rating.html">&mdash; who pays, &amp; the moving rating</a>
+      <a class="sl" href="../insurance/why-insurance-and-what-broke-it.html">&mdash; why insurance</a>
+      <a class="sl" href="../insurance/not-in-line.html">&mdash; not in line (scale 1&ndash;5)</a>
+      <a class="sl" href="../insurance/the-broker-market.html">&mdash; the broker market</a>
+      <a class="sl" href="../insurance/the-policy-as-a-statement.html">&mdash; the policy as a statement</a>
+      <a class="sl" href="../insurance/the-world-model.html">&mdash; the world model (the MVP)</a>
+      <a class="sl" href="../insurance/make-them-insurable.html">&mdash; make them insurable</a>
+      <a class="sl" href="../insurance/the-schemas-and-the-clocks.html">&mdash; the schemas &amp; the clocks</a>
+      <a class="sl" href="../insurance/llms.txt">insurance/llms.txt</a>
+      <a class="sl" href="../documents/agent-insurance.html">The pivot briefing (memo 0)</a>
+      <a class="sl" href="../documents/insurance-without-money.html">Rating before money (memo 1)</a>
+      <a class="sl" href="../documents/insurance-ecosystem.html">The go-live gate (memo 2)</a>
+      <a class="sl" href="../documents/who-pays-for-the-delta.html">Who pays (memo 3)</a>
+      <a class="sl" href="../documents/why-insurance.html">Why insurance (memo 4)</a>
+      <a class="sl" href="../documents/not-in-line.html">Not in line (memo 5)</a>
+      <a class="sl" href="../documents/the-broker-market.html">The broker market (memo 6)</a>
+      <a class="sl" href="../documents/the-policy-as-a-statement.html">The policy statement (memo 7)</a>
+      <a class="sl" href="../documents/the-world-model.html">The world model (memo 8)</a>
+      <a class="sl" href="../documents/make-them-insurable.html">Make them insurable (memo 9)</a>
+      <a class="sl" href="../documents/the-schemas-and-the-clocks.html">Schemas &amp; clocks (memo 10)</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../documents/index.html">The documents</a>
+      <a class="sl" href="../data/index.html">The data viewer</a>
+      <a class="sl" href="../packs/index.html">Dev packs</a>
+      <a class="sl" href="../packs/registry-mvp/index.html">The registry MVP pack</a>
+      <a class="sl" href="../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
+      <a class="sl" href="../packs/map-your-case/index.html">The Map Your Case pack</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../admin/versions.html">Release history</a>
+      <a class="sl" href="../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+  <script src="../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="index.html">documents</a> / specification-for-the-insurance-ecosystem-pack</div>
+<h1>Brief For The pki.sgit.ai Site Agent: Specification For The Insurance Ecosystem Pack, What To Inventory Before Writing It, And The Four Findings That Are Already Established</h1>
+
+<div class="docmeta">
+  <span class="k">Type</span><span class="v">Dev brief — the fourth of 26 August, handed over rather than read there</span>
+  <span class="k">Version</span><span class="v">v0.33.62</span>
+  <span class="k">Date</span><span class="v">26 August 2026 (received 3 September)</span>
+  <span class="k">Author</span><span class="v">Dinis Cruz (project lead) and collaborators</span>
+  <span class="k">Licence</span><span class="v">CC BY 4.0</span>
+  <span class="k">Source</span><span class="v"><a href="../briefs/v0.33.62__dev-brief__brief-for-the-pki-site-agent-specification-for-the-insurance-ecosystem-pack.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/dev/briefs/v0.33.62__dev-brief__brief-for-the-pki-site-agent-specification-for-the-insurance-ecosystem-pack.md">view on GitHub</a></span>
+</div>
+
+<h2 id="summary">Summary</h2>
+<p>The specification for a pack this brief deliberately does not contain, because writing it needs the codebase, the vault applications and the tooling surface. The objective: an end-to-end ecosystem on vaults where a new session is told the rules, handed its own policy, measured while it works, and refused by something that is not itself when it exceeds cover, visible in a room. First the inventory — nine items, none available to the session that wrote this — then the four findings to inherit rather than re-derive: the ledger must be an append lane because a write key grants purge; hook types include an HTTP variant, which is the difference between a setting and a boundary; token usage has four counters and the obvious one measured 562 for a session that moved a hundred and nine million; and June and August use mandate for opposite things, with August recommended. Seven sections the pack must cover, eleven questions it must answer (the ninth a decision), a first increment that produces a real refusal before any vault exists, and one acceptance test for the pack itself: a session that has read only the pack builds it all and asks nobody a question.</p>
+
+<h2 id="concepts">Key concepts</h2>
+<ul>
+  <li><a href="../packs/insurance-ecosystem/index.html"><b>The pack it specifies</b></a> — written 3 September, after the inventory</li>
+  <li><a href="../packs/insurance-ecosystem/eleven-answers.html"><b>The inventory, done</b></a> — the nine items with evidence, and the eleven answers</li>
+  <li><a href="../packs/insurance-ecosystem/first-increment.html"><b>The first increment</b></a> — three git policies to two hooks, run</li>
+  <li><a href="../shipped/index.html"><b>The append lane</b></a> — why the ledger cannot be a shared vault</li>
+  <li><a href="../packs/insurance-ecosystem/concepts.html"><b>Question nine</b></a> — mandate is the narrow thing; August governs</li>
+</ul>
+
+<h2 id="ideas">Key ideas</h2>
+<ul>
+  <li>The pack cannot be written honestly until somebody establishes what already exists.</li>
+  <li>A write key grants configure and purge: an agent that can record its own usage can delete the record of it.</li>
+  <li>A policy written against input_tokens would have measured 562 for a session that moved a hundred and nine million tokens.</li>
+  <li>The word mandate names the maximum in one part of the corpus and the minimum in another, which is the most expensive kind of collision because both readings are plausible.</li>
+  <li>Refusal must come from outside the agent's reasoning loop; balance derivation never runs in the agent; silence below cover is a requirement.</li>
+  <li>A question an implementing session has to ask is a gap in the pack rather than in the reader.</li>
+</ul>
+
+<h2 id="on-site">On this site</h2>
+<p>Answered by packs/insurance-ecosystem: eleven documents plus change control, tools/, hooks/, policies/, a ledger and a room; build-order step 1 built and its acceptance tests run on 3 September.</p>
+
+<h2 id="read">Read the document</h2>
+<div class="mdread-label">📄 Original document · v0.33.62 · 26 August 2026 (received 3 September) · rendered from the <a href="../briefs/v0.33.62__dev-brief__brief-for-the-pki-site-agent-specification-for-the-insurance-ecosystem-pack.md">raw markdown</a> (the source of truth)</div>
+<div class="mdread" id="mdread" data-src="../briefs/v0.33.62__dev-brief__brief-for-the-pki-site-agent-specification-for-the-insurance-ecosystem-pack.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="../briefs/v0.33.62__dev-brief__brief-for-the-pki-site-agent-specification-for-the-insurance-ecosystem-pack.md">open the raw markdown</a>.</p></noscript></div>
+
+<div class="pagenav">
+  <a href="index.html">← All documents</a>
+  <a href="../briefs/v0.33.62__dev-brief__brief-for-the-pki-site-agent-specification-for-the-insurance-ecosystem-pack.md">Raw markdown →</a>
+</div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.65</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The bench</h4>
+    <a href="../bench/index.html">&#9679; What is built</a>
+    <a href="../simulator/index.html">&#9679; The simulator</a>
+    <a href="../workbench/index.html">&#9679; The workbench (app)</a>
+    <a href="../registry/index.html">The register, live</a>
+    <a href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
+    <a href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
+    <a href="../assess/index.html">&#8594; Map your own case</a>
+    <a href="../book/index.html">The book (commissioned)</a>
+    <a href="../book/brief.html">&mdash; its commissioning brief</a>
+    <a href="../insurance-book/index.html">The insurance book</a>
+  </div>
+  <div>
+    <h4>Insurance</h4>
+    <a href="../insurance/index.html">&#9679; Insurance for agents</a>
+    <a href="../insurance-book/index.html">&#9679; The insurance book</a>
+    <a href="../insurance/what-this-is.html">What this is, and the rule</a>
+    <a href="../insurance/the-rating.html">The rating</a>
+    <a href="../insurance/the-ecosystem-and-the-gate.html">The ecosystem &amp; the gate</a>
+    <a href="../insurance/who-pays-and-the-moving-rating.html">Who pays, &amp; the moving rating</a>
+    <a href="../insurance/why-insurance-and-what-broke-it.html">Why insurance</a>
+    <a href="../insurance/not-in-line.html">Not in line</a>
+    <a href="../insurance/the-broker-market.html">The broker market</a>
+    <a href="../insurance/the-policy-as-a-statement.html">The policy as a statement</a>
+    <a href="../insurance/the-world-model.html">The world model (the MVP)</a>
+    <a href="../insurance/make-them-insurable.html">Make them insurable</a>
+    <a href="../insurance/the-schemas-and-the-clocks.html">The schemas &amp; the clocks</a>
+    <a href="../insurance/llms.txt">insurance/llms.txt</a>
+    <a href="../documents/agent-insurance.html">The pivot briefing</a>
+  </div>
+  <div>
+    <h4>The registry</h4>
+    <a href="../failure/index.html">Why they don't exist</a>
+    <a href="../rules/index.html">The four rules</a>
+    <a href="../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../roadmap/index.html">Build order</a>
+    <a href="../rules/prior-art.html">Prior art</a>
+  </div>
+  <div>
+    <h4>The three layers</h4>
+    <a href="../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../enrolment/index.html">Enrolment</a>
+    <a href="../execution/index.html">The execution broker</a>
+    <a href="../shipped/index.html">What already ships</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../origins/index.html">Origins: 2026</a>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../packs/registry-mvp/index.html">The registry MVP pack</a>
+    <a href="../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
+    <a href="../packs/map-your-case/index.html">The Map Your Case pack</a>
+    <a href="../about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../llms.txt">llms.txt</a>
+  </div>
+</div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+<script src="../assets/mdreader.js"></script>
+</body>
+</html>
