@@ -15,7 +15,12 @@ bands, the ledger says what today has already used, git says what this push weig
 import argparse, datetime as dt, json, os, subprocess, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 POLICY = os.path.join(HERE, "policy.json")
-LEDGER = os.path.join(HERE, "ledger.jsonl")
+LEDGER = os.path.join(HERE, "ledger.jsonl")          # tracked: the loss data, carried by commits
+QUEUE = os.path.join(HERE, "ledger.queue.jsonl")     # ignored by git: what the push checks wrote since the last commit
+# A push check runs AFTER the commit it measures exists, so its entry cannot be in that commit. Writing it
+# straight into the tracked ledger left the tree dirty after every push, forever (IE9, IE-C6). The entry
+# now goes to the queue, and the pack's pre-commit hook drains the queue into ledger.jsonl and stages it,
+# so the next commit carries the previous pushes' entries and the tree is clean after a push (IE-C8).
 
 def git(*a):
     return subprocess.run(["git", *a], capture_output=True, text=True, check=True).stdout
@@ -70,7 +75,7 @@ def main():
     ap.add_argument("--ref", default="HEAD", help="with --backtest: the ref to walk back from, e.g. origin/dev (default HEAD)")
     a = ap.parse_args()
     policy = json.load(open(POLICY))
-    ledger_lines = open(LEDGER).read().splitlines() if os.path.exists(LEDGER) else []
+    ledger_lines = [l for f in (LEDGER, QUEUE) if os.path.exists(f) for l in open(f).read().splitlines() if l.strip()]
 
     if a.backtest:
         branch = a.ref if a.ref != "HEAD" else git("rev-parse", "--abbrev-ref", "HEAD").strip()
@@ -102,8 +107,8 @@ def main():
         entry["override"] = a.override
         print(f"OVERRIDDEN by a human decision, on the record: {a.override}")
     if not a.dry_run:
-        with open(LEDGER, "a") as f: f.write(json.dumps(entry) + "\n")
-        print(f"ledger: appended ({LEDGER})")
+        with open(QUEUE, "a") as f: f.write(json.dumps(entry) + "\n")
+        print(f"ledger: queued ({os.path.relpath(QUEUE)}) — the next commit drains it into ledger.jsonl")
     sys.exit(0 if (v != "refused" or a.override) else 1)
 
 if __name__ == "__main__":

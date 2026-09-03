@@ -221,3 +221,7 @@ __marimo__/
 
 # The insurance ecosystem pack keeps its acceptance-run transcripts as .log files; they are evidence, not noise.
 !packs/insurance-ecosystem/tests/*.log
+
+# the insurance ecosystem's queues: written after a commit exists, drained into the tracked ledgers by the next commit (IE-C8)
+insurance/push-policy/ledger.queue.jsonl
+packs/insurance-ecosystem/ledger/queue/

@@ -1,0 +1,42 @@
+{
+ "acceptor": null,
+ "amount": 1,
+ "at": "2026-09-03T15:33:38+00:00",
+ "day": "2026-09-03",
+ "drawn": 0,
+ "id": "2026-09-03T15-33-38Z__8a3bf4fb",
+ "point": "supersede",
+ "policy": "git-pilot-2026-09-03-r3",
+ "policyholder": "the pki.sgit.ai estate",
+ "pool_left": null,
+ "reason": "policy git-pilot-2026-09-03-r2 superseded by git-pilot-2026-09-03-r3: the project lead, 3 Sep 2026, in chat: 'I accept the exhaustion and can you also increase those limits for now, since they are clearly too low for this session (we will review their use and correct values later)' \u2014 the first re-fit from the ledger: one day's publication drew the whole pool, a one-line change to a large generator costs the whole file, and a release of this site weighs 250\u2013300 KB. Bands \u00d74, the exclusion at the vendor's recommended maximum file size, pools \u00d74, counts \u00d72. To be reviewed against the ledger",
+ "ref": {
+  "exclude": null,
+  "set": [
+   "units.bytes_per_commit.normal=204800",
+   "units.bytes_per_commit.per_occurrence=1048576",
+   "units.bytes_per_commit.pool=4194304",
+   "units.bytes_per_commit.exclusion.reason=bytes committed into history are a stock, not a rate: irreversible without rewriting history others hold, and paid by every clone forever. The cap is the vendor's recommended maximum file size, 1 MB (hard limit 100 MB). Not the top of the buffer \u2014 the boundary of insurability",
+   "units.commits.normal=20",
+   "units.commits.pool=40",
+   "units.bytes_per_push.normal=204800",
+   "units.bytes_per_push.per_occurrence=1048576",
+   "units.bytes_per_push.pool=4194304",
+   "units.pushes.bands.own.normal=20",
+   "units.pushes.bands.own.pool=40",
+   "units.pushes.bands.dev.normal=5",
+   "units.pushes.bands.dev.pool=10",
+   "units.files_per_commit.normal=50",
+   "units.files_per_commit.per_occurrence=500",
+   "units.files_per_commit.pool=1000",
+   "draw_mode.requested_above.bytes_per_commit=524288"
+  ],
+  "suspend": false
+ },
+ "rules_version": "insurance-ecosystem/draft-1",
+ "subject": "the issuer",
+ "test": false,
+ "type": "event/v1",
+ "unit": "policy",
+ "verdict": "measured"
+}

@@ -16,7 +16,7 @@ python3 insurance/push-policy/check.py --branch <target-branch>
 ```
 
 It measures what git would send to `origin/<target-branch>` from `HEAD`, reads `policy.json` and
-today's ledger, prints one of three verdicts, and appends the verdict to `ledger.jsonl`:
+today's ledger, prints one of three verdicts, and queues the verdict in `ledger.queue.jsonl` (ignored by git); the pack's pre-commit hook drains the queue into `ledger.jsonl` at the next commit, so a push leaves the tree clean:
 
 | Verdict | Means | You |
 |---|---|---|
@@ -29,7 +29,7 @@ else counts as your own branch.
 
 ## Rules
 
-- **Never edit `policy.json` or `ledger.jsonl` to pass.** The policy is the project lead's; the ledger is append-only and is the loss data the numbers will be re-fitted from.
+- **Never edit `policy.json`, `ledger.jsonl` or `ledger.queue.jsonl` to pass.** The policy is the project lead's; the ledger is append-only and is the loss data the numbers will be re-fitted from.
 - **Run it even when you are sure.** Twelve of twelve site releases would have been refused when this was first measured (`README.md`); the estate did not know until the check said so.
 - **A refusal is a finding, not a failure.** Report it with the bytes and the limit. If the cause is the release touching every page, say that.
 - `--dry-run` gives the verdict without touching the ledger; use it while deciding, then run it for real before the push.

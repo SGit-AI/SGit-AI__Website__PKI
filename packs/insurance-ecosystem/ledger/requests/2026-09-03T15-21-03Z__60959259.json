@@ -1,0 +1,15 @@
+{
+ "amount": 90453,
+ "at": "2026-09-03T15:21:03+00:00",
+ "cause": "exhausted",
+ "excess": 39253,
+ "id": "2026-09-03T15-21-03Z__60959259",
+ "kind": "escalation",
+ "policy": "git-pilot-2026-09-03-r2",
+ "status": "waiting",
+ "subject": "session:844f4a2f",
+ "test": false,
+ "type": "request/v1",
+ "unit": "bytes_per_commit",
+ "why": "39,253 B over normal but only 38,875 left in today's pool of 943,718 (reserve held back) \u2014 the pool is exhausted for every session on this repository today"
+}

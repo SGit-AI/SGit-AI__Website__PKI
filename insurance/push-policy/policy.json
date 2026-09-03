@@ -4,31 +4,50 @@
   "type": "policy/v0",
   "issuer": "the project lead, memo 12, 2 September 2026",
   "subject": "any agent pushing to this repository",
-  "interval": { "unit": "day", "timezone": "UTC" },
+  "interval": {
+    "unit": "day",
+    "timezone": "UTC"
+  },
   "resources": {
     "pushes": {
       "unit": "pushes per day",
       "branches": {
-        "own":  { "normal": 10, "pool": 20, "note": "the agent's own branch. Memo 12 says 'five times a day, or ten' and 'a bucket of 20 or 50'; the larger normal and the smaller pool are taken, so the buffer is 2x normal" },
-        "dev":  { "normal": 3,  "pool": 10, "note": "memo 12: 'push to the dev branch three times a day' and 'maybe 10 for the dev branch'" }
+        "own": {
+          "normal": 20,
+          "pool": 40,
+          "note": "the agent's own branch. Memo 12 says 'five times a day, or ten' and 'a bucket of 20 or 50'; the larger normal and the smaller pool are taken, so the buffer is 2x normal"
+        },
+        "dev": {
+          "normal": 5,
+          "pool": 10,
+          "note": "memo 12: 'push to the dev branch three times a day' and 'maybe 10 for the dev branch'"
+        }
       }
     },
     "bytes": {
       "unit": "bytes of new objects per push, uncompressed, measured by git before the push (a floor: wire bytes after packing are smaller)",
-      "normal_per_push": 51200,
-      "max_per_push": 307200,
-      "pool_per_day": 1048576,
+      "normal_per_push": 204800,
+      "max_per_push": 1048576,
+      "pool_per_day": 4194304,
       "note": "memo 12: 50k normal, 'no commit should be more than 300k', 'a megabyte of budget'. The project lead's earlier message said 250k for the per-push maximum; the memo's 300k is used and the difference recorded"
     }
   },
   "verdicts": {
-    "normal":   "within the normal band; nothing drawn",
-    "drawn":    "over the normal band, within the per-occurrence limit, pool had enough: the excess is DRAWN from the pool (a claim, paid in the resource, doctrine 12 §1)",
-    "refused":  "over the per-occurrence limit, or the pool cannot cover the excess: the push is refused and the agent must stop"
+    "normal": "within the normal band; nothing drawn",
+    "drawn": "over the normal band, within the per-occurrence limit, pool had enough: the excess is DRAWN from the pool (a claim, paid in the resource, doctrine 12 §1)",
+    "refused": "over the per-occurrence limit, or the pool cannot cover the excess: the push is refused and the agent must stop"
   },
   "does_not_prove": [
     "That these numbers fit this repository. They are the memo's, and the backtest in README.md shows what they would have said about the estate's own recent pushes.",
     "That the check is a boundary. The ledger is in the repository and the check runs where the agent runs, so an agent can edit both: this is a SETTING (doctrine 05). A boundary is the same check run by a party the agent cannot reach, such as a required CI check.",
     "That bytes measured before the push equal bytes on the wire. git packs and compresses; this counts uncompressed new objects, which is the floor the estate's grant rule prefers."
+  ],
+  "_revisions": [
+    {
+      "at": "2026-09-03",
+      "by": "the project lead, in chat",
+      "what": "bands ×4 (50 KB → 200 KB normal per push), the per-push maximum 300 KB → 1 MB (the vendor's recommended maximum file size), the daily pool 1 MB → 4 MB, pushes own 10/20 → 20/40, dev 3/10 → 5/10",
+      "why": "'I accept the exhaustion and can you also increase those limits for now, since they are clearly too low for this session (we will review their use and correct values later)'. The ledger's first day: one pack's publication drew the whole pool; a one-line change to a large generator costs the whole file; a release of this site weighs 250–300 KB. The first re-fit from the loss data (GM-D101); to be reviewed"
+    }
   ]
 }

@@ -1,0 +1,25 @@
+{
+ "acceptor": null,
+ "amount": 90453,
+ "at": "2026-09-03T15:21:03+00:00",
+ "day": "2026-09-03",
+ "drawn": 0,
+ "id": "2026-09-03T15-21-03Z__1c946656",
+ "level": 3,
+ "point": "pre-commit",
+ "policy": "git-pilot-2026-09-03-r2",
+ "policyholder": "the pki.sgit.ai estate",
+ "pool_left": 38875,
+ "reason": "39,253 B over normal but only 38,875 left in today's pool of 943,718 (reserve held back) \u2014 the pool is exhausted for every session on this repository today",
+ "ref": {
+  "blobs": 10,
+  "branch": "claude/registry-mvp-brief-hpbap8"
+ },
+ "rules_version": "insurance-ecosystem/draft-1",
+ "subject": "session:844f4a2f",
+ "test": false,
+ "type": "event/v1",
+ "unit": "bytes_per_commit",
+ "verdict": "refused",
+ "zone": "outside"
+}

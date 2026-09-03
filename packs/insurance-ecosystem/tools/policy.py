@@ -11,6 +11,7 @@
     policy.py derive [--day D]                             # today's balance, derived from the ledger, never stored
     policy.py validate                                     # the policy against the schema rules in document 03
     policy.py hook-pre-tool-use                            # Claude PreToolUse handler: the same verdict, early, advisory
+    policy.py drain                                        # move queued push-point events into the tracked ledgers
 
 The verdict is a subtraction and nothing else: the policy says the bands, the ledger says what today has
 already used, the meter (git, the transcript) says what this event weighs. A draw is a claim paid in the
@@ -29,6 +30,11 @@ DEFAULT_LEDGER = os.path.join(PACK, "ledger")
 DEFAULT_SUBJECT = "pki-site-repo"
 RULES_VERSION = "insurance-ecosystem/draft-1"
 KINDS = ("volume", "count", "reach", "measure")
+# The levels of enforcement (memo 13, doctrine 13): where a verdict was produced, from nothing to out-of-band.
+LEVELS = {"briefing": 1, "pre-tool-use": 2, "skill": 2, "pre-commit": 3, "pre-push": 3, "manual": 3, "push-check": 3,
+          "ci": 4, "destination": 4, "reconcile": 5, "supersede": 0, "stop": 2}
+PUSH_QUEUE = os.path.join(REPO, "insurance", "push-policy", "ledger.queue.jsonl")
+PUSH_LEDGER = os.path.join(REPO, "insurance", "push-policy", "ledger.jsonl")
 TIER_LINE = "This is a SETTING, not a boundary: you could bypass it, and the point is that you do not."
 
 # ---------------------------------------------------------------- small helpers
@@ -107,14 +113,35 @@ def band(u, kind_key=None):
 
 # ---------------------------------------------------------------- ledger
 def read_dir(ledger, sub):
-    d = os.path.join(ledger, sub)
-    if not os.path.isdir(d): return []
+    """Read a ledger folder. For "events" the un-drained queue is read too, so a balance never misses a push
+    that has happened but is not yet carried by a commit (IE-C8)."""
     out = []
-    for n in sorted(os.listdir(d)):
-        if n.endswith(".json"):
-            try: out.append(json.load(open(os.path.join(d, n))))
-            except Exception as ex: print(f"  ! unreadable {sub}/{n}: {ex}", file=sys.stderr)
+    for d in ([os.path.join(ledger, sub)] + ([os.path.join(ledger, "queue")] if sub == "events" else [])):
+        if not os.path.isdir(d): continue
+        for n in sorted(os.listdir(d)):
+            if n.endswith(".json"):
+                try: out.append(json.load(open(os.path.join(d, n))))
+                except Exception as ex: print(f"  ! unreadable {os.path.relpath(os.path.join(d, n))}: {ex}", file=sys.stderr)
     return out
+
+def drain(ledger):
+    """The maintainer's and the pre-commit hook's job: move queued push-point events into events/ and the
+    push-policy queue's lines into its tracked ledger, and stage both, so the commit carries them (IE-C8)."""
+    moved = []
+    q = os.path.join(ledger, "queue")
+    if os.path.isdir(q):
+        for n in sorted(os.listdir(q)):
+            if not n.endswith(".json"): continue
+            src, dst = os.path.join(q, n), os.path.join(ledger, "events", n)
+            if os.path.exists(dst): os.remove(src); continue
+            os.makedirs(os.path.dirname(dst), exist_ok=True); os.replace(src, dst); moved.append(dst)
+    if os.path.exists(PUSH_QUEUE):
+        lines = [l for l in open(PUSH_QUEUE).read().splitlines() if l.strip()]
+        if lines:
+            with open(PUSH_LEDGER, "a") as f: f.write("\n".join(lines) + "\n")
+            moved.append(PUSH_LEDGER)
+        os.remove(PUSH_QUEUE)
+    return moved
 
 def write_json(ledger, sub, obj):
     d = os.path.join(ledger, sub); os.makedirs(d, exist_ok=True)
@@ -246,12 +273,17 @@ def staged_bytes():
         if not m: continue
         src, dst, path = m.group(1), m.group(2), m.group(4)
         if set(dst) == {"0"} or src == dst: continue
-        if "/ledger/" in "/" + path: continue          # the claim's own paperwork is never weighed (IE-C4)
+        if "/ledger/" in "/" + path or path.startswith("insurance/push-policy/ledger"): continue   # paperwork is never weighed (IE-C4, IE-C6)
         shas.append(dst)
     if not shas: return 0, 0
     out = subprocess.run(["git", "cat-file", "--batch-check=%(objecttype) %(objectsize)"], input="\n".join(shas), capture_output=True, text=True).stdout
     sizes = [int(l.split()[1]) for l in out.splitlines() if l.startswith("blob ")]
     return sum(sizes), len(sizes)
+
+def staged_files():
+    """Files the index adds or changes versus HEAD, the ledgers' own files excepted."""
+    names = git("diff", "--cached", "--name-only", "--diff-filter=AMCR", check=False).splitlines()
+    return len([n for n in names if n.strip() and "/ledger/" not in "/" + n and not n.startswith("insurance/push-policy/ledger")])
 
 def push_bytes(local_sha, remote_sha, remote):
     if not local_sha or set(local_sha) == {"0"}: return 0, 0          # a deletion pushes nothing
@@ -290,8 +322,11 @@ def cmd_check(a):
     ref = {}
     # --- the readings
     if a.point == "pre-commit":
+        if not a.dry_run and in_repo(ledger):
+            for m in drain(ledger): git("add", "--", m)               # the commit carries the previous pushes' claims (IE-C8)
         n, blobs = staged_bytes()
         readings = [("bytes_per_commit", n, None), ("commits", 1, None)]
+        if unit_spec(p, "files_per_commit"): readings.append(("files_per_commit", staged_files(), None))
         ref = {"blobs": blobs, "branch": git("rev-parse", "--abbrev-ref", "HEAD", check=False).strip()}
     elif a.point == "pre-push":
         kind = branch_kind(a.branch)
@@ -310,14 +345,15 @@ def cmd_check(a):
     written = []
     def event(v, d, extra=None):
         e = {"type": "event/v1", "id": new_id(now), "at": iso(now), "day": day, "policy": p["id"], "rules_version": p["rules_version"],
-             "subject": subject, "policyholder": p["policyholder"]["who"], "point": a.point or "manual",
+             "subject": subject, "policyholder": p["policyholder"]["who"], "point": a.point or "manual", "level": LEVELS.get(a.point or "manual", 3),
              "unit": d["unit"], "amount": d["amount"], "verdict": v, "drawn": d.get("drawn", 0), "pool_left": d.get("pool_left"),
              "acceptor": (p["policyholder"]["who"] if v == "drawn" else d.get("accepted_by")), "reason": d["reason"], "ref": ref, "test": bool(a.test)}
         if d.get("band"): e["band"] = d["band"]
         if d.get("via_request"): e["via_request"] = d["via_request"]
         if v in ("refused", "accepted_outside"): e["zone"] = "outside"
         if extra: e.update(extra)
-        if not a.dry_run: written.append(write_json(ledger, "events", e))
+        # a pre-push event cannot be carried by the commit it describes: it waits in the queue for the next commit (IE-C8)
+        if not a.dry_run: written.append(write_json(ledger, "queue" if a.point == "pre-push" else "events", e))
         return e
     def request(kind, d):
         r = {"type": "request/v1", "id": new_id(now), "kind": kind, "cause": d.get("cause"), "at": iso(now), "policy": p["id"], "subject": subject,
@@ -365,7 +401,7 @@ def cmd_check(a):
             event("normal", d)                       # countable: the eleventh needs the ten before it
         # volume + normal: silence below cover
     if a.point == "pre-commit" and written and not a.dry_run and in_repo(ledger):
-        git("add", "--", *written)                   # the commit carries its own claim (IE-D12)
+        git("add", "--", *[w for w in written if "/queue/" not in w])   # the commit carries its own claim (IE-D12)
     if a.dry_run:
         for v, d in results: print(f"  {v.upper()}  {d['unit']}  {d['reason']}")
     return 0
@@ -507,6 +543,12 @@ def cmd_derive(a):
         print(f"  {k:<22} used {fmt(s['used'])}  drawn {fmt(s['drawn'])}  pool_left {fmt(s['pool_left'])} of {fmt(s['pool_effective'])} (reserve {s['reserve_share']:.0%} held)  events {s['events']}  refused {s['refused']}  zone {s['zone']}")
     return 0
 
+def cmd_drain(a):
+    moved = drain(a.ledger)
+    print(f"drained {len(moved)} file(s) into the tracked ledgers" if moved else "nothing queued")
+    for m in moved: print("  " + os.path.relpath(m))
+    return 0
+
 def cmd_validate(a):
     p, path = load_current(a.policies, a.subject)
     errs = validate(p)
@@ -558,10 +600,10 @@ def main():
     for k in ("approved", "declined", "accept", "suspend"): g.add_argument(f"--{k}", dest="decision", action="store_const", const=k)
     s = sp.add_parser("supersede"); s.add_argument("policy"); s.add_argument("--as", dest="new_id", required=True); s.add_argument("--set", action="append"); s.add_argument("--exclude"); s.add_argument("--suspend", action="store_true"); s.add_argument("--why", required=True)
     v = sp.add_parser("derive"); v.add_argument("--day"); v.add_argument("--json", action="store_true"); v.add_argument("--test", action="store_true", help="the acceptance-run lane instead of the real one")
-    sp.add_parser("validate"); sp.add_parser("hook-pre-tool-use")
+    sp.add_parser("validate"); sp.add_parser("hook-pre-tool-use"); sp.add_parser("drain", help="move queued push events into the tracked ledgers (the pre-commit hook does this too)")
     a = ap.parse_args()
     return {"check": cmd_check, "briefing": cmd_briefing, "request": cmd_request, "decide": cmd_decide, "supersede": cmd_supersede,
-            "derive": cmd_derive, "validate": cmd_validate, "hook-pre-tool-use": cmd_hook_pre_tool_use}[a.cmd](a)
+            "derive": cmd_derive, "validate": cmd_validate, "hook-pre-tool-use": cmd_hook_pre_tool_use, "drain": cmd_drain}[a.cmd](a)
 
 if __name__ == "__main__":
     sys.exit(main())

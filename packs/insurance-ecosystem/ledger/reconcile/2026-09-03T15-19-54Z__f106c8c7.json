@@ -1,0 +1,25 @@
+{
+ "at": "2026-09-03T15:19:54+00:00",
+ "by": "the site agent, as maintainer (session:844f4a2f)",
+ "catches": [],
+ "checked": [
+  "5dd55e99a1e3675455b3a5b3048212fc1efec8aa",
+  "d44fee95de53ea2d4e8541dd0c4ab0dd0761cad3",
+  "e60bf1d467be676943fc43eb1f798d2301e462b3",
+  "cb6f115eba50c0b9255eaf40d771d18b438d6823",
+  "45a576ad6e01b685d0c46da0745d503a7925a991",
+  "4fddc873227ce927530934599039f1f4a4adc5fd",
+  "04b2ea6f539bcafd790c22772536762b038226cf",
+  "0793dade652bca2ab09c475504aa2a53bd3637a0",
+  "69894500c516d72a749b7cb977b82c2cd839905e",
+  "98ef4daa6cef9049a1add3550b2d79737d31357a",
+  "ca93bba71a0ec8efa5d0bd712ced56a99a8b3d0c"
+ ],
+ "id": "2026-09-03T15-19-54Z__f106c8c7",
+ "policy": "git-pilot-2026-09-03-r2",
+ "range": [
+  "8fdd44f182732e946f40c413cf53e42297228bae..HEAD"
+ ],
+ "type": "reconcile/v1",
+ "window_seconds": 240
+}

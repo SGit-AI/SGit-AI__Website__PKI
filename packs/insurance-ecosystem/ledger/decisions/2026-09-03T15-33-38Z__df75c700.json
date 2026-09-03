@@ -1,0 +1,10 @@
+{
+ "at": "2026-09-03T15:33:38+00:00",
+ "by": "the project lead",
+ "decision": "accept",
+ "id": "2026-09-03T15-33-38Z__df75c700",
+ "note": "the project lead, 3 Sep 2026, in chat: 'I accept the exhaustion and can you also increase those limits for now, since they are clearly too low for this session (we will review their use and correct values later)'",
+ "request": "2026-09-03T15-21-03Z__60959259",
+ "test": false,
+ "type": "decision/v1"
+}

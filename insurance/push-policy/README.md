@@ -11,7 +11,7 @@ Three documents and one function.
 | File | Is |
 |---|---|
 | [`policy.json`](policy.json) | The policy: a mandate-shaped statement with issuer, subject, interval, and for each resource the normal band, the per-occurrence limit and the daily pool. **This is the source of truth** |
-| `ledger.jsonl` | Append-only. One line per check: day, branch, bytes, verdict, what was drawn. **The claims file, and the loss data** |
+| `ledger.jsonl` | Append-only. One line per check: day, branch, bytes, verdict, what was drawn. **The claims file, and the loss data.** A check runs after the commit it measures exists, so its line goes first to `ledger.queue.jsonl` (ignored by git) and the next commit's pre-commit hook drains it in — the tree is clean after a push, and the loss data lags one commit (IE-C8) |
 | [`check.py`](check.py) | Measures what git would send, reads the two documents above, returns one of three verdicts, appends to the ledger, exits non-zero on refusal |
 | [`pre-push`](pre-push) | A sample git hook that calls the check. Shipped, **not installed** — see the finding below |
 | [`.claude/skills/push-policy/`](../../.claude/skills/push-policy/SKILL.md) | The skill: tells Claude to run the check before any push and to stop when refused |

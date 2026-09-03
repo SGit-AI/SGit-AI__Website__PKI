@@ -1,0 +1,28 @@
+# Level 4 of the enforcement ladder (memo 13, doctrine 13), in REPORT mode: the destination
+# looks at what arrived, with tools the agent could not have edited on the way, and says what
+# the policy would have said. It fails nothing. Turning it into a required check that refuses
+# is the issuer's decision (N31), and the day it does, a refusal here is an incident: the
+# hook in the agent's clone was bypassed or broken.
+#
+# Two jobs from the pack, both read-only, both printing to the log, which is the evidence:
+#   reconcile.py --report   level 5's replay of git against the ledger, for the last commits
+#   check.py --backtest 5   the push policy's verdict for each of the last five commits
+name: policy-report
+on:
+  workflow_dispatch:
+  push:
+    branches: ['**']
+permissions:
+  contents: read
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Level 5 — reconcile the ledger against git (report only)
+        run: python3 packs/insurance-ecosystem/tools/reconcile.py --report --last 25
+      - name: Level 3, replayed — the push policy over the last five commits
+        run: python3 insurance/push-policy/check.py --backtest 5 --ref HEAD

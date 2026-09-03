@@ -80,17 +80,28 @@ def main():
         corr = {"computable": True, "policyholders": len(holders), "drawn_days_total": len(alld), "days_two_or_more_drew": both,
                 "share": (both / len(alld)) if alld else 0, "note": "share of drawing days on which two or more policyholders drew; near 1 means the pool is not diversified"}
     def brief(e):
-        return {k: e.get(k) for k in ("id", "at", "day", "policy", "subject", "policyholder", "point", "unit", "band", "amount", "verdict", "drawn", "pool_left", "acceptor", "reason", "via_request", "test", "zone")}
+        return {k: e.get(k) for k in ("id", "at", "day", "policy", "subject", "policyholder", "point", "level", "band", "amount", "verdict", "drawn", "pool_left", "acceptor", "reason", "via_request", "test", "zone", "cause", "ref")}
+    # ---- the levels of enforcement (memo 13): events, refusals and catches by level; the last reconcile run
+    real = [e for e in events if not e.get("test")]
+    layers = {}
+    for lvl, name in ((0, "nothing"), (1, "prompt"), (2, "skill / system prompt"), (3, "hook"), (4, "destination"), (5, "post-action, out of band")):
+        evs = [e for e in real if (e.get("level") if e.get("level") is not None else P.LEVELS.get(e.get("point"), 3)) == lvl]
+        layers[str(lvl)] = {"name": name, "events": len(evs), "refused": len([e for e in evs if e.get("verdict") == "refused"]),
+                            "caught": len([e for e in evs if e.get("verdict") == "caught"]), "drawn": len([e for e in evs if e.get("verdict") == "drawn"])}
+    runs = sorted(P.read_dir(a.ledger, "reconcile"), key=lambda r: r.get("at") or "")
+    last_run = runs[-1] if runs else None
+    reconcile = {"runs": len(runs), "last": ({"at": last_run["at"], "by": last_run.get("by"), "checked": len(last_run.get("checked", [])), "catches": len(last_run.get("catches", []))} if last_run else None),
+                 "commits_checked": sum(len(r.get("checked", [])) for r in runs), "catches": [brief(e) for e in real if e.get("verdict") == "caught"]}
     ev_sorted = sorted(events, key=lambda e: e.get("at") or "", reverse=True)
     waiting = [r for r in requests if r["id"] not in decided]
     content = {
         "type": "room/v1", "generated_at": P.iso(now), "generated_by": a.by, "day": day,
         "ledger_commit": git_head(a.ledger), "ledger_path": os.path.relpath(a.ledger, PACK),
-        "policies": policies, "balances": balances, "balances_test": balances_test, "zones": zones, "draw_frequency": freq, "correlation": corr, "disagreements": disagreements,
+        "policies": policies, "balances": balances, "balances_test": balances_test, "zones": zones, "layers": layers, "reconcile": reconcile, "draw_frequency": freq, "correlation": corr, "disagreements": disagreements,
         "events": [brief(e) for e in ev_sorted[:80]],
         "requests": {"waiting": sorted(waiting, key=lambda r: r["at"], reverse=True),
                      "decided": [dict(r, decision=decided[r["id"]]) for r in sorted(requests, key=lambda r: r["at"], reverse=True) if r["id"] in decided][:40]},
-        "ledger": {"events": len(events), "test_events": len([e for e in events if e.get("test")]), "requests": len(requests), "decisions": len(decisions), "bytes": dir_bytes(a.ledger)},
+        "ledger": {"events": len(events), "test_events": len([e for e in events if e.get("test")]), "requests": len(requests), "decisions": len(decisions), "reconcile_runs": len(runs), "bytes": dir_bytes(a.ledger)},
         "stale_after_hours": 24,
     }
     os.makedirs(os.path.dirname(a.out), exist_ok=True)

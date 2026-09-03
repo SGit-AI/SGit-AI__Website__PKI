@@ -1,0 +1,13 @@
+{
+ "amount": 1,
+ "at": "2026-09-03T15:33:38+00:00",
+ "id": "2026-09-03T15-33-38Z__e3ad4307",
+ "kind": "acceptance",
+ "policy": "git-pilot-2026-09-03-r3",
+ "status": "waiting",
+ "subject": "session:844f4a2f",
+ "test": false,
+ "type": "request/v1",
+ "unit": "policy",
+ "why": "re-acceptance of git-pilot-2026-09-03-r3 by the policyholder (IE-D14): the limits raised for now by the issuer"
+}

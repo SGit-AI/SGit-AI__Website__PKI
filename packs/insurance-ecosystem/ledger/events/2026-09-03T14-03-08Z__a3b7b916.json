@@ -1,0 +1,23 @@
+{
+ "acceptor": null,
+ "amount": 1,
+ "at": "2026-09-03T14:03:08+00:00",
+ "day": "2026-09-03",
+ "drawn": 0,
+ "id": "2026-09-03T14-03-08Z__a3b7b916",
+ "level": 0,
+ "point": "supersede",
+ "policy": "git-pilot-2026-09-03-r2",
+ "policyholder": "the pki.sgit.ai estate",
+ "pool_left": null,
+ "reason": "policy git-pilot-2026-09-03 superseded by git-pilot-2026-09-03-r2: memo 13 \u2014 the levels of enforcement, and files_per_commit",
+ "ref": {
+  "supersedes": "git-pilot-2026-09-03"
+ },
+ "rules_version": "insurance-ecosystem/draft-1",
+ "subject": "the issuer",
+ "test": false,
+ "type": "event/v1",
+ "unit": "policy",
+ "verdict": "measured"
+}
