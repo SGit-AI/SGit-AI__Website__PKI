@@ -59,9 +59,10 @@ A claim, once published, is not edited. If it is wrong or overtaken, an entry he
 **The finding:** a `pre-commit` hook may `git add` the event it writes, so the event lands in the very commit it describes and the ledger never lags a commit — which the push-policy MVP's ledger does. The push event still lags (it is written after the commit exists) and is carried by the next commit.
 **Status:** implemented in `tools/policy.py`; recorded in document 09.
 
-### IE10 — The pack's own publication was the first requested draw
-**Source:** document 09.
-**Status:** recorded there with the request and decision ids.
+### IE10 — The pack's own publication was the first real-lane day
+**Source:** document 09, *What the pack's own publication drew*.
+**What happened:** six natural units; two drawn (74,979 B and 86,056 B); two requested above the 200 KB threshold and approved under the approver's hat as the project lead allowed for the pilot (the briefs, 254,360 B → 203,160 B drawn; the pages, 216,832 B → 165,632 B drawn); two refused as exclusions and **not** accepted by the session — the wiring sources at 310,858 B, over the cap by 3,658 B, and the badge rewrite at about 4 MB. Escalation `2026-09-03T02-09-05Z__c7278eae` waits for a person. The wiring is preserved as `pending/2026-09-03__wiring-awaiting-acceptance.patch`.
+**Status:** recorded; the issuer's decision on the per-commit cap against this estate's large files is N30.
 
 ## The decisions register
 
@@ -81,11 +82,25 @@ A claim, once published, is not edited. If it is wrong or overtaken, an entry he
 | IE-D12 | **A `pre-commit` hook stages the event it writes**, so a commit carries its own claim; the push event lags one commit | IE9 | **Done** |
 | IE-D13 | **Outside cover writes an escalation, not only a refusal**; the answers are accept-as-uninsured (never touching the pool) or suspend; an accepted-uninsured action is recorded as `accepted_outside` | The architecture brief's third zone | **Proposed** |
 | IE-D14 | **A supersession must be re-accepted** by the policyholder; until then the room shows *awaiting acceptance* and cover continues under the old terms only inside the old interval | W7 · June's interval rule | **Proposed** |
-| IE-D15 | **Test events are visible, separate and excluded from the balance** | Document 07 | **Proposed** |
+| IE-D15 | **Test events are visible, separate and excluded from the balance**, and the acceptance-run lane has its own balance so a run can see its own accumulation | Document 07, document 09 finding 1 | **Proposed** |
+| IE-D16 | **The session never accepts an action outside cover.** A requested draw inside the pool may be approved under the approver's hat in the pilot; an exclusion or an exhausted pool waits for a person, and the refused change is preserved beside the request as a patch | Document 09, *what the pack's own publication drew* | **Proposed — the line the pilot relaxation stops at** |
 
 ## Corrections
 
-*None yet. The first `IE-C` will be a question the implementing session had to ask.*
+### IE-C1 — An escalation is *already waiting* only for the same cause and the same amount
+**Found:** document 09, finding 7. The first matcher treated any waiting escalation on the same unit whose amount covered the new reading as the same escalation, so two different refusals (784,174 B and 310,858 B; then 216,832 B measured alone) shared one, and the second and third never got their own.
+**Change:** `request/v1` carries `cause` (`exclusion` | `exhausted`); `waiting_request` matches an escalation on unit, cause **and** amount; a draw request still covers any smaller reading. `tools/policy.py`, 3 September.
+**Status:** done.
+
+### IE-C2 — A decision note names the wrong id, and the ledger is not edited to fix it
+**Found:** decision `2026-09-03T02-06-11Z__5489fd4e` suspends the stale 784,174 B escalation and says the true reading for the pages alone is escalation `…37f7a0f5` — the stale one itself, because under the first matcher no new escalation had been written. The true readings are 310,858 B (the wiring, escalation `…c7278eae`) and 216,832 B (the pages, a requested draw, approved).
+**Change:** none to the ledger — files are only ever added. The correction is this entry, and document 09 carries it.
+**Status:** recorded.
+
+### IE-C3 — The dry run said *has been written* about files it did not write
+**Found:** `check --dry-run` printed the request and escalation paths as written. Nothing is written in a dry run.
+**Change:** the wording is now *would be written* under `--dry-run`.
+**Status:** done.
 
 ---
 

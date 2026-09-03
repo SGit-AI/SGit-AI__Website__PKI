@@ -145,6 +145,25 @@ The hooks are inside the grant they bound, so by the estate's own test they are 
 - **The token meter ran once**, on this session's transcript, and appended nothing to the ledger: the Stop hook is step 5.
 - **The pack's own commits** in this repository run through the same `pre-commit` from the moment it is installed here, and what they draw is on the real lane. [Change control](99__change-control.md) IE10 records what happened.
 
+## What the pack's own publication drew
+
+The hook was installed in this repository before the pack was committed, so the pack's publication is the first real-lane day on the ledger. Six natural units, in order, each measured by `pre-commit` as the whole size of every blob it added or changed:
+
+| Commit | Bytes | Verdict | On the ledger |
+|---|---|---|---|
+| The documents (`src/`) | 126,179 | **drawn** 74,979 B | event, acceptor the estate |
+| The tools, hooks, policies, acceptance ledger, room | 137,256 | **drawn** 86,056 B | event |
+| The two briefs and their reader pages | 254,360 | **requested** → approved → **drawn** 203,160 B | request `2026-09-03T02-04-39Z__04375181`, decision `…02-05-44Z__1be46c34` |
+| The pack's twelve reader pages and hub | 216,832 | **requested** → approved → **drawn** 165,632 B | request `…02-09-02Z__3197aed5`, decision `…02-09-02Z__b9f10977` |
+| The wiring sources (`gen_packs.py`, both `llms.txt`, the two hubs, `insurance.json`) | **310,858** | **refused — an exclusion**, over the cap by 3,658 B | escalation `2026-09-03T02-09-05Z__c7278eae`, **waiting** |
+| The badge rewrite (the last one; [T49](../../../admin/comms.html)) | ~4,000,000 | **refused — an exclusion** | waits on the same acceptance |
+
+Pool after the four draws: 413,891 B of 943,718 B. The two requested draws were approved by the same session under the approver's hat, as the project lead allowed for the pilot on 3 September, and the decisions say so. **The two exclusions were not accepted by this session**: outside cover is a person's call, and the escalation waits. The wiring is preserved as [a patch on the branch](../pending/2026-09-03__wiring-awaiting-acceptance.patch) beside the request that waits — which is what a waiting request looks like in practice.
+
+**Finding 6 — a one-line change to a large file costs the whole file.** The wiring commit is over the cap because the meter counts blobs, not diffs, and this estate's generators and front doors are large single files (`gen_documents.py` 142 KB, `versions.html` 167 KB). That is the case study's append-only finding arriving at commit time, and it is the first thing the issuer is asked to decide ([N30](../../../admin/comms.html)).
+
+**Finding 7 — the operator's own mistake produced a wrong reading, and the matcher hid it.** The wiring was once staged on top of the briefs, so a reading of 784,174 B measured two units as one and wrote escalation `…02-04-40Z__37f7a0f5`. When the units were then measured alone, the loose matcher (finding 3) reported that escalation as *already waiting* for both, so neither got its own. The matcher now requires the same cause and the same amount for an escalation to count as waiting (IE-C1); the stale escalation was suspended with a note that itself names the wrong id (IE-C2), because a ledger file is never edited and the correction lives here.
+
 ## Honest tensions
 
 | Tension | Note |
