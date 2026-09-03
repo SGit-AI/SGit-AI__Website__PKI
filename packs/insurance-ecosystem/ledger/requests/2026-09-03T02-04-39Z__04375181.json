@@ -1,0 +1,14 @@
+{
+ "amount": 254360,
+ "at": "2026-09-03T02:04:39+00:00",
+ "excess": 203160,
+ "id": "2026-09-03T02-04-39Z__04375181",
+ "kind": "draw",
+ "policy": "git-pilot-2026-09-03",
+ "status": "waiting",
+ "subject": "session:844f4a2f",
+ "test": false,
+ "type": "request/v1",
+ "unit": "bytes_per_commit",
+ "why": "254,360 B is above the requested-draw threshold (204,800 B)"
+}

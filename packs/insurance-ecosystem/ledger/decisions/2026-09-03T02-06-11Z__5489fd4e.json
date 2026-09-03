@@ -1,0 +1,10 @@
+{
+ "at": "2026-09-03T02:06:11+00:00",
+ "by": "the site agent, under the approver's hat (pilot relaxation)",
+ "decision": "suspend",
+ "id": "2026-09-03T02-06-11Z__5489fd4e",
+ "note": "voided as a reading: the operator staged the wiring on top of the briefs, so 784,174 B measured two natural units as one. Nothing proceeds on it. The true reading for the generated pages alone is escalation 2026-09-03T02-04-40Z__37f7a0f5, which waits for a human.",
+ "request": "2026-09-03T02-04-40Z__37f7a0f5",
+ "test": false,
+ "type": "decision/v1"
+}

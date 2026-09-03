@@ -178,11 +178,16 @@ def find_decision(ledger, p, subject, unit, amount, kind, wanted, test=False):
         return d, r
     return None, None
 
-def waiting_request(ledger, p, subject, unit, amount, kind, test=False):
+def waiting_request(ledger, p, subject, unit, amount, kind, test=False, cause=None):
+    """A draw request already waiting covers this reading if its amount does; an escalation is the same
+    only for the same cause AND the same amount — two different refusals are two escalations (IE-C1)."""
     decided = {d.get("request") for d in read_dir(ledger, "decisions")}
     for r in read_dir(ledger, "requests"):
         if r["id"] in decided or bool(r.get("test")) != bool(test): continue
-        if r.get("kind") == kind and r.get("policy") == p["id"] and r.get("unit") == unit and r.get("subject") == subject and int(r.get("amount") or 0) >= int(amount):
+        if r.get("kind") != kind or r.get("policy") != p["id"] or r.get("unit") != unit or r.get("subject") != subject: continue
+        if kind == "escalation":
+            if r.get("cause") == cause and int(r.get("amount") or 0) == int(amount): return r
+        elif int(r.get("amount") or 0) >= int(amount):
             return r
     return None
 
@@ -199,6 +204,7 @@ def verdict(p, ledger, state, subject, unit, amount, bk=None, test=False):
             d["reason"] = (f"{fmt(amount)} B is over the per-occurrence limit of {fmt(u['per_occurrence'])} B"
                            + (" — an EXCLUSION" if ex else ""))
             if ex: d["exclusion_reason"] = ex["reason"]
+            d["cause"] = "exclusion"
             dec, req = find_decision(ledger, p, subject, unit, amount, "escalation", "accept", test)
             if dec: d.update(via_request=req["id"], accepted_by=dec["by"], reason=d["reason"] + f"; accepted as UNINSURED by {dec['by']} on request {req['id']}"); return "accepted_outside", d
             return "refused", d
@@ -220,6 +226,7 @@ def verdict(p, ledger, state, subject, unit, amount, bk=None, test=False):
     if excess > st["pool_left"]:
         d["reason"] = (f"{fmt(excess)} {'B ' if u['kind']=='volume' else ''}over normal but only {fmt(max(0, st['pool_left']))} left in today's pool of "
                        f"{fmt(st['pool_effective'])} (reserve held back) — the pool is exhausted for every session on this repository today")
+        d["cause"] = "exhausted"
         dec, req = find_decision(ledger, p, subject, unit, amount, "escalation", "accept", test)
         if dec: d.update(via_request=req["id"], accepted_by=dec["by"], reason=d["reason"] + f"; accepted as UNINSURED by {dec['by']}"); return "accepted_outside", d
         return "refused", d
@@ -312,7 +319,7 @@ def cmd_check(a):
         if not a.dry_run: written.append(write_json(ledger, "events", e))
         return e
     def request(kind, d):
-        r = {"type": "request/v1", "id": new_id(now), "kind": kind, "at": iso(now), "policy": p["id"], "subject": subject,
+        r = {"type": "request/v1", "id": new_id(now), "kind": kind, "cause": d.get("cause"), "at": iso(now), "policy": p["id"], "subject": subject,
              "unit": d["unit"], "amount": d["amount"], "excess": max(0, d["amount"] - band(unit_spec(p, d["unit"]), d.get("band"))["normal"]) if unit_spec(p, d["unit"])["kind"] == "volume" else 1,
              "why": d["reason"], "status": "waiting", "test": bool(a.test)}
         if not a.dry_run: written.append(write_json(ledger, "requests", r))
@@ -325,11 +332,11 @@ def cmd_check(a):
             if d.get("exclusion_reason"): print(f"    reason: {d['exclusion_reason']}")
             print(f"    zone: OUTSIDE COVER. This action is uninsured.")
             event("refused", d)
-            w = waiting_request(ledger, p, subject, d["unit"], d["amount"], "escalation", bool(a.test))
+            w = waiting_request(ledger, p, subject, d["unit"], d["amount"], "escalation", bool(a.test), d.get("cause"))
             if w: print(f"    an escalation is already waiting: {w['id']}")
             else:
                 r = request("escalation", d)
-                print(f"    an escalation has been written: ledger/requests/{r['id']}.json")
+                print(f"    an escalation {'would be' if a.dry_run else 'has been'} written: ledger/requests/{r['id']}.json")
             print("    what to do: stop this class of action. Do not split, do not --no-verify, do not edit the policy.")
             print("               Tell the human what was refused, with the numbers. The approver answers the escalation.")
         else:
@@ -338,7 +345,7 @@ def cmd_check(a):
             if d.get("waiting"): print(f"    a request is already waiting: ledger/requests/{d['waiting']}.json")
             else:
                 r = request("draw", d)
-                print(f"    a request has been written: ledger/requests/{r['id']}.json")
+                print(f"    a request {'would be' if a.dry_run else 'has been'} written: ledger/requests/{r['id']}.json")
             print("    this action is refused until a decision exists. Ask the approver, quote the id, wait.")
             print("    do not split the action to get under the threshold.")
         print(f"  {TIER_LINE}")
