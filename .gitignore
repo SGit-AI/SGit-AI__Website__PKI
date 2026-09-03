@@ -218,3 +218,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# The insurance ecosystem pack keeps its acceptance-run transcripts as .log files; they are evidence, not noise.
+!packs/insurance-ecosystem/tests/*.log

@@ -1,0 +1,10 @@
+{
+ "at": "2026-09-03T03:18:59+00:00",
+ "by": "the site agent, under the approver's hat (pilot relaxation: the project lead, 3 Sep 2026, in chat)",
+ "decision": "approved",
+ "id": "2026-09-03T03-18-59Z__e7cf26ab",
+ "note": "the v0.1.67 release: the versions table (167 KB) plus the log the ignore file hid; one natural unit, inside the pool, above the requested threshold; the same session asked and answered, and says so (IE10)",
+ "request": "2026-09-03T03-18-25Z__a547b5ac",
+ "test": false,
+ "type": "decision/v1"
+}
