@@ -1,6 +1,23 @@
 {
   "type": "profile/v1",
   "id": "github/actions-runner/ci",
+  "reach_names": {
+    "host": "the runner \u2014 destroyed after the job; not your machine",
+    "tenant": "the repository, with the workflow's token",
+    "world": "the internet, unrestricted"
+  },
+  "not_reachable": [
+    {
+      "what": "your machine",
+      "why": "a hosted runner",
+      "source": "library entry 2"
+    },
+    {
+      "what": "the repository, for writing",
+      "why": "the token is contents:read",
+      "source": "evidence: ci.permissions-block"
+    }
+  ],
   "vendor": "GitHub",
   "product": "Actions runner (a hosted CI job)",
   "variant": "ci",

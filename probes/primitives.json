@@ -2,8 +2,29 @@
   "type": "capability-primitives/v1",
   "_what_this_is": "The starting set of CAPABILITY primitives: a verb crossed with an object class crossed with a reach, held at a stated altitude, each carrying whether its effect is reversible. A specific path, host or mailbox is an INSTANCE of a primitive, never a new one; only a new verb, object class or reach is a primitive, and it needs a probe. These are capabilities. The estate's other primitives — the counters a policy is written in — are METERS (measurable primitives); never say just 'primitives' in a document that touches both.",
   "source": "brief v0.33.64, 'the grant/mandate repo ships probes, not tables' (4 Sep 2026), §The Primitive",
-  "verbs": ["read", "write", "create", "delete", "execute", "send", "receive", "authenticate-as", "grant", "revoke"],
-  "object_classes": ["file", "process", "network-endpoint", "credential", "message", "record", "repository", "budget", "schedule"],
+  "verbs": [
+    "read",
+    "write",
+    "create",
+    "delete",
+    "execute",
+    "send",
+    "receive",
+    "authenticate-as",
+    "grant",
+    "revoke"
+  ],
+  "object_classes": [
+    "file",
+    "process",
+    "network-endpoint",
+    "credential",
+    "message",
+    "record",
+    "repository",
+    "budget",
+    "schedule"
+  ],
   "reaches": {
     "self": "the agent's own process, sandbox or turn",
     "project": "the working tree or workspace it was pointed at",
@@ -27,33 +48,218 @@
     "schedule": "things that outlive the turn"
   },
   "capabilities": [
-    {"id": "read.file.project",   "family": "filesystem", "verb": "read",   "object": "file", "reach": "project", "reversible": "yes", "label": "Read the project it is working on"},
-    {"id": "write.file.project",  "family": "filesystem", "verb": "write",  "object": "file", "reach": "project", "reversible": "with-effort", "label": "Change the project it is working on"},
-    {"id": "read.file.host",      "family": "filesystem", "verb": "read",   "object": "file", "reach": "host", "reversible": "no", "label": "Read any file the account can (your other files)", "why_irreversible": "a record once read is exposure that cannot be unread"},
-    {"id": "write.file.host",     "family": "filesystem", "verb": "write",  "object": "file", "reach": "host", "reversible": "with-effort", "label": "Change any file the account can"},
-    {"id": "delete.file.host",    "family": "filesystem", "verb": "delete", "object": "file", "reach": "host", "reversible": "no", "label": "Delete files anywhere the account can"},
-    {"id": "execute.process.host","family": "process",    "verb": "execute","object": "process", "reach": "host", "reversible": "with-effort", "label": "Run programs as the account", "note": "reversibility is that of whatever the program does; the primitive is held at with-effort because installs and edits are recoverable and the worst cases are their own rows"},
-    {"id": "execute.process.self","family": "process",    "verb": "execute","object": "process", "reach": "self", "reversible": "yes", "label": "Run programs inside its own sandbox only"},
-    {"id": "send.endpoint.allowed","family": "network",   "verb": "send",   "object": "network-endpoint", "reach": "tenant", "reversible": "no", "label": "Reach a permitted list of hosts", "why_irreversible": "bytes sent are sent"},
-    {"id": "send.endpoint.world", "family": "network",    "verb": "send",   "object": "network-endpoint", "reach": "world", "reversible": "no", "label": "Reach any host on the internet"},
-    {"id": "read.credential.host","family": "identity",   "verb": "read",   "object": "credential", "reach": "host", "reversible": "no", "label": "Read stored credentials", "why_irreversible": "a credential read is a credential exposed"},
-    {"id": "authenticate-as.credential.tenant", "family": "identity", "verb": "authenticate-as", "object": "credential", "reach": "tenant", "reversible": "no", "label": "Act in cloud, cluster or code-host accounts as you"},
-    {"id": "grant.credential.self","family": "identity",  "verb": "grant",  "object": "credential", "reach": "self", "reversible": "yes", "label": "Change its own permission settings"},
-    {"id": "send.message.world",  "family": "communication", "verb": "send", "object": "message", "reach": "world", "reversible": "no", "label": "Send a message to anyone"},
-    {"id": "read.message.tenant", "family": "communication", "verb": "read", "object": "message", "reach": "tenant", "reversible": "no", "label": "Read your mail or chat"},
-    {"id": "write.repository.project", "family": "code", "verb": "write", "object": "repository", "reach": "project", "reversible": "with-effort", "label": "Commit to the repository it was pointed at"},
-    {"id": "write.repository.tenant",  "family": "code", "verb": "write", "object": "repository", "reach": "tenant", "reversible": "with-effort", "label": "Push to your code hosts (any branch it can reach)", "note": "a push to a branch that deploys is with-effort for the repository and no for whatever the deploy did"},
-    {"id": "authenticate-as.credential.signing", "family": "code", "verb": "authenticate-as", "object": "credential", "reach": "tenant", "reversible": "no", "label": "Sign commits as you"},
-    {"id": "create.record.world", "family": "code", "verb": "create", "object": "record", "reach": "world", "reversible": "no", "label": "Publish packages, images or pages under your name"},
-    {"id": "write.budget.tenant", "family": "money", "verb": "write", "object": "budget", "reach": "tenant", "reversible": "no", "label": "Spend money or tokens against your account"},
-    {"id": "create.schedule.host","family": "schedule", "verb": "create", "object": "schedule", "reach": "host", "reversible": "yes", "label": "Create something that outlives the turn (a cron, a service, a routine)"},
-    {"id": "read.record.history", "family": "filesystem", "verb": "read", "object": "record", "reach": "host", "reversible": "no", "label": "Read shell history and past sessions", "why_irreversible": "a transcript read is every earlier session's reach, exposed again"}
+    {
+      "id": "read.file.project",
+      "family": "filesystem",
+      "verb": "read",
+      "object": "file",
+      "reach": "project",
+      "reversible": "yes",
+      "label": "Read the project it is working on"
+    },
+    {
+      "id": "write.file.project",
+      "family": "filesystem",
+      "verb": "write",
+      "object": "file",
+      "reach": "project",
+      "reversible": "with-effort",
+      "label": "Change the project it is working on"
+    },
+    {
+      "id": "read.file.host",
+      "family": "filesystem",
+      "verb": "read",
+      "object": "file",
+      "reach": "host",
+      "reversible": "no",
+      "label": "Read any file the account can reach",
+      "why_irreversible": "a record once read is exposure that cannot be unread"
+    },
+    {
+      "id": "write.file.host",
+      "family": "filesystem",
+      "verb": "write",
+      "object": "file",
+      "reach": "host",
+      "reversible": "with-effort",
+      "label": "Change any file the account can reach"
+    },
+    {
+      "id": "delete.file.host",
+      "family": "filesystem",
+      "verb": "delete",
+      "object": "file",
+      "reach": "host",
+      "reversible": "no",
+      "label": "Delete files anywhere the account can reach"
+    },
+    {
+      "id": "execute.process.host",
+      "family": "process",
+      "verb": "execute",
+      "object": "process",
+      "reach": "host",
+      "reversible": "with-effort",
+      "label": "Run programs as the account",
+      "note": "reversibility is that of whatever the program does; the primitive is held at with-effort because installs and edits are recoverable and the worst cases are their own rows"
+    },
+    {
+      "id": "execute.process.self",
+      "family": "process",
+      "verb": "execute",
+      "object": "process",
+      "reach": "self",
+      "reversible": "yes",
+      "label": "Run programs inside its own sandbox only"
+    },
+    {
+      "id": "send.endpoint.allowed",
+      "family": "network",
+      "verb": "send",
+      "object": "network-endpoint",
+      "reach": "tenant",
+      "reversible": "no",
+      "label": "Reach a permitted list of hosts",
+      "why_irreversible": "bytes sent are sent"
+    },
+    {
+      "id": "send.endpoint.world",
+      "family": "network",
+      "verb": "send",
+      "object": "network-endpoint",
+      "reach": "world",
+      "reversible": "no",
+      "label": "Reach any host on the internet"
+    },
+    {
+      "id": "read.credential.host",
+      "family": "identity",
+      "verb": "read",
+      "object": "credential",
+      "reach": "host",
+      "reversible": "no",
+      "label": "Read credentials stored where it runs",
+      "why_irreversible": "a credential read is a credential exposed"
+    },
+    {
+      "id": "authenticate-as.credential.tenant",
+      "family": "identity",
+      "verb": "authenticate-as",
+      "object": "credential",
+      "reach": "tenant",
+      "reversible": "no",
+      "label": "Act in accounts with the credentials it holds"
+    },
+    {
+      "id": "grant.credential.self",
+      "family": "identity",
+      "verb": "grant",
+      "object": "credential",
+      "reach": "self",
+      "reversible": "yes",
+      "label": "Change its own permission settings"
+    },
+    {
+      "id": "send.message.world",
+      "family": "communication",
+      "verb": "send",
+      "object": "message",
+      "reach": "world",
+      "reversible": "no",
+      "label": "Send a message to anyone"
+    },
+    {
+      "id": "read.message.tenant",
+      "family": "communication",
+      "verb": "read",
+      "object": "message",
+      "reach": "tenant",
+      "reversible": "no",
+      "label": "Read mail or chat it is connected to"
+    },
+    {
+      "id": "write.repository.project",
+      "family": "code",
+      "verb": "write",
+      "object": "repository",
+      "reach": "project",
+      "reversible": "with-effort",
+      "label": "Commit to the repository it was pointed at"
+    },
+    {
+      "id": "write.repository.tenant",
+      "family": "code",
+      "verb": "write",
+      "object": "repository",
+      "reach": "tenant",
+      "reversible": "with-effort",
+      "label": "Push to a code host (any branch it can reach)",
+      "note": "a push to a branch that deploys is with-effort for the repository and no for whatever the deploy did"
+    },
+    {
+      "id": "authenticate-as.credential.signing",
+      "family": "code",
+      "verb": "authenticate-as",
+      "object": "credential",
+      "reach": "tenant",
+      "reversible": "no",
+      "label": "Sign commits with the key it holds"
+    },
+    {
+      "id": "create.record.world",
+      "family": "code",
+      "verb": "create",
+      "object": "record",
+      "reach": "world",
+      "reversible": "no",
+      "label": "Publish packages, images or pages under the name it holds"
+    },
+    {
+      "id": "write.budget.tenant",
+      "family": "money",
+      "verb": "write",
+      "object": "budget",
+      "reach": "tenant",
+      "reversible": "no",
+      "label": "Spend money or tokens against an account it holds"
+    },
+    {
+      "id": "create.schedule.host",
+      "family": "schedule",
+      "verb": "create",
+      "object": "schedule",
+      "reach": "host",
+      "reversible": "yes",
+      "label": "Create something that outlives the turn where it runs (a cron, a service)"
+    },
+    {
+      "id": "read.record.history",
+      "family": "filesystem",
+      "verb": "read",
+      "object": "record",
+      "reach": "host",
+      "reversible": "no",
+      "label": "Read a retained record: shell history, past sessions",
+      "why_irreversible": "a transcript read is every earlier session's reach, exposed again"
+    },
+    {
+      "id": "create.schedule.tenant",
+      "family": "schedule",
+      "verb": "create",
+      "object": "schedule",
+      "reach": "tenant",
+      "reversible": "yes",
+      "label": "Create something that outlives the session, on the platform (a routine, a scheduled trigger, a new session)",
+      "note": "reversible in itself; what the scheduled thing does carries its own rows"
+    }
   ],
   "rules": [
     "A specific path, host or mailbox is an instance of a primitive, never a new one.",
     "Reversibility sits on the primitive, not the instance, because it decides whether a gap is a nuisance or a loss — and this estate has settled that recoverability decides insurability.",
     "A grant containing irreversible primitives is a different object from one that does not, however many rows each has.",
-    "The set is a starting set and will be wrong at the edges from the first week. A proposed primitive that is a specific thing is an instance; one that is a new verb, object class or reach needs a probe."
+    "The set is a starting set and will be wrong at the edges from the first week. A proposed primitive that is a specific thing is an instance; one that is a new verb, object class or reach needs a probe.",
+    "A label never says 'your' or 'as you': what host, tenant and world mean is the profile's to say (reach_names), because for an agent in a vendor's container 'host' is the container and 'tenant' is a scoped token, not your machine and not your accounts."
   ],
   "licence": "CC BY 4.0"
 }

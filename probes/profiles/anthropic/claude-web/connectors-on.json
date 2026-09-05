@@ -1,6 +1,18 @@
 {
   "type": "profile/v1",
   "id": "anthropic/claude-web/connectors-on",
+  "reach_names": {
+    "host": "what the drive connector is scoped to; not your machine",
+    "tenant": "the accounts you connected, as you scoped them",
+    "world": "the vendor's egress"
+  },
+  "not_reachable": [
+    {
+      "what": "your machine's files",
+      "why": "a browser tab; the connector reaches a drive, not a disk",
+      "source": "assess/library.json (web: home)"
+    }
+  ],
   "vendor": "Anthropic",
   "product": "Claude (in the browser, with connectors switched on)",
   "variant": "connectors-on",

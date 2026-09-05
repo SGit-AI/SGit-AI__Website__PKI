@@ -1,0 +1,109 @@
+{
+  "type": "findings/v1",
+  "subject": "agent:claude-session",
+  "profile": "anthropic/claude-code-remote/ccr-container",
+  "tool": "harness (MCP and built-in tools)",
+  "measured_at": "2026-09-05T22:30:00Z",
+  "measured_by": {
+    "who": "the session, from the tool list it was given \u2014 an account, not a probe",
+    "independence": "self",
+    "identity_record": "https://pki.sgit.ai/registry/records/sha256-f9facb4c94da6c19/",
+    "runner": "operator report (harness.platform-tools); no command ran"
+  },
+  "environment": {
+    "platform": "Linux",
+    "machine": "x86_64",
+    "note": "the tools are the harness's, declared to the session at start; their reach is what the platform scopes them to"
+  },
+  "findings": [
+    {
+      "probe": "harness.platform-tools",
+      "message": "a code-host API tool (push files, create or update a file, create a branch, open a pull request) writes to in-scope repositories under the platform's token \u2014 WITHOUT passing through the clone's git hooks; the mandate hook and the insurance policy bound the git tool, not this one",
+      "outcome": "True",
+      "capability": "write.repository.tenant",
+      "reversible": "with-effort",
+      "tier": "self-reported",
+      "observed_at": "2026-09-05T22:30:00Z",
+      "values": {
+        "tools": [
+          "push_files",
+          "create_or_update_file",
+          "create_branch",
+          "create_pull_request",
+          "merge_pull_request"
+        ],
+        "scope": "repositories the platform lists as in scope for the session",
+        "bypasses": "pre-commit and pre-push hooks in the clone"
+      }
+    },
+    {
+      "probe": "harness.platform-tools",
+      "message": "the same API tool acts on the code host as the platform's app with a token scoped to in-scope repositories \u2014 never as the person; the session holds no user credential",
+      "outcome": "True",
+      "capability": "authenticate-as.credential.tenant",
+      "reversible": "no",
+      "tier": "self-reported",
+      "observed_at": "2026-09-05T22:30:00Z",
+      "values": {
+        "as": "the platform's GitHub App, scoped",
+        "not": "the operator's own account"
+      }
+    },
+    {
+      "probe": "harness.platform-tools",
+      "message": "a scheduling tool creates a routine (a one-shot or cron trigger) that resumes this session or spawns a new one later: something that outlives the session, on the platform",
+      "outcome": "True",
+      "capability": "create.schedule.tenant",
+      "reversible": "yes",
+      "tier": "self-reported",
+      "observed_at": "2026-09-05T22:30:00Z",
+      "values": {
+        "tools": [
+          "create_trigger",
+          "send_later",
+          "create_session"
+        ],
+        "reach": "tenant \u2014 the platform, not this container"
+      }
+    },
+    {
+      "probe": "harness.platform-tools",
+      "message": "a fetch tool reaches hosts on its own allow-list, which the shell's proxy policy does not govern; sgit.ai and riskmandate.ai were reached during this session",
+      "outcome": "True",
+      "capability": "send.endpoint.allowed",
+      "reversible": "no",
+      "tier": "self-reported",
+      "observed_at": "2026-09-05T22:30:00Z",
+      "values": {
+        "answered": [
+          "sgit.ai",
+          "riskmandate.ai"
+        ]
+      }
+    },
+    {
+      "probe": "harness.platform-tools",
+      "message": "file tools read and edit the attached working tree",
+      "outcome": "True",
+      "capability": "read.file.project",
+      "reversible": "yes",
+      "tier": "self-reported",
+      "observed_at": "2026-09-05T22:30:00Z",
+      "values": {
+        "tools": [
+          "Read",
+          "Edit",
+          "Write",
+          "Glob",
+          "Grep"
+        ]
+      }
+    }
+  ],
+  "not_measured": [
+    "what the API tool can reach beyond the in-scope list (nothing, by the platform's account; not tested)",
+    "whether a routine survives the account's plan changing"
+  ],
+  "disclaimer": "PRESENCE AND REACHABILITY, NEVER CONTENTS. Self-reported: the weakest tier the model has.",
+  "licence": "CC BY 4.0"
+}

@@ -50,7 +50,7 @@
         "create.record.world"
       ],
       "command": "for p in .aws/credentials .config/gcloud .azure .git-credentials .config/gh/hosts.yml .ssh .npmrc .pypirc .cargo/credentials .gnupg .sg-send/keys .kube/config; do [ -e \"$HOME/$p\" ] && echo \"present: $p\"; done",
-      "how_to_read": "Presence at the usual locations only. A file present is a credential the account holds and a process running as the account can read (read.credential.host, observed by presence); which services it opens is INFERRED from the path, never read. A package-registry token present is publishing under the account's name (create.record.world), inferred the same way.",
+      "how_to_read": "Presence at the usual locations only. A file present is a credential the account holds and a process running as the account can read (read.credential.host, observed by presence); which services it opens is INFERRED from the path, never read. A package-registry token present is publishing under the account's name (create.record.world), inferred the same way. Presence cannot tell WHOSE a credential is: an agent's own signing key and its vault keystore look the same as a person's, so the profile's note says which, on the operator's account.",
       "tier_when_self_run": "observed",
       "safe_to_run": true,
       "origin": "measure.py probe_filesystem, and the published read-only audit tool's module list the assess library cites"
@@ -140,7 +140,7 @@
         "create.schedule.host"
       ],
       "command": "crontab -l 2>&1 | head -1; command -v crontab systemctl at 2>/dev/null; ls /etc/cron.d 2>/dev/null | wc -l",
-      "how_to_read": "Whether anything the agent creates can outlive the turn on this host. No scheduler binary and no cron directory: NotAvailable, and nothing found that outlives the turn. A scheduler present and writable: create.schedule.host. A harness's own routines (a scheduled trigger that resumes a session) are a scheduler at tenant reach and are recorded by the operator, not by this command.",
+      "how_to_read": "Whether anything the agent creates can outlive the turn on this host. No scheduler binary and no cron directory: NotAvailable. A scheduler present and writable: create.schedule.host — but on an EPHEMERAL host (a container destroyed with the session, a CI runner) a cron outlives the turn and dies with the machine, and the profile must say so. A harness's own routines (a scheduled trigger that resumes or spawns a session) are a scheduler at TENANT reach and are recorded by the operator with harness.platform-tools, not by this command.",
       "tier_when_self_run": "observed",
       "safe_to_run": true
     },
@@ -191,6 +191,22 @@
       "how_to_read": "Spend is established by the presence of a metered credential (inferred), or by the supplier's meter (observed, out of band), never by spending.",
       "tier_when_self_run": "inferred",
       "safe_to_run": false
+    },
+    {
+      "id": "harness.platform-tools",
+      "family": "identity",
+      "establishes": [
+        "create.schedule.tenant",
+        "authenticate-as.credential.tenant",
+        "write.repository.tenant",
+        "send.endpoint.allowed",
+        "read.file.project"
+      ],
+      "command": "(not runnable from the shell) — the operator lists the harness tools the session holds and what each reaches: an API tool that writes to a code host under a platform-scoped token, a tool that creates a scheduled trigger, a fetch tool with its own allow-list",
+      "how_to_read": "A harness tool is a tool: its reach is measured on its own row. Two consequences that a shell probe cannot see. A code-host API tool pushes WITHOUT going through the clone's git hooks, so a hook-based control (a setting) bounds the git tool and not this one; the control on this row is the platform's token scope (a boundary) and nothing else. And a scheduling tool is create.schedule at TENANT reach: what it creates outlives the session, on the platform. Tier: self-reported, by the operator, from the tool list the session was given.",
+      "tier_when_self_run": "self-reported",
+      "safe_to_run": true,
+      "runnable_from_shell": false
     }
   ],
   "licence": "CC BY 4.0"

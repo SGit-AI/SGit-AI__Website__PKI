@@ -32,8 +32,21 @@ main.doc table.caps td,main.doc table.probes td{font-size:.84rem}
 .btn.alt{background:var(--bg);color:var(--accent-dk)}
 .btn:disabled{opacity:.45;cursor:default}
 .verdict{background:#101114;color:#f4f4f2;border-radius:12px;padding:1.1rem 1.3rem;margin:1rem 0}
-.verdict .big{font-family:var(--serif);font-size:1.45rem;line-height:1.35;margin:0 0 .4rem}
-.verdict .sub{font-size:.85rem;color:#c9c9c4;margin:0}
+/* main.doc p sets a dark ink; inside the dark verdict box the ink must be light, and the
+   selector must outrank main.doc p — the first release shipped grey-on-black on phones. */
+main.doc .verdict p,.verdict p{color:#f4f4f2}
+main.doc .verdict .big,.verdict .big{font-family:var(--serif);font-size:1.45rem;line-height:1.35;margin:0 0 .4rem;color:#f4f4f2}
+main.doc .verdict .sub,.verdict .sub{font-size:.85rem;color:#c9c9c4;margin:0}
+.verdict b{color:#fff}
+.verdict code{background:rgba(255,255,255,.14);color:#f4f4f2;border:0}
+.verdict a{color:#9fd3cc}
+.cannot{background:var(--panel2);border:1px dashed var(--line2);border-radius:10px;padding:.6rem .85rem;margin:.6rem 0;font-size:.86rem}
+.cannot b{color:#101114}
+.ctl{display:inline-block;font-family:var(--mono);font-size:.64rem;letter-spacing:.05em;text-transform:uppercase;border:1px solid var(--line2);border-radius:999px;padding:.05rem .45rem;color:var(--dim);vertical-align:middle}
+.ctl.boundary{color:#0f766e;border-color:rgba(15,118,110,.5)}
+.ctl.setting{color:var(--warm);border-color:rgba(180,83,9,.5)}
+.ctl.none{color:#b91c1c;border-color:rgba(185,28,28,.45)}
+.ctl.expectation{color:var(--dim)}
 .verdict .tier{display:inline-block;margin-top:.6rem;font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid #6b6b66;border-radius:999px;padding:.15rem .55rem;color:#e6e6e2}
 .gap-cols{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin:.8rem 0}
 @media (max-width:760px){.gap-cols{grid-template-columns:1fr}}

@@ -3,8 +3,8 @@
 # A registry of capability primitives and measured grants. A grant claim never travels alone:
 # it travels with the probe that established it, so a challenge is a rerun rather than an argument.
 # GRANTS ARE PUBLIC, MANDATES ARE PRIVATE: your mandate stays in your clone under probes/yours/ (gitignored).
-# 21 capability primitives (12 irreversible) · 14 probes (12 safe to run) · 7 profiles (2 measured, 5 derived claims) · 3 evidence files, 42 findings, all self-run.
-# Page: https://pki.sgit.ai/probes/index.html · Runner: probes/run.py · Shapes: probes/schema/
+# 22 capability primitives (12 irreversible) · 15 probes (13 safe to run) · 7 profiles (2 measured, 5 derived claims) · 4 evidence files, 47 findings, all self-run.
+# Page: https://pki.sgit.ai/probes/index.html · Graph: https://pki.sgit.ai/probes/graph.html?profile=<id> · Runner: probes/run.py · Shapes: probes/schema/
 
 ## What an agent should carry if it summarises anything here
 
@@ -16,26 +16,37 @@
 
 ## The profiles
 
-  [anthropic/claude-code-remote/ccr-container] Claude Code on the web (a remote session container) — MEASURED · version 2026-09-05
-    tools shell (Bash), fetch (WebFetch) · union 14 · intersection 1 · irreversible 7
+  [anthropic/claude-code-remote/ccr-container] Claude Code on the web (a remote session container) — MEASURED · version 2026-09-05.2
+    tools shell (Bash), fetch (WebFetch), harness (MCP and built-in tools) · union 15 · intersection 1 · irreversible 7
+    host = this container — ephemeral, the vendor's; not your machine · tenant = the attached repository and the platform's scoped tokens; not your accounts
+    cannot reach: your machine's files; your credentials; hosts the proxy refuses; repositories outside the platform's scope
     https://pki.sgit.ai/probes/profiles/anthropic/claude-code-remote/ccr-container.json
   [anthropic/claude-code/local-confirmations-off] Claude Code (the CLI, on your own machine) — DERIVED (a claim) · version 2026-09-05
     tools shell (Bash), files (Read, Edit, Write), fetch (WebFetch) · union 16 · intersection 0 · irreversible 8
+    host = your machine, as your user account · tenant = your accounts, with the credentials in your home directory
     https://pki.sgit.ai/probes/profiles/anthropic/claude-code/local-confirmations-off.json
   [anthropic/claude-code/local-default] Claude Code (the CLI, on your own machine) — DERIVED (a claim) · version 2026-09-05
     tools shell (Bash), files (Read, Edit, Write), fetch (WebFetch) · union 16 · intersection 0 · irreversible 8
+    host = your machine, as your user account · tenant = your accounts, with the credentials in your home directory
     https://pki.sgit.ai/probes/profiles/anthropic/claude-code/local-default.json
   [anthropic/claude-desktop/default] Claude Desktop (a desktop app with local tools) — DERIVED (a claim) · version 2026-09-05
     tools conversation, local files and commands (when enabled) · union 10 · intersection 1 · irreversible 5
+    host = your machine, as your user account · tenant = your accounts
     https://pki.sgit.ai/probes/profiles/anthropic/claude-desktop/default.json
   [anthropic/claude-web/connectors-on] Claude (in the browser, with connectors switched on) — DERIVED (a claim) · version 2026-09-05
     tools conversation and uploads, connectors · union 5 · intersection 0 · irreversible 3
+    host = what the drive connector is scoped to; not your machine · tenant = the accounts you connected, as you scoped them
+    cannot reach: your machine's files
     https://pki.sgit.ai/probes/profiles/anthropic/claude-web/connectors-on.json
   [github/actions-runner/ci] Actions runner (a hosted CI job) — MEASURED · version 2026-08-26
     tools the job's shell · union 8 · intersection 8 · irreversible 3
+    host = the runner — destroyed after the job; not your machine · tenant = the repository, with the workflow's token
+    cannot reach: your machine; the repository, for writing
     https://pki.sgit.ai/probes/profiles/github/actions-runner/ci.json
   [openai/chatgpt-web/default] ChatGPT (in the browser, no connectors) — DERIVED (a claim) · version 2026-09-05
     tools conversation and uploads · union 1 · intersection 1 · irreversible 0
+    host = the vendor's environment; not your machine · tenant = nothing of yours
+    cannot reach: your machine's files; your accounts
     https://pki.sgit.ai/probes/profiles/openai/chatgpt-web/default.json
 
 ## The probes
@@ -54,6 +65,7 @@
   [ci.permissions-block] establishes write.repository.tenant · observed when self-run · safe
   [communication.send] establishes send.message.world, read.message.tenant · documented when self-run · DESCRIBED, NOT RUN
   [money.spend] establishes write.budget.tenant · inferred when self-run · DESCRIBED, NOT RUN
+  [harness.platform-tools] establishes create.schedule.tenant, authenticate-as.credential.tenant, write.repository.tenant, send.endpoint.allowed, read.file.project · self-reported when self-run · safe
 
 ## Vocabulary
 

@@ -75,6 +75,7 @@ manifest = {
         "version": p["version"], "description": p["description"], "measured": measured(p),
         "tools": [t["tool"] for t in p["tools"]], "union": p["union"], "intersection": p["intersection"],
         "irreversible_in_union": p.get("irreversible_in_union", []), "prior": p.get("prior", 0.0),
+        "reach_names": p.get("reach_names"), "not_reachable": p.get("not_reachable", []),
         "path": f"profiles/{p['id']}.json"} for p in profiles],
 }
 (P / "profiles" / "index.json").write_text(json.dumps(manifest, indent=2) + "\n")
@@ -104,9 +105,10 @@ probe_rows = "\n".join(
 def prof_row(p):
     ev = [t["evidence"] for t in p["tools"] if t.get("evidence")]
     evc = " ".join(f'<a href="{esc(e)}">file</a>' for e in ev)
-    return (f'<tr><td><a href="profiles/{esc(p["id"])}.json"><code>{esc(p["id"])}</code></a><br><span class="dim">{esc(p["product"])}</span></td>'
+    return (f'<tr><td><a href="profiles/{esc(p["id"])}.json"><code>{esc(p["id"])}</code></a><br><span class="dim">{esc(p["product"])}</span><br><a href="graph.html?profile={esc(p["id"])}">as a graph &rarr;</a></td>'
             f'<td>{esc(p.get("surface", ""))}</td><td>{"<br>".join(esc(t["tool"]) for t in p["tools"])}</td>'
             f'<td>{len(p["union"])}</td><td>{len(p["intersection"])}</td><td class="rev-no">{len(p.get("irreversible_in_union", []))}</td>'
+            f'<td>{len(p.get("not_reachable", []))}</td>'
             f'<td>{("<b>measured</b> &middot; " + evc) if ev else "<span class=is-claim>a claim &mdash; derived, no probe run</span>"}</td><td>{esc(p["version"])}</td></tr>')
 prof_rows = "\n".join(prof_row(p) for p in profiles)
 ev_rows = "\n".join(
@@ -180,9 +182,9 @@ page = f'''<!doctype html>
 <h2 id="profiles">The profiles</h2>
 <p>The unit of mapping is a <b>tool</b>, not a product: two tools in one session reached different sets of hosts on 4 September, union seven and intersection one, and neither set was the session's. So a profile is a named configuration of a product listing its tools, each with its own grant; the union is what an operator actually carries and the intersection is reported because it is usually nearly empty. A row with no evidence file is visibly <span class="is-claim">a claim</span> rather than a measurement.</p>
 <div class="tablewrap"><table class="profiles">
-<thead><tr><th>profile</th><th>surface</th><th>tools</th><th>union</th><th>&cap;</th><th>irreversible</th><th>evidence</th><th>version</th></tr></thead>
+<thead><tr><th>profile</th><th>surface</th><th>tools</th><th>union</th><th>&cap;</th><th>irreversible</th><th>cannot reach</th><th>evidence</th><th>version</th></tr></thead>
 <tbody>{prof_rows}</tbody></table></div>
-<p class="dim">Manifest: <a href="profiles/index.json">profiles/index.json</a>. A profile's <code>version</code> moves when any row moves, and an assessment computed against it goes stale when it does.</p>
+<p class="dim">Manifest: <a href="profiles/index.json">profiles/index.json</a>. A profile's <code>version</code> moves when any row moves, and an assessment computed against it goes stale when it does. <b>Labels never say <i>your</i> or <i>as you</i></b>: what host, tenant and world mean is each profile's to say (<code>reach_names</code>), because for an agent in a vendor's container <i>host</i> is the container and <i>tenant</i> is a scoped token. Each profile also lists what it <b>cannot</b> reach. <a href="graph.html">Every profile, drawn as a graph &rarr;</a></p>
 
 <h2 id="diff">The diff between two profiles</h2>
 <p>The same assistant on the web, locally, and with confirmations disabled are siblings sharing most rows and differing in a few, and the diff is the answer to &ldquo;what does turning that on actually give it&rdquo;.</p>
@@ -272,7 +274,7 @@ lines = ["# pki.sgit.ai/probes — probes, not tables", "#",
          "# it travels with the probe that established it, so a challenge is a rerun rather than an argument.",
          "# GRANTS ARE PUBLIC, MANDATES ARE PRIVATE: your mandate stays in your clone under probes/yours/ (gitignored).",
          f"# {n_caps} capability primitives ({n_irrev} irreversible) · {n_probes} probes ({n_safe} safe to run) · {n_prof} profiles ({n_meas} measured, {n_prof - n_meas} derived claims) · {n_ev} evidence files, {n_find} findings, all self-run.",
-         "# Page: https://pki.sgit.ai/probes/index.html · Runner: probes/run.py · Shapes: probes/schema/",
+         "# Page: https://pki.sgit.ai/probes/index.html · Graph: https://pki.sgit.ai/probes/graph.html?profile=<id> · Runner: probes/run.py · Shapes: probes/schema/",
          "", "## What an agent should carry if it summarises anything here", "",
          "  1. PRESENCE AND REACHABILITY, NEVER CONTENTS. No evidence file holds a byte of any credential, setting or transcript.",
          "  2. EVERY FINDING IS SELF-RUN: produced by the environment it describes, the weakest tier the model has. No independent run exists yet.",
@@ -283,6 +285,8 @@ lines = ["# pki.sgit.ai/probes — probes, not tables", "#",
 for p in profiles:
     lines.append(f"  [{p['id']}] {p['product']} — {'MEASURED' if measured(p) else 'DERIVED (a claim)'} · version {p['version']}")
     lines.append(f"    tools {', '.join(t['tool'] for t in p['tools'])} · union {len(p['union'])} · intersection {len(p['intersection'])} · irreversible {len(p.get('irreversible_in_union', []))}")
+    if p.get("reach_names"): lines.append(f"    host = {p['reach_names']['host']} · tenant = {p['reach_names']['tenant']}")
+    if p.get("not_reachable"): lines.append(f"    cannot reach: {'; '.join(n['what'] for n in p['not_reachable'])}")
     lines.append(f"    https://pki.sgit.ai/probes/profiles/{p['id']}.json")
 lines += ["", "## The probes", ""]
 for p in reg["probes"]:

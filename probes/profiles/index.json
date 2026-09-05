@@ -10,17 +10,19 @@
       "product": "Claude Code on the web (a remote session container)",
       "variant": "ccr-container",
       "surface": "agentbox",
-      "version": "2026-09-05",
-      "description": "A managed cloud container, ephemeral, one git repository attached, an egress proxy above it. MEASURED, by the thing being profiled: the shell probed on 5 September with probes/run.py, and the fetch tool's reach reported by the operator. The same environment measured on 26 August is the Grant & Mandate library's first entry, and the two agree on every row they share.",
+      "version": "2026-09-05.2",
+      "description": "A managed cloud container, ephemeral, one git repository attached, an egress proxy above it, and a set of harness tools scoped by the platform. MEASURED, by the thing being profiled: the shell probed on 5 September with probes/run.py, the fetch tool's reach and the harness tools reported by the operator. HOST MEANS THE CONTAINER, not your machine; TENANT means the platform's scoped tokens, not your accounts. The same environment measured on 26 August is the Grant & Mandate library's first entry, and the two agree on every row they share.",
       "measured": true,
       "tools": [
         "shell (Bash)",
-        "fetch (WebFetch)"
+        "fetch (WebFetch)",
+        "harness (MCP and built-in tools)"
       ],
       "union": [
         "authenticate-as.credential.signing",
         "authenticate-as.credential.tenant",
         "create.schedule.host",
+        "create.schedule.tenant",
         "delete.file.host",
         "execute.process.host",
         "read.credential.host",
@@ -46,6 +48,33 @@
         "send.endpoint.allowed"
       ],
       "prior": 0.1,
+      "reach_names": {
+        "host": "this container \u2014 ephemeral, the vendor's; not your machine",
+        "tenant": "the attached repository and the platform's scoped tokens; not your accounts",
+        "world": "the hosts the proxy allows"
+      },
+      "not_reachable": [
+        {
+          "what": "your machine's files",
+          "why": "the container has no path to the operator's computer; the assess tree records home as a boundary",
+          "source": "assess/library.json (agentbox: home)"
+        },
+        {
+          "what": "your credentials",
+          "why": "no user credential is in the image; the keys present are the session's own",
+          "source": "evidence: filesystem.credential-presence, 5 Sep"
+        },
+        {
+          "what": "hosts the proxy refuses",
+          "why": "a 403 on the CONNECT, set above the process",
+          "source": "evidence: network.egress-shell"
+        },
+        {
+          "what": "repositories outside the platform's scope",
+          "why": "the token is scoped by the platform; the API tool refuses out-of-scope calls",
+          "source": "harness.platform-tools, self-reported"
+        }
+      ],
       "path": "profiles/anthropic/claude-code-remote/ccr-container.json"
     },
     {
@@ -92,6 +121,12 @@
         "send.endpoint.world"
       ],
       "prior": 0.15,
+      "reach_names": {
+        "host": "your machine, as your user account",
+        "tenant": "your accounts, with the credentials in your home directory",
+        "world": "the internet"
+      },
+      "not_reachable": [],
       "path": "profiles/anthropic/claude-code/local-confirmations-off.json"
     },
     {
@@ -138,6 +173,12 @@
         "send.endpoint.world"
       ],
       "prior": 0.35,
+      "reach_names": {
+        "host": "your machine, as your user account",
+        "tenant": "your accounts, with the credentials in your home directory",
+        "world": "the internet"
+      },
+      "not_reachable": [],
       "path": "profiles/anthropic/claude-code/local-default.json"
     },
     {
@@ -176,6 +217,12 @@
         "send.endpoint.world"
       ],
       "prior": 0.1,
+      "reach_names": {
+        "host": "your machine, as your user account",
+        "tenant": "your accounts",
+        "world": "the internet"
+      },
+      "not_reachable": [],
       "path": "profiles/anthropic/claude-desktop/default.json"
     },
     {
@@ -205,6 +252,18 @@
         "read.message.tenant"
       ],
       "prior": 0.1,
+      "reach_names": {
+        "host": "what the drive connector is scoped to; not your machine",
+        "tenant": "the accounts you connected, as you scoped them",
+        "world": "the vendor's egress"
+      },
+      "not_reachable": [
+        {
+          "what": "your machine's files",
+          "why": "a browser tab; the connector reaches a drive, not a disk",
+          "source": "assess/library.json (web: home)"
+        }
+      ],
       "path": "profiles/anthropic/claude-web/connectors-on.json"
     },
     {
@@ -245,6 +304,23 @@
         "send.endpoint.world"
       ],
       "prior": 0.05,
+      "reach_names": {
+        "host": "the runner \u2014 destroyed after the job; not your machine",
+        "tenant": "the repository, with the workflow's token",
+        "world": "the internet, unrestricted"
+      },
+      "not_reachable": [
+        {
+          "what": "your machine",
+          "why": "a hosted runner",
+          "source": "library entry 2"
+        },
+        {
+          "what": "the repository, for writing",
+          "why": "the token is contents:read",
+          "source": "evidence: ci.permissions-block"
+        }
+      ],
       "path": "profiles/github/actions-runner/ci.json"
     },
     {
@@ -267,6 +343,23 @@
       ],
       "irreversible_in_union": [],
       "prior": 0.15,
+      "reach_names": {
+        "host": "the vendor's environment; not your machine",
+        "tenant": "nothing of yours",
+        "world": "the vendor's egress, if browsing is on"
+      },
+      "not_reachable": [
+        {
+          "what": "your machine's files",
+          "why": "the vendor's environment is a boundary you did not build",
+          "source": "assess/library.json (web: home)"
+        },
+        {
+          "what": "your accounts",
+          "why": "no connectors are on",
+          "source": "assess/library.json (web: connect)"
+        }
+      ],
       "path": "profiles/openai/chatgpt-web/default.json"
     }
   ]

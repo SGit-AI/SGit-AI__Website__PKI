@@ -94,8 +94,11 @@
     for (const id of S.profiles) {
       const p = await loadProfile(id);
       for (const t of p.tools) for (const g of t.grant) {
-        const r = rows[g.capability] || (rows[g.capability] = { tier: g.tier, sources: new Set(), measured: !!t.evidence, control_tier: g.control_tier });
-        r.sources.add(p.variant + ' · ' + t.tool);
+        const r = rows[g.capability] || (rows[g.capability] = { tier: g.tier, sources: new Set(), measured: !!t.evidence, ctls: new Set(), reach: new Set(), notes: [] });
+        r.sources.add(p.variant + ' · ' + t.tool.split(' (')[0]);
+        r.ctls.add(g.control_tier || 'none');
+        if (p.reach_names && p.reach_names[caps[g.capability].reach]) r.reach.add(p.variant + ': ' + caps[g.capability].reach + ' = ' + p.reach_names[caps[g.capability].reach]);
+        if (g.note && r.notes.length < 2) r.notes.push(g.note);
         if (t.evidence) r.measured = true;
         if (g.tier === 'observed') r.tier = 'observed';
       }
@@ -117,9 +120,14 @@
     $('#s3').hidden = false;
     const order = ids.slice().sort((a, b) => (caps[a].reversible === 'no' ? 0 : 1) - (caps[b].reversible === 'no' ? 0 : 1) || caps[a].family.localeCompare(caps[b].family));
     const measuredAll = ids.every(i => rows[i].measured);
+    const chosen = S.findings ? [] : await Promise.all(S.profiles.map(loadProfile));
+    const cannot = chosen.flatMap(p => (p.not_reachable || []).map(n => `${p.variant}: ${n.what} <span class="dim">(${n.why})</span>`));
+    const chip = i => [...(rows[i].ctls || [])].map(k => `<span class="ctl ${k}">${k}</span>`).join(' ');
     g2.innerHTML = `<p><b>${ids.length} capabilities</b>, ${ids.filter(i => caps[i].reversible === 'no').length} of them irreversible — ${S.findings ? 'from the findings file you pasted' : 'from ' + (measuredAll ? 'measurements' : 'profiles') + ' other people contributed'}${measuredAll ? '' : '; the derived rows are claims until somebody runs the probes'}.</p>
       <div class="fam-row">${famRow(ids, 'hit')}</div>
-      <ul class="caplist">${order.map(i => `<li><code>${i}</code> <span class="rev-${caps[i].reversible}">${caps[i].reversible === 'no' ? 'irreversible' : caps[i].reversible}</span> — ${caps[i].label} <span class="dim">· ${rows[i].measured ? rows[i].tier : 'derived'} · ${[...rows[i].sources].join(', ')}</span></li>`).join('')}</ul>`;
+      ${chosen.length ? `<p class="dim">${chosen.map(p => `<b>${p.variant}</b>: host = ${p.reach_names ? p.reach_names.host : 'host'}; tenant = ${p.reach_names ? p.reach_names.tenant : 'tenant'} · <a href="../probes/graph.html?profile=${encodeURIComponent(p.id)}">graph</a>`).join('<br>')}</p>` : ''}
+      ${cannot.length ? `<div class="cannot"><b>What they cannot reach:</b> ${cannot.join(' · ')}</div>` : ''}
+      <ul class="caplist">${order.map(i => `<li><code>${i}</code> <span class="rev-${caps[i].reversible}">${caps[i].reversible === 'no' ? 'irreversible' : caps[i].reversible}</span> ${chip(i)} — ${caps[i].label} <span class="dim">· ${rows[i].measured ? rows[i].tier : 'derived'} · ${[...rows[i].sources].join(', ')}${(rows[i].notes || []).length ? ' · ' + rows[i].notes[0] : ''}</span></li>`).join('')}</ul>`;
     // step 4: the gap
     const answered = S.purposes.size || S.never.size;
     $('#s4').hidden = !answered; $('#s5').hidden = !answered;

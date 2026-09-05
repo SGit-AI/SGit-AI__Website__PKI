@@ -149,7 +149,7 @@
 ## Probes, not tables (the capability registry) — live
   where     https://pki.sgit.ai/probes/index.html
   code      probes/ (primitives.json, probes.json, run.py, schema/, profiles/, evidence/, incidents/, reductions.json), admin/build/gen_probes.py
-  since     v0.1.69 (last moved v0.1.69)
+  since     v0.1.69 (last moved v0.1.70)
   is        A registry of capability primitives (verb × object × reach + reversible) and measured grants where a grant claim never travels alone: it points at the probe that established it, the date, the environment and the output, so a challenge is a rerun rather than an argument. A runner that emits findings/v1 in OpenSSF Scorecard's probe/finding shape plus reversibility and tier; seven profiles, two of them measured; grants public, mandates private.
   DOES NOT PROVE:
     - Independence. Every evidence file was produced by the environment it describes — the weakest tier the model has, and stated on every file

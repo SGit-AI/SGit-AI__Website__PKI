@@ -1,6 +1,12 @@
 {
   "type": "profile/v1",
   "id": "anthropic/claude-desktop/default",
+  "reach_names": {
+    "host": "your machine, as your user account",
+    "tenant": "your accounts",
+    "world": "the internet"
+  },
+  "not_reachable": [],
   "vendor": "Anthropic",
   "product": "Claude Desktop (a desktop app with local tools)",
   "variant": "default",

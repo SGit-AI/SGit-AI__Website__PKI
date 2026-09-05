@@ -1,6 +1,12 @@
 {
   "type": "profile/v1",
   "id": "anthropic/claude-code/local-confirmations-off",
+  "reach_names": {
+    "host": "your machine, as your user account",
+    "tenant": "your accounts, with the credentials in your home directory",
+    "world": "the internet"
+  },
+  "not_reachable": [],
   "vendor": "Anthropic",
   "product": "Claude Code (the CLI, on your own machine)",
   "variant": "local-confirmations-off",

@@ -316,7 +316,7 @@ BENCH = [
   code="book/, book/content/, book/shots/, book/build.py"),
 
  dict(slug="probes", name="Probes, not tables (the capability registry)", state="live",
-  where="../probes/index.html", since="v0.1.69", updated="v0.1.69",
+  where="../probes/index.html", since="v0.1.69", updated="v0.1.70",
   origin=("<a href='../documents/probes-not-tables.html'>brief v0.33.64 (probes, not tables)</a>, with the vocabulary "
           "corrected the same day by <a href='../documents/the-precedents.html'>the precedents brief</a>"),
   one_line="A registry of capability primitives (verb &times; object &times; reach + reversible) and measured grants where a "
@@ -330,7 +330,9 @@ BENCH = [
     "<b>A finding shape adopted, not minted</b> &mdash; Scorecard's probe, message, outcome, remediation and location, plus the two fields this subject needs",
     "<b>A row without evidence is visibly a claim</b> &mdash; the five derived profiles say so on the page, the manifest and llms.txt",
     "<b>An incident that demotes</b> &mdash; the 26 August hook, claimed inline and shown to be a setting, as the first record",
-    "The diff between two profiles, in the browser: the same assistant with confirmations on and off differs in one control"],
+    "The diff between two profiles, in the browser: the same assistant with confirmations on and off differs in one control",
+    "<b>Every profile drawn as a graph</b> (<a href='../probes/graph.html'>graph.html</a>): tools, the capability each reaches, the control on the path, and what it cannot reach",
+    "<b>A hook is a control on one tool</b> &mdash; this container's code-host API tool writes to the repository by a path the clone's hooks never see (the harness evidence, self-reported)"],
   does_not_prove=[
     "<b>Independence.</b> Every evidence file was produced by the environment it describes &mdash; the weakest tier the model has, and stated on every file",
     "<b>Completeness.</b> A self-run probe reports what the subject can see; a capability it does not know it has will not appear. A floor, not a census",

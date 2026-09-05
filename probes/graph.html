@@ -3,12 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Guess the agent &mdash; the tree asks cheap questions, guesses your grant, and measures the gap between what you predicted and what it found &middot; pki.sgit.ai</title>
-<meta name="description" content="Think of an agent you use. The tree asks cheap questions with obvious answers, infers the profile, asks you to predict what it can do before the reveal, and shows the prediction gap with the reduction on the same screen. Deterministic, in the browser, nothing sent.">
-<link rel="canonical" href="https://pki.sgit.ai/guess/index.html">
-<meta property="og:url" content="https://pki.sgit.ai/guess/index.html">
+<title>The grant, as a graph &mdash; a profile's tools, what each reaches, and what it cannot &middot; pki.sgit.ai</title>
+<meta name="description" content="A profile drawn as a graph: the profile, its tools, the capability each tool reaches with its reversibility and the control on the path, and what the profile cannot reach at all. Drawn in the browser from the profile JSON; hover any node or edge for the row behind it.">
+<link rel="canonical" href="https://pki.sgit.ai/probes/graph.html">
+<meta property="og:url" content="https://pki.sgit.ai/probes/graph.html">
 <link rel="stylesheet" href="../assets/site.css">
 <link rel="stylesheet" href="../assets/authorised.css">
+<style>
+#graph{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.6rem;overflow-x:auto}
+#graph svg{display:block;min-width:720px}
+.legend{display:flex;flex-wrap:wrap;gap:.5rem 1.2rem;font-size:.78rem;color:var(--dim);margin:.6rem 0}
+.legend i{display:inline-block;width:1.6rem;height:0;border-top:3px solid #0f766e;vertical-align:middle;margin-right:.3rem}
+.legend i.s{border-top:2px solid #b45309}.legend i.e{border-top:1.5px dashed #6b6f76}.legend i.n{border-top:1.5px dashed #b91c1c}
+.legend b{display:inline-block;width:.9rem;height:.9rem;border-radius:4px;vertical-align:middle;margin-right:.3rem;border:1.4px solid #9a9ea6;background:#fff}
+.legend b.no{background:#b91c1c;border-color:#b91c1c}.legend b.we{border-color:#b45309}.legend b.nr{border-style:dashed;background:#f4f4f2}
+main.doc.wide{max-width:1120px}
+</style>
 </head>
 <body>
 
@@ -51,9 +61,9 @@
       <a class="nl here" href="../authorised/index.html">Measure<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl" href="../authorised/index.html">&#9679; What you authorised and never asked for</a>
-      <a class="sl here" href="../guess/index.html">&#9679; Guess the agent</a>
+      <a class="sl" href="../guess/index.html">&#9679; Guess the agent</a>
       <a class="sl" href="../probes/index.html">&#9679; Probes, not tables</a>
-      <a class="sl" href="../probes/graph.html">&mdash; the grant as a graph</a>
+      <a class="sl here" href="../probes/graph.html">&mdash; the grant as a graph</a>
       <a class="sl" href="../probes/llms.txt">probes/llms.txt</a>
       </div>
     </div>
@@ -78,7 +88,7 @@
       <a class="sl" href="../workbench/index.html">&#9679; The workbench (app)</a>
       <a class="sl" href="../probes/index.html">&#9679; Probes, not tables</a>
       <a class="sl" href="../authorised/index.html">&#9679; What you authorised and never asked for</a>
-      <a class="sl here" href="../guess/index.html">&#9679; Guess the agent</a>
+      <a class="sl" href="../guess/index.html">&#9679; Guess the agent</a>
       <a class="sl" href="../registry/index.html">The register, live</a>
       <a class="sl" href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
       <a class="sl" href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
@@ -144,67 +154,25 @@
   <script src="../assets/version.js" defer></script>
   <script src="../assets/nav.js" defer></script>
 </div></nav>
-<main class="doc">
-<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="../bench/index.html">the bench</a> / guess the agent</div>
-<h1>Guess the agent</h1>
-<p class="lead">Think of an agent you use. Every other approach asks you to enumerate what it can do, which is exactly the thing you do not know and the reason this site exists. So the tree asks cheap questions with obvious answers &mdash; a terminal or a browser, ever clicked <i>always allow</i>, can it read your mail &mdash; and infers the rest. <b>Before the reveal it asks what you think it can do. That prediction is the measurement.</b></p>
-<p class="dim">Deterministic: arithmetic over <a href="tree.json">a published tree</a> and <a href="../probes/index.html#profiles">the public profiles</a>, reproducible and auditable, running in this tab. No model, no server, nothing sent. <span id="selftest"></span></p>
-
-<div class="step" id="ask">
-  <span class="k" id="qNum"></span>
-  <p class="q" id="qText"></p>
-  <p class="q-help" id="qHelp"></p>
-  <div class="answers" id="answers"><button class="btn" data-a="yes" type="button">yes</button><button class="btn" data-a="no" type="button">no</button><button class="btn alt" data-a="unsure" type="button">not sure</button></div>
-</div>
-
-<div class="step" id="predict" hidden>
-  <span class="k">the prediction &middot; the experiment</span>
-  <p class="dim" id="predictStatus"></p>
-  <p class="q">Before we show you: which of these can it do?</p>
-  <p class="q-help">Tick every family you think its grant contains. Without this step the game is a lookup with a costume on.</p>
-  <div class="choices" id="famChoices"></div>
-  <p><label><input type="checkbox" id="predIrrev"> &hellip;and do you think any of it is irreversible &mdash; something that cannot be undone once done?</label></p>
-  <p><button class="btn" id="predictBtn" type="button">that is my prediction &mdash; show me</button></p>
-</div>
-
-<div class="step" id="reveal" hidden>
-  <span class="k">the reveal, and the gap</span>
-  <div class="verdict" id="verdict"></div>
-  <div id="gapOut"></div>
-  <p class="dim" id="lastTime"></p>
-  <h3>The tuple this page would submit, and does not</h3>
-  <p class="dim">Answers, the profile matched, the prediction, the gap. No address, no identifier, no free text, no timestamp finer than a day. Shown so you can see exactly what it contains; declined by default, and there is no send. To contribute it, open a pull request under <a href="../probes/submissions/README.md"><code>probes/submissions/</code></a>.</p>
-  <pre class="tuple" id="tupleOut"></pre>
-  <p><button class="btn alt" id="again2" type="button">play again</button></p>
-</div>
-
-<h2 id="belief-h">The belief, live</h2>
-<p class="dim">Answers update a belief rather than prune a branch, so a wrong answer is recoverable. The next question is always the one that splits the remaining belief most evenly. The population prior is a guess and biases the first questions toward the common case; it says so in the tree file.</p>
-<div id="belief"></div>
-<h2 id="path-h">The path &mdash; a tree nobody can inspect is a fortune teller</h2>
-<div id="pathOut"></div>
-<p><button class="btn alt" id="again" type="button">start over</button></p>
-
-<h2 id="instrument">The same instrument, built three times in a week</h2>
-<table>
-<thead><tr><th>Instrument</th><th>Belief</th><th>Fact</th><th>The gap is</th></tr></thead>
-<tbody>
-<tr><td>The status block</td><td>The model's account of its own usage</td><td>The transcript</td><td>Whether a model can be trusted to account for itself</td></tr>
-<tr><td>The conformance layer</td><td>What a team says it does</td><td>What is attested, and at what tier</td><td>Where the standard is unevidenced</td></tr>
-<tr><td><b>This game</b></td><td><b>What a person thinks their agent can do</b></td><td><b>The measured grant for their profile</b></td><td><b>Whether people know what they have granted</b></td></tr>
-</tbody></table>
-<p>A belief, a measurement, and the distance between them as the product. Two words, kept apart on purpose: a <b>surprise</b> is an action outside the grant &mdash; a measurement failure, and <a href="../authorised/index.html#surprise-def">the assessment's validity test</a>; a <b>prediction gap</b> is what a person did not expect their grant to contain. The game measures the second and never reports the first.</p>
-
+<main class="doc wide">
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="../bench/index.html">the bench</a> / <a href="index.html">probes</a> / the grant as a graph</div>
+<h1>The grant, as a graph</h1>
+<p class="lead">One profile, drawn: the profile on the left, its tools, the capability each tool reaches, and at the bottom what it <b>cannot</b> reach. A node's fill is its reversibility and its word says so; an edge's stroke is the control on that path and the chip says so. Hover anything for the row behind it; the table below is the same data.</p>
+<p><label class="dim">profile <select id="profileSel"></select></label> &nbsp; <span id="links" class="dim"></span></p>
+<div class="legend"><span><b class="no"></b>irreversible</span><span><b class="we"></b>with effort</span><span><b></b>reversible</span><span><b class="nr"></b>cannot reach</span><span><i></i>boundary &mdash; the agent cannot reach the control</span><span><i class="s"></i>setting &mdash; inside the grant it bounds</span><span><i class="e"></i>expectation &mdash; prose</span><span><i class="n"></i>none</span></div>
+<div id="graph"><p class="dim">Drawing&hellip;</p></div>
+<div id="reading"></div>
+<h2 id="table-h">The same rows, as a table</h2>
+<div class="tablewrap" id="table"></div>
 <h2 id="not">What this does not prove</h2>
 <ul>
-<li><b>Anything about your environment.</b> It matched a profile from your answers &mdash; the weakest tier available &mdash; and produced a <i>hypothesis</i> about your grant. <a href="../probes/index.html">The probes</a> produce the measurement.</li>
-<li><b>That the tree is right.</b> Seven profiles and fifteen questions, with probabilities estimated by the author on one day and answered by nobody yet. A wrong branch is a contribution.</li>
-<li><b>That a small gap is safety.</b> Predicting the grant correctly does not narrow it; the reduction on the reveal screen does.</li>
-<li><b>Anything at scale.</b> No tuple has been submitted; the aggregate is empty, and will be published either way.</li>
+<li><b>Completeness.</b> The rows are what the probes and the operator's account established; a capability the subject does not know it has is not drawn.</li>
+<li><b>That a derived profile is true of any instance</b> &mdash; the selector says <i>a claim</i> where no probe has run.</li>
+<li><b>That a boundary holds.</b> A boundary is a control the agent cannot reach, as measured or reported; nothing here tested it under attack.</li>
 </ul>
-<p class="dim">Specified by <a href="../documents/guess-the-agent.html">brief v0.33.64 (guess the agent)</a>; steps 1 to 5 of its build order are what is here, the model-assisted fallback (step 7) is deliberately not, because a tree's failure is a recorded gap and a model's is a plausible guess. Self-test: <a href="selftest.json">selftest.json</a>. CC BY 4.0.</p>
+<p class="dim">Drawn from <a href="profiles/index.json">the manifest</a> and the profile files by <code>graph.js</code>; nothing is sent. The 26 August <a href="../packs/grant-and-mandate/index.html">library entries</a> drew the same environment as a tree with a worst path; this graph is per tool, which is what the 4 September measurement changed. CC BY 4.0.</p>
 </main>
-<script src="app.js" defer></script>
+<script src="graph.js" defer></script>
 <footer class="site"><div class="cols">
   <div>
     <div class="brandline">pki<span>.sgit.ai</span></div>

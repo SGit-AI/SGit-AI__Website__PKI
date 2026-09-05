@@ -5,8 +5,35 @@
   "product": "Claude Code on the web (a remote session container)",
   "variant": "ccr-container",
   "surface": "agentbox",
-  "version": "2026-09-05",
-  "description": "A managed cloud container, ephemeral, one git repository attached, an egress proxy above it. MEASURED, by the thing being profiled: the shell probed on 5 September with probes/run.py, and the fetch tool's reach reported by the operator. The same environment measured on 26 August is the Grant & Mandate library's first entry, and the two agree on every row they share.",
+  "version": "2026-09-05.2",
+  "description": "A managed cloud container, ephemeral, one git repository attached, an egress proxy above it, and a set of harness tools scoped by the platform. MEASURED, by the thing being profiled: the shell probed on 5 September with probes/run.py, the fetch tool's reach and the harness tools reported by the operator. HOST MEANS THE CONTAINER, not your machine; TENANT means the platform's scoped tokens, not your accounts. The same environment measured on 26 August is the Grant & Mandate library's first entry, and the two agree on every row they share.",
+  "reach_names": {
+    "host": "this container \u2014 ephemeral, the vendor's; not your machine",
+    "tenant": "the attached repository and the platform's scoped tokens; not your accounts",
+    "world": "the hosts the proxy allows"
+  },
+  "not_reachable": [
+    {
+      "what": "your machine's files",
+      "why": "the container has no path to the operator's computer; the assess tree records home as a boundary",
+      "source": "assess/library.json (agentbox: home)"
+    },
+    {
+      "what": "your credentials",
+      "why": "no user credential is in the image; the keys present are the session's own",
+      "source": "evidence: filesystem.credential-presence, 5 Sep"
+    },
+    {
+      "what": "hosts the proxy refuses",
+      "why": "a 403 on the CONNECT, set above the process",
+      "source": "evidence: network.egress-shell"
+    },
+    {
+      "what": "repositories outside the platform's scope",
+      "why": "the token is scoped by the platform; the API tool refuses out-of-scope calls",
+      "source": "harness.platform-tools, self-reported"
+    }
+  ],
   "tools": [
     {
       "tool": "shell (Bash)",
@@ -18,7 +45,7 @@
           "control": null,
           "control_tier": "none",
           "probe": "identity.account",
-          "note": "runs as root: no user boundary stands between the agent and the host"
+          "note": "root inside the container: every process and file IN THE CONTAINER. The container is the host; your machine is not reachable"
         },
         {
           "capability": "read.file.host",
@@ -26,7 +53,7 @@
           "control": null,
           "control_tier": "none",
           "probe": "identity.account",
-          "note": "runs as root: no user boundary stands between the agent and the host"
+          "note": "any file in the container \u2014 the attached clone, the harness's state, the system. Not your machine's files (the assess tree's 'home: boundary')"
         },
         {
           "capability": "write.file.host",
@@ -34,7 +61,7 @@
           "control": null,
           "control_tier": "none",
           "probe": "identity.account",
-          "note": "runs as root: no user boundary stands between the agent and the host"
+          "note": "a zero-byte file was created and removed in /etc: system configuration of the container is writable"
         },
         {
           "capability": "delete.file.host",
@@ -42,7 +69,7 @@
           "control": null,
           "control_tier": "none",
           "probe": "identity.account",
-          "note": "runs as root: no user boundary stands between the agent and the host"
+          "note": "anything in the container, including the clone; irreversible for the container, and the container is disposable"
         },
         {
           "capability": "read.credential.host",
@@ -50,7 +77,7 @@
           "control": null,
           "control_tier": "none",
           "probe": "filesystem.credential-presence",
-          "note": "credential-shaped paths present at the usual locations: ['code-host', 'signing'] \u2014 presence only, nothing opened"
+          "note": "the credential-shaped paths present are the SESSION'S OWN: its commit-signing key and its vault keystore. No user credential is in the container; presence cannot tell whose a key is, so this is the operator's account"
         },
         {
           "capability": "authenticate-as.credential.tenant",
@@ -58,7 +85,7 @@
           "control": "the token's scope, set by the platform (in-scope repositories only)",
           "control_tier": "boundary",
           "probe": "filesystem.credential-presence",
-          "note": "inferred from presence: a process that can read ['code-host'] credentials can use them"
+          "note": "five key-shaped variables and a code-host token \u2014 the platform's, scoped to in-scope repositories; it acts as the platform's app, never as you"
         },
         {
           "capability": "read.record.history",
@@ -66,15 +93,15 @@
           "control": null,
           "control_tier": "none",
           "probe": "filesystem.history-presence",
-          "note": "a retained record is present at ['.claude/projects']: the effective grant is the union of every prior turn's reach"
+          "note": "the harness's project directory holds this session's own earlier tool outputs; no user shell history exists here"
         },
         {
           "capability": "send.endpoint.allowed",
           "tier": "observed",
-          "control": "a mandatory egress proxy configured above this process \u2014 hosts it refuses are refused with a 403 on the CONNECT; the ten hosts probed on 5 September all answered",
+          "control": "a mandatory egress proxy configured above this process \u2014 hosts it refuses are refused with a 403 on the CONNECT; the six hosts probed on 5 September all answered",
           "control_tier": "boundary",
           "probe": "network.egress-shell",
-          "note": "6 of 6 hosts answer from the shell; 0 do not; proxy variable set \u2014 the hosts that answered are the allow-list as observed"
+          "note": "six of six probed hosts answered through the proxy; a sibling container measured on 4 September had three refused: same product, two policies"
         },
         {
           "capability": "write.repository.project",
@@ -106,7 +133,7 @@
           "control": "pre-commit and pre-push hooks in the clone (the mandate hook and the insurance policy) \u2014 refuse by exit code, --no-verify passes; no branch rule at the host",
           "control_tier": "setting",
           "probe": "vcs.remote-hooks-signing",
-          "note": "commits can leave for https://github.com/SGit-AI/SGit-AI__Website__PKI; hooks at .githooks (pre-commit, pre-push) refuse by exit code \u2014 a SETTING, --no-verify s"
+          "note": "the attached repository only (any branch it can reach); branch discipline is the clone's hooks, a setting; no rule at the host"
         },
         {
           "capability": "authenticate-as.credential.signing",
@@ -114,15 +141,15 @@
           "control": null,
           "control_tier": "none",
           "probe": "vcs.remote-hooks-signing",
-          "note": "a signing key is configured (ssh) and commits are signed by default: the agent signs as the account"
+          "note": "commits are signed with the session's own key, registered as an agent identity in this site's registry (sha256-f9facb4c94da6c19) \u2014 not with yours"
         },
         {
           "capability": "create.schedule.host",
           "tier": "observed",
-          "control": null,
-          "control_tier": "none",
+          "control": "the container is ephemeral: whatever is scheduled here dies with it",
+          "control_tier": "boundary",
           "probe": "schedule.persistence",
-          "note": "scheduler(s) present: ['systemctl'] and /etc/cron.d exists; something created here could outlive the turn"
+          "note": "systemctl and /etc/cron.d exist, so a cron can be written \u2014 and dies with the container; the real scheduler is the platform's routines, on the harness row"
         }
       ]
     },
@@ -133,10 +160,56 @@
         {
           "capability": "send.endpoint.allowed",
           "tier": "self-reported",
-          "control": "whatever the fetch tool's own allow-list is \u2014 not observable from the shell",
+          "control": "the fetch tool's own allow-list \u2014 not observable from the shell, not the proxy's",
           "control_tier": "boundary",
           "probe": "network.egress-second-tool",
           "note": "reached sgit.ai and riskmandate.ai during this session, by the operator's account; what it cannot reach is unknown"
+        }
+      ]
+    },
+    {
+      "tool": "harness (MCP and built-in tools)",
+      "evidence": "evidence/anthropic__claude-code-remote__ccr-container__harness__2026-09-05.json",
+      "grant": [
+        {
+          "capability": "write.repository.tenant",
+          "tier": "self-reported",
+          "control": "the platform's token scope \u2014 and NOT the clone's git hooks, which this path never runs",
+          "control_tier": "boundary",
+          "probe": "harness.platform-tools",
+          "note": "a code-host API tool writes to in-scope repositories without passing pre-commit or pre-push: the mandate hook and the insurance policy bound the git tool, not this one"
+        },
+        {
+          "capability": "authenticate-as.credential.tenant",
+          "tier": "self-reported",
+          "control": "the platform's token scope",
+          "control_tier": "boundary",
+          "probe": "harness.platform-tools",
+          "note": "acts on the code host as the platform's app, scoped; never as you"
+        },
+        {
+          "capability": "create.schedule.tenant",
+          "tier": "self-reported",
+          "control": "the platform's routines are the operator's to list and delete",
+          "control_tier": "setting",
+          "probe": "harness.platform-tools",
+          "note": "a routine or a scheduled trigger resumes this session or spawns another later: it outlives the container"
+        },
+        {
+          "capability": "send.endpoint.allowed",
+          "tier": "self-reported",
+          "control": "the fetch tool's allow-list",
+          "control_tier": "boundary",
+          "probe": "harness.platform-tools",
+          "note": "the fetch tool, again, as a harness tool"
+        },
+        {
+          "capability": "read.file.project",
+          "tier": "self-reported",
+          "control": null,
+          "control_tier": "none",
+          "probe": "harness.platform-tools",
+          "note": "file tools over the attached working tree"
         }
       ]
     }
@@ -144,14 +217,16 @@
   "sources": [
     "evidence/anthropic__claude-code-remote__ccr-container__shell__2026-09-05.json",
     "evidence/anthropic__claude-code-remote__ccr-container__fetch__2026-09-05.json",
+    "evidence/anthropic__claude-code-remote__ccr-container__harness__2026-09-05.json",
     "packs/grant-and-mandate/library/claude-code-remote__ccr-container__2026-08-26.json (the same environment, 26 August)"
   ],
-  "measured_note": "Both tools' reach is the whole probed list today, so the union and the intersection of the two tools coincide on the network row. The 4 September measurement of a sibling container (the conformance vault, agent-claude-session) found union seven, intersection one: three hosts the shell could not reach through the proxy. Same product, two containers, two policies \u2014 which is the per-tool, per-configuration point.",
+  "measured_note": "Three tools, three reaches. The shell and the fetch tool coincide on the network row today; the harness's code-host API tool is the finding: it reaches the repository by a path the clone's hooks never see, so a hook-based control is a control on ONE tool. The 4 September measurement of a sibling container found union seven, intersection one on hosts alone.",
   "prior": 0.1,
   "union": [
     "authenticate-as.credential.signing",
     "authenticate-as.credential.tenant",
     "create.schedule.host",
+    "create.schedule.tenant",
     "delete.file.host",
     "execute.process.host",
     "read.credential.host",

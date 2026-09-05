@@ -1,6 +1,23 @@
 {
   "type": "profile/v1",
   "id": "openai/chatgpt-web/default",
+  "reach_names": {
+    "host": "the vendor's environment; not your machine",
+    "tenant": "nothing of yours",
+    "world": "the vendor's egress, if browsing is on"
+  },
+  "not_reachable": [
+    {
+      "what": "your machine's files",
+      "why": "the vendor's environment is a boundary you did not build",
+      "source": "assess/library.json (web: home)"
+    },
+    {
+      "what": "your accounts",
+      "why": "no connectors are on",
+      "source": "assess/library.json (web: connect)"
+    }
+  ],
   "vendor": "OpenAI",
   "product": "ChatGPT (in the browser, no connectors)",
   "variant": "default",

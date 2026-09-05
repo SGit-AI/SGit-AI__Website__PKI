@@ -33,7 +33,7 @@
     const best = cands.reduce((a, q) => gain(b, q) > gain(b, a) ? q : a, cands[0]);
     return gain(b, best) < S.min_gain ? null : best;
   }
-  function render() {
+  async function render() {
     const l = lead(), conf = b[l];
     $('#belief').innerHTML = beliefHtml();
     $('#pathOut').innerHTML = path.length ? '<ol class="path">' + path.map(s => `<li><b>${s.q}</b> — ${s.a === null ? 'not sure' : s.a ? 'yes' : 'no'} → leading ${byId[s.lead].variant} at ${(s.conf * 100).toFixed(0)}%</li>`).join('') + '</ol>' : '<p class="dim">No questions asked yet.</p>';
@@ -63,9 +63,16 @@
         <p class="sub">A gap is the normal state: almost nobody can enumerate what they have granted, which is why the game asks cheap questions instead. ${over.length ? 'You also predicted ' + over.join(', ') + ', which this profile does not hold.' : ''}</p>
         <span class="tier">${prof.measured ? 'profile measured, self-run' : 'profile derived — a claim'} · matched from your answers, the weakest tier there is · not a measurement of your environment</span>`;
       const order = union.slice().sort((a, c) => (irrev.has(c) - irrev.has(a)) || (predicted.has(caps[a].family) - predicted.has(caps[c].family)));
+      const full = await fetch('../probes/profiles/' + pid + '.json').then(r => r.json());
+      const rowsOf = {}; for (const t of full.tools) for (const g of t.grant) (rowsOf[g.capability] = rowsOf[g.capability] || []).push({ ...g, tool: t.tool.split(' (')[0] });
+      const rn = full.reach_names || {};
+      const ctlChip = c => [...new Set((rowsOf[c] || []).map(r => r.control_tier || 'none'))].map(k => `<span class="ctl ${k}">${k}</span>`).join(' ');
+      const noteOf = c => { const rs = rowsOf[c] || []; const n = rs.find(r => r.note); const ctl = rs.find(r => r.control); return `${rs.map(r => r.tool).join(', ')}${rn[caps[c].reach] ? ' · ' + caps[c].reach + ' = ' + rn[caps[c].reach] : ''}${ctl ? ' · control: ' + ctl.control : ''}${n ? ' · ' + n.note : ''}`; };
       $('#gapOut').innerHTML = `<div class="fam-row">${tree.prediction.families.map(f => `<span class="${famsIn.has(f) ? (predicted.has(f) ? 'hit' : 'miss') : ''}">${f}${famsIn.has(f) ? (predicted.has(f) ? ' ✓' : ' — unpredicted') : ''}</span>`).join('')}</div>
+        ${rn.host ? `<p class="dim">For this profile <b>host</b> means ${rn.host}; <b>tenant</b> means ${rn.tenant}; <b>world</b> means ${rn.world}. <a href="../probes/graph.html?profile=${encodeURIComponent(pid)}">See it as a graph →</a></p>` : ''}
+        ${(full.not_reachable || []).length ? `<div class="cannot"><b>What it cannot reach:</b> ${full.not_reachable.map(n => `${n.what} <span class="dim">(${n.why})</span>`).join(' · ')}</div>` : ''}
         <div class="gap-cols">
-          <div class="loss"><h4>Its grant — irreversible first, unpredicted first</h4><ul>${order.map(c => `<li><b>${caps[c].label}</b> <span class="rev-${caps[c].reversible}">${caps[c].reversible === 'no' ? 'irreversible' : caps[c].reversible}</span>${predicted.has(caps[c].family) ? '' : ' <span class="rev-no">· unpredicted</span>'}<span class="how"><code>${c}</code> · ${caps[c].family}</span></li>`).join('')}</ul></div>
+          <div class="loss"><h4>Its grant — irreversible first, unpredicted first</h4><ul>${order.map(c => `<li><b>${caps[c].label}</b> <span class="rev-${caps[c].reversible}">${caps[c].reversible === 'no' ? 'irreversible' : caps[c].reversible}</span> ${ctlChip(c)}${predicted.has(caps[c].family) ? '' : ' <span class="rev-no">· unpredicted</span>'}<span class="how"><code>${c}</code> · ${caps[c].family} · ${noteOf(c)}</span></li>`).join('')}</ul></div>
           <div class="fix"><h4>The reduction — on this screen</h4><ul>${order.filter(c => irrev.has(c) || !predicted.has(caps[c].family)).map(c => { const r = red.reductions[c]; return `<li><b>${caps[c].label}</b><span class="how">${r ? r.setting + ' · costs: ' + r.costs + ' · after: ' + r.tier_after : 'no reduction written yet'}</span></li>`; }).join('')}</ul></div>
         </div>
         <p><b>Now the truth in ten minutes:</b> this is a hypothesis about your grant from ${asked.length} answers. <a href="../probes/index.html#run">Run the probes</a> where the agent lives and the measured file replaces the guess; the difference between the two results is itself worth showing. Or take the profile into <a href="../authorised/index.html">what you authorised and never asked for</a> and answer the mandate questions.</p>`;
