@@ -46,6 +46,16 @@
       </div>
     </div>
     <div class="ni ni-has">
+      <a class="nl" href="../authorised/index.html">Measure<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../authorised/index.html">&#9679; What you authorised and never asked for</a>
+      <a class="sl" href="../guess/index.html">&#9679; Guess the agent</a>
+      <a class="sl" href="../probes/index.html">&#9679; Probes, not tables</a>
+      <a class="sl" href="../probes/graph.html">&mdash; the grant as a graph</a>
+      <a class="sl" href="../probes/llms.txt">probes/llms.txt</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
       <a class="nl" href="../origins/index.html">Origins<span class="caret">&#9662;</span></a>
       <div class="sub">
       <a class="sl" href="../origins/index.html">Origins: 2026</a>
@@ -64,6 +74,9 @@
       <a class="sl" href="../experiments/the-deploy/index.html">&mdash; the deploy</a>
       <a class="sl" href="../experiments/the-control-room/index.html">&mdash; the control room</a>
       <a class="sl" href="../workbench/index.html">&#9679; The workbench (app)</a>
+      <a class="sl" href="../probes/index.html">&#9679; Probes, not tables</a>
+      <a class="sl" href="../authorised/index.html">&#9679; What you authorised and never asked for</a>
+      <a class="sl" href="../guess/index.html">&#9679; Guess the agent</a>
       <a class="sl" href="../registry/index.html">The register, live</a>
       <a class="sl" href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
       <a class="sl" href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
@@ -195,6 +208,7 @@
     <tr><td>T19</td><td>Still available from the review and not yet done: reclassify open questions 1, 4, 5 and 6 from <em>open</em> to <em>argued here, decision pending</em> — the review rates it the highest credibility-per-hour item on its list</td><td>site agent</td><td><span class="tstat t-open">queued</span></td></tr>
     <tr><td>T20</td><td>Open questions reclassified (the review's highest credibility-per-hour item): four of six now read <em>argued, decision pending</em> with links, and the eight opened on 20 August are captured on <a href="../roadmap/index.html#open-new">the roadmap</a></td><td>site agent</td><td><span class="tstat t-done">done v0.1.9</span></td></tr>
     <tr><td>T28</td><td><b>The book commissioned:</b> <a href="../book/BRIEF.md">a complete brief</a> for <em>A Key Means Nothing Alone</em>, written after reading how graphs.sgit.ai commissioned its three books (brief 38, and the shape the first actually took). Fifteen chapters in five parts, twelve gated figures, a RiskMandate chapter written as a contract, and an acceptance test that fails the book if a reader finishes trusting the register. <b>Superseded by T29 the same day</b> &mdash; see draft-2. <b>Needed from you (N14):</b> confirm the title and whether the writing round happens now.</td><td>site agent</td><td><span class="tstat t-done">done v0.1.33 &mdash; brief only, book unwritten</span></td></tr>
+    <tr><td>T52</td><td><b>The menu, the graph, and the game's two corrections.</b> A Measure group in the nav; <a href="../probes/graph.html">the grant as a graph</a> for every profile; the verdict box made legible on phones; the container profile's rows retold from the container's point of view (host is the vendor's container, the keys are the session's own, the token is the platform's), with <code>reach_names</code>, a cannot-reach list and a control chip on every row; the harness measured as a third tool, whose code-host API tool bypasses the clone's hooks.</td><td>site agent</td><td><span class="tstat t-done">done v0.1.70</span></td></tr>
     <tr><td>T51</td><td><b>The 4 September briefs' repository, site and game, built as three bench MVPs.</b> <a href="../probes/index.html">Probes, not tables</a> (primitives, a probe registry, a runner emitting <code>findings/v1</code> in Scorecard's shape plus reversibility and tier, seven profiles with two measured, an incident that demotes), <a href="../authorised/index.html">what you authorised and never asked for</a> (the verdict-first self-assessment in the browser; the site cannot scan anybody and says so) and <a href="../guess/index.html">guess the agent</a> (the deterministic tree with the prediction step; a prediction gap, never a surprise). The four briefs and the day index filed; <a href="../documents/probes-not-tables.html">reader pages</a>; the bench entries with what each does not prove; IE-D24 (the conformance vault's <code>conditions</code>/<code>exclusions</code> belong on <code>policy/v1</code>) and IE-D25 (evidence mode is the axis; the instrument mapping as a proposal); the pack's <code>llms.txt</code>.</td><td>site agent</td><td><span class="tstat t-done">done v0.1.69</span></td></tr>
     <tr><td>T50</td><td><b>Memo 13 processed and built the same day.</b> <a href="../documents/the-enforcement-ladder.html">Brief v0.33.85</a>, <a href="../insurance/the-enforcement-ladder.html">doctrine 13</a>, GM-D104&ndash;108; the pack amended (IE-D17&ndash;23, IE-C8) and climbing its own ladder: a level on every event, <code>reconcile.py</code> at level five (eleven commits, no catch), <code>policy-report.yml</code> at level four in report mode, the room's sixth card. The push-policy loop fixed by a queue. The limits raised for now on your word (policy r3).</td><td>site agent</td><td><span class="tstat t-done">done v0.1.68</span></td></tr>
     <tr><td>T49</td><td><b>The version badge is read at load time.</b> <code>chrome.py</code> writes <code>assets/version.js</code> once per release; <code>nav.js</code> fills the badge and the footer from it; <code>validate.js</code> gates that <code>version.js</code> agrees and that a page without a literal badge loads it. The one-time rewrite that removes the literal from ~230 pages is the last such commit, and it is <b>refused by the pack's own pre-commit hook as an exclusion</b> (~4 MB) until a human accepts it &mdash; see N30.</td><td>site agent</td><td><span class="tstat t-done">done v0.1.66</span></td></tr>
@@ -258,6 +272,9 @@
     <a href="../bench/index.html">&#9679; What is built</a>
     <a href="../simulator/index.html">&#9679; The simulator</a>
     <a href="../workbench/index.html">&#9679; The workbench (app)</a>
+    <a href="../probes/index.html">&#9679; Probes, not tables</a>
+    <a href="../authorised/index.html">&#9679; What you authorised and never asked for</a>
+    <a href="../guess/index.html">&#9679; Guess the agent</a>
     <a href="../registry/index.html">The register, live</a>
     <a href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
     <a href="../packs/grant-and-mandate/blocks.html">The building blocks</a>

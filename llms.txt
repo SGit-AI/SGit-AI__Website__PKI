@@ -8,7 +8,7 @@
 > but never delete anything — not a bug. This site publishes that history, and the
 > registry rules it produces, before the registry exists.
 
-Site version: v0.1.69 (29 August 2026). Published by the sgit project — participant
+Site version: v0.1.70 (29 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## Properties agents may rely on
@@ -60,7 +60,12 @@ a site and a game (the other four of that day concern the AIUC-1 conformance vau
   plus reversibility and tier. Seven profiles, two measured (this container's shell and
   fetch tool, separately; the CI runner), five derived and MARKED AS CLAIMS. Every
   evidence file is SELF-RUN — the weakest tier — and says so. GRANTS ARE PUBLIC,
-  MANDATES ARE PRIVATE: probes/yours/ is gitignored.
+  MANDATES ARE PRIVATE: probes/yours/ is gitignored. LABELS NEVER SAY "YOUR" OR "AS
+  YOU": each profile says what host, tenant and world mean for it (reach_names) and
+  lists what it CANNOT reach — for the container profile, host is the vendor's
+  container, the keys present are the session's own, the token is the platform's.
+  Every profile is drawn as a graph at /probes/graph.html?profile=<id>: tools, the
+  capability each reaches, the control on the path, and what it cannot reach.
 - WHAT YOU AUTHORISED AND NEVER ASKED FOR (/authorised/): a self-assessment in the
   browser — name your tools, the grant appears, four questions about work, the gap with
   the irreversible rows first and the reduction on the same screen. THE SITE CANNOT SCAN
