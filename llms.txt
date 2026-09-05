@@ -8,7 +8,7 @@
 > but never delete anything — not a bug. This site publishes that history, and the
 > registry rules it produces, before the registry exists.
 
-Site version: v0.1.70 (29 August 2026). Published by the sgit project — participant
+Site version: v0.1.71 (29 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## Properties agents may rely on
@@ -73,7 +73,7 @@ a site and a game (the other four of that day concern the AIUC-1 conformance vau
   sent. The verdict is a statement, not a grade; the tier is on the result; the
   assessment expires when a profile version moves. A SURPRISE is an action outside the
   grant — the assessment's validity test.
-- GUESS THE AGENT (/guess/): deterministic decision-tree induction over the profiles,
+- WHICH AGENT IS IT? (/guess/; working title guess the agent): deterministic decision-tree induction over the profiles,
   a prediction step before the reveal, and the PREDICTION GAP (never called a surprise)
   with the reduction on one screen. The tree is public (guess/tree.json) and self-tested
   at build; no model, no server, nothing sent. A hypothesis about a grant, not a measurement.

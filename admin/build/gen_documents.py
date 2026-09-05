@@ -1045,7 +1045,7 @@ DOCS = [
   version="v0.33.64", date="4 September 2026", dtype="Dev brief — eighth of 4 September; the question set is the part most likely to be wrong",
   summary="A guessing game whose real output is a measurement. It inverts the burden: instead of asking a person to enumerate what their agent can do, it asks cheap questions with obvious answers and infers the profile by ordinary decision-tree induction over a belief, choosing the question that splits the remaining space most evenly and never eliminating on one answer. The tree is public and forkable, because a wrong branch is a contribution and a tree nobody can inspect is a fortune teller. Two modes are two instruments: deterministic by default, a model as fallback, never a model in front of an arithmetic step. The player predicts before the reveal, and the gap between prediction and computation is the finding, the third instance in a week of a belief, a measurement and the distance between them. The naming collision is caught: the game measures a prediction gap and never a surprise. Built here as /guess/, steps 1 to 5.",
   concepts=[
-   ("Guess the agent", "../guess/index.html", "the game, built"),
+   ("Which Agent Is It?", "../guess/index.html", "the game, built and named for the question"),
    ("The tree", "../guess/tree.json", "public, forkable, fifteen questions"),
    ("The self-test", "../guess/selftest.json", "each profile placed from its own modal answers"),
    ("The prediction gap, not a surprise", "../guess/index.html#instrument", "the collision caught"),

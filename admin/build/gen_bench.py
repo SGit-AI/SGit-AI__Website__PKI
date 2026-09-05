@@ -368,10 +368,10 @@ BENCH = [
          "no endpoint exists: there is nothing on the page that can send"],
   code="authorised/ (index.html, app.js, README.md), assets/authorised.css"),
 
- dict(slug="guess-the-agent", name="Guess the agent", state="live",
-  where="../guess/index.html", since="v0.1.69", updated="v0.1.69",
+ dict(slug="guess-the-agent", name="Which Agent Is It? (the game)", state="live",
+  where="../guess/index.html", since="v0.1.69", updated="v0.1.71",
   origin="<a href='../documents/guess-the-agent.html'>brief v0.33.64 (guess the agent)</a>, build-order steps 1 to 5",
-  one_line="A guessing game whose output is a measurement: cheap questions with obvious answers, ordinary decision-tree "
+  one_line="Named for the question a person has (working title <i>guess the agent</i>). A guessing game whose output is a measurement: cheap questions with obvious answers, ordinary decision-tree "
            "induction over a belief across the public profiles, a prediction step before the reveal, and the prediction gap "
            "with the reduction on one screen. Deterministic, in the browser, the path always shown, nothing sent.",
   demonstrates=[

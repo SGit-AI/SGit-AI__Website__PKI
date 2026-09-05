@@ -71,3 +71,5 @@ main.doc .verdict .sub,.verdict .sub{font-size:.85rem;color:#c9c9c4;margin:0}
 .answers{display:flex;flex-wrap:wrap;gap:.5rem}
 .path{font-size:.82rem}
 .path li{margin:.2rem 0}
+
+.kicker{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-dk);margin:0 0 .2rem}
