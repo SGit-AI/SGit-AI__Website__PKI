@@ -21,7 +21,9 @@
      placeholders re-fitted from it: r3 raised the limits on the issuer's word after one day's loss data (IE-D23), to be reviewed.
   6. ONE SESSION HOLDING THE VAULT KEY MAY RUN ANY ROLE IN ANY VAULT, for the pilot (IE6) — except that accepting an action
      OUTSIDE cover (an exclusion, an exhaustion) is a person's, never the session's (IE-D16).
-  7. NO SECRETS IN ANY VAULT. Keys and access codes are never written into a vault or this repository.
+  7. BOTH POLICIES ARE IN NOTIFY MODE since 5 September (IE-D26): every verdict is computed and written to the ledger,
+     nothing blocks. A refusal on the ledger after that date was notified, not enforced. To be reviewed with the limits.
+  8. NO SECRETS IN ANY VAULT. Keys and access codes are never written into a vault or this repository.
 
 ## The documents
 

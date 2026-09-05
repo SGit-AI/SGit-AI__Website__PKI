@@ -342,12 +342,17 @@ def cmd_check(a):
         v, d = verdict(p, ledger, state, subject, unit, amount, bk, test=bool(a.test))
         results.append((v, d))
     blocking = [(v, d) for v, d in results if v in ("refused", "requested")]
+    # enforcement: "refuse" (the default — the hook exits 1 on a blocking verdict) or "notify" (IE-D26: the issuer's
+    # relaxation of 5 September — every verdict is still computed, printed and written to the ledger, and nothing blocks).
+    # The reading is the same either way; what changes is the exit code, and every event says which it was produced under.
+    notify = p.get("enforcement", "refuse") == "notify"
     written = []
     def event(v, d, extra=None):
         e = {"type": "event/v1", "id": new_id(now), "at": iso(now), "day": day, "policy": p["id"], "rules_version": p["rules_version"],
              "subject": subject, "policyholder": p["policyholder"]["who"], "point": a.point or "manual", "level": LEVELS.get(a.point or "manual", 3),
              "unit": d["unit"], "amount": d["amount"], "verdict": v, "drawn": d.get("drawn", 0), "pool_left": d.get("pool_left"),
-             "acceptor": (p["policyholder"]["who"] if v == "drawn" else d.get("accepted_by")), "reason": d["reason"], "ref": ref, "test": bool(a.test)}
+             "acceptor": (p["policyholder"]["who"] if v == "drawn" else d.get("accepted_by")), "reason": d["reason"], "ref": ref, "test": bool(a.test),
+             "enforcement": "notify" if notify else "refuse"}
         if d.get("band"): e["band"] = d["band"]
         if d.get("via_request"): e["via_request"] = d["via_request"]
         if v in ("refused", "accepted_outside"): e["zone"] = "outside"
@@ -387,6 +392,10 @@ def cmd_check(a):
             print("    do not split the action to get under the threshold.")
         print(f"  {TIER_LINE}")
         if a.dry_run: print("  (dry run: nothing written)")
+        if notify:
+            print(BANNER.format("NOTIFICATION ONLY — the policy is in notify mode (r4, IE-D26): the verdict above is recorded and nothing blocks"))
+            print("    the ledger carries this as a refusal produced under enforcement=notify; the numbers are the same, the exit code is not")
+            return 0
         return 1
     # --- nothing blocked: write what the ledger needs, say only what must be said
     for v, d in results:
@@ -468,6 +477,7 @@ def cmd_briefing(a):
     L.append(f"TO ASK:  python3 {os.path.relpath(os.path.abspath(__file__))} request --unit <u> --amount <n> --why \"…\"")
     L.append(f"THE ROOM: {os.path.relpath(os.path.join(PACK, 'room', 'index.html'))}  (or the room vault's read link)")
     L.append(f"HOOKS:   {hooks}")
+    L.append("MODE:    " + ("NOTIFY ONLY — every verdict is recorded on the ledger and nothing blocks (r4, IE-D26); a refusal is still a refusal in your report" if p.get("enforcement", "refuse") == "notify" else "refuse — a blocking verdict stops the action"))
     L.append(TIER_LINE)
     print("\n".join(L)); return 0
 

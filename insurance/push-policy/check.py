@@ -106,10 +106,17 @@ def main():
     if v == "refused" and a.override:
         entry["override"] = a.override
         print(f"OVERRIDDEN by a human decision, on the record: {a.override}")
+    # mode: "refuse" (the default — a refusal exits 1 and the push stops) or "notify" — the project lead's relaxation
+    # of 5 September (revision 3 in policy.json): the same verdict is computed and recorded; a refusal no longer stops
+    # the push. Every entry says which mode produced it, so the ledger stays readable as loss data either way.
+    notify = policy.get("mode", "refuse") == "notify"
+    entry["mode"] = "notify" if notify else "refuse"
+    if v == "refused" and notify and not a.override:
+        print("NOTIFICATION ONLY: the policy is in notify mode — this refusal is on the ledger and the push proceeds")
     if not a.dry_run:
         with open(QUEUE, "a") as f: f.write(json.dumps(entry) + "\n")
         print(f"ledger: queued ({os.path.relpath(QUEUE)}) — the next commit drains it into ledger.jsonl")
-    sys.exit(0 if (v != "refused" or a.override) else 1)
+    sys.exit(0 if (v != "refused" or a.override or notify) else 1)
 
 if __name__ == "__main__":
     main()

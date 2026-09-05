@@ -1,0 +1,26 @@
+{
+ "acceptor": null,
+ "amount": 1,
+ "at": "2026-09-05T21:33:20+00:00",
+ "day": "2026-09-05",
+ "drawn": 0,
+ "id": "2026-09-05T21-33-20Z__7942a368",
+ "point": "supersede",
+ "policy": "git-pilot-2026-09-03-r4",
+ "policyholder": "the pki.sgit.ai estate",
+ "pool_left": null,
+ "reason": "policy git-pilot-2026-09-03-r3 superseded by git-pilot-2026-09-03-r4: the issuer relaxes the policy to notification for now (5 Sep, in chat: 'for now you can relax this rules as just for notification'): every verdict is computed and written to the ledger with enforcement=notify, nothing blocks; IE-D26; to be reviewed with the limits (IE-D23)",
+ "ref": {
+  "exclude": null,
+  "set": [
+   "enforcement=notify"
+  ],
+  "suspend": false
+ },
+ "rules_version": "insurance-ecosystem/draft-1",
+ "subject": "the issuer",
+ "test": false,
+ "type": "event/v1",
+ "unit": "policy",
+ "verdict": "measured"
+}

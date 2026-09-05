@@ -27,6 +27,8 @@ Three documents and one function.
 
 **The pool is per repository**, because the ledger lives in it: every agent pushing here draws from the same megabyte. A push inside the normal band draws nothing. A push over it, within the per-occurrence limit, with enough pool left, is **drawn** — the excess comes off the pool and the push proceeds; that draw is the claim, paid in bytes. A push over the per-occurrence limit, or one the pool cannot cover, is **refused**, and the agent stops.
 
+**Since 5 September the policy is in notify mode** (`"mode": "notify"` in `policy.json`, revision 3, set by the project lead in chat): the verdict is computed and recorded exactly as before, every ledger entry says which mode produced it, and a refusal no longer stops the push. The v0.1.69 release was the fourth in a row to cross the per-push maximum because a one-line change to a generated file weighs the whole file; the numbers keep counting what would have been refused, which is the loss data the review needs.
+
 ## Run it
 
 ```bash

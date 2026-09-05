@@ -24,6 +24,13 @@ today's ledger, prints one of three verdicts, and queues the verdict in `ledger.
 | `DRAWN` | Over the normal band, within the per-push limit, pool had enough; the excess is drawn from today's pool | push — **and say in your message that the pool was drawn, and how much is left** |
 | `REFUSED` | Over the per-push maximum, or the pool cannot cover it; exit code 1 | **do not push.** Tell the human what was refused, why, and the numbers. Do not split the push to get under the limit; do not edit the policy or the ledger. The human decides |
 
+**Notify mode (since 5 September 2026).** `policy.json` carries `"mode": "notify"`, set by the project
+lead in chat (*"for now you can relax this rules as just for notification"*). In this mode the check
+prints `NOTIFICATION ONLY`, exits 0, and the push proceeds — but the verdict is still `REFUSED` on the
+ledger, with `mode: notify` on the entry. **Still run the check before every push, still report a
+refusal as a refusal with the numbers**, and say that it was notified rather than enforced. The mode is
+the issuer's to set back; never change it yourself.
+
 Run it for the branch you are actually pushing to. `dev` has its own, tighter band; anything
 else counts as your own branch.
 

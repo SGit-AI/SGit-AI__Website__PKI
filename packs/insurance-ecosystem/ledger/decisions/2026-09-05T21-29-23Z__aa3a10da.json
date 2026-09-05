@@ -1,0 +1,10 @@
+{
+ "at": "2026-09-05T21:29:23+00:00",
+ "by": "the project lead",
+ "decision": "accept",
+ "id": "2026-09-05T21-29-23Z__aa3a10da",
+ "note": "5 September, in chat: 'Yes please push, accept these changes (also for now you can relax this rules as just for notification)'. Accepted as uninsured at the reading of 1,169,648 B to the branch; the dev push of 1,205,461 B is accepted in the same words. The relaxation to notification is recorded as a supersession (r4) and IE-D26.",
+ "request": "2026-09-05T19-20-19Z__a872a807",
+ "test": false,
+ "type": "decision/v1"
+}
