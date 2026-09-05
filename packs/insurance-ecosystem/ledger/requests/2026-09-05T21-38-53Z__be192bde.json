@@ -1,0 +1,15 @@
+{
+ "amount": 1283315,
+ "at": "2026-09-05T21:38:53+00:00",
+ "cause": "exclusion",
+ "excess": 1078515,
+ "id": "2026-09-05T21-38-53Z__be192bde",
+ "kind": "escalation",
+ "policy": "git-pilot-2026-09-03-r4",
+ "status": "waiting",
+ "subject": "session:unknown@vm",
+ "test": false,
+ "type": "request/v1",
+ "unit": "bytes_per_push",
+ "why": "1,283,315 B is over the per-occurrence limit of 1,048,576 B \u2014 an EXCLUSION"
+}
