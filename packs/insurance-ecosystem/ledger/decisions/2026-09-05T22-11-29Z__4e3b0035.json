@@ -1,0 +1,10 @@
+{
+ "at": "2026-09-05T22:11:29+00:00",
+ "by": "the project lead",
+ "decision": "accept",
+ "id": "2026-09-05T22-11-29Z__4e3b0035",
+ "note": "5 September, in chat: 'Yes can you add those entries and fix these couple bugs/issues on the game'. The menu release rewrites every page; notified under r4, accepted as the v0.1.70 push in the project lead's words.",
+ "request": "2026-09-05T22-10-54Z__8c0f9e88",
+ "test": false,
+ "type": "decision/v1"
+}
