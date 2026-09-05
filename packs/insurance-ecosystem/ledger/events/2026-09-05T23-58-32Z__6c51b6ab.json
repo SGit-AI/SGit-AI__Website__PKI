@@ -1,0 +1,26 @@
+{
+ "acceptor": null,
+ "amount": 4749685,
+ "at": "2026-09-05T23:58:32+00:00",
+ "day": "2026-09-05",
+ "drawn": 0,
+ "enforcement": "notify",
+ "id": "2026-09-05T23-58-32Z__6c51b6ab",
+ "level": 3,
+ "point": "pre-commit",
+ "policy": "git-pilot-2026-09-03-r4",
+ "policyholder": "the pki.sgit.ai estate",
+ "pool_left": 2906575,
+ "reason": "4,749,685 B is over the per-occurrence limit of 1,048,576 B \u2014 an EXCLUSION",
+ "ref": {
+  "blobs": 231,
+  "branch": "claude/registry-mvp-brief-hpbap8"
+ },
+ "rules_version": "insurance-ecosystem/draft-1",
+ "subject": "session:unknown@vm",
+ "test": false,
+ "type": "event/v1",
+ "unit": "bytes_per_commit",
+ "verdict": "refused",
+ "zone": "outside"
+}
