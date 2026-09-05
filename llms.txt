@@ -8,7 +8,7 @@
 > but never delete anything — not a bug. This site publishes that history, and the
 > registry rules it produces, before the registry exists.
 
-Site version: v0.1.71 (29 August 2026). Published by the sgit project — participant
+Site version: v0.1.72 (29 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## Properties agents may rely on
@@ -77,6 +77,14 @@ a site and a game (the other four of that day concern the AIUC-1 conformance vau
   a prediction step before the reveal, and the PREDICTION GAP (never called a surprise)
   with the reduction on one screen. The tree is public (guess/tree.json) and self-tested
   at build; no model, no server, nothing sent. A hypothesis about a grant, not a measurement.
+  Since v0.1.72 (brief v0.33.65): REACH IS A NODE, NOT A RUNG — a mesh of reach nodes,
+  environments, obligations and questions, one file each under probes/mesh/, typed by one
+  ontology and compiled with gates (probes/mesh/graph.json; walk it at /guess/graph.html).
+  Questions are two classes: IDENTIFYING never counts toward the gap; MEASURING answers are
+  already predictions, each with a RELIABILITY — a low-reliability answer barely moves the
+  belief and fully counts toward the gap. The inspector keeps ASSERTED, INFERRED and
+  POSSIBLE apart. Demo mode (/guess/index.html?demo=random); the report (/guess/report.html);
+  the sources and how to correct a mapping (/guess/data.html).
 
 None of the three sees a visitor's environment. Carry that with any summary.
 

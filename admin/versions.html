@@ -50,6 +50,8 @@
       <div class="sub">
       <a class="sl" href="../authorised/index.html">&#9679; What you authorised and never asked for</a>
       <a class="sl" href="../guess/index.html">&#9679; Which agent is it?</a>
+      <a class="sl" href="../guess/graph.html">&mdash; the mesh, start anywhere</a>
+      <a class="sl" href="../guess/report.html">&mdash; the report</a>
       <a class="sl" href="../probes/index.html">&#9679; Probes, not tables</a>
       <a class="sl" href="../probes/graph.html">&mdash; the grant as a graph</a>
       <a class="sl" href="../probes/llms.txt">probes/llms.txt</a>
@@ -151,6 +153,11 @@
 <div class="tablewrap"><table class="vers">
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
+    <tr>
+<td class="vnum">v0.1.72</td>
+<td class="vdate">5 Sep 2026</td>
+<td><b>Reach is a node, and the game grows a mesh, an engine that is not fooled by ignorance, and its own pages.</b> <a href="../documents/reach-is-a-node.html">Brief v0.33.65</a> filed and built the same day, with the project lead's memo on the shape. <b>The mesh as files</b>: one file per reach node (six file systems wearing one verb, and the rest &mdash; thirty-five), environment, vendor, obligation and question under <code>probes/mesh/</code>, a <code>refine</code> map on every profile saying where each capability lands for it, two profiles nobody calls an agent (a browser extension with broad host permissions, a scheduled job as a service account), and <a href="../guess/data.html#ontology">one ontology</a> every edge is typed by; <code>gen_mesh.py</code> compiles the graph with gates. <b>The engine</b>: questions in two classes, identifying and measuring; a reliability per question that tempers the belief update, so a low-reliability answer barely moves the belief and fully counts toward the gap; identify first, then a few measuring questions about the leader; the gap collected per capability throughout, with its reach node and reversibility; the end-of-game prediction kept for the sense of scale. <b>The play screen</b> in two columns: the transcript on the left, the inspector on the right with asserted, inferred and possible in three treatments never mixed, the belief, why this question, disagreements so far, and sources with edit links. <b>Demo mode</b> plays a profile's own modal answers step by step or end to end. <a href="../guess/graph.html"><b>The mesh, start anywhere</b></a>: pick any node, see what points at it and what it points to, and answer <i>which products touch my share</i>. <a href="../guess/report.html"><b>The report</b></a>: one page with the answer, the clues, the classes, the belief, the specific gap, the scale, the grant as a graph, what it cannot reach, the obligations worth checking with the tier caveat, and the sources. <a href="../guess/data.html"><b>Sources &amp; corrections</b></a>: every file with view and edit links, and the workflow: a correction is an edit. The self-test caught the first thing the reliability tempering does: the two sibling profiles that differ on one control a person forgets needed an identifying question about the action the person took (<i>did you set it to never ask</i>). Not built, on purpose: the model at its three edges.</td>
+    </tr>
     <tr>
 <td class="vnum">v0.1.71</td>
 <td class="vdate">5 Sep 2026</td>

@@ -58,6 +58,8 @@ NAV = [
     ("Measure", "authorised/index.html", [
         ("&#9679; What you authorised and never asked for", "authorised/index.html"),
         ("&#9679; Which agent is it?", "guess/index.html"),
+        ("&mdash; the mesh, start anywhere", "guess/graph.html"),
+        ("&mdash; the report", "guess/report.html"),
         ("&#9679; Probes, not tables", "probes/index.html"),
         ("&mdash; the grant as a graph", "probes/graph.html"),
         ("probes/llms.txt", "probes/llms.txt"),
