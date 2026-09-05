@@ -1,0 +1,28 @@
+{
+  "type": "reductions/v1",
+  "_what_this_is": "For each capability primitive, the specific setting, script or configuration that narrows it, what it costs you, and the tier the control reaches afterwards. Guidance is free and stays free: guidance that costs money is guidance nobody follows (brief v0.33.64, the strategy brief). Efforts are borrowed from the assess library's controls, where they were written with the friction stated.",
+  "reductions": {
+    "read.file.host":   {"setting": "run the agent in a container with only the project mounted, or under a separate user account", "costs": "an afternoon, then ongoing friction (container) · days, and it fights you (account)", "tier_after": "boundary"},
+    "write.file.host":  {"setting": "the same container or account; the tool's own directory restriction is a setting anything running as you can step around", "costs": "as above", "tier_after": "boundary"},
+    "delete.file.host": {"setting": "the same container or account; and a backup that the agent cannot reach, because delete at host reach is irreversible", "costs": "as above, plus a backup outside the grant", "tier_after": "boundary"},
+    "execute.process.host": {"setting": "keep the confirmation prompt on for commands, and run in a container: execution survives inside it and stops being execution on your machine", "costs": "a click per command · an afternoon for the container", "tier_after": "setting (prompt) · boundary (container)"},
+    "send.endpoint.world": {"setting": "route outbound traffic through an allow-list — the one control the hosted container already has, demonstrated rather than claimed", "costs": "an hour, if you already have somewhere to put it", "tier_after": "boundary"},
+    "send.endpoint.allowed": {"setting": "shorten the list; a host it does not need is a host it can reach", "costs": "minutes per host, and a failure the first time it needs one you removed", "tier_after": "boundary"},
+    "read.credential.host": {"setting": "keep credentials out of the account the agent runs as: a credential helper, a separate account, or a container without your home mounted", "costs": "an afternoon, and re-authenticating where the agent needs a credential of its own", "tier_after": "boundary"},
+    "authenticate-as.credential.tenant": {"setting": "scoped, short-lived tokens issued to the agent rather than your own; read-only where read is all it needs", "costs": "an hour per service, and rotation", "tier_after": "boundary"},
+    "authenticate-as.credential.signing": {"setting": "a signing key of the agent's own, so its commits are signed as it and not as you (the registry's identity records exist for this)", "costs": "an hour, and a second key to manage", "tier_after": "boundary"},
+    "grant.credential.self": {"setting": "settings owned by a different user than the one the agent runs as, or set above the session by the platform", "costs": "minutes, if the platform supports it; otherwise the separate account", "tier_after": "boundary"},
+    "write.repository.tenant": {"setting": "a branch protection rule at the host — the agent cannot edit it — and a pre-push hook in the clone for the earlier, cheaper refusal", "costs": "minutes; and a review step before anything deploys", "tier_after": "boundary (host rule) · setting (hook)"},
+    "write.repository.project": {"setting": "none needed for most work; a review before merge is the control", "costs": "a reviewer's time", "tier_after": "setting"},
+    "create.record.world": {"setting": "no publishing token in the agent's environment; publish from CI with a token the agent does not hold", "costs": "an afternoon to move the publish step", "tier_after": "boundary"},
+    "send.message.world": {"setting": "no mail or chat connector, or a connector that drafts and never sends", "costs": "you press send", "tier_after": "boundary"},
+    "read.message.tenant": {"setting": "a connector scoped to one folder or label, or none", "costs": "the agent answers about less", "tier_after": "boundary"},
+    "write.budget.tenant": {"setting": "a spend cap at the supplier, set by somebody other than the agent — the supplier has a reason to refuse: it is paying", "costs": "the work stops when the cap is reached, which is the point", "tier_after": "boundary"},
+    "create.schedule.host": {"setting": "no scheduler in the agent's environment; anything that outlives the turn goes through a person", "costs": "you create the routine", "tier_after": "boundary"},
+    "read.record.history": {"setting": "history off, or a fresh environment per task, so the grant is a tree over the present rather than a union over every prior turn", "costs": "the agent forgets between tasks", "tier_after": "boundary"},
+    "execute.process.self": {"setting": "already a sandbox; keep it one", "costs": "nothing", "tier_after": "boundary"},
+    "read.file.project": {"setting": "none: this is what it is for", "costs": "nothing", "tier_after": "none"},
+    "write.file.project": {"setting": "a review before merge", "costs": "a reviewer's time", "tier_after": "setting"}
+  },
+  "licence": "CC BY 4.0"
+}

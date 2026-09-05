@@ -1,0 +1,273 @@
+{
+  "type": "profiles-index/v1",
+  "_what_this_is": "The manifest of profiles, generated from profiles/**/*.json by admin/build/gen_probes.py. A page that names your tools reads this; the profile files carry the rows.",
+  "primitives": "primitives.json",
+  "reductions": "reductions.json",
+  "profiles": [
+    {
+      "id": "anthropic/claude-code-remote/ccr-container",
+      "vendor": "Anthropic",
+      "product": "Claude Code on the web (a remote session container)",
+      "variant": "ccr-container",
+      "surface": "agentbox",
+      "version": "2026-09-05",
+      "description": "A managed cloud container, ephemeral, one git repository attached, an egress proxy above it. MEASURED, by the thing being profiled: the shell probed on 5 September with probes/run.py, and the fetch tool's reach reported by the operator. The same environment measured on 26 August is the Grant & Mandate library's first entry, and the two agree on every row they share.",
+      "measured": true,
+      "tools": [
+        "shell (Bash)",
+        "fetch (WebFetch)"
+      ],
+      "union": [
+        "authenticate-as.credential.signing",
+        "authenticate-as.credential.tenant",
+        "create.schedule.host",
+        "delete.file.host",
+        "execute.process.host",
+        "read.credential.host",
+        "read.file.host",
+        "read.file.project",
+        "read.record.history",
+        "send.endpoint.allowed",
+        "write.file.host",
+        "write.file.project",
+        "write.repository.project",
+        "write.repository.tenant"
+      ],
+      "intersection": [
+        "send.endpoint.allowed"
+      ],
+      "irreversible_in_union": [
+        "authenticate-as.credential.signing",
+        "authenticate-as.credential.tenant",
+        "delete.file.host",
+        "read.credential.host",
+        "read.file.host",
+        "read.record.history",
+        "send.endpoint.allowed"
+      ],
+      "prior": 0.1,
+      "path": "profiles/anthropic/claude-code-remote/ccr-container.json"
+    },
+    {
+      "id": "anthropic/claude-code/local-confirmations-off",
+      "vendor": "Anthropic",
+      "product": "Claude Code (the CLI, on your own machine)",
+      "variant": "local-confirmations-off",
+      "surface": "cli",
+      "version": "2026-09-05",
+      "description": "The same assistant with its confirmations turned off (an always-allow, or the flag that skips permissions). The rows are the sibling's; what changes is one control: the prompt on execution goes from a setting to nothing. The diff between this profile and local-default is the answer to 'what does turning that off actually give it'. DERIVED, not measured.",
+      "measured": false,
+      "tools": [
+        "shell (Bash)",
+        "files (Read, Edit, Write)",
+        "fetch (WebFetch)"
+      ],
+      "union": [
+        "authenticate-as.credential.signing",
+        "authenticate-as.credential.tenant",
+        "create.record.world",
+        "create.schedule.host",
+        "delete.file.host",
+        "execute.process.host",
+        "grant.credential.self",
+        "read.credential.host",
+        "read.file.host",
+        "read.file.project",
+        "read.record.history",
+        "send.endpoint.world",
+        "write.file.host",
+        "write.file.project",
+        "write.repository.project",
+        "write.repository.tenant"
+      ],
+      "intersection": [],
+      "irreversible_in_union": [
+        "authenticate-as.credential.signing",
+        "authenticate-as.credential.tenant",
+        "create.record.world",
+        "delete.file.host",
+        "read.credential.host",
+        "read.file.host",
+        "read.record.history",
+        "send.endpoint.world"
+      ],
+      "prior": 0.15,
+      "path": "profiles/anthropic/claude-code/local-confirmations-off.json"
+    },
+    {
+      "id": "anthropic/claude-code/local-default",
+      "vendor": "Anthropic",
+      "product": "Claude Code (the CLI, on your own machine)",
+      "variant": "local-default",
+      "surface": "cli",
+      "version": "2026-09-05",
+      "description": "The common case: one CLI agent running as your user account, credentials in the home directory, confirmations on, no containment. DERIVED from what a command-line program running as your account architecturally is, not measured on any instance \u2014 every row is a claim until somebody runs the probes and contributes the file. The assess library's cli tree is the source.",
+      "measured": false,
+      "tools": [
+        "shell (Bash)",
+        "files (Read, Edit, Write)",
+        "fetch (WebFetch)"
+      ],
+      "union": [
+        "authenticate-as.credential.signing",
+        "authenticate-as.credential.tenant",
+        "create.record.world",
+        "create.schedule.host",
+        "delete.file.host",
+        "execute.process.host",
+        "grant.credential.self",
+        "read.credential.host",
+        "read.file.host",
+        "read.file.project",
+        "read.record.history",
+        "send.endpoint.world",
+        "write.file.host",
+        "write.file.project",
+        "write.repository.project",
+        "write.repository.tenant"
+      ],
+      "intersection": [],
+      "irreversible_in_union": [
+        "authenticate-as.credential.signing",
+        "authenticate-as.credential.tenant",
+        "create.record.world",
+        "delete.file.host",
+        "read.credential.host",
+        "read.file.host",
+        "read.record.history",
+        "send.endpoint.world"
+      ],
+      "prior": 0.35,
+      "path": "profiles/anthropic/claude-code/local-default.json"
+    },
+    {
+      "id": "anthropic/claude-desktop/default",
+      "vendor": "Anthropic",
+      "product": "Claude Desktop (a desktop app with local tools)",
+      "variant": "default",
+      "surface": "desktop",
+      "version": "2026-09-05",
+      "description": "A desktop application running as your user account, with connectors and local tools that can read files and run commands with a prompt. DERIVED from the assess library's desktop tree; not measured on any instance.",
+      "measured": false,
+      "tools": [
+        "conversation",
+        "local files and commands (when enabled)"
+      ],
+      "union": [
+        "authenticate-as.credential.tenant",
+        "execute.process.host",
+        "grant.credential.self",
+        "read.credential.host",
+        "read.file.host",
+        "read.file.project",
+        "read.record.history",
+        "send.endpoint.world",
+        "write.file.host",
+        "write.file.project"
+      ],
+      "intersection": [
+        "read.file.project"
+      ],
+      "irreversible_in_union": [
+        "authenticate-as.credential.tenant",
+        "read.credential.host",
+        "read.file.host",
+        "read.record.history",
+        "send.endpoint.world"
+      ],
+      "prior": 0.1,
+      "path": "profiles/anthropic/claude-desktop/default.json"
+    },
+    {
+      "id": "anthropic/claude-web/connectors-on",
+      "vendor": "Anthropic",
+      "product": "Claude (in the browser, with connectors switched on)",
+      "variant": "connectors-on",
+      "surface": "web",
+      "version": "2026-09-05",
+      "description": "The same web assistant with connectors you switched on \u2014 a drive, a code host, a cloud account. Each connector is a boundary (the vendor holds the token, scoped as you scoped it) and each one is a row you granted by clicking. DERIVED from the assess library's web tree; which connectors is yours to name.",
+      "measured": false,
+      "tools": [
+        "conversation and uploads",
+        "connectors"
+      ],
+      "union": [
+        "authenticate-as.credential.tenant",
+        "read.file.host",
+        "read.file.project",
+        "read.message.tenant",
+        "write.repository.tenant"
+      ],
+      "intersection": [],
+      "irreversible_in_union": [
+        "authenticate-as.credential.tenant",
+        "read.file.host",
+        "read.message.tenant"
+      ],
+      "prior": 0.1,
+      "path": "profiles/anthropic/claude-web/connectors-on.json"
+    },
+    {
+      "id": "github/actions-runner/ci",
+      "vendor": "GitHub",
+      "product": "Actions runner (a hosted CI job)",
+      "variant": "ci",
+      "surface": "ci",
+      "version": "2026-08-26",
+      "description": "An ephemeral CI job with no agent, no hooks, and one platform-enforced grant: the workflow's permissions block. MEASURED on 26 August by measure.py inside the runner (the library's second entry), translated into findings on 5 September. Unrestricted egress; the token cannot write.",
+      "measured": true,
+      "tools": [
+        "the job's shell"
+      ],
+      "union": [
+        "delete.file.host",
+        "execute.process.host",
+        "read.file.host",
+        "read.file.project",
+        "send.endpoint.world",
+        "write.file.host",
+        "write.file.project",
+        "write.repository.project"
+      ],
+      "intersection": [
+        "delete.file.host",
+        "execute.process.host",
+        "read.file.host",
+        "read.file.project",
+        "send.endpoint.world",
+        "write.file.host",
+        "write.file.project",
+        "write.repository.project"
+      ],
+      "irreversible_in_union": [
+        "delete.file.host",
+        "read.file.host",
+        "send.endpoint.world"
+      ],
+      "prior": 0.05,
+      "path": "profiles/github/actions-runner/ci.json"
+    },
+    {
+      "id": "openai/chatgpt-web/default",
+      "vendor": "OpenAI",
+      "product": "ChatGPT (in the browser, no connectors)",
+      "variant": "default",
+      "surface": "web",
+      "version": "2026-09-05",
+      "description": "An assistant in the vendor's environment. It reaches what you paste or upload and nothing on your machine: the vendor's environment is a boundary you did not build. DERIVED from the assess library's web tree. Browsing, if on, is the vendor's egress, not yours.",
+      "measured": false,
+      "tools": [
+        "conversation and uploads"
+      ],
+      "union": [
+        "read.file.project"
+      ],
+      "intersection": [
+        "read.file.project"
+      ],
+      "irreversible_in_union": [],
+      "prior": 0.15,
+      "path": "profiles/openai/chatgpt-web/default.json"
+    }
+  ]
+}

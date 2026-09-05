@@ -225,3 +225,7 @@ __marimo__/
 # the insurance ecosystem's queues: written after a commit exists, drained into the tracked ledgers by the next commit (IE-C8)
 insurance/push-policy/ledger.queue.jsonl
 packs/insurance-ecosystem/ledger/queue/
+
+# the probe registry: your mandate and your delta stay in your clone (probes/yours/README.md says so twice)
+probes/yours/*
+!probes/yours/README.md

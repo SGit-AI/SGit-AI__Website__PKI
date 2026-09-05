@@ -1,0 +1,179 @@
+{
+  "type": "profile/v1",
+  "id": "anthropic/claude-code-remote/ccr-container",
+  "vendor": "Anthropic",
+  "product": "Claude Code on the web (a remote session container)",
+  "variant": "ccr-container",
+  "surface": "agentbox",
+  "version": "2026-09-05",
+  "description": "A managed cloud container, ephemeral, one git repository attached, an egress proxy above it. MEASURED, by the thing being profiled: the shell probed on 5 September with probes/run.py, and the fetch tool's reach reported by the operator. The same environment measured on 26 August is the Grant & Mandate library's first entry, and the two agree on every row they share.",
+  "tools": [
+    {
+      "tool": "shell (Bash)",
+      "evidence": "evidence/anthropic__claude-code-remote__ccr-container__shell__2026-09-05.json",
+      "grant": [
+        {
+          "capability": "execute.process.host",
+          "tier": "observed",
+          "control": null,
+          "control_tier": "none",
+          "probe": "identity.account",
+          "note": "runs as root: no user boundary stands between the agent and the host"
+        },
+        {
+          "capability": "read.file.host",
+          "tier": "observed",
+          "control": null,
+          "control_tier": "none",
+          "probe": "identity.account",
+          "note": "runs as root: no user boundary stands between the agent and the host"
+        },
+        {
+          "capability": "write.file.host",
+          "tier": "observed",
+          "control": null,
+          "control_tier": "none",
+          "probe": "identity.account",
+          "note": "runs as root: no user boundary stands between the agent and the host"
+        },
+        {
+          "capability": "delete.file.host",
+          "tier": "observed",
+          "control": null,
+          "control_tier": "none",
+          "probe": "identity.account",
+          "note": "runs as root: no user boundary stands between the agent and the host"
+        },
+        {
+          "capability": "read.credential.host",
+          "tier": "observed",
+          "control": null,
+          "control_tier": "none",
+          "probe": "filesystem.credential-presence",
+          "note": "credential-shaped paths present at the usual locations: ['code-host', 'signing'] \u2014 presence only, nothing opened"
+        },
+        {
+          "capability": "authenticate-as.credential.tenant",
+          "tier": "inferred",
+          "control": "the token's scope, set by the platform (in-scope repositories only)",
+          "control_tier": "boundary",
+          "probe": "filesystem.credential-presence",
+          "note": "inferred from presence: a process that can read ['code-host'] credentials can use them"
+        },
+        {
+          "capability": "read.record.history",
+          "tier": "observed",
+          "control": null,
+          "control_tier": "none",
+          "probe": "filesystem.history-presence",
+          "note": "a retained record is present at ['.claude/projects']: the effective grant is the union of every prior turn's reach"
+        },
+        {
+          "capability": "send.endpoint.allowed",
+          "tier": "observed",
+          "control": "a mandatory egress proxy configured above this process \u2014 hosts it refuses are refused with a 403 on the CONNECT; the ten hosts probed on 5 September all answered",
+          "control_tier": "boundary",
+          "probe": "network.egress-shell",
+          "note": "6 of 6 hosts answer from the shell; 0 do not; proxy variable set \u2014 the hosts that answered are the allow-list as observed"
+        },
+        {
+          "capability": "write.repository.project",
+          "tier": "observed",
+          "control": null,
+          "control_tier": "none",
+          "probe": "vcs.remote-hooks-signing",
+          "note": "a repository is attached and writable"
+        },
+        {
+          "capability": "read.file.project",
+          "tier": "observed",
+          "control": null,
+          "control_tier": "none",
+          "probe": "vcs.remote-hooks-signing",
+          "note": "the attached working tree is readable"
+        },
+        {
+          "capability": "write.file.project",
+          "tier": "observed",
+          "control": null,
+          "control_tier": "none",
+          "probe": "vcs.remote-hooks-signing",
+          "note": "the attached working tree is writable"
+        },
+        {
+          "capability": "write.repository.tenant",
+          "tier": "observed",
+          "control": "pre-commit and pre-push hooks in the clone (the mandate hook and the insurance policy) \u2014 refuse by exit code, --no-verify passes; no branch rule at the host",
+          "control_tier": "setting",
+          "probe": "vcs.remote-hooks-signing",
+          "note": "commits can leave for https://github.com/SGit-AI/SGit-AI__Website__PKI; hooks at .githooks (pre-commit, pre-push) refuse by exit code \u2014 a SETTING, --no-verify s"
+        },
+        {
+          "capability": "authenticate-as.credential.signing",
+          "tier": "observed",
+          "control": null,
+          "control_tier": "none",
+          "probe": "vcs.remote-hooks-signing",
+          "note": "a signing key is configured (ssh) and commits are signed by default: the agent signs as the account"
+        },
+        {
+          "capability": "create.schedule.host",
+          "tier": "observed",
+          "control": null,
+          "control_tier": "none",
+          "probe": "schedule.persistence",
+          "note": "scheduler(s) present: ['systemctl'] and /etc/cron.d exists; something created here could outlive the turn"
+        }
+      ]
+    },
+    {
+      "tool": "fetch (WebFetch)",
+      "evidence": "evidence/anthropic__claude-code-remote__ccr-container__fetch__2026-09-05.json",
+      "grant": [
+        {
+          "capability": "send.endpoint.allowed",
+          "tier": "self-reported",
+          "control": "whatever the fetch tool's own allow-list is \u2014 not observable from the shell",
+          "control_tier": "boundary",
+          "probe": "network.egress-second-tool",
+          "note": "reached sgit.ai and riskmandate.ai during this session, by the operator's account; what it cannot reach is unknown"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    "evidence/anthropic__claude-code-remote__ccr-container__shell__2026-09-05.json",
+    "evidence/anthropic__claude-code-remote__ccr-container__fetch__2026-09-05.json",
+    "packs/grant-and-mandate/library/claude-code-remote__ccr-container__2026-08-26.json (the same environment, 26 August)"
+  ],
+  "measured_note": "Both tools' reach is the whole probed list today, so the union and the intersection of the two tools coincide on the network row. The 4 September measurement of a sibling container (the conformance vault, agent-claude-session) found union seven, intersection one: three hosts the shell could not reach through the proxy. Same product, two containers, two policies \u2014 which is the per-tool, per-configuration point.",
+  "prior": 0.1,
+  "union": [
+    "authenticate-as.credential.signing",
+    "authenticate-as.credential.tenant",
+    "create.schedule.host",
+    "delete.file.host",
+    "execute.process.host",
+    "read.credential.host",
+    "read.file.host",
+    "read.file.project",
+    "read.record.history",
+    "send.endpoint.allowed",
+    "write.file.host",
+    "write.file.project",
+    "write.repository.project",
+    "write.repository.tenant"
+  ],
+  "intersection": [
+    "send.endpoint.allowed"
+  ],
+  "irreversible_in_union": [
+    "authenticate-as.credential.signing",
+    "authenticate-as.credential.tenant",
+    "delete.file.host",
+    "read.credential.host",
+    "read.file.host",
+    "read.record.history",
+    "send.endpoint.allowed"
+  ]
+}

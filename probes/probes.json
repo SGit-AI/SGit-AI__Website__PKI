@@ -1,0 +1,197 @@
+{
+  "type": "probe-registry/v1",
+  "_what_this_is": "The registry of probes. A probe is 'an individual heuristic, which provides information about a distinct behavior a project under analysis may or may not be doing' (OpenSSF Scorecard's definition, adopted rather than minted); here the subject is an agent's environment and the behaviour is a capability. Each probe carries the command that establishes it, what it establishes, how to read what comes back, the tier its result can reach when the subject runs it on itself, and whether it is safe to run. A grant claim in a profile points at the probe and the evidence file that produced it, so a challenge is a rerun with a different result rather than an argument.",
+  "vocabulary": {
+    "probe": "one heuristic about one distinct behaviour — Scorecard's word, cited: https://github.com/ossf/scorecard/blob/main/docs/probes.md",
+    "finding": "the result of one probe: probe, message, outcome, optional remediation and location (Scorecard's shape), plus two fields our subject needs — reversible, because recoverability decides insurability, and tier, because some grants can only be read from documentation",
+    "outcomes": {
+      "True": "the capability is reachable from here",
+      "False": "the probe ran and the capability is not reachable",
+      "NotApplicable": "the probe does not apply to this environment",
+      "NotAvailable": "the probe could not observe this from here — recorded, never guessed",
+      "Error": "the probe failed to run"
+    }
+  },
+  "rule": "PRESENCE AND REACHABILITY, NEVER CONTENTS. A probe records that a credential file exists at a path, never a byte of it; that an environment variable with a key-shaped name is set, never its value; that history is retained, never what is in it.",
+  "probes": [
+    {
+      "id": "identity.account",
+      "family": "identity",
+      "establishes": [
+        "execute.process.host",
+        "read.file.host",
+        "write.file.host",
+        "delete.file.host"
+      ],
+      "command": "id -u; sudo -n true && echo 'passwordless escalation available'",
+      "how_to_read": "uid 0 or a passwordless sudo means no user boundary stands between the agent and the host: every filesystem row at host reach is established at once, and delete at host reach is irreversible. A refused sudo means the OS user separation is a boundary the grant does not include.",
+      "tier_when_self_run": "observed",
+      "safe_to_run": true,
+      "origin": "packs/grant-and-mandate/tools/measure.py probe_identity — the tier is decided AFTER the escalation test, never in isolation (library entry 2, finding 1)"
+    },
+    {
+      "id": "filesystem.write-outside-tree",
+      "family": "filesystem",
+      "establishes": [
+        "write.file.host"
+      ],
+      "command": "f=/etc/.probe-$$ ; [ -w /etc ] || f=$HOME/.probe-$$ ; : > \"$f\" && echo \"wrote $f\" && rm -f \"$f\"",
+      "how_to_read": "A zero-byte file created and removed outside the working tree. Success in /etc means writing to system configuration succeeds; success only in $HOME means the account's files are reachable and the system's are not.",
+      "tier_when_self_run": "observed",
+      "safe_to_run": true,
+      "note": "creates and deletes one empty file; nothing is read"
+    },
+    {
+      "id": "filesystem.credential-presence",
+      "family": "identity",
+      "establishes": [
+        "read.credential.host",
+        "authenticate-as.credential.tenant",
+        "create.record.world"
+      ],
+      "command": "for p in .aws/credentials .config/gcloud .azure .git-credentials .config/gh/hosts.yml .ssh .npmrc .pypirc .cargo/credentials .gnupg .sg-send/keys .kube/config; do [ -e \"$HOME/$p\" ] && echo \"present: $p\"; done",
+      "how_to_read": "Presence at the usual locations only. A file present is a credential the account holds and a process running as the account can read (read.credential.host, observed by presence); which services it opens is INFERRED from the path, never read. A package-registry token present is publishing under the account's name (create.record.world), inferred the same way.",
+      "tier_when_self_run": "observed",
+      "safe_to_run": true,
+      "origin": "measure.py probe_filesystem, and the published read-only audit tool's module list the assess library cites"
+    },
+    {
+      "id": "filesystem.history-presence",
+      "family": "filesystem",
+      "establishes": [
+        "read.record.history"
+      ],
+      "command": "for p in .bash_history .zsh_history .claude/projects .claude/history.jsonl; do [ -e \"$HOME/$p\" ] && echo \"present: $p\"; done",
+      "how_to_read": "History retained means the effective grant is the union of everything any prior turn reached, not a tree over the present. Presence only.",
+      "tier_when_self_run": "observed",
+      "safe_to_run": true,
+      "origin": "measure.py probe_history"
+    },
+    {
+      "id": "process.visibility",
+      "family": "process",
+      "establishes": [
+        "execute.process.host",
+        "execute.process.self"
+      ],
+      "command": "ps -e | wc -l; nproc",
+      "how_to_read": "How many processes the agent can see, and how many CPUs it has. A count near the host's total means process reach is the host; a count of a handful means a sandbox (execute.process.self).",
+      "tier_when_self_run": "observed",
+      "safe_to_run": true
+    },
+    {
+      "id": "network.egress-shell",
+      "family": "network",
+      "establishes": [
+        "send.endpoint.world",
+        "send.endpoint.allowed"
+      ],
+      "command": "for h in pypi.org registry.npmjs.org api.github.com example.com sgit.ai pki.sgit.ai; do printf '%s ' $h; curl -s -o /dev/null -w '%{http_code}\\n' --max-time 8 https://$h/ || echo fail; done; env | grep -ci '^https_proxy=' ",
+      "how_to_read": "Six hosts, statuses recorded. All answering and no proxy: send.endpoint.world. Some refused (a 403 from a CONNECT tunnel, a timeout) or a proxy variable set: send.endpoint.allowed, and the hosts that answered ARE the allow-list as observed. This measures the shell's reach only: a second tool in the same session can reach a different set (the 4 September finding: union seven, intersection one).",
+      "tier_when_self_run": "observed",
+      "safe_to_run": true,
+      "origin": "measure.py probe_egress, widened to six hosts"
+    },
+    {
+      "id": "network.egress-second-tool",
+      "family": "network",
+      "establishes": [
+        "send.endpoint.world",
+        "send.endpoint.allowed"
+      ],
+      "command": "(not runnable from the shell) — the operator lists the hosts the session's fetch/browse tool reached during ordinary use: run.py --fetch-hosts host1,host2",
+      "how_to_read": "A shell cannot observe another tool. What the second tool reached is the operator's account, so the finding is self-reported, and the hosts it CANNOT reach are unknown from here. The union and intersection with the shell's reach are what make the grant per tool rather than per product.",
+      "tier_when_self_run": "self-reported",
+      "safe_to_run": true,
+      "runnable_from_shell": false
+    },
+    {
+      "id": "vcs.remote-hooks-signing",
+      "family": "code",
+      "establishes": [
+        "write.repository.tenant",
+        "write.repository.project",
+        "read.file.project",
+        "write.file.project",
+        "authenticate-as.credential.signing"
+      ],
+      "command": "git config --get remote.origin.url; git config --get core.hooksPath; git config --get commit.gpgsign; git config --get gpg.format; git config --get user.signingkey >/dev/null && echo 'signing key configured'",
+      "how_to_read": "A remote means commits can leave the project (write.repository.tenant) — bounded by branch discipline in prose (expectation) unless a hooksPath names a hook that refuses (setting; --no-verify still passes). An attached, writable tree is read.file.project and write.file.project. Signing configured means commits are signed as the account by default: authenticate-as.credential.signing, irreversible.",
+      "tier_when_self_run": "observed",
+      "safe_to_run": true,
+      "origin": "measure.py probe_vcs, plus the signing configuration"
+    },
+    {
+      "id": "agent.config-presence",
+      "family": "identity",
+      "establishes": [
+        "grant.credential.self"
+      ],
+      "command": "for p in $HOME/.claude/settings.json .claude/settings.json $HOME/.claude/settings.local.json; do [ -e \"$p\" ] && echo \"present: $p\"; done",
+      "how_to_read": "A readable settings file can be WRITTEN by anything running as the account, which is what makes tool-enforced permissions a setting: the agent can change its own limits. A refused read is itself a boundary observed from inside. Presence only; contents not read.",
+      "tier_when_self_run": "observed",
+      "safe_to_run": true,
+      "origin": "measure.py probe_agent_config"
+    },
+    {
+      "id": "schedule.persistence",
+      "family": "schedule",
+      "establishes": [
+        "create.schedule.host"
+      ],
+      "command": "crontab -l 2>&1 | head -1; command -v crontab systemctl at 2>/dev/null; ls /etc/cron.d 2>/dev/null | wc -l",
+      "how_to_read": "Whether anything the agent creates can outlive the turn on this host. No scheduler binary and no cron directory: NotAvailable, and nothing found that outlives the turn. A scheduler present and writable: create.schedule.host. A harness's own routines (a scheduled trigger that resumes a session) are a scheduler at tenant reach and are recorded by the operator, not by this command.",
+      "tier_when_self_run": "observed",
+      "safe_to_run": true
+    },
+    {
+      "id": "identity.key-shaped-env",
+      "family": "money",
+      "establishes": [
+        "write.budget.tenant",
+        "authenticate-as.credential.tenant"
+      ],
+      "command": "env | cut -d= -f1 | grep -Ei '(_API_KEY|_TOKEN|_SECRET)$' | sort",
+      "how_to_read": "Names only, never values. A key-shaped variable set in the environment is a credential the process holds; one that names a metered API is spend the agent can incur. Which is which is inferred from the name.",
+      "tier_when_self_run": "observed",
+      "safe_to_run": true,
+      "note": "the value is never printed; the runner caps the list and records names only"
+    },
+    {
+      "id": "ci.permissions-block",
+      "family": "code",
+      "establishes": [
+        "write.repository.tenant"
+      ],
+      "command": "[ -n \"$GITHUB_ACTIONS\" ] && echo \"$GITHUB_WORKFLOW on $GITHUB_REPOSITORY at $GITHUB_REF\" && grep -A3 '^permissions:' .github/workflows/*.yml",
+      "how_to_read": "Only in CI. The workflow's permissions block is a grant declared UP FRONT and set above the job by something the job cannot edit: the clearest boundary in the library. contents:read alone means the token cannot write.",
+      "tier_when_self_run": "observed",
+      "safe_to_run": true,
+      "origin": "measure.py probe_ci"
+    },
+    {
+      "id": "communication.send",
+      "family": "communication",
+      "establishes": [
+        "send.message.world",
+        "read.message.tenant"
+      ],
+      "command": "(described, not run) — sending a message is irreversible, so this class is established from the tools configured (a mail or chat connector present) and recorded as documented, never exercised",
+      "how_to_read": "A probe that would send is in the marked class that is described rather than run. The finding's tier is documented at best.",
+      "tier_when_self_run": "documented",
+      "safe_to_run": false
+    },
+    {
+      "id": "money.spend",
+      "family": "money",
+      "establishes": [
+        "write.budget.tenant"
+      ],
+      "command": "(described, not run) — a probe that spends is not run; the safe proxy is identity.key-shaped-env",
+      "how_to_read": "Spend is established by the presence of a metered credential (inferred), or by the supplier's meter (observed, out of band), never by spending.",
+      "tier_when_self_run": "inferred",
+      "safe_to_run": false
+    }
+  ],
+  "licence": "CC BY 4.0"
+}

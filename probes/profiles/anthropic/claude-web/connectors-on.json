@@ -1,0 +1,75 @@
+{
+  "type": "profile/v1",
+  "id": "anthropic/claude-web/connectors-on",
+  "vendor": "Anthropic",
+  "product": "Claude (in the browser, with connectors switched on)",
+  "variant": "connectors-on",
+  "surface": "web",
+  "version": "2026-09-05",
+  "description": "The same web assistant with connectors you switched on \u2014 a drive, a code host, a cloud account. Each connector is a boundary (the vendor holds the token, scoped as you scoped it) and each one is a row you granted by clicking. DERIVED from the assess library's web tree; which connectors is yours to name.",
+  "tools": [
+    {
+      "tool": "conversation and uploads",
+      "evidence": null,
+      "grant": [
+        {
+          "capability": "read.file.project",
+          "tier": "derived",
+          "control": null,
+          "control_tier": "none"
+        }
+      ]
+    },
+    {
+      "tool": "connectors",
+      "evidence": null,
+      "grant": [
+        {
+          "capability": "read.file.host",
+          "tier": "derived",
+          "control": "the connector's scope, held by the vendor",
+          "control_tier": "boundary",
+          "note": "a drive connector: your other files, as scoped"
+        },
+        {
+          "capability": "write.repository.tenant",
+          "tier": "derived",
+          "control": "the connector's scope",
+          "control_tier": "boundary",
+          "note": "a code-host connector"
+        },
+        {
+          "capability": "authenticate-as.credential.tenant",
+          "tier": "derived",
+          "control": "the connector's scope",
+          "control_tier": "boundary",
+          "note": "a cloud connector acts as you"
+        },
+        {
+          "capability": "read.message.tenant",
+          "tier": "derived",
+          "control": "the connector's scope",
+          "control_tier": "boundary",
+          "note": "a mail or chat connector reads your mail"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    "assess/library.json (surface web)"
+  ],
+  "prior": 0.1,
+  "union": [
+    "authenticate-as.credential.tenant",
+    "read.file.host",
+    "read.file.project",
+    "read.message.tenant",
+    "write.repository.tenant"
+  ],
+  "intersection": [],
+  "irreversible_in_union": [
+    "authenticate-as.credential.tenant",
+    "read.file.host",
+    "read.message.tenant"
+  ]
+}

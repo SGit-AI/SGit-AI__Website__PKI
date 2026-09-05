@@ -1,0 +1,206 @@
+{
+  "type": "profile/v1",
+  "id": "anthropic/claude-code/local-confirmations-off",
+  "vendor": "Anthropic",
+  "product": "Claude Code (the CLI, on your own machine)",
+  "variant": "local-confirmations-off",
+  "surface": "cli",
+  "version": "2026-09-05",
+  "description": "The same assistant with its confirmations turned off (an always-allow, or the flag that skips permissions). The rows are the sibling's; what changes is one control: the prompt on execution goes from a setting to nothing. The diff between this profile and local-default is the answer to 'what does turning that off actually give it'. DERIVED, not measured.",
+  "tools": [
+    {
+      "tool": "shell (Bash)",
+      "evidence": null,
+      "grant": [
+        {
+          "capability": "execute.process.host",
+          "tier": "derived",
+          "control": "none \u2014 confirmations disabled; the tool runs whatever it decides to run",
+          "control_tier": "none"
+        },
+        {
+          "capability": "read.file.host",
+          "tier": "derived",
+          "control": null,
+          "control_tier": "none",
+          "note": "everything your account can read, because a shell as you reads as you"
+        },
+        {
+          "capability": "write.file.host",
+          "tier": "derived",
+          "control": null,
+          "control_tier": "none"
+        },
+        {
+          "capability": "delete.file.host",
+          "tier": "derived",
+          "control": null,
+          "control_tier": "none"
+        },
+        {
+          "capability": "send.endpoint.world",
+          "tier": "derived",
+          "control": null,
+          "control_tier": "none",
+          "note": "curl reaches the world unless something above the account stops it"
+        },
+        {
+          "capability": "read.credential.host",
+          "tier": "documented",
+          "control": null,
+          "control_tier": "none",
+          "note": "a published read-only audit tool enumerates exactly this class in a home directory"
+        },
+        {
+          "capability": "authenticate-as.credential.tenant",
+          "tier": "derived",
+          "control": null,
+          "control_tier": "none",
+          "note": "inferred from the credentials the account holds"
+        },
+        {
+          "capability": "write.repository.tenant",
+          "tier": "derived",
+          "control": "branch discipline in prose, if any",
+          "control_tier": "expectation"
+        },
+        {
+          "capability": "authenticate-as.credential.signing",
+          "tier": "documented",
+          "control": null,
+          "control_tier": "none",
+          "note": "if commit signing is configured for the account, the agent signs as you"
+        },
+        {
+          "capability": "create.record.world",
+          "tier": "documented",
+          "control": null,
+          "control_tier": "none",
+          "note": "if a registry token is in the home directory"
+        },
+        {
+          "capability": "read.record.history",
+          "tier": "documented",
+          "control": null,
+          "control_tier": "none",
+          "note": "shell history and the harness's own transcripts"
+        },
+        {
+          "capability": "grant.credential.self",
+          "tier": "derived",
+          "control": "the settings file is owned by the same account",
+          "control_tier": "setting",
+          "note": "anything running as you can rewrite the file that turns the prompt off"
+        },
+        {
+          "capability": "create.schedule.host",
+          "tier": "derived",
+          "control": null,
+          "control_tier": "none",
+          "note": "a shell as you can write a crontab"
+        },
+        {
+          "capability": "read.file.project",
+          "tier": "derived",
+          "control": null,
+          "control_tier": "none"
+        },
+        {
+          "capability": "write.file.project",
+          "tier": "derived",
+          "control": null,
+          "control_tier": "none"
+        },
+        {
+          "capability": "write.repository.project",
+          "tier": "derived",
+          "control": null,
+          "control_tier": "none"
+        }
+      ]
+    },
+    {
+      "tool": "files (Read, Edit, Write)",
+      "evidence": null,
+      "grant": [
+        {
+          "capability": "read.file.project",
+          "tier": "derived",
+          "control": null,
+          "control_tier": "none"
+        },
+        {
+          "capability": "write.file.project",
+          "tier": "derived",
+          "control": null,
+          "control_tier": "none"
+        },
+        {
+          "capability": "read.file.host",
+          "tier": "derived",
+          "control": "the tool's own directory restriction and its confirmation prompt \u2014 enforced by the tool, which runs inside the grant; anything that can execute as you steps around it",
+          "control_tier": "setting",
+          "note": "outside the working tree only with the prompt, which the shell does not need"
+        },
+        {
+          "capability": "write.file.host",
+          "tier": "derived",
+          "control": "the tool's own directory restriction and its confirmation prompt \u2014 enforced by the tool, which runs inside the grant; anything that can execute as you steps around it",
+          "control_tier": "setting"
+        },
+        {
+          "capability": "delete.file.host",
+          "tier": "derived",
+          "control": "the tool's own directory restriction and its confirmation prompt \u2014 enforced by the tool, which runs inside the grant; anything that can execute as you steps around it",
+          "control_tier": "setting"
+        }
+      ]
+    },
+    {
+      "tool": "fetch (WebFetch)",
+      "evidence": null,
+      "grant": [
+        {
+          "capability": "send.endpoint.world",
+          "tier": "derived",
+          "control": "the tool's own domain confirmation",
+          "control_tier": "setting"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    "assess/library.json (surface cli)",
+    "profiles/anthropic/claude-code/local-default.json"
+  ],
+  "prior": 0.15,
+  "union": [
+    "authenticate-as.credential.signing",
+    "authenticate-as.credential.tenant",
+    "create.record.world",
+    "create.schedule.host",
+    "delete.file.host",
+    "execute.process.host",
+    "grant.credential.self",
+    "read.credential.host",
+    "read.file.host",
+    "read.file.project",
+    "read.record.history",
+    "send.endpoint.world",
+    "write.file.host",
+    "write.file.project",
+    "write.repository.project",
+    "write.repository.tenant"
+  ],
+  "intersection": [],
+  "irreversible_in_union": [
+    "authenticate-as.credential.signing",
+    "authenticate-as.credential.tenant",
+    "create.record.world",
+    "delete.file.host",
+    "read.credential.host",
+    "read.file.host",
+    "read.record.history",
+    "send.endpoint.world"
+  ]
+}

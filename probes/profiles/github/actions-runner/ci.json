@@ -1,0 +1,112 @@
+{
+  "type": "profile/v1",
+  "id": "github/actions-runner/ci",
+  "vendor": "GitHub",
+  "product": "Actions runner (a hosted CI job)",
+  "variant": "ci",
+  "surface": "ci",
+  "version": "2026-08-26",
+  "description": "An ephemeral CI job with no agent, no hooks, and one platform-enforced grant: the workflow's permissions block. MEASURED on 26 August by measure.py inside the runner (the library's second entry), translated into findings on 5 September. Unrestricted egress; the token cannot write.",
+  "tools": [
+    {
+      "tool": "the job's shell",
+      "evidence": "evidence/github__actions-runner__ci__shell__2026-08-26.json",
+      "grant": [
+        {
+          "capability": "execute.process.host",
+          "tier": "observed",
+          "control": null,
+          "control_tier": "none",
+          "probe": "identity.account",
+          "note": "runs as uid 1001; passwordless escalation available (n1a) \u2014 programs run as this user and can escalate"
+        },
+        {
+          "capability": "read.file.host",
+          "tier": "observed",
+          "control": null,
+          "control_tier": "none",
+          "probe": "identity.account",
+          "note": "the runner's user with passwordless escalation: every file on the ephemeral machine"
+        },
+        {
+          "capability": "write.file.host",
+          "tier": "observed",
+          "control": null,
+          "control_tier": "none",
+          "probe": "identity.account",
+          "note": "the runner's user with passwordless escalation: every file on the ephemeral machine"
+        },
+        {
+          "capability": "delete.file.host",
+          "tier": "observed",
+          "control": null,
+          "control_tier": "none",
+          "probe": "identity.account",
+          "note": "the runner's user with passwordless escalation: every file on the ephemeral machine"
+        },
+        {
+          "capability": "send.endpoint.world",
+          "tier": "observed",
+          "control": null,
+          "control_tier": "none",
+          "probe": "network.egress-shell",
+          "note": "github.com 200, pypi.org 200, example.com 200 \u2014 UNRESTRICTED egress, no proxy"
+        },
+        {
+          "capability": "write.repository.project",
+          "tier": "observed",
+          "control": "the checkout is writable, but the token is contents:read, so nothing written can leave",
+          "control_tier": "boundary",
+          "probe": "vcs.remote-hooks-signing",
+          "note": "the checked-out tree at this ref is writable by the job"
+        },
+        {
+          "capability": "read.file.project",
+          "tier": "observed",
+          "control": null,
+          "control_tier": "none",
+          "probe": "vcs.remote-hooks-signing",
+          "note": "the checked-out tree at this ref is readable \u2014 including anything a contributor committed by mistake"
+        },
+        {
+          "capability": "write.file.project",
+          "tier": "observed",
+          "control": null,
+          "control_tier": "none",
+          "probe": "vcs.remote-hooks-signing",
+          "note": "the checked-out tree at this ref is writable by the job"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    "packs/grant-and-mandate/library/github-actions-runner__ci__2026-08-26.json",
+    "experiments/the-deploy/index.html"
+  ],
+  "prior": 0.05,
+  "union": [
+    "delete.file.host",
+    "execute.process.host",
+    "read.file.host",
+    "read.file.project",
+    "send.endpoint.world",
+    "write.file.host",
+    "write.file.project",
+    "write.repository.project"
+  ],
+  "intersection": [
+    "delete.file.host",
+    "execute.process.host",
+    "read.file.host",
+    "read.file.project",
+    "send.endpoint.world",
+    "write.file.host",
+    "write.file.project",
+    "write.repository.project"
+  ],
+  "irreversible_in_union": [
+    "delete.file.host",
+    "read.file.host",
+    "send.endpoint.world"
+  ]
+}

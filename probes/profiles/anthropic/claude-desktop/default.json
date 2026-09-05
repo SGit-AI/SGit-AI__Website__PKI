@@ -1,0 +1,118 @@
+{
+  "type": "profile/v1",
+  "id": "anthropic/claude-desktop/default",
+  "vendor": "Anthropic",
+  "product": "Claude Desktop (a desktop app with local tools)",
+  "variant": "default",
+  "surface": "desktop",
+  "version": "2026-09-05",
+  "description": "A desktop application running as your user account, with connectors and local tools that can read files and run commands with a prompt. DERIVED from the assess library's desktop tree; not measured on any instance.",
+  "tools": [
+    {
+      "tool": "conversation",
+      "evidence": null,
+      "grant": [
+        {
+          "capability": "read.file.project",
+          "tier": "derived",
+          "control": null,
+          "control_tier": "none",
+          "note": "what you paste or attach"
+        }
+      ]
+    },
+    {
+      "tool": "local files and commands (when enabled)",
+      "evidence": null,
+      "grant": [
+        {
+          "capability": "read.file.project",
+          "tier": "derived",
+          "control": null,
+          "control_tier": "none"
+        },
+        {
+          "capability": "write.file.project",
+          "tier": "derived",
+          "control": null,
+          "control_tier": "none"
+        },
+        {
+          "capability": "read.file.host",
+          "tier": "derived",
+          "control": "the app's folder permission",
+          "control_tier": "setting"
+        },
+        {
+          "capability": "write.file.host",
+          "tier": "derived",
+          "control": "the app's folder permission",
+          "control_tier": "setting"
+        },
+        {
+          "capability": "execute.process.host",
+          "tier": "derived",
+          "control": "a confirmation prompt",
+          "control_tier": "setting",
+          "note": "run terminal commands as you"
+        },
+        {
+          "capability": "read.credential.host",
+          "tier": "documented",
+          "control": null,
+          "control_tier": "none"
+        },
+        {
+          "capability": "authenticate-as.credential.tenant",
+          "tier": "derived",
+          "control": null,
+          "control_tier": "none"
+        },
+        {
+          "capability": "read.record.history",
+          "tier": "documented",
+          "control": null,
+          "control_tier": "none"
+        },
+        {
+          "capability": "grant.credential.self",
+          "tier": "derived",
+          "control": "the app's own settings file",
+          "control_tier": "setting"
+        },
+        {
+          "capability": "send.endpoint.world",
+          "tier": "derived",
+          "control": null,
+          "control_tier": "none"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    "assess/library.json (surface desktop)"
+  ],
+  "prior": 0.1,
+  "union": [
+    "authenticate-as.credential.tenant",
+    "execute.process.host",
+    "grant.credential.self",
+    "read.credential.host",
+    "read.file.host",
+    "read.file.project",
+    "read.record.history",
+    "send.endpoint.world",
+    "write.file.host",
+    "write.file.project"
+  ],
+  "intersection": [
+    "read.file.project"
+  ],
+  "irreversible_in_union": [
+    "authenticate-as.credential.tenant",
+    "read.credential.host",
+    "read.file.host",
+    "read.record.history",
+    "send.endpoint.world"
+  ]
+}

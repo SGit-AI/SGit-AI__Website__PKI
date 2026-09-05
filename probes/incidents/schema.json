@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "incident/v1 — evidence that demotes a control",
+  "type": "object",
+  "required": ["type", "date", "profile", "capability", "control_claimed", "claimed_rung", "demoted_to", "what_happened", "account"],
+  "properties": {
+    "type": {"const": "incident/v1"},
+    "date": {"type": "string", "format": "date"},
+    "profile": {"type": "string"},
+    "capability": {"type": "string", "description": "id in primitives.json"},
+    "control_claimed": {"type": "string"},
+    "claimed_rung": {"enum": ["asserted", "documented", "manual", "out-of-band", "inline"]},
+    "demoted_to": {"enum": ["asserted", "documented", "manual", "out-of-band", "inline"]},
+    "bypassed": {"type": "boolean", "description": "true when an action got past the control; false when the incident shows the control's tier another way"},
+    "what_happened": {"type": "string"},
+    "account": {"type": "string", "description": "URL of the public account"},
+    "evidence": {"type": "array", "items": {"type": "string"}}
+  }
+}

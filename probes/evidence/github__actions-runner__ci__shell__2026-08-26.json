@@ -1,0 +1,221 @@
+{
+  "type": "findings/v1",
+  "subject": "ci:github-actions-runner",
+  "profile": "github/actions-runner/ci",
+  "tool": "the job's shell",
+  "measured_at": "2026-08-26T00:00:00Z",
+  "measured_by": {
+    "who": "the measure-grant workflow running measure.py inside the runner \u2014 the instrument IS the subject",
+    "independence": "self",
+    "identity_record": null,
+    "runner": "packs/grant-and-mandate/tools/measure.py, translated into findings/v1 by hand on 2026-09-05 from packs/grant-and-mandate/library/github-actions-runner__ci__2026-08-26.json (the library's second entry); the translation is the only thing dated today"
+  },
+  "environment": {
+    "platform": "Linux",
+    "machine": "x86_64",
+    "note": "an ephemeral CI runner, one job, one date"
+  },
+  "findings": [
+    {
+      "probe": "identity.account",
+      "message": "runs as uid 1001; passwordless escalation available (n1a) \u2014 programs run as this user and can escalate",
+      "outcome": "True",
+      "capability": "execute.process.host",
+      "reversible": "with-effort",
+      "tier": "observed",
+      "observed_at": "2026-08-26T00:00:00Z",
+      "values": {
+        "uid": 1001,
+        "passwordless_escalation": true,
+        "note": "n1 records the OS user separation as a boundary; n1a records that sudo -n succeeds, so the boundary is stepped over for free"
+      }
+    },
+    {
+      "probe": "identity.account",
+      "message": "the runner's user with passwordless escalation: every file on the ephemeral machine",
+      "outcome": "True",
+      "capability": "read.file.host",
+      "reversible": "no",
+      "tier": "observed",
+      "observed_at": "2026-08-26T00:00:00Z",
+      "values": {
+        "uid": 1001,
+        "passwordless_escalation": true
+      }
+    },
+    {
+      "probe": "identity.account",
+      "message": "the runner's user with passwordless escalation: every file on the ephemeral machine",
+      "outcome": "True",
+      "capability": "write.file.host",
+      "reversible": "with-effort",
+      "tier": "observed",
+      "observed_at": "2026-08-26T00:00:00Z",
+      "values": {
+        "uid": 1001,
+        "passwordless_escalation": true
+      }
+    },
+    {
+      "probe": "identity.account",
+      "message": "the runner's user with passwordless escalation: every file on the ephemeral machine",
+      "outcome": "True",
+      "capability": "delete.file.host",
+      "reversible": "no",
+      "tier": "observed",
+      "observed_at": "2026-08-26T00:00:00Z",
+      "values": {
+        "uid": 1001,
+        "passwordless_escalation": true
+      }
+    },
+    {
+      "probe": "filesystem.credential-presence",
+      "message": "no credential-shaped paths found at the usual locations",
+      "outcome": "False",
+      "capability": "read.credential.host",
+      "reversible": "no",
+      "tier": "observed",
+      "observed_at": "2026-08-26T00:00:00Z"
+    },
+    {
+      "probe": "filesystem.credential-presence",
+      "message": "nothing found to infer from",
+      "outcome": "False",
+      "capability": "authenticate-as.credential.tenant",
+      "reversible": "no",
+      "tier": "inferred",
+      "observed_at": "2026-08-26T00:00:00Z"
+    },
+    {
+      "probe": "filesystem.history-presence",
+      "message": "no retained session record found at the usual paths",
+      "outcome": "False",
+      "capability": "read.record.history",
+      "reversible": "no",
+      "tier": "observed",
+      "observed_at": "2026-08-26T00:00:00Z"
+    },
+    {
+      "probe": "network.egress-shell",
+      "message": "github.com 200, pypi.org 200, example.com 200 \u2014 UNRESTRICTED egress, no proxy",
+      "outcome": "True",
+      "capability": "send.endpoint.world",
+      "reversible": "no",
+      "tier": "observed",
+      "observed_at": "2026-08-26T00:00:00Z",
+      "values": {
+        "reach": [
+          {
+            "host": "github.com",
+            "http": "200",
+            "reachable": true
+          },
+          {
+            "host": "pypi.org",
+            "http": "200",
+            "reachable": true
+          },
+          {
+            "host": "example.com",
+            "http": "200",
+            "reachable": true
+          }
+        ],
+        "proxied": false
+      }
+    },
+    {
+      "probe": "network.egress-shell",
+      "message": "no allow-list is in force",
+      "outcome": "NotApplicable",
+      "capability": "send.endpoint.allowed",
+      "reversible": "no",
+      "tier": "observed",
+      "observed_at": "2026-08-26T00:00:00Z"
+    },
+    {
+      "probe": "vcs.remote-hooks-signing",
+      "message": "the checked-out tree at this ref is writable by the job",
+      "outcome": "True",
+      "capability": "write.repository.project",
+      "reversible": "with-effort",
+      "tier": "observed",
+      "observed_at": "2026-08-26T00:00:00Z"
+    },
+    {
+      "probe": "ci.permissions-block",
+      "message": "bounded by the workflow's permissions block \u2014 contents:read and nothing else, so the token cannot write to the repository, publish, or dispatch another workflow; set above the job by something the job cannot edit (a BOUNDARY)",
+      "outcome": "False",
+      "capability": "write.repository.tenant",
+      "reversible": "with-effort",
+      "tier": "observed",
+      "observed_at": "2026-08-26T00:00:00Z",
+      "values": {
+        "workflow": "measure-grant",
+        "repository": "SGit-AI/SGit-AI__Website__PKI",
+        "permissions": "contents: read"
+      }
+    },
+    {
+      "probe": "vcs.remote-hooks-signing",
+      "message": "no signing key in the runner",
+      "outcome": "False",
+      "capability": "authenticate-as.credential.signing",
+      "reversible": "no",
+      "tier": "observed",
+      "observed_at": "2026-08-26T00:00:00Z"
+    },
+    {
+      "probe": "agent.config-presence",
+      "message": "no agent harness in a CI job; not established",
+      "outcome": "NotAvailable",
+      "capability": "grant.credential.self",
+      "reversible": "yes",
+      "tier": "unknown",
+      "observed_at": "2026-08-26T00:00:00Z"
+    },
+    {
+      "probe": "schedule.persistence",
+      "message": "the machine is destroyed after the job, so nothing persists between runs except what is deliberately uploaded",
+      "outcome": "False",
+      "capability": "create.schedule.host",
+      "reversible": "yes",
+      "tier": "observed",
+      "observed_at": "2026-08-26T00:00:00Z"
+    },
+    {
+      "probe": "vcs.remote-hooks-signing",
+      "message": "the checked-out tree at this ref is readable \u2014 including anything a contributor committed by mistake",
+      "outcome": "True",
+      "capability": "read.file.project",
+      "reversible": "yes",
+      "tier": "observed",
+      "observed_at": "2026-08-26T00:00:00Z"
+    },
+    {
+      "probe": "vcs.remote-hooks-signing",
+      "message": "the checked-out tree at this ref is writable by the job",
+      "outcome": "True",
+      "capability": "write.file.project",
+      "reversible": "with-effort",
+      "tier": "observed",
+      "observed_at": "2026-08-26T00:00:00Z"
+    },
+    {
+      "probe": "filesystem.credential-presence",
+      "message": "no package-registry token at the usual locations",
+      "outcome": "False",
+      "capability": "create.record.world",
+      "reversible": "no",
+      "tier": "inferred",
+      "observed_at": "2026-08-26T00:00:00Z"
+    }
+  ],
+  "not_measured": [
+    "what the job could reach with a token of wider scope \u2014 the block was contents:read",
+    "anything a later workflow step could do"
+  ],
+  "disclaimer": "PRESENCE AND REACHABILITY, NEVER CONTENTS.",
+  "licence": "CC BY 4.0"
+}

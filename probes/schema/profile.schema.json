@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pki.sgit.ai/probes/schema/profile.schema.json",
+  "title": "profile/v1 — a named configuration of a product, listing its tools and each tool's grant",
+  "type": "object",
+  "required": ["type", "id", "vendor", "product", "variant", "version", "tools", "union", "intersection"],
+  "properties": {
+    "type": {"const": "profile/v1"},
+    "id": {"type": "string", "pattern": "^[a-z0-9-]+/[a-z0-9-]+/[a-z0-9-]+$"},
+    "vendor": {"type": "string"}, "product": {"type": "string"}, "variant": {"type": "string"},
+    "surface": {"enum": ["cli", "desktop", "web", "agentbox", "ci"]},
+    "version": {"type": "string", "description": "moves when any row moves; an assessment computed against it goes stale when it does"},
+    "description": {"type": "string"},
+    "tools": {"type": "array", "items": {"type": "object", "required": ["tool", "grant"], "properties": {
+      "tool": {"type": "string"},
+      "evidence": {"type": ["string", "null"], "description": "path of a findings/v1 file, relative to probes/ — null means the rows are a claim"},
+      "grant": {"type": "array", "items": {"type": "object", "required": ["capability", "tier"], "properties": {
+        "capability": {"type": "string"}, "tier": {"type": "string"}, "probe": {"type": "string"}, "note": {"type": "string"}, "control": {"type": ["string", "null"]}, "control_tier": {"type": "string"}
+      }}}
+    }}},
+    "union": {"type": "array", "items": {"type": "string"}},
+    "intersection": {"type": "array", "items": {"type": "string"}},
+    "sources": {"type": "array", "items": {"type": "string"}},
+    "prior": {"type": "number", "description": "population prior for the game; honest only as a guess, and said so"}
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pki.sgit.ai/probes/schema/finding.schema.json",
+  "title": "finding/v1 — the result of one probe",
+  "description": "Adopted from OpenSSF Scorecard's finding (probe, message, outcome, remediation, location; https://github.com/ossf/scorecard/blob/main/docs/probes.md) with two divergences our subject needs: reversible, because recoverability decides insurability, and tier, because some grants can only be read from documentation. A finding never carries contents — presence and reachability only.",
+  "type": "object",
+  "required": ["probe", "message", "outcome", "capability", "reversible", "tier", "observed_at"],
+  "properties": {
+    "probe": {"type": "string", "description": "id in probes.json"},
+    "message": {"type": "string", "description": "one sentence a person can read"},
+    "outcome": {"enum": ["True", "False", "NotApplicable", "NotAvailable", "Error"]},
+    "capability": {"type": "string", "description": "id in primitives.json — the capability primitive this finding is about"},
+    "reversible": {"enum": ["yes", "with-effort", "no"], "description": "copied from the primitive at the time of the finding"},
+    "tier": {"enum": ["observed", "self-reported", "documented", "derived", "inferred", "unknown"]},
+    "observed_at": {"type": "string", "format": "date-time"},
+    "remediation": {"type": "object", "properties": {"text": {"type": "string"}, "effort": {"type": "string"}, "tier_after": {"type": "string"}}},
+    "location": {"type": "object", "properties": {"path": {"type": "string"}, "note": {"type": "string"}}},
+    "values": {"type": "object", "description": "structured detail — names, statuses, counts; never contents"}
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pki.sgit.ai/probes/schema/findings.schema.json",
+  "title": "findings/v1 — one run of the probes against one tool in one environment",
+  "description": "The evidence row. A profile's grant rows point at a file of this shape; a row with no evidence file is visibly a claim rather than a measurement.",
+  "type": "object",
+  "required": ["type", "subject", "profile", "tool", "measured_at", "measured_by", "findings"],
+  "properties": {
+    "type": {"const": "findings/v1"},
+    "subject": {"type": "string", "description": "what was measured, e.g. agent:claude-session"},
+    "profile": {"type": "string", "description": "vendor/product/variant — the profile this is evidence for"},
+    "tool": {"type": "string", "description": "the tool inside the product whose reach this is; a product is not the unit"},
+    "measured_at": {"type": "string", "format": "date-time"},
+    "measured_by": {"type": "object", "required": ["who", "independence"], "properties": {
+      "who": {"type": "string"},
+      "independence": {"enum": ["self", "independent"], "description": "self: run by the thing being profiled — the weakest tier the model has, and stated"},
+      "identity_record": {"type": ["string", "null"]},
+      "runner": {"type": "string"}
+    }},
+    "environment": {"type": "object"},
+    "findings": {"type": "array", "items": {"$ref": "finding.schema.json"}},
+    "not_measured": {"type": "array", "items": {"type": "string"}},
+    "disclaimer": {"type": "string"},
+    "licence": {"type": "string"}
+  }
+}

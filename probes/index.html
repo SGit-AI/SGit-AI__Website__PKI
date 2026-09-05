@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Probes, not tables &mdash; the capability primitives, the probes that establish them, and the measured profiles &middot; pki.sgit.ai</title>
+<meta name="description" content="A registry of capability primitives and measured grants where a grant claim never travels alone: it travels with the probe that established it, so a challenge is a rerun rather than an argument. Grants public, mandates private.">
+<link rel="canonical" href="https://pki.sgit.ai/probes/index.html">
+<meta property="og:url" content="https://pki.sgit.ai/probes/index.html">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/authorised.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
+  <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history" data-site-version></a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../failure/index.html">The registry<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../registry/index.html">&#9679; The registry, live</a>
+      <a class="sl" href="../failure/index.html">Why they don't exist</a>
+      <a class="sl" href="../rules/index.html">The four rules</a>
+      <a class="sl" href="../mandate/index.html">Identity &amp; mandate</a>
+      <a class="sl" href="../roadmap/index.html">Build order</a>
+      <a class="sl" href="../rules/prior-art.html">Prior art</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../bootstrap/index.html">The layers<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../bootstrap/index.html">The bootstrap trap</a>
+      <a class="sl" href="../enrolment/index.html">Enrolment</a>
+      <a class="sl" href="../execution/index.html">The execution broker</a>
+      <a class="sl" href="../shipped/index.html">What already ships</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../assess/index.html">Map your case<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../assess/index.html">Map your own case</a>
+      <a class="sl" href="../assess/library.html">The library of trees</a>
+      <a class="sl" href="../packs/map-your-case/readers/index.html">Synthetic readers</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../origins/index.html">Origins<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../origins/index.html">Origins: 2026</a>
+      <a class="sl" href="../origins/review.html">The review, redacted</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../bench/index.html">The bench<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../bench/index.html">&#9679; The bench &mdash; what is built</a>
+      <a class="sl" href="../simulator/index.html">&#9679; The simulator &mdash; play a card</a>
+      <a class="sl" href="../experiments/index.html">&#9679; Experiments</a>
+      <a class="sl" href="../experiments/the-room/index.html">&mdash; the chain room</a>
+      <a class="sl" href="../experiments/the-table/index.html">&mdash; the table</a>
+      <a class="sl" href="../experiments/push-to-github/index.html">&mdash; push to GitHub</a>
+      <a class="sl" href="../experiments/the-deploy/index.html">&mdash; the deploy</a>
+      <a class="sl" href="../experiments/the-control-room/index.html">&mdash; the control room</a>
+      <a class="sl" href="../workbench/index.html">&#9679; The workbench (app)</a>
+      <a class="sl" href="../registry/index.html">The register, live</a>
+      <a class="sl" href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
+      <a class="sl" href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
+      <a class="sl" href="../assess/index.html">Map your own case</a>
+      <a class="sl" href="../book/index.html">The book (commissioned)</a>
+      <a class="sl" href="../book/brief.html">&mdash; its commissioning brief</a>
+      <a class="sl" href="../insurance-book/index.html">The insurance book</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../insurance/index.html">Insurance<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../insurance/index.html">&#9679; Insurance for agents</a>
+      <a class="sl" href="../insurance-book/index.html">&#9679; The insurance book</a>
+      <a class="sl" href="../insurance/what-this-is.html">&mdash; what this is, and the rule</a>
+      <a class="sl" href="../insurance/the-rating.html">&mdash; the rating</a>
+      <a class="sl" href="../insurance/the-ecosystem-and-the-gate.html">&mdash; the ecosystem &amp; the gate</a>
+      <a class="sl" href="../insurance/who-pays-and-the-moving-rating.html">&mdash; who pays, &amp; the moving rating</a>
+      <a class="sl" href="../insurance/why-insurance-and-what-broke-it.html">&mdash; why insurance</a>
+      <a class="sl" href="../insurance/not-in-line.html">&mdash; not in line (scale 1&ndash;5)</a>
+      <a class="sl" href="../insurance/the-broker-market.html">&mdash; the broker market</a>
+      <a class="sl" href="../insurance/the-policy-as-a-statement.html">&mdash; the policy as a statement</a>
+      <a class="sl" href="../insurance/the-world-model.html">&mdash; the world model (the MVP)</a>
+      <a class="sl" href="../insurance/make-them-insurable.html">&mdash; make them insurable</a>
+      <a class="sl" href="../insurance/the-schemas-and-the-clocks.html">&mdash; the schemas &amp; the clocks</a>
+      <a class="sl" href="../insurance/llms.txt">insurance/llms.txt</a>
+      <a class="sl" href="../documents/agent-insurance.html">The pivot briefing (memo 0)</a>
+      <a class="sl" href="../documents/insurance-without-money.html">Rating before money (memo 1)</a>
+      <a class="sl" href="../documents/insurance-ecosystem.html">The go-live gate (memo 2)</a>
+      <a class="sl" href="../documents/who-pays-for-the-delta.html">Who pays (memo 3)</a>
+      <a class="sl" href="../documents/why-insurance.html">Why insurance (memo 4)</a>
+      <a class="sl" href="../documents/not-in-line.html">Not in line (memo 5)</a>
+      <a class="sl" href="../documents/the-broker-market.html">The broker market (memo 6)</a>
+      <a class="sl" href="../documents/the-policy-as-a-statement.html">The policy statement (memo 7)</a>
+      <a class="sl" href="../documents/the-world-model.html">The world model (memo 8)</a>
+      <a class="sl" href="../documents/make-them-insurable.html">Make them insurable (memo 9)</a>
+      <a class="sl" href="../documents/the-schemas-and-the-clocks.html">Schemas &amp; clocks (memo 10)</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../documents/index.html">The documents</a>
+      <a class="sl" href="../data/index.html">The data viewer</a>
+      <a class="sl" href="../packs/index.html">Dev packs</a>
+      <a class="sl" href="../packs/registry-mvp/index.html">The registry MVP pack</a>
+      <a class="sl" href="../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
+      <a class="sl" href="../packs/insurance-ecosystem/index.html">The Insurance Ecosystem pack</a>
+      <a class="sl" href="../packs/map-your-case/index.html">The Map Your Case pack</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../admin/versions.html">Release history</a>
+      <a class="sl" href="../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+  <script src="../assets/version.js" defer></script>
+  <script src="../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="../bench/index.html">the bench</a> / probes</div>
+<h1>Probes, not tables</h1>
+<p class="lead">A table of what a product can do is an opinion: somebody disagrees, edits it, and the registry accumulates positions rather than knowledge. <b>So the unit of contribution is a probe</b> &mdash; a short reproducible command, what it establishes, and how to read what comes back. A grant claim here points at the probe that produced it, the date, the environment and the output, and a challenge is a rerun with a different result, which is a fact rather than a view.</p>
+
+<div class="verdict-strip">
+  <div><span class="n">21</span><span class="k">capability primitives, 12 of them irreversible</span></div>
+  <div><span class="n">14</span><span class="k">probes, 12 safe to run, 2 described and never run</span></div>
+  <div><span class="n">7</span><span class="k">profiles, 2 measured, 5 derived claims</span></div>
+  <div><span class="n">3</span><span class="k">evidence files, 42 findings, every one self-run</span></div>
+</div>
+
+<div class="note"><b>The rule every probe keeps: presence and reachability, never contents.</b> A probe records that a credential file exists at a path, never a byte of it; that a variable with a key-shaped name is set, never its value; that history is retained, never what is in it. The evidence files on this page were produced by the environment they describe, and there is nothing sensitive in them to leak, by construction. And the tier is stated: <b>every finding here was produced by the thing being profiled</b>, which is the weakest tier the model has, and exactly why the probe rather than the claim is what ships.</div>
+
+<h2 id="split">Grants are public, mandates are private</h2>
+<table>
+<thead><tr><th></th><th>Grant</th><th>Mandate</th></tr></thead>
+<tbody>
+<tr><td>What it is</td><td>What a tool can do</td><td>What this organisation expected this agent to do</td></tr>
+<tr><td>Who can establish it</td><td>Anybody with the product, by probe</td><td>Only the operator</td></tr>
+<tr><td>Where it lives</td><td><b>Here: public, contributed, challenged</b></td><td><b>In your clone, under <code>yours/</code>, gitignored, never uploaded</b></td></tr>
+<tr><td>How it is produced</td><td>Probes and documentation</td><td>An agent asking <a href="templates/mandate-questionnaire.md">questions about work</a>, never about capability</td></tr>
+<tr><td>What it is worth to others</td><td>A great deal, because measuring is work</td><td>Nothing, and it is nobody's business</td></tr>
+</tbody></table>
+<p>Nothing about your estate leaves your clone. The delta is computed locally from a public grant and a private mandate, and the only things that can flow back are a probe result, a profile correction, or an incident &mdash; each a fact about a vendor's product rather than about you. <a href="../authorised/index.html">The page that computes the delta</a> runs in your browser for the same reason.</p>
+
+<h2 id="primitive">The primitive</h2>
+<pre class="cmd">capability = verb  &times;  object class  &times;  reach          + reversible?</pre>
+<p>A specific path, host or mailbox is an <b>instance</b> of a primitive, never a new one, which is the rule that keeps the set finite. Reversibility sits on the primitive, because it decides whether a gap is a nuisance or a loss, and this estate has settled that <a href="../insurance/the-schemas-and-the-clocks.html">recoverability decides insurability</a>. These are <b>capability primitives</b>; the counters a policy is written in are <b>meters</b> (<a href="../insurance/the-resource-pool.html">measurable primitives</a>), and a document that touches both says which.</p>
+<ul><li><b>filesystem</b> &mdash; files and directories</li><li><b>process</b> &mdash; programs and their execution</li><li><b>network</b> &mdash; endpoints and hosts</li><li><b>identity</b> &mdash; credentials and who the agent can act as</li><li><b>communication</b> &mdash; messages to people</li><li><b>code</b> &mdash; repositories and what lands in them</li><li><b>money</b> &mdash; budgets and spend</li><li><b>schedule</b> &mdash; things that outlive the turn</li></ul>
+<div class="tablewrap"><table class="caps">
+<thead><tr><th>id</th><th>family</th><th>verb &times; object &times; reach</th><th>reversible</th><th>what it means</th></tr></thead>
+<tbody><tr><td><code>read.file.project</code></td><td>filesystem</td><td>read &times; file &times; project</td><td class="rev-yes">yes</td><td>Read the project it is working on</td></tr>
+<tr><td><code>write.file.project</code></td><td>filesystem</td><td>write &times; file &times; project</td><td class="rev-with-effort">with-effort</td><td>Change the project it is working on</td></tr>
+<tr><td><code>read.file.host</code></td><td>filesystem</td><td>read &times; file &times; host</td><td class="rev-no">no</td><td>Read any file the account can (your other files) &mdash; <i>a record once read is exposure that cannot be unread</i></td></tr>
+<tr><td><code>write.file.host</code></td><td>filesystem</td><td>write &times; file &times; host</td><td class="rev-with-effort">with-effort</td><td>Change any file the account can</td></tr>
+<tr><td><code>delete.file.host</code></td><td>filesystem</td><td>delete &times; file &times; host</td><td class="rev-no">no</td><td>Delete files anywhere the account can</td></tr>
+<tr><td><code>execute.process.host</code></td><td>process</td><td>execute &times; process &times; host</td><td class="rev-with-effort">with-effort</td><td>Run programs as the account</td></tr>
+<tr><td><code>execute.process.self</code></td><td>process</td><td>execute &times; process &times; self</td><td class="rev-yes">yes</td><td>Run programs inside its own sandbox only</td></tr>
+<tr><td><code>send.endpoint.allowed</code></td><td>network</td><td>send &times; network-endpoint &times; tenant</td><td class="rev-no">no</td><td>Reach a permitted list of hosts &mdash; <i>bytes sent are sent</i></td></tr>
+<tr><td><code>send.endpoint.world</code></td><td>network</td><td>send &times; network-endpoint &times; world</td><td class="rev-no">no</td><td>Reach any host on the internet</td></tr>
+<tr><td><code>read.credential.host</code></td><td>identity</td><td>read &times; credential &times; host</td><td class="rev-no">no</td><td>Read stored credentials &mdash; <i>a credential read is a credential exposed</i></td></tr>
+<tr><td><code>authenticate-as.credential.tenant</code></td><td>identity</td><td>authenticate-as &times; credential &times; tenant</td><td class="rev-no">no</td><td>Act in cloud, cluster or code-host accounts as you</td></tr>
+<tr><td><code>grant.credential.self</code></td><td>identity</td><td>grant &times; credential &times; self</td><td class="rev-yes">yes</td><td>Change its own permission settings</td></tr>
+<tr><td><code>send.message.world</code></td><td>communication</td><td>send &times; message &times; world</td><td class="rev-no">no</td><td>Send a message to anyone</td></tr>
+<tr><td><code>read.message.tenant</code></td><td>communication</td><td>read &times; message &times; tenant</td><td class="rev-no">no</td><td>Read your mail or chat</td></tr>
+<tr><td><code>write.repository.project</code></td><td>code</td><td>write &times; repository &times; project</td><td class="rev-with-effort">with-effort</td><td>Commit to the repository it was pointed at</td></tr>
+<tr><td><code>write.repository.tenant</code></td><td>code</td><td>write &times; repository &times; tenant</td><td class="rev-with-effort">with-effort</td><td>Push to your code hosts (any branch it can reach)</td></tr>
+<tr><td><code>authenticate-as.credential.signing</code></td><td>code</td><td>authenticate-as &times; credential &times; tenant</td><td class="rev-no">no</td><td>Sign commits as you</td></tr>
+<tr><td><code>create.record.world</code></td><td>code</td><td>create &times; record &times; world</td><td class="rev-no">no</td><td>Publish packages, images or pages under your name</td></tr>
+<tr><td><code>write.budget.tenant</code></td><td>money</td><td>write &times; budget &times; tenant</td><td class="rev-no">no</td><td>Spend money or tokens against your account</td></tr>
+<tr><td><code>create.schedule.host</code></td><td>schedule</td><td>create &times; schedule &times; host</td><td class="rev-yes">yes</td><td>Create something that outlives the turn (a cron, a service, a routine)</td></tr>
+<tr><td><code>read.record.history</code></td><td>filesystem</td><td>read &times; record &times; host</td><td class="rev-no">no</td><td>Read shell history and past sessions &mdash; <i>a transcript read is every earlier session&#x27;s reach, exposed again</i></td></tr></tbody></table></div>
+<p class="dim">Source: <a href="primitives.json">primitives.json</a>. A proposed primitive that is a specific thing is an instance; one that is a new verb, object class or reach needs a probe.</p>
+
+<h2 id="probes">The probes</h2>
+<p>Each probe is one heuristic about one distinct behaviour &mdash; <a href="https://github.com/ossf/scorecard/blob/main/docs/probes.md">OpenSSF Scorecard's definition</a>, adopted rather than minted, because this corpus anchors to published vocabulary and diverges only where the subject differs. The result of one probe is a <b>finding</b> in Scorecard's shape (probe, message, outcome, remediation, location) plus the two fields this subject needs: <b>reversible</b>, and <b>tier</b>. Shapes: <a href="schema/finding.schema.json">finding</a> &middot; <a href="schema/findings.schema.json">findings file</a> &middot; <a href="schema/profile.schema.json">profile</a>.</p>
+<div class="tablewrap"><table class="probes">
+<thead><tr><th>probe</th><th>establishes</th><th>command, and how to read it</th></tr></thead>
+<tbody><tr><td><code>identity.account</code><br><span class="dim">identity &middot; observed when self-run &middot; safe to run</span></td><td><code>execute.process.host</code><br><code>read.file.host</code><br><code>write.file.host</code><br><code>delete.file.host</code></td><td><pre class="cmd">id -u; sudo -n true &amp;&amp; echo &#x27;passwordless escalation available&#x27;</pre><p>uid 0 or a passwordless sudo means no user boundary stands between the agent and the host: every filesystem row at host reach is established at once, and delete at host reach is irreversible. A refused sudo means the OS user separation is a boundary the grant does not include.</p><p class=dim>packs/grant-and-mandate/tools/measure.py probe_identity — the tier is decided AFTER the escalation test, never in isolation (library entry 2, finding 1)</p></td></tr>
+<tr><td><code>filesystem.write-outside-tree</code><br><span class="dim">filesystem &middot; observed when self-run &middot; safe to run</span></td><td><code>write.file.host</code></td><td><pre class="cmd">f=/etc/.probe-$$ ; [ -w /etc ] || f=$HOME/.probe-$$ ; : &gt; &quot;$f&quot; &amp;&amp; echo &quot;wrote $f&quot; &amp;&amp; rm -f &quot;$f&quot;</pre><p>A zero-byte file created and removed outside the working tree. Success in /etc means writing to system configuration succeeds; success only in $HOME means the account&#x27;s files are reachable and the system&#x27;s are not.</p></td></tr>
+<tr><td><code>filesystem.credential-presence</code><br><span class="dim">identity &middot; observed when self-run &middot; safe to run</span></td><td><code>read.credential.host</code><br><code>authenticate-as.credential.tenant</code><br><code>create.record.world</code></td><td><pre class="cmd">for p in .aws/credentials .config/gcloud .azure .git-credentials .config/gh/hosts.yml .ssh .npmrc .pypirc .cargo/credentials .gnupg .sg-send/keys .kube/config; do [ -e &quot;$HOME/$p&quot; ] &amp;&amp; echo &quot;present: $p&quot;; done</pre><p>Presence at the usual locations only. A file present is a credential the account holds and a process running as the account can read (read.credential.host, observed by presence); which services it opens is INFERRED from the path, never read. A package-registry token present is publishing under the account&#x27;s name (create.record.world), inferred the same way.</p><p class=dim>measure.py probe_filesystem, and the published read-only audit tool&#x27;s module list the assess library cites</p></td></tr>
+<tr><td><code>filesystem.history-presence</code><br><span class="dim">filesystem &middot; observed when self-run &middot; safe to run</span></td><td><code>read.record.history</code></td><td><pre class="cmd">for p in .bash_history .zsh_history .claude/projects .claude/history.jsonl; do [ -e &quot;$HOME/$p&quot; ] &amp;&amp; echo &quot;present: $p&quot;; done</pre><p>History retained means the effective grant is the union of everything any prior turn reached, not a tree over the present. Presence only.</p><p class=dim>measure.py probe_history</p></td></tr>
+<tr><td><code>process.visibility</code><br><span class="dim">process &middot; observed when self-run &middot; safe to run</span></td><td><code>execute.process.host</code><br><code>execute.process.self</code></td><td><pre class="cmd">ps -e | wc -l; nproc</pre><p>How many processes the agent can see, and how many CPUs it has. A count near the host&#x27;s total means process reach is the host; a count of a handful means a sandbox (execute.process.self).</p></td></tr>
+<tr><td><code>network.egress-shell</code><br><span class="dim">network &middot; observed when self-run &middot; safe to run</span></td><td><code>send.endpoint.world</code><br><code>send.endpoint.allowed</code></td><td><pre class="cmd">for h in pypi.org registry.npmjs.org api.github.com example.com sgit.ai pki.sgit.ai; do printf &#x27;%s &#x27; $h; curl -s -o /dev/null -w &#x27;%{http_code}\n&#x27; --max-time 8 https://$h/ || echo fail; done; env | grep -ci &#x27;^https_proxy=&#x27; </pre><p>Six hosts, statuses recorded. All answering and no proxy: send.endpoint.world. Some refused (a 403 from a CONNECT tunnel, a timeout) or a proxy variable set: send.endpoint.allowed, and the hosts that answered ARE the allow-list as observed. This measures the shell&#x27;s reach only: a second tool in the same session can reach a different set (the 4 September finding: union seven, intersection one).</p><p class=dim>measure.py probe_egress, widened to six hosts</p></td></tr>
+<tr><td><code>network.egress-second-tool</code><br><span class="dim">network &middot; self-reported when self-run &middot; safe to run</span></td><td><code>send.endpoint.world</code><br><code>send.endpoint.allowed</code></td><td><pre class="cmd">(not runnable from the shell) — the operator lists the hosts the session&#x27;s fetch/browse tool reached during ordinary use: run.py --fetch-hosts host1,host2</pre><p>A shell cannot observe another tool. What the second tool reached is the operator&#x27;s account, so the finding is self-reported, and the hosts it CANNOT reach are unknown from here. The union and intersection with the shell&#x27;s reach are what make the grant per tool rather than per product.</p></td></tr>
+<tr><td><code>vcs.remote-hooks-signing</code><br><span class="dim">code &middot; observed when self-run &middot; safe to run</span></td><td><code>write.repository.tenant</code><br><code>write.repository.project</code><br><code>read.file.project</code><br><code>write.file.project</code><br><code>authenticate-as.credential.signing</code></td><td><pre class="cmd">git config --get remote.origin.url; git config --get core.hooksPath; git config --get commit.gpgsign; git config --get gpg.format; git config --get user.signingkey &gt;/dev/null &amp;&amp; echo &#x27;signing key configured&#x27;</pre><p>A remote means commits can leave the project (write.repository.tenant) — bounded by branch discipline in prose (expectation) unless a hooksPath names a hook that refuses (setting; --no-verify still passes). An attached, writable tree is read.file.project and write.file.project. Signing configured means commits are signed as the account by default: authenticate-as.credential.signing, irreversible.</p><p class=dim>measure.py probe_vcs, plus the signing configuration</p></td></tr>
+<tr><td><code>agent.config-presence</code><br><span class="dim">identity &middot; observed when self-run &middot; safe to run</span></td><td><code>grant.credential.self</code></td><td><pre class="cmd">for p in $HOME/.claude/settings.json .claude/settings.json $HOME/.claude/settings.local.json; do [ -e &quot;$p&quot; ] &amp;&amp; echo &quot;present: $p&quot;; done</pre><p>A readable settings file can be WRITTEN by anything running as the account, which is what makes tool-enforced permissions a setting: the agent can change its own limits. A refused read is itself a boundary observed from inside. Presence only; contents not read.</p><p class=dim>measure.py probe_agent_config</p></td></tr>
+<tr><td><code>schedule.persistence</code><br><span class="dim">schedule &middot; observed when self-run &middot; safe to run</span></td><td><code>create.schedule.host</code></td><td><pre class="cmd">crontab -l 2&gt;&amp;1 | head -1; command -v crontab systemctl at 2&gt;/dev/null; ls /etc/cron.d 2&gt;/dev/null | wc -l</pre><p>Whether anything the agent creates can outlive the turn on this host. No scheduler binary and no cron directory: NotAvailable, and nothing found that outlives the turn. A scheduler present and writable: create.schedule.host. A harness&#x27;s own routines (a scheduled trigger that resumes a session) are a scheduler at tenant reach and are recorded by the operator, not by this command.</p></td></tr>
+<tr><td><code>identity.key-shaped-env</code><br><span class="dim">money &middot; observed when self-run &middot; safe to run</span></td><td><code>write.budget.tenant</code><br><code>authenticate-as.credential.tenant</code></td><td><pre class="cmd">env | cut -d= -f1 | grep -Ei &#x27;(_API_KEY|_TOKEN|_SECRET)$&#x27; | sort</pre><p>Names only, never values. A key-shaped variable set in the environment is a credential the process holds; one that names a metered API is spend the agent can incur. Which is which is inferred from the name.</p></td></tr>
+<tr><td><code>ci.permissions-block</code><br><span class="dim">code &middot; observed when self-run &middot; safe to run</span></td><td><code>write.repository.tenant</code></td><td><pre class="cmd">[ -n &quot;$GITHUB_ACTIONS&quot; ] &amp;&amp; echo &quot;$GITHUB_WORKFLOW on $GITHUB_REPOSITORY at $GITHUB_REF&quot; &amp;&amp; grep -A3 &#x27;^permissions:&#x27; .github/workflows/*.yml</pre><p>Only in CI. The workflow&#x27;s permissions block is a grant declared UP FRONT and set above the job by something the job cannot edit: the clearest boundary in the library. contents:read alone means the token cannot write.</p><p class=dim>measure.py probe_ci</p></td></tr>
+<tr><td><code>communication.send</code><br><span class="dim">communication &middot; documented when self-run &middot; <b>described, not run</b></span></td><td><code>send.message.world</code><br><code>read.message.tenant</code></td><td><pre class="cmd">(described, not run) — sending a message is irreversible, so this class is established from the tools configured (a mail or chat connector present) and recorded as documented, never exercised</pre><p>A probe that would send is in the marked class that is described rather than run. The finding&#x27;s tier is documented at best.</p></td></tr>
+<tr><td><code>money.spend</code><br><span class="dim">money &middot; inferred when self-run &middot; <b>described, not run</b></span></td><td><code>write.budget.tenant</code></td><td><pre class="cmd">(described, not run) — a probe that spends is not run; the safe proxy is identity.key-shaped-env</pre><p>Spend is established by the presence of a metered credential (inferred), or by the supplier&#x27;s meter (observed, out of band), never by spending.</p></td></tr></tbody></table></div>
+<p class="dim">Source: <a href="probes.json">probes.json</a>. Runner: <a href="run.py"><code>run.py</code></a>, which runs the safe probes, emits <code>findings/v1</code>, and validates evidence and profiles.</p>
+
+<h2 id="profiles">The profiles</h2>
+<p>The unit of mapping is a <b>tool</b>, not a product: two tools in one session reached different sets of hosts on 4 September, union seven and intersection one, and neither set was the session's. So a profile is a named configuration of a product listing its tools, each with its own grant; the union is what an operator actually carries and the intersection is reported because it is usually nearly empty. A row with no evidence file is visibly <span class="is-claim">a claim</span> rather than a measurement.</p>
+<div class="tablewrap"><table class="profiles">
+<thead><tr><th>profile</th><th>surface</th><th>tools</th><th>union</th><th>&cap;</th><th>irreversible</th><th>evidence</th><th>version</th></tr></thead>
+<tbody><tr><td><a href="profiles/anthropic/claude-code-remote/ccr-container.json"><code>anthropic/claude-code-remote/ccr-container</code></a><br><span class="dim">Claude Code on the web (a remote session container)</span></td><td>agentbox</td><td>shell (Bash)<br>fetch (WebFetch)</td><td>14</td><td>1</td><td class="rev-no">7</td><td><b>measured</b> &middot; <a href="evidence/anthropic__claude-code-remote__ccr-container__shell__2026-09-05.json">file</a> <a href="evidence/anthropic__claude-code-remote__ccr-container__fetch__2026-09-05.json">file</a></td><td>2026-09-05</td></tr>
+<tr><td><a href="profiles/anthropic/claude-code/local-confirmations-off.json"><code>anthropic/claude-code/local-confirmations-off</code></a><br><span class="dim">Claude Code (the CLI, on your own machine)</span></td><td>cli</td><td>shell (Bash)<br>files (Read, Edit, Write)<br>fetch (WebFetch)</td><td>16</td><td>0</td><td class="rev-no">8</td><td><span class=is-claim>a claim &mdash; derived, no probe run</span></td><td>2026-09-05</td></tr>
+<tr><td><a href="profiles/anthropic/claude-code/local-default.json"><code>anthropic/claude-code/local-default</code></a><br><span class="dim">Claude Code (the CLI, on your own machine)</span></td><td>cli</td><td>shell (Bash)<br>files (Read, Edit, Write)<br>fetch (WebFetch)</td><td>16</td><td>0</td><td class="rev-no">8</td><td><span class=is-claim>a claim &mdash; derived, no probe run</span></td><td>2026-09-05</td></tr>
+<tr><td><a href="profiles/anthropic/claude-desktop/default.json"><code>anthropic/claude-desktop/default</code></a><br><span class="dim">Claude Desktop (a desktop app with local tools)</span></td><td>desktop</td><td>conversation<br>local files and commands (when enabled)</td><td>10</td><td>1</td><td class="rev-no">5</td><td><span class=is-claim>a claim &mdash; derived, no probe run</span></td><td>2026-09-05</td></tr>
+<tr><td><a href="profiles/anthropic/claude-web/connectors-on.json"><code>anthropic/claude-web/connectors-on</code></a><br><span class="dim">Claude (in the browser, with connectors switched on)</span></td><td>web</td><td>conversation and uploads<br>connectors</td><td>5</td><td>0</td><td class="rev-no">3</td><td><span class=is-claim>a claim &mdash; derived, no probe run</span></td><td>2026-09-05</td></tr>
+<tr><td><a href="profiles/github/actions-runner/ci.json"><code>github/actions-runner/ci</code></a><br><span class="dim">Actions runner (a hosted CI job)</span></td><td>ci</td><td>the job&#x27;s shell</td><td>8</td><td>8</td><td class="rev-no">3</td><td><b>measured</b> &middot; <a href="evidence/github__actions-runner__ci__shell__2026-08-26.json">file</a></td><td>2026-08-26</td></tr>
+<tr><td><a href="profiles/openai/chatgpt-web/default.json"><code>openai/chatgpt-web/default</code></a><br><span class="dim">ChatGPT (in the browser, no connectors)</span></td><td>web</td><td>conversation and uploads</td><td>1</td><td>1</td><td class="rev-no">0</td><td><span class=is-claim>a claim &mdash; derived, no probe run</span></td><td>2026-09-05</td></tr></tbody></table></div>
+<p class="dim">Manifest: <a href="profiles/index.json">profiles/index.json</a>. A profile's <code>version</code> moves when any row moves, and an assessment computed against it goes stale when it does.</p>
+
+<h2 id="diff">The diff between two profiles</h2>
+<p>The same assistant on the web, locally, and with confirmations disabled are siblings sharing most rows and differing in a few, and the diff is the answer to &ldquo;what does turning that on actually give it&rdquo;.</p>
+<div class="diff-widget" id="diff">
+  <label>A <select id="diffA"></select></label>
+  <label>B <select id="diffB"></select></label>
+  <div id="diffOut" class="diff-out"><p class="dim">Loading profiles&hellip;</p></div>
+</div>
+
+<h2 id="evidence">The evidence</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>file</th><th>profile</th><th>tool</th><th>date</th><th>independence</th><th>findings</th></tr></thead>
+<tbody><tr><td><a href="evidence/anthropic__claude-code-remote__ccr-container__fetch__2026-09-05.json"><code>anthropic__claude-code-remote__ccr-container__fetch__2026-09-05.json</code></a></td><td>anthropic/claude-code-remote/ccr-container</td><td>fetch</td><td>2026-09-05</td><td>self</td><td>1 True &middot; 0 False &middot; 0 not available/applicable</td></tr>
+<tr><td><a href="evidence/anthropic__claude-code-remote__ccr-container__shell__2026-09-05.json"><code>anthropic__claude-code-remote__ccr-container__shell__2026-09-05.json</code></a></td><td>anthropic/claude-code-remote/ccr-container</td><td>shell</td><td>2026-09-05</td><td>self</td><td>17 True &middot; 2 False &middot; 5 not available/applicable</td></tr>
+<tr><td><a href="evidence/github__actions-runner__ci__shell__2026-08-26.json"><code>github__actions-runner__ci__shell__2026-08-26.json</code></a></td><td>github/actions-runner/ci</td><td>the job&#x27;s shell</td><td>2026-08-26</td><td>self</td><td>8 True &middot; 7 False &middot; 2 not available/applicable</td></tr></tbody></table></div>
+<p>Every file says <code>self</code>: the probes were run by the thing being profiled. The registry's own model says a probe run by an independent party on the same profile is stronger, and the registry shows both when it has them. <b>Independence is the thing worth paying for</b>, and today nobody has.</p>
+
+<h2 id="incidents">Incidents</h2>
+<p>An incident is evidence that <b>demotes</b> a control: a guardrail an incident bypassed was not the guardrail it was claimed to be. A record names the profile, the capability, the control claimed, the rung it was claimed at and the rung it drops to, with a link to the public account. That is how the registry gets more honest over time rather than more confident.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>date</th><th>profile</th><th>capability</th><th>control claimed</th><th>rung</th><th></th></tr></thead>
+<tbody><tr><td>2026-08-26</td><td><code>anthropic/claude-code-remote/ccr-container</code></td><td><code>write.repository.tenant</code></td><td>a signed mandate compiled into a pre-push hook that git runs in the agent&#x27;s clone</td><td>inline &rarr; <b>out-of-band</b> (not a bypass)</td><td><a href="https://pki.sgit.ai/packs/grant-and-mandate/enforcement.html">the account</a></td></tr></tbody></table></div>
+<p class="dim">Folder: <a href="incidents/README.md">incidents/</a>. No bypass has been recorded yet; the first would come from <a href="../packs/insurance-ecosystem/decision-points.html">the reconciliation job</a>, where a commit that carries no claim is the detection.</p>
+
+<h2 id="workflow">The workflow, and where the value arrives</h2>
+<pre class="cmd">1  fork or clone           you now hold every measured grant in the registry
+2  name your profiles      which of these products and configurations you actually use
+3  the grant appears       &lt;- value arrives here, before you have written anything
+4  point an agent at it    it runs the probes it can, and asks the mandate questions
+5  the delta is computed   locally, in your clone, and rendered
+6  contribute back         a probe result, a profile correction, an incident. Never your mandate</pre>
+<p>Step three is the test of the whole thing: anybody who names three products should see a grant they did not know they had, and if they do not, the registry is not yet worth forking. <a href="../authorised/index.html">Steps two to five, in the browser &rarr;</a></p>
+
+<h2 id="run">Run it where the agent lives</h2>
+<pre class="cmd">git clone https://github.com/SGit-AI/SGit-AI__Website__PKI && cd SGit-AI__Website__PKI
+python3 probes/run.py --profile &lt;vendor&gt;/&lt;product&gt;/&lt;variant&gt; --tool shell --out probes/evidence/&lt;file&gt;.json
+python3 probes/run.py validate probes/evidence/&lt;file&gt;.json
+# the second tool, by report: the hosts you saw it reach
+python3 probes/run.py --profile ... --tool fetch --fetch-hosts host1,host2 --out ...</pre>
+<p>The scan cannot run from outside: agent exposure lives inside a laptop, a container, a workspace configuration and a set of connected accounts, and there is nothing to probe from the internet. So the measurement runs where the thing lives and the file is yours until you commit it. Contributions are pull requests &mdash; a code host rather than a vault, because a vault publishes read keys and never write keys, and what this needs is exactly what that rule forbids: strangers proposing changes.</p>
+
+<h2 id="not">What this does not prove</h2>
+<ul>
+<li><b>That any profile is complete.</b> A self-run probe reports what the subject can see; a capability it does not know it has will not appear. A floor, never a census.</li>
+<li><b>That a derived profile is true of any instance.</b> 5 of the 7 profiles are reasoned from what a surface architecturally is and no probe has been run on them; they are claims, marked as such, until somebody contributes a file.</li>
+<li><b>Independence.</b> Every evidence file was produced by the environment it describes.</li>
+<li><b>That the primitive set is right.</b> It is a starting set, will be wrong at the edges from the first week, and the probes are the contribution.</li>
+<li><b>Anything about you.</b> Nothing here can see your environment; the page that computes your delta runs in your browser.</li>
+</ul>
+<p class="dim">Specified by <a href="../documents/probes-not-tables.html">brief v0.33.64 (the grant/mandate repository ships probes, not tables)</a>, with the vocabulary corrected the same day by <a href="../documents/the-precedents.html">the precedents brief</a>. Machine-readable: <a href="llms.txt">probes/llms.txt</a>. CC BY 4.0.</p>
+</main>
+
+<script>
+(async function () {
+  const base = '';
+  const idx = await (await fetch(base + 'profiles/index.json')).json();
+  const prim = await (await fetch(base + 'primitives.json')).json();
+  const caps = Object.fromEntries(prim.capabilities.map(c => [c.id, c]));
+  const A = document.getElementById('diffA'), B = document.getElementById('diffB'), out = document.getElementById('diffOut');
+  for (const p of idx.profiles) { for (const s of [A, B]) { const o = document.createElement('option'); o.value = p.id; o.textContent = p.id + (p.measured ? '' : ' (claim)'); s.appendChild(o); } }
+  A.value = 'anthropic/claude-code/local-default'; B.value = 'anthropic/claude-code/local-confirmations-off';
+  const cache = {};
+  async function load(id) { if (!cache[id]) cache[id] = await (await fetch(base + 'profiles/' + id + '.json')).json(); return cache[id]; }
+  function rows(p) { const m = {}; for (const t of p.tools) for (const g of t.grant) { const k = g.capability; if (!m[k]) m[k] = []; m[k].push({tool: t.tool, control_tier: g.control_tier || 'none', control: g.control, tier: g.tier}); } return m; }
+  function li(k, extra) { const c = caps[k]; return `<li><code>${k}</code> <span class="rev-${c.reversible}">${c.reversible === 'no' ? 'irreversible' : c.reversible}</span> — ${c.label}${extra || ''}</li>`; }
+  async function render() {
+    const a = await load(A.value), b = await load(B.value); const ra = rows(a), rb = rows(b);
+    const onlyA = Object.keys(ra).filter(k => !rb[k]), onlyB = Object.keys(rb).filter(k => !ra[k]);
+    const both = Object.keys(ra).filter(k => rb[k]);
+    const changed = both.filter(k => { const ta = ra[k].map(x => x.control_tier).sort().join(','), tb = rb[k].map(x => x.control_tier).sort().join(','); return ta !== tb; });
+    out.innerHTML = `<div class="diff-cols">
+      <div><h4>Only in A (${onlyA.length})</h4><ul>${onlyA.map(k => li(k)).join('') || '<li class=dim>nothing</li>'}</ul></div>
+      <div><h4>Only in B (${onlyB.length})</h4><ul>${onlyB.map(k => li(k)).join('') || '<li class=dim>nothing</li>'}</ul></div>
+      <div><h4>In both, control differs (${changed.length})</h4><ul>${changed.map(k => li(k, ` — A: <i>${ra[k].map(x => x.control_tier).join('/')}</i>, B: <i>${rb[k].map(x => x.control_tier).join('/')}</i>`)).join('') || '<li class=dim>nothing</li>'}</ul></div>
+    </div><p class="dim">${both.length - changed.length} rows are the same in both. Tier of A: ${a.tools.some(t => t.evidence) ? 'measured' : 'derived (a claim)'}; of B: ${b.tools.some(t => t.evidence) ? 'measured' : 'derived (a claim)'}.</p>`;
+  }
+  A.onchange = B.onchange = render; render();
+})();
+</script>
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html" data-site-version>release history</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The bench</h4>
+    <a href="../bench/index.html">&#9679; What is built</a>
+    <a href="../simulator/index.html">&#9679; The simulator</a>
+    <a href="../workbench/index.html">&#9679; The workbench (app)</a>
+    <a href="../registry/index.html">The register, live</a>
+    <a href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
+    <a href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
+    <a href="../assess/index.html">&#8594; Map your own case</a>
+    <a href="../book/index.html">The book (commissioned)</a>
+    <a href="../book/brief.html">&mdash; its commissioning brief</a>
+    <a href="../insurance-book/index.html">The insurance book</a>
+  </div>
+  <div>
+    <h4>Insurance</h4>
+    <a href="../insurance/index.html">&#9679; Insurance for agents</a>
+    <a href="../insurance-book/index.html">&#9679; The insurance book</a>
+    <a href="../insurance/what-this-is.html">What this is, and the rule</a>
+    <a href="../insurance/the-rating.html">The rating</a>
+    <a href="../insurance/the-ecosystem-and-the-gate.html">The ecosystem &amp; the gate</a>
+    <a href="../insurance/who-pays-and-the-moving-rating.html">Who pays, &amp; the moving rating</a>
+    <a href="../insurance/why-insurance-and-what-broke-it.html">Why insurance</a>
+    <a href="../insurance/not-in-line.html">Not in line</a>
+    <a href="../insurance/the-broker-market.html">The broker market</a>
+    <a href="../insurance/the-policy-as-a-statement.html">The policy as a statement</a>
+    <a href="../insurance/the-world-model.html">The world model (the MVP)</a>
+    <a href="../insurance/make-them-insurable.html">Make them insurable</a>
+    <a href="../insurance/the-schemas-and-the-clocks.html">The schemas &amp; the clocks</a>
+    <a href="../insurance/llms.txt">insurance/llms.txt</a>
+    <a href="../documents/agent-insurance.html">The pivot briefing</a>
+  </div>
+  <div>
+    <h4>The registry</h4>
+    <a href="../failure/index.html">Why they don't exist</a>
+    <a href="../rules/index.html">The four rules</a>
+    <a href="../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../roadmap/index.html">Build order</a>
+    <a href="../rules/prior-art.html">Prior art</a>
+  </div>
+  <div>
+    <h4>The three layers</h4>
+    <a href="../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../enrolment/index.html">Enrolment</a>
+    <a href="../execution/index.html">The execution broker</a>
+    <a href="../shipped/index.html">What already ships</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../origins/index.html">Origins: 2026</a>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../packs/registry-mvp/index.html">The registry MVP pack</a>
+    <a href="../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
+    <a href="../packs/insurance-ecosystem/index.html">The Insurance Ecosystem pack</a>
+    <a href="../packs/map-your-case/index.html">The Map Your Case pack</a>
+    <a href="../about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../llms.txt">llms.txt</a>
+  </div>
+</div></footer>
+
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+# pki.sgit.ai/probes — probes, not tables
+#
+# A registry of capability primitives and measured grants. A grant claim never travels alone:
+# it travels with the probe that established it, so a challenge is a rerun rather than an argument.
+# GRANTS ARE PUBLIC, MANDATES ARE PRIVATE: your mandate stays in your clone under probes/yours/ (gitignored).
+# 21 capability primitives (12 irreversible) · 14 probes (12 safe to run) · 7 profiles (2 measured, 5 derived claims) · 3 evidence files, 42 findings, all self-run.
+# Page: https://pki.sgit.ai/probes/index.html · Runner: probes/run.py · Shapes: probes/schema/
+
+## What an agent should carry if it summarises anything here
+
+  1. PRESENCE AND REACHABILITY, NEVER CONTENTS. No evidence file holds a byte of any credential, setting or transcript.
+  2. EVERY FINDING IS SELF-RUN: produced by the environment it describes, the weakest tier the model has. No independent run exists yet.
+  3. 5 OF 7 PROFILES ARE CLAIMS: derived from what a surface architecturally is, marked as such, no probe run on any instance.
+  4. A PROFILE IS PER TOOL, NOT PER PRODUCT. Two tools in one session reach different hosts; the union is what the operator carries.
+  5. NOTHING HERE CAN SEE YOU. The scan cannot run from outside; the delta is computed in your browser or your clone.
+
+## The profiles
+
+  [anthropic/claude-code-remote/ccr-container] Claude Code on the web (a remote session container) — MEASURED · version 2026-09-05
+    tools shell (Bash), fetch (WebFetch) · union 14 · intersection 1 · irreversible 7
+    https://pki.sgit.ai/probes/profiles/anthropic/claude-code-remote/ccr-container.json
+  [anthropic/claude-code/local-confirmations-off] Claude Code (the CLI, on your own machine) — DERIVED (a claim) · version 2026-09-05
+    tools shell (Bash), files (Read, Edit, Write), fetch (WebFetch) · union 16 · intersection 0 · irreversible 8
+    https://pki.sgit.ai/probes/profiles/anthropic/claude-code/local-confirmations-off.json
+  [anthropic/claude-code/local-default] Claude Code (the CLI, on your own machine) — DERIVED (a claim) · version 2026-09-05
+    tools shell (Bash), files (Read, Edit, Write), fetch (WebFetch) · union 16 · intersection 0 · irreversible 8
+    https://pki.sgit.ai/probes/profiles/anthropic/claude-code/local-default.json
+  [anthropic/claude-desktop/default] Claude Desktop (a desktop app with local tools) — DERIVED (a claim) · version 2026-09-05
+    tools conversation, local files and commands (when enabled) · union 10 · intersection 1 · irreversible 5
+    https://pki.sgit.ai/probes/profiles/anthropic/claude-desktop/default.json
+  [anthropic/claude-web/connectors-on] Claude (in the browser, with connectors switched on) — DERIVED (a claim) · version 2026-09-05
+    tools conversation and uploads, connectors · union 5 · intersection 0 · irreversible 3
+    https://pki.sgit.ai/probes/profiles/anthropic/claude-web/connectors-on.json
+  [github/actions-runner/ci] Actions runner (a hosted CI job) — MEASURED · version 2026-08-26
+    tools the job's shell · union 8 · intersection 8 · irreversible 3
+    https://pki.sgit.ai/probes/profiles/github/actions-runner/ci.json
+  [openai/chatgpt-web/default] ChatGPT (in the browser, no connectors) — DERIVED (a claim) · version 2026-09-05
+    tools conversation and uploads · union 1 · intersection 1 · irreversible 0
+    https://pki.sgit.ai/probes/profiles/openai/chatgpt-web/default.json
+
+## The probes
+
+  [identity.account] establishes execute.process.host, read.file.host, write.file.host, delete.file.host · observed when self-run · safe
+  [filesystem.write-outside-tree] establishes write.file.host · observed when self-run · safe
+  [filesystem.credential-presence] establishes read.credential.host, authenticate-as.credential.tenant, create.record.world · observed when self-run · safe
+  [filesystem.history-presence] establishes read.record.history · observed when self-run · safe
+  [process.visibility] establishes execute.process.host, execute.process.self · observed when self-run · safe
+  [network.egress-shell] establishes send.endpoint.world, send.endpoint.allowed · observed when self-run · safe
+  [network.egress-second-tool] establishes send.endpoint.world, send.endpoint.allowed · self-reported when self-run · safe
+  [vcs.remote-hooks-signing] establishes write.repository.tenant, write.repository.project, read.file.project, write.file.project, authenticate-as.credential.signing · observed when self-run · safe
+  [agent.config-presence] establishes grant.credential.self · observed when self-run · safe
+  [schedule.persistence] establishes create.schedule.host · observed when self-run · safe
+  [identity.key-shaped-env] establishes write.budget.tenant, authenticate-as.credential.tenant · observed when self-run · safe
+  [ci.permissions-block] establishes write.repository.tenant · observed when self-run · safe
+  [communication.send] establishes send.message.world, read.message.tenant · documented when self-run · DESCRIBED, NOT RUN
+  [money.spend] establishes write.budget.tenant · inferred when self-run · DESCRIBED, NOT RUN
+
+## Vocabulary
+
+  probe, finding: OpenSSF Scorecard's definitions, adopted (https://github.com/ossf/scorecard/blob/main/docs/probes.md);
+  plus reversible (recoverability decides insurability) and tier (observed | self-reported | documented | derived | inferred | unknown).
+  capability primitive = verb × object class × reach + reversible. Not to be confused with the meters a policy is written in.
+
+Specified by brief v0.33.64 (4 September 2026). CC BY 4.0.

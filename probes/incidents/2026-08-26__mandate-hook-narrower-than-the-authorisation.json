@@ -1,0 +1,13 @@
+{
+  "type": "incident/v1",
+  "date": "2026-08-26",
+  "profile": "anthropic/claude-code-remote/ccr-container",
+  "capability": "write.repository.tenant",
+  "control_claimed": "a signed mandate compiled into a pre-push hook that git runs in the agent's clone",
+  "claimed_rung": "inline",
+  "demoted_to": "out-of-band",
+  "bypassed": false,
+  "what_happened": "The hook refused a real push to dev with `error: failed to push some refs`, then within the hour refused the release that was carrying it, because mandate v1 was narrower than the authorisation that existed. The remedy was the issuer amending the mandate, never a bypass. The tier the control reached is stated rather than claimed: SETTING, not boundary — the hook is inside the grant it bounds and --no-verify still gets past it. The enforcer is in the actor's reach, so the rung is out-of-band at best; the boundary on this capability is a branch rule at the host, which does not exist for this repository.",
+  "account": "https://pki.sgit.ai/packs/grant-and-mandate/enforcement.html",
+  "evidence": ["packs/grant-and-mandate/src/07__enforcement.md", "experiments/the-table/index.html"]
+}

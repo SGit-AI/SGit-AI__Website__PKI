@@ -1,0 +1,36 @@
+{
+  "type": "profile/v1",
+  "id": "openai/chatgpt-web/default",
+  "vendor": "OpenAI",
+  "product": "ChatGPT (in the browser, no connectors)",
+  "variant": "default",
+  "surface": "web",
+  "version": "2026-09-05",
+  "description": "An assistant in the vendor's environment. It reaches what you paste or upload and nothing on your machine: the vendor's environment is a boundary you did not build. DERIVED from the assess library's web tree. Browsing, if on, is the vendor's egress, not yours.",
+  "tools": [
+    {
+      "tool": "conversation and uploads",
+      "evidence": null,
+      "grant": [
+        {
+          "capability": "read.file.project",
+          "tier": "derived",
+          "control": null,
+          "control_tier": "none",
+          "note": "what you paste or upload \u2014 and a record once read is exposure that cannot be unread, on the vendor's side"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    "assess/library.json (surface web)"
+  ],
+  "prior": 0.15,
+  "union": [
+    "read.file.project"
+  ],
+  "intersection": [
+    "read.file.project"
+  ],
+  "irreversible_in_union": []
+}

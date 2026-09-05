@@ -1,0 +1,60 @@
+/* authorised.css — shared by /probes/, /authorised/ and /guess/: the verdict strip, the
+   capability lists with reversibility marked, the diff widget and the game's board.
+   Everything else is site.css. */
+.verdict-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.7rem;margin:1.2rem 0}
+.verdict-strip>div{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.8rem 1rem}
+.verdict-strip .n{display:block;font-family:var(--serif);font-size:2rem;color:#101114;line-height:1.1}
+.verdict-strip .k{display:block;font-size:.78rem;color:var(--dim);margin-top:.25rem;line-height:1.4}
+.dim{color:var(--dim);font-size:.85rem}
+.is-claim{color:var(--warm);font-weight:600}
+.rev-no{color:#b91c1c;font-weight:700}
+.rev-with-effort{color:var(--warm)}
+.rev-yes{color:var(--dim)}
+pre.cmd{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:.6rem .8rem;font-size:.78rem;line-height:1.45;white-space:pre-wrap;overflow-wrap:anywhere;margin:.4rem 0}
+main.doc table.probes td p{margin:.35rem 0 0;font-size:.84rem}
+main.doc table.caps td,main.doc table.probes td{font-size:.84rem}
+.diff-widget{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;margin:1rem 0}
+.diff-widget label{font-size:.8rem;color:var(--dim);margin-right:1rem}
+.diff-widget select,.step select,.step input[type=text]{font:inherit;font-size:.85rem;padding:.3rem .4rem;border:1px solid var(--line2);border-radius:6px;background:var(--bg);color:var(--fg);max-width:100%}
+.diff-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.8rem;margin-top:.7rem}
+.diff-cols h4,.gap-cols h4{margin:0 0 .3rem;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.diff-cols ul,.gap-cols ul,.caplist{list-style:none;padding:0;margin:0}
+.diff-cols li,.gap-cols li,.caplist li{font-size:.84rem;padding:.25rem 0;border-top:1px solid var(--line)}
+/* the steps */
+.step{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:1rem 1.1rem;margin:1rem 0}
+.step .k{font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-dk);display:block;margin-bottom:.3rem}
+.step h3{margin:.1rem 0 .5rem}
+.step[hidden]{display:none}
+.choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.45rem;margin:.5rem 0}
+.choices label{display:flex;gap:.5rem;align-items:flex-start;font-size:.86rem;padding:.45rem .6rem;border:1px solid var(--line);border-radius:8px;background:var(--bg);cursor:pointer}
+.choices label small{display:block;color:var(--dim);font-size:.74rem}
+.btn{display:inline-block;font:inherit;font-size:.86rem;font-weight:600;padding:.5rem .9rem;border-radius:8px;border:1px solid var(--accent-dk);background:var(--accent);color:#fff;cursor:pointer}
+.btn.alt{background:var(--bg);color:var(--accent-dk)}
+.btn:disabled{opacity:.45;cursor:default}
+.verdict{background:#101114;color:#f4f4f2;border-radius:12px;padding:1.1rem 1.3rem;margin:1rem 0}
+.verdict .big{font-family:var(--serif);font-size:1.45rem;line-height:1.35;margin:0 0 .4rem}
+.verdict .sub{font-size:.85rem;color:#c9c9c4;margin:0}
+.verdict .tier{display:inline-block;margin-top:.6rem;font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid #6b6b66;border-radius:999px;padding:.15rem .55rem;color:#e6e6e2}
+.gap-cols{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin:.8rem 0}
+@media (max-width:760px){.gap-cols{grid-template-columns:1fr}}
+.gap-cols>div{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:.7rem .85rem}
+.gap-cols>div.loss{border-left:3px solid #b91c1c}
+.gap-cols>div.fix{border-left:3px solid var(--accent)}
+.gap-cols li b{color:#101114}
+.gap-cols li .how{display:block;color:var(--dim);font-size:.78rem;margin-top:.15rem}
+.tuple{font-family:var(--mono);font-size:.76rem;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:.6rem .8rem;white-space:pre-wrap;overflow-wrap:anywhere}
+.fam-row{display:flex;flex-wrap:wrap;gap:.4rem;margin:.4rem 0}
+.fam-row span{font-size:.74rem;border:1px solid var(--line2);border-radius:999px;padding:.15rem .55rem;background:var(--bg)}
+.fam-row span.hit{background:rgba(15,118,110,.09);border-color:rgba(15,118,110,.4);color:#0f766e}
+.fam-row span.miss{background:rgba(185,28,28,.07);border-color:rgba(185,28,28,.4);color:#b91c1c}
+/* the game */
+.belief{display:grid;gap:.3rem;margin:.6rem 0}
+.belief div{display:grid;grid-template-columns:minmax(160px,1fr) 3fr 3.5rem;gap:.5rem;align-items:center;font-size:.78rem}
+.belief .bar{height:.55rem;background:var(--panel2);border-radius:999px;overflow:hidden}
+.belief .bar i{display:block;height:100%;background:var(--accent);border-radius:999px}
+.belief .lead-p .bar i{background:#0f766e}
+.q{font-family:var(--serif);font-size:1.3rem;color:#101114;margin:.4rem 0 .6rem}
+.q-help{font-size:.82rem;color:var(--dim);margin:0 0 .6rem}
+.answers{display:flex;flex-wrap:wrap;gap:.5rem}
+.path{font-size:.82rem}
+.path li{margin:.2rem 0}

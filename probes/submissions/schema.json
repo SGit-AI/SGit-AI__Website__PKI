@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "submission/v1 — counts only",
+  "type": "object",
+  "required": ["type", "day", "profiles", "grant_by_family", "mandate_by_family", "irreversible_outside_mandate"],
+  "properties": {
+    "type": {"const": "submission/v1"},
+    "day": {"type": "string", "format": "date", "description": "no timestamp finer than a day"},
+    "profiles": {"type": "array", "items": {"type": "string"}, "description": "profile ids only"},
+    "grant_by_family": {"type": "object", "additionalProperties": {"type": "integer"}},
+    "mandate_by_family": {"type": "object", "additionalProperties": {"type": "integer"}},
+    "irreversible_outside_mandate": {"type": "integer"},
+    "tier": {"enum": ["self-reported", "observed"]}
+  },
+  "additionalProperties": false
+}
