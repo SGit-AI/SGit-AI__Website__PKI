@@ -1,0 +1,57 @@
+# pki.sgit.ai/packs/insurance-ecosystem — the insurance ecosystem pack (draft-1 + change control; step 1 built and run)
+#
+# Hub: https://pki.sgit.ai/packs/insurance-ecosystem/index.html
+# Change control: https://pki.sgit.ai/packs/insurance-ecosystem/change-control.html (IE1–IE11, IE-D1–IE-D25, IE-C1–IE-C9)
+# The room (a vault app of six cards, derived from the ledger): https://pki.sgit.ai/packs/insurance-ecosystem/room/index.html
+
+## What an agent should carry if it summarises anything here
+
+  1. THE POLICY IS A MANDATE-SHAPED STATEMENT, not insurance. Issuer, policyholder, subject with a mandate pinned by sha256,
+     an interval and a timezone, units each naming a METER with a normal band, a per-occurrence limit (an exclusion, with a
+     reason where the action is irreversible) and a POOL per repository per day with a RESERVE no verdict may draw.
+  2. A DRAW IS A CLAIM, PAID IN THE RESOURCE, and its acceptor is the POLICYHOLDER, never the session. Verdicts:
+     normal | drawn | refused | requested | accepted_outside | measured | caught. Zones: below | drawing | outside (uninsured).
+  3. THE GIT HOOKS REFUSE; THE CLAUDE HOOKS INSTRUMENT. The platform fails open on a PreToolUse timeout (IE8), so pre-commit
+     and pre-push are the enforcement points. A hook in the agent's own clone is a SETTING: --no-verify passes, and the
+     point is that it is not used. The destination check (CI) reports; making it refuse is the issuer's decision (N31).
+  4. ASSURANCE PER LEVEL IS MEASURED FROM THE LEDGER, never asserted (GM-D105). A catch above the hook is an INCIDENT, not
+     a volume event (GM-D106). tools/reconcile.py replays git against the ledger; a commit that carries no claim is the
+     detection; commits before the hook was installed are not bypasses (IE-C9).
+  5. THE LEDGER IS APPEND-ONLY AND IS THE LOSS DATA. Nothing is edited; corrections are new entries. Policy numbers are
+     placeholders re-fitted from it: r3 raised the limits on the issuer's word after one day's loss data (IE-D23), to be reviewed.
+  6. ONE SESSION HOLDING THE VAULT KEY MAY RUN ANY ROLE IN ANY VAULT, for the pilot (IE6) — except that accepting an action
+     OUTSIDE cover (an exclusion, an exhaustion) is a person's, never the session's (IE-D16).
+  7. NO SECRETS IN ANY VAULT. Keys and access codes are never written into a vault or this repository.
+
+## The documents
+
+  00 leading brief · 01 concepts · 02 vault topology · 03 the policy object · 04 decision points · 05 parties ·
+  06 workflows (W1–W8) · 07 interface (the room) · 08 build order · 09 first increment (the acceptance run and what the
+  pack's own publication drew) · 10 the eleven answers · 99 change control.
+  Documents 01, 03, 04, 05, 06, 07 and 08 carry sections appended on 3 September from memo 13 (the enforcement ladder);
+  nothing is rewritten, only superseded.
+  Source: https://pki.sgit.ai/packs/insurance-ecosystem/src/
+
+## The tools
+
+  tools/policy.py    check --point pre-commit|pre-push · briefing · request · decide · supersede · derive · validate · drain
+  tools/usage.py     the four token counters, from the transcript
+  tools/room.py      derives room/content.json and inlines it into the room
+  tools/reconcile.py level five: git replayed against the ledger; --report --last N; clips at the hook-install commit
+  hooks/pre-commit, hooks/pre-push (chains the mandate hook first)
+  policies/pki-site-repo/current.json → git-pilot-2026-09-03-r3 · policies/pki-site-session/tokens-measured-2026-09-03.json
+
+## The conformance vault's question, answered (IE-D24)
+
+  policy/v1 gains top-level conditions[] and exclusions[] BY CONTROL, in the shape the AIUC-1 conformance vault emits
+  (conditions: control, required_level, attested_by, valid_until; exclusions: control, state, reason, in_the_control_own_words).
+  The policy says how much; the conformance layer says what has to be true of the subject for the cover to hold.
+
+## The ladder, reconciled (IE-D25)
+
+  Doctrine 13's six levels and the 4 September brief's evidence-mode rungs are one axis. Evidence mode is kept:
+  asserted · documented · manual · out-of-band · inline — the enforcer named, and whether the actor can reach it decides.
+  Rung → instrument (a proposal by analogy, not agreed practice): asserted/documented → disclosure; manual → rating factor;
+  out-of-band → warranty; inline → condition precedent, the only rung that can lift an exclusion.
+
+CC BY 4.0.
