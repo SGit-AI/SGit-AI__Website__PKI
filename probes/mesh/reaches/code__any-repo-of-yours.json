@@ -1,0 +1,16 @@
+{
+  "type": "reach/v1",
+  "id": "code:any-repo-of-yours",
+  "label": "any repository your credentials reach",
+  "family": "code",
+  "exposure": "every code host your account is logged into",
+  "runs_in": [
+    "env:desktop",
+    "env:wsl",
+    "env:managed-desktop",
+    "env:vendor-cloud"
+  ],
+  "governed_by": [
+    "obl:aiuc1-B006.1"
+  ]
+}

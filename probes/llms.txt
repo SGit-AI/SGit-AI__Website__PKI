@@ -3,14 +3,14 @@
 # A registry of capability primitives and measured grants. A grant claim never travels alone:
 # it travels with the probe that established it, so a challenge is a rerun rather than an argument.
 # GRANTS ARE PUBLIC, MANDATES ARE PRIVATE: your mandate stays in your clone under probes/yours/ (gitignored).
-# 22 capability primitives (12 irreversible) · 15 probes (13 safe to run) · 7 profiles (2 measured, 5 derived claims) · 4 evidence files, 47 findings, all self-run.
+# 23 capability primitives (13 irreversible) · 16 probes (14 safe to run) · 9 profiles (2 measured, 7 derived claims) · 4 evidence files, 47 findings, all self-run.
 # Page: https://pki.sgit.ai/probes/index.html · Graph: https://pki.sgit.ai/probes/graph.html?profile=<id> · Runner: probes/run.py · Shapes: probes/schema/
 
 ## What an agent should carry if it summarises anything here
 
   1. PRESENCE AND REACHABILITY, NEVER CONTENTS. No evidence file holds a byte of any credential, setting or transcript.
   2. EVERY FINDING IS SELF-RUN: produced by the environment it describes, the weakest tier the model has. No independent run exists yet.
-  3. 5 OF 7 PROFILES ARE CLAIMS: derived from what a surface architecturally is, marked as such, no probe run on any instance.
+  3. 7 OF 9 PROFILES ARE CLAIMS: derived from what a surface architecturally is, marked as such, no probe run on any instance.
   4. A PROFILE IS PER TOOL, NOT PER PRODUCT. Two tools in one session reach different hosts; the union is what the operator carries.
   5. NOTHING HERE CAN SEE YOU. The scan cannot run from outside; the delta is computed in your browser or your clone.
 
@@ -38,6 +38,16 @@
     host = what the drive connector is scoped to; not your machine · tenant = the accounts you connected, as you scoped them
     cannot reach: your machine's files
     https://pki.sgit.ai/probes/profiles/anthropic/claude-web/connectors-on.json
+  [generic/browser-extension/broad-host-permissions] A browser extension with broad host permissions — DERIVED (a claim) · version 2026-09-05
+    tools the extension · union 3 · intersection 3 · irreversible 3
+    host = your browser — every page, every logged-in site · tenant = the sites you are logged into, as you
+    cannot reach: files on your disk
+    https://pki.sgit.ai/probes/profiles/generic/browser-extension/broad-host-permissions.json
+  [generic/scheduled-job/service-account] A scheduled job running as a service account — DERIVED (a claim) · version 2026-09-05
+    tools the job · union 7 · intersection 7 · irreversible 4
+    host = the server it runs on, as the service account · tenant = whatever the service account's credential opens
+    cannot reach: your machine
+    https://pki.sgit.ai/probes/profiles/generic/scheduled-job/service-account.json
   [github/actions-runner/ci] Actions runner (a hosted CI job) — MEASURED · version 2026-08-26
     tools the job's shell · union 8 · intersection 8 · irreversible 3
     host = the runner — destroyed after the job; not your machine · tenant = the repository, with the workflow's token
@@ -65,7 +75,8 @@
   [ci.permissions-block] establishes write.repository.tenant · observed when self-run · safe
   [communication.send] establishes send.message.world, read.message.tenant · documented when self-run · DESCRIBED, NOT RUN
   [money.spend] establishes write.budget.tenant · inferred when self-run · DESCRIBED, NOT RUN
-  [harness.platform-tools] establishes create.schedule.tenant, authenticate-as.credential.tenant, write.repository.tenant, send.endpoint.allowed, read.file.project · self-reported when self-run · safe
+  [harness.platform-tools] establishes create.schedule.tenant, authenticate-as.credential.tenant, write.repository.tenant, send.endpoint.allowed, read.file.project, read.record.browsing · self-reported when self-run · safe
+  [browser.extension-permissions] establishes read.record.browsing, send.endpoint.world, authenticate-as.credential.tenant · documented when self-run · safe
 
 ## Vocabulary
 

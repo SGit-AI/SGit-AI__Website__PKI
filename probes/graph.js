@@ -3,23 +3,25 @@
 // profile JSON; no library; nothing sent. Every colour is doubled by a shape or a label:
 // reversibility is the node's fill AND its word; the control tier is the edge's stroke
 // AND its chip. Hover a node or edge for the row behind it; the table below is the same data.
+window.ProfileGraph = { drawInto: null };
 (async function () {
   const $ = s => document.querySelector(s);
-  const base = './';
+  const base = (document.currentScript && document.currentScript.src) ? document.currentScript.src.replace(/graph\.js.*$/, '') : './';
   const [idx, prim, red] = await Promise.all(['profiles/index.json', 'primitives.json', 'reductions.json'].map(f => fetch(base + f).then(r => r.json())));
   const caps = Object.fromEntries(prim.capabilities.map(c => [c.id, c]));
   const FAM = Object.keys(prim.families);
-  const sel = $('#profileSel');
+  const sel = $('#profileSel') || document.createElement('select');
   for (const p of idx.profiles) { const o = document.createElement('option'); o.value = p.id; o.textContent = `${p.product} · ${p.variant}${p.measured ? '' : ' (a claim)'}`; sel.appendChild(o); }
   const want = new URLSearchParams(location.search).get('profile');
   sel.value = idx.profiles.some(p => p.id === want) ? want : 'anthropic/claude-code-remote/ccr-container';
   sel.onchange = () => { history.replaceState(null, '', '?profile=' + encodeURIComponent(sel.value)); draw(); };
+  let els = { graph: $('#graph'), reading: $('#reading'), table: $('#table'), links: $('#links') };
   const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const REV = { no: { fill: '#b91c1c', ink: '#fff', word: 'irreversible' }, 'with-effort': { fill: '#fff', stroke: '#b45309', ink: '#7a3a05', word: 'with effort' }, yes: { fill: '#fff', stroke: '#9a9ea6', ink: '#34363c', word: 'reversible' } };
   const CTL = { boundary: { stroke: '#0f766e', width: 3, dash: '' }, setting: { stroke: '#b45309', width: 1.8, dash: '' }, expectation: { stroke: '#6b6f76', width: 1.4, dash: '2 4' }, none: { stroke: '#b91c1c', width: 1.4, dash: '6 4' } };
 
-  async function draw() {
-    const p = await fetch(base + 'profiles/' + sel.value + '.json').then(r => r.json());
+  async function draw(profileId) {
+    const p = await fetch(base + 'profiles/' + (profileId || sel.value) + '.json').then(r => r.json());
     const m = idx.profiles.find(x => x.id === p.id);
     // rows: capability -> [{tool, tier, control, control_tier, note, probe}]
     const rows = {};
@@ -63,23 +65,24 @@
       notR.forEach((n, i) => { const cy = notTop + i * rowH + 10; s += `<g><rect x="${xCap}" y="${cy - 14}" width="${capW}" height="28" rx="8" fill="#f4f4f2" stroke="#9a9ea6" stroke-width="1.2" stroke-dasharray="4 3"/><text x="${xCap + 10}" y="${cy + 4}" font-size="11" fill="#6b6f76">${esc(n.what)}</text><title>${esc(n.what)}\n${esc(n.why)}\nsource: ${esc(n.source || '')}</title></g><text x="${xCap + capW + 10}" y="${cy + 4}" font-size="9.5" fill="#6b6f76">${esc((n.why || '').slice(0, 48))}</text>`; });
     }
     s += '</svg>';
-    $('#graph').innerHTML = s;
+    els.graph.innerHTML = s;
     // hover: dim everything but the hovered capability's edges
-    const svg = $('#graph svg');
+    const svg = els.graph.querySelector('svg');
     svg.querySelectorAll('.cap').forEach(g => { g.addEventListener('mouseenter', () => svg.querySelectorAll('.edge').forEach(e => e.style.opacity = e.dataset.cap === g.dataset.cap ? '1' : '.12')); g.addEventListener('mouseleave', () => svg.querySelectorAll('.edge').forEach(e => e.style.opacity = '.85')); });
     // the reading
     const irrev = capIds.filter(c => caps[c].reversible === 'no');
     const uncontrolled = irrev.filter(c => rows[c].every(r => (r.control_tier || 'none') === 'none'));
     const bounded = capIds.filter(c => rows[c].some(r => r.control_tier === 'boundary'));
-    $('#reading').innerHTML = `<p><b>${capIds.length} capabilities</b> across ${p.tools.length} tool${p.tools.length > 1 ? 's' : ''}; <b class="rev-no">${irrev.length} irreversible</b>, of which <b>${uncontrolled.length}</b> ${uncontrolled.length === 1 ? 'has' : 'have'} no control on any path; ${bounded.length} bounded by something the agent cannot reach; ${notR.length} thing${notR.length === 1 ? '' : 's'} it cannot reach at all.
+    els.reading.innerHTML = `<p><b>${capIds.length} capabilities</b> across ${p.tools.length} tool${p.tools.length > 1 ? 's' : ''}; <b class="rev-no">${irrev.length} irreversible</b>, of which <b>${uncontrolled.length}</b> ${uncontrolled.length === 1 ? 'has' : 'have'} no control on any path; ${bounded.length} bounded by something the agent cannot reach; ${notR.length} thing${notR.length === 1 ? '' : 's'} it cannot reach at all.
       ${p.reach_names ? `<br><b>host</b> means ${esc(p.reach_names.host)} · <b>tenant</b> means ${esc(p.reach_names.tenant)} · <b>world</b> means ${esc(p.reach_names.world)}.` : ''}
       ${p.measured_note ? `<br><span class="dim">${esc(p.measured_note)}</span>` : ''}</p>
       <p class="dim">${esc(p.description)}</p>`;
     // the table view: the same rows
-    $('#table').innerHTML = `<table><thead><tr><th>tool</th><th>capability</th><th>reach</th><th>reversible</th><th>control</th><th>tier</th><th>note</th></tr></thead><tbody>` +
+    els.table.innerHTML = `<table><thead><tr><th>tool</th><th>capability</th><th>reach</th><th>reversible</th><th>control</th><th>tier</th><th>note</th></tr></thead><tbody>` +
       p.tools.flatMap(t => t.grant.map(g => `<tr><td>${esc(t.tool)}</td><td><code>${esc(g.capability)}</code><br>${esc(caps[g.capability].label)}</td><td>${esc(caps[g.capability].reach)}</td><td class="rev-${caps[g.capability].reversible}">${esc(caps[g.capability].reversible)}</td><td><span class="ctl ${esc(g.control_tier || 'none')}">${esc(g.control_tier || 'none')}</span>${g.control ? '<br><span class="dim">' + esc(g.control) + '</span>' : ''}</td><td>${esc(g.tier)}${g.probe ? '<br><span class="dim">' + esc(g.probe) + '</span>' : ''}</td><td class="dim">${esc(g.note || '')}</td></tr>`)).join('') +
       notR.map(n => `<tr><td>—</td><td><i>cannot reach: ${esc(n.what)}</i></td><td></td><td></td><td></td><td></td><td class="dim">${esc(n.why)} · ${esc(n.source || '')}</td></tr>`).join('') + '</tbody></table>';
-    $('#links').innerHTML = `<a href="profiles/${esc(p.id)}.json">the profile JSON</a> · ${p.tools.filter(t => t.evidence).map(t => `<a href="${esc(t.evidence)}">${esc(t.tool.split(' (')[0])} evidence</a>`).join(' · ') || 'no evidence file: a claim'} · <a href="../guess/index.html">the game</a> · <a href="../authorised/index.html">the assessment</a>`;
+    els.links.innerHTML = `<a href="profiles/${esc(p.id)}.json">the profile JSON</a> · ${p.tools.filter(t => t.evidence).map(t => `<a href="${esc(t.evidence)}">${esc(t.tool.split(' (')[0])} evidence</a>`).join(' · ') || 'no evidence file: a claim'} · <a href="../guess/index.html">the game</a> · <a href="../authorised/index.html">the assessment</a>`;
   }
-  draw();
+  window.ProfileGraph.drawInto = async (el, profileId) => { const mk = () => { const d = document.createElement('div'); el.appendChild(d); return d; }; els = { graph: mk(), reading: mk(), table: mk(), links: mk() }; els.graph.id = ''; await draw(profileId); };
+  if ($('#profileSel')) draw();
 })();

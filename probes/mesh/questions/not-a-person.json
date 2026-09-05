@@ -1,0 +1,20 @@
+{
+  "type": "question/v1",
+  "id": "not-a-person",
+  "text": "Does it run under an account that is not a person's?",
+  "help": "A service account, a bot user, a platform's app.",
+  "class": "discriminating",
+  "reliability": 0.6,
+  "reliability_note": "medium: many people never look",
+  "p_yes": {
+    "anthropic/claude-code/local-default": 0.05,
+    "anthropic/claude-code/local-confirmations-off": 0.05,
+    "anthropic/claude-desktop/default": 0.05,
+    "anthropic/claude-code-remote/ccr-container": 0.75,
+    "openai/chatgpt-web/default": 0.1,
+    "anthropic/claude-web/connectors-on": 0.1,
+    "github/actions-runner/ci": 0.95,
+    "generic/browser-extension/broad-host-permissions": 0.1,
+    "generic/scheduled-job/service-account": 0.95
+  }
+}

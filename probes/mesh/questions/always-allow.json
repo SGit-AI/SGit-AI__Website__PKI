@@ -1,0 +1,21 @@
+{
+  "type": "question/v1",
+  "id": "always-allow",
+  "text": "Have you ever clicked something that said 'always allow', or turned its confirmations off?",
+  "help": "Including a flag that skips permissions, or an auto mode.",
+  "class": "eliciting",
+  "reliability": 0.6,
+  "reliability_note": "medium: a control you clicked through once and forgot",
+  "p_yes": {
+    "anthropic/claude-code/local-default": 0.25,
+    "anthropic/claude-code/local-confirmations-off": 0.96,
+    "anthropic/claude-desktop/default": 0.35,
+    "anthropic/claude-code-remote/ccr-container": 0.5,
+    "openai/chatgpt-web/default": 0.15,
+    "anthropic/claude-web/connectors-on": 0.3,
+    "github/actions-runner/ci": 0.1,
+    "generic/browser-extension/broad-host-permissions": 0.6,
+    "generic/scheduled-job/service-account": 0.2
+  },
+  "asks_about": "execute.process.host"
+}

@@ -1,0 +1,21 @@
+{
+  "type": "question/v1",
+  "id": "connectors",
+  "text": "Have you connected it to a drive, your mail, a code host or a cloud account?",
+  "help": "A connector or integration you switched on and authorised with a login.",
+  "class": "eliciting",
+  "reliability": 0.8,
+  "reliability_note": "medium-high: you clicked the login",
+  "p_yes": {
+    "anthropic/claude-code/local-default": 0.35,
+    "anthropic/claude-code/local-confirmations-off": 0.4,
+    "anthropic/claude-desktop/default": 0.6,
+    "anthropic/claude-code-remote/ccr-container": 0.3,
+    "openai/chatgpt-web/default": 0.08,
+    "anthropic/claude-web/connectors-on": 0.97,
+    "github/actions-runner/ci": 0.05,
+    "generic/browser-extension/broad-host-permissions": 0.5,
+    "generic/scheduled-job/service-account": 0.6
+  },
+  "asks_about": "authenticate-as.credential.tenant"
+}

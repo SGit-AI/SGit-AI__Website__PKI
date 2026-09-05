@@ -1,0 +1,13 @@
+{
+  "type": "reach/v1",
+  "id": "sched:host-cron",
+  "label": "a scheduler on the host",
+  "family": "schedule",
+  "exposure": "outlives the turn; on an ephemeral host, dies with the machine",
+  "runs_in": [
+    "env:desktop",
+    "env:container",
+    "env:server"
+  ],
+  "governed_by": []
+}

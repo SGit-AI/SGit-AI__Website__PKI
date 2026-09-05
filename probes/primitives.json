@@ -45,7 +45,8 @@
     "communication": "messages to people",
     "code": "repositories and what lands in them",
     "money": "budgets and spend",
-    "schedule": "things that outlive the turn"
+    "schedule": "things that outlive the turn",
+    "browser": "what a browser extension or automation can see and do in your browser"
   },
   "capabilities": [
     {
@@ -252,6 +253,16 @@
       "reversible": "yes",
       "label": "Create something that outlives the session, on the platform (a routine, a scheduled trigger, a new session)",
       "note": "reversible in itself; what the scheduled thing does carries its own rows"
+    },
+    {
+      "id": "read.record.browsing",
+      "family": "browser",
+      "verb": "read",
+      "object": "record",
+      "reach": "host",
+      "reversible": "no",
+      "label": "Read every page you visit",
+      "why_irreversible": "what you read, it read"
     }
   ],
   "rules": [

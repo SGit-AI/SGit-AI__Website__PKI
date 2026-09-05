@@ -1,0 +1,9 @@
+{
+  "type": "obligation/v1",
+  "id": "obl:aiuc1-D003.1",
+  "identifier": "AIUC-1 D003.1",
+  "words": "tool call validation and authorisation",
+  "note": "a scope check before a tool call; the explainer's scope check is an implementation of it",
+  "source": "the AIUC-1 catalogue as held in the conformance vault (sgit vault 2wzct4k7, conformance/); the words are the requirement's title",
+  "caveat": "a profile matched from answers is the weakest evidence tier there is — self-reported, about a product rather than a deployment, inferred rather than measured — so this is an obligation worth checking, never a compliance finding"
+}

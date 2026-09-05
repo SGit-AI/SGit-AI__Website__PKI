@@ -1,0 +1,13 @@
+{
+  "type": "reach/v1",
+  "id": "fs:server-disk",
+  "label": "a server's disk",
+  "family": "filesystem",
+  "exposure": "whatever the service account owns",
+  "runs_in": [
+    "env:server"
+  ],
+  "governed_by": [
+    "obl:aiuc1-E015.3"
+  ]
+}

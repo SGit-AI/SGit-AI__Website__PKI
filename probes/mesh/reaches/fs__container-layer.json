@@ -1,0 +1,11 @@
+{
+  "type": "reach/v1",
+  "id": "fs:container-layer",
+  "label": "the container's own layer",
+  "family": "filesystem",
+  "exposure": "nothing of yours; ephemeral, destroyed with the session",
+  "runs_in": [
+    "env:container"
+  ],
+  "governed_by": []
+}

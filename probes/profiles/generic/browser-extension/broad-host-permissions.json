@@ -1,0 +1,75 @@
+{
+  "type": "profile/v1",
+  "id": "generic/browser-extension/broad-host-permissions",
+  "vendor": "generic",
+  "product": "A browser extension with broad host permissions",
+  "variant": "broad-host-permissions",
+  "surface": "extension",
+  "version": "2026-09-05",
+  "description": "Not an agent by name, and it has a grant: an extension granted 'read and change all your data on all websites' reads every page you visit, reaches any host, and acts inside the sites you are logged into. Nobody wrote it a mandate. DERIVED from the permission model the browser documents; not measured on any instance.",
+  "reach_names": {
+    "host": "your browser \u2014 every page, every logged-in site",
+    "tenant": "the sites you are logged into, as you",
+    "world": "the internet, from your browser"
+  },
+  "not_reachable": [
+    {
+      "what": "files on your disk",
+      "why": "the browser sandbox; an extension reads pages, not the filesystem",
+      "source": "the browser's extension permission model"
+    }
+  ],
+  "refine": {
+    "read.record.browsing": "web:every-page",
+    "send.endpoint.world": "net:world",
+    "authenticate-as.credential.tenant": "id:browser-sessions"
+  },
+  "tools": [
+    {
+      "tool": "the extension",
+      "evidence": null,
+      "grant": [
+        {
+          "capability": "read.record.browsing",
+          "tier": "documented",
+          "control": null,
+          "control_tier": "none",
+          "note": "'read and change all your data on all websites'"
+        },
+        {
+          "capability": "send.endpoint.world",
+          "tier": "documented",
+          "control": null,
+          "control_tier": "none",
+          "note": "host permissions"
+        },
+        {
+          "capability": "authenticate-as.credential.tenant",
+          "tier": "documented",
+          "control": "the site's own session controls",
+          "control_tier": "setting",
+          "note": "acts inside sites where you have a session, as you"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    "the browser's documented extension permission model (brief v0.33.65: things nobody calls an agent)"
+  ],
+  "prior": 0.03,
+  "union": [
+    "authenticate-as.credential.tenant",
+    "read.record.browsing",
+    "send.endpoint.world"
+  ],
+  "intersection": [
+    "authenticate-as.credential.tenant",
+    "read.record.browsing",
+    "send.endpoint.world"
+  ],
+  "irreversible_in_union": [
+    "authenticate-as.credential.tenant",
+    "read.record.browsing",
+    "send.endpoint.world"
+  ]
+}

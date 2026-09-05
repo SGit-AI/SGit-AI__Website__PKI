@@ -1,0 +1,21 @@
+{
+  "type": "question/v1",
+  "id": "creds-home",
+  "text": "Are your cloud, SSH or registry credentials in the home directory of the account it runs as?",
+  "help": "The usual dotfiles: .aws, .ssh, .npmrc, a kubeconfig.",
+  "class": "eliciting",
+  "reliability": 0.3,
+  "reliability_note": "low: almost nobody knows, so this answer barely moves the belief and fully counts toward the gap",
+  "p_yes": {
+    "anthropic/claude-code/local-default": 0.85,
+    "anthropic/claude-code/local-confirmations-off": 0.85,
+    "anthropic/claude-desktop/default": 0.8,
+    "anthropic/claude-code-remote/ccr-container": 0.35,
+    "openai/chatgpt-web/default": 0.04,
+    "anthropic/claude-web/connectors-on": 0.06,
+    "github/actions-runner/ci": 0.1,
+    "generic/browser-extension/broad-host-permissions": 0.05,
+    "generic/scheduled-job/service-account": 0.7
+  },
+  "asks_about": "read.credential.host"
+}

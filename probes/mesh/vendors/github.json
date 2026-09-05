@@ -1,0 +1,6 @@
+{
+  "type": "vendor/v1",
+  "id": "github",
+  "label": "GitHub",
+  "kind": "code host and CI provider"
+}

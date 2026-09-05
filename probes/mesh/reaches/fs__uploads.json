@@ -1,0 +1,11 @@
+{
+  "type": "reach/v1",
+  "id": "fs:uploads",
+  "label": "what you paste or upload",
+  "family": "filesystem",
+  "exposure": "on the vendor's side, and a record once read is exposure that cannot be unread",
+  "runs_in": [
+    "env:vendor-cloud"
+  ],
+  "governed_by": []
+}

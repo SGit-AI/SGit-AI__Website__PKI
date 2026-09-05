@@ -1,0 +1,20 @@
+{
+  "type": "question/v1",
+  "id": "unattended",
+  "text": "Does it run when nobody is watching — a pipeline, a schedule, a job?",
+  "help": "It starts without you and finishes without you.",
+  "class": "discriminating",
+  "reliability": 0.85,
+  "reliability_note": "high: you know where you type",
+  "p_yes": {
+    "anthropic/claude-code/local-default": 0.1,
+    "anthropic/claude-code/local-confirmations-off": 0.2,
+    "anthropic/claude-desktop/default": 0.08,
+    "anthropic/claude-code-remote/ccr-container": 0.4,
+    "openai/chatgpt-web/default": 0.03,
+    "anthropic/claude-web/connectors-on": 0.08,
+    "github/actions-runner/ci": 0.97,
+    "generic/browser-extension/broad-host-permissions": 0.3,
+    "generic/scheduled-job/service-account": 0.98
+  }
+}

@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reach Is A Node In A Mesh Rather Than A Rung On A Ladder, Questions Divide Into Ones That Identify And Ones That Measure, And Each Carries A Reliability Because A Wrong Answer Is Not Noise But The Finding · documents · pki.sgit.ai</title>
+<meta name="description" content="Original document, readable in-page: summary, key concepts and key ideas, then the full markdown. Dev brief — third of 5 September; the shipped game was read before writing it, and one aside overturns a design decision in its specification, v0.33.65, 5 September 2026. CC BY 4.0.">
+<link rel="canonical" href="https://pki.sgit.ai/documents/reach-is-a-node.html">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
+  <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history" data-site-version></a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../failure/index.html">The registry<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../registry/index.html">&#9679; The registry, live</a>
+      <a class="sl" href="../failure/index.html">Why they don't exist</a>
+      <a class="sl" href="../rules/index.html">The four rules</a>
+      <a class="sl" href="../mandate/index.html">Identity &amp; mandate</a>
+      <a class="sl" href="../roadmap/index.html">Build order</a>
+      <a class="sl" href="../rules/prior-art.html">Prior art</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../bootstrap/index.html">The layers<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../bootstrap/index.html">The bootstrap trap</a>
+      <a class="sl" href="../enrolment/index.html">Enrolment</a>
+      <a class="sl" href="../execution/index.html">The execution broker</a>
+      <a class="sl" href="../shipped/index.html">What already ships</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../assess/index.html">Map your case<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../assess/index.html">Map your own case</a>
+      <a class="sl" href="../assess/library.html">The library of trees</a>
+      <a class="sl" href="../packs/map-your-case/readers/index.html">Synthetic readers</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../authorised/index.html">Measure<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../authorised/index.html">&#9679; What you authorised and never asked for</a>
+      <a class="sl" href="../guess/index.html">&#9679; Which agent is it?</a>
+      <a class="sl" href="../guess/graph.html">&mdash; the mesh, start anywhere</a>
+      <a class="sl" href="../guess/report.html">&mdash; the report</a>
+      <a class="sl" href="../probes/index.html">&#9679; Probes, not tables</a>
+      <a class="sl" href="../probes/graph.html">&mdash; the grant as a graph</a>
+      <a class="sl" href="../probes/llms.txt">probes/llms.txt</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../origins/index.html">Origins<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../origins/index.html">Origins: 2026</a>
+      <a class="sl" href="../origins/review.html">The review, redacted</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../bench/index.html">The bench<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../bench/index.html">&#9679; The bench &mdash; what is built</a>
+      <a class="sl" href="../simulator/index.html">&#9679; The simulator &mdash; play a card</a>
+      <a class="sl" href="../experiments/index.html">&#9679; Experiments</a>
+      <a class="sl" href="../experiments/the-room/index.html">&mdash; the chain room</a>
+      <a class="sl" href="../experiments/the-table/index.html">&mdash; the table</a>
+      <a class="sl" href="../experiments/push-to-github/index.html">&mdash; push to GitHub</a>
+      <a class="sl" href="../experiments/the-deploy/index.html">&mdash; the deploy</a>
+      <a class="sl" href="../experiments/the-control-room/index.html">&mdash; the control room</a>
+      <a class="sl" href="../workbench/index.html">&#9679; The workbench (app)</a>
+      <a class="sl" href="../probes/index.html">&#9679; Probes, not tables</a>
+      <a class="sl" href="../authorised/index.html">&#9679; What you authorised and never asked for</a>
+      <a class="sl" href="../guess/index.html">&#9679; Which agent is it?</a>
+      <a class="sl" href="../registry/index.html">The register, live</a>
+      <a class="sl" href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
+      <a class="sl" href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
+      <a class="sl" href="../assess/index.html">Map your own case</a>
+      <a class="sl" href="../book/index.html">The book (commissioned)</a>
+      <a class="sl" href="../book/brief.html">&mdash; its commissioning brief</a>
+      <a class="sl" href="../insurance-book/index.html">The insurance book</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../insurance/index.html">Insurance<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../insurance/index.html">&#9679; Insurance for agents</a>
+      <a class="sl" href="../insurance-book/index.html">&#9679; The insurance book</a>
+      <a class="sl" href="../insurance/what-this-is.html">&mdash; what this is, and the rule</a>
+      <a class="sl" href="../insurance/the-rating.html">&mdash; the rating</a>
+      <a class="sl" href="../insurance/the-ecosystem-and-the-gate.html">&mdash; the ecosystem &amp; the gate</a>
+      <a class="sl" href="../insurance/who-pays-and-the-moving-rating.html">&mdash; who pays, &amp; the moving rating</a>
+      <a class="sl" href="../insurance/why-insurance-and-what-broke-it.html">&mdash; why insurance</a>
+      <a class="sl" href="../insurance/not-in-line.html">&mdash; not in line (scale 1&ndash;5)</a>
+      <a class="sl" href="../insurance/the-broker-market.html">&mdash; the broker market</a>
+      <a class="sl" href="../insurance/the-policy-as-a-statement.html">&mdash; the policy as a statement</a>
+      <a class="sl" href="../insurance/the-world-model.html">&mdash; the world model (the MVP)</a>
+      <a class="sl" href="../insurance/make-them-insurable.html">&mdash; make them insurable</a>
+      <a class="sl" href="../insurance/the-schemas-and-the-clocks.html">&mdash; the schemas &amp; the clocks</a>
+      <a class="sl" href="../insurance/llms.txt">insurance/llms.txt</a>
+      <a class="sl" href="../documents/agent-insurance.html">The pivot briefing (memo 0)</a>
+      <a class="sl" href="../documents/insurance-without-money.html">Rating before money (memo 1)</a>
+      <a class="sl" href="../documents/insurance-ecosystem.html">The go-live gate (memo 2)</a>
+      <a class="sl" href="../documents/who-pays-for-the-delta.html">Who pays (memo 3)</a>
+      <a class="sl" href="../documents/why-insurance.html">Why insurance (memo 4)</a>
+      <a class="sl" href="../documents/not-in-line.html">Not in line (memo 5)</a>
+      <a class="sl" href="../documents/the-broker-market.html">The broker market (memo 6)</a>
+      <a class="sl" href="../documents/the-policy-as-a-statement.html">The policy statement (memo 7)</a>
+      <a class="sl" href="../documents/the-world-model.html">The world model (memo 8)</a>
+      <a class="sl" href="../documents/make-them-insurable.html">Make them insurable (memo 9)</a>
+      <a class="sl" href="../documents/the-schemas-and-the-clocks.html">Schemas &amp; clocks (memo 10)</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../documents/index.html">The documents</a>
+      <a class="sl" href="../data/index.html">The data viewer</a>
+      <a class="sl" href="../packs/index.html">Dev packs</a>
+      <a class="sl" href="../packs/registry-mvp/index.html">The registry MVP pack</a>
+      <a class="sl" href="../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
+      <a class="sl" href="../packs/insurance-ecosystem/index.html">The Insurance Ecosystem pack</a>
+      <a class="sl" href="../packs/map-your-case/index.html">The Map Your Case pack</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../admin/versions.html">Release history</a>
+      <a class="sl" href="../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+  <script src="../assets/version.js" defer></script>
+  <script src="../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="index.html">documents</a> / reach-is-a-node</div>
+<h1>Reach Is A Node In A Mesh Rather Than A Rung On A Ladder, Questions Divide Into Ones That Identify And Ones That Measure, And Each Carries A Reliability Because A Wrong Answer Is Not Noise But The Finding</h1>
+
+<div class="docmeta">
+  <span class="k">Type</span><span class="v">Dev brief — third of 5 September; the shipped game was read before writing it, and one aside overturns a design decision in its specification</span>
+  <span class="k">Version</span><span class="v">v0.33.65</span>
+  <span class="k">Date</span><span class="v">5 September 2026</span>
+  <span class="k">Author</span><span class="v">Dinis Cruz (project lead) and collaborators</span>
+  <span class="k">Licence</span><span class="v">CC BY 4.0</span>
+  <span class="k">Source</span><span class="v"><a href="../briefs/v0.33.65__dev-brief__reach-is-a-node-not-a-ladder-two-question-classes-and-a-reliability-per-question-because-a-wrong-answer-is-the-measurement.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/dev/briefs/v0.33.65__dev-brief__reach-is-a-node-not-a-ladder-two-question-classes-and-a-reliability-per-question-because-a-wrong-answer-is-the-measurement.md">view on GitHub</a></span>
+</div>
+
+<h2 id="summary">Summary</h2>
+<p>An evolution of the guessing game on one correction and one implication. The correction: a capability's reach is not a rung on a ladder but a node in a mesh, because reading a file at the local disk, the user's home, a corporate share, a network mount, a cloud store and a container's own layer are six exposures wearing one verb, none above or below another; each reach node carries its own edges to environments, products and obligations, which makes the traversal bidirectional, and walking inward answers which products touch my share. The implication: a player asked whether the thing can reach every credential on their machine may say no because they do not know, so every answer is already a prediction; questions divide into ones that identify and ones that measure, each carries a reliability, a low-reliability answer barely moves the belief and fully counts toward the gap, and the gap is a set of per-capability disagreements collected throughout. The detective panel shows asserted, inferred and possible in three treatments never mixed. Built the same day: the mesh as files with one ontology, the engine, the two-column play screen, the mesh navigator, the report and the sources page.</p>
+
+<h2 id="concepts">Key concepts</h2>
+<ul>
+  <li><a href="../guess/index.html"><b>The play screen</b></a> — the transcript and the inspector</li>
+  <li><a href="../guess/graph.html"><b>The mesh, start anywhere</b></a> — which products touch my share?</li>
+  <li><a href="../guess/report.html"><b>The report</b></a> — one page, every class kept apart</li>
+  <li><a href="../guess/data.html"><b>The sources of truth</b></a> — one file per node; a correction is an edit</li>
+  <li><a href="../guess/data.html#ontology"><b>The ontology</b></a> — every edge typed</li>
+</ul>
+
+<h2 id="ideas">Key ideas</h2>
+<ul>
+  <li>Reach is a node in a mesh rather than a rung on a ladder, because six file-system reaches are elsewhere from each other.</li>
+  <li>Coarse and fine views must be the same shape, or every boundary needs a special case.</li>
+  <li>Questions divide into ones that identify and ones that measure, and only the second may contribute to the finding.</li>
+  <li>A low-reliability answer barely moves the profile belief and fully counts toward the gap, which turns the user's error into the product.</li>
+  <li>The inspector shows asserted, inferred and possible in three treatments that are never mixed.</li>
+  <li>The most valuable guesses are things nobody calls an agent; an obligation reached this way is a question worth asking, never a finding.</li>
+  <li>A model earns three edges and never sits in front of an arithmetic step.</li>
+</ul>
+
+<h2 id="on-site">On this site</h2>
+<p>Adds probes/mesh/ (ontology, reaches, envs, vendors, obligations, questions as one file each), refine maps and two non-agentic profiles, admin/build/gen_mesh.py with its gates, guess/engine.js, the rewritten play screen, guess/graph.html (the mesh navigator), guess/report.html and guess/data.html.</p>
+
+<h2 id="read">Read the document</h2>
+<div class="mdread-label">📄 Original document · v0.33.65 · 5 September 2026 · rendered from the <a href="../briefs/v0.33.65__dev-brief__reach-is-a-node-not-a-ladder-two-question-classes-and-a-reliability-per-question-because-a-wrong-answer-is-the-measurement.md">raw markdown</a> (the source of truth)</div>
+<div class="mdread" id="mdread" data-src="../briefs/v0.33.65__dev-brief__reach-is-a-node-not-a-ladder-two-question-classes-and-a-reliability-per-question-because-a-wrong-answer-is-the-measurement.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="../briefs/v0.33.65__dev-brief__reach-is-a-node-not-a-ladder-two-question-classes-and-a-reliability-per-question-because-a-wrong-answer-is-the-measurement.md">open the raw markdown</a>.</p></noscript></div>
+
+<div class="pagenav">
+  <a href="index.html">← All documents</a>
+  <a href="../briefs/v0.33.65__dev-brief__reach-is-a-node-not-a-ladder-two-question-classes-and-a-reliability-per-question-because-a-wrong-answer-is-the-measurement.md">Raw markdown →</a>
+</div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html" data-site-version>release history</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The bench</h4>
+    <a href="../bench/index.html">&#9679; What is built</a>
+    <a href="../simulator/index.html">&#9679; The simulator</a>
+    <a href="../workbench/index.html">&#9679; The workbench (app)</a>
+    <a href="../probes/index.html">&#9679; Probes, not tables</a>
+    <a href="../authorised/index.html">&#9679; What you authorised and never asked for</a>
+    <a href="../guess/index.html">&#9679; Which agent is it?</a>
+    <a href="../registry/index.html">The register, live</a>
+    <a href="../packs/grant-and-mandate/enforcement.html">The mandate hook</a>
+    <a href="../packs/grant-and-mandate/blocks.html">The building blocks</a>
+    <a href="../assess/index.html">&#8594; Map your own case</a>
+    <a href="../book/index.html">The book (commissioned)</a>
+    <a href="../book/brief.html">&mdash; its commissioning brief</a>
+    <a href="../insurance-book/index.html">The insurance book</a>
+  </div>
+  <div>
+    <h4>Insurance</h4>
+    <a href="../insurance/index.html">&#9679; Insurance for agents</a>
+    <a href="../insurance-book/index.html">&#9679; The insurance book</a>
+    <a href="../insurance/what-this-is.html">What this is, and the rule</a>
+    <a href="../insurance/the-rating.html">The rating</a>
+    <a href="../insurance/the-ecosystem-and-the-gate.html">The ecosystem &amp; the gate</a>
+    <a href="../insurance/who-pays-and-the-moving-rating.html">Who pays, &amp; the moving rating</a>
+    <a href="../insurance/why-insurance-and-what-broke-it.html">Why insurance</a>
+    <a href="../insurance/not-in-line.html">Not in line</a>
+    <a href="../insurance/the-broker-market.html">The broker market</a>
+    <a href="../insurance/the-policy-as-a-statement.html">The policy as a statement</a>
+    <a href="../insurance/the-world-model.html">The world model (the MVP)</a>
+    <a href="../insurance/make-them-insurable.html">Make them insurable</a>
+    <a href="../insurance/the-schemas-and-the-clocks.html">The schemas &amp; the clocks</a>
+    <a href="../insurance/llms.txt">insurance/llms.txt</a>
+    <a href="../documents/agent-insurance.html">The pivot briefing</a>
+  </div>
+  <div>
+    <h4>The registry</h4>
+    <a href="../failure/index.html">Why they don't exist</a>
+    <a href="../rules/index.html">The four rules</a>
+    <a href="../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../roadmap/index.html">Build order</a>
+    <a href="../rules/prior-art.html">Prior art</a>
+  </div>
+  <div>
+    <h4>The three layers</h4>
+    <a href="../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../enrolment/index.html">Enrolment</a>
+    <a href="../execution/index.html">The execution broker</a>
+    <a href="../shipped/index.html">What already ships</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../origins/index.html">Origins: 2026</a>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../packs/registry-mvp/index.html">The registry MVP pack</a>
+    <a href="../packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
+    <a href="../packs/insurance-ecosystem/index.html">The Insurance Ecosystem pack</a>
+    <a href="../packs/map-your-case/index.html">The Map Your Case pack</a>
+    <a href="../about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../llms.txt">llms.txt</a>
+  </div>
+</div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+<script src="../assets/mdreader.js"></script>
+</body>
+</html>

@@ -1,6 +1,33 @@
 {
   "type": "profile/v1",
   "id": "anthropic/claude-code/local-default",
+  "refine": {
+    "read.file.host": [
+      "fs:user-home",
+      "fs:network-mount"
+    ],
+    "write.file.host": [
+      "fs:user-home",
+      "fs:network-mount"
+    ],
+    "delete.file.host": [
+      "fs:user-home",
+      "fs:network-mount"
+    ],
+    "read.file.project": "fs:project",
+    "write.file.project": "fs:project",
+    "execute.process.host": "proc:host-account",
+    "send.endpoint.world": "net:world",
+    "read.credential.host": "id:user-credentials",
+    "authenticate-as.credential.tenant": "id:user-credentials",
+    "authenticate-as.credential.signing": "id:user-credentials",
+    "write.repository.tenant": "code:any-repo-of-yours",
+    "write.repository.project": "code:attached-repo",
+    "create.record.world": "pub:registries",
+    "read.record.history": "rec:shell-history",
+    "grant.credential.self": "cfg:own-settings",
+    "create.schedule.host": "sched:host-cron"
+  },
   "reach_names": {
     "host": "your machine, as your user account",
     "tenant": "your accounts, with the credentials in your home directory",
@@ -179,7 +206,7 @@
     "assess/library.json (surface cli)",
     "the published read-only audit tool's module list the library cites"
   ],
-  "prior": 0.35,
+  "prior": 0.33,
   "union": [
     "authenticate-as.credential.signing",
     "authenticate-as.credential.tenant",

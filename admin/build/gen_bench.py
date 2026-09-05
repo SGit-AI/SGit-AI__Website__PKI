@@ -369,7 +369,7 @@ BENCH = [
   code="authorised/ (index.html, app.js, README.md), assets/authorised.css"),
 
  dict(slug="guess-the-agent", name="Which Agent Is It? (the game)", state="live",
-  where="../guess/index.html", since="v0.1.69", updated="v0.1.71",
+  where="../guess/index.html", since="v0.1.69", updated="v0.1.72",
   origin="<a href='../documents/guess-the-agent.html'>brief v0.33.64 (guess the agent)</a>, build-order steps 1 to 5",
   one_line="Named for the question a person has (working title <i>guess the agent</i>). A guessing game whose output is a measurement: cheap questions with obvious answers, ordinary decision-tree "
            "induction over a belief across the public profiles, a prediction step before the reveal, and the prediction gap "
@@ -380,15 +380,22 @@ BENCH = [
     "<b>The prediction step is the instrument</b> &mdash; the gap between what was predicted and what the tree found is the finding",
     "<b>The tree is public and self-tested</b> &mdash; every profile placed from its own modal answers, the count derived at build",
     "<b>The naming collision caught</b> &mdash; a prediction gap, never a surprise",
-    "An honest <i>not in the set</i> when no profile dominates, which is a finding rather than a failure"],
+    "An honest <i>it hasn't met yours yet</i> when no profile dominates, which is a finding rather than a failure",
+    "<b>Reach is a node</b> (brief v0.33.65) &mdash; a mesh of reach nodes, environments, obligations and questions, one file each, typed by <a href='../guess/data.html#ontology'>one ontology</a>, compiled with gates; <a href='../guess/graph.html'>walk it in either direction</a>",
+    "<b>Two question classes and a reliability per question</b> &mdash; identifying questions never count toward the gap; a low-reliability answer barely moves the belief and fully counts toward it",
+    "<b>The gap collected throughout</b> &mdash; per-capability disagreements with their reach node and reversibility, and the end-of-game prediction kept for the sense of scale",
+    "<b>The inspector</b>: asserted, inferred and possible in three treatments never mixed, on by default; every row links to its source file",
+    "<b>Demo mode</b> plays a profile's own modal answers step by step or end to end; <a href='../guess/report.html'>the report</a> puts a run on one page"],
   does_not_prove=[
     "<b>Anything about the player's environment.</b> It matched a profile from self-reported answers, the weakest tier available, and produced a hypothesis, not a measurement",
     "<b>That the tree is right.</b> Seven profiles, fifteen questions, probabilities estimated by the author on one day and answered by nobody yet",
     "<b>That a small gap is safety.</b> Predicting the grant correctly does not narrow it",
-    "Anything at scale: no tuple has been submitted, and the aggregate is empty"],
-  gates=["<code>gen_guess.py</code>: every question carries an expected answer for every profile in the manifest and no other; every profile is placed by its own modal answers within the budget, or the build fails",
+    "Anything at scale: no tuple has been submitted, and the aggregate is empty",
+    "<b>Calibration.</b> Reliabilities and expected answers are the author's estimates until play data exists"],
+  gates=["<code>gen_mesh.py</code>: every edge's type is in the ontology and joins the node types it says; every id exists; every refine names a capability in the profile's union and a reach node; every question carries a class, a reliability and an expected answer for every profile",
+         "<code>gen_guess.py</code>: every profile is placed by its own modal answers under the reliability-tempered update, or the build fails",
          "the model-assisted fallback is deliberately absent: never a model in front of an arithmetic step"],
-  code="guess/ (index.html, app.js, tree.json, selftest.json), admin/build/gen_guess.py"),
+  code="guess/ (engine.js, app.js, graph.js, report.js, index.html, graph.html, report.html, data.html, tree.json, selftest.json), probes/mesh/, admin/build/gen_mesh.py, admin/build/gen_guess.py"),
 
  dict(slug="synthetic-readers", name="Synthetic readers", state="specified",
   where="../packs/map-your-case/readers/index.html", since="v0.1.23", updated="v0.1.24",

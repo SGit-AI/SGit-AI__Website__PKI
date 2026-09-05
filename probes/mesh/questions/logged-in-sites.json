@@ -1,0 +1,21 @@
+{
+  "type": "question/v1",
+  "id": "logged-in-sites",
+  "text": "Does it act inside websites you are logged into?",
+  "help": "It can click, read and post as you on sites where you have a session.",
+  "class": "eliciting",
+  "reliability": 0.55,
+  "reliability_note": "medium: extensions ask for it once",
+  "p_yes": {
+    "anthropic/claude-code/local-default": 0.05,
+    "anthropic/claude-code/local-confirmations-off": 0.05,
+    "anthropic/claude-desktop/default": 0.1,
+    "anthropic/claude-code-remote/ccr-container": 0.03,
+    "openai/chatgpt-web/default": 0.05,
+    "anthropic/claude-web/connectors-on": 0.4,
+    "github/actions-runner/ci": 0.02,
+    "generic/browser-extension/broad-host-permissions": 0.9,
+    "generic/scheduled-job/service-account": 0.05
+  },
+  "asks_about": "authenticate-as.credential.tenant"
+}

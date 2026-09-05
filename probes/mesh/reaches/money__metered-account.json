@@ -1,0 +1,15 @@
+{
+  "type": "reach/v1",
+  "id": "money:metered-account",
+  "label": "an account that is billed",
+  "family": "money",
+  "exposure": "spend the agent can incur",
+  "runs_in": [
+    "env:desktop",
+    "env:server",
+    "env:container"
+  ],
+  "governed_by": [
+    "obl:aiuc1-D003.2"
+  ]
+}

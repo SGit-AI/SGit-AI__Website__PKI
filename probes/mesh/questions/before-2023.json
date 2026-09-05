@@ -1,0 +1,21 @@
+{
+  "type": "question/v1",
+  "id": "before-2023",
+  "text": "Did it exist before 2023?",
+  "help": "Runners, cron jobs and extensions did; most assistants did not.",
+  "class": "discriminating",
+  "reliability": 0.8,
+  "reliability_note": "medium-high: people misdate products",
+  "p_yes": {
+    "anthropic/claude-code/local-default": 0.03,
+    "anthropic/claude-code/local-confirmations-off": 0.03,
+    "anthropic/claude-desktop/default": 0.03,
+    "anthropic/claude-code-remote/ccr-container": 0.03,
+    "openai/chatgpt-web/default": 0.55,
+    "anthropic/claude-web/connectors-on": 0.03,
+    "github/actions-runner/ci": 0.95,
+    "generic/browser-extension/broad-host-permissions": 0.85,
+    "generic/scheduled-job/service-account": 0.95
+  },
+  "funny": true
+}

@@ -1,0 +1,14 @@
+{
+  "type": "reach/v1",
+  "id": "id:browser-sessions",
+  "label": "the sites you are logged into",
+  "family": "identity",
+  "exposure": "cookies and sessions; acting inside a site as you",
+  "runs_in": [
+    "env:browser"
+  ],
+  "governed_by": [
+    "obl:aiuc1-B006.1",
+    "obl:aiuc1-D003.1"
+  ]
+}

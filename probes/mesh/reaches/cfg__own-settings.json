@@ -1,0 +1,13 @@
+{
+  "type": "reach/v1",
+  "id": "cfg:own-settings",
+  "label": "its own settings file",
+  "family": "identity",
+  "exposure": "the file that turns the prompt off, owned by the same account",
+  "runs_in": [
+    "env:desktop",
+    "env:wsl",
+    "env:managed-desktop"
+  ],
+  "governed_by": []
+}

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Which Agent Is It? &mdash; think of an AI agent, answer a few questions, and see what it can reach, what it cannot, and which of it could not be undone &middot; pki.sgit.ai</title>
-<meta name="description" content="Think of an AI agent, assistant or developer tool. Answer a few questions and RiskMandate.ai will try to identify it, or tell you it hasn't met yours yet. Before the reveal, say what you think it can do. Then see what it can reach, what it cannot, and which of it could not be undone. Deterministic, in the browser, nothing sent.">
+<meta name="description" content="Think of an AI agent, assistant or developer tool. Answer a few questions and RiskMandate.ai will try to identify it, or tell you it hasn't met yours yet. The questions that measure are already predictions about what it can do; a wrong answer there is the finding. Deterministic, in the browser, nothing sent.">
 <link rel="canonical" href="https://pki.sgit.ai/guess/index.html">
 <meta property="og:url" content="https://pki.sgit.ai/guess/index.html">
 <link rel="stylesheet" href="../assets/site.css">
@@ -52,6 +52,8 @@
       <div class="sub">
       <a class="sl" href="../authorised/index.html">&#9679; What you authorised and never asked for</a>
       <a class="sl here" href="../guess/index.html">&#9679; Which agent is it?</a>
+      <a class="sl" href="../guess/graph.html">&mdash; the mesh, start anywhere</a>
+      <a class="sl" href="../guess/report.html">&mdash; the report</a>
       <a class="sl" href="../probes/index.html">&#9679; Probes, not tables</a>
       <a class="sl" href="../probes/graph.html">&mdash; the grant as a graph</a>
       <a class="sl" href="../probes/llms.txt">probes/llms.txt</a>
@@ -144,68 +146,36 @@
   <script src="../assets/version.js" defer></script>
   <script src="../assets/nav.js" defer></script>
 </div></nav>
-<main class="doc">
+<main class="doc play">
 <div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="../bench/index.html">the bench</a> / which agent is it?</div>
 <p class="kicker">RiskMandate.ai</p>
 <h1>Which Agent Is It?</h1>
-<p class="lead">Think of an AI agent, assistant or developer tool. Answer a few questions and RiskMandate.ai will try to identify it, or tell you it hasn&rsquo;t met yours yet. <b>Before the reveal, say what you think it can do.</b> Then see what it can reach, what it cannot, and which of it could not be undone.</p>
-<p>Every other approach asks you to enumerate what your agent can do, which is exactly the thing you do not know. So the questions are cheap ones with obvious answers &mdash; a terminal or a browser, ever clicked <i>always allow</i>, can it read your mail &mdash; and the rest is inferred. The prediction you make before the reveal is the measurement.</p>
-<p class="dim">Deterministic: arithmetic over <a href="tree.json">a published tree</a> and <a href="../probes/index.html#profiles">the public profiles</a>, reproducible and auditable, running in this tab. No model, no server, nothing sent. <span id="selftest"></span></p>
-
-<div class="step" id="ask">
-  <span class="k" id="qNum"></span>
-  <p class="q" id="qText"></p>
-  <p class="q-help" id="qHelp"></p>
-  <div class="answers" id="answers"><button class="btn" data-a="yes" type="button">yes</button><button class="btn" data-a="no" type="button">no</button><button class="btn alt" data-a="unsure" type="button">not sure</button></div>
+<nav class="subnav"><a class="here" href="index.html">Play</a><a href="graph.html">The mesh</a><a href="report.html">Report</a><a href="data.html">Sources &amp; corrections</a><a href="../probes/index.html">The probes</a></nav>
+<p class="lead">Think of an AI agent, assistant or developer tool &mdash; or a tool you connected to something. Answer a few questions and RiskMandate.ai will try to identify it, or tell you it hasn&rsquo;t met yours yet. Then see what it can reach, what it cannot, and which of it could not be undone.</p>
+<div class="demo-bar" id="demoBar"></div>
+<div class="play-grid">
+  <section class="chat" aria-label="the session">
+    <div class="log" id="log"></div>
+    <div class="ask" id="ask"></div>
+  </section>
+  <aside class="inspector" id="inspector" aria-label="the inspector"><p class="dim">Loading&hellip;</p></aside>
 </div>
 
-<div class="step" id="predict" hidden>
-  <span class="k">the prediction &middot; the experiment</span>
-  <p class="dim" id="predictStatus"></p>
-  <p class="q">Before we show you: which of these can it do?</p>
-  <p class="q-help">Tick every family you think its grant contains. Without this step the game is a lookup with a costume on.</p>
-  <div class="choices" id="famChoices"></div>
-  <p><label><input type="checkbox" id="predIrrev"> &hellip;and do you think any of it is irreversible &mdash; something that cannot be undone once done?</label></p>
-  <p><button class="btn" id="predictBtn" type="button">that is my prediction &mdash; show me</button></p>
-</div>
-
-<div class="step" id="reveal" hidden>
-  <span class="k">the reveal, and the gap</span>
-  <div class="verdict" id="verdict"></div>
-  <div id="gapOut"></div>
-  <p class="dim" id="lastTime"></p>
-  <h3>The tuple this page would submit, and does not</h3>
-  <p class="dim">Answers, the profile matched, the prediction, the gap. No address, no identifier, no free text, no timestamp finer than a day. Shown so you can see exactly what it contains; declined by default, and there is no send. To contribute it, open a pull request under <a href="../probes/submissions/README.md"><code>probes/submissions/</code></a>.</p>
-  <pre class="tuple" id="tupleOut"></pre>
-  <p><button class="btn alt" id="again2" type="button">play again</button></p>
-</div>
-
-<h2 id="belief-h">The belief, live</h2>
-<p class="dim">Answers update a belief rather than prune a branch, so a wrong answer is recoverable. The next question is always the one that splits the remaining belief most evenly. The population prior is a guess and biases the first questions toward the common case; it says so in the tree file.</p>
-<div id="belief"></div>
-<h2 id="path-h">The path &mdash; a tree nobody can inspect is a fortune teller</h2>
-<div id="pathOut"></div>
-<p><button class="btn alt" id="again" type="button">start over</button></p>
-
-<h2 id="instrument">The same instrument, built three times in a week</h2>
-<table>
-<thead><tr><th>Instrument</th><th>Belief</th><th>Fact</th><th>The gap is</th></tr></thead>
-<tbody>
-<tr><td>The status block</td><td>The model's account of its own usage</td><td>The transcript</td><td>Whether a model can be trusted to account for itself</td></tr>
-<tr><td>The conformance layer</td><td>What a team says it does</td><td>What is attested, and at what tier</td><td>Where the standard is unevidenced</td></tr>
-<tr><td><b>This game</b></td><td><b>What a person thinks their agent can do</b></td><td><b>The measured grant for their profile</b></td><td><b>Whether people know what they have granted</b></td></tr>
-</tbody></table>
-<p>A belief, a measurement, and the distance between them as the product. Two words, kept apart on purpose: a <b>surprise</b> is an action outside the grant &mdash; a measurement failure, and <a href="../authorised/index.html#surprise-def">the assessment's validity test</a>; a <b>prediction gap</b> is what a person did not expect their grant to contain. The game measures the second and never reports the first.</p>
+<h2 id="how">How it works, and what the inspector shows</h2>
+<p>Questions come in two classes, and the transcript labels each. <b>Identifying</b> questions &mdash; a terminal or a browser, is it named after a person &mdash; split the profiles beautifully and measure nothing about anybody's exposure. <b>Measuring</b> questions &mdash; can it read your credentials, can it read your mail &mdash; are already predictions about what it can do, and only those count toward the gap. Each question also carries a <b>reliability</b>: how likely a player is to know the true answer. A low-reliability answer barely moves the belief and fully counts toward the gap, so the engine is not fooled by the ignorance it exists to measure.</p>
+<p>The inspector on the right keeps three classes apart and never mixes them: <span class="asserted"><span class="lab">asserted</span></span> is what you said; <span class="inferred"><span class="lab">inferred</span></span> is what the leading profile's measured grant implies; <span class="possible"><span class="lab">possible</span></span> is what is still consistent. A hypothesis drawn like a fact is the thing this estate exists to prevent. Every row links to the file behind it, because a correction is an edit.</p>
+<p>Deterministic: arithmetic over <a href="tree.json">a published question set</a> and <a href="../probes/index.html#profiles">the public profiles</a>, reproducible and auditable, running in this tab. No model, no server, nothing sent. The <a href="selftest.json">self-test</a> places every profile from its own modal answers at build time; the count is derived, never typed. Reliabilities are a mechanism with no fitted values behind them yet.</p>
 
 <h2 id="not">What this does not prove</h2>
 <ul>
-<li><b>Anything about your environment.</b> It matched a profile from your answers &mdash; the weakest tier available &mdash; and produced a <i>hypothesis</i> about your grant. <a href="../probes/index.html">The probes</a> produce the measurement.</li>
-<li><b>That the tree is right.</b> Seven profiles and fifteen questions, with probabilities estimated by the author on one day and answered by nobody yet. A wrong branch is a contribution, and &ldquo;it hasn&rsquo;t met yours yet&rdquo; is the honest answer when no profile dominates.</li>
-<li><b>That a small gap is safety.</b> Predicting the grant correctly does not narrow it; the reduction on the reveal screen does.</li>
-<li><b>Anything at scale.</b> No tuple has been submitted; the aggregate is empty, and will be published either way.</li>
+<li><b>Anything about your environment.</b> It matched a profile from your answers &mdash; the weakest tier available &mdash; and produced a hypothesis about a grant. <a href="../probes/index.html">The probes</a> produce the measurement.</li>
+<li><b>That the tree is right.</b> Nine profiles and two dozen questions, with probabilities and reliabilities estimated by the author and answered by nobody yet. A wrong branch is a contribution; <a href="data.html">every question is a file</a>.</li>
+<li><b>That a small gap is safety.</b> Knowing the grant does not narrow it; the reduction on the reveal screen does.</li>
+<li><b>Anything at scale.</b> No run has been submitted; the aggregate is empty.</li>
 </ul>
-<p class="dim">Working title <i>guess the agent</i>; named <i>Which Agent Is It?</i> by the project lead on 5 September, for the question a person has rather than the mechanic. Specified by <a href="../documents/guess-the-agent.html">brief v0.33.64 (guess the agent)</a>; steps 1 to 5 of its build order are what is here, the model-assisted fallback (step 7) is deliberately not, because a tree's failure is a recorded gap and a model's is a plausible guess. Self-test: <a href="selftest.json">selftest.json</a>. CC BY 4.0.</p>
+<p class="dim">Working title <i>guess the agent</i>; named <i>Which Agent Is It?</i> by the project lead on 5 September. Specified by <a href="../documents/guess-the-agent.html">brief v0.33.64</a> and evolved by <a href="../documents/reach-is-a-node.html">brief v0.33.65</a> (reach is a node, two question classes, a reliability per question, the gap collected throughout, the three-class inspector). The model earns three edges &mdash; free text, question generation, narration &mdash; and none is built: never a model in front of an arithmetic step. CC BY 4.0.</p>
 </main>
+<script src="engine.js"></script>
 <script src="app.js" defer></script>
 <footer class="site"><div class="cols">
   <div>

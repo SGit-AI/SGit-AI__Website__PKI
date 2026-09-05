@@ -1,0 +1,7 @@
+{
+  "type": "env/v1",
+  "id": "env:ci-runner",
+  "label": "a hosted CI runner, destroyed after the job",
+  "provided_by": "github",
+  "note": "an ephemeral machine with the workflow's token"
+}

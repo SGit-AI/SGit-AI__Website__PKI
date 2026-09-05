@@ -1,0 +1,13 @@
+{
+  "type": "reach/v1",
+  "id": "code:attached-repo",
+  "label": "the repository it was pointed at",
+  "family": "code",
+  "exposure": "the one clone",
+  "runs_in": [
+    "env:desktop",
+    "env:container",
+    "env:ci-runner"
+  ],
+  "governed_by": []
+}

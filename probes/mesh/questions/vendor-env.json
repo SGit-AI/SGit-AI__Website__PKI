@@ -1,0 +1,20 @@
+{
+  "type": "question/v1",
+  "id": "vendor-env",
+  "text": "Does it run in the vendor's environment rather than yours?",
+  "help": "The computer doing the work is theirs; you see a page.",
+  "class": "discriminating",
+  "reliability": 0.7,
+  "reliability_note": "medium",
+  "p_yes": {
+    "anthropic/claude-code/local-default": 0.03,
+    "anthropic/claude-code/local-confirmations-off": 0.03,
+    "anthropic/claude-desktop/default": 0.06,
+    "anthropic/claude-code-remote/ccr-container": 0.9,
+    "openai/chatgpt-web/default": 0.95,
+    "anthropic/claude-web/connectors-on": 0.95,
+    "github/actions-runner/ci": 0.55,
+    "generic/browser-extension/broad-host-permissions": 0.1,
+    "generic/scheduled-job/service-account": 0.05
+  }
+}

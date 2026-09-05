@@ -1,0 +1,7 @@
+{
+  "type": "env/v1",
+  "id": "env:server",
+  "label": "a server or scheduled host of yours",
+  "provided_by": "you",
+  "note": "runs without a person, under an account that is not a person's"
+}

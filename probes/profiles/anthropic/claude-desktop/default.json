@@ -1,6 +1,18 @@
 {
   "type": "profile/v1",
   "id": "anthropic/claude-desktop/default",
+  "refine": {
+    "read.file.host": "fs:user-home",
+    "write.file.host": "fs:user-home",
+    "read.file.project": "fs:project",
+    "write.file.project": "fs:project",
+    "execute.process.host": "proc:host-account",
+    "send.endpoint.world": "net:world",
+    "read.credential.host": "id:user-credentials",
+    "authenticate-as.credential.tenant": "id:user-credentials",
+    "read.record.history": "rec:shell-history",
+    "grant.credential.self": "cfg:own-settings"
+  },
   "reach_names": {
     "host": "your machine, as your user account",
     "tenant": "your accounts",

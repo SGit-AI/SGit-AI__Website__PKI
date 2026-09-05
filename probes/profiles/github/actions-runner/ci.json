@@ -1,6 +1,16 @@
 {
   "type": "profile/v1",
   "id": "github/actions-runner/ci",
+  "refine": {
+    "read.file.host": "fs:ci-checkout",
+    "write.file.host": "fs:ci-checkout",
+    "delete.file.host": "fs:ci-checkout",
+    "read.file.project": "fs:ci-checkout",
+    "write.file.project": "fs:ci-checkout",
+    "execute.process.host": "proc:ci-runner",
+    "send.endpoint.world": "net:world",
+    "write.repository.project": "code:attached-repo"
+  },
   "reach_names": {
     "host": "the runner \u2014 destroyed after the job; not your machine",
     "tenant": "the repository, with the workflow's token",

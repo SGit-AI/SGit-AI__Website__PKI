@@ -200,11 +200,26 @@
         "authenticate-as.credential.tenant",
         "write.repository.tenant",
         "send.endpoint.allowed",
-        "read.file.project"
+        "read.file.project",
+        "read.record.browsing"
       ],
       "command": "(not runnable from the shell) — the operator lists the harness tools the session holds and what each reaches: an API tool that writes to a code host under a platform-scoped token, a tool that creates a scheduled trigger, a fetch tool with its own allow-list",
       "how_to_read": "A harness tool is a tool: its reach is measured on its own row. Two consequences that a shell probe cannot see. A code-host API tool pushes WITHOUT going through the clone's git hooks, so a hook-based control (a setting) bounds the git tool and not this one; the control on this row is the platform's token scope (a boundary) and nothing else. And a scheduling tool is create.schedule at TENANT reach: what it creates outlives the session, on the platform. Tier: self-reported, by the operator, from the tool list the session was given.",
       "tier_when_self_run": "self-reported",
+      "safe_to_run": true,
+      "runnable_from_shell": false
+    },
+    {
+      "id": "browser.extension-permissions",
+      "family": "browser",
+      "establishes": [
+        "read.record.browsing",
+        "send.endpoint.world",
+        "authenticate-as.credential.tenant"
+      ],
+      "command": "(described, not run) — open the browser's extension page and read the permissions each extension was granted: 'read and change all your data on all websites' is read.record.browsing at web:every-page; host permissions are send.endpoint.world; an extension that acts on logged-in sites is authenticate-as.credential.tenant at id:browser-sessions",
+      "how_to_read": "Documented tier: the permission is what the browser shows, not what the extension does with it. A broad host permission is a grant nobody remembers granting.",
+      "tier_when_self_run": "documented",
       "safe_to_run": true,
       "runnable_from_shell": false
     }

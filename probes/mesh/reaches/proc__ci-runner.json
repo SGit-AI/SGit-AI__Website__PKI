@@ -1,0 +1,13 @@
+{
+  "type": "reach/v1",
+  "id": "proc:ci-runner",
+  "label": "programs on the runner",
+  "family": "process",
+  "exposure": "a machine destroyed after the job",
+  "runs_in": [
+    "env:ci-runner"
+  ],
+  "governed_by": [
+    "obl:aiuc1-D003.1"
+  ]
+}

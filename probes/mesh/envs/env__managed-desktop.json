@@ -1,0 +1,7 @@
+{
+  "type": "env/v1",
+  "id": "env:managed-desktop",
+  "label": "a corporate-managed desktop",
+  "provided_by": "you",
+  "note": "your account plus whatever shares and mounts the organisation gives it"
+}

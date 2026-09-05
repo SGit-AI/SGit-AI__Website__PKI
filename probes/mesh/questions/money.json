@@ -1,0 +1,21 @@
+{
+  "type": "question/v1",
+  "id": "money",
+  "text": "Does it hold a key to anything that costs money?",
+  "help": "An API key, a cloud credential, a card on file.",
+  "class": "eliciting",
+  "reliability": 0.4,
+  "reliability_note": "low-medium: keys are set once and forgotten",
+  "p_yes": {
+    "anthropic/claude-code/local-default": 0.5,
+    "anthropic/claude-code/local-confirmations-off": 0.5,
+    "anthropic/claude-desktop/default": 0.4,
+    "anthropic/claude-code-remote/ccr-container": 0.3,
+    "openai/chatgpt-web/default": 0.05,
+    "anthropic/claude-web/connectors-on": 0.4,
+    "github/actions-runner/ci": 0.3,
+    "generic/browser-extension/broad-host-permissions": 0.05,
+    "generic/scheduled-job/service-account": 0.8
+  },
+  "asks_about": "write.budget.tenant"
+}

@@ -1060,6 +1060,28 @@ DOCS = [
    "The game produces a hypothesis about a grant; the probes produce the measurement.",
   ],
   pages="Adds /guess/ (index.html, app.js, tree.json, selftest.json), admin/build/gen_guess.py with its self-test gate, and the bench entry."),
+ dict(slug="reach-is-a-node",
+  title="Reach Is A Node In A Mesh Rather Than A Rung On A Ladder, Questions Divide Into Ones That Identify And Ones That Measure, And Each Carries A Reliability Because A Wrong Answer Is Not Noise But The Finding",
+  md="v0.33.65__dev-brief__reach-is-a-node-not-a-ladder-two-question-classes-and-a-reliability-per-question-because-a-wrong-answer-is-the-measurement.md",
+  version="v0.33.65", date="5 September 2026", dtype="Dev brief — third of 5 September; the shipped game was read before writing it, and one aside overturns a design decision in its specification",
+  summary="An evolution of the guessing game on one correction and one implication. The correction: a capability's reach is not a rung on a ladder but a node in a mesh, because reading a file at the local disk, the user's home, a corporate share, a network mount, a cloud store and a container's own layer are six exposures wearing one verb, none above or below another; each reach node carries its own edges to environments, products and obligations, which makes the traversal bidirectional, and walking inward answers which products touch my share. The implication: a player asked whether the thing can reach every credential on their machine may say no because they do not know, so every answer is already a prediction; questions divide into ones that identify and ones that measure, each carries a reliability, a low-reliability answer barely moves the belief and fully counts toward the gap, and the gap is a set of per-capability disagreements collected throughout. The detective panel shows asserted, inferred and possible in three treatments never mixed. Built the same day: the mesh as files with one ontology, the engine, the two-column play screen, the mesh navigator, the report and the sources page.",
+  concepts=[
+   ("The play screen", "../guess/index.html", "the transcript and the inspector"),
+   ("The mesh, start anywhere", "../guess/graph.html", "which products touch my share?"),
+   ("The report", "../guess/report.html", "one page, every class kept apart"),
+   ("The sources of truth", "../guess/data.html", "one file per node; a correction is an edit"),
+   ("The ontology", "../guess/data.html#ontology", "every edge typed"),
+  ],
+  ideas=[
+   "Reach is a node in a mesh rather than a rung on a ladder, because six file-system reaches are elsewhere from each other.",
+   "Coarse and fine views must be the same shape, or every boundary needs a special case.",
+   "Questions divide into ones that identify and ones that measure, and only the second may contribute to the finding.",
+   "A low-reliability answer barely moves the profile belief and fully counts toward the gap, which turns the user's error into the product.",
+   "The inspector shows asserted, inferred and possible in three treatments that are never mixed.",
+   "The most valuable guesses are things nobody calls an agent; an obligation reached this way is a question worth asking, never a finding.",
+   "A model earns three edges and never sits in front of an arithmetic step.",
+  ],
+  pages="Adds probes/mesh/ (ontology, reaches, envs, vendors, obligations, questions as one file each), refine maps and two non-agentic profiles, admin/build/gen_mesh.py with its gates, guess/engine.js, the rewritten play screen, guess/graph.html (the mesh navigator), guess/report.html and guess/data.html."),
 ]
 
 PAGE = """<!doctype html>

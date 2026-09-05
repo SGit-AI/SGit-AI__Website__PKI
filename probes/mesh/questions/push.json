@@ -1,0 +1,21 @@
+{
+  "type": "question/v1",
+  "id": "push",
+  "text": "Does it push commits to a code host?",
+  "help": "Its work leaves your machine for GitHub or the like, under a credential.",
+  "class": "eliciting",
+  "reliability": 0.7,
+  "reliability_note": "medium-high: you see the pull requests",
+  "p_yes": {
+    "anthropic/claude-code/local-default": 0.7,
+    "anthropic/claude-code/local-confirmations-off": 0.78,
+    "anthropic/claude-desktop/default": 0.3,
+    "anthropic/claude-code-remote/ccr-container": 0.95,
+    "openai/chatgpt-web/default": 0.03,
+    "anthropic/claude-web/connectors-on": 0.45,
+    "github/actions-runner/ci": 0.25,
+    "generic/browser-extension/broad-host-permissions": 0.03,
+    "generic/scheduled-job/service-account": 0.3
+  },
+  "asks_about": "write.repository.tenant"
+}

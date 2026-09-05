@@ -1,0 +1,14 @@
+{
+  "type": "reach/v1",
+  "id": "proc:server",
+  "label": "programs on a server, as a service account",
+  "family": "process",
+  "exposure": "runs without a person",
+  "runs_in": [
+    "env:server"
+  ],
+  "governed_by": [
+    "obl:aiuc1-D003.1",
+    "obl:aiuc1-E004"
+  ]
+}

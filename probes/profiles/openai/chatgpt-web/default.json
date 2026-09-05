@@ -1,6 +1,9 @@
 {
   "type": "profile/v1",
   "id": "openai/chatgpt-web/default",
+  "refine": {
+    "read.file.project": "fs:uploads"
+  },
   "reach_names": {
     "host": "the vendor's environment; not your machine",
     "tenant": "nothing of yours",

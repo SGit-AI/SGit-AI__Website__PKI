@@ -1,0 +1,7 @@
+{
+  "type": "env/v1",
+  "id": "env:wsl",
+  "label": "a Linux environment inside your Windows desktop",
+  "provided_by": "you",
+  "note": "the same account's files, through a different path"
+}

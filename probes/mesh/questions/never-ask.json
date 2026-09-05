@@ -1,0 +1,20 @@
+{
+  "type": "question/v1",
+  "id": "never-ask",
+  "text": "Did you set it to never ask — a flag that skips permissions, an auto mode, a 'don't ask again'?",
+  "help": "An action you took once, on purpose, so it would stop interrupting you.",
+  "class": "discriminating",
+  "reliability": 0.85,
+  "reliability_note": "high: you typed the flag or clicked the box; the sibling question 'always allow' asks whether the control is still there, which is what people forget",
+  "p_yes": {
+    "anthropic/claude-code/local-default": 0.05,
+    "anthropic/claude-code/local-confirmations-off": 0.95,
+    "anthropic/claude-desktop/default": 0.15,
+    "anthropic/claude-code-remote/ccr-container": 0.5,
+    "openai/chatgpt-web/default": 0.05,
+    "anthropic/claude-web/connectors-on": 0.08,
+    "github/actions-runner/ci": 0.05,
+    "generic/browser-extension/broad-host-permissions": 0.3,
+    "generic/scheduled-job/service-account": 0.1
+  }
+}

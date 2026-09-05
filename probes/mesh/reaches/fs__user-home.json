@@ -1,0 +1,15 @@
+{
+  "type": "reach/v1",
+  "id": "fs:user-home",
+  "label": "your home directory",
+  "family": "filesystem",
+  "exposure": "documents, keys, history, other projects — everything your account owns",
+  "runs_in": [
+    "env:desktop",
+    "env:wsl",
+    "env:managed-desktop"
+  ],
+  "governed_by": [
+    "obl:aiuc1-B006.1"
+  ]
+}

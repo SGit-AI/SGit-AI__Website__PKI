@@ -1,0 +1,21 @@
+{
+  "type": "question/v1",
+  "id": "mail",
+  "text": "Can it read your mail or chat?",
+  "help": "A mail or messaging connector, or an app with that permission.",
+  "class": "eliciting",
+  "reliability": 0.6,
+  "reliability_note": "medium: you would remember connecting mail, usually",
+  "p_yes": {
+    "anthropic/claude-code/local-default": 0.06,
+    "anthropic/claude-code/local-confirmations-off": 0.08,
+    "anthropic/claude-desktop/default": 0.3,
+    "anthropic/claude-code-remote/ccr-container": 0.05,
+    "openai/chatgpt-web/default": 0.05,
+    "anthropic/claude-web/connectors-on": 0.7,
+    "github/actions-runner/ci": 0.02,
+    "generic/browser-extension/broad-host-permissions": 0.4,
+    "generic/scheduled-job/service-account": 0.05
+  },
+  "asks_about": "read.message.tenant"
+}

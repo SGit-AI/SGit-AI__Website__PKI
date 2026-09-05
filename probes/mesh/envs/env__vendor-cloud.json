@@ -1,0 +1,7 @@
+{
+  "type": "env/v1",
+  "id": "env:vendor-cloud",
+  "label": "the vendor's own environment",
+  "provided_by": "generic",
+  "note": "the computer doing the work is theirs; you see a page"
+}

@@ -1,0 +1,13 @@
+{
+  "type": "reach/v1",
+  "id": "net:allowlist",
+  "label": "a permitted list of hosts",
+  "family": "network",
+  "exposure": "the list is the boundary, set above the process",
+  "runs_in": [
+    "env:container"
+  ],
+  "governed_by": [
+    "obl:aiuc1-D003.2"
+  ]
+}

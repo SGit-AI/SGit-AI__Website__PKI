@@ -1,0 +1,20 @@
+{
+  "type": "question/v1",
+  "id": "desktop-app",
+  "text": "Is it an app you installed, with its own window?",
+  "help": "Not a browser tab; an application on the desktop.",
+  "class": "discriminating",
+  "reliability": 0.95,
+  "reliability_note": "high: you know where you type",
+  "p_yes": {
+    "anthropic/claude-code/local-default": 0.1,
+    "anthropic/claude-code/local-confirmations-off": 0.1,
+    "anthropic/claude-desktop/default": 0.95,
+    "anthropic/claude-code-remote/ccr-container": 0.05,
+    "openai/chatgpt-web/default": 0.1,
+    "anthropic/claude-web/connectors-on": 0.08,
+    "github/actions-runner/ci": 0.02,
+    "generic/browser-extension/broad-host-permissions": 0.05,
+    "generic/scheduled-job/service-account": 0.02
+  }
+}

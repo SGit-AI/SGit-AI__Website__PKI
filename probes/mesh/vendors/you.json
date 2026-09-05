@@ -1,0 +1,6 @@
+{
+  "type": "vendor/v1",
+  "id": "you",
+  "label": "you (your own machine, your own accounts)",
+  "kind": "the operator"
+}

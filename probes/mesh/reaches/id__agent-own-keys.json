@@ -1,0 +1,11 @@
+{
+  "type": "reach/v1",
+  "id": "id:agent-own-keys",
+  "label": "the agent's own keys",
+  "family": "identity",
+  "exposure": "a signing key and a keystore issued to the session, not to you",
+  "runs_in": [
+    "env:container"
+  ],
+  "governed_by": []
+}

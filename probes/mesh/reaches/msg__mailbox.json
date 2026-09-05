@@ -1,0 +1,14 @@
+{
+  "type": "reach/v1",
+  "id": "msg:mailbox",
+  "label": "your mailbox or chat",
+  "family": "communication",
+  "exposure": "a record once read is exposure that cannot be unread",
+  "runs_in": [
+    "env:vendor-cloud",
+    "env:desktop"
+  ],
+  "governed_by": [
+    "obl:aiuc1-B006.1"
+  ]
+}

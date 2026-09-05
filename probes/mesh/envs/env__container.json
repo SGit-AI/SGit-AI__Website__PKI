@@ -1,0 +1,7 @@
+{
+  "type": "env/v1",
+  "id": "env:container",
+  "label": "an ephemeral container in a vendor's cloud",
+  "provided_by": "anthropic",
+  "note": "the container is the host; your machine is not reachable; the container dies with the session"
+}

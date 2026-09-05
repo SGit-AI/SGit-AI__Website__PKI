@@ -1,0 +1,14 @@
+{
+  "type": "reach/v1",
+  "id": "pub:registries",
+  "label": "package and image registries, under your name",
+  "family": "code",
+  "exposure": "a publish cannot be unpublished from every mirror",
+  "runs_in": [
+    "env:desktop",
+    "env:ci-runner"
+  ],
+  "governed_by": [
+    "obl:aiuc1-E004"
+  ]
+}

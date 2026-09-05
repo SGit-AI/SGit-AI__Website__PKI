@@ -1,0 +1,11 @@
+{
+  "type": "reach/v1",
+  "id": "net:vendor-egress",
+  "label": "the vendor's egress",
+  "family": "network",
+  "exposure": "browsing from the vendor's side; not your network",
+  "runs_in": [
+    "env:vendor-cloud"
+  ],
+  "governed_by": []
+}

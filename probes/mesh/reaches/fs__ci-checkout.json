@@ -1,0 +1,11 @@
+{
+  "type": "reach/v1",
+  "id": "fs:ci-checkout",
+  "label": "the checked-out tree in a CI job",
+  "family": "filesystem",
+  "exposure": "every file at this ref — including anything committed by mistake",
+  "runs_in": [
+    "env:ci-runner"
+  ],
+  "governed_by": []
+}

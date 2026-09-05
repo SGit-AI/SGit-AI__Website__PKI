@@ -1,0 +1,6 @@
+{
+  "type": "vendor/v1",
+  "id": "openai",
+  "label": "OpenAI",
+  "kind": "AI vendor"
+}

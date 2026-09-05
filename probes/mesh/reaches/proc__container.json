@@ -1,0 +1,13 @@
+{
+  "type": "reach/v1",
+  "id": "proc:container",
+  "label": "programs inside the container",
+  "family": "process",
+  "exposure": "root, inside a disposable box",
+  "runs_in": [
+    "env:container"
+  ],
+  "governed_by": [
+    "obl:aiuc1-D003.1"
+  ]
+}

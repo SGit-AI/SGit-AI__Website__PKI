@@ -1,0 +1,21 @@
+{
+  "type": "question/v1",
+  "id": "called-agent",
+  "text": "Would most people call it an AI agent?",
+  "help": "A runner, a cron job or an extension has a grant and no such name.",
+  "class": "discriminating",
+  "reliability": 0.7,
+  "reliability_note": "medium: the word is the point",
+  "p_yes": {
+    "anthropic/claude-code/local-default": 0.9,
+    "anthropic/claude-code/local-confirmations-off": 0.9,
+    "anthropic/claude-desktop/default": 0.85,
+    "anthropic/claude-code-remote/ccr-container": 0.9,
+    "openai/chatgpt-web/default": 0.7,
+    "anthropic/claude-web/connectors-on": 0.8,
+    "github/actions-runner/ci": 0.05,
+    "generic/browser-extension/broad-host-permissions": 0.1,
+    "generic/scheduled-job/service-account": 0.05
+  },
+  "funny": true
+}

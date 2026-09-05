@@ -1,0 +1,20 @@
+{
+  "type": "question/v1",
+  "id": "attached-repo",
+  "text": "Did you attach a repository to a session, rather than open a folder?",
+  "help": "You picked a repo from a list and something cloned it somewhere that is not your laptop.",
+  "class": "discriminating",
+  "reliability": 0.9,
+  "reliability_note": "high: you know where you type",
+  "p_yes": {
+    "anthropic/claude-code/local-default": 0.08,
+    "anthropic/claude-code/local-confirmations-off": 0.08,
+    "anthropic/claude-desktop/default": 0.05,
+    "anthropic/claude-code-remote/ccr-container": 0.92,
+    "openai/chatgpt-web/default": 0.03,
+    "anthropic/claude-web/connectors-on": 0.1,
+    "github/actions-runner/ci": 0.7,
+    "generic/browser-extension/broad-host-permissions": 0.03,
+    "generic/scheduled-job/service-account": 0.1
+  }
+}

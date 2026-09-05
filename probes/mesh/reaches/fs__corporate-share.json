@@ -1,0 +1,14 @@
+{
+  "type": "reach/v1",
+  "id": "fs:corporate-share",
+  "label": "a corporate share",
+  "family": "filesystem",
+  "exposure": "other people's work, and the audit question that follows",
+  "runs_in": [
+    "env:managed-desktop"
+  ],
+  "governed_by": [
+    "obl:aiuc1-B006.1",
+    "obl:aiuc1-E015.3"
+  ]
+}

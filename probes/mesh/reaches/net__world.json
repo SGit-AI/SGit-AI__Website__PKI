@@ -1,0 +1,18 @@
+{
+  "type": "reach/v1",
+  "id": "net:world",
+  "label": "any host on the internet",
+  "family": "network",
+  "exposure": "bytes sent are sent",
+  "runs_in": [
+    "env:desktop",
+    "env:ci-runner",
+    "env:server",
+    "env:wsl",
+    "env:managed-desktop",
+    "env:browser"
+  ],
+  "governed_by": [
+    "obl:aiuc1-D003.2"
+  ]
+}

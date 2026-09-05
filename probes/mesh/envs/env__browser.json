@@ -1,0 +1,7 @@
+{
+  "type": "env/v1",
+  "id": "env:browser",
+  "label": "a browser tab or extension on your machine",
+  "provided_by": "you",
+  "note": "every page you visit, and every site you are logged into, are one permission away"
+}

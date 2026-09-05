@@ -1,0 +1,20 @@
+{
+  "type": "question/v1",
+  "id": "paste-only",
+  "text": "Do you mostly paste things into it and read what comes back?",
+  "help": "It never touches anything of yours unless you paste it.",
+  "class": "discriminating",
+  "reliability": 0.8,
+  "reliability_note": "medium",
+  "p_yes": {
+    "anthropic/claude-code/local-default": 0.08,
+    "anthropic/claude-code/local-confirmations-off": 0.06,
+    "anthropic/claude-desktop/default": 0.4,
+    "anthropic/claude-code-remote/ccr-container": 0.08,
+    "openai/chatgpt-web/default": 0.92,
+    "anthropic/claude-web/connectors-on": 0.55,
+    "github/actions-runner/ci": 0.02,
+    "generic/browser-extension/broad-host-permissions": 0.05,
+    "generic/scheduled-job/service-account": 0.02
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "type": "ontology/v1",
+  "_what_this_is": "The taxonomy the mesh is written in. Every node has one of these node types and every edge one of these edge types, with the direction stated; admin/build/gen_mesh.py refuses an edge whose type is not here or whose ends are not of the stated types. A coarse node is a named set of fine ones and is traversed identically (member-of), which is the fractal test: zooming never changes the format. Reach is a node, not a rung (brief v0.33.65).",
+  "node_types": {
+    "vendor": {
+      "label": "vendor",
+      "means": "who makes or provides the thing",
+      "folder": "probes/mesh/vendors/"
+    },
+    "profile": {
+      "label": "profile",
+      "means": "a named configuration of a product, listing its tools",
+      "folder": "probes/profiles/<vendor>/<product>/"
+    },
+    "tool": {
+      "label": "tool",
+      "means": "one tool inside a profile; the unit of mapping, because two tools in one session reach different things",
+      "folder": "(inside the profile file)"
+    },
+    "family": {
+      "label": "family",
+      "means": "the coarsest grouping of capabilities: filesystem, network, identity…",
+      "folder": "probes/primitives.json (families)"
+    },
+    "capability": {
+      "label": "capability",
+      "means": "verb × object class × reach class, with reversibility — the coarse node",
+      "folder": "probes/primitives.json (capabilities)"
+    },
+    "exposure": {
+      "label": "exposure",
+      "means": "a capability at one reach node — the fine node; the same verb and object at fs:user-home and at fs:container-layer are two exposures",
+      "folder": "(derived from a profile's refine map)"
+    },
+    "reach": {
+      "label": "reach",
+      "means": "where a capability lands: a file system, a network, a credential store, a repository, a scheduler — a node with its own edges, not a rung",
+      "folder": "probes/mesh/reaches/"
+    },
+    "env": {
+      "label": "environment",
+      "means": "where things run: a desktop, a container, a CI runner, a browser, the vendor's cloud",
+      "folder": "probes/mesh/envs/"
+    },
+    "obligation": {
+      "label": "obligation",
+      "means": "a control or article that governs a reach — reached by traversal, and never a compliance finding",
+      "folder": "probes/mesh/obligations/"
+    },
+    "evidence": {
+      "label": "evidence",
+      "means": "a findings/v1 file: probe runs or an operator's account, dated, with a tier",
+      "folder": "probes/evidence/"
+    },
+    "question": {
+      "label": "question",
+      "means": "one question the game asks, with its class, reliability and the capability it asks about",
+      "folder": "probes/mesh/questions/"
+    }
+  },
+  "edge_types": {
+    "made-by": {
+      "from": "profile",
+      "to": "vendor",
+      "means": "the profile is a configuration of this vendor's product"
+    },
+    "runs-in": {
+      "from": [
+        "profile",
+        "reach"
+      ],
+      "to": "env",
+      "means": "runs in, or lives in, this environment"
+    },
+    "provided-by": {
+      "from": "env",
+      "to": "vendor",
+      "means": "the environment is provided by this vendor (or by you)"
+    },
+    "has-tool": {
+      "from": "profile",
+      "to": "tool",
+      "means": "the profile contains this tool"
+    },
+    "reaches": {
+      "from": "tool",
+      "to": "exposure",
+      "means": "the tool can do this, here; attributes carry the control on the path, its tier, the evidence tier and a note"
+    },
+    "at": {
+      "from": "exposure",
+      "to": "reach",
+      "means": "the exposure lands on this reach node"
+    },
+    "member-of": {
+      "from": [
+        "exposure",
+        "capability"
+      ],
+      "to": [
+        "capability",
+        "family"
+      ],
+      "means": "fine is a member of coarse; same shape either way"
+    },
+    "governed-by": {
+      "from": "reach",
+      "to": "obligation",
+      "means": "an obligation that governs this reach — a question worth asking, at the weakest tier"
+    },
+    "evidenced-by": {
+      "from": "tool",
+      "to": "evidence",
+      "means": "the tool's rows are established by this evidence file"
+    },
+    "asks-about": {
+      "from": "question",
+      "to": "capability",
+      "means": "an eliciting question is a prediction about this capability"
+    },
+    "bounded-by": {
+      "from": "exposure",
+      "to": "obligation",
+      "means": "reserved: a control evidenced as the boundary on this exposure (not yet used)"
+    }
+  },
+  "licence": "CC BY 4.0"
+}

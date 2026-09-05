@@ -1,0 +1,13 @@
+{
+  "type": "reach/v1",
+  "id": "sched:platform-routines",
+  "label": "the platform's routines",
+  "family": "schedule",
+  "exposure": "outlives the session, on the platform",
+  "runs_in": [
+    "env:vendor-cloud"
+  ],
+  "governed_by": [
+    "obl:aiuc1-E004"
+  ]
+}

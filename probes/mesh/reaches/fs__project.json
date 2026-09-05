@@ -1,0 +1,15 @@
+{
+  "type": "reach/v1",
+  "id": "fs:project",
+  "label": "the project it was pointed at",
+  "family": "filesystem",
+  "exposure": "the working tree and nothing else",
+  "runs_in": [
+    "env:desktop",
+    "env:container",
+    "env:ci-runner",
+    "env:wsl",
+    "env:managed-desktop"
+  ],
+  "governed_by": []
+}

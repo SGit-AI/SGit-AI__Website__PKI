@@ -1,0 +1,14 @@
+{
+  "type": "reach/v1",
+  "id": "fs:network-mount",
+  "label": "a network mount",
+  "family": "filesystem",
+  "exposure": "whatever is mounted today, which is not a fixed set",
+  "runs_in": [
+    "env:desktop",
+    "env:managed-desktop"
+  ],
+  "governed_by": [
+    "obl:aiuc1-B006.1"
+  ]
+}

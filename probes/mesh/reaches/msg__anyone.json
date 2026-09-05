@@ -1,0 +1,15 @@
+{
+  "type": "reach/v1",
+  "id": "msg:anyone",
+  "label": "anyone, as you",
+  "family": "communication",
+  "exposure": "a message sent is sent",
+  "runs_in": [
+    "env:vendor-cloud",
+    "env:desktop"
+  ],
+  "governed_by": [
+    "obl:aiuc1-D003.1",
+    "obl:aiuc1-E004"
+  ]
+}

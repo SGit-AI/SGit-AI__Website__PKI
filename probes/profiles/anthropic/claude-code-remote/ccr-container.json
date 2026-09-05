@@ -1,6 +1,26 @@
 {
   "type": "profile/v1",
   "id": "anthropic/claude-code-remote/ccr-container",
+  "refine": {
+    "read.file.host": "fs:container-layer",
+    "write.file.host": "fs:container-layer",
+    "delete.file.host": "fs:container-layer",
+    "read.file.project": "fs:project",
+    "write.file.project": "fs:project",
+    "execute.process.host": "proc:container",
+    "send.endpoint.allowed": "net:allowlist",
+    "read.credential.host": "id:agent-own-keys",
+    "authenticate-as.credential.tenant": "id:platform-token",
+    "authenticate-as.credential.signing": "id:agent-own-keys",
+    "write.repository.tenant": [
+      "code:attached-repo",
+      "code:in-scope-repos"
+    ],
+    "write.repository.project": "code:attached-repo",
+    "read.record.history": "rec:session-history",
+    "create.schedule.host": "sched:host-cron",
+    "create.schedule.tenant": "sched:platform-routines"
+  },
   "vendor": "Anthropic",
   "product": "Claude Code on the web (a remote session container)",
   "variant": "ccr-container",
@@ -221,7 +241,7 @@
     "packs/grant-and-mandate/library/claude-code-remote__ccr-container__2026-08-26.json (the same environment, 26 August)"
   ],
   "measured_note": "Three tools, three reaches. The shell and the fetch tool coincide on the network row today; the harness's code-host API tool is the finding: it reaches the repository by a path the clone's hooks never see, so a hook-based control is a control on ONE tool. The 4 September measurement of a sibling container found union seven, intersection one on hosts alone.",
-  "prior": 0.1,
+  "prior": 0.08,
   "union": [
     "authenticate-as.credential.signing",
     "authenticate-as.credential.tenant",

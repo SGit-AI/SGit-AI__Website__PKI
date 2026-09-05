@@ -1,0 +1,14 @@
+{
+  "type": "reach/v1",
+  "id": "web:every-page",
+  "label": "every page you visit",
+  "family": "browser",
+  "exposure": "an extension with broad host permissions reads what you read",
+  "runs_in": [
+    "env:browser"
+  ],
+  "governed_by": [
+    "obl:aiuc1-B006.1",
+    "obl:aiuc1-E015.3"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "type": "reach/v1",
+  "id": "id:connector-token",
+  "label": "a connector you switched on",
+  "family": "identity",
+  "exposure": "a token held by the vendor, scoped as you scoped it",
+  "runs_in": [
+    "env:vendor-cloud"
+  ],
+  "governed_by": [
+    "obl:aiuc1-B006.1"
+  ]
+}

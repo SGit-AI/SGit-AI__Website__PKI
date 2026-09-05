@@ -1,0 +1,20 @@
+{
+  "type": "question/v1",
+  "id": "terminal",
+  "text": "Do you run it in a terminal, on your own machine?",
+  "help": "A command you type, in a shell, on the laptop in front of you.",
+  "class": "discriminating",
+  "reliability": 0.95,
+  "reliability_note": "high: you know where you type",
+  "p_yes": {
+    "anthropic/claude-code/local-default": 0.92,
+    "anthropic/claude-code/local-confirmations-off": 0.92,
+    "anthropic/claude-desktop/default": 0.12,
+    "anthropic/claude-code-remote/ccr-container": 0.1,
+    "openai/chatgpt-web/default": 0.03,
+    "anthropic/claude-web/connectors-on": 0.05,
+    "github/actions-runner/ci": 0.05,
+    "generic/browser-extension/broad-host-permissions": 0.03,
+    "generic/scheduled-job/service-account": 0.15
+  }
+}

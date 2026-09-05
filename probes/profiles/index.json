@@ -47,7 +47,7 @@
         "read.record.history",
         "send.endpoint.allowed"
       ],
-      "prior": 0.1,
+      "prior": 0.08,
       "reach_names": {
         "host": "this container \u2014 ephemeral, the vendor's; not your machine",
         "tenant": "the attached repository and the platform's scoped tokens; not your accounts",
@@ -120,7 +120,7 @@
         "read.record.history",
         "send.endpoint.world"
       ],
-      "prior": 0.15,
+      "prior": 0.14,
       "reach_names": {
         "host": "your machine, as your user account",
         "tenant": "your accounts, with the credentials in your home directory",
@@ -172,7 +172,7 @@
         "read.record.history",
         "send.endpoint.world"
       ],
-      "prior": 0.35,
+      "prior": 0.33,
       "reach_names": {
         "host": "your machine, as your user account",
         "tenant": "your accounts, with the credentials in your home directory",
@@ -265,6 +265,99 @@
         }
       ],
       "path": "profiles/anthropic/claude-web/connectors-on.json"
+    },
+    {
+      "id": "generic/browser-extension/broad-host-permissions",
+      "vendor": "generic",
+      "product": "A browser extension with broad host permissions",
+      "variant": "broad-host-permissions",
+      "surface": "extension",
+      "version": "2026-09-05",
+      "description": "Not an agent by name, and it has a grant: an extension granted 'read and change all your data on all websites' reads every page you visit, reaches any host, and acts inside the sites you are logged into. Nobody wrote it a mandate. DERIVED from the permission model the browser documents; not measured on any instance.",
+      "measured": false,
+      "tools": [
+        "the extension"
+      ],
+      "union": [
+        "authenticate-as.credential.tenant",
+        "read.record.browsing",
+        "send.endpoint.world"
+      ],
+      "intersection": [
+        "authenticate-as.credential.tenant",
+        "read.record.browsing",
+        "send.endpoint.world"
+      ],
+      "irreversible_in_union": [
+        "authenticate-as.credential.tenant",
+        "read.record.browsing",
+        "send.endpoint.world"
+      ],
+      "prior": 0.03,
+      "reach_names": {
+        "host": "your browser \u2014 every page, every logged-in site",
+        "tenant": "the sites you are logged into, as you",
+        "world": "the internet, from your browser"
+      },
+      "not_reachable": [
+        {
+          "what": "files on your disk",
+          "why": "the browser sandbox; an extension reads pages, not the filesystem",
+          "source": "the browser's extension permission model"
+        }
+      ],
+      "path": "profiles/generic/browser-extension/broad-host-permissions.json"
+    },
+    {
+      "id": "generic/scheduled-job/service-account",
+      "vendor": "generic",
+      "product": "A scheduled job running as a service account",
+      "variant": "service-account",
+      "surface": "service",
+      "version": "2026-09-05",
+      "description": "A cron job or scheduled task on a server, under an account that is not a person's, with a credential nobody rotates. It runs when nobody is watching and no person's judgement stands in front of it. DERIVED; not measured on any instance.",
+      "measured": false,
+      "tools": [
+        "the job"
+      ],
+      "union": [
+        "authenticate-as.credential.tenant",
+        "create.schedule.host",
+        "execute.process.host",
+        "read.file.host",
+        "send.endpoint.world",
+        "write.budget.tenant",
+        "write.file.host"
+      ],
+      "intersection": [
+        "authenticate-as.credential.tenant",
+        "create.schedule.host",
+        "execute.process.host",
+        "read.file.host",
+        "send.endpoint.world",
+        "write.budget.tenant",
+        "write.file.host"
+      ],
+      "irreversible_in_union": [
+        "authenticate-as.credential.tenant",
+        "read.file.host",
+        "send.endpoint.world",
+        "write.budget.tenant"
+      ],
+      "prior": 0.02,
+      "reach_names": {
+        "host": "the server it runs on, as the service account",
+        "tenant": "whatever the service account's credential opens",
+        "world": "the internet, from the server"
+      },
+      "not_reachable": [
+        {
+          "what": "your machine",
+          "why": "it runs on a server",
+          "source": "by construction"
+        }
+      ],
+      "path": "profiles/generic/scheduled-job/service-account.json"
     },
     {
       "id": "github/actions-runner/ci",

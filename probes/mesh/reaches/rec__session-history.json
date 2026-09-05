@@ -1,0 +1,13 @@
+{
+  "type": "reach/v1",
+  "id": "rec:session-history",
+  "label": "the session's own retained record",
+  "family": "filesystem",
+  "exposure": "this session's earlier tool outputs, inside the container",
+  "runs_in": [
+    "env:container"
+  ],
+  "governed_by": [
+    "obl:aiuc1-E015.3"
+  ]
+}

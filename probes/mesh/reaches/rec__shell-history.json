@@ -1,0 +1,15 @@
+{
+  "type": "reach/v1",
+  "id": "rec:shell-history",
+  "label": "your shell history and past transcripts",
+  "family": "filesystem",
+  "exposure": "every earlier session's reach, exposed again",
+  "runs_in": [
+    "env:desktop",
+    "env:wsl",
+    "env:managed-desktop"
+  ],
+  "governed_by": [
+    "obl:aiuc1-E015.3"
+  ]
+}

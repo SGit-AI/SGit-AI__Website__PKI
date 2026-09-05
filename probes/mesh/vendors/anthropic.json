@@ -1,0 +1,6 @@
+{
+  "type": "vendor/v1",
+  "id": "anthropic",
+  "label": "Anthropic",
+  "kind": "AI vendor"
+}

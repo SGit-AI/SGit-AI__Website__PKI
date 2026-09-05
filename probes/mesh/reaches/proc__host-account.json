@@ -1,0 +1,15 @@
+{
+  "type": "reach/v1",
+  "id": "proc:host-account",
+  "label": "programs as your user account, on your machine",
+  "family": "process",
+  "exposure": "anything you could run",
+  "runs_in": [
+    "env:desktop",
+    "env:wsl",
+    "env:managed-desktop"
+  ],
+  "governed_by": [
+    "obl:aiuc1-D003.1"
+  ]
+}

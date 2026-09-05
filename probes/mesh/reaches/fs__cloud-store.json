@@ -1,0 +1,13 @@
+{
+  "type": "reach/v1",
+  "id": "fs:cloud-store",
+  "label": "a cloud drive you connected",
+  "family": "filesystem",
+  "exposure": "a different blast radius and a different regulator",
+  "runs_in": [
+    "env:vendor-cloud"
+  ],
+  "governed_by": [
+    "obl:aiuc1-B006.1"
+  ]
+}

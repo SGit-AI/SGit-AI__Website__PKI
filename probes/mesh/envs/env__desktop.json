@@ -1,0 +1,7 @@
+{
+  "type": "env/v1",
+  "id": "env:desktop",
+  "label": "your desktop or laptop, as your user account",
+  "provided_by": "you",
+  "note": "everything your account can open is one process away"
+}

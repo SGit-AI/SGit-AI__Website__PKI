@@ -1,0 +1,13 @@
+{
+  "type": "reach/v1",
+  "id": "code:in-scope-repos",
+  "label": "the repositories the platform lists as in scope",
+  "family": "code",
+  "exposure": "by API, under the platform's token — a path the clone's hooks never see",
+  "runs_in": [
+    "env:container"
+  ],
+  "governed_by": [
+    "obl:aiuc1-D003.1"
+  ]
+}

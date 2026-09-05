@@ -1,0 +1,14 @@
+{
+  "type": "reach/v1",
+  "id": "id:platform-token",
+  "label": "a platform-scoped token",
+  "family": "identity",
+  "exposure": "acts as the platform's app, scoped to what the platform lists",
+  "runs_in": [
+    "env:container",
+    "env:ci-runner"
+  ],
+  "governed_by": [
+    "obl:aiuc1-D003.1"
+  ]
+}

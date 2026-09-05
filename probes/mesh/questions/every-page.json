@@ -1,0 +1,21 @@
+{
+  "type": "question/v1",
+  "id": "every-page",
+  "text": "Can it see every page you visit?",
+  "help": "A broad host permission — 'read and change all your data on all websites'.",
+  "class": "eliciting",
+  "reliability": 0.4,
+  "reliability_note": "low-medium: the permission was granted at install and not read",
+  "p_yes": {
+    "anthropic/claude-code/local-default": 0.03,
+    "anthropic/claude-code/local-confirmations-off": 0.03,
+    "anthropic/claude-desktop/default": 0.05,
+    "anthropic/claude-code-remote/ccr-container": 0.03,
+    "openai/chatgpt-web/default": 0.03,
+    "anthropic/claude-web/connectors-on": 0.1,
+    "github/actions-runner/ci": 0.02,
+    "generic/browser-extension/broad-host-permissions": 0.92,
+    "generic/scheduled-job/service-account": 0.03
+  },
+  "asks_about": "read.record.browsing"
+}

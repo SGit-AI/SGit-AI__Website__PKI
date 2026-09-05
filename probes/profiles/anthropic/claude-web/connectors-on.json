@@ -1,6 +1,13 @@
 {
   "type": "profile/v1",
   "id": "anthropic/claude-web/connectors-on",
+  "refine": {
+    "read.file.project": "fs:uploads",
+    "read.file.host": "fs:cloud-store",
+    "write.repository.tenant": "code:any-repo-of-yours",
+    "authenticate-as.credential.tenant": "id:connector-token",
+    "read.message.tenant": "msg:mailbox"
+  },
   "reach_names": {
     "host": "what the drive connector is scoped to; not your machine",
     "tenant": "the accounts you connected, as you scoped them",

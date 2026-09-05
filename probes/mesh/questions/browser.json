@@ -1,0 +1,20 @@
+{
+  "type": "question/v1",
+  "id": "browser",
+  "text": "Do you use it in a browser tab?",
+  "help": "The product's own website, not a terminal and not an installed app.",
+  "class": "discriminating",
+  "reliability": 0.95,
+  "reliability_note": "high: you know where you type",
+  "p_yes": {
+    "anthropic/claude-code/local-default": 0.08,
+    "anthropic/claude-code/local-confirmations-off": 0.08,
+    "anthropic/claude-desktop/default": 0.1,
+    "anthropic/claude-code-remote/ccr-container": 0.85,
+    "openai/chatgpt-web/default": 0.95,
+    "anthropic/claude-web/connectors-on": 0.95,
+    "github/actions-runner/ci": 0.05,
+    "generic/browser-extension/broad-host-permissions": 0.6,
+    "generic/scheduled-job/service-account": 0.03
+  }
+}

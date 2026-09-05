@@ -1,0 +1,21 @@
+{
+  "type": "question/v1",
+  "id": "other-files",
+  "text": "Can it read files on your machine that are not the project?",
+  "help": "Your documents, your dotfiles — anything your own account can open.",
+  "class": "eliciting",
+  "reliability": 0.35,
+  "reliability_note": "low: almost nobody knows, so this answer barely moves the belief and fully counts toward the gap",
+  "p_yes": {
+    "anthropic/claude-code/local-default": 0.88,
+    "anthropic/claude-code/local-confirmations-off": 0.9,
+    "anthropic/claude-desktop/default": 0.8,
+    "anthropic/claude-code-remote/ccr-container": 0.08,
+    "openai/chatgpt-web/default": 0.04,
+    "anthropic/claude-web/connectors-on": 0.45,
+    "github/actions-runner/ci": 0.08,
+    "generic/browser-extension/broad-host-permissions": 0.1,
+    "generic/scheduled-job/service-account": 0.3
+  },
+  "asks_about": "read.file.host"
+}
