@@ -1,0 +1,10 @@
+{
+ "at": "2026-09-05T23:59:00+00:00",
+ "by": "the project lead",
+ "decision": "accept",
+ "id": "2026-09-05T23-59-00Z__29bdcb6f",
+ "note": "5 September, in chat: the brief v0.33.65 and the memo on the game's shape. The v0.1.72 push, notified under r4, accepted in the project lead's words.",
+ "request": "2026-09-05T23-58-39Z__54adea8a",
+ "test": false,
+ "type": "decision/v1"
+}
