@@ -1,0 +1,10 @@
+{
+ "at": "2026-09-05T21:39:49+00:00",
+ "by": "the project lead",
+ "decision": "accept",
+ "id": "2026-09-05T21-39-49Z__851cae9a",
+ "note": "5 September, in chat: 'Yes please push, accept these changes (also for now you can relax this rules as just for notification)'. The same acceptance as 2026-09-05T19-20-19Z__a872a807; the reading moved because the acceptance's own paperwork was committed before the push (IE-C5). Notified, not enforced (r4).",
+ "request": "2026-09-05T21-38-58Z__ea7656ec",
+ "test": false,
+ "type": "decision/v1"
+}
