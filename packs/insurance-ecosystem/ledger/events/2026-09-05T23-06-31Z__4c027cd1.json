@@ -1,0 +1,28 @@
+{
+ "acceptor": null,
+ "amount": 5165611,
+ "at": "2026-09-05T23:06:31+00:00",
+ "day": "2026-09-05",
+ "drawn": 0,
+ "enforcement": "notify",
+ "id": "2026-09-05T23-06-31Z__4c027cd1",
+ "level": 3,
+ "point": "pre-push",
+ "policy": "git-pilot-2026-09-03-r4",
+ "policyholder": "the pki.sgit.ai estate",
+ "pool_left": 3774873,
+ "reason": "5,165,611 B is over the per-occurrence limit of 1,048,576 B \u2014 an EXCLUSION",
+ "ref": {
+  "blobs": 257,
+  "branch": "dev",
+  "head": "27b1f352ce8b",
+  "remote": "origin"
+ },
+ "rules_version": "insurance-ecosystem/draft-1",
+ "subject": "session:unknown@vm",
+ "test": false,
+ "type": "event/v1",
+ "unit": "bytes_per_push",
+ "verdict": "refused",
+ "zone": "outside"
+}

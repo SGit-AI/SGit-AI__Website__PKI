@@ -1,0 +1,10 @@
+{
+ "at": "2026-09-05T23:06:49+00:00",
+ "by": "the project lead",
+ "decision": "accept",
+ "id": "2026-09-05T23-06-49Z__148d3fdc",
+ "note": "5 September, in chat: 'Ok, and yes can you do these changes now'. The v0.1.71 push, notified under r4, accepted in the project lead's words.",
+ "request": "2026-09-05T23-06-31Z__99c5b37f",
+ "test": false,
+ "type": "decision/v1"
+}
