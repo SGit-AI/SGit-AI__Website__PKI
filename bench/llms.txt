@@ -5,7 +5,7 @@
 # collected demonstrations without their limits would manufacture the false
 # assurance this site exists to argue against.
 #
-# 13 of 14 are built and running. Hub: https://pki.sgit.ai/bench/index.html
+# 16 of 17 are built and running. Hub: https://pki.sgit.ai/bench/index.html
 
 ## The register — live
   where     https://pki.sgit.ai/registry/index.html
@@ -145,6 +145,39 @@
     - That a participant's account can be neutral. The mitigations are real and are not independence: the strongest bias in such an account is not what it says but what it thinks to check, and there is no way for the writer to know what it did not think to run
     - That the estate is mature enough to deserve a book — two environments, one agent, one mandate, a fixture root, and one outside reader in its entire history, whose single pass produced half the open contradictions in chapter 15
     - That any of this is needed. Nobody outside the project has been asked, which the estate's own doctrine appendix rates a Phase I hole rather than a nice-to-have
+
+## Probes, not tables (the capability registry) — live
+  where     https://pki.sgit.ai/probes/index.html
+  code      probes/ (primitives.json, probes.json, run.py, schema/, profiles/, evidence/, incidents/, reductions.json), admin/build/gen_probes.py
+  since     v0.1.69 (last moved v0.1.69)
+  is        A registry of capability primitives (verb × object × reach + reversible) and measured grants where a grant claim never travels alone: it points at the probe that established it, the date, the environment and the output, so a challenge is a rerun rather than an argument. A runner that emits findings/v1 in OpenSSF Scorecard's probe/finding shape plus reversibility and tier; seven profiles, two of them measured; grants public, mandates private.
+  DOES NOT PROVE:
+    - Independence. Every evidence file was produced by the environment it describes — the weakest tier the model has, and stated on every file
+    - Completeness. A self-run probe reports what the subject can see; a capability it does not know it has will not appear. A floor, not a census
+    - That a derived profile is true of any instance. Five of the seven are reasoned from what a surface architecturally is; no probe has been run on them
+    - That the primitive set is right: a starting set, wrong at the edges from the first week by its own admission
+
+## What you authorised and never asked for — live
+  where     https://pki.sgit.ai/authorised/index.html
+  code      authorised/ (index.html, app.js, README.md), assets/authorised.css
+  since     v0.1.69 (last moved v0.1.69)
+  is        A self-assessment that runs in the browser: name your tools, the grant appears from measurements other people contributed, four questions about work produce the mandate, and the gap is rendered with the irreversible rows first and the reduction on the same screen. The verdict is a statement, not a grade; the tier is on the result; the counts-only tuple is shown and never sent.
+  DOES NOT PROVE:
+    - Anything about the visitor's environment. It matched profiles from answers, or read a file the visitor brought; it saw nothing itself
+    - That the gap is a loss. It is authorised, and most of it is harmless most days; the irreversible rows decide
+    - That the questionnaire is the mandate. Twelve purposes and ten exclusions are coarse; the full elicitation is an agent asking in the person's own words
+    - Calibration. No surprise count exists for any assessment made here; the validity test is stated, not passed
+
+## Guess the agent — live
+  where     https://pki.sgit.ai/guess/index.html
+  code      guess/ (index.html, app.js, tree.json, selftest.json), admin/build/gen_guess.py
+  since     v0.1.69 (last moved v0.1.69)
+  is        A guessing game whose output is a measurement: cheap questions with obvious answers, ordinary decision-tree induction over a belief across the public profiles, a prediction step before the reveal, and the prediction gap with the reduction on one screen. Deterministic, in the browser, the path always shown, nothing sent.
+  DOES NOT PROVE:
+    - Anything about the player's environment. It matched a profile from self-reported answers, the weakest tier available, and produced a hypothesis, not a measurement
+    - That the tree is right. Seven profiles, fifteen questions, probabilities estimated by the author on one day and answered by nobody yet
+    - That a small gap is safety. Predicting the grant correctly does not narrow it
+    - Anything at scale: no tuple has been submitted, and the aggregate is empty
 
 ## Synthetic readers — specified
   where     https://pki.sgit.ai/packs/map-your-case/readers/index.html

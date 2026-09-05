@@ -315,6 +315,79 @@ BENCH = [
          "the caption gate — every figure must carry a caption saying what to notice, never merely what the image is of"],
   code="book/, book/content/, book/shots/, book/build.py"),
 
+ dict(slug="probes", name="Probes, not tables (the capability registry)", state="live",
+  where="../probes/index.html", since="v0.1.69", updated="v0.1.69",
+  origin=("<a href='../documents/probes-not-tables.html'>brief v0.33.64 (probes, not tables)</a>, with the vocabulary "
+          "corrected the same day by <a href='../documents/the-precedents.html'>the precedents brief</a>"),
+  one_line="A registry of capability primitives (verb &times; object &times; reach + reversible) and measured grants where a "
+           "grant claim never travels alone: it points at the probe that established it, the date, the environment and the "
+           "output, so a challenge is a rerun rather than an argument. A runner that emits <code>findings/v1</code> in OpenSSF "
+           "Scorecard's probe/finding shape plus reversibility and tier; seven profiles, two of them measured; grants public, "
+           "mandates private.",
+  demonstrates=[
+    "<b>The probe as the unit of contribution</b> &mdash; fourteen probes, twelve safe to run and two described and never run, each with the command and how to read it",
+    "<b>The grant is per tool, not per product</b> &mdash; this container's shell and its fetch tool measured separately on 5 September, union and intersection reported",
+    "<b>A finding shape adopted, not minted</b> &mdash; Scorecard's probe, message, outcome, remediation and location, plus the two fields this subject needs",
+    "<b>A row without evidence is visibly a claim</b> &mdash; the five derived profiles say so on the page, the manifest and llms.txt",
+    "<b>An incident that demotes</b> &mdash; the 26 August hook, claimed inline and shown to be a setting, as the first record",
+    "The diff between two profiles, in the browser: the same assistant with confirmations on and off differs in one control"],
+  does_not_prove=[
+    "<b>Independence.</b> Every evidence file was produced by the environment it describes &mdash; the weakest tier the model has, and stated on every file",
+    "<b>Completeness.</b> A self-run probe reports what the subject can see; a capability it does not know it has will not appear. A floor, not a census",
+    "<b>That a derived profile is true of any instance.</b> Five of the seven are reasoned from what a surface architecturally is; no probe has been run on them",
+    "That the primitive set is right: a starting set, wrong at the edges from the first week by its own admission"],
+  gates=["<code>gen_probes.py</code>: every probe establishes only capabilities that exist and every capability is established by at least one probe; every profile's union and intersection are recomputed from its tools' grants; a row at a measured tier must point at an evidence file holding a True finding for it; every irreversible capability has a reduction",
+         "<code>probes/run.py validate</code> on every evidence file: shape, ids, reversibility copied from the primitive, presence-only size",
+         "the site's key-leak tripwire, over the evidence files too"],
+  code="probes/ (primitives.json, probes.json, run.py, schema/, profiles/, evidence/, incidents/, reductions.json), admin/build/gen_probes.py"),
+
+ dict(slug="authorised", name="What you authorised and never asked for", state="live",
+  where="../authorised/index.html", since="v0.1.69", updated="v0.1.69",
+  origin=("<a href='../documents/name-the-question.html'>brief v0.33.64 (name the question, not the concept)</a> and "
+          "<a href='../documents/the-precedents.html'>the precedents</a>"),
+  one_line="A self-assessment that runs in the browser: name your tools, the grant appears from measurements other people "
+           "contributed, four questions about work produce the mandate, and the gap is rendered with the irreversible rows first "
+           "and the reduction on the same screen. The verdict is a statement, not a grade; the tier is on the result; the "
+           "counts-only tuple is shown and never sent.",
+  demonstrates=[
+    "<b>Value arrives at step three</b> &mdash; before the visitor has typed anything about themselves",
+    "<b>The site cannot scan you, and says so</b> &mdash; nothing leaves the tab; the measurement runs where the agent lives, and a <code>findings/v1</code> file can be brought in",
+    "<b>A falsifiable assessment</b> &mdash; a surprise is an action outside the grant, so the surprise count is the validity test",
+    "<b>The reduction on the same screen as the gap</b>, ticking one moves the verdict",
+    "<b>The assessment expires</b> &mdash; dated, pinned to profile versions, stale when a vendor moves a default",
+    "The public phrase is a sentence: every coined noun tested collided or needed explaining"],
+  does_not_prove=[
+    "<b>Anything about the visitor's environment.</b> It matched profiles from answers, or read a file the visitor brought; it saw nothing itself",
+    "<b>That the gap is a loss.</b> It is authorised, and most of it is harmless most days; the irreversible rows decide",
+    "<b>That the questionnaire is the mandate.</b> Twelve purposes and ten exclusions are coarse; the full elicitation is an agent asking in the person's own words",
+    "<b>Calibration.</b> No surprise count exists for any assessment made here; the validity test is stated, not passed"],
+  gates=["the arithmetic is <code>app.js</code> and the rows are the profiles' &mdash; no number on the page is typed",
+         "the reductions gate in <code>gen_probes.py</code>: every irreversible row in a gap has a way out",
+         "no endpoint exists: there is nothing on the page that can send"],
+  code="authorised/ (index.html, app.js, README.md), assets/authorised.css"),
+
+ dict(slug="guess-the-agent", name="Guess the agent", state="live",
+  where="../guess/index.html", since="v0.1.69", updated="v0.1.69",
+  origin="<a href='../documents/guess-the-agent.html'>brief v0.33.64 (guess the agent)</a>, build-order steps 1 to 5",
+  one_line="A guessing game whose output is a measurement: cheap questions with obvious answers, ordinary decision-tree "
+           "induction over a belief across the public profiles, a prediction step before the reveal, and the prediction gap "
+           "with the reduction on one screen. Deterministic, in the browser, the path always shown, nothing sent.",
+  demonstrates=[
+    "<b>The burden inverted</b> &mdash; fifteen questions people can actually answer, instead of an enumeration nobody can make",
+    "<b>The next question splits the belief most evenly</b>, and answers update rather than prune; a wrong answer is recoverable",
+    "<b>The prediction step is the instrument</b> &mdash; the gap between what was predicted and what the tree found is the finding",
+    "<b>The tree is public and self-tested</b> &mdash; every profile placed from its own modal answers, the count derived at build",
+    "<b>The naming collision caught</b> &mdash; a prediction gap, never a surprise",
+    "An honest <i>not in the set</i> when no profile dominates, which is a finding rather than a failure"],
+  does_not_prove=[
+    "<b>Anything about the player's environment.</b> It matched a profile from self-reported answers, the weakest tier available, and produced a hypothesis, not a measurement",
+    "<b>That the tree is right.</b> Seven profiles, fifteen questions, probabilities estimated by the author on one day and answered by nobody yet",
+    "<b>That a small gap is safety.</b> Predicting the grant correctly does not narrow it",
+    "Anything at scale: no tuple has been submitted, and the aggregate is empty"],
+  gates=["<code>gen_guess.py</code>: every question carries an expected answer for every profile in the manifest and no other; every profile is placed by its own modal answers within the budget, or the build fails",
+         "the model-assisted fallback is deliberately absent: never a model in front of an arithmetic step"],
+  code="guess/ (index.html, app.js, tree.json, selftest.json), admin/build/gen_guess.py"),
+
  dict(slug="synthetic-readers", name="Synthetic readers", state="specified",
   where="../packs/map-your-case/readers/index.html", since="v0.1.23", updated="v0.1.24",
   origin="the Map Your Case pack, document 08",

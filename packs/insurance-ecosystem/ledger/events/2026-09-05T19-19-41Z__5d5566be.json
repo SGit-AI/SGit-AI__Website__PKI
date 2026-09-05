@@ -1,0 +1,24 @@
+{
+ "acceptor": "the pki.sgit.ai estate",
+ "amount": 487524,
+ "at": "2026-09-05T19:19:41+00:00",
+ "day": "2026-09-05",
+ "drawn": 282724,
+ "id": "2026-09-05T19-19-41Z__5d5566be",
+ "level": 3,
+ "point": "pre-commit",
+ "policy": "git-pilot-2026-09-03-r3",
+ "policyholder": "the pki.sgit.ai estate",
+ "pool_left": 3345137,
+ "reason": "282,724 B drawn from today's pool (3,345,137 B left)",
+ "ref": {
+  "blobs": 10,
+  "branch": "claude/registry-mvp-brief-hpbap8"
+ },
+ "rules_version": "insurance-ecosystem/draft-1",
+ "subject": "session:unknown@vm",
+ "test": false,
+ "type": "event/v1",
+ "unit": "bytes_per_commit",
+ "verdict": "drawn"
+}

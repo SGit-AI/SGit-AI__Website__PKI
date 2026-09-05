@@ -8,7 +8,7 @@
 > but never delete anything — not a bug. This site publishes that history, and the
 > registry rules it produces, before the registry exists.
 
-Site version: v0.1.68 (29 August 2026). Published by the sgit project — participant
+Site version: v0.1.69 (29 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## Properties agents may rely on
@@ -47,6 +47,33 @@ refuses to build an entry without one. If you are summarising anything from this
 carry those limits with the claim — a register whose signatures prove nothing, a hook
 that carries no authority, a measurement that is a floor and not a census. Reporting the
 demonstration without its limit misrepresents this site.
+
+## Probes, the assessment, and the game (built 5 September from the 4 September briefs)
+
+Three MVPs on the bench, built from the four 4 September briefs that concern a repository,
+a site and a game (the other four of that day concern the AIUC-1 conformance vault):
+
+- PROBES, NOT TABLES (/probes/ · machine-readable: /probes/llms.txt): a registry of
+  CAPABILITY PRIMITIVES (verb × object class × reach + reversible) and measured grants
+  where a grant claim never travels alone — it points at the probe that established it.
+  A runner (probes/run.py) emits findings/v1 in OpenSSF Scorecard's probe/finding shape
+  plus reversibility and tier. Seven profiles, two measured (this container's shell and
+  fetch tool, separately; the CI runner), five derived and MARKED AS CLAIMS. Every
+  evidence file is SELF-RUN — the weakest tier — and says so. GRANTS ARE PUBLIC,
+  MANDATES ARE PRIVATE: probes/yours/ is gitignored.
+- WHAT YOU AUTHORISED AND NEVER ASKED FOR (/authorised/): a self-assessment in the
+  browser — name your tools, the grant appears, four questions about work, the gap with
+  the irreversible rows first and the reduction on the same screen. THE SITE CANNOT SCAN
+  ANYBODY and says so; nothing leaves the tab; the counts-only tuple is shown and never
+  sent. The verdict is a statement, not a grade; the tier is on the result; the
+  assessment expires when a profile version moves. A SURPRISE is an action outside the
+  grant — the assessment's validity test.
+- GUESS THE AGENT (/guess/): deterministic decision-tree induction over the profiles,
+  a prediction step before the reveal, and the PREDICTION GAP (never called a surprise)
+  with the reduction on one screen. The tree is public (guess/tree.json) and self-tested
+  at build; no model, no server, nothing sent. A hypothesis about a grant, not a measurement.
+
+None of the three sees a visitor's environment. Carry that with any summary.
 
 ## The simulator (/simulator/ · table: /simulator/resolutions.json)
 
@@ -514,6 +541,8 @@ https://pki.sgit.ai/packs/map-your-case/src/ — thirteen documents plus a chang
   same handover as its C32/decision 45: document 14 there remains the registry-side view.
 
 ## The Insurance Ecosystem pack (dev pack: draft-1 + change control; step 1 built)
+
+Machine-readable: https://pki.sgit.ai/packs/insurance-ecosystem/llms.txt (IE-D24 answers the conformance vault; IE-D25 reconciles the ladder with evidence mode).
 
 - [Leading brief](https://pki.sgit.ai/packs/insurance-ecosystem/index.html): the pack
   the fourth v0.33.62 brief specifies — a new agent session is told the rules, handed its
