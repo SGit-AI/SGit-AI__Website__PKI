@@ -191,7 +191,7 @@ page = f'''<!doctype html>
 <div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="../bench/index.html">the bench</a> / <a href="index.html">which agent is it?</a> / the sources of truth</div>
 <p class="kicker">RiskMandate.ai &middot; which agent is it?</p>
 <h1>The sources of truth</h1>
-<nav class="subnav"><a href="index.html">Play</a><a href="graph.html">The mesh</a><a href="report.html">Report</a><a class="here" href="data.html">Sources &amp; corrections</a><a href="../probes/index.html">The probes</a></nav>
+<nav class="subnav"><a href="index.html">Play</a><a href="graph.html">The mesh</a><a href="report.html">Report</a><a class="here" href="data.html">Sources &amp; corrections</a><a href="prompt.html">Build your own</a><a href="../probes/index.html">The probes</a></nav>
 <p class="lead">Every node in the mesh is a file, in a folder named for what it is, and every edge is typed by one ontology. The game, the graph and the report are compiled from these files with gates, so <b>a correction is an edit</b>: change the file, open a pull request, and the next build carries it. Nothing on the play screen is typed by hand.</p>
 <div class="verdict-strip">
   <div><span class="n">{len(nodes)}</span><span class="k">nodes, {len(edges)} typed edges</span></div>

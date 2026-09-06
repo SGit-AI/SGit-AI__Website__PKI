@@ -369,7 +369,7 @@ BENCH = [
   code="authorised/ (index.html, app.js, README.md), assets/authorised.css"),
 
  dict(slug="guess-the-agent", name="Which Agent Is It? (the game)", state="live",
-  where="../guess/index.html", since="v0.1.69", updated="v0.1.72",
+  where="../guess/index.html", since="v0.1.69", updated="v0.1.73",
   origin="<a href='../documents/guess-the-agent.html'>brief v0.33.64 (guess the agent)</a>, build-order steps 1 to 5",
   one_line="Named for the question a person has (working title <i>guess the agent</i>). A guessing game whose output is a measurement: cheap questions with obvious answers, ordinary decision-tree "
            "induction over a belief across the public profiles, a prediction step before the reveal, and the prediction gap "
@@ -385,7 +385,8 @@ BENCH = [
     "<b>Two question classes and a reliability per question</b> &mdash; identifying questions never count toward the gap; a low-reliability answer barely moves the belief and fully counts toward it",
     "<b>The gap collected throughout</b> &mdash; per-capability disagreements with their reach node and reversibility, and the end-of-game prediction kept for the sense of scale",
     "<b>The inspector</b>: asserted, inferred and possible in three treatments never mixed, on by default; every row links to its source file",
-    "<b>Demo mode</b> plays a profile's own modal answers step by step or end to end; <a href='../guess/report.html'>the report</a> puts a run on one page"],
+    "<b>Demo mode</b> plays a profile's own modal answers step by step or end to end; <a href='../guess/report.html'>the report</a> puts a run on one page",
+    "<b>Build your own</b> &mdash; <a href='../guess/prompt.html'>a prompt pack</a> an agent is pointed at: twelve rules that are not its to change, everything else its own; a plan first, then the build, as a folder under <code>guess/variants/</code>"],
   does_not_prove=[
     "<b>Anything about the player's environment.</b> It matched a profile from self-reported answers, the weakest tier available, and produced a hypothesis, not a measurement",
     "<b>That the tree is right.</b> Seven profiles, fifteen questions, probabilities estimated by the author on one day and answered by nobody yet",

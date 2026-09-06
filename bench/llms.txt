@@ -171,7 +171,7 @@
 ## Which Agent Is It? (the game) — live
   where     https://pki.sgit.ai/guess/index.html
   code      guess/ (engine.js, app.js, graph.js, report.js, index.html, graph.html, report.html, data.html, tree.json, selftest.json), probes/mesh/, admin/build/gen_mesh.py, admin/build/gen_guess.py
-  since     v0.1.69 (last moved v0.1.72)
+  since     v0.1.69 (last moved v0.1.73)
   is        Named for the question a person has (working title guess the agent). A guessing game whose output is a measurement: cheap questions with obvious answers, ordinary decision-tree induction over a belief across the public profiles, a prediction step before the reveal, and the prediction gap with the reduction on one screen. Deterministic, in the browser, the path always shown, nothing sent.
   DOES NOT PROVE:
     - Anything about the player's environment. It matched a profile from self-reported answers, the weakest tier available, and produced a hypothesis, not a measurement

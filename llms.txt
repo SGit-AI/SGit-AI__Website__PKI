@@ -8,7 +8,7 @@
 > but never delete anything — not a bug. This site publishes that history, and the
 > registry rules it produces, before the registry exists.
 
-Site version: v0.1.72 (29 August 2026). Published by the sgit project — participant
+Site version: v0.1.73 (29 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## Properties agents may rely on
@@ -84,7 +84,9 @@ a site and a game (the other four of that day concern the AIUC-1 conformance vau
   already predictions, each with a RELIABILITY — a low-reliability answer barely moves the
   belief and fully counts toward the gap. The inspector keeps ASSERTED, INFERRED and
   POSSIBLE apart. Demo mode (/guess/index.html?demo=random); the report (/guess/report.html);
-  the sources and how to correct a mapping (/guess/data.html).
+  the sources and how to correct a mapping (/guess/data.html). BUILD YOUR OWN: a prompt pack
+  for an agent at /guess/prompt.md (page: /guess/prompt.html) — twelve rules that are not
+  the agent's to change, everything else is; step one is a plan for review, step two the build.
 
 None of the three sees a visitor's environment. Carry that with any summary.
 

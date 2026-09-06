@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>The report &mdash; one page with the answer, the clues, the gap with its reach, the grant, the graph and the sources &middot; pki.sgit.ai</title>
-<meta name="description" content="A run of Which Agent Is It? on one page: the answer and its confidence, the clues with their class and reliability, asserted and inferred kept apart, the specific gap per capability with its reach node, the sense of scale, the grant as a graph, what it cannot reach, the obligations worth checking, and the sources. Print view.">
-<link rel="canonical" href="https://pki.sgit.ai/guess/report.html">
-<meta property="og:url" content="https://pki.sgit.ai/guess/report.html">
+<title>Build your own &mdash; a prompt pack that asks an agent to design and build its own Which Agent Is It? &middot; pki.sgit.ai</title>
+<meta name="description" content="Hand one link to an agent — Claude, ChatGPT, Cursor, any other — and it designs its own version of the game: its idea, its style, its interface, its technology, within twelve rules that are not its to change. Step one is a plan you review; step two is the build.">
+<link rel="canonical" href="https://pki.sgit.ai/guess/prompt.html">
+<meta property="og:url" content="https://pki.sgit.ai/guess/prompt.html">
 <link rel="stylesheet" href="../assets/site.css">
 <link rel="stylesheet" href="../assets/authorised.css">
 </head>
@@ -53,7 +53,7 @@
       <a class="sl" href="../authorised/index.html">&#9679; What you authorised and never asked for</a>
       <a class="sl" href="../guess/index.html">&#9679; Which agent is it?</a>
       <a class="sl" href="../guess/graph.html">&mdash; the mesh, start anywhere</a>
-      <a class="sl here" href="../guess/report.html">&mdash; the report</a>
+      <a class="sl" href="../guess/report.html">&mdash; the report</a>
       <a class="sl" href="../probes/index.html">&#9679; Probes, not tables</a>
       <a class="sl" href="../probes/graph.html">&mdash; the grant as a graph</a>
       <a class="sl" href="../probes/llms.txt">probes/llms.txt</a>
@@ -146,17 +146,53 @@
   <script src="../assets/version.js" defer></script>
   <script src="../assets/nav.js" defer></script>
 </div></nav>
-<main class="doc report">
-<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="../bench/index.html">the bench</a> / <a href="index.html">which agent is it?</a> / report</div>
+<main class="doc">
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="../bench/index.html">the bench</a> / <a href="index.html">which agent is it?</a> / build your own</div>
 <p class="kicker">RiskMandate.ai &middot; which agent is it?</p>
-<h1>The report</h1>
-<nav class="subnav"><a href="index.html">Play</a><a href="graph.html">The mesh</a><a class="here" href="report.html">Report</a><a href="data.html">Sources &amp; corrections</a><a href="prompt.html">Build your own</a><a href="../probes/index.html">The probes</a></nav>
-<p class="lead">Everything from one run on one page: the answer, the clues, the three classes kept apart, the belief as it settled, the specific gap with its reach nodes and the reduction, the sense of scale, the grant as a graph, what it cannot reach, the obligations worth checking, and the sources behind every row. From this browser's last run, or from a profile's own answers in demo mode.</p>
-<div id="report"><p class="dim">Loading&hellip;</p></div>
+<h1>Build your own</h1>
+<nav class="subnav"><a href="index.html">Play</a><a href="graph.html">The mesh</a><a href="report.html">Report</a><a href="data.html">Sources &amp; corrections</a><a class="here" href="prompt.html">Build your own</a><a href="../probes/index.html">The probes</a></nav>
+<p class="lead">This is what you give to your agent. One link, to a brief that points at the pages and the data on this site rather than repeating them, and asks the agent to design and build <b>its own</b> version of the game &mdash; its idea, its style, its interface, its technology &mdash; within twelve rules that are not its to change. Hand the same link to several agents and compare what comes back.</p>
+
+<div class="step">
+  <span class="k">the hand-off</span>
+  <h3>Copy this link and give it to the agent</h3>
+  <p><code id="promptUrl">https://pki.sgit.ai/guess/prompt.md</code> <button class="btn alt" id="copyUrl" type="button">copy the link</button> <a class="btn alt" href="prompt.md">open the raw markdown</a></p>
+  <h3>Or paste this line</h3>
+  <pre class="tuple" id="starter">Read https://pki.sgit.ai/guess/prompt.md and everything it points at. Then do step 1 only: propose your plan for your own version of the game and stop for my review. If I ask for variations, make each genuinely different in genre and technology.</pre>
+  <p><button class="btn alt" id="copyStarter" type="button">copy the line</button> <span class="dim">For three variations, add: <i>Give me three variations.</i></span></p>
+</div>
+
+<h2 id="how">How the exchange goes</h2>
+<ol>
+<li><b>Step one, the plan.</b> The agent reads the pages and the data, and replies with a short plan: the idea and its name, the genre and the technology, the screens, a twelve-line table saying how each rule is met, how the data is loaded, what it will not build, the risks. Then it stops.</li>
+<li><b>You review.</b> Pick the variation, change what you want, say go.</li>
+<li><b>Step two, the build.</b> The agent delivers a self-contained folder under <code>guess/variants/&lt;name&gt;/</code>: the game as a static folder, a README with a does-not-prove list, its own self-test output, and a screenshot of the reveal. As a pull request if it can, a zip if it cannot.</li>
+<li><b>We check</b> the seven things the brief lists: it runs from a folder, the self-test passes, nothing leaves the browser, the three classes are distinct, the reveal shows the gap with the fix and the tier caveat, the words, the source links.</li>
+</ol>
+<p>The rules are the game's invariants from <a href="../documents/guess-the-agent.html">brief v0.33.64</a> and <a href="../documents/reach-is-a-node.html">brief v0.33.65</a>: a deterministic core, two question classes, a reliability per question, the prediction before the reveal, the gap per capability with its reach and the reduction beside it, three classes never mixed, honest failure, the tier caveat, nothing leaving the browser, every node linked to its source, and the words. Everything else &mdash; genre, look, technology, voice, pacing &mdash; is the agent's.</p>
+
+<h2 id="brief">The brief, rendered</h2>
+<div class="mdread-label">📄 <code>guess/prompt.md</code> &middot; rendered from the <a href="prompt.md">raw markdown</a> (the source of truth &mdash; the link above is what the agent reads)</div>
+<div class="mdread" id="mdread" data-src="prompt.md"><noscript><p class="dim">In-page rendering needs JavaScript &mdash; <a href="prompt.md">open the raw markdown</a>.</p></noscript></div>
+
+<h2 id="variants">Variants</h2>
+<p id="variants-note" class="dim">None yet. The first agent to hand one back lands under <code>guess/variants/</code>, and this list is where they will be compared: genre, technology, whether the self-test passed, and what each says it does not prove.</p>
+
+<h2 id="not">What this does not prove</h2>
+<ul>
+<li><b>That an agent will keep the rules.</b> The brief states them; the checks are ours to run on what comes back.</li>
+<li><b>That the variants are comparable measurements.</b> They are explorations of form over one data set and one engine contract; the data and the self-test are the fixed points.</li>
+</ul>
+<p class="dim">The prompt pack is the project lead's request of 6 September: a brief an agent can be pointed at, on the site, with the markdown beside it. CC BY 4.0.</p>
 </main>
-<script src="engine.js"></script>
-<script src="../probes/graph.js"></script>
-<script src="report.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+<script src="../assets/mdreader.js"></script>
+<script>
+(function () {
+  const copy = (id, btn) => { const b = document.getElementById(btn); b.addEventListener('click', () => { try { navigator.clipboard.writeText(document.getElementById(id).textContent.trim()); b.textContent = 'copied'; setTimeout(() => b.textContent = b.dataset.t, 1500); } catch (e) { } }); b.dataset.t = b.textContent; };
+  copy('promptUrl', 'copyUrl'); copy('starter', 'copyStarter');
+})();
+</script>
 <footer class="site"><div class="cols">
   <div>
     <div class="brandline">pki<span>.sgit.ai</span></div>
