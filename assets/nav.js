@@ -10,9 +10,23 @@
      empty (and hidden by CSS) and the footer link reads "release history" — nothing is wrong,
      nothing is stale. Before v0.1.66 the version was stamped into every page, and a one-line
      release rewrote ~200 files. */
-  if (window.SITE_VERSION) {
+  function fillVersion(v) {
     var els = document.querySelectorAll('[data-site-version]');
-    for (var i = 0; i < els.length; i++) els[i].textContent = window.SITE_VERSION;
+    for (var i = 0; i < els.length; i++) els[i].textContent = v;
+  }
+  if (window.SITE_VERSION) {
+    fillVersion(window.SITE_VERSION);
+    /* version.js is served with a ten-minute cache, so a browser that had it before a release
+       shows the old badge next to a freshly fetched page (seen on 6 Sep: the release row said
+       v0.1.73, the badge v0.1.72). Refetch past the cache and refill if it moved. Best-effort:
+       any failure leaves the cached value, which is never blank. */
+    try {
+      var tag = document.querySelector('script[src$="assets/version.js"]');
+      if (tag && window.fetch) fetch(tag.getAttribute('src'), { cache: 'reload' }).then(function (r) { return r.ok ? r.text() : ''; }).then(function (s) {
+        var m = /"(v\d+\.\d+\.\d+)"/.exec(s || '');
+        if (m && m[1] !== window.SITE_VERSION) { window.SITE_VERSION = m[1]; fillVersion(m[1]); }
+      }).catch(function () {});
+    } catch (e) {}
   }
   var nav = document.querySelector('nav.site');
   if (!nav) return;
