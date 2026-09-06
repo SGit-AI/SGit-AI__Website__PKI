@@ -1,0 +1,28 @@
+{
+ "acceptor": null,
+ "amount": 1,
+ "at": "2026-09-06T00:15:17+00:00",
+ "band": "own",
+ "day": "2026-09-06",
+ "drawn": 0,
+ "enforcement": "notify",
+ "id": "2026-09-06T00-15-17Z__8d2db381",
+ "level": 3,
+ "point": "pre-push",
+ "policy": "git-pilot-2026-09-03-r4",
+ "policyholder": "the pki.sgit.ai estate",
+ "pool_left": 36,
+ "reason": "pushes 3 of 20 in the normal band",
+ "ref": {
+  "blobs": 11,
+  "branch": "claude/registry-mvp-brief-hpbap8",
+  "head": "655f359f8020",
+  "remote": "origin"
+ },
+ "rules_version": "insurance-ecosystem/draft-1",
+ "subject": "session:unknown@vm",
+ "test": false,
+ "type": "event/v1",
+ "unit": "pushes",
+ "verdict": "normal"
+}
