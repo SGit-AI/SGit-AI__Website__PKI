@@ -1,0 +1,10 @@
+{
+ "at": "2026-09-06T00:08:59+00:00",
+ "by": "the session, under the approver's hat (the pilot relaxation, IE6; requested draws only)",
+ "decision": "approved",
+ "id": "2026-09-06T00-08-59Z__69b8e2fa",
+ "note": "the v0.1.73 release commit: 662,658 B, above the requested-draw threshold because versions.html, comms.html and the bench generator are weighed whole for a one-line change (N30, decision 1). Inside cover; approved as a draw under notify mode.",
+ "request": "2026-09-06T00-08-39Z__0ce36930",
+ "test": false,
+ "type": "decision/v1"
+}
