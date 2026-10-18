@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>How the register of people works · pki.sgit.ai</title>
+<meta name="description" content="How pki.sgit.ai's register of people works: a passkey opens a vault that holds your keys, evidence, an anchor who verifies, a link that only counts when it goes both ways (the answer to 2019), degrees of separation, invitations and messages by QR code.">
+<link rel="canonical" href="https://pki.sgit.ai/people/how.html">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/people/people.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
+  <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
+  <span class="stage-pill">people first</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history" data-site-version></a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl here" href="../people/index.html">People<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../people/index.html">&#9679; The register of people</a>
+      <a class="sl" href="../vault/index.html">&#9679; Your vault &amp; your keys</a>
+      <a class="sl" href="../send/index.html">&#9679; Send a message</a>
+      <a class="sl" href="../invite/index.html">&#9679; Invite someone</a>
+      <a class="sl here" href="../people/how.html">How it works</a>
+      <a class="sl" href="../documents/people-directory.html">The brief</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../failure/index.html">The rules<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../failure/index.html">Why the old ones failed (2019)</a>
+      <a class="sl" href="../rules/index.html">The four rules</a>
+      <a class="sl" href="../rules/prior-art.html">Prior art</a>
+      <a class="sl" href="../bootstrap/index.html">The bootstrap trap</a>
+      <a class="sl" href="../mandate/index.html">Identity &amp; mandate</a>
+      <a class="sl" href="../enrolment/index.html">Enrolment</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../archive/index.html">Archive<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../archive/index.html">&#9679; The archive: what is kept, and why</a>
+      <a class="sl" href="../registry/index.html">The agent register (fixtures)</a>
+      <a class="sl" href="../archive/front-2026-08.html">The front page, August 2026</a>
+      <a class="sl" href="../execution/index.html">The layers: broker &amp; what ships</a>
+      <a class="sl" href="../roadmap/index.html">Build order (agents)</a>
+      <a class="sl" href="../authorised/index.html">Measure: probes &amp; the game</a>
+      <a class="sl" href="../bench/index.html">The bench &amp; experiments</a>
+      <a class="sl" href="../insurance/index.html">Insurance for agents</a>
+      <a class="sl" href="../assess/index.html">Map your case</a>
+      <a class="sl" href="../origins/index.html">Origins: 2026</a>
+      <a class="sl" href="../book/index.html">The books</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../documents/index.html">The documents</a>
+      <a class="sl" href="../data/index.html">The data viewer</a>
+      <a class="sl" href="../packs/index.html">Dev packs</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../admin/versions.html">Release history</a>
+      <a class="sl" href="../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+  <script src="../assets/version.js" defer></script>
+  <script src="../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="index.html">people</a> / how it works</div>
+<h1>How the register of people works</h1>
+<p class="lead">A place for the public keys of the people Dinis Cruz works with, so he, and they, can find someone and send them something only they can read. Seven steps, each built on something that already ships, and one rule that answers the question this site was founded on.</p>
+
+<div class="note"><b>Status, 18 October 2026.</b> Built and running: the vault, the keys, the record, evidence, links, the graph, sending and opening by link and QR code, the inbox, invitations. In the register: no real person yet, and five fixtures that show how it works. The number to watch is <a href="index.html">real public keys in the register</a>. The brief this implements: <a href="../documents/people-directory.html">a directory of people and their keys</a> (<a href="https://newsroom.sgit.ai/articles/a-directory-of-people-and-keys.html">the article</a>).</div>
+
+<h2 id="flow">From a passkey to a message</h2>
+<ol class="steps">
+<li><b>A passkey opens a vault.</b> You register a passkey on pki.sgit.ai. Its PRF output derives the address and key of a small <em>door</em> vault; the door holds the key of your <em>master</em> vault; the master holds the key of your <em>book</em>. This is the newsroom's design, reused, not redesigned (<a href="https://newsroom.sgit.ai/articles/the-passkey-opens-the-vault.html">the passkey opens the vault</a>). The middle vault is what makes your keys follow you: every device whose passkey, or recovery code, opens a door opens the same master.</li>
+<li><b>Make a key pair, or bring the one sgit made.</b> In the browser, with the same constructions as <code>sgit pki keygen</code>: RSA-OAEP 4096 to receive, ECDSA P-256 to sign. Or import sgit's own files. The private halves are kept in the master, in sgit's key store layout, and a script hands them to the CLI. Both directions are tested against sgit-ai 0.23.0 on every build.</li>
+<li><b>Publish the public half</b> as your identity statement, signed with your own key. Nobody gets a record from someone else's description of them.</li>
+<li><b>Add evidence</b>: a website, GitHub, a DNS record, keys you publish elsewhere, profiles. Each is a signed claim in your own record.</li>
+<li><b>Be verified by the anchor</b>, Dinis, for now, and confirm it from your side.</li>
+<li><b>Link with the people you know</b>: a link counts only when both of you wrote it.</li>
+<li><b>Then anyone can write to you</b>: a message sealed to your key, as a link and a QR code that opens in your browser, or into your inbox.</li>
+</ol>
+
+<h2 id="two-ways">Two ways, or not at all</h2>
+<p>A link is the statement "I know the owner of that key", and it is written in the linker's own record. The other person's link back is written in theirs. <b>A link exists only when both statements exist, each pointing at the other, and neither has been withdrawn.</b> I can always say I know you; you might say you have never heard of me, and then my claim is visible in my record and adds nothing to yours.</p>
+<p>That rule is the answer to the question <a href="../failure/index.html">the 2019 failure</a> left open. The keyserver network let anyone append a signature to anyone's key, and nothing could be deleted, so attackers flooded certain keys until importing them broke the software. Here, the <a href="../rules/index.html">first rule</a> is that only the owner writes to their own record: a vouch for you lands in the voucher's record, never in yours, so a flood has nowhere to land. The third rule bounds each record: 256 statements, 150 live links, 32 pieces of evidence, 16 KiB a statement. A withdrawal is a signed append, never a deletion (rule 2).</p>
+<div class="warnbox"><b>What it stops, and what it does not.</b> Two-way links stop flooding. They do not stop lying: two people can confirm each other falsely. The anchor and the evidence are what make a link worth something.</div>
+
+<h2 id="anchor">The anchor, for now</h2>
+<p>Evidence says an account and a key go together; it does not say the person is who they say. So, for now, Dinis is the trusted element. He meets people, or checks through a channel he already knows is theirs (a call, a message), and signs a link that names the method and the date. The details, a phone number or a message, stay in his vault, in a private note. The person links back, which is the second factor; a verification is complete when both statements exist. The methods published by name: <i>in person</i>, <i>a video call</i>, <i>a channel already known to be theirs</i>. Being the anchor is a choice, stated rather than hidden. It is how this starts, not how it has to stay.</p>
+<p><b>A verification expires.</b> Each carries the date of the check and a date it is valid until (a year, unless the anchor sets another). After that the person is still linked, both ways, but no longer verified, and the anchor's vault lists them as due: verifying again is a new signed link, with a new date, which replaces the old one. A key, a phone or a person can change in a year; the register says when it last looked.</p>
+
+<h2 id="graph">Degrees of separation</h2>
+<p>From the confirmed links the site works out the graph: who is verified, by whom, and how many steps anyone is from the anchor, or from anyone else. If you are two steps from someone you can see through whom, and ask to link directly; they still have to link back. Degrees are computed from the records each time a page opens, in your browser, and never stored as a fact.</p>
+
+<h2 id="evidence">Evidence, and the proof line</h2>
+<p>Machine-checkable evidence carries one line naming your record: <code>pki.sgit.ai=sha256:&lt;your record's 16 hex&gt;</code>.</p>
+<div class="tablewrap"><table class="kv"><tbody>
+<tr><th>A website</th><td>the line in <code>https://&lt;domain&gt;/.well-known/pki.sgit.ai.txt</code>. Checked from the browser when the site allows it (CORS).</td></tr>
+<tr><th>GitHub</th><td>the line in a public gist owned by your account; the gist's owner must be the account named.</td></tr>
+<tr><th>A DNS record</th><td>the line in a TXT record at <code>_pki.sgit.ai.&lt;domain&gt;</code>, read over DNS-over-HTTPS: the pattern Bluesky uses for domain handles.</td></tr>
+<tr><th>Keys elsewhere</th><td>a URL where you already publish a key, such as <code>github.com/&lt;you&gt;.keys</code>. A person checks it.</td></tr>
+<tr><th>Profiles</th><td>LinkedIn and others: links a person checks, not a machine.</td></tr>
+</tbody></table></div>
+
+<h2 id="messages">Messages, and invitations, by QR code</h2>
+<p>A message is encrypted in your browser in sgit's own envelope (a fresh AES-256-GCM key, wrapped with RSA-OAEP to the recipient), so <code>sgit pki decrypt</code> opens it too. When you are signed in, it is signed twice: by the envelope, as sgit does, and inside, over a message that names the recipient, so it cannot be re-sealed to a third person and read as theirs (the envelope's own signature covers the ciphertext only, as <a href="https://sgit.ai/docs/pki.html">sgit's documentation</a> says). The result is a link, <code>pki.sgit.ai/m/#m1.…</code>, and a QR code: a short message fits one. The message is in the fragment, the part after <code>#</code>, which a browser never sends to a server. If the recipient's record publishes an inbox (an <a href="https://sgit.ai/docs/vault-messaging.html">append lane</a> on their book vault), the message can go straight there: anyone can write, with no account, and only their vault can list and read.</p>
+<p>An invitation is a QR code with the URL printed above it, signed with the inviter's key and naming nobody, because the person has no key yet. They scan it, make a passkey and a key, and their first link points at the inviter, who links back. An invitation can carry an SG/Send access key, so the person can create their vault; it then must go only to them.</p>
+
+<h2 id="public">What is public, and what is not</h2>
+<div class="tablewrap"><table class="kv"><tbody>
+<tr><th>Public</th><td>the public key bundle and fingerprints, the name a person chooses to show, the evidence they chose to add, their links (confirmed or not), the method and date of a verification, and the address of their inbox if they published one.</td></tr>
+<tr><th>Private, in vaults</th><td>private keys (in the master); the anchor's evidence details and notes; contacts; messages; invitations made.</td></tr>
+<tr><th>Never</th><td>anybody who did not enrol. A list of people to invite stays in the inviter's own vault; the register holds only people who made their own key and published it.</td></tr>
+</tbody></table></div>
+
+<h2 id="writes">How a record gets in</h2>
+<p>Your statements are kept in your book and handed to the register as one file, a <i>submission</i>: sent to the anchor's inbox when the anchor has one, or downloaded and emailed. <code>node admin/build/people.mjs add &lt;file&gt;</code> checks every signature, and that every statement is by the record's own key, before it writes anything; the change is a reviewed commit, and the site's build checks every record again (<code>people.mjs check</code>, inside <code>validate.js</code>). Every page checks them a third time, in the reader's browser. The register's write path stays what it was for the agent register: a commit, in public.</p>
+
+<h2 id="claims">What this does not claim</h2>
+<ul>
+<li>There are places to publish keys: GitHub serves users' keys, keys.openpgp.org publishes after an email check, Keybase still runs, Keyoxide links keys to accounts. What was missing, as of 18 October 2026, is the combination: keys made and held in the browser, evidence, a person to start trust from, vouching that cannot be flooded, and a way to send something to the person you found.</li>
+<li>The anchor is a single point of trust, at first. Stated on purpose.</li>
+<li>Passkey support varies: the vault needs the passkey PRF extension, which some browsers and password managers handle unevenly. The recovery code, or a key kept in the browser, are the ways around it.</li>
+<li>Writing vaults needs an SG/Send access key. Nobody needs one to join: without it, a person makes their key and keeps it in their browser, encrypted with a passphrase, and everything but the cross-device vault and the inbox works; the key moves into a vault the day they have one. An invitation <em>can</em> carry the inviter's access key, only when the inviter ticks the box.</li>
+<li>The lane address is agreed through the register (the inbox statement), not derived from a public key: that derivation is proposed in sgit, not shipped.</li>
+</ul>
+
+<h2 id="questions">Open, for Dinis</h2>
+<ul>
+<li>Who are the first ten people? (The invitations are ready.)</li>
+<li>Which verification methods count: the three above, published by name?</li>
+<li>Should a person be able to hide their links? Today every link in a record is public, so the register shows who knows whom.</li>
+<li><b>Settled, 19 October:</b> a verification expires, a year after the check unless the anchor sets another date, and is then done again.</li>
+<li>Per-person access keys: an invitation can carry the inviter's key today; a key of their own for each person, with its own quota, is the better answer, and is SG/Send's to issue.</li>
+</ul>
+
+<h2 id="history">And the agent register?</h2>
+<p>Everything this site designed for agents stays: <a href="../failure/index.html">the 2019 failure</a>, <a href="../rules/index.html">the four rules</a> (which this register keeps), <a href="../mandate/index.html">identity and mandate</a>, <a href="../registry/index.html">the agent register</a> with its fixtures, and the work around it, kept as the record of the thinking. An agent's key is a record like a person's; people come first because people are who Dinis needs to write to now. <a href="../archive/index.html">The archive</a> lists what is there.</p>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>A register of people and their public keys: verified by an anchor first, then by each other, with a link that only counts when it goes both ways; and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html" data-site-version>release history</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>People</h4>
+    <a href="../people/index.html">&#9679; The register</a>
+    <a href="../vault/index.html">&#9679; Your vault</a>
+    <a href="../send/index.html">&#9679; Send a message</a>
+    <a href="../m/index.html">Open a message</a>
+    <a href="../invite/index.html">&#9679; Invite someone</a>
+    <a href="../people/how.html">How it works</a>
+    <a href="../documents/people-directory.html">The brief</a>
+  </div>
+  <div>
+    <h4>The rules</h4>
+    <a href="../failure/index.html">Why the old ones failed</a>
+    <a href="../rules/index.html">The four rules</a>
+    <a href="../rules/prior-art.html">Prior art</a>
+    <a href="../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../enrolment/index.html">Enrolment</a>
+  </div>
+  <div>
+    <h4>Archive</h4>
+    <a href="../archive/index.html">The archive</a>
+    <a href="../registry/index.html">The agent register</a>
+    <a href="../authorised/index.html">Measure</a>
+    <a href="../bench/index.html">The bench</a>
+    <a href="../insurance/index.html">Insurance for agents</a>
+    <a href="../assess/index.html">Map your case</a>
+    <a href="../origins/index.html">Origins: 2026</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../packs/index.html">Dev packs</a>
+    <a href="../about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../llms.txt">llms.txt</a>
+  </div>
+</div></footer>
+</body>
+</html>

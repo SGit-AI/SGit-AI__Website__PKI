@@ -36,94 +36,42 @@ PARENT_TITLE = ("sgit.ai — the parent project: the vault layer and the shipped
 #     still lights up the group it belongs to. Without it the deep pages — which is most
 #     of the site — would render with nothing highlighted at all.
 NAV = [
-    ("The registry", "failure/index.html", [
-        ("&#9679; The registry, live", "registry/index.html"),
-        ("Why they don't exist", "failure/index.html"),
+    # v0.2.0: people first (the 18 October 2026 brief). The agent register and everything built around it stay,
+    # one menu deeper, under Archive: kept as the record of the thinking, not as the front of the site.
+    ("People", "people/index.html", [
+        ("&#9679; The register of people", "people/index.html"),
+        ("&#9679; Your vault &amp; your keys", "vault/index.html"),
+        ("&#9679; Send a message", "send/index.html"),
+        ("&#9679; Invite someone", "invite/index.html"),
+        ("How it works", "people/how.html"),
+        ("The brief", "documents/people-directory.html"),
+    ], ("people/", "vault/", "send/", "m/", "invite/", "join/")),
+    ("The rules", "failure/index.html", [
+        ("Why the old ones failed (2019)", "failure/index.html"),
         ("The four rules", "rules/index.html"),
-        ("Identity &amp; mandate", "mandate/index.html"),
-        ("Build order", "roadmap/index.html"),
         ("Prior art", "rules/prior-art.html"),
-    ], ("failure/", "rules/", "mandate/", "roadmap/", "registry/")),
-    ("The layers", "bootstrap/index.html", [
         ("The bootstrap trap", "bootstrap/index.html"),
+        ("Identity &amp; mandate", "mandate/index.html"),
         ("Enrolment", "enrolment/index.html"),
-        ("The execution broker", "execution/index.html"),
-        ("What already ships", "shipped/index.html"),
-    ], ("bootstrap/", "enrolment/", "execution/", "shipped/")),
-    ("Map your case", "assess/index.html", [
-        ("Map your own case", "assess/index.html"),
-        ("The library of trees", "assess/library.html"),
-        ("Synthetic readers", "packs/map-your-case/readers/index.html"),
-    ], ("assess/",)),
-    ("Measure", "authorised/index.html", [
-        ("&#9679; What you authorised and never asked for", "authorised/index.html"),
-        ("&#9679; Which agent is it?", "guess/index.html"),
-        ("&mdash; the mesh, start anywhere", "guess/graph.html"),
-        ("&mdash; the report", "guess/report.html"),
-        ("&#9679; Probes, not tables", "probes/index.html"),
-        ("&mdash; the grant as a graph", "probes/graph.html"),
-        ("probes/llms.txt", "probes/llms.txt"),
-    ], ("authorised/", "guess/", "probes/")),
-    ("Origins", "origins/index.html", [
+    ], ("failure/", "rules/", "mandate/", "bootstrap/", "enrolment/")),
+    ("Archive", "archive/index.html", [
+        ("&#9679; The archive: what is kept, and why", "archive/index.html"),
+        ("The agent register (fixtures)", "registry/index.html"),
+        ("The front page, August 2026", "archive/front-2026-08.html"),
+        ("The layers: broker &amp; what ships", "execution/index.html"),
+        ("Build order (agents)", "roadmap/index.html"),
+        ("Measure: probes &amp; the game", "authorised/index.html"),
+        ("The bench &amp; experiments", "bench/index.html"),
+        ("Insurance for agents", "insurance/index.html"),
+        ("Map your case", "assess/index.html"),
         ("Origins: 2026", "origins/index.html"),
-        ("The review, redacted", "origins/review.html"),
-    ], ("origins/",)),
-    ("The bench", "bench/index.html", [
-        ("&#9679; The bench &mdash; what is built", "bench/index.html"),
-        ("&#9679; The simulator &mdash; play a card", "simulator/index.html"),
-        ("&#9679; Experiments", "experiments/index.html"),
-        ("&mdash; the chain room", "experiments/the-room/index.html"),
-        ("&mdash; the table", "experiments/the-table/index.html"),
-        ("&mdash; push to GitHub", "experiments/push-to-github/index.html"),
-        ("&mdash; the deploy", "experiments/the-deploy/index.html"),
-        ("&mdash; the control room", "experiments/the-control-room/index.html"),
-        ("&#9679; The workbench (app)", "workbench/index.html"),
-        ("&#9679; Probes, not tables", "probes/index.html"),
-        ("&#9679; What you authorised and never asked for", "authorised/index.html"),
-        ("&#9679; Which agent is it?", "guess/index.html"),
-        ("The register, live", "registry/index.html"),
-        ("The mandate hook", "packs/grant-and-mandate/enforcement.html"),
-        ("The building blocks", "packs/grant-and-mandate/blocks.html"),
-        ("Map your own case", "assess/index.html"),
-        ("The book (commissioned)", "book/index.html"),
-        ("&mdash; its commissioning brief", "book/brief.html"),
-        ("The insurance book", "insurance-book/index.html"),
-    ], ("bench/", "book/", "experiments/", "simulator/", "workbench/", "insurance-book/")),
-    ("Insurance", "insurance/index.html", [
-        ("&#9679; Insurance for agents", "insurance/index.html"),
-        ("&#9679; The insurance book", "insurance-book/index.html"),
-        ("&mdash; what this is, and the rule", "insurance/what-this-is.html"),
-        ("&mdash; the rating", "insurance/the-rating.html"),
-        ("&mdash; the ecosystem &amp; the gate", "insurance/the-ecosystem-and-the-gate.html"),
-        ("&mdash; who pays, &amp; the moving rating", "insurance/who-pays-and-the-moving-rating.html"),
-        ("&mdash; why insurance", "insurance/why-insurance-and-what-broke-it.html"),
-        ("&mdash; not in line (scale 1&ndash;5)", "insurance/not-in-line.html"),
-        ("&mdash; the broker market", "insurance/the-broker-market.html"),
-        ("&mdash; the policy as a statement", "insurance/the-policy-as-a-statement.html"),
-        ("&mdash; the world model (the MVP)", "insurance/the-world-model.html"),
-        ("&mdash; make them insurable", "insurance/make-them-insurable.html"),
-        ("&mdash; the schemas &amp; the clocks", "insurance/the-schemas-and-the-clocks.html"),
-        ("insurance/llms.txt", "insurance/llms.txt"),
-        ("The pivot briefing (memo 0)", "documents/agent-insurance.html"),
-        ("Rating before money (memo 1)", "documents/insurance-without-money.html"),
-        ("The go-live gate (memo 2)", "documents/insurance-ecosystem.html"),
-        ("Who pays (memo 3)", "documents/who-pays-for-the-delta.html"),
-        ("Why insurance (memo 4)", "documents/why-insurance.html"),
-        ("Not in line (memo 5)", "documents/not-in-line.html"),
-        ("The broker market (memo 6)", "documents/the-broker-market.html"),
-        ("The policy statement (memo 7)", "documents/the-policy-as-a-statement.html"),
-        ("The world model (memo 8)", "documents/the-world-model.html"),
-        ("Make them insurable (memo 9)", "documents/make-them-insurable.html"),
-        ("Schemas &amp; clocks (memo 10)", "documents/the-schemas-and-the-clocks.html"),
-    ], ("insurance/",)),
+        ("The books", "book/index.html"),
+    ], ("archive/", "registry/", "execution/", "shipped/", "roadmap/", "authorised/", "guess/", "probes/", "bench/", "book/",
+        "experiments/", "simulator/", "workbench/", "insurance/", "insurance-book/", "assess/", "origins/")),
     ("Docs", "documents/index.html", [
         ("The documents", "documents/index.html"),
         ("The data viewer", "data/index.html"),
         ("Dev packs", "packs/index.html"),
-        ("The registry MVP pack", "packs/registry-mvp/index.html"),
-        ("The Grant &amp; Mandate pack", "packs/grant-and-mandate/index.html"),
-        ("The Insurance Ecosystem pack", "packs/insurance-ecosystem/index.html"),
-        ("The Map Your Case pack", "packs/map-your-case/index.html"),
     ], ("documents/", "packs/", "data/")),
     ("Site", "admin/comms.html", [
         ("Comms: tasks &amp; requests", "admin/comms.html"),
@@ -134,58 +82,35 @@ NAV = [
 ]
 
 FOOTER = [
-    ("The bench", [
-        ("&#9679; What is built", "bench/index.html"),
-        ("&#9679; The simulator", "simulator/index.html"),
-        ("&#9679; The workbench (app)", "workbench/index.html"),
-        ("&#9679; Probes, not tables", "probes/index.html"),
-        ("&#9679; What you authorised and never asked for", "authorised/index.html"),
-        ("&#9679; Which agent is it?", "guess/index.html"),
-        ("The register, live", "registry/index.html"),
-        ("The mandate hook", "packs/grant-and-mandate/enforcement.html"),
-        ("The building blocks", "packs/grant-and-mandate/blocks.html"),
-        ("&#8594; Map your own case", "assess/index.html"),
-        ("The book (commissioned)", "book/index.html"),
-        ("&mdash; its commissioning brief", "book/brief.html"),
-        ("The insurance book", "insurance-book/index.html"),
+    ("People", [
+        ("&#9679; The register", "people/index.html"),
+        ("&#9679; Your vault", "vault/index.html"),
+        ("&#9679; Send a message", "send/index.html"),
+        ("Open a message", "m/index.html"),
+        ("&#9679; Invite someone", "invite/index.html"),
+        ("How it works", "people/how.html"),
+        ("The brief", "documents/people-directory.html"),
     ]),
-    ("Insurance", [
-        ("&#9679; Insurance for agents", "insurance/index.html"),
-        ("&#9679; The insurance book", "insurance-book/index.html"),
-        ("What this is, and the rule", "insurance/what-this-is.html"),
-        ("The rating", "insurance/the-rating.html"),
-        ("The ecosystem &amp; the gate", "insurance/the-ecosystem-and-the-gate.html"),
-        ("Who pays, &amp; the moving rating", "insurance/who-pays-and-the-moving-rating.html"),
-        ("Why insurance", "insurance/why-insurance-and-what-broke-it.html"),
-        ("Not in line", "insurance/not-in-line.html"),
-        ("The broker market", "insurance/the-broker-market.html"),
-        ("The policy as a statement", "insurance/the-policy-as-a-statement.html"),
-        ("The world model (the MVP)", "insurance/the-world-model.html"),
-        ("Make them insurable", "insurance/make-them-insurable.html"),
-        ("The schemas &amp; the clocks", "insurance/the-schemas-and-the-clocks.html"),
-        ("insurance/llms.txt", "insurance/llms.txt"),
-        ("The pivot briefing", "documents/agent-insurance.html"),
-    ]),
-    ("The registry", [
-        ("Why they don't exist", "failure/index.html"),
+    ("The rules", [
+        ("Why the old ones failed", "failure/index.html"),
         ("The four rules", "rules/index.html"),
-        ("Identity &amp; mandate", "mandate/index.html"),
-        ("Build order", "roadmap/index.html"),
         ("Prior art", "rules/prior-art.html"),
-    ]),
-    ("The three layers", [
         ("The bootstrap trap", "bootstrap/index.html"),
+        ("Identity &amp; mandate", "mandate/index.html"),
         ("Enrolment", "enrolment/index.html"),
-        ("The execution broker", "execution/index.html"),
-        ("What already ships", "shipped/index.html"),
+    ]),
+    ("Archive", [
+        ("The archive", "archive/index.html"),
+        ("The agent register", "registry/index.html"),
+        ("Measure", "authorised/index.html"),
+        ("The bench", "bench/index.html"),
+        ("Insurance for agents", "insurance/index.html"),
+        ("Map your case", "assess/index.html"),
+        ("Origins: 2026", "origins/index.html"),
     ]),
     ("The sources", [
-        ("Origins: 2026", "origins/index.html"),
         ("The documents", "documents/index.html"),
-        ("The registry MVP pack", "packs/registry-mvp/index.html"),
-        ("The Grant &amp; Mandate pack", "packs/grant-and-mandate/index.html"),
-        ("The Insurance Ecosystem pack", "packs/insurance-ecosystem/index.html"),
-        ("The Map Your Case pack", "packs/map-your-case/index.html"),
+        ("Dev packs", "packs/index.html"),
         ("Where we lose", "about/participant.html"),
     ]),
     ("Site", [
@@ -195,8 +120,8 @@ FOOTER = [
     ]),
 ]
 
-BLURB = ("Public key infrastructure for agents: a registry designed from a documented failure, "
-         "and the published work behind it. Part of the <a href=\"https://sgit.ai\" "
+BLURB = ("A register of people and their public keys: verified by an anchor first, then by each other, "
+         "with a link that only counts when it goes both ways; and the published work behind it. Part of the <a href=\"https://sgit.ai\" "
          "style=\"display:inline;padding:0\"><b>sgit.ai</b></a> network — the vault layer and "
          "the shipped CLI this registry is designed onto. All content CC BY 4.0.")
 PARTNOTE = ('⚠ Participant disclosure: published by the sgit project, which builds the vault layer '
@@ -226,7 +151,7 @@ def nav_html(rel, up):
     return (f'<nav class="site"><div class="row">\n'
             f'  <a class="brand" href="{up}index.html">pki<span>.sgit.ai</span></a>\n'
             f'  <a class="parent" href="{PARENT}" title="{PARENT_TITLE}">↗ part of <b>sgit.ai</b></a>\n'
-            f'  <span class="stage-pill">mvp draft</span>\n'
+            f'  <span class="stage-pill">people first</span>\n'
             f'  <a class="ver" href="{up}admin/versions.html" title="Site release history" data-site-version></a>\n'
             f'  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>\n'
             f'  <div class="nav-items">\n{rows}\n  </div>\n'

@@ -3,126 +3,64 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>pki.sgit.ai — a key registry for agents, designed from a documented failure</title>
-<meta name="description" content="Good public key repositories existed, and were destroyed. The 2019 keyserver failure, the four registry rules it produces, the bootstrap trap that explains why agent registries do not exist, and identity separated from mandate as independently revocable signed statements.">
+<title>pki.sgit.ai — a register of people and their keys, verified both ways</title>
+<meta name="description" content="Find someone and send them something only they can read. A passkey opens a vault that holds your keys, sgit-compatible; you publish the public half, add evidence, are verified by an anchor, and link with the people you know. A link only counts when it goes both ways, which is also the answer to how the old web of trust was destroyed in 2019.">
 <link rel="canonical" href="https://pki.sgit.ai/index.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="pki.sgit.ai">
 <meta property="og:url" content="https://pki.sgit.ai/index.html">
-<meta property="og:title" content="pki.sgit.ai — good public key repositories existed, and were destroyed">
-<meta property="og:description" content="The global keyserver network was destroyed in 2019 by an attack its own maintainer called unsalvageable, and the cause was a stated design goal rather than a bug. The history, and the four registry rules it produces, published before the registry exists.">
+<meta property="og:title" content="pki.sgit.ai — a register of people and their keys">
+<meta property="og:description" content="Verified by an anchor first, then by each other, and a link that only counts when it goes both ways. Messages and invitations by QR code. Every statement signed and checked in your browser.">
 <meta name="twitter:card" content="summary">
 <link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
 <link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/people/people.css">
 </head>
 <body>
 
 <nav class="site"><div class="row">
   <a class="brand" href="index.html">pki<span>.sgit.ai</span></a>
   <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
-  <span class="stage-pill">mvp draft</span>
+  <span class="stage-pill">people first</span>
   <a class="ver" href="admin/versions.html" title="Site release history" data-site-version></a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
   <div class="nav-items">
     <div class="ni ni-has">
-      <a class="nl" href="failure/index.html">The registry<span class="caret">&#9662;</span></a>
+      <a class="nl" href="people/index.html">People<span class="caret">&#9662;</span></a>
       <div class="sub">
-      <a class="sl" href="registry/index.html">&#9679; The registry, live</a>
-      <a class="sl" href="failure/index.html">Why they don't exist</a>
+      <a class="sl" href="people/index.html">&#9679; The register of people</a>
+      <a class="sl" href="vault/index.html">&#9679; Your vault &amp; your keys</a>
+      <a class="sl" href="send/index.html">&#9679; Send a message</a>
+      <a class="sl" href="invite/index.html">&#9679; Invite someone</a>
+      <a class="sl" href="people/how.html">How it works</a>
+      <a class="sl" href="documents/people-directory.html">The brief</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="failure/index.html">The rules<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="failure/index.html">Why the old ones failed (2019)</a>
       <a class="sl" href="rules/index.html">The four rules</a>
-      <a class="sl" href="mandate/index.html">Identity &amp; mandate</a>
-      <a class="sl" href="roadmap/index.html">Build order</a>
       <a class="sl" href="rules/prior-art.html">Prior art</a>
-      </div>
-    </div>
-    <div class="ni ni-has">
-      <a class="nl" href="bootstrap/index.html">The layers<span class="caret">&#9662;</span></a>
-      <div class="sub">
       <a class="sl" href="bootstrap/index.html">The bootstrap trap</a>
+      <a class="sl" href="mandate/index.html">Identity &amp; mandate</a>
       <a class="sl" href="enrolment/index.html">Enrolment</a>
-      <a class="sl" href="execution/index.html">The execution broker</a>
-      <a class="sl" href="shipped/index.html">What already ships</a>
       </div>
     </div>
     <div class="ni ni-has">
-      <a class="nl" href="assess/index.html">Map your case<span class="caret">&#9662;</span></a>
+      <a class="nl" href="archive/index.html">Archive<span class="caret">&#9662;</span></a>
       <div class="sub">
-      <a class="sl" href="assess/index.html">Map your own case</a>
-      <a class="sl" href="assess/library.html">The library of trees</a>
-      <a class="sl" href="packs/map-your-case/readers/index.html">Synthetic readers</a>
-      </div>
-    </div>
-    <div class="ni ni-has">
-      <a class="nl" href="authorised/index.html">Measure<span class="caret">&#9662;</span></a>
-      <div class="sub">
-      <a class="sl" href="authorised/index.html">&#9679; What you authorised and never asked for</a>
-      <a class="sl" href="guess/index.html">&#9679; Which agent is it?</a>
-      <a class="sl" href="guess/graph.html">&mdash; the mesh, start anywhere</a>
-      <a class="sl" href="guess/report.html">&mdash; the report</a>
-      <a class="sl" href="probes/index.html">&#9679; Probes, not tables</a>
-      <a class="sl" href="probes/graph.html">&mdash; the grant as a graph</a>
-      <a class="sl" href="probes/llms.txt">probes/llms.txt</a>
-      </div>
-    </div>
-    <div class="ni ni-has">
-      <a class="nl" href="origins/index.html">Origins<span class="caret">&#9662;</span></a>
-      <div class="sub">
+      <a class="sl" href="archive/index.html">&#9679; The archive: what is kept, and why</a>
+      <a class="sl" href="registry/index.html">The agent register (fixtures)</a>
+      <a class="sl" href="archive/front-2026-08.html">The front page, August 2026</a>
+      <a class="sl" href="execution/index.html">The layers: broker &amp; what ships</a>
+      <a class="sl" href="roadmap/index.html">Build order (agents)</a>
+      <a class="sl" href="authorised/index.html">Measure: probes &amp; the game</a>
+      <a class="sl" href="bench/index.html">The bench &amp; experiments</a>
+      <a class="sl" href="insurance/index.html">Insurance for agents</a>
+      <a class="sl" href="assess/index.html">Map your case</a>
       <a class="sl" href="origins/index.html">Origins: 2026</a>
-      <a class="sl" href="origins/review.html">The review, redacted</a>
-      </div>
-    </div>
-    <div class="ni ni-has">
-      <a class="nl" href="bench/index.html">The bench<span class="caret">&#9662;</span></a>
-      <div class="sub">
-      <a class="sl" href="bench/index.html">&#9679; The bench &mdash; what is built</a>
-      <a class="sl" href="simulator/index.html">&#9679; The simulator &mdash; play a card</a>
-      <a class="sl" href="experiments/index.html">&#9679; Experiments</a>
-      <a class="sl" href="experiments/the-room/index.html">&mdash; the chain room</a>
-      <a class="sl" href="experiments/the-table/index.html">&mdash; the table</a>
-      <a class="sl" href="experiments/push-to-github/index.html">&mdash; push to GitHub</a>
-      <a class="sl" href="experiments/the-deploy/index.html">&mdash; the deploy</a>
-      <a class="sl" href="experiments/the-control-room/index.html">&mdash; the control room</a>
-      <a class="sl" href="workbench/index.html">&#9679; The workbench (app)</a>
-      <a class="sl" href="probes/index.html">&#9679; Probes, not tables</a>
-      <a class="sl" href="authorised/index.html">&#9679; What you authorised and never asked for</a>
-      <a class="sl" href="guess/index.html">&#9679; Which agent is it?</a>
-      <a class="sl" href="registry/index.html">The register, live</a>
-      <a class="sl" href="packs/grant-and-mandate/enforcement.html">The mandate hook</a>
-      <a class="sl" href="packs/grant-and-mandate/blocks.html">The building blocks</a>
-      <a class="sl" href="assess/index.html">Map your own case</a>
-      <a class="sl" href="book/index.html">The book (commissioned)</a>
-      <a class="sl" href="book/brief.html">&mdash; its commissioning brief</a>
-      <a class="sl" href="insurance-book/index.html">The insurance book</a>
-      </div>
-    </div>
-    <div class="ni ni-has">
-      <a class="nl" href="insurance/index.html">Insurance<span class="caret">&#9662;</span></a>
-      <div class="sub">
-      <a class="sl" href="insurance/index.html">&#9679; Insurance for agents</a>
-      <a class="sl" href="insurance-book/index.html">&#9679; The insurance book</a>
-      <a class="sl" href="insurance/what-this-is.html">&mdash; what this is, and the rule</a>
-      <a class="sl" href="insurance/the-rating.html">&mdash; the rating</a>
-      <a class="sl" href="insurance/the-ecosystem-and-the-gate.html">&mdash; the ecosystem &amp; the gate</a>
-      <a class="sl" href="insurance/who-pays-and-the-moving-rating.html">&mdash; who pays, &amp; the moving rating</a>
-      <a class="sl" href="insurance/why-insurance-and-what-broke-it.html">&mdash; why insurance</a>
-      <a class="sl" href="insurance/not-in-line.html">&mdash; not in line (scale 1&ndash;5)</a>
-      <a class="sl" href="insurance/the-broker-market.html">&mdash; the broker market</a>
-      <a class="sl" href="insurance/the-policy-as-a-statement.html">&mdash; the policy as a statement</a>
-      <a class="sl" href="insurance/the-world-model.html">&mdash; the world model (the MVP)</a>
-      <a class="sl" href="insurance/make-them-insurable.html">&mdash; make them insurable</a>
-      <a class="sl" href="insurance/the-schemas-and-the-clocks.html">&mdash; the schemas &amp; the clocks</a>
-      <a class="sl" href="insurance/llms.txt">insurance/llms.txt</a>
-      <a class="sl" href="documents/agent-insurance.html">The pivot briefing (memo 0)</a>
-      <a class="sl" href="documents/insurance-without-money.html">Rating before money (memo 1)</a>
-      <a class="sl" href="documents/insurance-ecosystem.html">The go-live gate (memo 2)</a>
-      <a class="sl" href="documents/who-pays-for-the-delta.html">Who pays (memo 3)</a>
-      <a class="sl" href="documents/why-insurance.html">Why insurance (memo 4)</a>
-      <a class="sl" href="documents/not-in-line.html">Not in line (memo 5)</a>
-      <a class="sl" href="documents/the-broker-market.html">The broker market (memo 6)</a>
-      <a class="sl" href="documents/the-policy-as-a-statement.html">The policy statement (memo 7)</a>
-      <a class="sl" href="documents/the-world-model.html">The world model (memo 8)</a>
-      <a class="sl" href="documents/make-them-insurable.html">Make them insurable (memo 9)</a>
-      <a class="sl" href="documents/the-schemas-and-the-clocks.html">Schemas &amp; clocks (memo 10)</a>
+      <a class="sl" href="book/index.html">The books</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -131,10 +69,6 @@
       <a class="sl" href="documents/index.html">The documents</a>
       <a class="sl" href="data/index.html">The data viewer</a>
       <a class="sl" href="packs/index.html">Dev packs</a>
-      <a class="sl" href="packs/registry-mvp/index.html">The registry MVP pack</a>
-      <a class="sl" href="packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
-      <a class="sl" href="packs/insurance-ecosystem/index.html">The Insurance Ecosystem pack</a>
-      <a class="sl" href="packs/map-your-case/index.html">The Map Your Case pack</a>
       </div>
     </div>
     <div class="ni ni-has">
@@ -153,217 +87,111 @@
 </div></nav>
 
 <header class="hero">
-  <div class="eyebrow">Public key infrastructure · agent identity · mandates</div>
-  <h1>Good public key repositories<br>existed, and were destroyed</h1>
-  <p class="sub">In 2019 the global keyserver network was flooded with garbage signatures until importing a poisoned certificate broke your installation. Its own maintainer called it <b>unsalvageable</b> — and the cause was a design goal stated at the outset, not a bug. Anyone proposing a key registry now should be able to show they designed it with that history in hand. This site is that history, and the rules it produces, published before the registry exists.</p>
+  <div class="eyebrow">People · public keys · a web of trust that cannot be flooded</div>
+  <h1>Find someone, and write to them<br>so that only they can read it</h1>
+  <p class="sub">A register of the people Dinis Cruz works with and their public keys. You make your own key in your browser, behind a passkey, and publish the public half; you add evidence; you are verified by the anchor, and then by each other. <b>A link only counts when it goes both ways</b>, which is also the answer to how the old web of trust was destroyed in 2019.</p>
   <div class="ctas">
-    <a class="cta1" href="failure/index.html">Read the failure →</a>
-    <a class="cta2" href="bootstrap/index.html">Why registries for agents don't exist →</a>
-    <a class="cta2" href="rules/index.html">The four rules →</a>
+    <a class="cta1" href="vault/index.html">Make your key →</a>
+    <a class="cta2" href="people/index.html">The register →</a>
+    <a class="cta2" href="send/index.html">Send a message →</a>
+    <a class="cta2" href="people/how.html">How it works →</a>
   </div>
+  <div class="big" style="justify-content:center"><span class="n" id="real-keys">0</span><span class="l">real public keys in the register<br><span class="small">the one number to watch</span></span></div>
 </header>
 
-<!-- the three layers -->
-<section class="band alt" id="third">
-  <div class="split">
-    <p class="cap" style="margin-top:0;font-size:.9rem"><b>Which third of the answer this site holds.</b> Three sites carry one answer between them: <a href="https://nhi.sgit.ai/thesis/index.html">nhi.sgit.ai states the problem</a> (no identity for rented agents), <b>this site holds the design</b> (the rules, the mandate, the enrolment path, the registry pack), and <a href="https://sgit.ai/docs/pki.md">sgit.ai/docs/pki documents the shipped commands</a> the design operationalises. Page-to-page, not domain-to-domain — per the <a href="documents/site-access-report.html">site access report</a> that found the three thirds unjoined.</p>
-  </div>
-</section>
-
-<section class="band" id="layers">
-  <h2>Three questions, and this site answers the first two</h2>
-  <p class="blurb">A key registry is usually approached as one problem. It is three, and they separate cleanly — which matters, because a system that answers only one of them and implies it answered all three is the failure mode worth avoiding.</p>
-  <div class="split">
-    <table>
-      <thead><tr><th>Question</th><th class="safe">What answers it</th><th>Kind of problem</th></tr></thead>
-      <tbody>
-        <tr><td><b>Who is this agent?</b></td><td><a href="rules/index.html">Identity</a> — a signed statement in a registry</td><td>A registry problem</td></tr>
-        <tr><td><b>What may it do?</b></td><td><a href="mandate/index.html">Mandate</a> — a separate statement, revoked separately</td><td>A delegation problem</td></tr>
-        <tr><td><b>Should that produce this effect, now, here?</b></td><td><a href="execution/index.html">Execution</a> — a broker that holds the credential the agent never sees</td><td>A broker problem</td></tr>
-      </tbody>
-    </table>
-    <p class="cap">The third is a different product line and this site does not own it — but it is <a href="execution/index.html#receipts">named here</a>, because a reader arriving at a key registry is usually trying to answer a question about something that <em>happened</em>, and identity plus mandate cannot answer it. Recording who a key belongs to and what it was permitted to do leaves out the most auditable event of all.</p>
-  </div>
-</section>
-
-<!-- the reframe -->
-<section class="band alt" id="reframe">
-  <h2>Not a new product — the missing half of one that ships</h2>
-  <p class="blurb">The keypairs, the signing, the encryption to a named recipient and the contacts list already exist. The documentation says, in its own words, <b>no revocation, no directory</b>. Those two absences are precisely what a registry supplies.</p>
+<section class="band alt" id="flow">
+  <h2>From a passkey to a message</h2>
+  <p class="blurb">Seven steps, each built on something that already ships: the newsroom's passkey vault, sgit's keys, the append lanes, and this site's four rules.</p>
   <div class="cards">
-    <div class="card"><span class="tag">Ships today</span><h3>Keys, signatures, encryption</h3><p><code>sgit pki keygen</code> makes two pairs — <b>RSA-OAEP 4096</b> for encryption and <b>ECDSA P-256</b> for signing. Encrypt to a fingerprint, sign, verify, keep contacts.</p></div>
-    <div class="card"><span class="tag">Absent</span><h3>No revocation</h3><p>A compromised key cannot be withdrawn, and anybody verifying an old signature cannot tell whether the key was still good at the time.</p></div>
-    <div class="card"><span class="tag">Absent</span><h3>No directory</h3><p>Keys are exchanged out of band into a local contacts list. There is no answer to "what is the current key for this agent, and who says so".</p></div>
-    <a class="card" href="shipped/index.html"><span class="tag">The consequence</span><h3>A concrete user and a bounded scope</h3><p>Somebody already running these commands who has hit exactly those two walls. And it makes the keyserver history land harder — the last system that attempted both was destroyed by how it did them.</p><span class="go">Read →</span></a>
+    <a class="card" href="vault/index.html"><span class="tag">1 · Start with the key</span><h3>A passkey opens a vault</h3><p>The passkey derives a door vault; the door opens a master vault that holds your private keys; so the keys follow you to every device whose passkey opens it. The same keys as <code>sgit pki</code>, made here or brought from the CLI.</p><span class="go">Your vault →</span></a>
+    <a class="card" href="people/how.html#evidence"><span class="tag">2 · Evidence</span><h3>Website, GitHub, DNS</h3><p>Signed claims in your own record that an account and your key go together, checked by machine where they can be: a file on your site, a gist, a TXT record.</p><span class="go">The proof line →</span></a>
+    <a class="card" href="people/how.html#anchor"><span class="tag">3 · The anchor, for now</span><h3>Verified by Dinis, confirmed by you</h3><p>He meets you, or checks on a channel he already knows is yours, and signs it: the method and the date in public, the details in his vault. You confirm from your side.</p><span class="go">Why an anchor →</span></a>
+    <a class="card" href="people/how.html#two-ways"><span class="tag">4 · Two ways, or not at all</span><h3>A link both people wrote</h3><p>I can say I know you; you still have to say you know me. Each says it in their own record, so nobody can add anything to anybody else's.</p><span class="go">The rule →</span></a>
+    <a class="card" href="people/index.html"><span class="tag">5 · Degrees of separation</span><h3>Computed, never stored</h3><p>From the confirmed links: who is verified, by whom, and how many steps anyone is from the anchor, or from you.</p><span class="go">The graph →</span></a>
+    <a class="card" href="invite/index.html"><span class="tag">6 · Invitations</span><h3>A QR code, the URL printed above it</h3><p>Scan it, make a passkey and your key, and your first link, to whoever invited you, waits for them to link back.</p><span class="go">Invite →</span></a>
+    <a class="card" href="send/index.html"><span class="tag">7 · What it is for</span><h3>A secret, as a QR code</h3><p>Write a message; it is encrypted in your browser to their key; they open it in theirs. Nothing readable passes through a server. Tokens and vault keys, too: not pasted into a chat.</p><span class="go">Send →</span></a>
   </div>
 </section>
 
-<!-- the append-only split -->
 <section class="band" id="split">
-  <h2>One property, two outcomes</h2>
-  <p class="blurb">The design goal that killed the network was <em>append-only</em> — a pattern this project uses in five places, and rightly. A documented catastrophe caused by a pattern you rely on deserves a precise resolution rather than a shrug. Here it is.</p>
+  <h2>Two ways, or not at all: the answer to 2019</h2>
+  <p class="blurb">The keyserver network let anyone append a signature to anyone's key, and nothing could be deleted; attackers flooded keys until they broke. Its successor answered by refusing third-party signatures at all, and lost the web of trust with them. This register keeps vouching, and gives a flood nowhere to land.</p>
   <div class="split">
     <table>
-      <thead><tr><th></th><th class="safe">Append-only, owner-writes</th><th class="fatal">Append-only, anyone-writes</th></tr></thead>
+      <thead><tr><th></th><th class="fatal">The keyserver network, 2019</th><th class="safe">This register</th></tr></thead>
       <tbody>
-        <tr><td><b>Who may write to a record</b></td><td>Only its owner</td><td><b class="no">Anybody</b></td></tr>
-        <tr><td><b>Can a stranger grow your record?</b></td><td><b class="yes">No</b></td><td><b class="no">Without limit</b></td></tr>
-        <tr><td><b>Is every entry attributable?</b></td><td><b class="yes">Yes</b> — signed by the owner</td><td><b class="no">No</b> — garbage is indistinguishable</td></tr>
-        <tr><td><b>Can something be withdrawn?</b></td><td><b class="yes">Yes</b> — a signed append supersedes</td><td><b class="no">Never</b> — by design</td></tr>
-        <tr><td><b>Failure mode</b></td><td>A record grows slowly, in the owner's own hand</td><td><b class="no">Destroyed the network</b></td></tr>
+        <tr><td><b>Where a vouch for you is written</b></td><td><b class="no">On your key</b>, by anyone</td><td><b class="yes">In the voucher's own record</b>, signed by them</td></tr>
+        <tr><td><b>Can a stranger grow your record?</b></td><td><b class="no">Without limit</b></td><td><b class="yes">No</b>: only you write to it (rule 1), and it is bounded (rule 3)</td></tr>
+        <tr><td><b>What an unconfirmed vouch does</b></td><td>Counts</td><td><b class="yes">Nothing</b>: a claim, visible in the claimant's record</td></tr>
+        <tr><td><b>Withdrawing</b></td><td><b class="no">Never</b>, by design</td><td><b class="yes">A signed append</b> by either side ends the link (rule 2)</td></tr>
       </tbody>
     </table>
-    <p class="cap">Append-only is safe when a writer appends only to objects it owns, and fatal when anyone may append to somebody else's. The rule to carry forward is not "append-only" — it is <em>the writer owns what it writes</em>. <a href="failure/index.html#append-only">The full argument, with sources →</a></p>
+    <p class="cap">Two-way links stop flooding, not lying: two people can confirm each other falsely. The anchor and the evidence are what make a link worth something. <a href="failure/index.html">The 2019 history, with sources →</a> · <a href="rules/index.html">The four rules →</a></p>
   </div>
 </section>
 
-<!-- the rules -->
-<section class="band alt" id="rules">
-  <h2>Four rules, published before the registry exists</h2>
-  <p class="blurb">Each one turns around a property the 2019 attack abused. Publishing them now is cheap; claiming them afterwards is impossible. If something ships that breaks one, this site is the evidence.</p>
+<section class="band alt" id="reframe">
+  <h2>Completing something that ships</h2>
+  <p class="blurb">sgit already makes the keys: an encryption pair and a signing pair, exported as a small bundle. Its own documentation lists what is missing in one line: <b>"No web of trust and no directory"</b>. This is that directory, byte-compatible with the CLI in both directions, tested against it on every build.</p>
   <div class="cards">
-    <a class="card" href="rules/index.html#r1"><span class="tag">Rule 1</span><h3>Only the owner writes to their own record</h3><p>Turns around: anyone may append to anybody's certificate. This is the rule that carries the append-only pattern through the history intact.</p><span class="go">Read →</span></a>
-    <a class="card" href="rules/index.html#r2"><span class="tag">Rule 2</span><h3>Revocation is a signed append, not a deletion</h3><p>Signed by the key being revoked. The record stays append-only, the revocation is self-authenticating, and what a key said before revocation stays checkable.</p><span class="go">Read →</span></a>
-    <a class="card" href="rules/index.html#r3"><span class="tag">Rule 3</span><h3>Records are size-bounded</h3><p>One poisoned key reached ~150,000 signatures because certificates had no limit. A stated parameter — with the honest cost that it will one day reject a legitimate record.</p><span class="go">Read →</span></a>
-    <a class="card" href="rules/index.html#r4"><span class="tag">Rule 4</span><h3>Every entry is signed by something you can check</h3><p>Which is what makes untrusted mirrors safe and the registry's contents portable — a reader verifies without trusting whoever served the bytes.</p><span class="go">Read →</span></a>
+    <div class="card"><span class="tag">Ships in sgit</span><h3>Keys, signatures, encryption</h3><p><code>sgit pki keygen</code>: RSA-OAEP 4096 and ECDSA P-256. Encrypt to a fingerprint, sign, verify. A key made here goes into sgit's key store with one script; a key sgit made comes in from its two files.</p></div>
+    <div class="card"><span class="tag">Ships in the newsroom</span><h3>A passkey that opens a vault</h3><p>The PRF extension, a door, a master: the newsroom's reader vault, reused here unchanged, so one design opens both.</p></div>
+    <div class="card"><span class="tag">Ships in SG/Send</span><h3>An address anyone can write to</h3><p>Append lanes: a write-only channel on your vault, with no account needed to send and nobody but you able to read. Your inbox.</p></div>
+    <a class="card" href="people/how.html#claims"><span class="tag">What it does not claim</span><h3>Places to publish keys exist</h3><p>GitHub, keys.openpgp.org, Keybase, Keyoxide. What was missing is the combination, and a way to send something to the person you found.</p><span class="go">The honest edges →</span></a>
   </div>
 </section>
 
-<!-- the history -->
 <section class="band" id="history">
-  <h2>The history, in five minutes</h2>
-  <p class="blurb">Externally verifiable, and cited. Nothing on the failure page depends on trusting us — which is why it leads.</p>
-  <div class="cards">
-    <div class="card"><span class="tag">June 2019</span><h3>~150,000 signatures on one key</h3><p>Two prominent contributors' certificates flooded with bogus signatures. Importing one broke a working installation in hard-to-debug ways; the recommended mitigation became to stop using the network entirely.</p></div>
-    <div class="card"><span class="tag">The cause</span><h3>A design goal, not a bug</h3><p>A key server could add information to a certificate but could never delete a certificate or anything in it — stated at the outset. Changing a goal of that magnitude means a fresh sheet of paper, not a patch.</p></div>
-    <div class="card"><span class="tag">The replacement</span><h3>Immune, and diminished</h3><p>The successor strips all third-party signatures and unverified identities. That stops the attack completely, and removes the web of trust with it — a trade to make deliberately rather than inherit.</p></div>
-  </div>
-  <p class="blurb" style="margin-top:1.6rem;margin-bottom:0"><a href="failure/index.html#sources">The whole story, with sources →</a></p>
+  <h2>What this site was, and still holds</h2>
+  <p class="blurb">From August to October 2026 pki.sgit.ai designed a key registry for agents: the 2019 failure, the four rules, identity and mandate as separate statements, the bootstrap trap, a register of fixtures, and a good deal built around it. The people come first now, because people are who need to be written to. None of it is deleted: the rules are this register's rules, and the rest is <a href="archive/index.html">kept in the archive</a>, with <a href="archive/front-2026-08.html">the old front page</a> as it was.</p>
 </section>
 
-<!-- bootstrap -->
-<section class="band" id="bootstrap">
-  <h2>Why registries for agents don't exist</h2>
-  <p class="blurb">A second obstacle, separate from the 2019 failure and just as load-bearing. Generating a keypair is trivial; getting it recognised requires reaching a trusted authority, every route to which requires authentication, which requires the identity the agent does not have. <b>That is a loop, not a missing feature</b> — and every common escape hands over authority broader than the identity being created.</p>
-  <div class="cards">
-    <a class="card" href="bootstrap/index.html#workarounds"><span class="tag">The trap</span><h3>Seven workarounds, one pattern</h3><p>The operator's credential, repository write access, a shared bot token, a vendor integration, a cloud credential, a project signing secret, a bespoke enrolment server. Every one solves transport by creating a larger identity problem.</p><span class="go">Read →</span></a>
-    <a class="card" href="bootstrap/index.html#evidence"><span class="tag">Evidence</span><h3>Not theoretical</h3><p>A coding assistant holding a token scoped to every repository its developer had authorised. An unprivileged issue reaching CI secrets in three vendors' own repositories. The short-lived-token feature request still open.</p><span class="go">Read →</span></a>
-    <a class="card" href="bootstrap/index.html#choreography"><span class="tag">The reframing</span><h3>Authority choreography</h3><p>The hardest part is not cryptography — it is the order in which claims are established. A system can use excellent cryptography and still have a weak bootstrap if the first instruction is to hand over a platform token.</p><span class="go">Read →</span></a>
-    <a class="card" href="enrolment/index.html"><span class="tag">The exit</span><h3>A door that requires nothing</h3><p>An append lane grants one capability: add an object to an inbox. It is <b>shipped and account-less</b> — a write needs a token in the body, no account, no access token — so the enrolment path is buildable rather than theoretical.</p><span class="go">Read →</span></a>
-  </div>
-</section>
-
-<!-- mandate -->
-<section class="band alt" id="mandate">
-  <h2>A key says who. It does not say what they may do</h2>
-  <p class="blurb">Current systems give an agent <b>your</b> identity, and therefore all of your permissions. The registry separates two signed statements that revoke independently — a materially different position from a bearer token.</p>
-  <div class="cards">
-    <a class="card" href="mandate/index.html#two"><span class="tag">Concept</span><h3>Identity and mandate</h3><p>Identity: this key belongs to this agent. Mandate: this agent may do these things, until this date, on whose authority. Both checkable by a third party; the second revocable without touching the first.</p><span class="go">Read →</span></a>
-    <a class="card" href="mandate/index.html#vs-token"><span class="tag">Comparison</span><h3>Why it beats a bearer token</h3><p>A token's scope is knowable only to its issuer. A mandate's scope is published, so the party relying on it can see the limits of what it was given — and refuse work outside them.</p><span class="go">Read →</span></a>
-    <a class="card" href="mandate/index.html#caution"><span class="tag">The caution</span><h3>What a mandate does not do</h3><p>It constrains what an agent may be authorised to do, not what it does within that authority. One control among several — it composes with observation and ceilings, it does not replace them.</p><span class="go">Read →</span></a>
-    <a class="card" href="execution/index.html#receipts"><span class="tag">The third corner</span><h3>Receipts</h3><p>Identity says who, mandate says what may be done, and neither records what was <em>actually</em> done. A signed receipt is a fact with provenance — produced by the party that performed the action, not the party being assessed.</p><span class="go">Read →</span></a>
-  </div>
-</section>
-
-<!-- why now / build order -->
-<section class="band" id="why-now">
-  <h2>Why attempt this now, and in what order</h2>
-  <p class="blurb">The idea is old. What changed is that vaults supply the layer a key server used to have to build for itself: <b>distribution</b> (a published vault is readable from static hosting and mirrorable by anybody), <b>custody without access</b> (untrusted mirrors are safe by construction), and <b>versioning</b> (the state of a key at any past date is answerable natively). What vaults do <em>not</em> supply — the ownership rule, the size bound, signature checking — is the registry logic, and it is exactly the part that failed last time.</p>
-  <div class="cards">
-    <a class="card" href="roadmap/index.html#order"><span class="tag">Build order</span><h3>Private registry before public</h3><p>A registry with one organisation's agents in it is testable; a global one is a commitment. Steps 2 and 3 — the failure page and the rules — are done, and were done before anything was built.</p><span class="go">Read →</span></a>
-    <a class="card" href="roadmap/index.html#tensions"><span class="tag">Honest tensions</span><h3>Where this design strains</h3><p>Size bounds will one day reject a legitimate record. Fractal trust needs every store to declare its roots. Attestation is valuable and dangerous. Published, not buried.</p><span class="go">Read →</span></a>
-    <a class="card" href="roadmap/index.html#open"><span class="tag">Open questions</span><h3>Six, published unresolved</h3><p>Starting with the central one: does the registry accept third-party attestations at all? A documented failure on one side, no social trust on the other.</p><span class="go">Read →</span></a>
-    <a class="card" href="packs/registry-mvp/index.html"><span class="tag">Dev pack</span><h3>The registry MVP pack</h3><p>Eight documents: the leading brief, architecture, schemas, workflows, build order — plus the diagrams, the change control recording what v0.33.61 corrected, and a tabletop exercise that gives the four rules their first population.</p><span class="go">Read →</span></a>
-    <a class="card" href="documents/pki-registry.html"><span class="tag">The source</span><h3>The scoping brief, verbatim</h3><p>Everything here comes from one document, captured whole with its citations and readable in-page. The raw markdown stays the source of truth.</p><span class="go">Read →</span></a>
-  </div>
-</section>
-
-<!-- origins -->
-<section class="band" id="origins">
-  <h2>This did not start last week</h2>
-  <p class="blurb">A site arguing for provenance discipline owes a reader its own. PKI work here runs from a commit-impersonation incident in February 2026, through four changes of direction, past things that were built and retired and things fully specified and never coded — roughly <b>110 documents against 3,900 lines of code</b>, and that ratio is itself the finding.</p>
-  <div class="cards">
-    <a class="card" href="origins/index.html"><span class="tag">The arc</span><h3>Four acts, three pivots</h3><p>PKI as messaging → as provenance → as agent identity → as substrate. With the thirteen primary sources published verbatim, including the supply-chain ≅ agent-chain isomorphism drawn four months early.</p><span class="go">Read →</span></a>
-    <a class="card" href="rules/prior-art.html"><span class="tag">Prior art</span><h3>The registry that was retired</h3><p>Five endpoints, duplicate-fingerprint rejection, soft delete and a hash-chained transparency log — shipped in February, superseded in June. Two of the four rules ran in production before they were written down.</p><span class="go">Read →</span></a>
-    <a class="card" href="origins/review.html"><span class="tag">Redacted</span><h3>The review, in public</h3><p>The cross-reference review this rests on names a customer and findings against live code, so it is not published. A public edition is — and it states exactly what was removed and why.</p><span class="go">Read →</span></a>
-  </div>
-</section>
-
-<!-- participant -->
 <section class="band alt" id="participant">
   <h2>Who is writing this</h2>
-  <p class="blurb">This site is published by the sgit project, which builds the vault layer the registry would be built on. So this is a participant publishing a design — stated here, upfront. The discipline applies lightly to the history, because <a href="failure/index.html#sources">those claims are externally verifiable</a>, and heavily to the design, which is why the design is published as <a href="rules/index.html">checkable rules before the thing exists</a>. And <a href="about/participant.html">we publish where our own approach loses</a>: vaults do not supply the registry, do not solve attestation, and a mandate constrains authority rather than behaviour.</p>
-  <div class="ctas">
-    <a class="cta2" href="about/participant.html">The participant disclosure, in full →</a>
-    <a class="cta2" href="https://nhi.sgit.ai">The identity gap this is the cryptographic half of →</a>
-  </div>
+  <p class="blurb">Published by the sgit project, which builds the vault layer this runs on, and by Dinis Cruz, who is, for now, its anchor: a single point of trust, stated on purpose. <a href="about/participant.html">The participant disclosure, and where this approach loses →</a> If you want to be one of the first keys in the register, write to <a href="mailto:agent@riskmandate.ai">agent@riskmandate.ai</a>.</p>
 </section>
 
 <footer class="site"><div class="cols">
   <div>
     <div class="brandline">pki<span>.sgit.ai</span></div>
-    <p>Public key infrastructure for agents: a registry designed from a documented failure, and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
+    <p>A register of people and their public keys: verified by an anchor first, then by each other, with a link that only counts when it goes both ways; and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
     <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
     <p class="verline">site <a href="admin/versions.html" data-site-version>release history</a> · <a href="admin/index.html">engineering</a> · <a href="index.md">this page as markdown</a></p>
   </div>
   <div>
-    <h4>The bench</h4>
-    <a href="bench/index.html">&#9679; What is built</a>
-    <a href="simulator/index.html">&#9679; The simulator</a>
-    <a href="workbench/index.html">&#9679; The workbench (app)</a>
-    <a href="probes/index.html">&#9679; Probes, not tables</a>
-    <a href="authorised/index.html">&#9679; What you authorised and never asked for</a>
-    <a href="guess/index.html">&#9679; Which agent is it?</a>
-    <a href="registry/index.html">The register, live</a>
-    <a href="packs/grant-and-mandate/enforcement.html">The mandate hook</a>
-    <a href="packs/grant-and-mandate/blocks.html">The building blocks</a>
-    <a href="assess/index.html">&#8594; Map your own case</a>
-    <a href="book/index.html">The book (commissioned)</a>
-    <a href="book/brief.html">&mdash; its commissioning brief</a>
-    <a href="insurance-book/index.html">The insurance book</a>
+    <h4>People</h4>
+    <a href="people/index.html">&#9679; The register</a>
+    <a href="vault/index.html">&#9679; Your vault</a>
+    <a href="send/index.html">&#9679; Send a message</a>
+    <a href="m/index.html">Open a message</a>
+    <a href="invite/index.html">&#9679; Invite someone</a>
+    <a href="people/how.html">How it works</a>
+    <a href="documents/people-directory.html">The brief</a>
   </div>
   <div>
-    <h4>Insurance</h4>
-    <a href="insurance/index.html">&#9679; Insurance for agents</a>
-    <a href="insurance-book/index.html">&#9679; The insurance book</a>
-    <a href="insurance/what-this-is.html">What this is, and the rule</a>
-    <a href="insurance/the-rating.html">The rating</a>
-    <a href="insurance/the-ecosystem-and-the-gate.html">The ecosystem &amp; the gate</a>
-    <a href="insurance/who-pays-and-the-moving-rating.html">Who pays, &amp; the moving rating</a>
-    <a href="insurance/why-insurance-and-what-broke-it.html">Why insurance</a>
-    <a href="insurance/not-in-line.html">Not in line</a>
-    <a href="insurance/the-broker-market.html">The broker market</a>
-    <a href="insurance/the-policy-as-a-statement.html">The policy as a statement</a>
-    <a href="insurance/the-world-model.html">The world model (the MVP)</a>
-    <a href="insurance/make-them-insurable.html">Make them insurable</a>
-    <a href="insurance/the-schemas-and-the-clocks.html">The schemas &amp; the clocks</a>
-    <a href="insurance/llms.txt">insurance/llms.txt</a>
-    <a href="documents/agent-insurance.html">The pivot briefing</a>
-  </div>
-  <div>
-    <h4>The registry</h4>
-    <a href="failure/index.html">Why they don't exist</a>
+    <h4>The rules</h4>
+    <a href="failure/index.html">Why the old ones failed</a>
     <a href="rules/index.html">The four rules</a>
-    <a href="mandate/index.html">Identity &amp; mandate</a>
-    <a href="roadmap/index.html">Build order</a>
     <a href="rules/prior-art.html">Prior art</a>
+    <a href="bootstrap/index.html">The bootstrap trap</a>
+    <a href="mandate/index.html">Identity &amp; mandate</a>
+    <a href="enrolment/index.html">Enrolment</a>
   </div>
   <div>
-    <h4>The three layers</h4>
-    <a href="bootstrap/index.html">The bootstrap trap</a>
-    <a href="enrolment/index.html">Enrolment</a>
-    <a href="execution/index.html">The execution broker</a>
-    <a href="shipped/index.html">What already ships</a>
+    <h4>Archive</h4>
+    <a href="archive/index.html">The archive</a>
+    <a href="registry/index.html">The agent register</a>
+    <a href="authorised/index.html">Measure</a>
+    <a href="bench/index.html">The bench</a>
+    <a href="insurance/index.html">Insurance for agents</a>
+    <a href="assess/index.html">Map your case</a>
+    <a href="origins/index.html">Origins: 2026</a>
   </div>
   <div>
     <h4>The sources</h4>
-    <a href="origins/index.html">Origins: 2026</a>
     <a href="documents/index.html">The documents</a>
-    <a href="packs/registry-mvp/index.html">The registry MVP pack</a>
-    <a href="packs/grant-and-mandate/index.html">The Grant &amp; Mandate pack</a>
-    <a href="packs/insurance-ecosystem/index.html">The Insurance Ecosystem pack</a>
-    <a href="packs/map-your-case/index.html">The Map Your Case pack</a>
+    <a href="packs/index.html">Dev packs</a>
     <a href="about/participant.html">Where we lose</a>
   </div>
   <div>
@@ -373,7 +201,9 @@
     <a href="llms.txt">llms.txt</a>
   </div>
 </div></footer>
-
-</body>
+<script type="module">
+import { loadDirectory, D } from './assets/people/ui.js'
+loadDirectory().then(d => { document.getElementById('real-keys').textContent = String(D.realKeys(d.records)) }).catch(() => {})
+</script>
 </body>
 </html>

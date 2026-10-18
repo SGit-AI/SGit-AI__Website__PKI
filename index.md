@@ -1,111 +1,51 @@
-# pki.sgit.ai — good public key repositories existed, and were destroyed
+# pki.sgit.ai — a register of people and their keys, verified both ways
 
-> In 2019 the global keyserver network was flooded with garbage signatures until
-> importing a poisoned certificate broke your installation. Its own maintainer called it
-> **unsalvageable** — and the cause was a design goal stated at the outset, not a bug.
-> Anyone proposing a key registry now should be able to show they designed it with that
-> history in hand.
+> Find someone and send them something only they can read. A passkey opens a vault that
+> holds your keys (the same keys `sgit pki` makes); you publish the public half, add
+> evidence, are verified by an anchor, and link with the people you know. A link only
+> counts when it goes both ways, which is also the answer to how the old web of trust was
+> destroyed in 2019.
 
-*Source: <https://pki.sgit.ai/index.html> · site v0.1.74 · markdown twin of the front page.*
+*Source: <https://pki.sgit.ai/index.html> · site v0.2.0 · markdown twin of the front page.*
 
 ---
 
-## One property, two outcomes
+## From a passkey to a message
 
-| | Append-only, owner-writes | Append-only, anyone-writes |
+1. **A passkey opens a vault.** Its PRF output derives a door vault; the door holds the key of a
+   master vault, which holds your private keys; so the keys follow you to every device whose
+   passkey, or recovery code, opens a door. The newsroom's design, reused. [Your vault](vault/index.html)
+2. **Make a key pair, or bring sgit's.** RSA-OAEP 4096 and ECDSA P-256, made in the browser,
+   byte-compatible with `sgit pki` in both directions.
+3. **Publish the public half**, signed with your own key.
+4. **Add evidence**: a website, GitHub, a DNS record (`pki.sgit.ai=sha256:<record>` as the proof line),
+   keys elsewhere, profiles.
+5. **Be verified by the anchor** (Dinis Cruz, for now): a link from him naming the method and the
+   date; you confirm by linking back.
+6. **Link with the people you know.** A link counts only when both wrote it. Degrees of separation
+   are computed from the confirmed links, never stored.
+7. **Write to anyone in the register**: a message sealed in your browser to their key, as a link and
+   a QR code (`pki.sgit.ai/m/#m1.…`), or into their inbox (an append lane). [Send](send/index.html)
+
+Invitations are QR codes with the URL printed above them, signed by the inviter. [Invite](invite/index.html)
+
+## Two ways, or not at all
+
+| | The keyserver network, 2019 | This register |
 |---|---|---|
-| Who may write to a record | Only its owner | **Anybody** |
-| Can a stranger grow your record? | No | **Without limit** |
-| Is every entry attributable? | Yes — signed by the owner | **No** — garbage is indistinguishable |
-| Can something be withdrawn? | Yes — a signed append supersedes | **Never** — by design |
-| Failure mode | A record grows slowly, in the owner's own hand | **Destroyed the network** |
+| Where a vouch for you is written | On your key, by anyone | In the voucher's own record |
+| Can a stranger grow your record? | Without limit | No (rule 1, rule 3) |
+| What an unconfirmed vouch does | Counts | Nothing: a visible claim |
+| Withdrawing | Never | A signed append (rule 2) |
 
-Append-only is safe when a writer appends only to objects it owns, and fatal when anyone
-may append to somebody else's. The rule to carry forward is not "append-only" — it is
-*the writer owns what it writes*. [The full argument, with sources](failure/index.html).
+Two-way links stop flooding, not lying; the anchor and the evidence make a link worth something.
 
-## Three questions, three layers
+## The number to watch
 
-| Question | What answers it | Kind of problem |
-|---|---|---|
-| Who is this agent? | [Identity](rules/index.html) — a signed statement in a registry | A registry problem |
-| What may it do? | [Mandate](mandate/index.html) — a separate statement, revoked separately | A delegation problem |
-| Should that produce this effect, now, here? | [Execution](execution/index.html) — a broker holding the credential the agent never sees | A broker problem |
+Real public keys in the register, fixtures excluded: [the register](people/index.html). Machine-readable:
+[directory/index.json](directory/index.json) (generated; the signed statements in `directory/records/` are the source).
 
-## Not a new product — the missing half of one that ships
+## What this site was
 
-The keypairs, signing, encryption to a fingerprint and contacts list already exist. The
-documentation says, in its own words, **no revocation, no directory**. Those two absences are
-precisely what a registry supplies — a concrete user and a bounded scope.
-[What already ships, and what is only proposed](shipped/index.html).
-
-## Why registries for agents don't exist
-
-Generating a keypair is trivial; getting it recognised requires reaching a trusted authority,
-every route to which requires authentication, which requires the identity the agent does not
-have. **A loop, not a missing feature** — and every common escape hands over authority broader
-than the identity being created. [The bootstrap trap](bootstrap/index.html), and
-[the account-less door that breaks it](enrolment/index.html).
-
-## Four rules, published before the registry exists
-
-1. [**Only the owner writes to their own record**](rules/index.html#r1) — turns around:
-   anyone may append to anybody's certificate.
-2. [**Revocation is a signed append, not a deletion**](rules/index.html#r2) — signed by
-   the key being revoked, so the record stays append-only and still supports withdrawal.
-3. [**Records are size-bounded**](rules/index.html#r3) — one poisoned key reached
-   ~150,000 signatures because certificates had no limit.
-4. [**Every entry is signed by something you can check**](rules/index.html#r4) — which is
-   what makes untrusted mirrors safe.
-
-## Identity and mandate are separate statements
-
-| Statement | Says |
-|---|---|
-| **Identity** | This key belongs to this agent |
-| **Mandate** | This agent may do these things, until this date, on whose authority |
-
-Both checkable by a third party; the mandate revocable without touching the identity.
-And the caution that travels with it: a signed mandate constrains what an agent may be
-*authorised* to do, not what it does within that authority.
-[Identity and mandate](mandate/index.html).
-
-## Build order
-
-A registry with one organisation's agents in it is testable; a global one is a
-commitment — so the private registry comes before the public one.
-[The six steps, the honest tensions, and six open questions published unresolved](roadmap/index.html).
-
-## The registry MVP, proposed
-
-A five-brief first-pass pack proposes the build: a public vault of append-only signed
-statements, schemas for identity/mandate/grant/revocation, workflows an LLM session can
-follow from a page, and read-path-first phasing.
-Now a full dev pack of ten documents — diagrams, change control, a tabletop exercise,
-the [interface written out screen by screen](packs/registry-mvp/ux-mockups.html), and
-[six Wardley maps](packs/registry-mvp/wardley-maps.html) of where the novelty actually
-sits, [the whole thing as deliverables](packs/registry-mvp/user-stories.html) — six users,
-twenty-four stories, six workflows — [observability](packs/registry-mvp/observability.html), which answers who is using a
-mandate by refusing the question and telling you instead who has never checked one, and
-[the grant tree](packs/registry-mvp/grant-tree.html) — blast radius as a path, and the three-tier
-test for whether a control is a boundary at all: [start at the pack hub](packs/registry-mvp/index.html).
-
-And one part of it is built rather than designed: [map your own case](assess/index.html) — pick the
-agents you run, tick what you meant them to do, and see the difference. It stores your choices and
-never your answers, entirely in your browser, and you can check that in the network panel in ten
-seconds.
-
-## Who is writing this
-
-Published by the sgit project, which builds the vault layer this registry would be built
-on. The history is externally verifiable; the design is published as checkable rules
-before the thing exists.
-[The participant disclosure, including where our own approach loses](about/participant.html).
-
-## Site
-
-- [The documents](documents/index.html) — the scoping brief, verbatim
-- [Comms: tasks & requests](admin/comms.html)
-- [Release history](admin/versions.html)
-- [How this site is built](admin/index.html)
-- [llms.txt](llms.txt)
+From August to October 2026 it designed a key registry for agents. The rules carry over; the rest is
+kept in [the archive](archive/index.html), with [the old front page](archive/front-2026-08.html).

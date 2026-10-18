@@ -8,6 +8,8 @@
 //   3. canonical host — every <link rel="canonical"> and og:url points at the host
 //      in CNAME. This site was refactored out of nhi.sgit.ai, so a canonical left
 //      pointing at the old host is the specific mistake worth catching in CI.
+//   5. the register of people — admin/build/people.mjs check: every record in directory/records/ reads
+//      cleanly (signatures, ownership, bounds) and directory/index.json is not stale
 //   4. key-leak tripwire — nothing in the tree may look like an sgit vault key
 //      (a >=20-char passphrase joined by a colon to a uuid-shaped id). The site
 //      discusses keys constantly; it must never contain one.
@@ -137,6 +139,12 @@ for (const f of htmlFiles) {
   for (const [src, n] of seen) if (n > 1) {
     errors.push(`${path.relative(ROOT, f)}: loads ${src} ${n} times`);
   }
+}
+
+// --- 5. the register of people ---------------------------------------------
+{
+  const r = require('child_process').spawnSync(process.execPath, [path.join(ROOT, 'admin/build/people.mjs'), 'check'], { encoding: 'utf8' });
+  if (r.status !== 0) errors.push(`the register of people: ${(r.stderr || r.stdout || 'people.mjs check failed').trim()}`);
 }
 
 // --- 4. key-leak tripwire -------------------------------------------------

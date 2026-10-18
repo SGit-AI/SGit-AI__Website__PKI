@@ -1,0 +1,23 @@
+{
+  "v": 1,
+  "type": "identity",
+  "registry": "pki.sgit.ai",
+  "record": "sha256:9a8830b7b941c841",
+  "signer": "sha256:9a8830b7b941c841",
+  "created_at": "2026-10-18T09:04:00Z",
+  "body": {
+    "kind": "person",
+    "name": "Fixture: Duarte",
+    "about": "Not a person. Links to Ana, who has not linked back: a claim, and no link.",
+    "bundle": {
+      "v": 1,
+      "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAx0nwVpEex2F3+Nn7ClOB\nMAQcIn1ELbs/Qmitojkrz5UC+wyQcTs/J3sKdyMIkC0zbd6fNbz5YBaeYVa5fB+v\n2KTsIDXW0KMa9DxeWnKH96cjwLKfbRg2mhQcO/cchQJGbhzGDRoo0XA7C4JVSJSC\nWoSg6x7vPs+n3p4sufP64KAo8bjk2MQpVd/kL7kCiZhuzVxLsuA2EyEpOiB1Mwwt\nDZ9ctan9+k2ES7W2I1usKlZF6fIB69J6BxYRolfXQ4Sol5hhTOYV7pi7wHCrxP01\n6c5MnGL+7eY89eg/P0lpBD7h3oKzUtXhjlstDonfgtLNdLXN0uNClE4WTaeEE9J8\nquqs5KjoMasi2S0a/AaaqEfou48SN4ck6uenXeDqnAnPB+AIr9eV8FREoCYPwdrC\nNnJW9wd6J5VTf6txjk/wNYFWiIGKsIdP/9vqHTWhYPGSFTxabD+KjFloJamIqB8n\nXPkcG+8gCrX3FTbXkliBl6FV2Brb6JhQnMdD4mMLduT5IEX7lAuhmTGPxLpjkjqb\nHcGaX87hKAEKo0xfObiiTOESTyokHyota0W7fAM6zZDeotRahLIqSVc9BX1i/doq\ncpagupT3jL1gt2shcrHY3LjLGJCMIobO57jiEF8LED6qZWy1V4TFVlPtdd0HMBeb\nTI2F15p2050NRww3e+d9WYsCAwEAAQ==\n-----END PUBLIC KEY-----\n",
+      "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEYOziZ7ZNdZLy7Qb6tM2J3fw657My\nAy1n+WYj7yFJ/HeLUaT8E2rjuO+jYlJKRKvGBeq2vx5UCsWIGOCbdGWlBA==\n-----END PUBLIC KEY-----\n",
+      "label": "fixture-duarte",
+      "fingerprint": "sha256:baf4756f4caf962e",
+      "signing_fingerprint": "sha256:9a8830b7b941c841"
+    },
+    "private_key_published": false
+  },
+  "sig": "b/bMQmBhg4mIUun7POI4rVbc41zJmjUSPQO23aBGXcmQecC1l9qGFONsj7Yl5raRQas4hDNe1aG/FqEIesJPeQ=="
+}

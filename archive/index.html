@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The archive: what pki.sgit.ai designed for agents, kept · pki.sgit.ai</title>
+<meta name="description" content="From August to October 2026 pki.sgit.ai designed a key registry for agents and built a good deal around it. Since v0.2.0 people come first; everything from before is kept here, as the record of the thinking.">
+<link rel="canonical" href="https://pki.sgit.ai/archive/index.html">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
+  <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
+  <span class="stage-pill">people first</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history" data-site-version></a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl" href="../people/index.html">People<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../people/index.html">&#9679; The register of people</a>
+      <a class="sl" href="../vault/index.html">&#9679; Your vault &amp; your keys</a>
+      <a class="sl" href="../send/index.html">&#9679; Send a message</a>
+      <a class="sl" href="../invite/index.html">&#9679; Invite someone</a>
+      <a class="sl" href="../people/how.html">How it works</a>
+      <a class="sl" href="../documents/people-directory.html">The brief</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../failure/index.html">The rules<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../failure/index.html">Why the old ones failed (2019)</a>
+      <a class="sl" href="../rules/index.html">The four rules</a>
+      <a class="sl" href="../rules/prior-art.html">Prior art</a>
+      <a class="sl" href="../bootstrap/index.html">The bootstrap trap</a>
+      <a class="sl" href="../mandate/index.html">Identity &amp; mandate</a>
+      <a class="sl" href="../enrolment/index.html">Enrolment</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl here" href="../archive/index.html">Archive<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl here" href="../archive/index.html">&#9679; The archive: what is kept, and why</a>
+      <a class="sl" href="../registry/index.html">The agent register (fixtures)</a>
+      <a class="sl" href="../archive/front-2026-08.html">The front page, August 2026</a>
+      <a class="sl" href="../execution/index.html">The layers: broker &amp; what ships</a>
+      <a class="sl" href="../roadmap/index.html">Build order (agents)</a>
+      <a class="sl" href="../authorised/index.html">Measure: probes &amp; the game</a>
+      <a class="sl" href="../bench/index.html">The bench &amp; experiments</a>
+      <a class="sl" href="../insurance/index.html">Insurance for agents</a>
+      <a class="sl" href="../assess/index.html">Map your case</a>
+      <a class="sl" href="../origins/index.html">Origins: 2026</a>
+      <a class="sl" href="../book/index.html">The books</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../documents/index.html">The documents</a>
+      <a class="sl" href="../data/index.html">The data viewer</a>
+      <a class="sl" href="../packs/index.html">Dev packs</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../admin/versions.html">Release history</a>
+      <a class="sl" href="../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+  <script src="../assets/version.js" defer></script>
+  <script src="../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / archive</div>
+<h1>The archive</h1>
+<p class="lead">From 25 August to 18 October 2026 this site designed a key registry for agents, and built a good deal around it. On 18 October the brief changed: <a href="../documents/people-directory.html">people first</a>, and much simpler. We were overbaking it. Nothing below is deleted, because the thinking is worth keeping and some of it is load-bearing.</p>
+
+<div class="note"><b>What carried over, unchanged.</b> <a href="../failure/index.html">The 2019 failure</a> and <a href="../rules/index.html">the four rules</a> are the register of people's own rules: only the owner writes to their own record, revocation is a signed append, records are bounded, every entry is signed. The statement format (<code>{v, type, registry, record, signer, created_at, body, sig}</code>, jq-canonical, sgit's raw ECDSA signatures) is the same one, with new types: <i>evidence</i>, <i>link</i> and <i>inbox</i>. The open question the rules page left, the attestation trade, has its answer: <a href="../people/how.html#two-ways">a link only counts when it goes both ways</a>.</div>
+
+<h2>The agent register and its design</h2>
+<ul>
+<li><a href="front-2026-08.html">The front page, August 2026</a>, as it was.</li>
+<li><a href="../registry/index.html">The agent register</a>: eleven records, ten of them fixtures with their private keys published on purpose, one real (the session that wrote it). An agent's key is a record like a person's; this one stays a separate tree, <code>registry/records/</code>.</li>
+<li><a href="../mandate/index.html">Identity and mandate</a> as separate, independently revocable statements; <a href="../bootstrap/index.html">the bootstrap trap</a>; <a href="../enrolment/index.html">enrolment</a> through an append lane, which the people register now uses as the inbox.</li>
+<li><a href="../execution/index.html">The execution broker</a>, <a href="../shipped/index.html">what already ships</a>, <a href="../roadmap/index.html">the build order for agents</a>.</li>
+</ul>
+
+<h2>What was built around it</h2>
+<ul>
+<li><b>Measure.</b> <a href="../authorised/index.html">What you authorised and never asked for</a>, <a href="../guess/index.html">Which agent is it?</a>, <a href="../probes/index.html">Probes, not tables</a>.</li>
+<li><b>The bench.</b> <a href="../bench/index.html">What is built</a>, <a href="../simulator/index.html">the simulator</a>, <a href="../experiments/index.html">experiments</a>, <a href="../workbench/index.html">the workbench</a>.</li>
+<li><b>Insurance for agents.</b> <a href="../insurance/index.html">The rating, before the money</a>, <a href="../insurance-book/index.html">the insurance book</a>, and the push policy this repository still runs under.</li>
+<li><b>Map your case.</b> <a href="../assess/index.html">The assessment</a>.</li>
+<li><b>The books.</b> <a href="../book/index.html">A Key Means Nothing Alone</a>.</li>
+<li><b>The sources.</b> <a href="../origins/index.html">Origins, February to August 2026</a>, <a href="../documents/index.html">the documents</a>, <a href="../packs/index.html">the dev packs</a>.</li>
+</ul>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>A register of people and their public keys: verified by an anchor first, then by each other, with a link that only counts when it goes both ways; and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html" data-site-version>release history</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>People</h4>
+    <a href="../people/index.html">&#9679; The register</a>
+    <a href="../vault/index.html">&#9679; Your vault</a>
+    <a href="../send/index.html">&#9679; Send a message</a>
+    <a href="../m/index.html">Open a message</a>
+    <a href="../invite/index.html">&#9679; Invite someone</a>
+    <a href="../people/how.html">How it works</a>
+    <a href="../documents/people-directory.html">The brief</a>
+  </div>
+  <div>
+    <h4>The rules</h4>
+    <a href="../failure/index.html">Why the old ones failed</a>
+    <a href="../rules/index.html">The four rules</a>
+    <a href="../rules/prior-art.html">Prior art</a>
+    <a href="../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../enrolment/index.html">Enrolment</a>
+  </div>
+  <div>
+    <h4>Archive</h4>
+    <a href="../archive/index.html">The archive</a>
+    <a href="../registry/index.html">The agent register</a>
+    <a href="../authorised/index.html">Measure</a>
+    <a href="../bench/index.html">The bench</a>
+    <a href="../insurance/index.html">Insurance for agents</a>
+    <a href="../assess/index.html">Map your case</a>
+    <a href="../origins/index.html">Origins: 2026</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../packs/index.html">Dev packs</a>
+    <a href="../about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../llms.txt">llms.txt</a>
+  </div>
+</div></footer>
+</body>
+</html>

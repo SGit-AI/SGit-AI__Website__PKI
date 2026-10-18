@@ -1,15 +1,58 @@
-# pki.sgit.ai — public key infrastructure for agents
+# pki.sgit.ai — a register of people and their public keys, verified both ways
 
-> Good public key repositories existed, and were destroyed. In June 2019 the global
-> keyserver network was flooded with bogus signatures until importing a poisoned
-> certificate would break a working installation; one key reached roughly 150,000
-> signatures, and the network's own maintainer called it unsalvageable. The cause was a
-> design goal stated at the outset — a key server could add information to a certificate
-> but never delete anything — not a bug. This site publishes that history, and the
-> registry rules it produces, before the registry exists.
+> Find someone and send them something only they can read. A person registers a passkey,
+> which opens a vault (door → master → book, the newsroom's design); makes a key pair in
+> the browser, byte-compatible with `sgit pki` (RSA-OAEP 4096 + ECDSA P-256, the same
+> JSON bundle), or imports sgit's; publishes the public half as a signed identity
+> statement; adds evidence; is verified by an anchor (Dinis Cruz, for now); and links with
+> the people they know. A link counts only when both records hold one, each pointing at
+> the other: the answer to the 2019 keyserver flood. Since v0.2.0 (18 October 2026) people
+> come first; the agent-registry work is kept under /archive/.
 
-Site version: v0.1.74 (29 August 2026). Published by the sgit project — participant
+Site version: v0.2.0 (18 October 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
+
+## The register of people (start here)
+
+- /people/index.html — the register: every record read and its signatures checked in the
+  browser; the count of real keys (fixtures excluded) is the number to watch.
+- /people/how.html — how it works: the flow, two-way links, the anchor, evidence and the
+  proof line, messages and invitations, what is public, what it does not claim.
+- /directory/index.json — machine-readable, GENERATED (no authority). The source is
+  /directory/records/sha256-<16 hex>/NN__<type>.json: one signed statement per file, in
+  the register's envelope {v, type, registry, record, signer, created_at, body, sig};
+  canonical bytes = `jq -cS 'del(.sig)'`; signature = ECDSA P-256/SHA-256, raw r||s,
+  base64; statement id = "sha256:" + sha256(`jq -cS .`); record = the signing fingerprint.
+  Types: identity (body.kind "person", name, bundle), evidence (website | github | dns |
+  key | link), link (to, method, on), inbox (endpoint, vault, token: an append lane),
+  revocation (withdraws one of the record's own statements). A link exists only when both
+  records hold one, each pointing at the other, neither withdrawn. Bounds: 16 KiB a
+  statement, 256 a record, 150 live links, 32 live evidence items.
+- /directory/anchors.json — anchors (empty until Dinis's key is in) and the fixture anchor.
+- Fixtures: five made-up people whose private keys are published at /directory/fixtures/.
+- Proof line for machine-checked evidence: `pki.sgit.ai=sha256:<record>` in
+  https://<domain>/.well-known/pki.sgit.ai.txt, a public gist owned by the GitHub account,
+  or a TXT record at _pki.sgit.ai.<domain>.
+- Messages: /send/ seals in the browser (sgit's hybrid v2 envelope; `sgit pki decrypt`
+  opens it) and yields https://pki.sgit.ai/m/#m1.<to16>.<w>.<i>.<c>[.<s>.<from16>]
+  (base64url fields; the fragment never reaches a server). The inner message is JSON
+  {v:1, kind:"pki.sgit.ai/message/v1", to, from?, at, subject?, text, files?, sig?}, its
+  sig covering `to`. Or delivered to the recipient's inbox (append lane) if published.
+- Invitations: /invite/ → https://pki.sgit.ai/join/#i1.<from16>.<yyyymmdd>.<nonce>.<sig>
+  [&n=<name>][&k=<access key>]; sig over "pki.sgit.ai/invite/v1|<fp>|<exp>|<nonce>".
+- Code: /assets/people/ (keys.js, directory.js, message.js, account.js, door.js, ui.js),
+  the same modules the build runs (admin/build/people.mjs) and the tests import.
+- Writes: a person's statements go to the register as a submission
+  {kind:"pki.sgit.ai/submission/v1", record, statements}; `node admin/build/people.mjs add`
+  verifies every signature and that every statement is the record's own, then a reviewed
+  commit. The site's build re-checks every record (`people.mjs check`, run by validate.js).
+- The brief: /documents/people-directory.html (verbatim at
+  /briefs/newsroom-2026-10-18__build-brief__a-directory-of-people-and-keys.md).
+
+## Archive: the agent registry, August to October 2026
+
+Everything below describes the site as it was before v0.2.0. It is kept: the rules carry
+over unchanged, and the rest is the record of the thinking. /archive/index.html lists it.
 
 ## Properties agents may rely on
 

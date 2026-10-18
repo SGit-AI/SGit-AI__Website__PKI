@@ -1,0 +1,7 @@
+{
+  "_note": "anchors: the keys verification starts from in the real register (Dinis Cruz, once his key is in). fixture_anchors: the same, for the fixture graph only.",
+  "anchors": [],
+  "fixture_anchors": [
+    "sha256:568450f3a50a5cb2"
+  ]
+}

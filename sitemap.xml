@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://pki.sgit.ai/people/index.html</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://pki.sgit.ai/people/how.html</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://pki.sgit.ai/people/person.html</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://pki.sgit.ai/vault/index.html</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://pki.sgit.ai/send/index.html</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://pki.sgit.ai/m/index.html</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://pki.sgit.ai/invite/index.html</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://pki.sgit.ai/join/index.html</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://pki.sgit.ai/archive/index.html</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://pki.sgit.ai/archive/front-2026-08.html</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://pki.sgit.ai/documents/people-directory.html</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://pki.sgit.ai/documents/people-directory-article.html</loc><lastmod>2026-10-18</lastmod></url>
   <url><loc>https://pki.sgit.ai/assess/index.html</loc><lastmod>2026-08-21</lastmod></url>
   <url><loc>https://pki.sgit.ai/assess/library.html</loc><lastmod>2026-08-21</lastmod></url>
-  <url><loc>https://pki.sgit.ai/index.html</loc><lastmod>2026-08-20</lastmod></url>
+  <url><loc>https://pki.sgit.ai/index.html</loc><lastmod>2026-10-18</lastmod></url>
   <url><loc>https://pki.sgit.ai/bench/index.html</loc><lastmod>2026-08-26</lastmod></url>
   <url><loc>https://pki.sgit.ai/book/index.html</loc><lastmod>2026-08-27</lastmod></url>
   <url><loc>https://pki.sgit.ai/workbench/index.html</loc><lastmod>2026-08-30</lastmod></url>
