@@ -8,7 +8,8 @@
  *
  * with record === signer === the signing fingerprint of the identity's bundle. The types a person's record uses:
  *
- *   identity     body { kind: "person", name, bundle, about?, private_key_published }    exactly one, the first
+ *   identity     body { kind: "person" | "agent", name, bundle, about?, runtime?, session?, private_key_published }
+ *                                                                                         exactly one, the first
  *   evidence     body { kind: website | github | dns | key | link, value, url? }        a claim that an account is theirs
  *   link         body { to: <fingerprint>, method?, on?, until? }                        "I know the owner of that key"
  *   inbox        body { endpoint, vault, token }                                         where to write to them (an append lane)
@@ -24,7 +25,14 @@
  * replaces the old one. Degrees of separation are computed from the records each time and never stored (rule: a view,
  * not a fact).
  *
- * Bounds (rule 3): 16 KiB a statement, 256 statements a record, 150 live links a record, 32 live evidence items.
+ * Agents are records like people's (kind "agent"). An agent is OPERATED by a key when that key's record links to it
+ * with method "operates" (and an end date: agents are verified for days or weeks, not a year) and the agent's record
+ * links back (method "operated-by"): the same two-way rule. The operator can be a person, or an agent the person
+ * operates (a fleet key, so that a person running hundreds of agents does not fill their own record); the chain is
+ * followed up to three steps to the person at its root, whose standing the agent's page shows.
+ *
+ * Bounds (rule 3): 16 KiB a statement, 256 statements a record, 150 live links to people and 200 to operated agents
+ * a record, 32 live evidence items.
  *
  * Pure functions over parsed JSON and keys.js; runs in the browser and in Node (admin/build/people.mjs).
  *
@@ -34,7 +42,7 @@ import { FP, canon, checkBundle, fingerprint, statementId, signStatement, verify
 
 export const REGISTRY = 'pki.sgit.ai'
 export const TYPES = ['identity', 'evidence', 'link', 'inbox', 'revocation']
-export const BOUNDS = { statement_bytes: 16384, statements: 256, links: 150, evidence: 32 }
+export const BOUNDS = { statement_bytes: 16384, statements: 256, links: 150, agents: 200, evidence: 32 }
 export const EVIDENCE = {
     website: { label: 'A website', machine: true, how: 'a file at https://<your domain>/.well-known/pki.sgit.ai.txt containing the proof line' },
     github: { label: 'GitHub', machine: true, how: 'a public gist, owned by your account, containing the proof line' },
@@ -43,13 +51,15 @@ export const EVIDENCE = {
     link: { label: 'A profile', machine: false, how: 'LinkedIn or another profile: a link a person checks, not a machine' },
 }
 /** The verification methods an anchor may name. Published by name; the details stay in the anchor's vault. */
-export const METHODS = { 'in-person': 'met in person', 'video-call': 'on a video call', 'known-channel': 'on a channel already known to be theirs', 'invitation': 'through an invitation they accepted', 'known': 'known to me' }
+export const METHODS = { 'in-person': 'met in person', 'video-call': 'on a video call', 'known-channel': 'on a channel already known to be theirs', 'invitation': 'through an invitation they accepted', 'known': 'known to me',
+                          'operates': 'runs this agent', 'operated-by': 'is the agent of this key' }
+export const AGENT_DAYS = 30
 export const VERIFYING = ['in-person', 'video-call', 'known-channel']
 export const VERIFY_DAYS = 365
 const today = () => new Date().toISOString().slice(0, 10)
 const plusDays = (d, n) => new Date(Date.parse(d + 'T00:00:00Z') + n * 86400000).toISOString().slice(0, 10)
 /** When a verifying link stops verifying: its own `until`, or VERIFY_DAYS after it was made. */
-export const validUntil = l => l.until || plusDays(l.on || String(l.at).slice(0, 10), VERIFY_DAYS)
+export const validUntil = l => l.until || plusDays(l.on || String(l.at).slice(0, 10), l.method === 'operates' ? AGENT_DAYS : VERIFY_DAYS)
 
 /** The proof line evidence carries: the record's fingerprint, so a page, a gist or a TXT record names this key. */
 export const proofLine = fp => `pki.sgit.ai=${fp}`
@@ -69,6 +79,9 @@ export async function statement(identity, type, body, at = now()) {
 }
 export const identityStatement = (identity, { name, about = '' }, at) =>
     statement(identity, 'identity', { kind: 'person', name: String(name).trim(), about: String(about || '').trim(), bundle: identity.bundle, private_key_published: false }, at)
+/** An agent's identity: runtime says where it runs (free text), session that the key lives only as long as one session. */
+export const agentStatement = (identity, { name, about = '', runtime = '', session = false }, at) =>
+    statement(identity, 'identity', { kind: 'agent', name: String(name).trim(), about: String(about || '').trim(), runtime: String(runtime || '').trim(), session: !!session, bundle: identity.bundle, private_key_published: false }, at)
 export const evidenceStatement = (identity, { kind, value, url = '' }, at) => statement(identity, 'evidence', { kind, value: String(value).trim(), url: String(url || '').trim() }, at)
 export const linkStatement = (identity, { to, method = '', on = '', until = '' }, at) => statement(identity, 'link', until ? { to, method, on, until } : { to, method, on }, at)
 export const inboxStatement = (identity, { endpoint, vault, token }, at) => statement(identity, 'inbox', { endpoint, vault, token }, at)
@@ -123,7 +136,10 @@ export async function readRecord(statements, { dir = null, fixture = false } = {
     for (const e of live('link')) lastLink.set(e.st.body.to, { id: e.id, at: e.st.created_at, ...e.st.body })
     out.links = [...lastLink.values()]
     const inb = live('inbox'); out.inbox = inb.length ? { id: inb[inb.length - 1].id, ...inb[inb.length - 1].st.body } : null
-    if (out.links.length > BOUNDS.links) problems.push(`${out.links.length} live links: over the bound of ${BOUNDS.links} (rule 3)`)
+    const toAgents = out.links.filter(l => l.method === 'operates').length
+    if (out.links.length - toAgents > BOUNDS.links) problems.push(`${out.links.length - toAgents} live links: over the bound of ${BOUNDS.links} (rule 3)`)
+    if (toAgents > BOUNDS.agents) problems.push(`${toAgents} operated agents: over the bound of ${BOUNDS.agents} (rule 3); use a fleet key`)
+    out.kind = idSt.body.kind
     if (out.evidence.length > BOUNDS.evidence) problems.push(`${out.evidence.length} live evidence items: over the bound of ${BOUNDS.evidence} (rule 3)`)
     if (out.revoked) { out.links = []; out.inbox = null }
     out.ok = problems.length === 0
@@ -134,7 +150,8 @@ function shapeProblems(st, fp) {
     switch (st.type) {
         case 'identity':
             if (b.kind !== 'person' && b.kind !== 'agent') return 'identity kind must be person or agent'
-            if (b.kind === 'person' && !String(b.name || '').trim()) return 'a person’s identity names them'
+            if (!String(b.name || '').trim()) return 'an identity names who or what it is'
+            if (b.kind === 'agent' && (String(b.runtime || '').length > 120 || (b.session != null && typeof b.session !== 'boolean'))) return 'runtime is short text and session a boolean'
             if (String(b.name || '').length > 120 || String(b.about || '').length > 600) return 'the name or about is too long'
             if (b.private_key_published !== false && b.private_key_published !== true) return 'private_key_published must be stated'
             return null
@@ -196,7 +213,17 @@ export function graph(records, { anchors = [], includeFixtures = false, asOf = t
         else if (!expired.has(y) || expired.get(y).until < v.until) expired.set(y, v)
     }
     for (const y of verified.keys()) expired.delete(y)
-    return { people, edges, claims, adj, degrees, via, verified, expired, anchors: live, asOf }
+    // agents: operated when the operator's link names "operates" and is in date, and the agent links back
+    const operated = new Map(), lapsed = new Map()
+    for (const [a, r] of people) for (const l of r.links) {
+        const ag = people.get(l.to)
+        if (l.method !== 'operates' || !ag || ag.kind !== 'agent' || !adj.get(a).has(l.to)) continue
+        const v = { by: a, on: l.on || l.at.slice(0, 10), at: l.at, until: validUntil(l) }
+        if (v.until >= asOf) { if (!operated.has(l.to) || operated.get(l.to).until < v.until) operated.set(l.to, v) }
+        else if (!lapsed.has(l.to) || lapsed.get(l.to).until < v.until) lapsed.set(l.to, v)
+    }
+    for (const y of operated.keys()) lapsed.delete(y)
+    return { people, edges, claims, adj, degrees, via, verified, expired, operated, lapsed, anchors: live, asOf }
 }
 /** The steps between two people, through confirmed links only: [a, …, b], or null. */
 export function path(g, a, b) {
@@ -211,8 +238,26 @@ export function path(g, a, b) {
     const out = []; for (let x = b; x != null; x = prev.get(x)) out.unshift(x)
     return out
 }
-/** What the register says about one person, in words the page shows. */
+/** The operators above an agent, nearest first, up to three steps: [fp, …]; the last is the root. */
+export function operators(g, fp) {
+    const out = []
+    for (let x = fp, i = 0; i < 3 && g.operated.has(x); i++) { x = g.operated.get(x).by; if (out.includes(x)) break; out.push(x) }
+    return out
+}
+/** What the register says about one person (or agent), in words the page shows. */
 export function standing(g, fp) {
+    const rec = g.people.get(fp)
+    if (rec && rec.kind === 'agent') {
+        const op = g.operated.get(fp)
+        if (op) {
+            const chain = operators(g, fp), root = chain[chain.length - 1], rs = standing(g, root)
+            const trusted = g.people.get(root) && g.people.get(root).kind === 'person' && ['anchor', 'verified'].includes(rs.level)
+            return { level: trusted ? 'operated' : 'agent', text: `an agent operated by ${chain.map(x => nameOf(g, x)).join(', operated by ')}; confirmed ${op.on}, valid until ${op.until}${trusted ? '' : ` (whose own standing: ${rs.level})`}`, ...op, chain, root, trusted }
+        }
+        const x = g.lapsed.get(fp)
+        if (x) return { level: 'expired', text: `an agent operated by ${nameOf(g, x.by)} until ${x.until}: to be confirmed again`, ...x }
+        return { level: 'listed', text: 'an agent in the register, not confirmed by an operator' }
+    }
     if (g.anchors.includes(fp)) return { level: 'anchor', text: 'an anchor: verification starts here' }
     const v = g.verified.get(fp)
     if (v) return { level: 'verified', text: `verified by ${nameOf(g, v.by)}, ${METHODS[v.method]}, on ${v.on}; valid until ${v.until}`, ...v }
@@ -227,8 +272,13 @@ export const nameOf = (g, fp) => (g.people.get(fp) && g.people.get(fp).name) || 
 export const waitingFor = (g, fp) => g.claims.filter(c => c.to === fp && c.reason === 'not confirmed')
 /** The number to watch: real keys in the register (fixtures excluded, revoked excluded). */
 export const realKeys = records => records.filter(r => r.ok && !r.fixture && !r.revoked && r.identity && r.identity.body.kind === 'person').length
+/** Agents' keys, counted apart: they are many, cheap, and short-lived. */
+export const realAgents = records => records.filter(r => r.ok && !r.fixture && !r.revoked && r.identity && r.identity.body.kind === 'agent').length
 
 /** A submission: the statements a person hands to the register, in one file. */
 export const SUBMISSION = 'pki.sgit.ai/submission/v1'
 export function submission(statements) { return { kind: SUBMISSION, record: statements[0] && statements[0].record, statements } }
+/** Several submissions in one file (an operator's link and the agent's record, say), for one `people.mjs add`. */
+export const SUBMISSIONS = 'pki.sgit.ai/submissions/v1'
+export const submissions = subs => ({ kind: SUBMISSIONS, submissions: subs })
 export { fingerprint, statementId }

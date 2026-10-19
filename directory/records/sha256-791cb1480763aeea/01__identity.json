@@ -1,0 +1,25 @@
+{
+  "v": 1,
+  "type": "identity",
+  "registry": "pki.sgit.ai",
+  "record": "sha256:791cb1480763aeea",
+  "signer": "sha256:791cb1480763aeea",
+  "created_at": "2026-10-18T09:07:00Z",
+  "body": {
+    "kind": "agent",
+    "name": "Fixture: Ana’s fleet",
+    "about": "Not a fleet anyone runs. A fleet key Ana operates, which operates her agents.",
+    "runtime": "pki.sgit.ai vault",
+    "session": false,
+    "bundle": {
+      "v": 1,
+      "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAqGwRG3TAP/oYL2CCRsQe\nCKuvuvA1QH5RCYvdZFnRLAskpAjyT9BijGO/IBmAjMtDsU0XwE/KA6HSj39S6CpK\ng1AieOJm/m678BcBVzPnTWZuKAgN1Z61BfxiZJAPY1Itm4ExdscXinYuBcUAVEKd\nKVFB7bes6q2nobvIYwNWWJSR9GCFlSXkcbea8rXouXmVKeAO7g+KNwim34P6CT/N\n6pEntPYpuaRua/IkEGkmB2EMogLpTKNFD/+wxa/MN5d39l7mu8KZnuHcuV1MiYaY\n9/l7GNEzcVq+uA58bOiGTSSeTjyjP6qmCAUt0/4CnZUexMFwk/UWypOkNWPKXw8H\nEtEBEB8y8o767VI2kjnrmbajmXTrf+kvuduPua6bQghTtPsr8GRo+gEj3WmR+5y7\nboygcksTMHJoPQOcUfGIozb4CvJLjrpXXljGQ28BiuA2MwJm22+fidmIslSPiV7o\nOlYLx/WGXnmBOVQYRTxYC/B6b05FV0nJ3lwIZTqRr39WdP3xSWwcArjdof0HJAj9\nMLgLB++zxmv0JwVAHuwY4loWZ3+QhnnkFmLD6pmepZ6trMsLHIXmjSB0Fx2V92QD\nME58M1SS/HjKu49wXYeohKtoz7MWyTcBKA/rNKOqlmANDZrw9g977kfJEvciBdGm\nvZl8Giopdf/MpOXIJ3Co0pUCAwEAAQ==\n-----END PUBLIC KEY-----\n",
+      "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEogpOH0yFZvQvcn28dMH1WPOd6geN\nRIX0gb8P5RxS0A+UTlArdEpz7aRejIFJshwgv995CTo5Sca3LbZFRnr1UA==\n-----END PUBLIC KEY-----\n",
+      "label": "fixture-ana’s",
+      "fingerprint": "sha256:74b1217d18288bd3",
+      "signing_fingerprint": "sha256:791cb1480763aeea"
+    },
+    "private_key_published": false
+  },
+  "sig": "NNkzloS5V8TxsY/ft5W2hK3mNfbdRxc1h0xsyqyeW3RlYmI0aQ9ce2f0shQ/tskBZgtuKUpbDOk3hDxf/mQ8sg=="
+}

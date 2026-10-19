@@ -18,7 +18,7 @@ async function draw() {
     const nm = x => h('a', { href: pageUrl('people/person.html') + '#' + K.dirOf(x) }, D.nameOf(g, x))
     app.replaceChildren(
         h('h1', {}, r.name || '(no name)'),
-        h('p', {}, standingPill(g, fp, r), ' ', r.fixture ? h('span', { class: 'pill fixture' }, 'fixture: its private keys are published, it proves nothing') : null, ' ', h('span', { class: 'dim small' }, s.text)),
+        h('p', {}, r.kind === 'agent' ? [h('span', { class: 'pill agent' }, 'agent'), ' '] : null, standingPill(g, fp, r), ' ', r.fixture ? h('span', { class: 'pill fixture' }, 'fixture: its private keys are published, it proves nothing') : null, ' ', h('span', { class: 'dim small' }, s.text)),
         r.identity.body.about ? h('p', { class: 'lead' }, r.identity.body.about) : null,
         r.problems.length ? msg('bad', h('b', {}, 'This record does not read cleanly: '), r.problems.join('; ')) : msg('ok', `Every one of the ${r.statements.length} statements was checked here, in your browser, against this key.`),
         h('div', { class: 'acts' },
@@ -33,6 +33,8 @@ async function draw() {
             h('tr', {}, h('th', {}, 'Record (signing key)'), h('td', { class: 'mono' }, r.fp)),
             h('tr', {}, h('th', {}, 'Encryption key'), h('td', { class: 'mono' }, r.bundle.fingerprint, h('span', { class: 'dim' }, ' · RSA-OAEP 4096'))),
             h('tr', {}, h('th', {}, 'Label'), h('td', {}, r.bundle.label || '')),
+            r.kind === 'agent' ? h('tr', {}, h('th', {}, 'Runs on'), h('td', {}, r.identity.body.runtime || '(not said)', r.identity.body.session ? ' · a session key: it lives as long as one session' : '')) : null,
+            r.kind === 'agent' && s.chain ? h('tr', {}, h('th', {}, 'Operated by'), h('td', {}, ...s.chain.map((x, i) => [i ? ', operated by ' : '', nm(x)]), ` · until ${s.until}`)) : null,
             h('tr', {}, h('th', {}, 'In the register since'), h('td', {}, r.identity.created_at)),
             h('tr', {}, h('th', {}, 'Inbox'), h('td', {}, r.inbox ? 'yes: anyone can write to them, sealed to this key, with no account' : 'none: a message to them travels as a link or a QR code')),
             r.revoked ? h('tr', {}, h('th', {}, 'Revoked'), h('td', { class: 'bad' }, `${r.revoked.at} (${r.revoked.reason})`)) : null)),

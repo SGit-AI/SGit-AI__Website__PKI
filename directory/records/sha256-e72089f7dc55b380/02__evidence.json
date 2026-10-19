@@ -1,0 +1,14 @@
+{
+  "v": 1,
+  "type": "evidence",
+  "registry": "pki.sgit.ai",
+  "record": "sha256:e72089f7dc55b380",
+  "signer": "sha256:e72089f7dc55b380",
+  "created_at": "2026-10-18T09:09:00Z",
+  "body": {
+    "kind": "website",
+    "value": "example.org",
+    "url": "https://example.org/.well-known/pki.sgit.ai.txt"
+  },
+  "sig": "Y1tR0uiNx+U7SmZTI+FQBUjNHE/5aRGOfCm9gNASgpuuonnrRyDaOWXcrKjg22JSoMf3wz3HeMpNt4Wp66Z9iA=="
+}

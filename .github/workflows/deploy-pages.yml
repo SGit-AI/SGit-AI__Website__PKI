@@ -46,7 +46,7 @@ jobs:
       - name: Validate the site (structure, links, version, canonical, key-leak tripwire)
         run: node admin/build/validate.js
       - name: The register of people (keys and records; vaults against the mock server)
-        run: node admin/build/test_people.mjs && node admin/build/test_people_vault.mjs
+        run: node admin/build/test_people.mjs && node admin/build/test_people_vault.mjs && node admin/build/test_agent_tool.mjs
 
   tag-release:
     runs-on: ubuntu-latest

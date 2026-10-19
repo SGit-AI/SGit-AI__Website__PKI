@@ -1,0 +1,23 @@
+{
+  "v": 1,
+  "type": "identity",
+  "registry": "pki.sgit.ai",
+  "record": "sha256:c1b6c3f22f0dd360",
+  "signer": "sha256:c1b6c3f22f0dd360",
+  "created_at": "2026-10-18T09:03:00Z",
+  "body": {
+    "kind": "person",
+    "name": "Fixture: Clara",
+    "about": "Not a person. Two steps from the anchor, through Bruno.",
+    "bundle": {
+      "v": 1,
+      "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA8EU/vwMNmdKw5VhhIIvZ\nn8xdzsLqKVb2xDfdzFipYZIkgqX8kW1QB6WRUCzczaX65/i+NXIAfZ1yLU4zwR7n\nVtvk/3IJ6DaFZWpIbIkNZUyPqNzhR8VrbfsXxDedjvc2InwcpviWSKY6rkh79q1r\nXe83A0/LetVKe6XvfCsju7R+JOE6ed0p+fQAMAnFoDpXcnHHe2GcD05rdTVgbQy/\n+fcYSc83vrtT3IamlS0VadW9AD9PaXmC+hh0lctBbJlReK7ftE+u8zRH7ZiQ9IDb\n711CcDRkzxD2X7prJxn55cdgm6GRopEBTnmBkgVhT4/QC+CF2aTYBTDyFAL73qbH\nD2m74Ikv2d8e287N6mgi5KEPM4hkmr1MbEjs9fCUWvx+2NDHoC1MdHvOCkwZK1sc\ndlanj8zvArFBBkwrI8eApnuWg9xF+qXzgoW4TLxipHFYUdp1vc9u/PKDIl8h75JV\n2UtG4CX8eLo+Jz6H8V86Hmh650DhbPLBBpYGOQcQO5W6D/LkiFHH6ftd03zCBcvR\nY15gRCOhB7x7T/dW8L5fAXQpUnZkamGHYrhNbMUjcVW4NpU13/LzeDmioSRCQr/B\n8C9Fy0hlzZDliEa8E2UwjkyH8r5VHb0+s4Qa4festpiIT6RdOeH8nsrjnMFceyOd\nDn8ZmjpVc9a04BgXgxpzhxsCAwEAAQ==\n-----END PUBLIC KEY-----\n",
+      "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEFfJseU+KV1aIkJJ6v6+UIC6eLENb\ncDtA79j6XnKS5r9BvKmav4Wv4+GJkWJmoOHbhKbsOGgW6GRlZ5+PyHBH8w==\n-----END PUBLIC KEY-----\n",
+      "label": "fixture-clara",
+      "fingerprint": "sha256:591776e691d0b289",
+      "signing_fingerprint": "sha256:c1b6c3f22f0dd360"
+    },
+    "private_key_published": false
+  },
+  "sig": "v04wlXSh6Ud7WfGffhoKMub7r0/fhjocrWS98sdphpairC3FS7tT0nhN80FRpsQJ5IV7fHbWNToD1wIVKrP+Rg=="
+}

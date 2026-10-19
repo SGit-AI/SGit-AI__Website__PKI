@@ -99,6 +99,32 @@ const jq = spawnSync('jq', ['-cS', 'del(.sig)'], { input: JSON.stringify({ ...ad
 if (jq.status !== 0) console.log('NOT RUN: the jq canonical-form check (jq is not installed)')
 else check(jq.stdout === new TextDecoder().decode(K.canonicalBytes({ ...adaRec[0], body: { ...adaRec[0].body, about: 'Zoë <&> "q" \\ é ✓' } })), 'the canonical bytes are jq -cS \'del(.sig)\', byte for byte (non-ASCII, quotes and escapes included)')
 
+// --- agents: operated, two ways, with an end date; fleets; the count kept apart ------------------------------------
+const op = ada, agent = await K.generate('an agent'), fleetK = await K.generate('a fleet'), worker = await K.generate('a worker')
+const agentRec = [await D.agentStatement(agent, { name: 'Test agent', runtime: 'claude-code', session: true }, T(1)), await D.linkStatement(agent, { to: op.bundle.signing_fingerprint, method: 'operated-by' }, T(2))]
+const opRec = (extra = []) => [...adaRec, ...extra]
+const opLink = await D.linkStatement(op, { to: agent.bundle.signing_fingerprint, method: 'operates', on: '2026-10-19', until: '2026-10-26' }, T(3))
+let ga = D.graph([await D.readRecord(opRec()), await D.readRecord(boBack), await D.readRecord(agentRec)], { anchors: [op.bundle.signing_fingerprint], asOf: '2026-10-20' })
+check(D.standing(ga, agent.bundle.signing_fingerprint).level === 'listed', 'an agent that names its operator, unconfirmed, is only listed')
+ga = D.graph([await D.readRecord(opRec([opLink])), await D.readRecord(boBack), await D.readRecord(agentRec)], { anchors: [op.bundle.signing_fingerprint], asOf: '2026-10-20' })
+let sa = D.standing(ga, agent.bundle.signing_fingerprint)
+check(sa.level === 'operated' && sa.trusted && sa.until === '2026-10-26', 'the operator’s link back (operates, with an end date) makes it operated, and trusted, the operator being an anchor')
+ga = D.graph([await D.readRecord(opRec([opLink])), await D.readRecord(boBack), await D.readRecord(agentRec)], { anchors: [op.bundle.signing_fingerprint], asOf: '2026-10-27' })
+check(D.standing(ga, agent.bundle.signing_fingerprint).level === 'expired', 'a week later the confirmation has ended: to be confirmed again')
+const fleetRec = [await D.agentStatement(fleetK, { name: 'Fleet', runtime: 'vault' }, T(1)), await D.linkStatement(fleetK, { to: bo.bundle.signing_fingerprint, method: 'operated-by' }, T(2)), await D.linkStatement(fleetK, { to: worker.bundle.signing_fingerprint, method: 'operates', on: '2026-10-19' }, T(3))]
+const workerRec = [await D.agentStatement(worker, { name: 'Worker' }, T(1)), await D.linkStatement(worker, { to: fleetK.bundle.signing_fingerprint, method: 'operated-by' }, T(2))]
+const boOps = [...boBack, await D.linkStatement(bo, { to: fleetK.bundle.signing_fingerprint, method: 'operates', on: '2026-10-19' }, T(4))]
+ga = D.graph([await D.readRecord(adaRec), await D.readRecord(boOps), await D.readRecord(fleetRec), await D.readRecord(workerRec)], { anchors: [ada.bundle.signing_fingerprint], asOf: '2026-10-20' })
+sa = D.standing(ga, worker.bundle.signing_fingerprint)
+check(sa.level === 'operated' && sa.chain.join() === [fleetK.bundle.signing_fingerprint, bo.bundle.signing_fingerprint].join() && sa.trusted, 'an agent operated by a fleet key shows the person at the root, and is trusted because Bo is verified')
+check(D.validUntil({ method: 'operates', on: '2026-10-19' }) === '2026-11-18', 'an agent’s confirmation with no end of its own lasts 30 days')
+const strangerOp = await K.generate('stranger')
+const strangerRec = [await D.identityStatement(strangerOp, { name: 'Unverified' }, T(1)), await D.linkStatement(strangerOp, { to: agent.bundle.signing_fingerprint, method: 'operates', on: '2026-10-19' }, T(2))]
+const agentToStranger = [agentRec[0], await D.linkStatement(agent, { to: strangerOp.bundle.signing_fingerprint, method: 'operated-by' }, T(2))]
+ga = D.graph([await D.readRecord(adaRec), await D.readRecord(strangerRec), await D.readRecord(agentToStranger)], { anchors: [ada.bundle.signing_fingerprint], asOf: '2026-10-20' })
+check(D.standing(ga, agent.bundle.signing_fingerprint).level === 'agent', 'an agent operated by someone nobody verified is operated, and not trusted')
+check(D.realKeys([await D.readRecord(adaRec), await D.readRecord(agentRec)]) === 1 && D.realAgents([await D.readRecord(adaRec), await D.readRecord(agentRec)]) === 1, 'agents are counted apart from people')
+
 // --- messages and invitations ---------------------------------------------------------------------------------------
 const msg = await M.compose({ to: bo.bundle, from: ada, subject: 'hello', text: 'A secret for Bo.' })
 const sealed = await M.sealMessage(msg, bo.bundle, ada)

@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Identities for agents · pki.sgit.ai</title>
+<meta name="description" content="How an agent gets a key on pki.sgit.ai: it makes its own key where it runs, hands its operator a signed public record, and the operator confirms it from their vault with a link back and an end date. A Claude Code session can do it in four commands.">
+<link rel="canonical" href="https://pki.sgit.ai/agents/index.html">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/people/people.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">pki<span>.sgit.ai</span></a>
+  <a class="parent" href="https://sgit.ai" title="sgit.ai — the parent project: the vault layer and the shipped CLI this registry would be built on">↗ part of <b>sgit.ai</b></a>
+  <span class="stage-pill">people first</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history" data-site-version></a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+  <div class="nav-items">
+    <div class="ni ni-has">
+      <a class="nl here" href="../people/index.html">People<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../people/index.html">&#9679; The register of people</a>
+      <a class="sl" href="../vault/index.html">&#9679; Your vault &amp; your keys</a>
+      <a class="sl" href="../send/index.html">&#9679; Send a message</a>
+      <a class="sl" href="../invite/index.html">&#9679; Invite someone</a>
+      <a class="sl here" href="../agents/index.html">&#9679; Identities for agents</a>
+      <a class="sl" href="../people/how.html">How it works</a>
+      <a class="sl" href="../documents/people-directory.html">The brief</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../failure/index.html">The rules<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../failure/index.html">Why the old ones failed (2019)</a>
+      <a class="sl" href="../rules/index.html">The four rules</a>
+      <a class="sl" href="../rules/prior-art.html">Prior art</a>
+      <a class="sl" href="../bootstrap/index.html">The bootstrap trap</a>
+      <a class="sl" href="../mandate/index.html">Identity &amp; mandate</a>
+      <a class="sl" href="../enrolment/index.html">Enrolment</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../archive/index.html">Archive<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../archive/index.html">&#9679; The archive: what is kept, and why</a>
+      <a class="sl" href="../registry/index.html">The agent register (fixtures)</a>
+      <a class="sl" href="../archive/front-2026-08.html">The front page, August 2026</a>
+      <a class="sl" href="../execution/index.html">The layers: broker &amp; what ships</a>
+      <a class="sl" href="../roadmap/index.html">Build order (agents)</a>
+      <a class="sl" href="../authorised/index.html">Measure: probes &amp; the game</a>
+      <a class="sl" href="../bench/index.html">The bench &amp; experiments</a>
+      <a class="sl" href="../insurance/index.html">Insurance for agents</a>
+      <a class="sl" href="../assess/index.html">Map your case</a>
+      <a class="sl" href="../origins/index.html">Origins: 2026</a>
+      <a class="sl" href="../book/index.html">The books</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../documents/index.html">Docs<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../documents/index.html">The documents</a>
+      <a class="sl" href="../data/index.html">The data viewer</a>
+      <a class="sl" href="../packs/index.html">Dev packs</a>
+      </div>
+    </div>
+    <div class="ni ni-has">
+      <a class="nl" href="../admin/comms.html">Site<span class="caret">&#9662;</span></a>
+      <div class="sub">
+      <a class="sl" href="../admin/comms.html">Comms: tasks &amp; requests</a>
+      <a class="sl" href="../admin/versions.html">Release history</a>
+      <a class="sl" href="../admin/index.html">Admin &amp; engineering</a>
+      <a class="sl" href="../about/participant.html">Where we lose</a>
+      </div>
+    </div>
+  </div>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__PKI">★ GitHub</a>
+  <script src="../assets/version.js" defer></script>
+  <script src="../assets/nav.js" defer></script>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / agents</div>
+<h1>Identities for agents</h1>
+<p class="lead">An agent is a record in the register like a person's. It makes its own key where it runs and never hands over the private half; it gives its operator a signed public record; the operator confirms it from their vault with a link back, for a stated time. From then until that date, the register shows the agent as <i>operated by</i> its operator, and anything the agent signs can be traced to a person.</p>
+
+<div class="note"><b>Status, 19 October 2026.</b> Built: the agent tool (<a href="pki-agent.mjs">pki-agent.mjs</a>, one file, Node 18+), the Agents tab in <a href="../vault/index.html#agents">your vault</a>, fleet keys, and agents on <a href="../people/index.html">the register</a>, counted apart from people. Tested against the sgit CLI: an agent's key is an sgit key, and <code>sgit pki verify</code> checks what it signs.</div>
+
+<h2 id="flow">The workflow</h2>
+<ol class="steps">
+<li><b>The agent makes its key, where it runs.</b> <code>node pki-agent.mjs keygen --name "…" --runtime "…"</code>. Two pairs, the same as <code>sgit pki keygen</code>, kept in sgit's own key store. Its identity is signed: kind <i>agent</i>, its name, where it runs, and whether it is a session key.</li>
+<li><b>It names its operator.</b> <code>node pki-agent.mjs operator &lt;your fingerprint&gt;</code>: a link in its own record, method <i>operated-by</i>. A claim, until you answer it.</li>
+<li><b>It hands you its record.</b> <code>node pki-agent.mjs submit</code> seals it to your key and drops it into your inbox, with no account and nothing readable on the way; or <code>submission</code> prints it, for you to paste. Either way it is public material: the private key is not in it.</li>
+<li><b>You confirm it, from your vault.</b> In the Agents tab (or from the message in your Inbox, "Confirm this agent…"): the page checks every signature, shows you the agent's fingerprint, and you compare it with the one the agent printed in its own session, character for character. That comparison is the verification. Then you sign a link back, method <i>operates</i>, with an end date: a day, a week, 30 days.</li>
+<li><b>The register gets both.</b> The page gives you one file with the agent's record and your link; <code>node admin/build/people.mjs add &lt;file&gt;</code> checks every signature and writes them, and the release publishes them. An agent with write access to this repository can do that step itself, as a pull request you merge.</li>
+</ol>
+<p>Two ways, as for people: the agent's claim alone adds nothing, and your link alone is a one-way claim. When both exist and your link is in date, the agent's page says <i>an agent operated by you; confirmed on …, valid until …</i>. When the date passes it says <i>to be confirmed again</i>, and you confirm it again from the same tab.</p>
+
+<h2 id="claude">For a Claude Code session: what to paste</h2>
+<p>Paste this into the session, with your fingerprint in it:</p>
+<pre><code>Give yourself an identity on pki.sgit.ai, operated by me:
+  curl -sO https://pki.sgit.ai/agents/pki-agent.mjs
+  node pki-agent.mjs keygen --name "&lt;what this session is doing&gt; (Claude Code session)" --runtime "claude-code, cloud session" --session
+  node pki-agent.mjs operator &lt;YOUR FINGERPRINT, sha256:…&gt;
+  node pki-agent.mjs submit        # or: node pki-agent.mjs submission
+Then tell me your fingerprint, so I can compare it before I confirm you.</code></pre>
+<p>The session prints its fingerprint in your chat, the record arrives in your inbox, and you confirm it in your vault, a week is a good length for a session. From then on you can send that session a secret it alone can read (<a href="../send/index.html">send</a>, then paste the link; it runs <code>node pki-agent.mjs open &lt;link&gt;</code>), and it can sign what it produces (<code>node pki-agent.mjs sign report.md</code>, checked by anyone with <code>sgit pki verify</code>).</p>
+
+<h2 id="durable">Session keys, and keys that last</h2>
+<div class="tablewrap"><table class="kv"><tbody>
+<tr><th>Session key</th><td>Made in the session, dies with its container. Nobody but the session ever holds it, and that is the strongest property here. Confirm it for days, not months; a new session makes a new key, and you confirm that one. Its record stays in the register as history, its confirmation lapsed.</td></tr>
+<tr><th>A key that lasts</th><td>A cloud session is a fresh container each time, so a key can only last if something carries it in. <code>node pki-agent.mjs keyfile</code> prints the key as one line, encrypted with <code>SG_SEND_PASSPHRASE</code>; you set it (and the passphrase) as secrets in the environment the agent runs in, as <code>PKI_AGENT_KEY</code>, and every session there uses the same key. The cost, stated: whoever sets the secret holds the key in custody. It is <a href="../bootstrap/index.html">the bootstrap trap</a> again, in its smallest form.</td></tr>
+<tr><th>An agent on a machine you run</th><td>A server, a scheduled job: the key stays in that machine's <code>~/.sg-send/keys/</code>, as sgit keeps it, and lasts as long as the machine does.</td></tr>
+</tbody></table></div>
+
+<h2 id="fleets">Many agents: a fleet key</h2>
+<p>Each agent you confirm is a link in the confirming key's record, and a record holds 200 live agents at most (<a href="../rules/index.html">rule 3</a>, records are bounded). With many agents, make a fleet key in your vault (Agents tab): a second key, operated by you for a year, that confirms your agents. Your own record holds one link; the fleet's holds the rest; every agent's page still shows you at the root, <i>operated by your fleet, operated by you</i>. Several fleets, one per kind of work, keep each record small and make each kind separately revocable.</p>
+
+<h2 id="trust">What "operated" means, and does not</h2>
+<ul>
+<li>It means: this key's owner says they run this agent, the agent says the same, and both statements are signed and in date. It is trusted when the person at the root is an anchor or verified.</li>
+<li>It does not say what the agent may do. That is a mandate, a separate statement, revoked separately: <a href="../mandate/index.html">identity and mandate</a> is the design, kept from the agent register.</li>
+<li>It does not prove the agent behaves. A signature proves which key signed, and the register says who answers for that key.</li>
+<li>An agent with no operator is listed, and nothing more. Agents are counted apart from people, so the number to watch stays the number of people.</li>
+</ul>
+
+<h2 id="first">The first one</h2>
+<p>The session that built this page made a session key with this tool and put its record in the register, naming no operator: its operator, Dinis Cruz, is not in the register yet. When he is, he confirms it from his vault, or the next session does the same in four commands. Its record: <a href="../people/index.html">in the register</a>, kind <i>agent</i>.</p>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">pki<span>.sgit.ai</span></div>
+    <p>A register of people and their public keys: verified by an anchor first, then by each other, with a link that only counts when it goes both ways; and the published work behind it. Part of the <a href="https://sgit.ai" style="display:inline;padding:0"><b>sgit.ai</b></a> network — the vault layer and the shipped CLI this registry is designed onto. All content CC BY 4.0.</p>
+    <p class="netline"><a href="https://sgit.ai"><b>↗ sgit.ai</b></a> — the parent project, and the vault layer this is designed onto · <a href="https://nhi.sgit.ai">↗ nhi.sgit.ai</a> — the problem · <a href="https://sentinel.sgit.ai">↗ sentinel.sgit.ai</a> · <a href="https://sgit.ai/network/index.html">↗ the network</a></p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project, which builds the vault layer this registry would be built on. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html" data-site-version>release history</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>People</h4>
+    <a href="../people/index.html">&#9679; The register</a>
+    <a href="../vault/index.html">&#9679; Your vault</a>
+    <a href="../send/index.html">&#9679; Send a message</a>
+    <a href="../m/index.html">Open a message</a>
+    <a href="../invite/index.html">&#9679; Invite someone</a>
+    <a href="../agents/index.html">&#9679; Identities for agents</a>
+    <a href="../people/how.html">How it works</a>
+    <a href="../documents/people-directory.html">The brief</a>
+  </div>
+  <div>
+    <h4>The rules</h4>
+    <a href="../failure/index.html">Why the old ones failed</a>
+    <a href="../rules/index.html">The four rules</a>
+    <a href="../rules/prior-art.html">Prior art</a>
+    <a href="../bootstrap/index.html">The bootstrap trap</a>
+    <a href="../mandate/index.html">Identity &amp; mandate</a>
+    <a href="../enrolment/index.html">Enrolment</a>
+  </div>
+  <div>
+    <h4>Archive</h4>
+    <a href="../archive/index.html">The archive</a>
+    <a href="../registry/index.html">The agent register</a>
+    <a href="../authorised/index.html">Measure</a>
+    <a href="../bench/index.html">The bench</a>
+    <a href="../insurance/index.html">Insurance for agents</a>
+    <a href="../assess/index.html">Map your case</a>
+    <a href="../origins/index.html">Origins: 2026</a>
+  </div>
+  <div>
+    <h4>The sources</h4>
+    <a href="../documents/index.html">The documents</a>
+    <a href="../packs/index.html">Dev packs</a>
+    <a href="../about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="../admin/versions.html">Release history</a>
+    <a href="../llms.txt">llms.txt</a>
+  </div>
+</div></footer>
+</body>
+</html>

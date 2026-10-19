@@ -100,6 +100,27 @@ try {
     const rec = await D.readRecord(sub.statements)
     check(sub.kind === D.SUBMISSION && rec.ok && rec.fp === anaFp && rec.evidence.length === 1 && rec.name === 'Ana Test', 'she signs her identity and a piece of evidence; the submission she downloads reads as a clean record')
 
+    // an agent asks Ana to operate it; she confirms it in her Agents tab
+    {
+        const K = await import(path.join(ROOT, 'assets/people/keys.js'))
+        const agent = await K.generate('an agent of Ana')
+        const agentSts = [await D.agentStatement(agent, { name: 'Ana’s test agent', runtime: 'claude-code, cloud session', session: true }), await D.linkStatement(agent, { to: anaFp, method: 'operated-by' })]
+        await p.goto(SITE + 'vault/index.html#agents')
+        await p.locator('#tab-agents textarea').waitFor({ timeout: 60000 })
+        await p.fill('#tab-agents textarea', JSON.stringify(D.submission(agentSts)))
+        await p.getByRole('button', { name: 'Check it' }).click()
+        await p.getByText('Compare it with what the agent printed').waitFor()
+        check((await text(p, '#tab-agents .vpanel b.mono')).trim() === agent.bundle.signing_fingerprint, 'Ana pastes an agent’s submission: the page checks it and shows the fingerprint to compare')
+        await p.getByRole('button', { name: 'I operate this agent: sign' }).click()
+        const [dl2] = await Promise.all([p.waitForEvent('download'), p.getByRole('button', { name: 'Download for the register' }).click()])
+        const f2 = path.join(os.tmpdir(), `pki-agent-${Date.now()}.json`); await dl2.saveAs(f2)
+        const both = JSON.parse(fs.readFileSync(f2, 'utf8')); fs.rmSync(f2)
+        const recs = []; for (const sub of both.submissions) recs.push(await D.readRecord(sub.statements))
+        const ga = D.graph(recs, { anchors: [anaFp] })
+        const sa = D.standing(ga, agent.bundle.signing_fingerprint)
+        check(both.kind === D.SUBMISSIONS && recs.every(r => r.ok) && sa.level === 'operated' && sa.chain[0] === anaFp, `she signs a link back; the one file for the register shows the agent operated by her (${sa.text.slice(0, 60)}…)`)
+    }
+
     // a message to a fixture, opened as the fixture
     await p.goto(SITE + 'send/index.html')
     const bruno = (await (await fetch(SITE + 'directory/index.json')).json()).records.find(r => /Bruno/.test(r.name))

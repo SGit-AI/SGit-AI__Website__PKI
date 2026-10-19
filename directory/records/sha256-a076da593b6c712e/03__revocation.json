@@ -1,0 +1,17 @@
+{
+  "v": 1,
+  "type": "revocation",
+  "registry": "pki.sgit.ai",
+  "record": "sha256:a076da593b6c712e",
+  "signer": "sha256:a076da593b6c712e",
+  "created_at": "2026-10-18T09:18:00Z",
+  "body": {
+    "revokes": {
+      "record": "sha256:a076da593b6c712e",
+      "statement": "sha256:0d0311a9e7f568296aeb47d4e00cc26f1be9310af0a72a00bbbb01f353a9037e"
+    },
+    "reason": "withdrawn",
+    "effective_from": "2026-10-18T09:18:00Z"
+  },
+  "sig": "IboC4yaLg/LvC/KRjY4JFHSM22RdJLaPHY3T5giMp48/ySChmqPUi9qPa/6PQVyOtdz8PdTqUV66tiPZogNXkA=="
+}

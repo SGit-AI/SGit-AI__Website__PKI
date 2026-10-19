@@ -1,0 +1,25 @@
+{
+  "v": 1,
+  "type": "identity",
+  "registry": "pki.sgit.ai",
+  "record": "sha256:a0f2ccfe07781213",
+  "signer": "sha256:a0f2ccfe07781213",
+  "created_at": "2026-10-19T23:36:57Z",
+  "body": {
+    "kind": "agent",
+    "name": "pki.sgit.ai site agent (Claude Code session, 19 October 2026)",
+    "about": "The Claude Code session that built the register of people and the agent workflow, v0.2.0 to v0.2.1. A session key: it lives as long as this session.",
+    "runtime": "claude-code, cloud session",
+    "session": true,
+    "bundle": {
+      "v": 1,
+      "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAtF0blhwg2Laqf/l7Kao3\nK/Peq3dvgXM6st1YqIxbXMgypgKGJD02F/8KNYTCIVzNGYs2EM10vxZcbgHUhdbI\nZNFOEZcLdXfSxufkBLLVnRpwfxtYGeFPM91IlC0FiV4dEwzIJA+22kR/Bp8Ue28z\nMCg8aE/zsUpEgxyNnoex4/WABOmzTHBjw7Af8X9Rl98EM55FAnQo3p1OF6EQs+q5\nXgJK0wL74ZqwyZPwBEEudXqrnrq3v6twqJ6Vtnkx1RcPVB4qplM6IymksMJunhwh\nMtzsKhXjUul+LqgMTMiLP9bGqnkjeKInC1SdgWOZy/hQu+9hwQTB1X3NmnesCaFZ\nFbpzBu9UDK67L3zUejzaxg8Bj+Xvm4mJ1uGAIBRzCCr2VQ64sd9U9uUVFr2F3Sdo\nfE//z3f1kGVaKS6lNnZ4EFO6re/4QTpD/NpHbNwT3YsHIIQJWA0doqMkC+N0p+1G\nf8RIUS0xZ2mMUcCrhl8wHkWwy0xebOP0cmTauvPuO4vW+4n4thaOGpD/35xTOdeg\nH6VVtJg68pKMqductaSmMyAOj0QlNbVZoGobCkkhuDyuclEJFT2VmthJS99zCD/+\ng5cSM09Q4TWs8i0XFQS0R/0mTEGrgKPFAj60e9eg8JrwUTJZPtqLTViBklq2Vgva\niLII/r4RMm4umBadSlwvH8cCAwEAAQ==\n-----END PUBLIC KEY-----\n",
+      "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEYmppBgRfuYAJEkRP2g2EkcPCTNId\n4Sj708Nsp7wgU4NMB0IXulBjgZTc96wYYZLMBIcVNQJmQQMvQGnNd2G1tw==\n-----END PUBLIC KEY-----\n",
+      "label": "pki.sgit.ai site agent (Claude Code session, 19 October 2026)",
+      "fingerprint": "sha256:fa301fa7941b11b9",
+      "signing_fingerprint": "sha256:a0f2ccfe07781213"
+    },
+    "private_key_published": false
+  },
+  "sig": "1iu1zOuKt6ENgqUKCvYiJENRIsX1yRYciT9Q9+C15n5VPGY+3pJ7Nv1ko+8Z5xyyionUkWT4gCtZ7tgsemXzZQ=="
+}

@@ -1,0 +1,25 @@
+{
+  "v": 1,
+  "type": "identity",
+  "registry": "pki.sgit.ai",
+  "record": "sha256:8d69aa4573adc745",
+  "signer": "sha256:8d69aa4573adc745",
+  "created_at": "2026-10-18T09:06:00Z",
+  "body": {
+    "kind": "agent",
+    "name": "Fixture: Bruno’s research agent",
+    "about": "Not an agent anyone runs. Operated by Bruno, who is verified: the register shows it as his.",
+    "runtime": "claude-code, cloud session",
+    "session": true,
+    "bundle": {
+      "v": 1,
+      "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAx1U3+e6bHfty0qKF070m\nmmL1YuO5e1teplGMuCz7roIuiYmhtbOT2dh9oaLGUDbYOL0Y3K62en6M+bEIke9k\n2/L/cdp4gYBQq9DXDeu0vU0smuz88pRmT6SupvX655DeL/3p0mXBKUNCPQ8Sp1Cg\n+I6bFCybFQNgw6XzhtiLInz1qZNPw78HU0rvXE50/s4HoyjYDAfLoJ0AXmugunb3\n32R7bGbSUGFRdkiNFMgpy87YHLVxPtkl/94V5WBzaZfPbZyqVWjuHzGfV0Y1Mvtx\nUMTWCGO+XmFmCNWDQB7vte4bPAl9ifXO0JvHWmovsYf/e3aaBIqjqXANGnyWQce8\nBqh4hTEAoHJ/DJZqKlakx+I7rarRpvkfpqZ+Bgq4UY9LNqSLjdETOZ2p8dtSJMJX\nyZmZ68F0qt0p2fwS18d1YDIrsCDtEEfLKp8XYDot5AxEjYBSMnnkUyMokGo0w6Ed\n5VQ/kTzFc6JC/dedlfzGE14K+T6x7Bwm/5jwHwdT+NV+fGwVbEfx4KONvEM72wxZ\nY87ojZ+ejVkO02WW+c6vh36mEF6MKdnrTJdgFJMwqfJtkmo4g84UGIB3fgA6o194\n8n/ZFwRYc22fJxLlAKRhOIPAK3CP/ct1AigExAKcMWJFXrxXj/ogSc4W74tVwg0K\nU1LqkeCVHs2Alm6bnz9ZV4UCAwEAAQ==\n-----END PUBLIC KEY-----\n",
+      "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEcvpYJl1VvvgRTbMdmQs2ubu/g1Xf\n5YBlAzbGyNrrtfHVq8/5kmd501sgEsap/IGcu8GDhcMiOKAWdIswxdsdWw==\n-----END PUBLIC KEY-----\n",
+      "label": "fixture-bruno’s",
+      "fingerprint": "sha256:e9067cd60abf21c8",
+      "signing_fingerprint": "sha256:8d69aa4573adc745"
+    },
+    "private_key_published": false
+  },
+  "sig": "aCUbAx+qzbiQIPD04L0cPNAIZgbLRvIpqlcvynaxpHNeLFIiRMHwjVFXckXch91vI2dIe0/FvhGAjB4IkGYT5Q=="
+}

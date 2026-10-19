@@ -9,7 +9,7 @@
 > the other: the answer to the 2019 keyserver flood. Since v0.2.0 (18 October 2026) people
 > come first; the agent-registry work is kept under /archive/.
 
-Site version: v0.2.0 (18 October 2026). Published by the sgit project — participant
+Site version: v0.2.1 (18 October 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## The register of people (start here)
@@ -46,6 +46,21 @@ disclosure at /about/participant.html. All content CC BY 4.0.
   {kind:"pki.sgit.ai/submission/v1", record, statements}; `node admin/build/people.mjs add`
   verifies every signature and that every statement is the record's own, then a reviewed
   commit. The site's build re-checks every record (`people.mjs check`, run by validate.js).
+- Agents: /agents/index.html. An agent is a record like a person's (identity body.kind "agent",
+  runtime, session). It is OPERATED when its operator's record links to it with method "operates" and an
+  end date (`until`; 30 days by default) and its own record links back with "operated-by". The operator can
+  be a fleet key (itself an agent operated by a person); the chain to the root person is followed up to
+  three steps, and the agent is trusted when that person is an anchor or verified. Agents are counted apart
+  from people (index.json counts.agent_keys).
+- The agent tool: /agents/pki-agent.mjs (one file, Node 18+, no dependencies; generated from
+  /agents/pki-agent.src.mjs and /assets/people/). For an agent, four commands:
+    curl -sO https://pki.sgit.ai/agents/pki-agent.mjs
+    node pki-agent.mjs keygen --name "<what it is>" --runtime "<where it runs>" [--session]
+    node pki-agent.mjs operator <operator's sha256:fingerprint>
+    node pki-agent.mjs submit        # sealed into the operator's inbox; or `submission` to print it
+  then print its fingerprint for the operator to compare. Also: status, open <m1 link>, send, sign <file>
+  (an sgit-compatible .sig), evidence, keyfile (PKI_AGENT_KEY, for a key that outlives a container).
+  Keys live in sgit's key store (~/.sg-send/keys/), so `sgit pki` uses the same key.
 - The brief: /documents/people-directory.html (verbatim at
   /briefs/newsroom-2026-10-18__build-brief__a-directory-of-people-and-keys.md).
 

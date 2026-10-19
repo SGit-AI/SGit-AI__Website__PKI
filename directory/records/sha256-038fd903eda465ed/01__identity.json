@@ -1,0 +1,23 @@
+{
+  "v": 1,
+  "type": "identity",
+  "registry": "pki.sgit.ai",
+  "record": "sha256:038fd903eda465ed",
+  "signer": "sha256:038fd903eda465ed",
+  "created_at": "2026-10-18T09:02:00Z",
+  "body": {
+    "kind": "person",
+    "name": "Fixture: Bruno",
+    "about": "Not a person. Verified by the fixture anchor in person, and linked back.",
+    "bundle": {
+      "v": 1,
+      "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAuXxfeAlkq2XzlaDM49dh\n8LHnD9PFguriuqcHREG6ESfyoWdgysDBVdzY8eZh7uDBVpT2A0pwUcznBnn5Lchx\n2g9waMHPgZE3nni5cSmXYuQxa7RoI/NKd5VTrJvqLoO86QLQkA/GlaTYr9f1TQk0\nvdBzPQyYwUZVC7cgYB8j0rYzheSiVwja0FobYHsuzbSR2m7m/czEQ3QGS58Q1gmB\nk2Ztbve5JF9xhryi09ysZAiuVzVHLemPzVnDij0N5SQibXi6S8Ex3TfZ/wXtQDu3\n+wQpU8O9WBbewFkmB9uTdQVPIWNtkM3bvM7t4Cy/SwwvVCydL5jERySgLUD4OBUW\npZzCAMOgbqN6YqJAa8oYvChbMEHMpnxHC0XSgeuaLamWPVQzluP0m9X7YcLRKkpt\nK2zyMM6NAWDICTUEiXyCclQL0xOQMLMgMom/JrQ1B9T1M3R+qhnd0K8fg2H1+zh9\nNz/r/BKVm5plVY6jvdxCMISw4Bd6sIN3nc5LR2zcwh33Y0/G1L0cuDadX7DQo03f\nrO1O+wiFg2uRIU9TDWxhoa0nYDiWdDRioHuv2d0qtF5VqmYUMuE3K/3KALHnpTE+\nmgFQCM1hC72Vl3M7d3GyPPgbW9Pnla0T3t+VXsa7L64HUPeMrQ627eCkLAJtdW+N\nqKQEDK4RqH1JgGurJHdmGFkCAwEAAQ==\n-----END PUBLIC KEY-----\n",
+      "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAENXhsYoRkTNvf2BV+3bmJ77tvvqRO\n/+UBM29T28gij8SJpeG96OxeQ1eHbf1xPG+aauiXZzMEkelz++go79ETEQ==\n-----END PUBLIC KEY-----\n",
+      "label": "fixture-bruno",
+      "fingerprint": "sha256:e0aefa78bc0ecf98",
+      "signing_fingerprint": "sha256:038fd903eda465ed"
+    },
+    "private_key_published": false
+  },
+  "sig": "o1cQJ8F1UpVdkjxwYSphyhp5ulboQFxY3NLk63ITmqjnjzyR5dkRCLKj7plg10uoQhW+jGzuM+9g7BN7wBoEpw=="
+}

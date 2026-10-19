@@ -8,10 +8,10 @@ const search = h('input', { class: 't', type: 'search', placeholder: 'Search by 
 
 try {
     const dir = await loadDirectory()
-    const real = D.realKeys(dir.records)
+    const real = D.realKeys(dir.records), agentsN = D.realAgents(dir.records)
     const list = h('div', { class: 'people', id: 'people-list' }), graphBox = h('div', { id: 'people-graph' }), claims = h('div')
     app.replaceChildren(
-        h('div', { class: 'big' }, h('span', { class: 'n', id: 'real-keys' }, String(real)), h('span', { class: 'l' }, real === 1 ? 'real public key in the register' : 'real public keys in the register', h('br'), h('span', { class: 'small' }, 'the one number to watch; fixtures excluded'))),
+        h('div', { class: 'big' }, h('span', { class: 'n', id: 'real-keys' }, String(real)), h('span', { class: 'l' }, real === 1 ? 'real public key in the register' : 'real public keys in the register', h('br'), h('span', { class: 'small' }, `the one number to watch; fixtures excluded; and ${agentsN} agent key${agentsN === 1 ? '' : 's'}, counted apart`))),
         real === 0 ? msg('warn', 'The register holds no real person yet. The first records are the people Dinis Cruz works with, verified by him; until his own key is in, the anchor list is empty and the pages show the fixture graph to say how it works. ', h('a', { href: pageUrl('vault/index.html') }, 'Make your key'), ' · ', h('a', { href: 'mailto:agent@riskmandate.ai' }, 'ask to be one of the first')) : null,
         h('div', { class: 'acts' }, h('label', { class: 'small' }, showFix, ' show the fixture records (made up, their private keys published on purpose)')),
         search, list,
@@ -35,7 +35,7 @@ try {
 function card(r, g) {
     const links = g.edges.filter(([a, b]) => a === r.fp || b === r.fp).length
     return h('a', { class: 'person', href: pageUrl('people/person.html') + '#' + r.dir },
-        h('div', {}, standingPill(g, r.fp, r), ' ', r.fixture ? h('span', { class: 'pill fixture' }, 'fixture') : null),
+        h('div', {}, r.kind === 'agent' ? [h('span', { class: 'pill agent' }, 'agent'), ' '] : null, standingPill(g, r.fp, r), ' ', r.fixture ? h('span', { class: 'pill fixture' }, 'fixture') : null),
         h('h3', {}, r.name || '(no name)'), h('div', { class: 'fp' }, r.fp),
         h('p', {}, `${r.evidence.length} evidence · ${links} confirmed link${links === 1 ? '' : 's'}${r.inbox ? ' · has an inbox' : ''}`),
         r.problems.length ? h('p', { class: 'bad' }, `${r.problems.length} problem(s): ${r.problems[0]}`) : null)

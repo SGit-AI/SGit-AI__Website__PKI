@@ -214,6 +214,8 @@ export const vault = {
     },
     async contacts() { return this.mode === 'vault' ? A.book.contacts(this.book) : Object.values(localBook().contacts) },
     async saveContact(c) { if (this.mode === 'vault') return A.book.saveContact(this.book, c); const b = localBook(); b.contacts[c.bundle.signing_fingerprint] = { v: 1, ...c, updated: new Date().toISOString() }; saveLocalBook(b) },
+    async agents() { return this.mode === 'vault' ? A.book.agents(this.book) : Object.values(localBook().agents || {}) },
+    async saveAgent(sub) { if (this.mode === 'vault') return A.book.saveAgent(this.book, sub); const b = localBook(); (b.agents = b.agents || {})[sub.record] = sub; saveLocalBook(b) },
     async removeContact(fp) { if (this.mode === 'vault') return A.book.removeContact(this.book, fp); const b = localBook(); delete b.contacts[fp]; saveLocalBook(b) },
     close() { session.set(null); Object.assign(this, { mode: null, door: null, master: null, book: null, token: '', doors: [], ids: [], inbox: null, browserIds: null }); this.changed() },
 }

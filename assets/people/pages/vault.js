@@ -8,10 +8,10 @@ import { messageCard } from '../cards.js'
 
 const app = document.getElementById('app'), barMount = document.getElementById('vault-bar-mount')
 vaultBar(barMount)
-let tab = (location.hash.match(/^#(keys|record|links|contacts|inbox|vaults)\b/) || [])[1] || 'keys'
+let tab = (location.hash.match(/^#(keys|record|links|agents|contacts|inbox|vaults)\b/) || [])[1] || 'keys'
 const linkTarget = () => (location.hash.match(/link=(sha256-[0-9a-f]{16})/) || [])[1]
 if (linkTarget()) tab = 'links'
-const TABS = [['keys', 'Your keys'], ['record', 'Your record'], ['links', 'Links'], ['contacts', 'Contacts'], ['inbox', 'Inbox'], ['vaults', 'Your vaults']]
+const TABS = [['keys', 'Your keys'], ['record', 'Your record'], ['links', 'Links'], ['agents', 'Agents'], ['contacts', 'Contacts'], ['inbox', 'Inbox'], ['vaults', 'Your vaults']]
 const say = (box, kind, ...kids) => box.prepend(msg(kind, ...kids))
 
 async function draw() {
@@ -19,9 +19,10 @@ async function draw() {
     const tabs = h('div', { class: 'tabs', role: 'tablist' }, ...TABS.map(([id, label]) => h('button', { type: 'button', class: id === tab ? 'on' : '', onclick: () => { tab = id; history.replaceState(null, '', '#' + id); draw() } }, label)))
     const body = h('div', { id: 'tab-' + tab })
     app.replaceChildren(tabs, body)
-    try { await ({ keys, record, links, contacts, inbox, vaults })[tab](body, dir) } catch (e) { say(body, 'bad', err(e)) }
+    try { await ({ keys, record, links, agents, contacts, inbox, vaults })[tab](body, dir) } catch (e) { say(body, 'bad', err(e)) }
 }
 vault.onChange(() => draw())
+window.addEventListener('hashchange', () => { const t = (location.hash.match(/^#(keys|record|links|agents|contacts|inbox|vaults)\b/) || [])[1] || (linkTarget() ? 'links' : null); if (t && t !== tab) { tab = t; draw() } })
 draw()
 
 // ------------------------------------------------------------ keys
@@ -222,6 +223,91 @@ async function links(body, dir) {
     }))) : h('p', { class: 'dim small' }, 'None yet.'))
 }
 
+// ------------------------------------------------------------ agents
+const PENDING = 'pki.agent.pending'
+function pendingAgent(sub) { try { if (sub) sessionStorage.setItem(PENDING, JSON.stringify(sub)); else sessionStorage.removeItem(PENDING) } catch (e) { /* fine */ } }
+const readPending = () => { try { return JSON.parse(sessionStorage.getItem(PENDING) || 'null') } catch (e) { return null } }
+async function agents(body, dir) {
+    if (!vault.open || !vault.me) return body.append(msg('warn', 'Open your vault, with a key in it, first.'))
+    const mine = new Set(vault.ids.map(i => i.bundle.signing_fingerprint))
+    const g = dir ? dir.graph : null
+    body.append(h('p', {}, 'An agent makes its own key where it runs and hands you its public record: an identity, and a link naming your key as its operator. You confirm it with a link back, signed here, with an end date: until then the register shows it as operated by you. Its private key never comes to you. ', h('a', { href: pageUrl('agents/index.html') }, 'How agents get a key'), '.'))
+
+    // confirm one
+    const paste = h('textarea', { class: 't code', placeholder: '{"kind": "pki.sgit.ai/submission/v1", "record": "sha256:…", "statements": […]} — from node pki-agent.mjs submission, or from your inbox' })
+    const p0 = readPending(); if (p0) paste.value = JSON.stringify(p0, null, 1)
+    const check = h('button', { type: 'button', class: 'btn primary' }, 'Check it')
+    const out = h('div')
+    check.addEventListener('click', () => busy(check, async () => {
+        out.replaceChildren()
+        let sub; try { sub = JSON.parse(paste.value) } catch (e) { return out.append(msg('bad', 'That is not JSON.')) }
+        const r = await D.readRecord(sub.statements || [])
+        if (!r.ok) return out.append(msg('bad', 'The record does not read cleanly: ', r.problems.join('; ')))
+        if (r.kind !== 'agent') return out.append(msg('bad', 'This is not an agent’s record (its identity is a ' + r.kind + ').'))
+        const claims = r.links.filter(l => l.method === 'operated-by').map(l => l.to)
+        const by = h('select', { class: 't' }, ...vault.ids.map(i => h('option', { value: i.bundle.signing_fingerprint, selected: claims.includes(i.bundle.signing_fingerprint) }, `${i.bundle.label || 'a key'} · ${i.bundle.signing_fingerprint}`)))
+        const days = h('select', { class: 't' }, ...[[1, 'a day'], [7, 'a week'], [30, '30 days'], [90, '90 days'], [365, 'a year']].map(([d, l]) => h('option', { value: d, selected: d === (r.identity.body.session ? 7 : 30) }, l)))
+        const sign = h('button', { type: 'button', class: 'btn primary' }, 'I operate this agent: sign')
+        sign.addEventListener('click', () => busy(sign, async () => {
+            const op = vault.ids.find(i => i.bundle.signing_fingerprint === by.value)
+            if (!claims.includes(by.value)) { if (!confirm('The agent does not name this key as its operator, so the link will be one-way until it does. Sign anyway?')) return }
+            const on = new Date().toISOString().slice(0, 10), until = new Date(Date.now() + Number(days.value) * 86400000).toISOString().slice(0, 10)
+            const st = await D.linkStatement(op, { to: r.fp, method: 'operates', on, until })
+            await vault.addStatement(st)
+            await vault.saveAgent({ ...sub, confirmed: { by: by.value, on, until } })
+            pendingAgent(null)
+            const opSts = await vault.statements(by.value)
+            const both = D.submissions([sub, D.submission(opSts)])
+            out.replaceChildren(msg('ok', `Signed: ${r.name} is operated by ${op.bundle.label || by.value} until ${until}.`),
+                h('p', { class: 'small' }, 'One file now carries both records, the agent’s and your link, for the register (', h('code', {}, 'node admin/build/people.mjs add'), '):'),
+                h('div', { class: 'acts' }, h('button', { type: 'button', class: 'btn primary', onclick: () => download(`pki-agent-${K.dirOf(r.fp)}.json`, JSON.stringify(both, null, 1)) }, 'Download for the register'), copyButton(JSON.stringify(both, null, 1), 'Copy it')))
+        }))
+        out.append(h('div', { class: 'vpanel' },
+            h('h3', {}, r.name), r.identity.body.about ? h('p', { class: 'small' }, r.identity.body.about) : null,
+            h('table', { class: 'kv' }, h('tbody', {},
+                h('tr', {}, h('th', {}, 'Fingerprint'), h('td', {}, h('b', { class: 'mono' }, r.fp), h('div', { class: 'warn small' }, 'Compare it with what the agent printed in its own session, character for character, before you sign.'))),
+                h('tr', {}, h('th', {}, 'Runs on'), h('td', {}, r.identity.body.runtime || '(not said)', r.identity.body.session ? ' · a session key: it dies with the session' : '')),
+                h('tr', {}, h('th', {}, 'Names as operator'), h('td', { class: 'mono' }, claims.join(', ') || 'nobody yet')))),
+            h('label', { class: 'f' }, 'Operated by'), by, h('label', { class: 'f' }, 'For'), days, h('div', { class: 'acts' }, sign)))
+    }))
+    body.append(h('h3', {}, 'Confirm an agent'), paste, h('div', { class: 'acts' }, check), out)
+    if (p0) check.click()
+
+    // mine
+    const kept = await vault.agents()
+    const rows = []
+    for (const a of kept) {
+        const fp = a.record, rec = dir && dir.byFp.get(fp), st = g && g.people.has(fp) ? D.standing(g, fp) : null
+        const name = (a.statements && a.statements[0] && a.statements[0].body.name) || fp
+        const renew = h('button', { type: 'button', class: 'btn small' }, 'Confirm again')
+        renew.addEventListener('click', () => { pendingAgent(a); draw() })
+        rows.push(h('tr', {}, h('th', {}, rec ? h('a', { href: pageUrl('people/person.html') + '#' + K.dirOf(fp) }, name) : name),
+            h('td', {}, h('span', { class: 'mono dim' }, fp), h('div', { class: 'small' }, st ? st.text : `not in the register yet${a.confirmed ? `; you signed until ${a.confirmed.until}` : ''}`), renew)))
+    }
+    body.append(h('h3', {}, 'Your agents'), rows.length ? h('table', { class: 'kv' }, h('tbody', {}, ...rows)) : h('p', { class: 'dim small' }, 'None yet.'))
+
+    // a fleet key
+    const fname = h('input', { class: 't', placeholder: 'e.g. Dinis’s research agents' })
+    const mk = h('button', { type: 'button', class: 'btn' }, 'Make a fleet key')
+    mk.addEventListener('click', () => busy(mk, async () => {
+        if (vault.mode !== 'vault') return say(body, 'warn', 'A fleet key lives in your vault: open it with your passkey.')
+        if (!fname.value.trim()) return say(body, 'warn', 'Name the fleet.')
+        say(body, '', 'Making the fleet’s key…')
+        const person = vault.me, fleet = await K.generate(fname.value.trim())
+        await A.saveIdentity(vault.master, fleet)
+        vault.ids = await A.identities(vault.master)
+        const until = new Date(Date.now() + 365 * 86400000).toISOString().slice(0, 10)
+        await vault.addStatement(await D.agentStatement(fleet, { name: fname.value.trim(), about: `A fleet key: it confirms the agents ${person.bundle.label || 'its operator'} runs, so their links do not fill the operator's own record.`, runtime: 'pki.sgit.ai vault' }))
+        await vault.addStatement(await D.linkStatement(fleet, { to: person.bundle.signing_fingerprint, method: 'operated-by' }))
+        await vault.addStatement(await D.linkStatement(person, { to: fleet.bundle.signing_fingerprint, method: 'operates', on: new Date().toISOString().slice(0, 10), until }))
+        say(body, 'ok', `The fleet key ${fleet.bundle.signing_fingerprint} is in your master, operated by you until ${until}. Choose it under “Operated by” when you confirm its agents; send both records to the register (Your record, with each key as the default in turn, or the file below).`)
+        const both = D.submissions([D.submission(await vault.statements(fleet.bundle.signing_fingerprint)), D.submission(await vault.statements(person.bundle.signing_fingerprint))])
+        body.prepend(h('div', { class: 'acts' }, h('button', { type: 'button', class: 'btn primary', onclick: () => download(`pki-fleet-${K.dirOf(fleet.bundle.signing_fingerprint)}.json`, JSON.stringify(both, null, 1)) }, 'Download the fleet and your record, for the register')))
+        vault.changed()
+    }))
+    body.append(h('h3', {}, 'A fleet key, for many agents'), h('p', { class: 'dim small' }, `Each agent you confirm is a link in the confirming key's record, and a record holds ${D.BOUNDS.agents} live agents at most (rule 3). A fleet key is a second key in your vault that you operate, and that operates your agents: your own record holds one link, the fleet's holds the rest, and every agent's page still shows you at the root.`), fname, h('div', { class: 'acts' }, mk))
+}
+
 // ------------------------------------------------------------ contacts
 async function contacts(body, dir) {
     if (!vault.open) return body.append(msg('warn', 'Open your vault first.'))
@@ -265,7 +351,11 @@ async function inbox(body, dir) {
                 keep.addEventListener('click', () => busy(keep, async () => { await A.book.saveMessage(vault.book, 'in', { id: item.file_id, at: o.msg.at, msg: o.msg, verified: o.verified }); await A.markRead(vault.inbox, item.inbox, [item.file_id]); keep.replaceWith(h('span', { class: 'ok small' }, 'kept')) }))
                 const drop = h('button', { type: 'button', class: 'btn small' }, 'Discard')
                 drop.addEventListener('click', () => busy(drop, async () => { await A.markRead(vault.inbox, item.inbox, [item.file_id]); drop.closest('.msgcard').remove() }))
-                box.append(o ? messageCard(o.msg, o.verified, nameOf, [keep, drop]) : h('div', { class: 'msgcard' }, msg('bad', `Could not be opened: ${err(e1)}`), h('div', { class: 'acts' }, drop)))
+                const subFile = o && (o.msg.files || []).find(f => f.name === 'submission.json')
+                let agentSub = null
+                if (subFile) { try { const j = JSON.parse(new TextDecoder().decode(K.unb64(subFile.data))); if (j.statements && j.statements[0] && j.statements[0].body.kind === 'agent') agentSub = j } catch (e) { /* not one */ } }
+                const confirm = agentSub ? h('button', { type: 'button', class: 'btn small primary', onclick: () => { pendingAgent(agentSub); tab = 'agents'; history.replaceState(null, '', '#agents'); draw() } }, 'Confirm this agent…') : null
+                box.append(o ? messageCard(o.msg, o.verified, nameOf, [confirm, keep, drop].filter(Boolean)) : h('div', { class: 'msgcard' }, msg('bad', `Could not be opened: ${err(e1)}`), h('div', { class: 'acts' }, drop)))
             }
         }))
         body.append(h('p', { class: 'small' }, 'Your inbox is an append lane on your book vault. What arrives is sealed to your key; it is opened here, with the key from your master.'), h('div', { class: 'acts' }, check), box)

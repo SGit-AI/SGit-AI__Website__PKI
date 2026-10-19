@@ -1,0 +1,15 @@
+{
+  "v": 1,
+  "type": "link",
+  "registry": "pki.sgit.ai",
+  "record": "sha256:791cb1480763aeea",
+  "signer": "sha256:791cb1480763aeea",
+  "created_at": "2026-10-18T09:24:00Z",
+  "body": {
+    "to": "sha256:5605b7dfb246c7d5",
+    "method": "operates",
+    "on": "2026-10-18",
+    "until": "2027-04-18"
+  },
+  "sig": "JNpGuwhLvB91PDL/MMId8MIRV0PbbED8igDi+9bRcviLRfbo6spyJKZFMgFBLyxmUlQqpD3wzEHUXHxxrQDsZA=="
+}

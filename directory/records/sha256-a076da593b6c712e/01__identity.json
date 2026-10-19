@@ -1,0 +1,23 @@
+{
+  "v": 1,
+  "type": "identity",
+  "registry": "pki.sgit.ai",
+  "record": "sha256:a076da593b6c712e",
+  "signer": "sha256:a076da593b6c712e",
+  "created_at": "2026-10-18T09:05:00Z",
+  "body": {
+    "kind": "person",
+    "name": "Fixture: Eva",
+    "about": "Not a person. Linked to Clara, then withdrew it.",
+    "bundle": {
+      "v": 1,
+      "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAtPcTMhfiHcYD9bJsjFRP\n1Oe8mQGJyCiV/v8Cur7jSjNI+UA9GVrNX9Lnp6C/uB+tuCVDGL0OvdmTYpaz/BOE\nBtPFYzq3ACpB5WOiKCi3pdlOTnWfUTS8+dMcZE60L43IQVpuZ9KmdKdhD0QZXAjW\n5M6/Awm4HRXZ1f3kZ2ki40LdMFVQgQVp9JuNhAeUWKd7UXyp+KsKTpnho5DcjIkX\nF0oY8VhAlTf0PxRn1wExG75jHe+nV/MXGWnNoRPEeZQ8nGUBn37ze/uQ+/zR/MJr\n5gGK632Caxc+93fjirbY8RuXYTCej619zqa5lXpId0kppxOyN3sny3/Zvq2umGQk\naffPpb1MrX4WcFCkz1kA3tF/5dltdpCSMgGpVfPl4Q1poUyJbfz5qPCYihndanTL\nNEsxfv0Prb71CGJyT3Zsa6/LuHKwF/6GnTqjV0+I5UWLsNAQai2IlBhqKCvzQwjn\npHeNT1LGoGWhWR0oVuR9ZzUBz+T8axha55S5Rd9v2E8yoSjgnjzTfV0nHLx3Dm9d\nv3AciO2IGb8jR817mFfBc882pNV5YbxVUhmipbC7dZwmBetg0cVRKNnXx4VzdKvO\nVD5aTRPq73ZOz1p3Qzh03RE3q310nhur1QWS8AWuPeY881DqIUKoWSiRdYjjJIui\n5f/vo+PVjeO8+6JCW1a+Vd8CAwEAAQ==\n-----END PUBLIC KEY-----\n",
+      "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEjf6QoqAdfrACc8n6gXsRLnNha5FO\nqVgJnuJ0SJurCVeD11oFwnME2KSPVuE/ITCGX9HpXKecQHqbxvaQR897tA==\n-----END PUBLIC KEY-----\n",
+      "label": "fixture-eva",
+      "fingerprint": "sha256:8d9fcaa4123197bf",
+      "signing_fingerprint": "sha256:a076da593b6c712e"
+    },
+    "private_key_published": false
+  },
+  "sig": "viklsw/l+jwIpuQp/fOSi2PtQS7I2GpUWtd1Mp5u70xGM3kvz9RfQievlSaK/UqM0z7YI7YaSHib/8JWEV7tyA=="
+}

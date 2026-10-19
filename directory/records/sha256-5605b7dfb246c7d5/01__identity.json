@@ -1,0 +1,25 @@
+{
+  "v": 1,
+  "type": "identity",
+  "registry": "pki.sgit.ai",
+  "record": "sha256:5605b7dfb246c7d5",
+  "signer": "sha256:5605b7dfb246c7d5",
+  "created_at": "2026-10-18T09:08:00Z",
+  "body": {
+    "kind": "agent",
+    "name": "Fixture: an agent of Ana’s fleet",
+    "about": "Not an agent anyone runs. Operated by Ana’s fleet: its page shows Ana at the root.",
+    "runtime": "a scheduled job",
+    "session": false,
+    "bundle": {
+      "v": 1,
+      "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAzCs5zHrTFlAaVvvjuscO\nUCng2avEy8HO95cZjui/HObbcW8mvcqSM3RhCSWeC81zjebkB2kEPLy21EYu3Y7T\nzGywQY+KsdA9wPLsmPEBSdSZTiF+ZLmMG9Ww+CQOkASq2Yl46HRKCGpQm7QWNsFG\nUYw2yMx05UkiuTA8r+5yMa4QfQJl/gZ1LS47A53aU+iXPnQy5mohWs5NPJV36SlM\neHQj/NaCvXewvveaYS5KZkd7JcosuZgtoZlL93xH2n5NWzeBkma5mEpXivCB23i8\nV5I9zsyYD8rhhRwPns4HXeXQDjuVTWKXdu1XZxIrYlnKJIfAUtT5Jb4M9ldzX79s\nmhbt+LZSvPfQROD+RNW/0GZ4VxYB6tCff9vxoLcp9vz50kUTXsYNlhV/iFlTN+Pa\nuaerdpTiFF64SsCneBKuDfTKeXZQ0j2g+rKQoJl/PZGoTITDFoK4S2Ai90vJVNjb\nl+iu2AkXoB9KesghFzD+n4QfZV6EeMQo7ZjSPLv1LhFnTU+U49e3LH6edEhwWuti\npKzNAlBiLhsURzsfQq0Leyh2Xx6V9sPKHAxdtwDDYgUrG0wWp7nfICgq/4Bv3IE7\nz0dJB/Eu6UF7asuA5MmB9IdT9s4Vf4UtR3xbu9LDAX/EiCXdvsL81zL1DjyeCC26\ngqDuKIkvUtBA/zh8ekZmc2UCAwEAAQ==\n-----END PUBLIC KEY-----\n",
+      "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEAeQvWTvoe+ERBY/uJgHhFwp+/XkY\nuLBaXMXraalBT8AaiGtTN/EN/UPsjzb6RQu8pDqzcT/3DR9XcqZDEVtJmw==\n-----END PUBLIC KEY-----\n",
+      "label": "fixture-an",
+      "fingerprint": "sha256:e70ffc26543ae895",
+      "signing_fingerprint": "sha256:5605b7dfb246c7d5"
+    },
+    "private_key_published": false
+  },
+  "sig": "eknOPldgnNa+22Uq8HkKjzyiyYnKTvu8QuQytY8En+84E+oPpyXwJoDw9HH99LYmrJEc0q9iH6XcCJNf9YxFmA=="
+}

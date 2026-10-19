@@ -1,0 +1,23 @@
+{
+  "v": 1,
+  "type": "identity",
+  "registry": "pki.sgit.ai",
+  "record": "sha256:e72089f7dc55b380",
+  "signer": "sha256:e72089f7dc55b380",
+  "created_at": "2026-10-18T09:01:00Z",
+  "body": {
+    "kind": "person",
+    "name": "Fixture: Ana (the fixture anchor)",
+    "about": "Not a person. The anchor of the fixture graph, so the pages can show verification before a real anchor is in.",
+    "bundle": {
+      "v": 1,
+      "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA7Fvf5rHz7huyRyKGiUoO\niZjcF5mipqvDFUzt0TwBnXPNTbIH+zO+Ff0nWmSQOvy0O+Cm9eSk1gS3TzILVr07\nl7pi9k3YZX4Tj9Dn4wgPpgQGyX5CwX0rQXAVhHc2fPsDNdaCUm3t8l2jc7nH4YAj\nDw27627ZlUskhYgwwVpfKARnSgYQ5swaclY7O1J6MVQqqDtUuZlswJuArc5GLIl6\nNrRuvA6ULQM+c1JQsPj+mOoKEyn3qOH6bbW9MnK/dJgQQLOfyemjgSXb5oOiPbgU\nFCkemdut5Bxbv0rhgcG9YlrN2WukA891qi1ICYdvq9iZwI49H7UDy1o82EZkZPRr\ntaKyLyDyivFOSyNgXdBl9xwpdqq9lrDIDF/xpg5hxlfcZmLm+T6Fe8/kBbtRszLa\ndL/2GqfXds6k8bLwajmVn6RN3Mebs1Qm/bV8Qh8vAooctcBiJ/BghSGC3dB2C85y\n+J/tpXiDdDv7IZxPZKF5vZm0hSrsA0iLxX4u2eYfJ/W5r8wCwNJhOGsK8pRo74Ee\ntMHXovN55FfSknopvRs3PkeX6493cTseIZ7KAn/UjkavuEOyIT7WTDb56f2mY3Lw\nwwwXn/Xxf3Kjk9NHqftb3lMx44FRVHrdmG/EPuHgC3U+6u45KTzhafA8ac6Qv8BB\n0XGE1tnPftyG0PbfR403kSsCAwEAAQ==\n-----END PUBLIC KEY-----\n",
+      "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEXvuEJQV2r9/9rbefA1ZrH9mL9KkB\nLjQ66E+KrXC5VJQgwDTP9oAkKIoCmqni/keDnyM3QwwxmeEgPMYIrFZ19w==\n-----END PUBLIC KEY-----\n",
+      "label": "fixture-ana",
+      "fingerprint": "sha256:2590b418f1a6dacc",
+      "signing_fingerprint": "sha256:e72089f7dc55b380"
+    },
+    "private_key_published": false
+  },
+  "sig": "GsGqsXy613M65D74bj73h5jNiDOvH/4xnKj1LvplxHTb3GNkKQNp2ksdfkp4FX9iyn3YMAn6KFAPGYh/l8G93Q=="
+}

@@ -49,6 +49,8 @@ p.msg.ok{background:#ecf7f5} p.msg.warn{background:#fff7e6} p.msg.bad{background
 .pill.verified{border-color:var(--accent);color:var(--accent-dk);background:#ecf7f5}
 .pill.linked{border-color:#9bc8c2;color:var(--accent-dk)}
 .pill.expired{border-color:#e5cf9b;color:var(--warm);background:#fff7e6}
+.pill.agent{border-color:#b9b4e6;color:#4c3fa6;background:#f1effc}
+.pill.operated{border-color:var(--accent);color:var(--accent-dk);background:#ecf7f5}
 .pill.fixture{border-color:#e5cf9b;color:var(--yellow);background:#fff7e6}
 .pill.revoked{border-color:#f1b7b7;color:var(--red);background:#fdecec}
 

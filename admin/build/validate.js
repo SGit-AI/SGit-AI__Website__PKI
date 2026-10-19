@@ -145,6 +145,8 @@ for (const f of htmlFiles) {
 {
   const r = require('child_process').spawnSync(process.execPath, [path.join(ROOT, 'admin/build/people.mjs'), 'check'], { encoding: 'utf8' });
   if (r.status !== 0) errors.push(`the register of people: ${(r.stderr || r.stdout || 'people.mjs check failed').trim()}`);
+  const t = require('child_process').spawnSync(process.execPath, [path.join(ROOT, 'admin/build/gen_agent_tool.mjs'), '--check'], { encoding: 'utf8' });
+  if (t.status !== 0) errors.push((t.stderr || 'agents/pki-agent.mjs is stale').trim());
 }
 
 // --- 4. key-leak tripwire -------------------------------------------------

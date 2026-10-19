@@ -156,6 +156,13 @@ export const book = {
         await NV.writeFile(bk, `/messages/${box}`, name, JSON.stringify(m, null, 2)); await NV.publish(bk)
         return name
     },
+    /** Agents this person confirmed, or was asked to: the agent's submission as it arrived, kept by the agent's fingerprint. */
+    async agents(bk) {
+        const names = (await NV.listFiles(bk, '/agents').catch(() => [])).filter(n => n.endsWith('.json'))
+        const out = []; for (const n of names) { try { out.push(JSON.parse(await NV.readText(bk, `/agents/${n}`))) } catch (e) { /* skip */ } }
+        return out
+    },
+    async saveAgent(bk, sub) { await NV.writeFile(bk, '/agents', `${K.dirOf(sub.record)}.json`, JSON.stringify(sub, null, 1)); await NV.publish(bk) },
     async saveInvite(bk, inv) { await NV.writeFile(bk, '/invites', `${safe(inv.nonce)}.json`, JSON.stringify(inv, null, 2)); await NV.publish(bk) },
     async invites(bk) {
         const names = (await NV.listFiles(bk, '/invites').catch(() => [])).filter(n => n.endsWith('.json'))

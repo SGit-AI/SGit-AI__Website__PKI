@@ -7,145 +7,25 @@
     "statement_bytes": 16384,
     "statements": 256,
     "links": 150,
+    "agents": 200,
     "evidence": 32
   },
   "counts": {
     "real_keys": 0,
-    "records": 5,
-    "fixtures": 5,
+    "agent_keys": 1,
+    "records": 9,
+    "fixtures": 8,
     "confirmed_links": 0,
-    "confirmed_links_with_fixtures": 2
+    "confirmed_links_with_fixtures": 5
   },
   "anchors": [],
   "fixture_anchors": [
-    "sha256:568450f3a50a5cb2"
+    "sha256:e72089f7dc55b380"
   ],
   "records": [
     {
-      "fp": "sha256:568450f3a50a5cb2",
-      "dir": "sha256-568450f3a50a5cb2",
-      "fixture": true,
-      "ok": true,
-      "name": "Fixture: Ana (the fixture anchor)",
-      "revoked": null,
-      "statements": [
-        {
-          "v": 1,
-          "type": "identity",
-          "registry": "pki.sgit.ai",
-          "record": "sha256:568450f3a50a5cb2",
-          "signer": "sha256:568450f3a50a5cb2",
-          "created_at": "2026-10-18T09:01:00Z",
-          "body": {
-            "kind": "person",
-            "name": "Fixture: Ana (the fixture anchor)",
-            "about": "Not a person. The anchor of the fixture graph, so the pages can show verification before a real anchor is in.",
-            "bundle": {
-              "v": 1,
-              "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA3pRBFKyrf1LJ4DnpGAlo\n+dO9S5+nDJDQENxkj1kcWbVHgkVxCfX9m5ph/88mz/QIzi1OJ7HDeoAsRKYELA3z\nXq/nf7NPPd7mq3VkCwW/9vA680XvC4eOkyvtSZOYWS34W464HwJ40C+vU+J+HrQ8\nzEDGOHiFyzHZ1LpKMZhfEpWihfA+8WcBQxoGcM6pf/XY7qDod9XbMlO45sqn0EFt\nEvLwNfXOQ578mQSsKkXuGfHolOkWSeymV4n+dhxs3qQy2xyQLeEmCauz5HofIrrI\nwFfkN7TlLbjGUUzBTpq42me0dKb9ZLgK6Xr+cdDwj5Vt9saxoHPjhiEc5X7plis8\nYAb/KPriRcvqJcicD10jNfeWSOXEIj7/2PMlrnHb/ygeafOvbkphekisyEowLynF\nCP0EJ4PeGTbExNsZitJ2LbpzlT8lFQkmEPoJn2swEI236dhphfiLysVGmjnfKe1q\nMSMZyRSBP6SVtBrPKMiV2suqJqMKgnSk4d7X+GNcKywwXk6XezGK0Jze6kYVxvqM\nJkYk6nZfM5LGQEr4NpdCI/uT2aTmuaI/nMAdjYiYB6i19xK/WtEpYzff1jpxGx9y\nUckdFkhzdUykHZiSNGYfmAbgWPGqMP9MQzDsuk3Nqc0VnghmFE8hj56XIc42CJPp\nXJcsrYiS03R5v/mmMBhbaK8CAwEAAQ==\n-----END PUBLIC KEY-----\n",
-              "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE4exhjdNAnQMw5ckra+HVe7fhCc3p\nN+CHN0jBibItyovhHQWtYnOnxBKaL5T1vLJePjbfe/RAViEH0Y6VilH5Ow==\n-----END PUBLIC KEY-----\n",
-              "label": "fixture-ana",
-              "fingerprint": "sha256:782176a703f5a6d3",
-              "signing_fingerprint": "sha256:568450f3a50a5cb2"
-            },
-            "private_key_published": false
-          },
-          "sig": "YNETrWs8hsOSLWdd57cjsMTmju5MJHZVeyDcBkxVamcQ0/Mn151ZX89eH/HlcTdM7jDUtf67h04M4JQj+fp7rQ=="
-        },
-        {
-          "v": 1,
-          "type": "evidence",
-          "registry": "pki.sgit.ai",
-          "record": "sha256:568450f3a50a5cb2",
-          "signer": "sha256:568450f3a50a5cb2",
-          "created_at": "2026-10-18T09:06:00Z",
-          "body": {
-            "kind": "website",
-            "value": "example.org",
-            "url": "https://example.org/.well-known/pki.sgit.ai.txt"
-          },
-          "sig": "sWL2h1RZsLXMsPTxtfE3aX0yL5MAvQ2imdRBTvhSgx9ewd6YDNlZCF8jJ1J2mbECLz+gELME7mMK/J02RWQppw=="
-        },
-        {
-          "v": 1,
-          "type": "link",
-          "registry": "pki.sgit.ai",
-          "record": "sha256:568450f3a50a5cb2",
-          "signer": "sha256:568450f3a50a5cb2",
-          "created_at": "2026-10-18T09:07:00Z",
-          "body": {
-            "to": "sha256:98537047436a2784",
-            "method": "in-person",
-            "on": "2026-10-18"
-          },
-          "sig": "UHjo6BRnisZq5BT2pPQqA5zCKdC3SuTx3s7yQ4h+f14kpE2e5E8n1tFAXnk4JqRmZUtFu6ssVifwlbOtqW7S5A=="
-        }
-      ]
-    },
-    {
-      "fp": "sha256:78557ff54f616a7e",
-      "dir": "sha256-78557ff54f616a7e",
-      "fixture": true,
-      "ok": true,
-      "name": "Fixture: Clara",
-      "revoked": null,
-      "statements": [
-        {
-          "v": 1,
-          "type": "identity",
-          "registry": "pki.sgit.ai",
-          "record": "sha256:78557ff54f616a7e",
-          "signer": "sha256:78557ff54f616a7e",
-          "created_at": "2026-10-18T09:03:00Z",
-          "body": {
-            "kind": "person",
-            "name": "Fixture: Clara",
-            "about": "Not a person. Two steps from the anchor, through Bruno.",
-            "bundle": {
-              "v": 1,
-              "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAqBjMBL4YiDDXKczu7dfz\noXZF3W3mygbG8xPqdzvmAXCuA39857q/6nlprwmVOWiXnQB22jZVuNbpFosZuvU1\nnAsxG8yly6EkuwVKWirMK6Jb/gJPZj3Vd/70F1nUbAmO9VWMD+XmIY7cSboWx8Mg\n6vTEqlJ/LA18rG6YijA5V39VlCIps2Be8lyQxP/xpPgch21abKKdRAo7USblEqHQ\nBS4k+sKMcBPbfnGUeBwWi3Atd0tguDdirybEBROUnuTrMWt3AoxiErdIbdPCzHrA\ntWF4RF5MAQ96WBjOb+W96a40v/qZcyVD24gdX/M2bz3rpj3xT7CXkBwQs5uX/X0g\nTzdpRSnUuqyTnYIUCsZSt40UeuyK2eZtGMbqiX85Vx7rXHlAzB8K42tpVrcICvLV\n2NLKNKDg50Ij1UayaB7niO3thOotukhIUxdvi2JrAEs5w/OLg/AdjIldRQN53yUX\nkxm5o9cuC+Bvh1RdIwEasufanoxWIknuwv3VUvoYkCZ6m61S1fK46Vrrt1B41WMv\n4xe+ExnqThusI9V6sWhSKUAJMVsSn6ikzY101+esbMkGxsmOUmM7IRXtFAUbABCM\nzvxr147Ns57zrZoLPbwVM4g4oBwR3aXONP0O5jFzbtCeT3oXS14LZYSHemJy5/kv\nsNnCEOIXiDyq6ZylLB/j7CkCAwEAAQ==\n-----END PUBLIC KEY-----\n",
-              "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEvil+DhX8QT59nW2Uy0U3nFXNr+Fz\n8o+llb1wBCf7bkltYcpE9NK+xtQWuUAsRB5nS/a6ES3etzcTI5v7mQ+NgA==\n-----END PUBLIC KEY-----\n",
-              "label": "fixture-clara",
-              "fingerprint": "sha256:1510393a54686510",
-              "signing_fingerprint": "sha256:78557ff54f616a7e"
-            },
-            "private_key_published": false
-          },
-          "sig": "dT/IeENzXcQMIFjl1QHL/8sa9Ope+/Qj5mYkqAOoO/7CtXx2OzjefDkQmpNeaphA1WQDRu5svq/tBvPGH8Yl2g=="
-        },
-        {
-          "v": 1,
-          "type": "link",
-          "registry": "pki.sgit.ai",
-          "record": "sha256:78557ff54f616a7e",
-          "signer": "sha256:78557ff54f616a7e",
-          "created_at": "2026-10-18T09:11:00Z",
-          "body": {
-            "to": "sha256:98537047436a2784",
-            "method": "invitation",
-            "on": ""
-          },
-          "sig": "h2ExF0Tpy27R7Zucxk0M5LaChEwHtuGsm3k0vzn/613ysKH/HJ1OmDd9XizUQzWO1yvezjqmYykHd+MfV4GlUQ=="
-        },
-        {
-          "v": 1,
-          "type": "link",
-          "registry": "pki.sgit.ai",
-          "record": "sha256:78557ff54f616a7e",
-          "signer": "sha256:78557ff54f616a7e",
-          "created_at": "2026-10-18T09:14:00Z",
-          "body": {
-            "to": "sha256:b961a7ae09576084",
-            "method": "",
-            "on": ""
-          },
-          "sig": "TW84Kh9zt872qNesFmpi7eSOuLKEwtlQ7hThD0V4PFOjBuHL7R+8FHERKnEA2yEUEVyyJSR4pRXGelBtI2hzZw=="
-        }
-      ]
-    },
-    {
-      "fp": "sha256:98537047436a2784",
-      "dir": "sha256-98537047436a2784",
+      "fp": "sha256:038fd903eda465ed",
+      "dir": "sha256-038fd903eda465ed",
       "fixture": true,
       "ok": true,
       "name": "Fixture: Bruno",
@@ -155,8 +35,8 @@
           "v": 1,
           "type": "identity",
           "registry": "pki.sgit.ai",
-          "record": "sha256:98537047436a2784",
-          "signer": "sha256:98537047436a2784",
+          "record": "sha256:038fd903eda465ed",
+          "signer": "sha256:038fd903eda465ed",
           "created_at": "2026-10-18T09:02:00Z",
           "body": {
             "kind": "person",
@@ -164,63 +44,127 @@
             "about": "Not a person. Verified by the fixture anchor in person, and linked back.",
             "bundle": {
               "v": 1,
-              "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA5FvxkVBVCdcC9gpoZ+Kf\njrdb8I+1xiglc0QX/AM0mr92kU2y8Xk2KQY0PgJbHhEIqW0DweqeiVwN/mIQjEYG\nbD5iNPx5yNcr33N/zy5N1f82m2L4Wje+IIEU8tjqbSu24qQfrPcy+I+XaIdHxaD0\n6d6g5wPpT1/FB0JVjgNMfBl+/9dqTSpm4PeBnqZTEpiVZlLRiEKSm0v+1z2YpKIZ\nZxXZ4+Sl73kEyJWWlqTEY2SW+99v//crdacX3UuCYPS9CmQJ7aL98Ht9M5FVXRBB\nLnIO0eMDaw84mbPIpg9mKE0tLROApfUtFLP391rdIYm98RRcPa0h3aREkh+ir38o\nKYMr7s+5DLt/ltMAM5Kntubi8TxrGHjmQdJ3iZut36YJLTXksxXdbEqJHgMQTHfR\ne18ug7nZf+wOJfHRaM52889oUDKia0QHb6l7P2MnI+KxcgjOn2diGCpvW0/ZZ5U+\nqWs81FhszgbXu5GNseGkerRvHl7XR+ZV73Mk2jbALcMhsOkd5+FVYYimQg1cjvWu\nCBLboqk6cyJx4ddGX/bmf6ej4ohTo2pNU131L8P7/8GKx4dAYnAtch4k2RUO/k/l\n19f+NFgOJeHvOt2CMg1x37axOXE3RTm2bUPYJQFqVuj8ZwgvdM3+UJevkDCMd7Be\ngsmgnKZ/1gmqDTBxcVZJXpkCAwEAAQ==\n-----END PUBLIC KEY-----\n",
-              "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEC7t4kcque0YES9KqwN1ZTHD/jhQI\nyvxWr/u38Sng4EjIxtqV8OreMASQL7lhQZat+bXdYJJB+Umk+KXaWUUwaA==\n-----END PUBLIC KEY-----\n",
+              "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAuXxfeAlkq2XzlaDM49dh\n8LHnD9PFguriuqcHREG6ESfyoWdgysDBVdzY8eZh7uDBVpT2A0pwUcznBnn5Lchx\n2g9waMHPgZE3nni5cSmXYuQxa7RoI/NKd5VTrJvqLoO86QLQkA/GlaTYr9f1TQk0\nvdBzPQyYwUZVC7cgYB8j0rYzheSiVwja0FobYHsuzbSR2m7m/czEQ3QGS58Q1gmB\nk2Ztbve5JF9xhryi09ysZAiuVzVHLemPzVnDij0N5SQibXi6S8Ex3TfZ/wXtQDu3\n+wQpU8O9WBbewFkmB9uTdQVPIWNtkM3bvM7t4Cy/SwwvVCydL5jERySgLUD4OBUW\npZzCAMOgbqN6YqJAa8oYvChbMEHMpnxHC0XSgeuaLamWPVQzluP0m9X7YcLRKkpt\nK2zyMM6NAWDICTUEiXyCclQL0xOQMLMgMom/JrQ1B9T1M3R+qhnd0K8fg2H1+zh9\nNz/r/BKVm5plVY6jvdxCMISw4Bd6sIN3nc5LR2zcwh33Y0/G1L0cuDadX7DQo03f\nrO1O+wiFg2uRIU9TDWxhoa0nYDiWdDRioHuv2d0qtF5VqmYUMuE3K/3KALHnpTE+\nmgFQCM1hC72Vl3M7d3GyPPgbW9Pnla0T3t+VXsa7L64HUPeMrQ627eCkLAJtdW+N\nqKQEDK4RqH1JgGurJHdmGFkCAwEAAQ==\n-----END PUBLIC KEY-----\n",
+              "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAENXhsYoRkTNvf2BV+3bmJ77tvvqRO\n/+UBM29T28gij8SJpeG96OxeQ1eHbf1xPG+aauiXZzMEkelz++go79ETEQ==\n-----END PUBLIC KEY-----\n",
               "label": "fixture-bruno",
-              "fingerprint": "sha256:85f1e5c814b24f62",
-              "signing_fingerprint": "sha256:98537047436a2784"
+              "fingerprint": "sha256:e0aefa78bc0ecf98",
+              "signing_fingerprint": "sha256:038fd903eda465ed"
             },
             "private_key_published": false
           },
-          "sig": "y8JzjxSpVgoxAaR8Iy1064eYu2ffDI/V3IHSkYS0bbBWK5ADVetUbAju1zRf69VCDgwgcaoonvB9i7/2verKvg=="
+          "sig": "o1cQJ8F1UpVdkjxwYSphyhp5ulboQFxY3NLk63ITmqjnjzyR5dkRCLKj7plg10uoQhW+jGzuM+9g7BN7wBoEpw=="
         },
         {
           "v": 1,
           "type": "link",
           "registry": "pki.sgit.ai",
-          "record": "sha256:98537047436a2784",
-          "signer": "sha256:98537047436a2784",
-          "created_at": "2026-10-18T09:08:00Z",
+          "record": "sha256:038fd903eda465ed",
+          "signer": "sha256:038fd903eda465ed",
+          "created_at": "2026-10-18T09:11:00Z",
           "body": {
-            "to": "sha256:568450f3a50a5cb2",
+            "to": "sha256:e72089f7dc55b380",
             "method": "known",
             "on": ""
           },
-          "sig": "Bdog251C8F/303q4dIXKT8GujMlfV3CiJZ7JlQq3NerDGOP4kmV4DLDapH5DHNrUD2XwW+1CgFOk0w1amOrGtw=="
+          "sig": "m5kdSLenn49R8ke/kenmT5nSDydcIgIF8lu+vjHGNF14pkXduCBl0Xfsld8AQFoZt2ag9AU3mToC+knZAbwOmw=="
         },
         {
           "v": 1,
           "type": "evidence",
           "registry": "pki.sgit.ai",
-          "record": "sha256:98537047436a2784",
-          "signer": "sha256:98537047436a2784",
-          "created_at": "2026-10-18T09:09:00Z",
+          "record": "sha256:038fd903eda465ed",
+          "signer": "sha256:038fd903eda465ed",
+          "created_at": "2026-10-18T09:12:00Z",
           "body": {
             "kind": "github",
             "value": "fixture-bruno",
             "url": "https://gist.github.com/fixture-bruno/0"
           },
-          "sig": "swCFIQLvngRkt/wOEWIYO3LehsmZaBMZJYERipgayBK2gggI8o0B3Q1O5SxcPkfcTj7tM2VsPyO4WZWlphOwQw=="
+          "sig": "bMjGelZCkKUBsZM5vpO0Wz4XnDI1gAlON1w8dVERP/lJAdGnjzE7NXj1qtuXbQcEs19z6BU3NHNGg3dF2CHuZA=="
         },
         {
           "v": 1,
           "type": "link",
           "registry": "pki.sgit.ai",
-          "record": "sha256:98537047436a2784",
-          "signer": "sha256:98537047436a2784",
-          "created_at": "2026-10-18T09:10:00Z",
+          "record": "sha256:038fd903eda465ed",
+          "signer": "sha256:038fd903eda465ed",
+          "created_at": "2026-10-18T09:13:00Z",
           "body": {
-            "to": "sha256:78557ff54f616a7e",
+            "to": "sha256:c1b6c3f22f0dd360",
             "method": "known",
             "on": ""
           },
-          "sig": "p+J44Ls7PLXLeNeYJQ8xcNnhMoAZzx5eebs02tlkqoMEborwJyL2HqfTcJSC6s+bPQZRypr3BODBVF/CB/U5gQ=="
+          "sig": "qbYCRvI0qmXQsX2jnRKt8Qd0idii71i4qNCx5x3srwdopeSBRYnhVLzFbMnZJdiQlDn2mBvvy7KumbtNTSVv/Q=="
+        },
+        {
+          "v": 1,
+          "type": "link",
+          "registry": "pki.sgit.ai",
+          "record": "sha256:038fd903eda465ed",
+          "signer": "sha256:038fd903eda465ed",
+          "created_at": "2026-10-18T09:20:00Z",
+          "body": {
+            "to": "sha256:8d69aa4573adc745",
+            "method": "operates",
+            "on": "2026-10-18",
+            "until": "2027-04-18"
+          },
+          "sig": "tqFd6zhkJ/5illf03+C9byGjW5OqZsGcg6GjxYVD3vn1PSEushQ7dQYJ829L+KFcL71RV73mzv8D07Yu/TGWBw=="
         }
       ]
     },
     {
-      "fp": "sha256:9a8830b7b941c841",
-      "dir": "sha256-9a8830b7b941c841",
+      "fp": "sha256:5605b7dfb246c7d5",
+      "dir": "sha256-5605b7dfb246c7d5",
+      "fixture": true,
+      "ok": true,
+      "name": "Fixture: an agent of Ana’s fleet",
+      "revoked": null,
+      "statements": [
+        {
+          "v": 1,
+          "type": "identity",
+          "registry": "pki.sgit.ai",
+          "record": "sha256:5605b7dfb246c7d5",
+          "signer": "sha256:5605b7dfb246c7d5",
+          "created_at": "2026-10-18T09:08:00Z",
+          "body": {
+            "kind": "agent",
+            "name": "Fixture: an agent of Ana’s fleet",
+            "about": "Not an agent anyone runs. Operated by Ana’s fleet: its page shows Ana at the root.",
+            "runtime": "a scheduled job",
+            "session": false,
+            "bundle": {
+              "v": 1,
+              "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAzCs5zHrTFlAaVvvjuscO\nUCng2avEy8HO95cZjui/HObbcW8mvcqSM3RhCSWeC81zjebkB2kEPLy21EYu3Y7T\nzGywQY+KsdA9wPLsmPEBSdSZTiF+ZLmMG9Ww+CQOkASq2Yl46HRKCGpQm7QWNsFG\nUYw2yMx05UkiuTA8r+5yMa4QfQJl/gZ1LS47A53aU+iXPnQy5mohWs5NPJV36SlM\neHQj/NaCvXewvveaYS5KZkd7JcosuZgtoZlL93xH2n5NWzeBkma5mEpXivCB23i8\nV5I9zsyYD8rhhRwPns4HXeXQDjuVTWKXdu1XZxIrYlnKJIfAUtT5Jb4M9ldzX79s\nmhbt+LZSvPfQROD+RNW/0GZ4VxYB6tCff9vxoLcp9vz50kUTXsYNlhV/iFlTN+Pa\nuaerdpTiFF64SsCneBKuDfTKeXZQ0j2g+rKQoJl/PZGoTITDFoK4S2Ai90vJVNjb\nl+iu2AkXoB9KesghFzD+n4QfZV6EeMQo7ZjSPLv1LhFnTU+U49e3LH6edEhwWuti\npKzNAlBiLhsURzsfQq0Leyh2Xx6V9sPKHAxdtwDDYgUrG0wWp7nfICgq/4Bv3IE7\nz0dJB/Eu6UF7asuA5MmB9IdT9s4Vf4UtR3xbu9LDAX/EiCXdvsL81zL1DjyeCC26\ngqDuKIkvUtBA/zh8ekZmc2UCAwEAAQ==\n-----END PUBLIC KEY-----\n",
+              "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEAeQvWTvoe+ERBY/uJgHhFwp+/XkY\nuLBaXMXraalBT8AaiGtTN/EN/UPsjzb6RQu8pDqzcT/3DR9XcqZDEVtJmw==\n-----END PUBLIC KEY-----\n",
+              "label": "fixture-an",
+              "fingerprint": "sha256:e70ffc26543ae895",
+              "signing_fingerprint": "sha256:5605b7dfb246c7d5"
+            },
+            "private_key_published": false
+          },
+          "sig": "eknOPldgnNa+22Uq8HkKjzyiyYnKTvu8QuQytY8En+84E+oPpyXwJoDw9HH99LYmrJEc0q9iH6XcCJNf9YxFmA=="
+        },
+        {
+          "v": 1,
+          "type": "link",
+          "registry": "pki.sgit.ai",
+          "record": "sha256:5605b7dfb246c7d5",
+          "signer": "sha256:5605b7dfb246c7d5",
+          "created_at": "2026-10-18T09:23:00Z",
+          "body": {
+            "to": "sha256:791cb1480763aeea",
+            "method": "operated-by",
+            "on": ""
+          },
+          "sig": "4n9zuAypcoGEie1n3xRkpUqYlc/2UrtulXsXfXIfRy1YrjmTq090OwJB0b4Xd9VbB1R4AuKEQ79fU6HtpOU02A=="
+        }
+      ]
+    },
+    {
+      "fp": "sha256:63b6ad9bd74eb6f7",
+      "dir": "sha256-63b6ad9bd74eb6f7",
       "fixture": true,
       "ok": true,
       "name": "Fixture: Duarte",
@@ -230,8 +174,8 @@
           "v": 1,
           "type": "identity",
           "registry": "pki.sgit.ai",
-          "record": "sha256:9a8830b7b941c841",
-          "signer": "sha256:9a8830b7b941c841",
+          "record": "sha256:63b6ad9bd74eb6f7",
+          "signer": "sha256:63b6ad9bd74eb6f7",
           "created_at": "2026-10-18T09:04:00Z",
           "body": {
             "kind": "person",
@@ -239,35 +183,148 @@
             "about": "Not a person. Links to Ana, who has not linked back: a claim, and no link.",
             "bundle": {
               "v": 1,
-              "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAx0nwVpEex2F3+Nn7ClOB\nMAQcIn1ELbs/Qmitojkrz5UC+wyQcTs/J3sKdyMIkC0zbd6fNbz5YBaeYVa5fB+v\n2KTsIDXW0KMa9DxeWnKH96cjwLKfbRg2mhQcO/cchQJGbhzGDRoo0XA7C4JVSJSC\nWoSg6x7vPs+n3p4sufP64KAo8bjk2MQpVd/kL7kCiZhuzVxLsuA2EyEpOiB1Mwwt\nDZ9ctan9+k2ES7W2I1usKlZF6fIB69J6BxYRolfXQ4Sol5hhTOYV7pi7wHCrxP01\n6c5MnGL+7eY89eg/P0lpBD7h3oKzUtXhjlstDonfgtLNdLXN0uNClE4WTaeEE9J8\nquqs5KjoMasi2S0a/AaaqEfou48SN4ck6uenXeDqnAnPB+AIr9eV8FREoCYPwdrC\nNnJW9wd6J5VTf6txjk/wNYFWiIGKsIdP/9vqHTWhYPGSFTxabD+KjFloJamIqB8n\nXPkcG+8gCrX3FTbXkliBl6FV2Brb6JhQnMdD4mMLduT5IEX7lAuhmTGPxLpjkjqb\nHcGaX87hKAEKo0xfObiiTOESTyokHyota0W7fAM6zZDeotRahLIqSVc9BX1i/doq\ncpagupT3jL1gt2shcrHY3LjLGJCMIobO57jiEF8LED6qZWy1V4TFVlPtdd0HMBeb\nTI2F15p2050NRww3e+d9WYsCAwEAAQ==\n-----END PUBLIC KEY-----\n",
-              "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEYOziZ7ZNdZLy7Qb6tM2J3fw657My\nAy1n+WYj7yFJ/HeLUaT8E2rjuO+jYlJKRKvGBeq2vx5UCsWIGOCbdGWlBA==\n-----END PUBLIC KEY-----\n",
+              "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAtq3VMzBTWklzu+d+KIUe\n4SOM4B/UcbEts/IDF4VBNrnS+K9hA1MwvaAexLiuHq7ovXBq7VOhIlDfe2Kev6Ot\nSdOpkuSjMDNz+SpMqd+bUbc1RUge/V5fTB3/KAUozsnNodSrlxqWMmsbIc2LKvMU\nS7XTcvsCmM3vi4vx39tQu2q2hEUMA4G5D/d5xqAe96Uxv/YEoz/ISniDAxYWK1qT\ndj1X0R+IkZSGXsW8ZdOHF8fYwJAaNK45R9MYriOEiiiQp2FyItK2DypunoaYsUZ0\nVcMVE2ZXnl50WWJUzomO+Ga6Dln0d3cZNZzPHr4biat3te9FGOXD9xyjIImmXRjw\nf4WxHeEogR0uHOkYjB+qzbrgfyfFuyxsm9WjeKgKjcWWIXweHXOmeXFOm0A6ChWj\nF6qqwWdrdpn5kM6okL+Ykzuidrk8QWZiP+e3JFIyyOPcQNVWCHFtP+o2EhlJ4Gnn\n73os5zczegJkQ/CgOE4ZvR6BccZGglTX9xrvW0mC1kHTkp92tQuSPPz1tOfeoWKL\nTUf4f2PFSUz6Nyt9GP7yJIiuS/ttZLKBUT8qAje8UEgzEiQIX6jWyTwuBxiCQI2b\n0RrZ73xopX0brxUV3I3LZrmH/DcK0AYenkGnwnvJgOu/4L/66jXrl+AOqbnlQQru\nloynShwCQxVIFWgi2Fy5TOsCAwEAAQ==\n-----END PUBLIC KEY-----\n",
+              "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAExpy7WTbUhI8VgSH+9cIGKu8frh0A\nFXrQ5NukFC1vloUuwCRRVY7LBN75hEwkRIsl5kuby2KwPEdYQ356D0CsTA==\n-----END PUBLIC KEY-----\n",
               "label": "fixture-duarte",
-              "fingerprint": "sha256:baf4756f4caf962e",
-              "signing_fingerprint": "sha256:9a8830b7b941c841"
+              "fingerprint": "sha256:d7aab8314c0abfbf",
+              "signing_fingerprint": "sha256:63b6ad9bd74eb6f7"
             },
             "private_key_published": false
           },
-          "sig": "b/bMQmBhg4mIUun7POI4rVbc41zJmjUSPQO23aBGXcmQecC1l9qGFONsj7Yl5raRQas4hDNe1aG/FqEIesJPeQ=="
+          "sig": "g0GxQmhUOCHJiJEwGP0/Zmy+gqW+544xBsgJ+uXIoHtUuIGzN+Fhgam2iwXun0LVKm6NDkGIkX/WyEogHu6nTQ=="
         },
         {
           "v": 1,
           "type": "link",
           "registry": "pki.sgit.ai",
-          "record": "sha256:9a8830b7b941c841",
-          "signer": "sha256:9a8830b7b941c841",
-          "created_at": "2026-10-18T09:12:00Z",
+          "record": "sha256:63b6ad9bd74eb6f7",
+          "signer": "sha256:63b6ad9bd74eb6f7",
+          "created_at": "2026-10-18T09:15:00Z",
           "body": {
-            "to": "sha256:568450f3a50a5cb2",
+            "to": "sha256:e72089f7dc55b380",
             "method": "",
             "on": ""
           },
-          "sig": "1N90jLB1SUXd2sHLil3UrpN3WAM2Px5MgjPi+nLtBTOpzJ1pOShdnaCfHtJrB6V+dfNTJhtSSA8+uYRJN4bkhA=="
+          "sig": "w2QRJdO3XMLd+EeSQL58MT2pHhgEjpGVc5AHJy7XrQBAa2rh1b11Ty+dAGOcmNENA6UtRuWRnKivUs1pSQGPXA=="
         }
       ]
     },
     {
-      "fp": "sha256:b961a7ae09576084",
-      "dir": "sha256-b961a7ae09576084",
+      "fp": "sha256:791cb1480763aeea",
+      "dir": "sha256-791cb1480763aeea",
+      "fixture": true,
+      "ok": true,
+      "name": "Fixture: Ana’s fleet",
+      "revoked": null,
+      "statements": [
+        {
+          "v": 1,
+          "type": "identity",
+          "registry": "pki.sgit.ai",
+          "record": "sha256:791cb1480763aeea",
+          "signer": "sha256:791cb1480763aeea",
+          "created_at": "2026-10-18T09:07:00Z",
+          "body": {
+            "kind": "agent",
+            "name": "Fixture: Ana’s fleet",
+            "about": "Not a fleet anyone runs. A fleet key Ana operates, which operates her agents.",
+            "runtime": "pki.sgit.ai vault",
+            "session": false,
+            "bundle": {
+              "v": 1,
+              "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAqGwRG3TAP/oYL2CCRsQe\nCKuvuvA1QH5RCYvdZFnRLAskpAjyT9BijGO/IBmAjMtDsU0XwE/KA6HSj39S6CpK\ng1AieOJm/m678BcBVzPnTWZuKAgN1Z61BfxiZJAPY1Itm4ExdscXinYuBcUAVEKd\nKVFB7bes6q2nobvIYwNWWJSR9GCFlSXkcbea8rXouXmVKeAO7g+KNwim34P6CT/N\n6pEntPYpuaRua/IkEGkmB2EMogLpTKNFD/+wxa/MN5d39l7mu8KZnuHcuV1MiYaY\n9/l7GNEzcVq+uA58bOiGTSSeTjyjP6qmCAUt0/4CnZUexMFwk/UWypOkNWPKXw8H\nEtEBEB8y8o767VI2kjnrmbajmXTrf+kvuduPua6bQghTtPsr8GRo+gEj3WmR+5y7\nboygcksTMHJoPQOcUfGIozb4CvJLjrpXXljGQ28BiuA2MwJm22+fidmIslSPiV7o\nOlYLx/WGXnmBOVQYRTxYC/B6b05FV0nJ3lwIZTqRr39WdP3xSWwcArjdof0HJAj9\nMLgLB++zxmv0JwVAHuwY4loWZ3+QhnnkFmLD6pmepZ6trMsLHIXmjSB0Fx2V92QD\nME58M1SS/HjKu49wXYeohKtoz7MWyTcBKA/rNKOqlmANDZrw9g977kfJEvciBdGm\nvZl8Giopdf/MpOXIJ3Co0pUCAwEAAQ==\n-----END PUBLIC KEY-----\n",
+              "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEogpOH0yFZvQvcn28dMH1WPOd6geN\nRIX0gb8P5RxS0A+UTlArdEpz7aRejIFJshwgv995CTo5Sca3LbZFRnr1UA==\n-----END PUBLIC KEY-----\n",
+              "label": "fixture-ana’s",
+              "fingerprint": "sha256:74b1217d18288bd3",
+              "signing_fingerprint": "sha256:791cb1480763aeea"
+            },
+            "private_key_published": false
+          },
+          "sig": "NNkzloS5V8TxsY/ft5W2hK3mNfbdRxc1h0xsyqyeW3RlYmI0aQ9ce2f0shQ/tskBZgtuKUpbDOk3hDxf/mQ8sg=="
+        },
+        {
+          "v": 1,
+          "type": "link",
+          "registry": "pki.sgit.ai",
+          "record": "sha256:791cb1480763aeea",
+          "signer": "sha256:791cb1480763aeea",
+          "created_at": "2026-10-18T09:21:00Z",
+          "body": {
+            "to": "sha256:e72089f7dc55b380",
+            "method": "operated-by",
+            "on": ""
+          },
+          "sig": "gUir8CP+4bhJ+m86B5NNkQSzasZVtre+qcfpS9Dw/6bClroc+gCJT+0gk+KYMB+thPpyV64qHDO7VI2zdS7HVg=="
+        },
+        {
+          "v": 1,
+          "type": "link",
+          "registry": "pki.sgit.ai",
+          "record": "sha256:791cb1480763aeea",
+          "signer": "sha256:791cb1480763aeea",
+          "created_at": "2026-10-18T09:24:00Z",
+          "body": {
+            "to": "sha256:5605b7dfb246c7d5",
+            "method": "operates",
+            "on": "2026-10-18",
+            "until": "2027-04-18"
+          },
+          "sig": "JNpGuwhLvB91PDL/MMId8MIRV0PbbED8igDi+9bRcviLRfbo6spyJKZFMgFBLyxmUlQqpD3wzEHUXHxxrQDsZA=="
+        }
+      ]
+    },
+    {
+      "fp": "sha256:8d69aa4573adc745",
+      "dir": "sha256-8d69aa4573adc745",
+      "fixture": true,
+      "ok": true,
+      "name": "Fixture: Bruno’s research agent",
+      "revoked": null,
+      "statements": [
+        {
+          "v": 1,
+          "type": "identity",
+          "registry": "pki.sgit.ai",
+          "record": "sha256:8d69aa4573adc745",
+          "signer": "sha256:8d69aa4573adc745",
+          "created_at": "2026-10-18T09:06:00Z",
+          "body": {
+            "kind": "agent",
+            "name": "Fixture: Bruno’s research agent",
+            "about": "Not an agent anyone runs. Operated by Bruno, who is verified: the register shows it as his.",
+            "runtime": "claude-code, cloud session",
+            "session": true,
+            "bundle": {
+              "v": 1,
+              "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAx1U3+e6bHfty0qKF070m\nmmL1YuO5e1teplGMuCz7roIuiYmhtbOT2dh9oaLGUDbYOL0Y3K62en6M+bEIke9k\n2/L/cdp4gYBQq9DXDeu0vU0smuz88pRmT6SupvX655DeL/3p0mXBKUNCPQ8Sp1Cg\n+I6bFCybFQNgw6XzhtiLInz1qZNPw78HU0rvXE50/s4HoyjYDAfLoJ0AXmugunb3\n32R7bGbSUGFRdkiNFMgpy87YHLVxPtkl/94V5WBzaZfPbZyqVWjuHzGfV0Y1Mvtx\nUMTWCGO+XmFmCNWDQB7vte4bPAl9ifXO0JvHWmovsYf/e3aaBIqjqXANGnyWQce8\nBqh4hTEAoHJ/DJZqKlakx+I7rarRpvkfpqZ+Bgq4UY9LNqSLjdETOZ2p8dtSJMJX\nyZmZ68F0qt0p2fwS18d1YDIrsCDtEEfLKp8XYDot5AxEjYBSMnnkUyMokGo0w6Ed\n5VQ/kTzFc6JC/dedlfzGE14K+T6x7Bwm/5jwHwdT+NV+fGwVbEfx4KONvEM72wxZ\nY87ojZ+ejVkO02WW+c6vh36mEF6MKdnrTJdgFJMwqfJtkmo4g84UGIB3fgA6o194\n8n/ZFwRYc22fJxLlAKRhOIPAK3CP/ct1AigExAKcMWJFXrxXj/ogSc4W74tVwg0K\nU1LqkeCVHs2Alm6bnz9ZV4UCAwEAAQ==\n-----END PUBLIC KEY-----\n",
+              "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEcvpYJl1VvvgRTbMdmQs2ubu/g1Xf\n5YBlAzbGyNrrtfHVq8/5kmd501sgEsap/IGcu8GDhcMiOKAWdIswxdsdWw==\n-----END PUBLIC KEY-----\n",
+              "label": "fixture-bruno’s",
+              "fingerprint": "sha256:e9067cd60abf21c8",
+              "signing_fingerprint": "sha256:8d69aa4573adc745"
+            },
+            "private_key_published": false
+          },
+          "sig": "aCUbAx+qzbiQIPD04L0cPNAIZgbLRvIpqlcvynaxpHNeLFIiRMHwjVFXckXch91vI2dIe0/FvhGAjB4IkGYT5Q=="
+        },
+        {
+          "v": 1,
+          "type": "link",
+          "registry": "pki.sgit.ai",
+          "record": "sha256:8d69aa4573adc745",
+          "signer": "sha256:8d69aa4573adc745",
+          "created_at": "2026-10-18T09:19:00Z",
+          "body": {
+            "to": "sha256:038fd903eda465ed",
+            "method": "operated-by",
+            "on": ""
+          },
+          "sig": "xQRS5lAg+e6XVHWTqQIH6Qv39jRT6OfEeGcMB3ZoxpUeQ+yoEkpQ6P6S9cLX5EtdGur5svD4tMP1kVSKD2a2bA=="
+        }
+      ]
+    },
+    {
+      "fp": "sha256:a076da593b6c712e",
+      "dir": "sha256-a076da593b6c712e",
       "fixture": true,
       "ok": true,
       "name": "Fixture: Eva",
@@ -277,8 +334,8 @@
           "v": 1,
           "type": "identity",
           "registry": "pki.sgit.ai",
-          "record": "sha256:b961a7ae09576084",
-          "signer": "sha256:b961a7ae09576084",
+          "record": "sha256:a076da593b6c712e",
+          "signer": "sha256:a076da593b6c712e",
           "created_at": "2026-10-18T09:05:00Z",
           "body": {
             "kind": "person",
@@ -286,46 +343,232 @@
             "about": "Not a person. Linked to Clara, then withdrew it.",
             "bundle": {
               "v": 1,
-              "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA0Aa44i/A5Gv4qq74I6Ik\nD3HIWYqIQqQrTIlLubTJRYeBTbH1QIHGKIVLlCyqaZW23KZ6IbOguN2ctAZQZ6HH\n0l63VB2q8iTovXdCXXhkVoWPKLzsHMeSWWOo0+CwFxFY+iHwMXp557RIvwfNUaZJ\nvFkJXWztaU+Jkt5ck9YmRX49ET3lEpZL3f7G9OazbXZVngNwK7o9cOsYWlzr+I6/\nm9qMf+A8hPBdsVYZvk5trl6Gr/ZoXPtA+mjBDAQTBT5yceMnBCXHPY/4BxqWwfeF\n0C56XgUVcqxyXEj+FDjhuE5D4zNCBv+QhBhlh8DAftVQgFv2eHtPiGMtO0sxa4dN\nR3F6L9CKgAMlTBpiZN5lKrAT8UgyHirzmeUd4jCucV1LEUMahW8+JBlsqOFwWmsz\n2h2ZSMgcWLXbgN0cR+PB6Fn16gdEvFE9GdqyXH2YELBUeU2EBX+L7U6V4zFR8A4u\njeR/YGnYV6mv5gs6lHyn1jnziruoQGBRpu8e/8fXmcMi+GFLGkFdiVfOmA6CAS4q\nh74LsCwn0tXy016OOcNzc4wxI/sbz4l9aDIVWvW/zWvwgz0TyP9weccXBebKlz1J\nujAUPE+EJSfUtamVuKBO92OatqN5N8UuAYLijgMOq1ADtMFcIL52ylWHX3YJ+jau\nP5q9HoRJPMgjyu4+0UxaENMCAwEAAQ==\n-----END PUBLIC KEY-----\n",
-              "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEOP4Qaqp/iHP3TBSm5qk9hLTPm3Hx\n6WlRoFW2TJ5WEy2KxEnTgxXcNyCuwZqRZ9Mp9E+V3bVd2hrFAXO+K2lIEw==\n-----END PUBLIC KEY-----\n",
+              "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAtPcTMhfiHcYD9bJsjFRP\n1Oe8mQGJyCiV/v8Cur7jSjNI+UA9GVrNX9Lnp6C/uB+tuCVDGL0OvdmTYpaz/BOE\nBtPFYzq3ACpB5WOiKCi3pdlOTnWfUTS8+dMcZE60L43IQVpuZ9KmdKdhD0QZXAjW\n5M6/Awm4HRXZ1f3kZ2ki40LdMFVQgQVp9JuNhAeUWKd7UXyp+KsKTpnho5DcjIkX\nF0oY8VhAlTf0PxRn1wExG75jHe+nV/MXGWnNoRPEeZQ8nGUBn37ze/uQ+/zR/MJr\n5gGK632Caxc+93fjirbY8RuXYTCej619zqa5lXpId0kppxOyN3sny3/Zvq2umGQk\naffPpb1MrX4WcFCkz1kA3tF/5dltdpCSMgGpVfPl4Q1poUyJbfz5qPCYihndanTL\nNEsxfv0Prb71CGJyT3Zsa6/LuHKwF/6GnTqjV0+I5UWLsNAQai2IlBhqKCvzQwjn\npHeNT1LGoGWhWR0oVuR9ZzUBz+T8axha55S5Rd9v2E8yoSjgnjzTfV0nHLx3Dm9d\nv3AciO2IGb8jR817mFfBc882pNV5YbxVUhmipbC7dZwmBetg0cVRKNnXx4VzdKvO\nVD5aTRPq73ZOz1p3Qzh03RE3q310nhur1QWS8AWuPeY881DqIUKoWSiRdYjjJIui\n5f/vo+PVjeO8+6JCW1a+Vd8CAwEAAQ==\n-----END PUBLIC KEY-----\n",
+              "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEjf6QoqAdfrACc8n6gXsRLnNha5FO\nqVgJnuJ0SJurCVeD11oFwnME2KSPVuE/ITCGX9HpXKecQHqbxvaQR897tA==\n-----END PUBLIC KEY-----\n",
               "label": "fixture-eva",
-              "fingerprint": "sha256:a4659f8b3ad55304",
-              "signing_fingerprint": "sha256:b961a7ae09576084"
+              "fingerprint": "sha256:8d9fcaa4123197bf",
+              "signing_fingerprint": "sha256:a076da593b6c712e"
             },
             "private_key_published": false
           },
-          "sig": "QfqbB8VqSVYWMB6fg8GR2q/c12I+StWwiYX8mGkWLXmbcKwBYPfq1MgUrIXZ+/6SxzbDJDyQ7GwkobGKHv2e7w=="
+          "sig": "viklsw/l+jwIpuQp/fOSi2PtQS7I2GpUWtd1Mp5u70xGM3kvz9RfQievlSaK/UqM0z7YI7YaSHib/8JWEV7tyA=="
         },
         {
           "v": 1,
           "type": "link",
           "registry": "pki.sgit.ai",
-          "record": "sha256:b961a7ae09576084",
-          "signer": "sha256:b961a7ae09576084",
-          "created_at": "2026-10-18T09:13:00Z",
+          "record": "sha256:a076da593b6c712e",
+          "signer": "sha256:a076da593b6c712e",
+          "created_at": "2026-10-18T09:16:00Z",
           "body": {
-            "to": "sha256:78557ff54f616a7e",
+            "to": "sha256:c1b6c3f22f0dd360",
             "method": "",
             "on": ""
           },
-          "sig": "knISf0kv5ENTDWOLHvz8atQuW6m9IgHzwV1DZ8ztcJXDWalwL3kpbh6+fa/DElk2Gq4KBbvx+M8Z/eNDFoqslg=="
+          "sig": "KF0P0G4tye0AEbcDAOGIEG9Dbp8IVhyzdd3I1Iy8XSEm8i0U516TXPJnONJFm9qSZfdlMMHxhOS1eJTmkSSLvQ=="
         },
         {
           "v": 1,
           "type": "revocation",
           "registry": "pki.sgit.ai",
-          "record": "sha256:b961a7ae09576084",
-          "signer": "sha256:b961a7ae09576084",
-          "created_at": "2026-10-18T09:15:00Z",
+          "record": "sha256:a076da593b6c712e",
+          "signer": "sha256:a076da593b6c712e",
+          "created_at": "2026-10-18T09:18:00Z",
           "body": {
             "revokes": {
-              "record": "sha256:b961a7ae09576084",
-              "statement": "sha256:78efaff0717d8413f0751902ade749c9b872a71a536d3d5395a55b366af03ab0"
+              "record": "sha256:a076da593b6c712e",
+              "statement": "sha256:0d0311a9e7f568296aeb47d4e00cc26f1be9310af0a72a00bbbb01f353a9037e"
             },
             "reason": "withdrawn",
-            "effective_from": "2026-10-18T09:15:00Z"
+            "effective_from": "2026-10-18T09:18:00Z"
           },
-          "sig": "H0hYZbo8HIcDJUF5bw5uBLd6Gft5w+LKom4I8DknyF6Ynbskprptp763sIszLsgDzEGR65R7G726pizBhnw+cA=="
+          "sig": "IboC4yaLg/LvC/KRjY4JFHSM22RdJLaPHY3T5giMp48/ySChmqPUi9qPa/6PQVyOtdz8PdTqUV66tiPZogNXkA=="
+        }
+      ]
+    },
+    {
+      "fp": "sha256:a0f2ccfe07781213",
+      "dir": "sha256-a0f2ccfe07781213",
+      "fixture": false,
+      "ok": true,
+      "name": "pki.sgit.ai site agent (Claude Code session, 19 October 2026)",
+      "revoked": null,
+      "statements": [
+        {
+          "v": 1,
+          "type": "identity",
+          "registry": "pki.sgit.ai",
+          "record": "sha256:a0f2ccfe07781213",
+          "signer": "sha256:a0f2ccfe07781213",
+          "created_at": "2026-10-19T23:36:57Z",
+          "body": {
+            "kind": "agent",
+            "name": "pki.sgit.ai site agent (Claude Code session, 19 October 2026)",
+            "about": "The Claude Code session that built the register of people and the agent workflow, v0.2.0 to v0.2.1. A session key: it lives as long as this session.",
+            "runtime": "claude-code, cloud session",
+            "session": true,
+            "bundle": {
+              "v": 1,
+              "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAtF0blhwg2Laqf/l7Kao3\nK/Peq3dvgXM6st1YqIxbXMgypgKGJD02F/8KNYTCIVzNGYs2EM10vxZcbgHUhdbI\nZNFOEZcLdXfSxufkBLLVnRpwfxtYGeFPM91IlC0FiV4dEwzIJA+22kR/Bp8Ue28z\nMCg8aE/zsUpEgxyNnoex4/WABOmzTHBjw7Af8X9Rl98EM55FAnQo3p1OF6EQs+q5\nXgJK0wL74ZqwyZPwBEEudXqrnrq3v6twqJ6Vtnkx1RcPVB4qplM6IymksMJunhwh\nMtzsKhXjUul+LqgMTMiLP9bGqnkjeKInC1SdgWOZy/hQu+9hwQTB1X3NmnesCaFZ\nFbpzBu9UDK67L3zUejzaxg8Bj+Xvm4mJ1uGAIBRzCCr2VQ64sd9U9uUVFr2F3Sdo\nfE//z3f1kGVaKS6lNnZ4EFO6re/4QTpD/NpHbNwT3YsHIIQJWA0doqMkC+N0p+1G\nf8RIUS0xZ2mMUcCrhl8wHkWwy0xebOP0cmTauvPuO4vW+4n4thaOGpD/35xTOdeg\nH6VVtJg68pKMqductaSmMyAOj0QlNbVZoGobCkkhuDyuclEJFT2VmthJS99zCD/+\ng5cSM09Q4TWs8i0XFQS0R/0mTEGrgKPFAj60e9eg8JrwUTJZPtqLTViBklq2Vgva\niLII/r4RMm4umBadSlwvH8cCAwEAAQ==\n-----END PUBLIC KEY-----\n",
+              "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEYmppBgRfuYAJEkRP2g2EkcPCTNId\n4Sj708Nsp7wgU4NMB0IXulBjgZTc96wYYZLMBIcVNQJmQQMvQGnNd2G1tw==\n-----END PUBLIC KEY-----\n",
+              "label": "pki.sgit.ai site agent (Claude Code session, 19 October 2026)",
+              "fingerprint": "sha256:fa301fa7941b11b9",
+              "signing_fingerprint": "sha256:a0f2ccfe07781213"
+            },
+            "private_key_published": false
+          },
+          "sig": "1iu1zOuKt6ENgqUKCvYiJENRIsX1yRYciT9Q9+C15n5VPGY+3pJ7Nv1ko+8Z5xyyionUkWT4gCtZ7tgsemXzZQ=="
+        },
+        {
+          "v": 1,
+          "type": "evidence",
+          "registry": "pki.sgit.ai",
+          "record": "sha256:a0f2ccfe07781213",
+          "signer": "sha256:a0f2ccfe07781213",
+          "created_at": "2026-10-19T23:36:57Z",
+          "body": {
+            "kind": "link",
+            "value": "this Claude Code session",
+            "url": "https://claude.ai/code/session_011wKmozwdUKkEUwcZPi2gUG"
+          },
+          "sig": "UktqnixWjblmtpvXkAkVbHGW9YrQcLRvH2PLQXq/rhfwD0tNvFQiynVYneWdTAox/H+wtEKis7ZRk5Hr8U+EpQ=="
+        }
+      ]
+    },
+    {
+      "fp": "sha256:c1b6c3f22f0dd360",
+      "dir": "sha256-c1b6c3f22f0dd360",
+      "fixture": true,
+      "ok": true,
+      "name": "Fixture: Clara",
+      "revoked": null,
+      "statements": [
+        {
+          "v": 1,
+          "type": "identity",
+          "registry": "pki.sgit.ai",
+          "record": "sha256:c1b6c3f22f0dd360",
+          "signer": "sha256:c1b6c3f22f0dd360",
+          "created_at": "2026-10-18T09:03:00Z",
+          "body": {
+            "kind": "person",
+            "name": "Fixture: Clara",
+            "about": "Not a person. Two steps from the anchor, through Bruno.",
+            "bundle": {
+              "v": 1,
+              "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA8EU/vwMNmdKw5VhhIIvZ\nn8xdzsLqKVb2xDfdzFipYZIkgqX8kW1QB6WRUCzczaX65/i+NXIAfZ1yLU4zwR7n\nVtvk/3IJ6DaFZWpIbIkNZUyPqNzhR8VrbfsXxDedjvc2InwcpviWSKY6rkh79q1r\nXe83A0/LetVKe6XvfCsju7R+JOE6ed0p+fQAMAnFoDpXcnHHe2GcD05rdTVgbQy/\n+fcYSc83vrtT3IamlS0VadW9AD9PaXmC+hh0lctBbJlReK7ftE+u8zRH7ZiQ9IDb\n711CcDRkzxD2X7prJxn55cdgm6GRopEBTnmBkgVhT4/QC+CF2aTYBTDyFAL73qbH\nD2m74Ikv2d8e287N6mgi5KEPM4hkmr1MbEjs9fCUWvx+2NDHoC1MdHvOCkwZK1sc\ndlanj8zvArFBBkwrI8eApnuWg9xF+qXzgoW4TLxipHFYUdp1vc9u/PKDIl8h75JV\n2UtG4CX8eLo+Jz6H8V86Hmh650DhbPLBBpYGOQcQO5W6D/LkiFHH6ftd03zCBcvR\nY15gRCOhB7x7T/dW8L5fAXQpUnZkamGHYrhNbMUjcVW4NpU13/LzeDmioSRCQr/B\n8C9Fy0hlzZDliEa8E2UwjkyH8r5VHb0+s4Qa4festpiIT6RdOeH8nsrjnMFceyOd\nDn8ZmjpVc9a04BgXgxpzhxsCAwEAAQ==\n-----END PUBLIC KEY-----\n",
+              "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEFfJseU+KV1aIkJJ6v6+UIC6eLENb\ncDtA79j6XnKS5r9BvKmav4Wv4+GJkWJmoOHbhKbsOGgW6GRlZ5+PyHBH8w==\n-----END PUBLIC KEY-----\n",
+              "label": "fixture-clara",
+              "fingerprint": "sha256:591776e691d0b289",
+              "signing_fingerprint": "sha256:c1b6c3f22f0dd360"
+            },
+            "private_key_published": false
+          },
+          "sig": "v04wlXSh6Ud7WfGffhoKMub7r0/fhjocrWS98sdphpairC3FS7tT0nhN80FRpsQJ5IV7fHbWNToD1wIVKrP+Rg=="
+        },
+        {
+          "v": 1,
+          "type": "link",
+          "registry": "pki.sgit.ai",
+          "record": "sha256:c1b6c3f22f0dd360",
+          "signer": "sha256:c1b6c3f22f0dd360",
+          "created_at": "2026-10-18T09:14:00Z",
+          "body": {
+            "to": "sha256:038fd903eda465ed",
+            "method": "invitation",
+            "on": ""
+          },
+          "sig": "SKwfGzQCTS+9Zc9Ucj5QHHOQn1QSg/s1r9sDzawI0ledDciJXWo0732EYE740Kn2eR30vlK2lpdfjgDqXjNCbg=="
+        },
+        {
+          "v": 1,
+          "type": "link",
+          "registry": "pki.sgit.ai",
+          "record": "sha256:c1b6c3f22f0dd360",
+          "signer": "sha256:c1b6c3f22f0dd360",
+          "created_at": "2026-10-18T09:17:00Z",
+          "body": {
+            "to": "sha256:a076da593b6c712e",
+            "method": "",
+            "on": ""
+          },
+          "sig": "SxOVmjDxd4SCL9ZjpE8rLQq9OzT/2h3c5NpXr0AZqzi9IBdqftebOMXvoBb98ERXlhrwjG8XJ5Y/HuuTt5agSg=="
+        }
+      ]
+    },
+    {
+      "fp": "sha256:e72089f7dc55b380",
+      "dir": "sha256-e72089f7dc55b380",
+      "fixture": true,
+      "ok": true,
+      "name": "Fixture: Ana (the fixture anchor)",
+      "revoked": null,
+      "statements": [
+        {
+          "v": 1,
+          "type": "identity",
+          "registry": "pki.sgit.ai",
+          "record": "sha256:e72089f7dc55b380",
+          "signer": "sha256:e72089f7dc55b380",
+          "created_at": "2026-10-18T09:01:00Z",
+          "body": {
+            "kind": "person",
+            "name": "Fixture: Ana (the fixture anchor)",
+            "about": "Not a person. The anchor of the fixture graph, so the pages can show verification before a real anchor is in.",
+            "bundle": {
+              "v": 1,
+              "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA7Fvf5rHz7huyRyKGiUoO\niZjcF5mipqvDFUzt0TwBnXPNTbIH+zO+Ff0nWmSQOvy0O+Cm9eSk1gS3TzILVr07\nl7pi9k3YZX4Tj9Dn4wgPpgQGyX5CwX0rQXAVhHc2fPsDNdaCUm3t8l2jc7nH4YAj\nDw27627ZlUskhYgwwVpfKARnSgYQ5swaclY7O1J6MVQqqDtUuZlswJuArc5GLIl6\nNrRuvA6ULQM+c1JQsPj+mOoKEyn3qOH6bbW9MnK/dJgQQLOfyemjgSXb5oOiPbgU\nFCkemdut5Bxbv0rhgcG9YlrN2WukA891qi1ICYdvq9iZwI49H7UDy1o82EZkZPRr\ntaKyLyDyivFOSyNgXdBl9xwpdqq9lrDIDF/xpg5hxlfcZmLm+T6Fe8/kBbtRszLa\ndL/2GqfXds6k8bLwajmVn6RN3Mebs1Qm/bV8Qh8vAooctcBiJ/BghSGC3dB2C85y\n+J/tpXiDdDv7IZxPZKF5vZm0hSrsA0iLxX4u2eYfJ/W5r8wCwNJhOGsK8pRo74Ee\ntMHXovN55FfSknopvRs3PkeX6493cTseIZ7KAn/UjkavuEOyIT7WTDb56f2mY3Lw\nwwwXn/Xxf3Kjk9NHqftb3lMx44FRVHrdmG/EPuHgC3U+6u45KTzhafA8ac6Qv8BB\n0XGE1tnPftyG0PbfR403kSsCAwEAAQ==\n-----END PUBLIC KEY-----\n",
+              "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEXvuEJQV2r9/9rbefA1ZrH9mL9KkB\nLjQ66E+KrXC5VJQgwDTP9oAkKIoCmqni/keDnyM3QwwxmeEgPMYIrFZ19w==\n-----END PUBLIC KEY-----\n",
+              "label": "fixture-ana",
+              "fingerprint": "sha256:2590b418f1a6dacc",
+              "signing_fingerprint": "sha256:e72089f7dc55b380"
+            },
+            "private_key_published": false
+          },
+          "sig": "GsGqsXy613M65D74bj73h5jNiDOvH/4xnKj1LvplxHTb3GNkKQNp2ksdfkp4FX9iyn3YMAn6KFAPGYh/l8G93Q=="
+        },
+        {
+          "v": 1,
+          "type": "evidence",
+          "registry": "pki.sgit.ai",
+          "record": "sha256:e72089f7dc55b380",
+          "signer": "sha256:e72089f7dc55b380",
+          "created_at": "2026-10-18T09:09:00Z",
+          "body": {
+            "kind": "website",
+            "value": "example.org",
+            "url": "https://example.org/.well-known/pki.sgit.ai.txt"
+          },
+          "sig": "Y1tR0uiNx+U7SmZTI+FQBUjNHE/5aRGOfCm9gNASgpuuonnrRyDaOWXcrKjg22JSoMf3wz3HeMpNt4Wp66Z9iA=="
+        },
+        {
+          "v": 1,
+          "type": "link",
+          "registry": "pki.sgit.ai",
+          "record": "sha256:e72089f7dc55b380",
+          "signer": "sha256:e72089f7dc55b380",
+          "created_at": "2026-10-18T09:10:00Z",
+          "body": {
+            "to": "sha256:038fd903eda465ed",
+            "method": "in-person",
+            "on": "2026-10-18"
+          },
+          "sig": "sdwQbsqTHWp+W2om0JA3pim/AjOOy9+6AZxMxR2hUxuBKRIrzRGV85gVK0gOMh8uNuwGFYkM0o4HlEFVq5KVvA=="
+        },
+        {
+          "v": 1,
+          "type": "link",
+          "registry": "pki.sgit.ai",
+          "record": "sha256:e72089f7dc55b380",
+          "signer": "sha256:e72089f7dc55b380",
+          "created_at": "2026-10-18T09:22:00Z",
+          "body": {
+            "to": "sha256:791cb1480763aeea",
+            "method": "operates",
+            "on": "2026-10-18",
+            "until": "2027-10-18"
+          },
+          "sig": "GZXCss0W0xU0rHKr8Dbp6lcBmtwhxkObM/qcPqcsPsyduUOoQXslTioEYu+incjfjy5jhbmNikx6c2v63l1qwQ=="
         }
       ]
     }
