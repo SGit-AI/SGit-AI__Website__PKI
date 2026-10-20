@@ -38,7 +38,7 @@ python3 insurance/push-policy/check.py --backtest 12 --ref origin/dev   # what t
 python3 insurance/push-policy/check.py --branch dev --override "<a human's decision, quoted>"   # a refusal a human overrides: both go on the ledger
 ```
 
-The measurement is the uncompressed size of objects reachable from `HEAD` and not from the remote branch — what git would have to send. It is a floor: packing compresses, so the wire carries less. A floor is what this estate's grant rule prefers over a guess.
+The measurement, since policy revision 4 (20 October 2026, the project lead's decision), is **what git actually sends**: the size of the thin pack git builds for the push, from the objects `HEAD` reaches and the remote does not have; a branch the remote does not have yet is measured against everything it has. Until then it was the uncompressed size of every new blob, which charged a one-line change to a page at the whole page: three releases that added a link to the navigation of ~270 pages counted 4.0 to 4.3 MB each, and git sent 221 to 512 KB. The uncompressed figure is still recorded on every ledger entry, as `bytes_uncompressed`, so the loss data keeps both.
 
 ## What it found first: this estate
 
@@ -79,7 +79,7 @@ Moving up the ladder is not a better skill. It is the same policy read somewhere
 
 - **That the numbers fit this repository.** They are memo 12's placeholders. The only fit so far says the estate breaches them on every release, and the page above argues that is the estate's fault; that is an argument, not a calibration from the ledger, which has no live entries yet.
 - **That the check is a boundary.** It is a setting by construction. Nothing stops an agent editing `policy.json`, the ledger, the hook or the skill.
-- **That bytes before the push are the cost.** They are a floor on what is asked, never a bill.
+- **That the pack measured before the push is the bill.** It is built the way git builds it, and the transport may differ by a few bytes of framing.
 - **That a per-repository pool is the right unit.** A per-organisation or per-agent pool is constructible from the same ledger; neither has been tried.
 - **That anyone but this estate has run it.** One repository, twelve commits replayed.
 

@@ -5,9 +5,11 @@
     python3 check.py --branch dev --dry-run       # verdict only, ledger untouched
     python3 check.py --backtest 12                # what the policy would have said about the last 12 commits on this branch
 
-The measurement: bytes of objects reachable from HEAD and not from the remote ref — what git
-would have to send — as uncompressed object sizes. That is a floor (packing compresses), and a
-floor is what this estate's grant rule prefers over a guess.
+The measurement (since policy revision 4, 20 October 2026): the bytes git actually sends, the size of
+the thin pack git builds for the push, from the objects reachable from HEAD and not from any ref the
+remote already has. Before revision 4 it summed the uncompressed size of every new blob, which charged
+a one-line change to a page at the whole page: a navigation link added to ~270 pages counted 4 MB for a
+push git sent in 221 KB. The uncompressed figure is still computed and recorded, as bytes_uncompressed.
 
 The verdict is a subtraction. There is no model, no score, no judgement: the policy says the
 bands, the ledger says what today has already used, git says what this push weighs.
@@ -25,9 +27,21 @@ QUEUE = os.path.join(HERE, "ledger.queue.jsonl")     # ignored by git: what the 
 def git(*a):
     return subprocess.run(["git", *a], capture_output=True, text=True, check=True).stdout
 
+def wire_bytes(head, bases):
+    """What git sends: the size of the thin pack for objects reachable from head and not from any of bases."""
+    revs = "\n".join([head] + [f"^{b}" for b in bases]) + "\n"
+    pack = subprocess.run(["git", "pack-objects", "--revs", "--thin", "--stdout", "-q"], input=revs.encode(), capture_output=True, check=True).stdout
+    return len(pack)
+
+def remote_tips(remote):
+    """Every ref the remote has, as git would see them before a push: a new branch is measured against them all."""
+    return [l for l in git("for-each-ref", f"refs/remotes/{remote}", "--format=%(objectname)").split() if l]
+
 def bytes_between(base, head):
-    """Sum of uncompressed sizes of objects reachable from head and not from base."""
-    objs = git("rev-list", "--objects", head, f"^{base}").split("\n")
+    """Sum of uncompressed sizes of blobs reachable from head and not from base, or from any of a list of bases
+    (recorded, no longer the measure)."""
+    bases = base if isinstance(base, list) else [base]
+    objs = git("rev-list", "--objects", head, *[f"^{b}" for b in bases]).split("\n")
     ids = [l.split()[0] for l in objs if l.strip()]
     if not ids: return 0, 0
     out = subprocess.run(["git", "cat-file", "--batch-check=%(objecttype) %(objectsize)"], input="\n".join(ids), capture_output=True, text=True, check=True).stdout
@@ -88,21 +102,26 @@ def main():
             # a root commit, or the boundary of a shallow clone, has no parent to diff against
             if subprocess.run(["git", "rev-parse", "--verify", "-q", f"{h}~1"], capture_output=True).returncode != 0:
                 print(f"  {when[:10]} skipped {'':>9}   {'':>4}        {subj[:60]}  — no parent (root commit or shallow boundary)"); continue
-            nbytes, nblobs = bytes_between(f"{h}~1", h)
+            raw, nblobs = bytes_between(f"{h}~1", h)
+            nbytes = wire_bytes(h, [f"{h}~1"])
             day = when[:10]
             v, d = verdict(policy, replay, kind, nbytes, day)
             replay.append(json.dumps({"day": day, "branch_kind": kind, "verdict": v, "bytes": nbytes, **d}))
-            print(f"  {day} {v:7s} {nbytes:>9,} B {nblobs:>4} blobs  {subj[:60]}  — {d['reason']}")
+            print(f"  {day} {v:7s} {nbytes:>9,} B sent ({raw:>9,} B uncompressed, {nblobs:>4} blobs)  {subj[:50]}  — {d['reason']}")
         return
 
     if not a.branch: ap.error("--branch is required (or --backtest N)")
     kind = "dev" if a.branch == "dev" else "own"
-    git("fetch", a.remote, a.branch)
-    nbytes, nblobs = bytes_between(f"{a.remote}/{a.branch}", "HEAD")
+    # a branch the remote does not have yet is new, not an error: it is measured against everything the remote has
+    exists = subprocess.run(["git", "fetch", a.remote, a.branch], capture_output=True).returncode == 0
+    git("fetch", a.remote)
+    tips = remote_tips(a.remote)
+    nbytes = wire_bytes("HEAD", tips)
+    raw, nblobs = bytes_between(tips, "HEAD") if tips else bytes_between([], "HEAD")
     day = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d")
     v, d = verdict(policy, ledger_lines, kind, nbytes, day)
-    entry = {"at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"), "day": day, "branch": a.branch, "branch_kind": kind, "bytes": nbytes, "blobs": nblobs, "verdict": v, **d, "head": git("rev-parse", "HEAD").strip()}
-    print(f"{v.upper()}: {a.branch} ← {nbytes:,} B in {nblobs} new blobs — {d['reason']}")
+    entry = {"at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"), "day": day, "branch": a.branch, "branch_kind": kind, "bytes": nbytes, "measure": "wire", "bytes_uncompressed": raw, "blobs": nblobs, "new_branch": not exists, "verdict": v, **d, "head": git("rev-parse", "HEAD").strip()}
+    print(f"{v.upper()}: {a.branch} ← {nbytes:,} B sent ({raw:,} B uncompressed in {nblobs} changed blobs){' (a new branch)' if not exists else ''} — {d['reason']}")
     if v == "refused" and a.override:
         entry["override"] = a.override
         print(f"OVERRIDDEN by a human decision, on the record: {a.override}")

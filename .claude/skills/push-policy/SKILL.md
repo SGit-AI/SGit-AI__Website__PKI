@@ -15,7 +15,7 @@ boundary — you could skip it — and the whole point of the exercise is that y
 python3 insurance/push-policy/check.py --branch <target-branch>
 ```
 
-It measures what git would send to `origin/<target-branch>` from `HEAD`, reads `policy.json` and
+It measures what git actually sends to `origin/<target-branch>` from `HEAD` (the thin pack's size, since policy revision 4; a new branch is measured against everything the remote has), reads `policy.json` and
 today's ledger, prints one of three verdicts, and queues the verdict in `ledger.queue.jsonl` (ignored by git); the pack's pre-commit hook drains the queue into `ledger.jsonl` at the next commit, so a push leaves the tree clean:
 
 | Verdict | Means | You |
