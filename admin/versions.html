@@ -89,6 +89,11 @@
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
     <tr>
+<td class="vnum">v0.2.4</td>
+<td class="vdate">20 Oct 2026</td>
+<td><b>In person, by QR code.</b> <a href="../articles/in-person-by-qr-code.html">A research note on exchanging public keys face to face</a>, checked claim by claim against Apple's documentation, MDN's compatibility data, NXP's material and QR capacities measured here: sound, with Multipeer Connectivity now deprecated (Xcode 27) and three precisions for this design. It proposes reciprocal QR scanning as the first build, the camera as the trusted channel, two scans making one in-person link in the register, and where QR codes help agents. The note is filed verbatim in <code>briefs/</code>.</td>
+    </tr>
+    <tr>
 <td class="vnum">v0.2.3</td>
 <td class="vdate">20 Oct 2026</td>
 <td><b>The push policy counts what git sends.</b> At the project lead's decision (policy revision 4), <code>insurance/push-policy/check.py</code> measures a push by the thin pack git builds for it, not by the uncompressed size of every changed file; the limits are unchanged. Replayed, v0.2.0 to v0.2.2 go from refused (4.0 to 4.3 MB) to drawn (221 to 512 KB sent). A branch the remote does not have yet is measured, not an error; every ledger entry still records the uncompressed figure.</td>
