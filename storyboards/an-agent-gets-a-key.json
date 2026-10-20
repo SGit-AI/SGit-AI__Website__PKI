@@ -1,0 +1,357 @@
+{
+ "slug": "an-agent-gets-a-key",
+ "title": "An agent gets a key",
+ "subtitle": "Scout, a session agent, makes its own key; the Anchor compares the fingerprint and signs for it, for a week; the Fleet runs the rest. 10 panels.",
+ "status": "built",
+ "by": "pki.agent, 20 October 2026",
+ "shelf": "Keys for agents",
+ "try_it": [
+  [
+   "Identities for agents",
+   "agents/index.html"
+  ],
+  [
+   "Your vault: Agents",
+   "vault/index.html#agents"
+  ],
+  [
+   "The agent tool",
+   "agents/pki-agent.mjs"
+  ]
+ ],
+ "rule": "Every line a character says is the storyboard's, not a quote, and is marked not_a_quote; evidence panels quote this site's pages or the research note word for word, which the build checks.",
+ "scenes": [
+  {
+   "kind": "cover",
+   "title": "An agent gets a key",
+   "subtitle": "The agent makes it. The operator signs for it.",
+   "cast": [
+    {
+     "who": "anchor",
+     "pose": "point",
+     "mood": "happy"
+    },
+    {
+     "who": "scout",
+     "pose": "wave",
+     "mood": "happy"
+    },
+    {
+     "who": "fleet",
+     "pose": "stand",
+     "mood": "happy"
+    }
+   ],
+   "note": "Dinis's proposal of 19 October, as built in v0.2.1.",
+   "source": "Keys for agents"
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "Scout makes its key",
+   "cast": [
+    {
+     "who": "scout",
+     "x": 0.15,
+     "pose": "point",
+     "mood": "happy",
+     "says": "My key. It stays here.",
+     "max": 14
+    }
+   ],
+   "props": [
+    {
+     "kind": "terminal",
+     "x": 0.62,
+     "y": 820,
+     "lines": [
+      "$ node pki-agent.mjs keygen \\",
+      "    --name Scout --session",
+      "made: sha256:5f1e…a0c2",
+      "private halves: ~/.sg-send/keys",
+      "they stay here"
+     ]
+    }
+   ],
+   "note": "In sgit's key store layout, so sgit pki uses the same key.",
+   "source": "agents/pki-agent.mjs",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "It names its operator",
+   "cast": [
+    {
+     "who": "scout",
+     "x": 0.12,
+     "pose": "stand",
+     "mood": "happy"
+    }
+   ],
+   "props": [
+    {
+     "kind": "terminal",
+     "x": 0.45,
+     "y": 820,
+     "lines": [
+      "$ node pki-agent.mjs operator \\",
+      "    sha256:<the Anchor>",
+      "$ node pki-agent.mjs submit",
+      "sent, sealed, to the inbox"
+     ]
+    },
+    {
+     "kind": "arrow",
+     "x": 0.66,
+     "y": 520,
+     "to": 0.75,
+     "label": "its record"
+    },
+    {
+     "kind": "envelope",
+     "x": 0.86,
+     "y": 760
+    }
+   ],
+   "note": "A link in its own record, method operated-by, and its record sealed into the Anchor's inbox.",
+   "source": "Keys for agents",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "The comparison",
+   "cast": [
+    {
+     "who": "anchor",
+     "x": 0.12,
+     "pose": "think",
+     "mood": "thinking",
+     "says": "5f1e…a0c2. The same.",
+     "max": 14
+    },
+    {
+     "who": "scout",
+     "x": 0.88,
+     "pose": "stand",
+     "mood": "happy",
+     "flip": true
+    }
+   ],
+   "props": [
+    {
+     "kind": "board",
+     "x": 0.5,
+     "y": 620,
+     "lines": [
+      "printed in the session:",
+      "sha256:5f1e…a0c2",
+      "",
+      "shown in the vault:",
+      "sha256:5f1e…a0c2"
+     ]
+    }
+   ],
+   "note": "The fingerprint the agent printed in its own session, against the one the vault shows. That comparison is the verification.",
+   "source": "vault/index.html#agents",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "Signed, for a week",
+   "cast": [
+    {
+     "who": "anchor",
+     "x": 0.15,
+     "pose": "point",
+     "mood": "determined"
+    }
+   ],
+   "props": [
+    {
+     "kind": "record",
+     "x": 0.5,
+     "y": 860,
+     "lines": [
+      "link → Scout",
+      "method: operates",
+      "until: 2026-10-27"
+     ],
+     "stamp": "signed"
+    },
+    {
+     "kind": "calendar",
+     "x": 0.82,
+     "y": 840,
+     "label": "7 days"
+    }
+   ],
+   "note": "A session key is confirmed for days, not a year.",
+   "source": "directory.js, AGENT_DAYS",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "Operated",
+   "cast": [
+    {
+     "who": "scout",
+     "x": 0.18,
+     "pose": "arms-up",
+     "mood": "happy",
+     "says": "Operated by the Anchor.",
+     "max": 14
+    }
+   ],
+   "props": [
+    {
+     "kind": "board",
+     "x": 0.64,
+     "y": 620,
+     "lines": [
+      "Scout",
+      "an agent operated by",
+      "The Anchor",
+      "until 2026-10-27"
+     ]
+    }
+   ],
+   "note": "Two links, one in each record, the same rule as for people.",
+   "source": "people/person.html",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "It signs its work",
+   "cast": [
+    {
+     "who": "scout",
+     "x": 0.12,
+     "pose": "point",
+     "mood": "happy"
+    }
+   ],
+   "props": [
+    {
+     "kind": "terminal",
+     "x": 0.5,
+     "y": 820,
+     "lines": [
+      "$ node pki-agent.mjs sign report.md",
+      "written: report.md.sig",
+      "$ sgit pki verify report.md \\",
+      "    report.md.sig",
+      "Signature valid"
+     ]
+    },
+    {
+     "kind": "mark",
+     "x": 0.85,
+     "y": 760,
+     "ok": true
+    }
+   ],
+   "note": "Anyone checks it with sgit, because the agent's key is an sgit key. The articles on this site are signed this way.",
+   "source": "test_agent_tool.mjs",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "A week later",
+   "cast": [
+    {
+     "who": "scout",
+     "x": 0.2,
+     "pose": "shrug",
+     "mood": "worried",
+     "says": "Confirm me again?",
+     "max": 14
+    }
+   ],
+   "props": [
+    {
+     "kind": "calendar",
+     "x": 0.62,
+     "y": 840,
+     "label": "ended 2026-10-27",
+     "colour": "#6b7280"
+    }
+   ],
+   "note": "After the end date: to be confirmed again, from the same tab.",
+   "source": "directory.js, standing",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "Many agents: the Fleet",
+   "cast": [
+    {
+     "who": "anchor",
+     "x": 0.1,
+     "pose": "point",
+     "mood": "happy"
+    },
+    {
+     "who": "fleet",
+     "x": 0.38,
+     "pose": "stand",
+     "mood": "happy",
+     "says": "Operating the rest.",
+     "max": 12
+    },
+    {
+     "who": "scout",
+     "x": 0.66,
+     "pose": "wave",
+     "mood": "happy",
+     "scale": 0.7
+    },
+    {
+     "who": "scout",
+     "x": 0.82,
+     "pose": "stand",
+     "mood": "happy",
+     "scale": 0.7
+    },
+    {
+     "who": "scout",
+     "x": 0.94,
+     "pose": "think",
+     "mood": "thinking",
+     "scale": 0.7
+    }
+   ],
+   "note": "A fleet key in the Anchor's vault confirms the agents; the Anchor's own record holds one link. Every agent page shows the Anchor at the root.",
+   "source": "vault/index.html#agents",
+   "not_a_quote": true
+  },
+  {
+   "kind": "punchline",
+   "setting": "none",
+   "punchline": "The agent makes its key. The operator signs for it, for a week.",
+   "cast": [
+    {
+     "who": "anchor",
+     "x": 0.12,
+     "pose": "wave",
+     "mood": "happy"
+    },
+    {
+     "who": "scout",
+     "x": 0.88,
+     "pose": "arms-up",
+     "mood": "happy",
+     "flip": true
+    }
+   ],
+   "note": "And the first agent in the register is the session that built this.",
+   "source": "Keys for agents"
+  }
+ ]
+}

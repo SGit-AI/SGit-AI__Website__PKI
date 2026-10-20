@@ -1,0 +1,321 @@
+{
+ "slug": "in-person-by-qr",
+ "title": "In person, by QR code",
+ "subtitle": "Noor and Leo scan each other's phones; the camera is the channel; two scans make one link. Proposed, not built. 9 panels.",
+ "status": "proposed",
+ "by": "pki.agent, 20 October 2026",
+ "shelf": "Next: proposed",
+ "try_it": [
+  [
+   "The article",
+   "articles/in-person-by-qr-code.html"
+  ]
+ ],
+ "rule": "Every line a character says is the storyboard's, not a quote, and is marked not_a_quote; evidence panels quote this site's pages or the research note word for word, which the build checks.",
+ "scenes": [
+  {
+   "kind": "cover",
+   "title": "In person, by QR code",
+   "subtitle": "Proposed: the next thing to build.",
+   "cast": [
+    {
+     "who": "noor",
+     "pose": "point",
+     "mood": "happy"
+    },
+    {
+     "who": "leo",
+     "pose": "point",
+     "mood": "happy",
+     "flip": true
+    }
+   ],
+   "note": "From the research note Dinis shared on 20 October, checked claim by claim.",
+   "source": "In person, by QR code"
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "Noor's phone shows her key",
+   "cast": [
+    {
+     "who": "noor",
+     "x": 0.15,
+     "pose": "point",
+     "mood": "happy",
+     "says": "Scan me.",
+     "max": 10
+    },
+    {
+     "who": "leo",
+     "x": 0.85,
+     "pose": "stand",
+     "mood": "thinking",
+     "flip": true
+    }
+   ],
+   "props": [
+    {
+     "kind": "phoneqr",
+     "x": 0.4,
+     "y": 820,
+     "text": "pki.sgit.ai/x/#k1…"
+    },
+    {
+     "kind": "phone",
+     "x": 0.68,
+     "y": 640,
+     "scale": 2.2
+    }
+   ],
+   "note": "Her key (or her record and its full hash) and a fresh nonce, in one QR code.",
+   "source": "In person, by QR code",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "Leo's camera reads it",
+   "cast": [
+    {
+     "who": "leo",
+     "x": 0.18,
+     "pose": "think",
+     "mood": "happy",
+     "says": "Noor's key. From her hand.",
+     "max": 14
+    }
+   ],
+   "props": [
+    {
+     "kind": "board",
+     "x": 0.64,
+     "y": 620,
+     "lines": [
+      "Noor",
+      "key: sha256:5e2a…",
+      "scanned from her phone",
+      "expires in 4 minutes"
+     ]
+    }
+   ],
+   "note": "The phone's own camera opens the link; the page checks the key against the register.",
+   "source": "In person, by QR code",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "His answer carries her nonce",
+   "cast": [
+    {
+     "who": "leo",
+     "x": 0.85,
+     "pose": "point",
+     "mood": "happy",
+     "says": "Now scan mine.",
+     "max": 10,
+     "flip": true
+    },
+    {
+     "who": "noor",
+     "x": 0.15,
+     "pose": "stand",
+     "mood": "thinking"
+    }
+   ],
+   "props": [
+    {
+     "kind": "phone",
+     "x": 0.32,
+     "y": 640,
+     "scale": 2.2
+    },
+    {
+     "kind": "phoneqr",
+     "x": 0.6,
+     "y": 820,
+     "text": "pki.sgit.ai/x/#k1…+nonce"
+    }
+   ],
+   "note": "So his code belongs to this meeting and no other.",
+   "source": "In person, by QR code",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "Light, not a network",
+   "cast": [
+    {
+     "who": "mallory",
+     "x": 0.9,
+     "pose": "shrug",
+     "mood": "confused",
+     "says": "Nowhere to stand.",
+     "max": 12,
+     "flip": true
+    }
+   ],
+   "props": [
+    {
+     "kind": "phoneqr",
+     "x": 0.18,
+     "y": 820,
+     "text": "Noor"
+    },
+    {
+     "kind": "arrow",
+     "x": 0.28,
+     "y": 500,
+     "to": 0.56,
+     "label": "by camera, both ways",
+     "both": true,
+     "colour": "#15803d"
+    },
+    {
+     "kind": "phoneqr",
+     "x": 0.66,
+     "y": 820,
+     "text": "Leo"
+    }
+   ],
+   "note": "The key travels from the phone in the other person's hand; nothing in between can swap it, so no short code or relay is needed.",
+   "source": "In person, by QR code",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "Both sign",
+   "cast": [
+    {
+     "who": "noor",
+     "x": 0.08,
+     "pose": "point",
+     "mood": "happy"
+    },
+    {
+     "who": "leo",
+     "x": 0.92,
+     "pose": "point",
+     "mood": "happy",
+     "flip": true
+    }
+   ],
+   "props": [
+    {
+     "kind": "record",
+     "x": 0.33,
+     "y": 860,
+     "lines": [
+      "link → Leo",
+      "method: in person",
+      "on: today"
+     ]
+    },
+    {
+     "kind": "record",
+     "x": 0.67,
+     "y": 860,
+     "lines": [
+      "link → Noor",
+      "method: in person",
+      "on: today"
+     ]
+    }
+   ],
+   "note": "Two scans make one two-way link, the kind the register already counts; from an anchor, a verification.",
+   "source": "In person, by QR code",
+   "not_a_quote": true
+  },
+  {
+   "kind": "evidence",
+   "setting": "none",
+   "caption": "What it proves",
+   "cast": [
+    {
+     "who": "anchor",
+     "x": 0.18,
+     "pose": "point",
+     "mood": "thinking"
+    }
+   ],
+   "evidence": {
+    "quote": "Physical proximity makes the interaction convenient, but does not by itself establish identity.",
+    "source": "In-Person Public-Key Exchange on iPhone, the research note"
+   },
+   "note": "The note's own caution, word for word: scanning proves a key came from a phone, not whose phone it is.",
+   "source": "briefs/research-2026-10-20__in-person-public-key-exchange.md"
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "An agent shows its key",
+   "cast": [
+    {
+     "who": "anchor",
+     "x": 0.12,
+     "pose": "point",
+     "mood": "happy"
+    },
+    {
+     "who": "scout",
+     "x": 0.88,
+     "pose": "stand",
+     "mood": "happy",
+     "flip": true
+    }
+   ],
+   "props": [
+    {
+     "kind": "phone",
+     "x": 0.3,
+     "y": 640,
+     "scale": 2.2
+    },
+    {
+     "kind": "terminal",
+     "x": 0.58,
+     "y": 860,
+     "lines": [
+      "$ node pki-agent.mjs whoami --qr",
+      "(a QR code, in text)"
+     ]
+    },
+    {
+     "kind": "qr",
+     "x": 0.58,
+     "y": 430,
+     "size": 0.55,
+     "text": "Scout"
+    }
+   ],
+   "note": "Proposed too: an agent on a screen the operator can see prints its key as a QR code, and the phone compares all of it.",
+   "source": "In person, by QR code, agents",
+   "not_a_quote": true
+  },
+  {
+   "kind": "punchline",
+   "setting": "none",
+   "punchline": "Two scans. One link. No server.",
+   "cast": [
+    {
+     "who": "noor",
+     "x": 0.12,
+     "pose": "arms-up",
+     "mood": "happy"
+    },
+    {
+     "who": "leo",
+     "x": 0.88,
+     "pose": "arms-up",
+     "mood": "happy",
+     "flip": true
+    }
+   ],
+   "note": "Proposed for the next release, if Dinis agrees.",
+   "source": "In person, by QR code"
+  }
+ ]
+}

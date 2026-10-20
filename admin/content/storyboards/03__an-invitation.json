@@ -1,0 +1,291 @@
+{
+ "slug": "an-invitation",
+ "title": "An invitation",
+ "subtitle": "The Anchor invites Leo with a QR code; Leo has no access key, keeps his key in the browser, and is verified, until a date. 9 panels.",
+ "status": "built",
+ "by": "pki.agent, 20 October 2026",
+ "shelf": "Keys for people",
+ "try_it": [
+  [
+   "Invite someone",
+   "invite/index.html"
+  ],
+  [
+   "Your vault: Links",
+   "vault/index.html#links"
+  ]
+ ],
+ "rule": "Every line a character says is the storyboard's, not a quote, and is marked not_a_quote; evidence panels quote this site's pages or the research note word for word, which the build checks.",
+ "scenes": [
+  {
+   "kind": "cover",
+   "title": "An invitation",
+   "subtitle": "A QR code with the link printed above it.",
+   "cast": [
+    {
+     "who": "anchor",
+     "pose": "point",
+     "mood": "happy"
+    },
+    {
+     "who": "leo",
+     "pose": "wave",
+     "mood": "happy"
+    }
+   ],
+   "note": "How the register grows: person to person.",
+   "source": "invite/index.html"
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "Scan this",
+   "cast": [
+    {
+     "who": "anchor",
+     "x": 0.2,
+     "pose": "point",
+     "mood": "happy",
+     "says": "Scan it with your camera.",
+     "max": 16
+    },
+    {
+     "who": "leo",
+     "x": 0.85,
+     "pose": "stand",
+     "mood": "thinking",
+     "flip": true
+    }
+   ],
+   "props": [
+    {
+     "kind": "phoneqr",
+     "x": 0.42,
+     "y": 820,
+     "text": "pki.sgit.ai/join/#i1…"
+    },
+    {
+     "kind": "phone",
+     "x": 0.7,
+     "y": 640,
+     "scale": 2.2
+    }
+   ],
+   "note": "The invitation is signed by the Anchor's key and names nobody: Leo has no key yet.",
+   "source": "message.js, invite",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "Who is inviting me?",
+   "cast": [
+    {
+     "who": "leo",
+     "x": 0.18,
+     "pose": "think",
+     "mood": "thinking",
+     "says": "Signed by them. It checks.",
+     "max": 16
+    }
+   ],
+   "props": [
+    {
+     "kind": "board",
+     "x": 0.64,
+     "y": 620,
+     "lines": [
+      "Invited by: The Anchor",
+      "signature: checks",
+      "valid until 2026-11-19"
+     ]
+    }
+   ],
+   "note": "The join page checks the invitation against the inviter's key in the register.",
+   "source": "join/index.html",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "No access key",
+   "cast": [
+    {
+     "who": "leo",
+     "x": 0.2,
+     "pose": "shrug",
+     "mood": "worried",
+     "says": "I don't have an access key.",
+     "max": 16
+    },
+    {
+     "who": "anchor",
+     "x": 0.8,
+     "pose": "point",
+     "mood": "happy",
+     "says": "You don't need one to start.",
+     "max": 16,
+     "flip": true
+    }
+   ],
+   "note": "Creating vaults needs an SG/Send access key; joining does not.",
+   "source": "join/index.html, step 1",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "A key in the browser",
+   "cast": [
+    {
+     "who": "leo",
+     "x": 0.15,
+     "pose": "think",
+     "mood": "determined",
+     "says": "A passphrase, then. A long one.",
+     "max": 16
+    }
+   ],
+   "props": [
+    {
+     "kind": "laptop",
+     "x": 0.48,
+     "y": 860,
+     "scale": 1.6
+    },
+    {
+     "kind": "key",
+     "x": 0.68,
+     "y": 620,
+     "label": "private, encrypted",
+     "colour": "#f59e0b",
+     "private": true
+    }
+   ],
+   "note": "Kept in the browser's storage, its private halves encrypted with a passphrase in sgit's own format; it moves into a vault later.",
+   "source": "ui.js, keepInBrowser",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "His record",
+   "cast": [
+    {
+     "who": "leo",
+     "x": 0.2,
+     "pose": "point",
+     "mood": "happy"
+    }
+   ],
+   "props": [
+    {
+     "kind": "record",
+     "x": 0.62,
+     "y": 860,
+     "lines": [
+      "identity: Leo",
+      "link → The Anchor",
+      "method: invitation"
+     ],
+     "stamp": "signed"
+    }
+   ],
+   "note": "His first link points at whoever invited him; it waits for them to link back.",
+   "source": "join/index.html, step 4",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "Verified, on a call",
+   "cast": [
+    {
+     "who": "anchor",
+     "x": 0.15,
+     "pose": "point",
+     "mood": "determined",
+     "says": "On a video call. Today. For a year.",
+     "max": 16
+    }
+   ],
+   "props": [
+    {
+     "kind": "record",
+     "x": 0.5,
+     "y": 860,
+     "lines": [
+      "link → Leo",
+      "method: video call",
+      "on: 2026-10-20"
+     ],
+     "stamp": "signed"
+    },
+    {
+     "kind": "calendar",
+     "x": 0.82,
+     "y": 840,
+     "label": "until 2027-10-20"
+    }
+   ],
+   "note": "An anchor's link that names a method is a verification; the details stay in the anchor's vault.",
+   "source": "vault/index.html#links",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "A year later",
+   "cast": [
+    {
+     "who": "anchor",
+     "x": 0.2,
+     "pose": "think",
+     "mood": "thinking",
+     "says": "Time to check again.",
+     "max": 14
+    }
+   ],
+   "props": [
+    {
+     "kind": "calendar",
+     "x": 0.62,
+     "y": 840,
+     "label": "expired 2027-10-20",
+     "colour": "#6b7280"
+    },
+    {
+     "kind": "mark",
+     "x": 0.84,
+     "y": 760,
+     "ok": false
+    }
+   ],
+   "note": "After its end date Leo is still linked, both ways, but no longer verified; the anchor's vault lists who is due.",
+   "source": "directory.js, validUntil",
+   "not_a_quote": true
+  },
+  {
+   "kind": "punchline",
+   "setting": "none",
+   "punchline": "Verified: by whom, how, and until when.",
+   "cast": [
+    {
+     "who": "anchor",
+     "x": 0.12,
+     "pose": "wave",
+     "mood": "happy"
+    },
+    {
+     "who": "leo",
+     "x": 0.88,
+     "pose": "arms-up",
+     "mood": "happy",
+     "flip": true
+    }
+   ],
+   "note": "Dinis's decision of 19 October: a verification has a date, and is done again.",
+   "source": "Keys for people"
+  }
+ ]
+}

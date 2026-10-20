@@ -1,0 +1,12 @@
+/* pki.sgit.ai's storyboard pages: the variables gen-z's storyboard.css reads that this site's site.css does not
+   define, mapped onto this site's tokens, and the layout around the viewer. */
+:root{--text:var(--fg);--solid:var(--accent-dk);--on-solid:#fff;--c-amber-bg:#fff7e6;--c-amber-line:#e5cf9b}
+main.sbmain{max-width:var(--wide);margin:0 auto;padding:1.2rem 1.1rem 3rem}
+main.sbmain .crumb{font-size:.8rem;color:var(--dim)}
+.sbtitle{font-family:'Caveat','Patrick Hand',cursive;font-size:clamp(2.4rem,5vw,3.6rem);margin:.3rem 0 .2rem;line-height:1}
+.sbtry{align-items:center}
+.sbcasts{display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));grid-auto-rows:auto;align-items:start}
+.sbcast{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.8rem;text-align:center;height:auto;overflow:visible;display:flex;flex-direction:column;align-items:center}
+.sbcast svg.sbx-figure{max-width:150px}
+.sbcast h3{margin:.3rem 0 .2rem;font-family:'Caveat','Patrick Hand',cursive;font-size:1.6rem}
+.sbcast p{margin:.2rem 0;text-align:left}

@@ -1,0 +1,328 @@
+{
+ "slug": "an-access-key-sealed",
+ "title": "An access key, sealed",
+ "subtitle": "Leo needs an access key to make a vault; the Anchor seals one to the key Leo already has, and keeps a ledger of hashes. 9 panels.",
+ "status": "built",
+ "by": "pki.agent, 20 October 2026",
+ "shelf": "Keys for people",
+ "try_it": [
+  [
+   "Hand over an access key",
+   "send/index.html"
+  ],
+  [
+   "The proposal",
+   "articles/handing-out-access-keys.html"
+  ]
+ ],
+ "rule": "Every line a character says is the storyboard's, not a quote, and is marked not_a_quote; evidence panels quote this site's pages or the research note word for word, which the build checks.",
+ "scenes": [
+  {
+   "kind": "cover",
+   "title": "An access key, sealed",
+   "subtitle": "The key first, then the access key, then the vault.",
+   "cast": [
+    {
+     "who": "anchor",
+     "pose": "point",
+     "mood": "happy"
+    },
+    {
+     "who": "leo",
+     "pose": "think",
+     "mood": "thinking"
+    }
+   ],
+   "note": "Phase 0 of the access-key proposal, built in v0.2.2.",
+   "source": "Handing out access keys"
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "The chicken and the egg",
+   "cast": [
+    {
+     "who": "leo",
+     "x": 0.18,
+     "pose": "shrug",
+     "mood": "confused",
+     "says": "Which comes first?",
+     "max": 14
+    }
+   ],
+   "props": [
+    {
+     "kind": "board",
+     "x": 0.64,
+     "y": 620,
+     "lines": [
+      "an access key → to make a vault",
+      "a vault → to keep the access key",
+      "",
+      "and it used to travel in the clear"
+     ]
+    }
+   ],
+   "note": "A person needed an access key before there was anywhere safe to receive it.",
+   "source": "Handing out access keys",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "The key comes first",
+   "cast": [
+    {
+     "who": "leo",
+     "x": 0.18,
+     "pose": "point",
+     "mood": "happy",
+     "says": "My key, in the browser.",
+     "max": 14
+    }
+   ],
+   "props": [
+    {
+     "kind": "laptop",
+     "x": 0.5,
+     "y": 860,
+     "scale": 1.6
+    },
+    {
+     "kind": "key",
+     "x": 0.72,
+     "y": 620,
+     "label": "Leo, sha256:7c1f…",
+     "colour": "#0f766e",
+     "private": true
+    }
+   ],
+   "note": "From the invitation: a key kept in the browser, with no access key.",
+   "source": "join/index.html",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "Sealed to it",
+   "cast": [
+    {
+     "who": "anchor",
+     "x": 0.12,
+     "pose": "point",
+     "mood": "determined"
+    }
+   ],
+   "props": [
+    {
+     "kind": "envelope",
+     "x": 0.36,
+     "y": 760,
+     "label": "an access key, sealed"
+    },
+    {
+     "kind": "arrow",
+     "x": 0.48,
+     "y": 520,
+     "to": 0.72,
+     "label": "to Leo's key"
+    },
+    {
+     "kind": "phone",
+     "x": 0.82,
+     "y": 660,
+     "scale": 2.2
+    }
+   ],
+   "note": "The send page's 'Hand over an access key': it travels inside the message, sealed to Leo's key.",
+   "source": "send.js, grant",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "His vault, created with it",
+   "cast": [
+    {
+     "who": "leo",
+     "x": 0.12,
+     "pose": "arms-up",
+     "mood": "excited",
+     "says": "Create my vault with it.",
+     "max": 14
+    }
+   ],
+   "props": [
+    {
+     "kind": "vault",
+     "x": 0.38,
+     "y": 840,
+     "label": "door",
+     "size": 0.6
+    },
+    {
+     "kind": "vault",
+     "x": 0.6,
+     "y": 840,
+     "label": "master",
+     "size": 0.8
+    },
+    {
+     "kind": "vault",
+     "x": 0.82,
+     "y": 840,
+     "label": "book",
+     "size": 0.6
+    }
+   ],
+   "note": "His browser key moves into the master, and the access key is kept there too.",
+   "source": "open.js, grantButton",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "Every device",
+   "cast": [
+    {
+     "who": "leo",
+     "x": 0.15,
+     "pose": "point",
+     "mood": "happy",
+     "says": "On my phone as well.",
+     "max": 14
+    }
+   ],
+   "props": [
+    {
+     "kind": "phone",
+     "x": 0.38,
+     "y": 660,
+     "scale": 2.2
+    },
+    {
+     "kind": "laptop",
+     "x": 0.6,
+     "y": 860,
+     "scale": 1.6
+    },
+    {
+     "kind": "vault",
+     "x": 0.84,
+     "y": 860,
+     "label": "master",
+     "size": 0.6
+    }
+   ],
+   "note": "Through the door each passkey opens.",
+   "source": "account.js, unlock",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "The Anchor's ledger",
+   "cast": [
+    {
+     "who": "anchor",
+     "x": 0.15,
+     "pose": "think",
+     "mood": "thinking",
+     "says": "Who, when, and a hash. Never the key.",
+     "max": 16
+    }
+   ],
+   "props": [
+    {
+     "kind": "record",
+     "x": 0.62,
+     "y": 860,
+     "lines": [
+      "to: Leo",
+      "on: 2026-10-20",
+      "name: leo-2026-10",
+      "sha256: 9f2c…"
+     ],
+     "stamp": "ledger"
+    }
+   ],
+   "note": "Kept in the Anchor's book; the vault page lists the access keys handed out.",
+   "source": "vault/index.html#vaults",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "Next: minting, on signed requests (proposed)",
+   "cast": [
+    {
+     "who": "anchor",
+     "x": 0.1,
+     "pose": "point",
+     "mood": "happy"
+    }
+   ],
+   "props": [
+    {
+     "kind": "record",
+     "x": 0.27,
+     "y": 860,
+     "scale": 0.7,
+     "lines": [
+      "mint for Leo"
+     ],
+     "stamp": "signed"
+    },
+    {
+     "kind": "arrow",
+     "x": 0.36,
+     "y": 520,
+     "to": 0.5
+    },
+    {
+     "kind": "server",
+     "x": 0.6,
+     "y": 860,
+     "label": "api.sgit.ai (proposed)"
+    },
+    {
+     "kind": "arrow",
+     "x": 0.68,
+     "y": 520,
+     "to": 0.8
+    },
+    {
+     "kind": "envelope",
+     "x": 0.88,
+     "y": 760,
+     "label": "sealed to Leo"
+    }
+   ],
+   "note": "Proposed, not built: the server mints, seals to the recipient, and keeps hashes; the Anchor never sees the key.",
+   "source": "Handing out access keys, phase 2",
+   "not_a_quote": true
+  },
+  {
+   "kind": "punchline",
+   "setting": "none",
+   "punchline": "An access key never travels in the clear.",
+   "cast": [
+    {
+     "who": "anchor",
+     "x": 0.12,
+     "pose": "wave",
+     "mood": "happy"
+    },
+    {
+     "who": "leo",
+     "x": 0.88,
+     "pose": "arms-up",
+     "mood": "happy",
+     "flip": true
+    }
+   ],
+   "note": "Phases 0 and 1 built; phases 2 to 4 proposed.",
+   "source": "Handing out access keys"
+  }
+ ]
+}

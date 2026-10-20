@@ -1,0 +1,347 @@
+{
+ "slug": "two-ways",
+ "title": "Two ways, or not at all",
+ "subtitle": "Mallory floods a key, as in 2019, and then tries again here, where a vouch can only be written in the voucher's own record. 9 panels.",
+ "status": "built",
+ "by": "pki.agent, 20 October 2026",
+ "shelf": "Keys for people",
+ "try_it": [
+  [
+   "The register",
+   "people/index.html"
+  ],
+  [
+   "Two ways, explained",
+   "people/how.html#two-ways"
+  ],
+  [
+   "The 2019 failure",
+   "failure/index.html"
+  ]
+ ],
+ "rule": "Every line a character says is the storyboard's, not a quote, and is marked not_a_quote; evidence panels quote this site's pages or the research note word for word, which the build checks.",
+ "scenes": [
+  {
+   "kind": "cover",
+   "title": "Two ways, or not at all",
+   "subtitle": "Why a link only counts when both people wrote it.",
+   "cast": [
+    {
+     "who": "mallory",
+     "pose": "shrug",
+     "mood": "thinking"
+    },
+    {
+     "who": "noor",
+     "pose": "stand",
+     "mood": "happy"
+    },
+    {
+     "who": "leo",
+     "pose": "wave",
+     "mood": "happy"
+    }
+   ],
+   "note": "The rule that answers the 2019 keyserver flood.",
+   "source": "people/how.html"
+  },
+  {
+   "kind": "evidence",
+   "setting": "none",
+   "caption": "2019",
+   "cast": [
+    {
+     "who": "mallory",
+     "x": 0.18,
+     "pose": "point",
+     "mood": "thinking"
+    }
+   ],
+   "evidence": {
+    "quote": "a key server could add information to a certificate but could never delete either a certificate or information about a certificate.",
+    "source": "pki.sgit.ai, the 2019 failure"
+   },
+   "note": "The design goal that made the flood possible, word for word from this site's failure page.",
+   "source": "failure/index.html"
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "The flood",
+   "cast": [
+    {
+     "who": "mallory",
+     "x": 0.2,
+     "pose": "arms-up",
+     "mood": "excited",
+     "says": "Anyone can add. Nothing can be deleted.",
+     "max": 18
+    }
+   ],
+   "props": [
+    {
+     "kind": "record",
+     "x": 0.66,
+     "y": 860,
+     "lines": [
+      "a key, 2019",
+      "sig",
+      "sig",
+      "sig",
+      "sig …",
+      "~150,000 sigs"
+     ],
+     "stamp": "broken"
+    }
+   ],
+   "note": "One key reached about 150,000 signatures; importing it broke the software.",
+   "source": "failure/index.html",
+   "not_a_quote": true
+  },
+  {
+   "kind": "evidence",
+   "setting": "none",
+   "caption": "The rule",
+   "cast": [
+    {
+     "who": "anchor",
+     "x": 0.18,
+     "pose": "point",
+     "mood": "thinking"
+    }
+   ],
+   "evidence": {
+    "quote": "The keyserver attack existed because anyone could append to anybody's certificate.",
+    "source": "pki.sgit.ai, the four rules"
+   },
+   "note": "Rule 1, word for word: only the owner writes to their own record.",
+   "source": "rules/index.html"
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "Where would Mallory write?",
+   "cast": [
+    {
+     "who": "mallory",
+     "x": 0.5,
+     "pose": "shrug",
+     "mood": "confused",
+     "says": "Where do I write?",
+     "max": 14
+    }
+   ],
+   "props": [
+    {
+     "kind": "record",
+     "x": 0.2,
+     "y": 860,
+     "label": "Noor's record",
+     "lines": [
+      "identity: Noor",
+      "signed by Noor"
+     ]
+    },
+    {
+     "kind": "record",
+     "x": 0.8,
+     "y": 860,
+     "label": "Leo's record",
+     "lines": [
+      "identity: Leo",
+      "signed by Leo"
+     ]
+    },
+    {
+     "kind": "mark",
+     "x": 0.66,
+     "y": 400,
+     "ok": false
+    }
+   ],
+   "note": "A statement signed by another key, put in someone's record, is rejected: the test says so.",
+   "source": "test_people.mjs",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "A claim",
+   "cast": [
+    {
+     "who": "leo",
+     "x": 0.85,
+     "pose": "think",
+     "mood": "confused",
+     "says": "I don't know her yet.",
+     "max": 14,
+     "flip": true
+    }
+   ],
+   "props": [
+    {
+     "kind": "record",
+     "x": 0.22,
+     "y": 860,
+     "label": "Noor's record",
+     "lines": [
+      "link → Leo"
+     ]
+    },
+    {
+     "kind": "arrow",
+     "x": 0.36,
+     "y": 520,
+     "to": 0.7,
+     "label": "a claim, one way",
+     "dashed": true
+    }
+   ],
+   "note": "A one-way link is visible in the claimant's record and adds nothing to the other person.",
+   "source": "directory.js, graph",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "A link",
+   "cast": [
+    {
+     "who": "noor",
+     "x": 0.1,
+     "pose": "point",
+     "mood": "happy"
+    },
+    {
+     "who": "leo",
+     "x": 0.9,
+     "pose": "point",
+     "mood": "happy",
+     "flip": true
+    }
+   ],
+   "props": [
+    {
+     "kind": "record",
+     "x": 0.3,
+     "y": 860,
+     "lines": [
+      "link → Leo"
+     ]
+    },
+    {
+     "kind": "record",
+     "x": 0.7,
+     "y": 860,
+     "lines": [
+      "link → Noor"
+     ]
+    },
+    {
+     "kind": "arrow",
+     "x": 0.38,
+     "y": 470,
+     "to": 0.62,
+     "label": "both ways: a link",
+     "both": true,
+     "colour": "#15803d"
+    }
+   ],
+   "note": "Linking back creates the link; each side is in its owner's record.",
+   "source": "test_people.mjs",
+   "not_a_quote": true
+  },
+  {
+   "kind": "graph",
+   "caption": "The register, computed",
+   "graph": {
+    "nodes": [
+     {
+      "id": "a",
+      "label": "The Anchor",
+      "x": 0.5,
+      "y": 0.12,
+      "colour": "#bbf7d0"
+     },
+     {
+      "id": "n",
+      "label": "Noor",
+      "x": 0.25,
+      "y": 0.5
+     },
+     {
+      "id": "l",
+      "label": "Leo",
+      "x": 0.75,
+      "y": 0.5
+     },
+     {
+      "id": "k",
+      "label": "Kofi",
+      "x": 0.5,
+      "y": 0.88
+     },
+     {
+      "id": "m",
+      "label": "Mallory",
+      "x": 0.9,
+      "y": 0.88,
+      "colour": "#fecaca"
+     }
+    ],
+    "edges": [
+     {
+      "from": "a",
+      "to": "n",
+      "label": "verified"
+     },
+     {
+      "from": "n",
+      "to": "l",
+      "label": "both ways"
+     },
+     {
+      "from": "l",
+      "to": "k",
+      "label": "both ways"
+     },
+     {
+      "from": "m",
+      "to": "l",
+      "label": "a claim"
+     }
+    ]
+   },
+   "note": "Degrees of separation come from confirmed links only, computed each time a page opens.",
+   "source": "people/index.html"
+  },
+  {
+   "kind": "punchline",
+   "setting": "none",
+   "punchline": "A vouch for you lands in my record, never in yours.",
+   "cast": [
+    {
+     "who": "noor",
+     "x": 0.12,
+     "pose": "wave",
+     "mood": "happy"
+    },
+    {
+     "who": "leo",
+     "x": 0.3,
+     "pose": "arms-up",
+     "mood": "happy"
+    },
+    {
+     "who": "mallory",
+     "x": 0.88,
+     "pose": "shrug",
+     "mood": "worried",
+     "flip": true
+    }
+   ],
+   "note": "Two-way links stop flooding. They do not stop lying: that is what the anchor and the evidence are for.",
+   "source": "people/how.html#two-ways"
+  }
+ ]
+}

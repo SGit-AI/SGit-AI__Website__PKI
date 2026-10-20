@@ -9,7 +9,7 @@
 > the other: the answer to the 2019 keyserver flood. Since v0.2.0 (18 October 2026) people
 > come first; the agent-registry work is kept under /archive/.
 
-Site version: v0.2.4 (18 October 2026). Published by the sgit project — participant
+Site version: v0.2.5 (18 October 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## The register of people (start here)
@@ -61,6 +61,12 @@ disclosure at /about/participant.html. All content CC BY 4.0.
   then print its fingerprint for the operator to compare. Also: status, open <m1 link>, send, sign <file>
   (an sgit-compatible .sig), evidence, keyfile (PKI_AGENT_KEY, for a key that outlives a container).
   Keys live in sgit's key store (~/.sg-send/keys/), so `sgit pki` uses the same key.
+- Storyboards: /storyboards/index.html. Every workflow as an interactive storyboard (deck, grid, script,
+  filter, animation), drawn in the browser from data by gen-z-developers.sgit.ai's storyboard kit with
+  Rough.js: /storyboards/<slug>.json and /storyboards/cast.json are the data (sources in
+  /admin/content/storyboards/). Seven boards, 64 panels: the-first-key, two-ways, an-invitation,
+  a-secret-by-qr, an-access-key-sealed, an-agent-gets-a-key (built) and in-person-by-qr (proposed).
+  Lines characters say are marked not_a_quote; evidence panels quote this site word for word (checked).
 - Articles: /articles/index.html, each with a markdown twin at /articles/<slug>.md and, when an agent
   wrote it, a detached signature at /articles/<slug>.md.sig ({signature, fingerprint}, the format
   `sgit pki sign` writes) by the agent's key in the register; check with `sgit pki verify`.
