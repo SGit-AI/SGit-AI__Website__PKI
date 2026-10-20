@@ -613,7 +613,9 @@ const __message = (() => {
  * A message is JSON, signed by the sender when the sender has a key, then sealed in sgit's hybrid v2 envelope to the
  * recipient's encryption key:
  *
- *     inner   { v: 1, kind: "pki.sgit.ai/message/v1", to, from?, at, subject?, text, files?: [{ name, type, data (base64) }], sig? }
+ *     inner   { v: 1, kind: "pki.sgit.ai/message/v1", to, from?, at, subject?, text, files?: [{ name, type, data (base64) }],
+ *               grant?: { service: "sg-send", endpoint, token, name? }, sig? }
+ *             grant: an access key handed over, sealed to the person it is for (the key-management proposal's phase 0).
  *             sig: the sender's ECDSA over the canonical bytes (keys.js canon, without sig). It covers `to`, so a
  *             recipient cannot re-seal a signed message to a third party and have it read as addressed to them,
  *             which the envelope's own s (over c only, see sgit.ai/docs/pki.md) does not prevent.
@@ -647,9 +649,10 @@ const MAX_QR_CHARS = 2300                            // version 40 at level L ho
 
 // ------------------------------------------------------------ the inner message
 /** The inner message, signed when `from` is an identity ({ bundle, private: { sign } }). */
-async function compose({ to, from = null, subject = '', text = '', files = [], at = new Date().toISOString() }) {
+async function compose({ to, from = null, subject = '', text = '', files = [], grant = null, at = new Date().toISOString() }) {
     const msg = { v: 1, kind: KIND, to: to.signing_fingerprint, at, text: String(text) }
     if (subject) msg.subject = String(subject)
+    if (grant) msg.grant = { service: 'sg-send', endpoint: String(grant.endpoint || 'https://dev.send.sgraph.ai'), token: String(grant.token), ...(grant.name ? { name: String(grant.name) } : {}) }
     if (files.length) msg.files = files.map(f => ({ name: String(f.name), type: String(f.type || 'application/octet-stream'), data: typeof f.data === 'string' ? f.data : b64(f.data) }))
     if (from) {
         msg.from = from.bundle.signing_fingerprint

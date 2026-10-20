@@ -6,8 +6,21 @@ import * as M from '../message.js'
 import { messageCard } from '../cards.js'
 
 const app = document.getElementById('app')
-vaultBar(document.getElementById('vault-bar-mount'))
+const bar = vaultBar(document.getElementById('vault-bar-mount'))
 const dir = await loadDirectory().catch(() => null)
+
+/** An access key handed over: keep it in the open vault, or offer it to the form that creates one. */
+function grantButton(g) {
+    if (vault.mode === 'vault') {
+        const b = h('button', { type: 'button', class: 'btn primary', id: 'grant-keep' }, vault.token === g.token ? 'Already your access key' : 'Keep it as my access key')
+        if (vault.token === g.token) b.disabled = true
+        b.addEventListener('click', () => busy(b, async () => { await A.setToken(vault.master, g.token); vault.token = g.token; if (vault.sg) vault.sg.token = g.token; b.replaceWith(h('span', { class: 'ok' }, 'Kept in your master vault: every device of yours has it now.')) }))
+        return b
+    }
+    const b = h('button', { type: 'button', class: 'btn primary', id: 'grant-use' }, 'Create my vault with it')
+    b.addEventListener('click', () => { bar.setAccessKey(g.token); window.scrollTo(0, 0); b.replaceWith(h('span', { class: 'ok' }, vault.mode === 'browser' ? 'Ready: press “Move into a vault” above, make or use a passkey, and the key goes in with your keys.' : 'Ready: press “Open with my passkey” above; the first time, the form to create your vault has the key in it.')) })
+    return b
+}
 
 async function draw() {
     const code = M.parseCode(location.hash)
@@ -30,6 +43,7 @@ async function draw() {
                 keep.addEventListener('click', () => busy(keep, async () => { await A.book.saveMessage(vault.book, 'in', { id: code.code.slice(-24), at: o.msg.at, msg: o.msg, verified: o.verified }); keep.replaceWith(h('span', { class: 'ok' }, 'kept')) }))
                 acts.push(keep)
             }
+            if (o.msg.grant && o.msg.grant.token) acts.unshift(grantButton(o.msg.grant))
             if (o.msg.from) acts.push(h('a', { class: 'btn', href: pageUrl('send/index.html') + '#to=' + K.dirOf(o.msg.from) }, 'Reply'))
             acts.push(h('button', { type: 'button', class: 'btn', onclick: () => download('message.txt.enc', code.enc, 'text/plain') }, 'Download as .enc'))
             result.replaceChildren(msg('ok', `Opened with ${label}.`), o.problems.length ? msg('warn', o.problems.join('; ')) : null, messageCard(o.msg, o.verified, nameOf, acts))

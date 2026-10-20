@@ -288,7 +288,7 @@ export function vaultBar(mount, opts = {}) {
             h('p', { class: 'dim small' }, `Your passkey derived the address ${door.vaultId}, and nothing is there. Either this is your first time here, or your vault was made with another passkey.`),
             h('h3', {}, 'First time: create your vault'),
             h('p', { class: 'small' }, 'Three vaults are made: a door at that address, a master that will hold your private keys, and a book for your record, contacts and messages. The access key is written into the master, so no other device of yours needs it typed.'),
-            h('label', { class: 'f' }, 'SG/Send access key ', h('span', { class: 'dim' }, opts.accessKey ? '(from your invitation)' : '(from whoever invited you)')), access,
+            h('label', { class: 'f' }, 'SG/Send access key ', h('span', { class: 'dim' }, opts.accessKey ? '(handed to you: in your invitation or a sealed message)' : '(from whoever invited you)')), access,
             h('div', { class: 'acts' }, go),
             h('h3', {}, 'Already have a vault from another device'),
             h('label', { class: 'f' }, 'Recovery code'), code, h('div', { class: 'acts' }, join),
@@ -309,5 +309,7 @@ export function vaultBar(mount, opts = {}) {
     vault.onChange(draw)
     draw()
     vault.resume().then(ok => { if (!ok) draw() })
-    return { draw, say }
+    /** A grant opened on this page offers its access key to the vault's first-time form. */
+    const setAccessKey = k => { opts.accessKey = k; draw() }
+    return { draw, say, setAccessKey }
 }

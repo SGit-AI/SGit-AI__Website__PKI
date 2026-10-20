@@ -88,3 +88,12 @@ svg.graph circle.node{fill:#fff;stroke:var(--accent-dk);stroke-width:2}
 svg.graph circle.node.anchor{fill:var(--accent-dk)}
 svg.graph circle.node.listed{stroke:var(--dim2)}
 @media (max-width:600px){main.tool h1{font-size:1.6rem}.big .n{font-size:2.5rem}}
+
+/* articles */
+main.article .byline{font-size:.85rem;color:var(--dim);margin:.2rem 0 .8rem}
+main.article .sigbox{font-size:.84rem}
+main.article table{width:100%;border-collapse:collapse;font-size:.88rem;margin:.6rem 0 1rem;background:var(--panel)}
+main.article th,main.article td{border:1px solid var(--line);padding:.4rem .6rem;text-align:left;vertical-align:top}
+main.article th{background:var(--panel2);font-weight:600}
+main.article pre{background:var(--term-bg);color:#e6edf3;padding:.8rem 1rem;border-radius:10px;overflow-x:auto;font-size:.8rem;line-height:1.5}
+main.article blockquote{border-left:3px solid var(--accent);margin:1rem 0;padding:.2rem 1rem;color:var(--dim)}

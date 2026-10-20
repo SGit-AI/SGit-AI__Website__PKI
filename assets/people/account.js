@@ -163,6 +163,13 @@ export const book = {
         return out
     },
     async saveAgent(bk, sub) { await NV.writeFile(bk, '/agents', `${K.dirOf(sub.record)}.json`, JSON.stringify(sub, null, 1)); await NV.publish(bk) },
+    /** The access keys this person handed out: never the key itself, its SHA-256, who it went to and when. */
+    async grants(bk) {
+        const names = (await NV.listFiles(bk, '/grants').catch(() => [])).filter(n => n.endsWith('.json'))
+        const out = []; for (const n of names) { try { out.push(JSON.parse(await NV.readText(bk, `/grants/${n}`))) } catch (e) { /* skip */ } }
+        return out.sort((a, b) => String(b.at).localeCompare(String(a.at)))
+    },
+    async saveGrant(bk, g) { await NV.writeFile(bk, '/grants', `${g.token_sha256.slice(0, 16)}__${K.dirOf(g.to)}.json`, JSON.stringify(g, null, 1)); await NV.publish(bk) },
     async saveInvite(bk, inv) { await NV.writeFile(bk, '/invites', `${safe(inv.nonce)}.json`, JSON.stringify(inv, null, 2)); await NV.publish(bk) },
     async invites(bk) {
         const names = (await NV.listFiles(bk, '/invites').catch(() => [])).filter(n => n.endsWith('.json'))

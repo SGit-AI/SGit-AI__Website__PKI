@@ -394,5 +394,7 @@ async function vaults(body) {
             h('p', { class: 'small' }, 'Master: ', h('span', { class: 'mono' }, NV.prefixedKey(vault.master))), vault.book ? h('p', { class: 'small' }, 'Book: ', h('span', { class: 'mono' }, NV.prefixedKey(vault.book))) : null,
             h('p', { class: 'dim small' }, h('code', {}, 'sgit clone <key>'), ' opens either on the command line; the master’s keys/ folder is in sgit’s own key store layout.')))
     })
+    const grants = await A.book.grants(vault.book).catch(() => [])
+    body.append(h('h3', {}, 'Access keys you handed out'), grants.length ? h('table', { class: 'kv' }, h('tbody', {}, ...grants.map(g => h('tr', {}, h('th', {}, g.to_name || g.to), h('td', { class: 'small' }, `${String(g.at).slice(0, 10)}${g.name ? ' · ' + g.name : ''} · `, h('span', { class: 'mono dim' }, 'sha256 ' + g.token_sha256.slice(0, 16) + '…')))))) : h('p', { class: 'dim small' }, 'None yet. Hand one over from the send page: it travels sealed to their key.'))
     body.append(h('div', { class: 'acts' }, addThis), !vault.token ? [h('label', { class: 'f' }, 'Access key'), tok, h('div', { class: 'acts' }, setTok)] : null, h('div', { class: 'acts' }, reveal))
 }

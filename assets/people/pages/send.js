@@ -15,6 +15,8 @@ const paste = h('textarea', { class: 't code', placeholder: 'or paste their publ
 const subject = h('input', { class: 't', id: 'send-subject', maxlength: 200, placeholder: 'optional' })
 const text = h('textarea', { class: 't', id: 'send-text', placeholder: 'What only they should read' })
 const files = h('input', { type: 'file', multiple: true })
+const grantKey = h('input', { class: 't', type: 'password', autocomplete: 'off', id: 'send-grant', placeholder: 'an SG/Send access key, to hand over sealed' })
+const grantName = h('input', { class: 't', id: 'send-grant-name', placeholder: 'its name on the server, if it has one (for your records)' })
 const sign = h('input', { type: 'checkbox', id: 'send-sign', checked: true })
 const go = h('button', { type: 'button', class: 'btn primary', id: 'send-go' }, 'Encrypt it')
 const out = h('div', { id: 'send-out' })
@@ -59,11 +61,12 @@ go.addEventListener('click', () => busy(go, async () => {
     try {
         const r = recipient()
         const p = await K.checkBundle(r.bundle); if (p.length) throw new Error(p.join('; '))
-        if (!text.value.trim() && !files.files.length) throw new Error('nothing to send')
+        const grant = grantKey.value.trim() ? { token: grantKey.value.trim(), name: grantName.value.trim() } : null
+        if (!text.value.trim() && !files.files.length && !grant) throw new Error('nothing to send')
         const attached = []
         for (const f of files.files) { if (f.size > 2 * 1024 * 1024) throw new Error(`${f.name} is over 2 MB`); attached.push({ name: f.name, type: f.type, data: new Uint8Array(await f.arrayBuffer()) }) }
         const from = sign.checked && vault.open ? vault.me : null
-        const m = await M.compose({ to: r.bundle, from, subject: subject.value.trim(), text: text.value, files: attached })
+        const m = await M.compose({ to: r.bundle, from, subject: subject.value.trim(), text: text.value || (grant ? 'An SG/Send access key, for you to create your vault with. Open this with your key, and the page will offer to keep it in your vault.' : ''), files: attached, grant })
         const sealed = await M.sealMessage(m, r.bundle, from)
         const fits = sealed.url.length <= M.MAX_QR_CHARS
         const boxes = [h('h2', {}, `Sealed to ${r.name}`),
@@ -76,6 +79,7 @@ go.addEventListener('click', () => busy(go, async () => {
             try { await A.deliver(r.rec.inbox, sealed.enc); e.target.replaceWith(h('span', { class: 'ok' }, `Delivered to ${r.name}’s inbox: the server said ok, and can say nothing else.`)) } catch (x) { out.prepend(msg('bad', err(x))) }
         }) }, `Deliver to ${r.name}’s inbox`))
         boxes.push(acts)
+        if (grant && vault.mode === 'vault') { await A.book.saveGrant(vault.book, { v: 1, to: r.bundle.signing_fingerprint, to_name: r.name, at: m.at, name: grant.name || '', token_sha256: await K.sha256hex(grant.token) }); boxes.push(h('p', { class: 'dim small' }, 'The hand-over is in your book, under Your vaults: who, when, and the key’s SHA-256, never the key.')) }
         if (vault.mode === 'vault') { await A.book.saveMessage(vault.book, 'out', { to: r.bundle.signing_fingerprint, at: m.at, subject: m.subject || '', text: m.text, how: r.rec && r.rec.inbox ? 'link or inbox' : 'link', code: sealed.code }); boxes.push(h('p', { class: 'dim small' }, 'A copy is kept in your book, under Sent.')) }
         out.replaceChildren(...boxes)
     } catch (e) { out.replaceChildren(msg('bad', err(e))) }
@@ -85,5 +89,8 @@ app.replaceChildren(
     h('label', { class: 'f' }, 'To'), to, paste,
     h('label', { class: 'f' }, 'Subject'), subject,
     h('label', { class: 'f' }, 'Message'), text,
+    h('details', { class: 'vpanel' }, h('summary', {}, h('b', {}, 'Hand over an access key')),
+        h('p', { class: 'small' }, 'An SG/Send access key lets them create vaults, and so keep their keys in a vault that follows them across devices. It travels sealed to their key, inside this message: only they can open it, and when they do, the page offers to keep it in their vault. Your book records that you handed it over, and its SHA-256, never the key.'),
+        grantKey, grantName),
     h('label', { class: 'f' }, 'Files ', h('span', { class: 'dim' }, '(optional, 2 MB each; a file makes it too long for a QR code, so it goes as a link or to their inbox)')), files,
     h('div', { class: 'acts' }, signLine), h('div', { class: 'acts' }, go), out)

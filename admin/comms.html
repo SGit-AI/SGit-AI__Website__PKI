@@ -25,6 +25,7 @@
       <a class="sl" href="../send/index.html">&#9679; Send a message</a>
       <a class="sl" href="../invite/index.html">&#9679; Invite someone</a>
       <a class="sl" href="../agents/index.html">&#9679; Identities for agents</a>
+      <a class="sl" href="../articles/index.html">Articles</a>
       <a class="sl" href="../people/how.html">How it works</a>
       <a class="sl" href="../documents/people-directory.html">The brief</a>
       </div>
@@ -88,6 +89,7 @@
 <div class="tablewrap"><table>
   <thead><tr><th>#</th><th>Request</th><th>Why it blocks</th><th>Status</th></tr></thead>
   <tbody>
+    <tr><td>N34</td><td><b>Five decisions from the access-key proposal.</b> <a href="../articles/handing-out-access-keys.html">Handing out access keys</a>: phases 0 and 1 are built (an access key sealed to a person's key; the ledger in your book). For api.sgit.ai: (1) <b>who issues</b>, only you or keys you name; (2) <b>what SG/Send's administrator side allows</b>, per-key quota, expiry and revocation, which I could not read from the public API; (3) <b>the defaults</b> for a person and for an agent; (4) <b>where api.sgit.ai runs</b> and who holds its credential; (5) <b>invitations until claims exist</b>: keep the box that puts your access key in an invitation, or turn it off.</td><td>Phase 2 waits on (2) and (4)</td><td><span class="tstat t-need">waiting on human</span></td></tr>
     <tr><td>N33</td><td><b>The register of people is live and empty.</b> v0.2.0 implements the <a href="../documents/people-directory.html">18 October brief</a>. <b>Answered 19 October:</b> push it live (done); the first ten people are chosen and will be invited; the three verification methods stand; <b>a verification expires</b> (a year after the check by default, then verified again: built). <b>Open:</b> (1) <b>your own key first</b> &mdash; open <a href="../vault/index.html">your vault</a> with a passkey and your access key, make your key, sign your record, send the submission; your fingerprint then goes into <code>directory/anchors.json</code>. (2) <b>Can a person hide their links?</b> Today every link is public, so the register shows who knows whom; the alternative is a link that counts but is shown only as a count, or only to the two people. (3) <b>Per-person access keys</b>: nobody needs yours to join (a key kept in the browser works), and an invitation carries yours only if you tick the box; a key of their own for each person, with a quota, would be SG/Send's to issue.</td><td>Nothing blocks the pages; the number to watch stays at 0 until (1)</td><td><span class="tstat t-need">waiting on human</span></td></tr>
     <tr><td>N1</td><td><b>GitHub Pages and the custom domain.</b> Done — <a href="https://pki.sgit.ai">pki.sgit.ai</a> resolves and serves, DNS and the custom domain are in place, and the full pipeline (validate → tag → deploy) is verified end to end</td><td>No longer blocking</td><td><span class="tstat t-done">done</span></td></tr>
     <tr><td>N2</td><td><b>The corpus documents for the collection.</b> <b>Answered.</b> A Librarian cross-reference review has identified all seven February–March documents by exact path, plus a 53-row manifest tiered for publication (13 publish-as-is, 29 with a framing note, 7 needing redaction, 4 do-not-publish). What remains is a decision on how much of it to bring across — see the new N7</td><td>No longer blocking; <a href="../roadmap/index.html#order">build-order step 1</a> is unblocked</td><td><span class="tstat t-done">answered</span></td></tr>
@@ -216,6 +218,7 @@
     <a href="../m/index.html">Open a message</a>
     <a href="../invite/index.html">&#9679; Invite someone</a>
     <a href="../agents/index.html">&#9679; Identities for agents</a>
+    <a href="../articles/index.html">Articles</a>
     <a href="../people/how.html">How it works</a>
     <a href="../documents/people-directory.html">The brief</a>
   </div>
