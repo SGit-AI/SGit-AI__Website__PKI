@@ -35,6 +35,7 @@ async function draw() {
             h('tr', {}, h('th', {}, 'Label'), h('td', {}, r.bundle.label || '')),
             r.kind === 'agent' ? h('tr', {}, h('th', {}, 'Runs on'), h('td', {}, r.identity.body.runtime || '(not said)', r.identity.body.session ? ' · a session key: it lives as long as one session' : '')) : null,
             r.kind === 'agent' && s.chain ? h('tr', {}, h('th', {}, 'Operated by'), h('td', {}, ...s.chain.map((x, i) => [i ? ', operated by ' : '', nm(x)]), ` · until ${s.until}`)) : null,
+            r.kind === 'agent' && s.chain && (s.policy || s.claimed_policy) ? h('tr', {}, h('th', {}, 'Policy'), h('td', {}, h('span', { class: 'mono' }, s.policy || '(none authorised)'), s.claimed_policy && s.claimed_policy !== s.policy ? h('span', { class: 'bad' }, ` · the agent claims ${s.claimed_policy}: they disagree`) : s.policy ? h('span', { class: 'ok' }, ' · authorised by the operator, claimed by the agent') : '')) : null,
             h('tr', {}, h('th', {}, 'In the register since'), h('td', {}, r.identity.created_at)),
             h('tr', {}, h('th', {}, 'Inbox'), h('td', {}, r.inbox ? 'yes: anyone can write to them, sealed to this key, with no account' : 'none: a message to them travels as a link or a QR code')),
             r.revoked ? h('tr', {}, h('th', {}, 'Revoked'), h('td', { class: 'bad' }, `${r.revoked.at} (${r.revoked.reason})`)) : null)),

@@ -56,6 +56,14 @@
    "wants": "every agent confirmed and every confirmation in date",
    "fears": "two hundred and one",
    "line": "Operated by the Anchor. Operating the rest.",
-   "look": {"colour": "#6d28d9"}}
+   "look": {"colour": "#6d28d9"}},
+  {"id": "keeper", "name": "The Keeper", "kind": "agent", "pronouns": "it/its", "age": null,
+   "role": "the vault keeper: an agent that holds the vault of vaults, operated by the Anchor a month at a time",
+   "stands_for": "the agent of Dinis's memo of 21 October that other agents hand their new vault keys to, sealed",
+   "personality": "patient, checks every date twice, never prints a key",
+   "wants": "every vault key sealed to it, signed by an agent the root vouches for, and in date",
+   "fears": "being the only one who holds a key, which is why the root gets a copy too",
+   "line": "Sealed to me, signed by you, in date. Then I keep it.",
+   "look": {"colour": "#b45309"}}
  ]
 }

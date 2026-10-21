@@ -163,7 +163,7 @@ function describe(st) {
     const b = st.body
     if (st.type === 'identity') return `${b.name}${b.about ? ' · ' + b.about : ''}`
     if (st.type === 'evidence') return `${D.EVIDENCE[b.kind] ? D.EVIDENCE[b.kind].label : b.kind}: ${b.value}${b.url ? ' · ' + b.url : ''}`
-    if (st.type === 'link') return `I know ${b.to}${b.method ? ' · ' + D.METHODS[b.method] : ''}${b.on ? ', ' + b.on : ''}`
+    if (st.type === 'link') return `I know ${b.to}${b.method ? ' · ' + D.METHODS[b.method] : ''}${b.on ? ', ' + b.on : ''}${b.until ? ' until ' + b.until : ''}${b.policy ? ' · policy ' + b.policy.slice(0, 19) + '…' : ''}`
     if (st.type === 'inbox') return `an inbox on vault ${b.vault}`
     if (st.type === 'revocation') return `withdraws ${b.revokes.statement.slice(0, 20)}…`
     return ''
@@ -247,18 +247,23 @@ async function agents(body, dir) {
         const claims = r.links.filter(l => l.method === 'operated-by').map(l => l.to)
         const by = h('select', { class: 't' }, ...vault.ids.map(i => h('option', { value: i.bundle.signing_fingerprint, selected: claims.includes(i.bundle.signing_fingerprint) }, `${i.bundle.label || 'a key'} · ${i.bundle.signing_fingerprint}`)))
         const days = h('select', { class: 't' }, ...[[1, 'a day'], [7, 'a week'], [30, '30 days'], [90, '90 days'], [365, 'a year']].map(([d, l]) => h('option', { value: d, selected: d === (r.identity.body.session ? 7 : 30) }, l)))
+        const claimed = (r.links.find(l => l.method === 'operated-by' && l.policy) || {}).policy || ''
+        const policy = h('textarea', { class: 't code', id: 'agent-policy', rows: 3, placeholder: 'optional: the behaviour policy it runs under, pasted as text, or its sha256:<64 hex>' }, claimed)
         const sign = h('button', { type: 'button', class: 'btn primary' }, 'I operate this agent: sign')
         sign.addEventListener('click', () => busy(sign, async () => {
             const op = vault.ids.find(i => i.bundle.signing_fingerprint === by.value)
+            const pv = policy.value.trim()
+            const pol = !pv ? '' : D.POLICY.test(pv) ? pv : 'sha256:' + await K.sha256hex(K.utf8(policy.value))
+            if (claimed && pol && pol !== claimed && !confirm(`The agent says it runs under ${claimed}; you are authorising ${pol}. An agent tool refuses to seal to an agent whose two sides disagree. Sign anyway?`)) return
             if (!claims.includes(by.value)) { if (!confirm('The agent does not name this key as its operator, so the link will be one-way until it does. Sign anyway?')) return }
             const on = new Date().toISOString().slice(0, 10), until = new Date(Date.now() + Number(days.value) * 86400000).toISOString().slice(0, 10)
-            const st = await D.linkStatement(op, { to: r.fp, method: 'operates', on, until })
+            const st = await D.linkStatement(op, { to: r.fp, method: 'operates', on, until, policy: pol })
             await vault.addStatement(st)
             await vault.saveAgent({ ...sub, confirmed: { by: by.value, on, until } })
             pendingAgent(null)
             const opSts = await vault.statements(by.value)
             const both = D.submissions([sub, D.submission(opSts)])
-            out.replaceChildren(msg('ok', `Signed: ${r.name} is operated by ${op.bundle.label || by.value} until ${until}.`),
+            out.replaceChildren(msg('ok', `Signed: ${r.name} is operated by ${op.bundle.label || by.value} until ${until}${pol ? `, under policy ${pol}` : ''}.`),
                 h('p', { class: 'small' }, 'One file now carries both records, the agent’s and your link, for the register (', h('code', {}, 'node admin/build/people.mjs add'), '):'),
                 h('div', { class: 'acts' }, h('button', { type: 'button', class: 'btn primary', onclick: () => download(`pki-agent-${K.dirOf(r.fp)}.json`, JSON.stringify(both, null, 1)) }, 'Download for the register'), copyButton(JSON.stringify(both, null, 1), 'Copy it')))
         }))
@@ -267,8 +272,11 @@ async function agents(body, dir) {
             h('table', { class: 'kv' }, h('tbody', {},
                 h('tr', {}, h('th', {}, 'Fingerprint'), h('td', {}, h('b', { class: 'mono' }, r.fp), h('div', { class: 'warn small' }, 'Compare it with what the agent printed in its own session, character for character, before you sign.'))),
                 h('tr', {}, h('th', {}, 'Runs on'), h('td', {}, r.identity.body.runtime || '(not said)', r.identity.body.session ? ' · a session key: it dies with the session' : '')),
-                h('tr', {}, h('th', {}, 'Names as operator'), h('td', { class: 'mono' }, claims.join(', ') || 'nobody yet')))),
-            h('label', { class: 'f' }, 'Operated by'), by, h('label', { class: 'f' }, 'For'), days, h('div', { class: 'acts' }, sign)))
+                h('tr', {}, h('th', {}, 'Names as operator'), h('td', { class: 'mono' }, claims.join(', ') || 'nobody yet')),
+                h('tr', {}, h('th', {}, 'Says it runs under'), h('td', { class: 'mono' }, claimed || 'no policy named')))),
+            h('label', { class: 'f' }, 'Operated by'), by, h('label', { class: 'f' }, 'For'), days,
+            h('label', { class: 'f', for: 'agent-policy' }, 'Behaviour policy ', h('span', { class: 'dim' }, '(its hash goes in your link: the register keeps the hash, never the text)')), policy,
+            h('div', { class: 'acts' }, sign)))
     }))
     body.append(h('h3', {}, 'Confirm an agent'), paste, h('div', { class: 'acts' }, check), out)
     if (p0) check.click()

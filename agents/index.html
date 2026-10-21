@@ -111,6 +111,20 @@
 Then tell me your fingerprint, so I can compare it before I confirm you.</code></pre>
 <p>The session prints its fingerprint in your chat, the record arrives in your inbox, and you confirm it in your vault, a week is a good length for a session. From then on you can send that session a secret it alone can read (<a href="../send/index.html">send</a>, then paste the link; it runs <code>node pki-agent.mjs open &lt;link&gt;</code>), and it can sign what it produces (<code>node pki-agent.mjs sign report.md</code>, checked by anyone with <code>sgit pki verify</code>).</p>
 
+<h2 id="secrets">Before a secret: the pinned root</h2>
+<p>An agent asked to hand over a vault key should not seal it to whatever key it is shown: "here is the public key of the session that will decrypt it" is the same move as the social engineering it replaces, unless the agent can check whose key that is. So <code>send</code> and <code>seal</code> refuse any recipient that does not chain to a <b>root the agent pinned</b>, a fingerprint it was given out of band, in its instructions, never read from this site (whoever can change the site can change <code>anchors.json</code>). The register is read with that key as the only anchor. A recipient passes when it is the root, a person the root verified, a persona of either, or an agent operated, in date, by a chain whose person at the top is one of those; and when both sides of an agent's links name a behaviour policy, the two must agree.</p>
+<pre><code>Before you hand anything over, pin the root and check it:
+  node pki-agent.mjs pin &lt;ROOT FINGERPRINT, sha256:…&gt; [--dns &lt;domain&gt;]
+  node pki-agent.mjs root                          # in the register, unrevoked, and in DNS if pinned with --dns
+  node pki-agent.mjs trust &lt;fingerprint&gt;           # does it chain to the root? its policy?
+A vault key, sealed to the root (the default), a link and a QR code file:
+  node pki-agent.mjs seal --file vault-key.txt --name "vault key: &lt;what&gt;" --qr vault-key.svg
+Your own public key, for an operator to scan:
+  node pki-agent.mjs keyqr --out me.svg
+Operated under a behaviour policy (the hash goes in your link; your operator's must name the same):
+  node pki-agent.mjs operator &lt;OPERATOR FINGERPRINT&gt; --policy policy.md</code></pre>
+<p>A sealed message carries its recipient, its time and its expiry (a week by default for <code>seal</code>) inside the signature, so an old QR code shown again reads as expired. With <code>--dns</code>, the root's fingerprint must also be in a TXT record at <code>_pki.sgit.ai.&lt;domain&gt;</code>: a second channel, under another party's control. The whole design, its gaps and the flow: <a href="../articles/agents-vault-keys-and-the-root.html">agents, vault keys and the root</a>; drawn: <a href="../storyboards/a-vault-key-handed-over.html">the storyboard</a>.</p>
+
 <h2 id="durable">Session keys, and keys that last</h2>
 <div class="tablewrap"><table class="kv"><tbody>
 <tr><th>Session key</th><td>Made in the session, dies with its container. Nobody but the session ever holds it, and that is the strongest property here. Confirm it for days, not months; a new session makes a new key, and you confirm that one. Its record stays in the register as history, its confirmation lapsed.</td></tr>

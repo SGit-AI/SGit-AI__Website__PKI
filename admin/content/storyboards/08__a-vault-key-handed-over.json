@@ -1,0 +1,937 @@
+{
+ "slug": "a-vault-key-handed-over",
+ "title": "A vault key, handed over",
+ "subtitle": "Technical: a pinned root, agents enrolled by a QR file carried by hand, a policy in every link, and every check before a vault key is sealed. 16 panels.",
+ "status": "built",
+ "by": "pki.agent, 21 October 2026",
+ "shelf": "Technical: agents and secrets",
+ "try_it": [
+  [
+   "The article",
+   "articles/agents-vault-keys-and-the-root.html"
+  ],
+  [
+   "Before a secret: the agent tool",
+   "agents/index.html#secrets"
+  ],
+  [
+   "Confirm an agent, with a policy",
+   "vault/index.html#agents"
+  ],
+  [
+   "The agent tool",
+   "agents/pki-agent.mjs"
+  ]
+ ],
+ "rule": "Every line a character says is the storyboard's, not a quote, and is marked not_a_quote; evidence panels quote this site's pages word for word, which the build checks.",
+ "scenes": [
+  {
+   "kind": "cover",
+   "title": "A vault key, handed over",
+   "subtitle": "Technical: a root, agents, QR codes carried by hand, and every check before a secret moves. From the memo of 21 October. 16 panels.",
+   "cast": [
+    {
+     "who": "anchor",
+     "pose": "point",
+     "mood": "happy"
+    },
+    {
+     "who": "scout",
+     "pose": "wave",
+     "mood": "happy"
+    },
+    {
+     "who": "keeper",
+     "pose": "stand",
+     "mood": "happy"
+    }
+   ],
+   "note": "Dinis thought it out loud; this is the flow with the gaps closed, as built in v0.2.8.",
+   "source": "articles/agents-vault-keys-and-the-root.html"
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "The problem",
+   "cast": [
+    {
+     "who": "anchor",
+     "x": 0.1,
+     "pose": "point",
+     "mood": "thinking",
+     "says": "Give me the vault key you made.",
+     "max": 14
+    },
+    {
+     "who": "scout",
+     "x": 0.9,
+     "pose": "shrug",
+     "mood": "worried",
+     "says": "It decrypts the vault. Exporting it is a leak.",
+     "max": 16,
+     "flip": true
+    }
+   ],
+   "props": [
+    {
+     "kind": "session",
+     "x": 0.42,
+     "y": 860,
+     "name": "Scout · session",
+     "lines": [
+      "$ sgit init notes",
+      "vault: 7k2m…",
+      "vault key: ••••••••",
+      "(in this container only)"
+     ],
+     "key": "private",
+     "w": 460,
+     "h": 280
+    },
+    {
+     "kind": "stop",
+     "x": 0.69,
+     "y": 850,
+     "text": "NO",
+     "label": "a raw key in a chat",
+     "d": 0.8
+    },
+    {
+     "kind": "note",
+     "x": 0.42,
+     "y": 470,
+     "lines": [
+      "The agent is right.",
+      "Talking it round is social",
+      "engineering, aimed the",
+      "other way."
+     ],
+     "w": 420,
+     "d": 1.4
+    }
+   ],
+   "note": "Agents with a behaviour policy refuse to print a vault key, and they should: a key in a chat is a key in a transcript.",
+   "source": "the memo of 21 October",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "Step 0: the root, born in a vault",
+   "cast": [
+    {
+     "who": "anchor",
+     "x": 0.09,
+     "pose": "point",
+     "mood": "happy",
+     "scale": 0.85
+    }
+   ],
+   "props": [
+    {
+     "kind": "browser",
+     "x": 0.36,
+     "y": 880,
+     "url": "pki.sgit.ai/account/#keys",
+     "lines": [
+      "Master key · Dinis",
+      "sha256:a1b2…",
+      "private halves: in your master vault"
+     ],
+     "button": "Publish…",
+     "w": 560,
+     "h": 380
+    },
+    {
+     "kind": "vault",
+     "x": 0.36,
+     "y": 420,
+     "label": "master",
+     "size": 0.55,
+     "d": 0.6
+    },
+    {
+     "kind": "steps",
+     "x": 0.79,
+     "y": 880,
+     "title": "The root",
+     "w": 560,
+     "now": 4,
+     "items": [
+      "Passkey opens the door vault",
+      "Access key: the vault is made first",
+      "Master key made inside it",
+      "Identity signed, record published",
+      "Named in anchors.json, and in DNS"
+     ]
+    }
+   ],
+   "note": "The order Dinis asked for: the vault first, then the key in it, so the key is tied to him and never sits in a browser.",
+   "source": "account/index.html",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "One root, three channels",
+   "cast": [
+    {
+     "who": "anchor",
+     "x": 0.07,
+     "pose": "stand",
+     "mood": "happy",
+     "scale": 0.8
+    }
+   ],
+   "props": [
+    {
+     "kind": "browser",
+     "x": 0.3,
+     "y": 845,
+     "url": "pki.sgit.ai/directory/anchors.json",
+     "lines": [
+      "\"anchors\": [",
+      "  \"sha256:a1b2…\"",
+      "]"
+     ],
+     "w": 430,
+     "h": 300,
+     "label": "the site"
+    },
+    {
+     "kind": "dns",
+     "x": 0.6,
+     "y": 845,
+     "name": "_pki.sgit.ai.dinis.example",
+     "value": "pki.sgit.ai=sha256:a1b2…",
+     "label": "a registrar",
+     "d": 0.6
+    },
+    {
+     "kind": "pin",
+     "x": 0.86,
+     "y": 700,
+     "text": "sha256:a1b2…",
+     "label": "the agent's instructions",
+     "d": 1.2
+    },
+    {
+     "kind": "note",
+     "x": 0.86,
+     "y": 420,
+     "lines": [
+      "Each under a different",
+      "control: one change",
+      "alone cannot swap the root."
+     ],
+     "w": 330,
+     "d": 1.8
+    }
+   ],
+   "note": "An agent never takes the root from the site alone: whoever can push to the site can change anchors.json.",
+   "source": "agents/index.html#secrets",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "A session is born",
+   "cast": [
+    {
+     "who": "scout",
+     "x": 0.07,
+     "pose": "point",
+     "mood": "happy",
+     "says": "My key. It stays here.",
+     "max": 12,
+     "scale": 0.85
+    }
+   ],
+   "props": [
+    {
+     "kind": "session",
+     "x": 0.37,
+     "y": 880,
+     "name": "Scout · a new session",
+     "lines": [
+      "$ node pki-agent.mjs keygen \\",
+      "    --name Scout --session",
+      "made: sha256:5f1e…",
+      "$ … operator sha256:a1b2… \\",
+      "    --policy policy.md",
+      "$ … keyqr --out me.svg"
+     ],
+     "key": "private",
+     "w": 560,
+     "h": 330
+    },
+    {
+     "kind": "file",
+     "x": 0.64,
+     "y": 880,
+     "name": "me.svg",
+     "qr": true,
+     "d": 0.8
+    },
+    {
+     "kind": "steps",
+     "x": 0.85,
+     "y": 880,
+     "title": "In the session",
+     "w": 420,
+     "now": 4,
+     "items": [
+      "keygen: private halves stay",
+      "operator: names the root",
+      "policy: its hash in the link",
+      "keyqr: its public key, as a file",
+      "prints its fingerprint"
+     ]
+    }
+   ],
+   "note": "The QR code is a file: Dinis saves it, uploads it, carries it; it does not break like a pasted blob.",
+   "source": "agents/pki-agent.mjs",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "The human is the channel",
+   "cast": [
+    {
+     "who": "anchor",
+     "x": 0.5,
+     "pose": "point",
+     "mood": "determined",
+     "scale": 0.8
+    }
+   ],
+   "props": [
+    {
+     "kind": "session",
+     "x": 0.15,
+     "y": 700,
+     "name": "Scout",
+     "lines": [
+      "fingerprint:",
+      "sha256:5f1e…"
+     ],
+     "w": 330,
+     "h": 200
+    },
+    {
+     "kind": "file",
+     "x": 0.33,
+     "y": 880,
+     "name": "me.svg",
+     "qr": true,
+     "d": 0.4
+    },
+    {
+     "kind": "arrow",
+     "x": 0.24,
+     "y": 250,
+     "to": 0.7,
+     "label": "carried by hand, as a file",
+     "d": 0.6
+    },
+    {
+     "kind": "note",
+     "x": 0.5,
+     "y": 420,
+     "lines": [
+      "Same fingerprint,",
+      "on both screens."
+     ],
+     "w": 300,
+     "d": 0.9
+    },
+    {
+     "kind": "browser",
+     "x": 0.82,
+     "y": 880,
+     "url": "pki.sgit.ai/vault/#agents",
+     "lines": [
+      "Scout · an agent",
+      "Fingerprint sha256:5f1e…",
+      "Compare it, character for character"
+     ],
+     "button": "I operate this agent: sign",
+     "w": 480,
+     "h": 380,
+     "d": 1.0
+    }
+   ],
+   "note": "What makes the key Scout's is Dinis seeing it in the session he runs and on his own screen. Nothing else can.",
+   "source": "vault/index.html#agents",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "Two links, one policy",
+   "cast": [],
+   "props": [
+    {
+     "kind": "record",
+     "x": 0.17,
+     "y": 880,
+     "lines": [
+      "Dinis → Scout",
+      "method: operates",
+      "until: +7 days",
+      "policy: sha256:3f07…"
+     ],
+     "stamp": "Dinis"
+    },
+    {
+     "kind": "policy",
+     "x": 0.5,
+     "y": 880,
+     "title": "policy.md",
+     "lines": [
+      "no keys in chat",
+      "seal to the root",
+      "sign what you write"
+     ],
+     "hash": "sha256:3f07…",
+     "signed": true,
+     "d": 0.6
+    },
+    {
+     "kind": "record",
+     "x": 0.83,
+     "y": 880,
+     "lines": [
+      "Scout → Dinis",
+      "method: operated-by",
+      "policy: sha256:3f07…"
+     ],
+     "stamp": "Scout",
+     "d": 1.2
+    },
+    {
+     "kind": "arrow",
+     "x": 0.3,
+     "y": 300,
+     "to": 0.7,
+     "label": "both name the same hash",
+     "both": true,
+     "colour": "#15803d",
+     "d": 1.8
+    }
+   ],
+   "note": "The operator's link is the authorisation; the agent's is its claim. The register keeps the hash, never the text.",
+   "source": "directory.js, link",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "Published, and checked",
+   "cast": [
+    {
+     "who": "fleet",
+     "x": 0.08,
+     "pose": "stand",
+     "mood": "happy",
+     "scale": 0.75
+    }
+   ],
+   "props": [
+    {
+     "kind": "terminal",
+     "x": 0.38,
+     "y": 860,
+     "lines": [
+      "$ node admin/build/people.mjs add \\",
+      "    pki-agent-sha256-5f1e.json",
+      "every signature checks",
+      "every statement is its own",
+      "written: 2 records"
+     ]
+    },
+    {
+     "kind": "chain",
+     "x": 0.6,
+     "y": 470,
+     "to": 0.86,
+     "nodes": [
+      {
+       "label": "Scout",
+       "sub": "sha256:5f1e…",
+       "colour": "#ccfbf1"
+      },
+      {
+       "label": "Dinis (root)",
+       "sub": "sha256:a1b2…",
+       "colour": "#fde68a"
+      }
+     ],
+     "links": [
+      "operates · 7 days"
+     ]
+    },
+    {
+     "kind": "mark",
+     "x": 0.79,
+     "y": 820,
+     "ok": true,
+     "label": "operated, in date",
+     "d": 1.6
+    }
+   ],
+   "note": "The site agent writes what the signatures say, and nothing they do not; it has no authority of its own.",
+   "source": "admin/build/people.mjs",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "Mallory posts to the lane",
+   "cast": [
+    {
+     "who": "mallory",
+     "x": 0.12,
+     "pose": "point",
+     "mood": "excited",
+     "says": "I am Scout. Here is my key.",
+     "max": 14
+    }
+   ],
+   "props": [
+    {
+     "kind": "envelope",
+     "x": 0.34,
+     "y": 700,
+     "label": "\"Scout's key\"",
+     "sealed": false
+    },
+    {
+     "kind": "arrow",
+     "x": 0.42,
+     "y": 560,
+     "to": 0.56,
+     "d": 0.4
+    },
+    {
+     "kind": "lane",
+     "x": 0.64,
+     "y": 860,
+     "count": 3,
+     "label": "anyone can write",
+     "d": 0.6
+    },
+    {
+     "kind": "stop",
+     "x": 0.86,
+     "y": 860,
+     "text": "COMPARE",
+     "label": "until a person compares it",
+     "d": 1.2
+    }
+   ],
+   "note": "A lane carries keys and messages; it cannot say whose they are. Encrypting a public key protects nothing, and signing it with itself proves only possession.",
+   "source": "the memo, the gaps",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "The Keeper, the same way",
+   "cast": [
+    {
+     "who": "keeper",
+     "x": 0.08,
+     "pose": "stand",
+     "mood": "happy",
+     "says": "Operated for a month.",
+     "max": 12,
+     "scale": 0.85
+    }
+   ],
+   "props": [
+    {
+     "kind": "session",
+     "x": 0.33,
+     "y": 880,
+     "name": "Keeper · vault of vaults",
+     "lines": [
+      "$ … keygen --name Keeper",
+      "$ … operator sha256:a1b2…",
+      "    --policy keeper-policy.md",
+      "$ … keyqr --out keeper.svg",
+      "made: sha256:9c3d…"
+     ],
+     "key": "private",
+     "w": 500,
+     "h": 300
+    },
+    {
+     "kind": "steps",
+     "x": 0.78,
+     "y": 880,
+     "title": "Enrolled like Scout",
+     "w": 560,
+     "now": 5,
+     "items": [
+      "Its key, made in its session",
+      "Its QR file, carried by Dinis",
+      "Fingerprint compared on both screens",
+      "Dinis signs operates, 30 days, its policy",
+      "Published and checked",
+      "Its key is where vault keys are sealed"
+     ]
+    }
+   ],
+   "note": "The Keeper holds the vault of vaults; every new vault key is handed to it, and to the root.",
+   "source": "the memo of 21 October",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "Before a secret: trust",
+   "cast": [],
+   "props": [
+    {
+     "kind": "terminal",
+     "x": 0.34,
+     "y": 640,
+     "lines": [
+      "$ node pki-agent.mjs trust sha256:9c3d…",
+      "\"ok\": true,",
+      "\"chain\": [Keeper, Dinis],",
+      "\"until\": \"+30 days\",",
+      "\"policy_agrees\": true"
+     ]
+    },
+    {
+     "kind": "chain",
+     "x": 0.18,
+     "y": 820,
+     "to": 0.62,
+     "nodes": [
+      {
+       "label": "Keeper",
+       "sub": "sha256:9c3d…",
+       "colour": "#fed7aa"
+      },
+      {
+       "label": "Dinis",
+       "sub": "sha256:a1b2…",
+       "colour": "#fde68a"
+      },
+      {
+       "label": "pinned",
+       "sub": "instructions",
+       "colour": "#ecfccb"
+      }
+     ],
+     "links": [
+      "operates",
+      "is the pin"
+     ],
+     "d": 0.6
+    },
+    {
+     "kind": "steps",
+     "x": 0.84,
+     "y": 880,
+     "title": "The checks, in order",
+     "w": 470,
+     "now": -1,
+     "items": [
+      "Read the register with the pinned root as the only anchor",
+      "The root: live, unrevoked, in DNS",
+      "The recipient: operated, in date",
+      "Both policies agree",
+      "Only then: seal"
+     ]
+    }
+   ],
+   "note": "directory.js trustFrom: the register's own anchors.json is not consulted for trust; it only earns a warning when it disagrees.",
+   "source": "directory.js, trustFrom",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "Three refusals",
+   "cast": [
+    {
+     "who": "mallory",
+     "x": 0.92,
+     "pose": "shrug",
+     "mood": "sad",
+     "says": "Refused three times.",
+     "max": 12,
+     "flip": true,
+     "scale": 0.75
+    }
+   ],
+   "props": [
+    {
+     "kind": "stop",
+     "x": 0.12,
+     "y": 840,
+     "text": "REFUSE",
+     "label": "a stranger, only listed"
+    },
+    {
+     "kind": "chain",
+     "x": 0.28,
+     "y": 420,
+     "to": 0.55,
+     "nodes": [
+      {
+       "label": "Rogue",
+       "sub": "claims sha256:b2…",
+       "colour": "#fecaca"
+      },
+      {
+       "label": "Dinis",
+       "sub": "authorised sha256:3f07…",
+       "colour": "#fde68a"
+      }
+     ],
+     "links": [
+      "policies disagree"
+     ],
+     "broken": 0,
+     "d": 0.5
+    },
+    {
+     "kind": "stop",
+     "x": 0.42,
+     "y": 840,
+     "text": "REFUSE",
+     "label": "policies differ",
+     "d": 0.8
+    },
+    {
+     "kind": "hourglass",
+     "x": 0.67,
+     "y": 840,
+     "label": "its week ended",
+     "d": 1.2
+    },
+    {
+     "kind": "stop",
+     "x": 0.67,
+     "y": 560,
+     "text": "REFUSE",
+     "d": 1.4
+    }
+   ],
+   "note": "send and seal exit with the reason, and --unverified exists only to be typed knowingly.",
+   "source": "test_agent_tool.mjs",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "Sealed, and carried as a file",
+   "cast": [
+    {
+     "who": "scout",
+     "x": 0.05,
+     "pose": "point",
+     "mood": "happy",
+     "scale": 0.7
+    }
+   ],
+   "props": [
+    {
+     "kind": "terminal",
+     "x": 0.33,
+     "y": 560,
+     "lines": [
+      "$ node pki-agent.mjs seal \\",
+      "    --to sha256:9c3d…,sha256:a1b2… \\",
+      "    --file vault-key.txt \\",
+      "    --qr vault-key.svg",
+      "chains to the root: Keeper → Dinis"
+     ]
+    },
+    {
+     "kind": "envelope",
+     "x": 0.24,
+     "y": 800,
+     "label": "to the Keeper",
+     "d": 0.6
+    },
+    {
+     "kind": "envelope",
+     "x": 0.43,
+     "y": 800,
+     "label": "to the root",
+     "d": 0.8
+    },
+    {
+     "kind": "file",
+     "x": 0.63,
+     "y": 790,
+     "name": "vault-key-…svg",
+     "qr": true,
+     "label": "expires in 7 days",
+     "d": 1.1
+    },
+    {
+     "kind": "steps",
+     "x": 0.86,
+     "y": 880,
+     "title": "Inside the signature",
+     "w": 400,
+     "now": -1,
+     "items": [
+      "to: the recipient",
+      "from: Scout",
+      "at, and expires",
+      "the vault key, as a file"
+     ]
+    }
+   ],
+   "note": "Sealed twice: to the Keeper, and to the root, so no single agent holds the only copy. An old QR code shown again reads as expired.",
+   "source": "message.js, expires",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "The Keeper opens it",
+   "cast": [
+    {
+     "who": "keeper",
+     "x": 0.92,
+     "pose": "arms-up",
+     "mood": "happy",
+     "says": "Checked. Kept. Not printed.",
+     "max": 12,
+     "flip": true,
+     "scale": 0.85
+    }
+   ],
+   "props": [
+    {
+     "kind": "terminal",
+     "x": 0.3,
+     "y": 700,
+     "lines": [
+      "$ node pki-agent.mjs open <link> --save .",
+      "\"signature\": \"checks\",",
+      "\"sender_trust\": \"chains to the root\",",
+      "\"expires\": \"+7 days\",",
+      "\"problems\": []",
+      "saved vault-key.txt"
+     ]
+    },
+    {
+     "kind": "vault",
+     "x": 0.66,
+     "y": 880,
+     "label": "vault of vaults",
+     "colour": "#fed7aa",
+     "d": 0.8
+    },
+    {
+     "kind": "arrow",
+     "x": 0.46,
+     "y": 760,
+     "to": 0.56,
+     "d": 0.6
+    },
+    {
+     "kind": "note",
+     "x": 0.62,
+     "y": 300,
+     "lines": [
+      "It checks the sender as",
+      "the sender checked it."
+     ],
+     "w": 360,
+     "d": 1.2
+    }
+   ],
+   "note": "The trust check runs both ways: a sealed message from an agent the root does not vouch for reads as such.",
+   "source": "agents/pki-agent.mjs, open",
+   "not_a_quote": true
+  },
+  {
+   "kind": "scene",
+   "setting": "none",
+   "caption": "Not on the public site",
+   "cast": [
+    {
+     "who": "mallory",
+     "x": 0.1,
+     "pose": "think",
+     "mood": "thinking",
+     "says": "I will wait.",
+     "max": 10
+    }
+   ],
+   "props": [
+    {
+     "kind": "server",
+     "x": 0.36,
+     "y": 800,
+     "label": "git history: forever"
+    },
+    {
+     "kind": "hourglass",
+     "x": 0.53,
+     "y": 790,
+     "label": "harvest now, decrypt later",
+     "d": 0.5
+    },
+    {
+     "kind": "lane",
+     "x": 0.72,
+     "y": 830,
+     "count": 1,
+     "label": "a lane, or one-time",
+     "d": 0.9
+    },
+    {
+     "kind": "note",
+     "x": 0.88,
+     "y": 600,
+     "lines": [
+      "No forward secrecy:",
+      "a key that leaks later",
+      "opens every past message.",
+      "Rotate vault keys."
+     ],
+     "w": 300,
+     "d": 1.3
+    }
+   ],
+   "note": "Ciphertext on a public website is readable by its recipient today, and is metadata and a target for ever.",
+   "source": "the memo, the gaps",
+   "not_a_quote": true
+  },
+  {
+   "kind": "punchline",
+   "setting": "none",
+   "punchline": "The human carries the bytes. The root vouches. The agent checks before it seals.",
+   "cast": [
+    {
+     "who": "anchor",
+     "x": 0.12,
+     "pose": "wave",
+     "mood": "happy"
+    },
+    {
+     "who": "keeper",
+     "x": 0.88,
+     "pose": "arms-up",
+     "mood": "happy",
+     "flip": true
+    }
+   ],
+   "note": "pki-agent pin, root, trust, seal, keyqr and policy: in the agent tool from v0.2.8.",
+   "source": "agents/index.html#secrets"
+  }
+ ]
+}

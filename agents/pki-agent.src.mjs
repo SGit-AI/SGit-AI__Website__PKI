@@ -18,6 +18,12 @@
  * output of `keyfile`, the two private halves encrypted with SG_SEND_PASSPHRASE, set as a secret in the environment
  * the agent runs in. Whoever sets that secret holds the key in custody; a session key avoids it altogether.
  *
+ * Trust before a secret (v0.2.8): `send` and `seal` refuse a recipient that does not chain to a pinned root. The root
+ * is one fingerprint the agent is given out of band (its instructions; `pin`, or PKI_ROOT), never the register's own
+ * anchors.json, since whoever can change the site can change that file. When the pin names a domain, the root's
+ * fingerprint must also be in a DNS TXT record at _pki.sgit.ai.<domain>, a second channel under another control.
+ * The register is then read with the pinned key as the only anchor (directory.js trustFrom).
+ *
  * agents/pki-agent.mjs is generated from this file and assets/people/ by admin/build/gen_agent_tool.mjs: the same
  * code the site runs, in one file.
  */
@@ -27,6 +33,8 @@ import path from 'path'
 import * as K from '../assets/people/keys.js'
 import * as D from '../assets/people/directory.js'
 import * as M from '../assets/people/message.js'
+import * as EV from '../assets/people/evidence.js'
+import { qrcode } from '../assets/vendor/qrcode-generator/2.0.4/qrcode.mjs'
 
 const HOME = process.env.PKI_AGENT_HOME || path.join(os.homedir(), '.sg-send')
 const KEYS = path.join(HOME, 'keys'), PKI = path.join(HOME, 'pki'), RECORDS = path.join(PKI, 'records')
@@ -90,18 +98,78 @@ async function register() {
     return { index, records, byFp: new Map(records.map(r => [r.fp, r])), graph: D.graph(records, { anchors: index.anchors }) }
 }
 
+// ------------------------------------------------------------ the pinned root, and trust from it
+const ROOTF = path.join(PKI, 'root.json')
+function pinned() {
+    if (process.env.PKI_ROOT) return { fp: process.env.PKI_ROOT.trim(), dns: (process.env.PKI_ROOT_DNS || '').trim(), from: 'PKI_ROOT' }
+    return fs.existsSync(ROOTF) ? { ...readJson(ROOTF), from: ROOTF } : null
+}
+/** The pinned root, checked: in the register, unrevoked, and in DNS when the pin names a domain. The graph from it alone. */
+async function fromRoot(reg) {
+    const p = pinned()
+    if (!p) die('no root pinned. node pki-agent.mjs pin <the root fingerprint your instructions give> [--dns <domain>] (or set PKI_ROOT)')
+    if (!K.FP.test(p.fp)) die(`the pinned root ${p.fp} is not a sha256:<16 hex> fingerprint`)
+    const rec = reg.byFp.get(p.fp)
+    if (!rec || !rec.ok || rec.revoked) die(`the pinned root ${p.fp} is not a live record in the register: refusing`)
+    const notes = []
+    if (!reg.index.anchors.includes(p.fp)) notes.push(`the register's anchors.json does not name ${p.fp}: trusting the pin, not the site`)
+    const domains = new Set([...(p.dns ? [p.dns] : []), ...rec.evidence.filter(e => e.kind === 'dns').map(e => e.value)])
+    for (const d of domains) {
+        const r = await EV.check({ kind: 'dns', value: d }, p.fp)
+        if (r.ok === false) die(`DNS disagrees with the pinned root: ${r.detail}. Refusing.`)
+        if (r.ok !== true && d === p.dns && !flags['no-dns']) die(`the pin requires DNS at ${d}, and it could not be checked (${r.detail}). Refusing (--no-dns to go on without it).`)
+        notes.push(`DNS ${d}: ${r.ok === true ? 'carries the root' : 'not checked'} (${r.detail})`)
+    }
+    return { p, rec, notes, g: D.graph(reg.records, { anchors: [p.fp] }) }
+}
+/** Refuse a recipient the pinned root does not vouch for, unless --unverified says to. Returns the trust found. */
+async function vouched(reg, fp) {
+    if (flags.unverified) { console.error(`pki-agent: --unverified: sealing to ${fp} without checking it chains to a root`); return null }
+    const { g, p, notes } = await fromRoot(reg)
+    for (const n of notes) console.error('pki-agent: ' + n)
+    const t = D.trustFrom(g, fp, p.fp)
+    if (!t.ok) die(`refusing to seal to ${fp}: ${t.why}. It must be the pinned root (${p.fp}), verified by it, a persona of it, or an agent it operates, in date. (--unverified to override, knowingly.)`)
+    if (t.policy_agrees === false) die(`refusing: the operator authorised policy ${t.policy}, the agent claims ${t.claimed_policy}`)
+    console.error(`pki-agent: ${fp} chains to the root: ${t.chain.join(' → ')}${t.until ? `, until ${t.until}` : ''}${t.policy ? `, policy ${t.policy}` : ''}`)
+    return t
+}
+/** A QR code as an SVG file: the same drawing the site's pages make. */
+function svgOf(text) {
+    const q = qrcode(0, 'L'); q.addData(String(text), 'Byte'); q.make()
+    const n = q.getModuleCount(), m = 4, size = n + m * 2
+    let d = ''
+    for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) { if (!q.isDark(r, c)) continue; let run = 1; while (c + run < n && q.isDark(r, c + run)) run++; d += `M${c + m} ${r + m}h${run}v1h-${run}z`; c += run - 1 }
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}" width="${size * 8}" height="${size * 8}" shape-rendering="crispEdges"><rect width="${size}" height="${size}" fill="#fff"/><path d="${d}" fill="#000"/></svg>\n`
+}
+function qrOut(url, file) {
+    if (!file) return
+    if (url.length > M.MAX_QR_CHARS) { console.error(`pki-agent: ${url.length} characters: too long for one QR code; the link still works`); return }
+    fs.writeFileSync(file, svgOf(url)); say(`QR code: ${file}`)
+}
+const policyOf = v => { if (!v) return ''; if (D.POLICY.test(String(v))) return String(v); if (!fs.existsSync(String(v))) die(`--policy ${v}: neither a sha256:<64 hex> nor a file`); return null }
+async function policyHash(v) { const p = policyOf(v); return p !== null ? p : 'sha256:' + await K.sha256hex(fs.readFileSync(String(v))) }
+const expiresIn = days => days ? new Date(Date.now() + Number(days) * 86400000).toISOString() : ''
+
 // ------------------------------------------------------------ the commands
 const commands = {
     async help() {
         say(`pki-agent: an agent's identity on pki.sgit.ai (${REGISTER})
 
   keygen --name N [--about A] [--runtime R] [--session]   make this agent's key and sign its identity
-  operator <fingerprint>                                   link to the key that operates this agent
+  operator <fingerprint> [--policy FILE|HASH]              link to the key that operates this agent
   submission [--out FILE]                                  the signed record, to hand to the operator
   submit                                                   send it, sealed, into the operator's inbox
   status                                                   what the register says about this agent
   whoami                                                   this agent's fingerprints
-  send --to FP --text T [--subject S]                      a message sealed to someone: a link and its text
+  send --to FP --text T [--subject S] [--expires DAYS] [--qr F.svg]   a message sealed to someone the root vouches for
+  seal [--to FP,FP] (--file F | --text T) [--name N] [--expires DAYS] [--qr F.svg]
+                                                           a secret (a vault key) sealed to the root by default,
+                                                           or to keys it vouches for; one link each
+  pin <root fingerprint> [--dns DOMAIN]                    the root to trust, given out of band (or PKI_ROOT)
+  root                                                     check the pinned root: register, anchors, DNS
+  trust <fingerprint>                                      does it chain to the pinned root? (and its policy)
+  keyqr [--out F.svg]                                      this agent's public key as a link and a QR code
+  policy <file>                                            the sha256 a link names a behaviour policy by
   open <link | m1… | file.enc>                             open a message sealed to this agent
   sign <file>                                              a signature sgit pki verify checks (file.sig)
   link <fingerprint> [--method known]                      link to any key in the register
@@ -123,9 +191,9 @@ Keys: ${KEYS} (sgit's layout${PASS ? ', encrypted with SG_SEND_PASSPHRASE' : ', 
     },
     async operator() {
         const fp = args[0]; if (!K.FP.test(String(fp))) die('operator <sha256:16 hex>')
-        const id = await me()
-        keep(await D.linkStatement(id, { to: fp, method: 'operated-by' }))
-        say(`linked to ${fp} as its operator. Next: node pki-agent.mjs submission (or submit), and ask them to confirm it.`)
+        const id = await me(), policy = await policyHash(flags.policy)
+        keep(await D.linkStatement(id, { to: fp, method: 'operated-by', policy }))
+        say(`linked to ${fp} as its operator${policy ? `, under policy ${policy}` : ''}. Next: node pki-agent.mjs submission (or submit), and ask them to confirm it.`)
     },
     async link() {
         const fp = args[0]; if (!K.FP.test(String(fp))) die('link <sha256:16 hex>')
@@ -165,8 +233,49 @@ Keys: ${KEYS} (sgit's layout${PASS ? ', encrypted with SG_SEND_PASSPHRASE' : ', 
     async send() {
         const id = await me(), reg = await register(), to = reg.byFp.get(flags.to)
         if (!to) die(`--to ${flags.to}: not in the register`)
-        const sealed = await M.sealMessage(await M.compose({ to: to.bundle, from: id, subject: flags.subject || '', text: String(flags.text || '') }), to.bundle, id)
-        say(sealed.url)
+        await vouched(reg, to.fp)
+        const sealed = await M.sealMessage(await M.compose({ to: to.bundle, from: id, subject: flags.subject || '', text: String(flags.text || ''), expires: expiresIn(flags.expires) }), to.bundle, id)
+        say(sealed.url); qrOut(sealed.url, flags.qr)
+    },
+    async seal() {
+        const id = await me(), reg = await register()
+        const tos = String(flags.to && flags.to !== true ? flags.to : (pinned() || {}).fp || '').split(',').map(x => x.trim()).filter(Boolean)
+        if (!tos.length) die('seal: --to FP, or pin a root to seal to it by default')
+        let data, name = flags.name && flags.name !== true ? String(flags.name) : ''
+        if (flags.file) { data = fs.readFileSync(String(flags.file)); name = name || path.basename(String(flags.file)) } else if (flags.text) data = K.utf8(String(flags.text))
+        else die('seal: --file F or --text T (a file keeps a secret out of the shell history)')
+        for (const fp of tos) {
+            const to = reg.byFp.get(fp); if (!to) die(`${fp}: not in the register`)
+            await vouched(reg, fp)
+            const m = await M.compose({ to: to.bundle, from: id, subject: `A secret: ${name || 'unnamed'}`, text: `Sealed to ${fp} by ${id.bundle.signing_fingerprint}. Open it with your key; the secret is the file inside.`, files: [{ name: name || 'secret.txt', type: 'application/octet-stream', data }], expires: expiresIn(flags.expires || 7) })
+            const sealed = await M.sealMessage(m, to.bundle, id)
+            say(`${to.name} (${fp}):`); say(sealed.url)
+            qrOut(sealed.url, flags.qr ? (tos.length > 1 ? String(flags.qr).replace(/(\.svg)?$/, `-${K.dirOf(fp)}.svg`) : String(flags.qr)) : '')
+        }
+    },
+    async pin() {
+        const fp = args[0]; if (!K.FP.test(String(fp))) die('pin <sha256:16 hex> [--dns domain]')
+        fs.mkdirSync(PKI, { recursive: true })
+        fs.writeFileSync(ROOTF, JSON.stringify({ fp, dns: flags.dns && flags.dns !== true ? String(flags.dns) : '', pinned_at: new Date().toISOString() }, null, 2))
+        say(`pinned: ${fp}${flags.dns ? ` (and DNS at _pki.sgit.ai.${flags.dns})` : ''}. Only pin a fingerprint you were given out of band, never one read from the register.`)
+    },
+    async root() {
+        const { p, rec, notes } = await fromRoot(await register())
+        say(`root: ${rec.name} (${p.fp}), pinned from ${p.from}`); for (const n of notes) say('  ' + n)
+    },
+    async trust() {
+        const fp = args[0]; if (!K.FP.test(String(fp))) die('trust <sha256:16 hex>')
+        const { g, p } = await fromRoot(await register())
+        say(JSON.stringify(D.trustFrom(g, fp, p.fp), null, 2))
+    },
+    async keyqr() {
+        const id = await me(), k = M.keyCode(id.bundle)
+        say(k.url); say(`fingerprint: ${id.bundle.signing_fingerprint} (read it to whoever scans this)`)
+        qrOut(k.url, flags.out)
+    },
+    async policy() {
+        const f = args[0]; if (!f || !fs.existsSync(f)) die('policy <file>')
+        say('sha256:' + await K.sha256hex(fs.readFileSync(f)))
     },
     async open() {
         const src = args[0]; if (!src) die('open <link | m1… | file.enc>')
@@ -175,7 +284,9 @@ Keys: ${KEYS} (sgit's layout${PASS ? ', encrypted with SG_SEND_PASSPHRASE' : ', 
         const id = await me()
         let known = new Map(); try { known = new Map([...(await register()).byFp].map(([k, r]) => [k, r.bundle])) } catch (e) { /* offline: signatures unchecked */ }
         const o = await M.openMessage(enc, [id], known)
-        say(JSON.stringify({ from: o.msg.from || null, signature: o.verified === true ? 'checks' : o.verified === false ? 'DOES NOT CHECK' : 'not checked (sender not in the register)', at: o.msg.at, subject: o.msg.subject || '', text: o.msg.text, files: (o.msg.files || []).map(f => f.name), problems: o.problems }, null, 2))
+        let trust = 'no root pinned'
+        if (o.msg.from && pinned()) { try { const reg = await register(), { g, p } = await fromRoot(reg), t = D.trustFrom(g, o.msg.from, p.fp); trust = t.ok ? `chains to the root: ${t.chain.join(' → ')}` : `NOT vouched for by the root: ${t.why}` } catch (e) { trust = 'not checked: ' + e.message } }
+        say(JSON.stringify({ from: o.msg.from || null, signature: o.verified === true ? 'checks' : o.verified === false ? 'DOES NOT CHECK' : 'not checked (sender not in the register)', sender_trust: trust, at: o.msg.at, expires: o.msg.expires || null, subject: o.msg.subject || '', text: o.msg.text, files: (o.msg.files || []).map(f => f.name), problems: o.problems }, null, 2))
         if (flags.save && o.msg.files) for (const f of o.msg.files) { fs.writeFileSync(path.join(flags.save, path.basename(f.name)), K.unb64(f.data)); say(`saved ${f.name}`) }
     },
     async keyfile() {

@@ -27,7 +27,8 @@ SRC = ROOT / "admin/content/storyboards"
 OUT = ROOT / "storyboards"
 POSES = {"stand", "point", "wave", "arms-up", "shrug", "think", "sit"}
 MOODS = {"neutral", "happy", "excited", "calm", "worried", "sad", "surprised", "thinking", "confused", "determined"}
-PROPS = {"laptop", "desk", "book", "board", "phone", "sign", "key", "vault", "qr", "envelope", "record", "server", "arrow", "mark", "calendar", "terminal", "phoneqr", "padlock"}
+PROPS = {"laptop", "desk", "book", "board", "phone", "sign", "key", "vault", "qr", "envelope", "record", "server", "arrow", "mark", "calendar", "terminal", "phoneqr", "padlock",
+         "steps", "session", "browser", "dns", "chain", "policy", "lane", "stop", "pin", "hourglass", "file", "note"}
 KINDS = {"cover", "scene", "evidence", "punchline", "spectrum", "map", "graph"}
 e = lambda s: html.escape(str(s or ""), quote=True)
 

@@ -136,6 +136,25 @@ check(sp.level === 'persona' && sp.master === bo.bundle.signing_fingerprint && s
 const persAsAgentLink = [persRec[0], await D.linkStatement(pers, { to: bo.bundle.signing_fingerprint, method: 'known' }, T(2))]
 gp = D.graph([await D.readRecord(adaRec), await D.readRecord(boPersona), await D.readRecord(persAsAgentLink)], { anchors: [ada.bundle.signing_fingerprint], asOf: '2026-10-20' })
 check(D.standing(gp, pers.bundle.signing_fingerprint).level !== 'persona', 'a link back by another method is not a persona link')
+
+// --- trust from a pinned root: the graph from that key alone, whatever anchors.json says ------------------------------
+{
+    const adaFp = ada.bundle.signing_fingerprint, boFp = bo.bundle.signing_fingerprint
+    const recs = [await D.readRecord(adaRec), await D.readRecord([...boBack, boPersona[boPersona.length - 1], boOps[boOps.length - 1]]), await D.readRecord(persRec), await D.readRecord(fleetRec), await D.readRecord(workerRec), await D.readRecord(cyRec)]
+    const gr = D.graph(recs, { anchors: [adaFp], asOf: '2026-10-20' })
+    check(D.trustFrom(gr, adaFp, adaFp).ok, 'trustFrom: the pinned root itself')
+    check(D.trustFrom(gr, boFp, adaFp).ok, 'trustFrom: a person the root verified, in date')
+    check(D.trustFrom(gr, pers.bundle.signing_fingerprint, adaFp).ok, 'trustFrom: a persona of a person the root verified')
+    const tw = D.trustFrom(gr, worker.bundle.signing_fingerprint, adaFp)
+    check(tw.ok && tw.chain.join() === [worker, fleetK, bo].map(x => x.bundle.signing_fingerprint).concat([adaFp]).join(), 'trustFrom: an agent operated by a fleet, operated by a person the root verified: the chain to the root')
+    check(!D.trustFrom(gr, cy.bundle.signing_fingerprint, adaFp).ok, 'trustFrom: a person linked to, not verified, is not vouched for')
+    const gBo = D.graph(recs, { anchors: [boFp], asOf: '2026-10-20' })
+    check(!D.trustFrom(gBo, adaFp, boFp).ok && D.trustFrom(gBo, worker.bundle.signing_fingerprint, boFp).ok, 'trustFrom: pinned to another root, trust follows that root, not the register’s anchors')
+    check(!D.trustFrom(D.graph(recs, { anchors: [adaFp, boFp] }), boFp, adaFp).ok, 'trustFrom refuses a graph built from more anchors than the pin')
+    const late = D.graph(recs, { anchors: [adaFp], asOf: '2028-01-01' })
+    check(!D.trustFrom(late, worker.bundle.signing_fingerprint, adaFp).ok, 'trustFrom: after the end dates, nothing below the root is vouched for')
+    check(!(await D.readRecord([adaRec[0], await D.linkStatement(ada, { to: boFp, method: 'operates', policy: 'not-a-hash' }, T(2))])).ok, 'a link’s policy must be a sha256:<64 hex>')
+}
 check(D.realKeys([await D.readRecord(adaRec), await D.readRecord(agentRec)]) === 1 && D.realAgents([await D.readRecord(adaRec), await D.readRecord(agentRec)]) === 1, 'agents are counted apart from people')
 
 // --- messages and invitations ---------------------------------------------------------------------------------------

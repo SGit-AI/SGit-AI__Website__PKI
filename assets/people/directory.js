@@ -11,7 +11,7 @@
  *   identity     body { kind: "person" | "agent", name, bundle, about?, runtime?, session?, private_key_published }
  *                                                                                         exactly one, the first
  *   evidence     body { kind: website | github | dns | key | link, value, url? }        a claim that an account is theirs
- *   link         body { to: <fingerprint>, method?, on?, until? }                        "I know the owner of that key"
+ *   link         body { to: <fingerprint>, method?, on?, until?, policy? }               "I know the owner of that key"
  *   inbox        body { endpoint, vault, token }                                         where to write to them (an append lane)
  *   revocation   body { revokes: { record, statement }, reason, effective_from }        withdraws one of their own statements,
  *                                                                                         or the identity itself (rule 2)
@@ -30,6 +30,16 @@
  * links back (method "operated-by"): the same two-way rule. The operator can be a person, or an agent the person
  * operates (a fleet key, so that a person running hundreds of agents does not fill their own record); the chain is
  * followed up to three steps to the person at its root, whose standing the agent's page shows.
+ *
+ * A link to an agent can name a policy: `policy` is "sha256:<64 hex>" of the behaviour policy the operator authorises
+ * it under (operates), or the agent says it runs under (operated-by). The register keeps the hash, never the text; the
+ * operator's is the authorisation, the agent's a claim, and trustFrom reports both and whether they agree.
+ *
+ * Trust from a pinned root (trustFrom): an agent about to seal a secret must not take the register's word for who the
+ * anchors are, because whoever can change the site can change anchors.json. It pins one fingerprint, given to it out of
+ * band (its instructions, a DNS TXT record), builds the graph with that key as the only anchor, and asks whether the
+ * recipient is the root, verified by the root, a persona of it, or an agent operated, in date, by a chain whose person
+ * at the top is the root or verified by it.
  *
  * Personas are a person's other keys (for work, for a project, for a pseudonym): records of kind "person" like any other,
  * tied to the person's master key by the same two-way rule. The master's record links to the persona with method
@@ -90,7 +100,13 @@ export const identityStatement = (identity, { name, about = '' }, at) =>
 export const agentStatement = (identity, { name, about = '', runtime = '', session = false }, at) =>
     statement(identity, 'identity', { kind: 'agent', name: String(name).trim(), about: String(about || '').trim(), runtime: String(runtime || '').trim(), session: !!session, bundle: identity.bundle, private_key_published: false }, at)
 export const evidenceStatement = (identity, { kind, value, url = '' }, at) => statement(identity, 'evidence', { kind, value: String(value).trim(), url: String(url || '').trim() }, at)
-export const linkStatement = (identity, { to, method = '', on = '', until = '' }, at) => statement(identity, 'link', until ? { to, method, on, until } : { to, method, on }, at)
+export const POLICY = /^sha256:[0-9a-f]{64}$/
+export function linkStatement(identity, { to, method = '', on = '', until = '', policy = '' }, at) {
+    const body = { to, method, on }
+    if (until) body.until = until
+    if (policy) body.policy = policy
+    return statement(identity, 'link', body, at)
+}
 export const inboxStatement = (identity, { endpoint, vault, token }, at) => statement(identity, 'inbox', { endpoint, vault, token }, at)
 export async function withdrawStatement(identity, of, reason = 'withdrawn', at = now()) {
     return statement(identity, 'revocation', { revokes: { record: identity.bundle.signing_fingerprint, statement: typeof of === 'string' ? of : await statementId(of) }, reason, effective_from: at }, at)
@@ -173,6 +189,7 @@ function shapeProblems(st, fp) {
             if (b.method && !METHODS[b.method]) return `unknown method ${b.method}`
             if (b.on && !/^\d{4}-\d\d-\d\d$/.test(b.on)) return 'on is a date, yyyy-mm-dd'
             if (b.until && (!/^\d{4}-\d\d-\d\d$/.test(b.until) || (b.on && b.until < b.on))) return 'until is a date, yyyy-mm-dd, not before on'
+            if (b.policy != null && !POLICY.test(String(b.policy))) return 'a policy is named by its sha256:<64 hex>'
             return null
         case 'inbox':
             if (!/^https:\/\/[a-z0-9.-]+$/.test(String(b.endpoint)) || !/^[a-z0-9]{4,24}$/.test(String(b.vault)) || !/^[0-9a-f]{16,128}$/.test(String(b.token))) return 'an inbox is an https endpoint, a vault id and a hex append token'
@@ -225,7 +242,8 @@ export function graph(records, { anchors = [], includeFixtures = false, asOf = t
     for (const [a, r] of people) for (const l of r.links) {
         const ag = people.get(l.to)
         if (l.method !== 'operates' || !ag || ag.kind !== 'agent' || !adj.get(a).has(l.to)) continue
-        const v = { by: a, on: l.on || l.at.slice(0, 10), at: l.at, until: validUntil(l) }
+        const back = linkOf(l.to, a)
+        const v = { by: a, on: l.on || l.at.slice(0, 10), at: l.at, until: validUntil(l), policy: l.policy || '', claimed_policy: (back && back.policy) || '' }
         if (v.until >= asOf) { if (!operated.has(l.to) || operated.get(l.to).until < v.until) operated.set(l.to, v) }
         else if (!lapsed.has(l.to) || lapsed.get(l.to).until < v.until) lapsed.set(l.to, v)
     }
@@ -285,6 +303,30 @@ export function standing(g, fp) {
     if (g.degrees.has(fp)) return { level: 'linked', text: `${g.degrees.get(fp)} step${g.degrees.get(fp) === 1 ? '' : 's'} from an anchor, through confirmed links`, degree: g.degrees.get(fp) }
     if (g.people.has(fp)) return { level: 'listed', text: 'in the register, not yet linked to an anchor' }
     return { level: 'absent', text: 'not in the register' }
+}
+/**
+ * Whether `fp` is trusted from a pinned root, for sealing a secret to it. g must be built with anchors: [root] and
+ * nothing else. Returns { ok, why, chain (fp … root), until?, policy?, claimed_policy?, policy_agrees? }.
+ */
+export function trustFrom(g, fp, root) {
+    if (!FP.test(String(root || ''))) return { ok: false, why: 'no root pinned' }
+    if (!g.people.has(root)) return { ok: false, why: `the pinned root ${root} is not in the register (or its record does not read, or is revoked)` }
+    if (g.anchors.length !== 1 || g.anchors[0] !== root) return { ok: false, why: 'the graph was not built from the pinned root alone' }
+    if (fp === root) return { ok: true, why: 'the pinned root itself', chain: [root] }
+    const rec = g.people.get(fp)
+    if (!rec) return { ok: false, why: `${fp} is not in the register (or its record does not read, or is revoked)` }
+    const s = standing(g, fp)
+    const viaRoot = person => person === root || (g.verified.has(person) && g.verified.get(person).by === root)
+    if (rec.kind === 'agent') {
+        if (s.level !== 'operated' && s.level !== 'agent') return { ok: false, why: s.text }
+        const top = s.root
+        if (!g.people.get(top) || g.people.get(top).kind !== 'person' || !viaRoot(top)) return { ok: false, why: `${s.text}; the person at the top of the chain is neither the root nor verified by it` }
+        const op = g.operated.get(fp)
+        return { ok: true, why: s.text, chain: [fp, ...s.chain, ...(top === root ? [] : [root])], until: op.until, policy: op.policy, claimed_policy: op.claimed_policy, policy_agrees: !op.policy || !op.claimed_policy || op.policy === op.claimed_policy }
+    }
+    if (s.level === 'verified' && s.by === root) return { ok: true, why: s.text, chain: [fp, root], until: s.until }
+    if (s.level === 'persona' && viaRoot(s.master)) return { ok: true, why: s.text, chain: [fp, s.master, ...(s.master === root ? [] : [root])] }
+    return { ok: false, why: `${s.text}: not verified by the pinned root` }
 }
 export const nameOf = (g, fp) => (g.people.get(fp) && g.people.get(fp).name) || fp
 /** One-way links pointing at someone: the claims they can confirm by linking back. */

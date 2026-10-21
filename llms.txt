@@ -9,7 +9,7 @@
 > the other: the answer to the 2019 keyserver flood. Since v0.2.0 (18 October 2026) people
 > come first; the agent-registry work is kept under /archive/.
 
-Site version: v0.2.7 (18 October 2026). Published by the sgit project — participant
+Site version: v0.2.8 (18 October 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## The register of people (start here)
@@ -60,6 +60,12 @@ disclosure at /about/participant.html. All content CC BY 4.0.
   is kept in this browser: one localStorage entry "pki.local.v1.<door id>", AES-256-GCM under
   HKDF(door seed, "pki.sgit.ai/local/v1") (assets/people/local.js). An access key moves it into the
   door/master/book vaults; the profile is the book's /profile.json; key metadata carries role master|persona.
+- Trust before a secret (pki-agent): `pin <root fp> [--dns domain]` (or PKI_ROOT), `root`, `trust <fp>`,
+  `seal [--to fp,fp] --file F [--qr F.svg]` (to the pinned root by default), `keyqr`, `policy <file>`,
+  `operator <fp> --policy F`. send/seal refuse a recipient that does not chain to the pinned root
+  (directory.js trustFrom: graph from the pin alone; the root, verified by it, a persona, or an agent operated
+  in date by such a person; operator's and agent's policy hashes must agree). Messages carry `expires`.
+  Article: /articles/agents-vault-keys-and-the-root.md; storyboard: /storyboards/a-vault-key-handed-over.html
 - Key links: https://pki.sgit.ai/send/#k1.<encryption SPKI>.<signing SPKI>.<label utf-8> (base64url each):
   a public key to seal to before it is in the register (message.js keyCode/parseKeyCode). Not secret, not
   authenticated: compare the fingerprint. The newcomer path: sign up (browser), master key, Share as a QR
@@ -76,14 +82,17 @@ disclosure at /about/participant.html. All content CC BY 4.0.
 - Storyboards: /storyboards/index.html. Every workflow as an interactive storyboard (deck, grid, script,
   filter, animation), drawn in the browser from data by gen-z-developers.sgit.ai's storyboard kit with
   Rough.js: /storyboards/<slug>.json and /storyboards/cast.json are the data (sources in
-  /admin/content/storyboards/). Seven boards, 64 panels: the-first-key, two-ways, an-invitation,
-  a-secret-by-qr, an-access-key-sealed, an-agent-gets-a-key (built) and in-person-by-qr (proposed).
+  /admin/content/storyboards/). Eight boards, 80 panels: the-first-key, two-ways, an-invitation,
+  a-secret-by-qr, an-access-key-sealed, an-agent-gets-a-key, a-vault-key-handed-over (technical; built) and
+  in-person-by-qr (proposed).
   Lines characters say are marked not_a_quote; evidence panels quote this site word for word (checked).
 - Articles: /articles/index.html, each with a markdown twin at /articles/<slug>.md and, when an agent
   wrote it, a detached signature at /articles/<slug>.md.sig ({signature, fingerprint}, the format
   `sgit pki sign` writes) by the agent's key in the register; check with `sgit pki verify`.
   - /articles/keys-for-people.md: the account of the register of people (v0.2.0), by pki.agent
   - /articles/keys-for-agents.md: the account of identities for agents (v0.2.1), by pki.agent
+  - /articles/agents-vault-keys-and-the-root.md: agents handing vault keys over; the memo's gaps, the
+    pinned root, policies by hash, expiry, seal and QR files (v0.2.8), by pki.agent
   - /articles/a-login-made-of-a-passkey.md: the account of the passkey login and the account section
     (v0.2.6): one button, the browser-only account, into a vault, profile, master key and personas
   - /articles/in-person-by-qr-code.md: a research note on in-person key exchange (iPhone, browser, NFC,

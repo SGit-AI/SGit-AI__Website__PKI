@@ -9,7 +9,11 @@
  *     record, read together, show the agent as operated;
  *   - status reads a register (served locally) and says so;
  *   - open reads a message sealed to the agent, as a link, and checks the sender's signature against the register;
- *   - sign writes a signature that `sgit pki verify` accepts (when sgit is installed; reported as not run otherwise).
+ *   - sign writes a signature that `sgit pki verify` accepts (when sgit is installed; reported as not run otherwise);
+ *   - trust from a pinned root (v0.2.8): with no pin, send refuses; pinned, the root and the agents it operates are
+ *     vouched for, a stranger in the register is refused, an agent whose claimed policy differs from the authorised one
+ *     is refused, a DNS pin that does not check refuses; seal puts a secret in a link (and a QR file) only the root
+ *     opens, with an expiry inside the signature; an expired message reads as expired; keyqr's link carries the key.
  */
 import fs from 'fs'
 import os from 'os'
@@ -49,17 +53,26 @@ try {
     const s = JSON.parse(fs.readFileSync(sub, 'utf8'))
     const r = await D.readRecord(s.statements)
     check(r.ok && r.kind === 'agent' && r.fp === fp && r.identity.body.session === true && r.links[0].method === 'operated-by', 'its submission is a clean agent record naming the operator')
-    const opLink = await D.linkStatement(operator, { to: fp, method: 'operates', on: '2026-10-19', until: '2026-10-26' }, '2026-10-19T11:00:00Z')
-    const opRec = await D.readRecord([opId, opLink]), g = D.graph([opRec, r], { anchors: [operator.bundle.signing_fingerprint], asOf: '2026-10-20' })
+    const day = n => new Date(Date.now() + n * 86400000).toISOString().slice(0, 10)
+    const opLink = await D.linkStatement(operator, { to: fp, method: 'operates', on: day(0), until: day(7) }, '2026-10-19T11:00:00Z')
+    const opRec = await D.readRecord([opId, opLink]), g = D.graph([opRec, r], { anchors: [operator.bundle.signing_fingerprint] })
     check(D.standing(g, fp).level === 'operated', 'with the operator’s link back, the two records show the agent as operated')
 
-    // a register, served here: the operator and the agent
-    const index = { anchors: [operator.bundle.signing_fingerprint], fixture_anchors: [], records: [
-        { fp: operator.bundle.signing_fingerprint, dir: K.dirOf(operator.bundle.signing_fingerprint), fixture: false, statements: [opId, opLink] },
-        { fp, dir: K.dirOf(fp), fixture: false, statements: s.statements }] }
+    // a register, served here: the operator, the agent, a stranger, and two agents with policies (one that disagrees)
+    const P = 'sha256:' + 'a'.repeat(64), Q = 'sha256:' + 'b'.repeat(64)
+    const stranger = await K.generate('Stranger'), mgr = await K.generate('Vault manager'), rogue = await K.generate('Rogue')
+    const agentRecOf = async (k, name, claim) => [await D.agentStatement(k, { name }, '2026-10-19T10:00:00Z'), await D.linkStatement(k, { to: operator.bundle.signing_fingerprint, method: 'operated-by', policy: claim }, '2026-10-19T10:01:00Z')]
+    const opSts = [opId, opLink, await D.linkStatement(operator, { to: mgr.bundle.signing_fingerprint, method: 'operates', on: day(0), until: day(30), policy: P }, '2026-10-19T11:01:00Z'),
+                   await D.linkStatement(operator, { to: rogue.bundle.signing_fingerprint, method: 'operates', on: day(0), until: day(30), policy: P }, '2026-10-19T11:02:00Z')]
+    const rec = (k, sts) => ({ fp: k.bundle.signing_fingerprint, dir: K.dirOf(k.bundle.signing_fingerprint), fixture: false, statements: sts })
+    const index = { anchors: [], fixture_anchors: [], records: [
+        rec(operator, opSts), { fp, dir: K.dirOf(fp), fixture: false, statements: s.statements },
+        rec(stranger, [await D.identityStatement(stranger, { name: 'A stranger' }, '2026-10-19T10:00:00Z')]),
+        rec(mgr, await agentRecOf(mgr, 'Vault manager', P)), rec(rogue, await agentRecOf(rogue, 'Rogue', Q))] }
     server = http.createServer((q, res) => { if (q.url === '/directory/index.json') { res.writeHead(200, { 'content-type': 'application/json' }); res.end(JSON.stringify(index)) } else { res.writeHead(404); res.end() } })
     await new Promise(x => server.listen(0, '127.0.0.1', x))
     const REG = { PKI_REGISTER: `http://127.0.0.1:${server.address().port}/` }
+    index.anchors = [operator.bundle.signing_fingerprint]
     const st = await run(['status'], REG)
     check(/an agent operated by The operator/.test(st.stdout), `status reads the register: “${st.stdout.trim().slice(0, 90)}…”`)
     const agentBundle = r.bundle
@@ -67,6 +80,38 @@ try {
     const op = await run(['open', sealed.url], REG)
     let opened = null; try { opened = JSON.parse(op.stdout) } catch (e) { /* below */ }
     check(opened && opened.text === 'a token for the agent' && opened.signature === 'checks', 'open reads a message sealed to the agent, and the operator’s signature checks against the register')
+
+    // ---------------------------------------------------------------- trust from a pinned root
+    const opFp = operator.bundle.signing_fingerprint
+    const nopin = await run(['send', '--to', opFp, '--text', 'hi'], REG)
+    check(nopin.status !== 0 && /no root pinned/.test(nopin.stderr), 'with no root pinned, send refuses')
+    check((await run(['pin', opFp], REG)).status === 0, 'pin the root, as the agent’s instructions give it')
+    index.anchors = []
+    const rootOut = await run(['root'], REG)
+    check(rootOut.status === 0 && /anchors\.json does not name/.test(rootOut.stdout), 'root: in the register, and it says when the site’s anchors.json does not name it (the pin wins)')
+    index.anchors = [opFp]
+    const tm = JSON.parse((await run(['trust', mgr.bundle.signing_fingerprint], REG)).stdout)
+    check(tm.ok && tm.chain.join() === [mgr.bundle.signing_fingerprint, opFp].join() && tm.policy === P && tm.policy_agrees, 'trust: an agent the root operates, in date, under the policy both sides name')
+    const strange = await run(['send', '--to', stranger.bundle.signing_fingerprint, '--text', 'hi'], REG)
+    check(strange.status !== 0 && /refusing to seal/.test(strange.stderr), 'send refuses a stranger in the register: listed is not vouched for')
+    const rg = await run(['seal', '--to', rogue.bundle.signing_fingerprint, '--text', 'the vault key'], REG)
+    check(rg.status !== 0 && /policy/.test(rg.stderr), 'seal refuses an agent that claims another policy than its operator authorised')
+    const secret = path.join(home, 'vault-key.txt'); fs.writeFileSync(secret, 'sgit_' + 'vault_key_for_test:abcd1234')
+    const sl = await run(['seal', '--file', secret, '--name', 'vault key: test', '--qr', 'secret.svg'], REG)
+    const link = (/https:\/\/pki\.sgit\.ai\/m\/#m1\.\S+/.exec(sl.stdout) || [])[0]
+    check(sl.status === 0 && !!link && /chains to the root/.test(sl.stderr), 'seal, with no --to: sealed to the pinned root, after checking it')
+    const om = await M.openMessage(M.parseCode(link).enc, [operator], new Map([[fp, r.bundle]]))
+    check(K.fromUtf8(K.unb64(om.msg.files[0].data)) === fs.readFileSync(secret, 'utf8') && om.verified === true && om.msg.expires > new Date().toISOString(), 'the root opens it: the secret, signed by the agent, expiring in a week')
+    check(fs.readFileSync(path.join(home, 'secret.svg'), 'utf8').startsWith('<svg'), 'and the QR code is a file, to carry to another session')
+    const old = await M.sealMessage(await M.compose({ to: r.bundle, from: operator, text: 'stale', expires: '2026-01-01T00:00:00Z' }), r.bundle, operator)
+    const oo = JSON.parse((await run(['open', old.url], REG)).stdout)
+    check(oo.problems.some(x => /expired/.test(x)) && /chains to the root/.test(oo.sender_trust), 'an expired message reads as expired (a replay), and the sender’s trust is shown')
+    const kq = await run(['keyqr', '--out', 'me.svg'], REG)
+    check((await M.parseKeyCode(kq.stdout)).signing_fingerprint === fp && fs.existsSync(path.join(home, 'me.svg')), 'keyqr: the agent’s public key as a link and a QR file, the fingerprint recomputed from it')
+    const dnsPin = await run(['pin', opFp, '--dns', 'no-such-domain.invalid'], REG)
+    const dn = await run(['seal', '--text', 'x'], REG)
+    check(dnsPin.status === 0 && dn.status !== 0 && /DNS|dns/.test(dn.stderr), 'a pin that names a domain refuses when DNS does not carry the root (or cannot be read)')
+    await run(['pin', opFp], REG)
 
     const kf = await run(['keyfile'], { SG_SEND_PASSPHRASE: 'a session secret' })
     const moved = await run(['whoami'], { PKI_AGENT_HOME: path.join(home, 'elsewhere'), PKI_AGENT_KEY: kf.stdout.trim(), SG_SEND_PASSPHRASE: 'a session secret' })
