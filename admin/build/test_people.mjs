@@ -123,6 +123,19 @@ const strangerRec = [await D.identityStatement(strangerOp, { name: 'Unverified' 
 const agentToStranger = [agentRec[0], await D.linkStatement(agent, { to: strangerOp.bundle.signing_fingerprint, method: 'operated-by' }, T(2))]
 ga = D.graph([await D.readRecord(adaRec), await D.readRecord(strangerRec), await D.readRecord(agentToStranger)], { anchors: [ada.bundle.signing_fingerprint], asOf: '2026-10-20' })
 check(D.standing(ga, agent.bundle.signing_fingerprint).level === 'agent', 'an agent operated by someone nobody verified is operated, and not trusted')
+
+// --- personas: a person's other keys, tied to their master by the same two-way rule ------------------------------------
+const pers = await K.generate('Bo at work')
+const persRec = [await D.identityStatement(pers, { name: 'Bo at work' }, T(1)), await D.linkStatement(pers, { to: bo.bundle.signing_fingerprint, method: 'persona-of', on: '2026-10-20' }, T(2))]
+const boPersona = [...boBack, await D.linkStatement(bo, { to: pers.bundle.signing_fingerprint, method: 'persona', on: '2026-10-20' }, T(4))]
+let gp = D.graph([await D.readRecord(adaRec), await D.readRecord(boBack), await D.readRecord(persRec)], { anchors: [ada.bundle.signing_fingerprint], asOf: '2026-10-20' })
+check(D.standing(gp, pers.bundle.signing_fingerprint).level === 'listed', 'a key that says it is a persona of Bo, without Bo saying so, is only listed')
+gp = D.graph([await D.readRecord(adaRec), await D.readRecord(boPersona), await D.readRecord(persRec)], { anchors: [ada.bundle.signing_fingerprint], asOf: '2026-10-20' })
+let sp = D.standing(gp, pers.bundle.signing_fingerprint)
+check(sp.level === 'persona' && sp.master === bo.bundle.signing_fingerprint && sp.trusted, 'both links (persona, persona-of): a persona of Bo, carrying Bo’s standing (verified)')
+const persAsAgentLink = [persRec[0], await D.linkStatement(pers, { to: bo.bundle.signing_fingerprint, method: 'known' }, T(2))]
+gp = D.graph([await D.readRecord(adaRec), await D.readRecord(boPersona), await D.readRecord(persAsAgentLink)], { anchors: [ada.bundle.signing_fingerprint], asOf: '2026-10-20' })
+check(D.standing(gp, pers.bundle.signing_fingerprint).level !== 'persona', 'a link back by another method is not a persona link')
 check(D.realKeys([await D.readRecord(adaRec), await D.readRecord(agentRec)]) === 1 && D.realAgents([await D.readRecord(adaRec), await D.readRecord(agentRec)]) === 1, 'agents are counted apart from people')
 
 // --- messages and invitations ---------------------------------------------------------------------------------------

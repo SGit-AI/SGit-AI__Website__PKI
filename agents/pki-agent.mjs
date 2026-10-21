@@ -351,6 +351,12 @@ const __directory = (() => {
  * operates (a fleet key, so that a person running hundreds of agents does not fill their own record); the chain is
  * followed up to three steps to the person at its root, whose standing the agent's page shows.
  *
+ * Personas are a person's other keys (for work, for a project, for a pseudonym): records of kind "person" like any other,
+ * tied to the person's master key by the same two-way rule. The master's record links to the persona with method
+ * "persona", and the persona's record links back with "persona-of". Either side alone is a claim; both together say
+ * one person holds both keys, and the persona's page shows the master's standing, not a standing of its own. A persona
+ * that wants to be verified in its own right is verified like anyone else, and that wins.
+ *
  * Bounds (rule 3): 16 KiB a statement, 256 statements a record, 150 live links to people and 200 to operated agents
  * a record, 32 live evidence items.
  *
@@ -372,7 +378,8 @@ const EVIDENCE = {
 }
 /** The verification methods an anchor may name. Published by name; the details stay in the anchor's vault. */
 const METHODS = { 'in-person': 'met in person', 'video-call': 'on a video call', 'known-channel': 'on a channel already known to be theirs', 'invitation': 'through an invitation they accepted', 'known': 'known to me',
-                          'operates': 'runs this agent', 'operated-by': 'is the agent of this key' }
+                          'operates': 'runs this agent', 'operated-by': 'is the agent of this key',
+                          'persona': 'is another key of mine (a persona)', 'persona-of': 'is a persona of this key' }
 const AGENT_DAYS = 30
 const VERIFYING = ['in-person', 'video-call', 'known-channel']
 const VERIFY_DAYS = 365
@@ -543,7 +550,14 @@ function graph(records, { anchors = [], includeFixtures = false, asOf = today() 
         else if (!lapsed.has(l.to) || lapsed.get(l.to).until < v.until) lapsed.set(l.to, v)
     }
     for (const y of operated.keys()) lapsed.delete(y)
-    return { people, edges, claims, adj, degrees, via, verified, expired, operated, lapsed, anchors: live, asOf }
+    // personas: the master links with "persona", the persona links back with "persona-of"; both people, both live
+    const personas = new Map()
+    for (const [a, r] of people) for (const l of r.links) {
+        const p = people.get(l.to), back = linkOf(l.to, a)
+        if (l.method !== 'persona' || !p || p.kind !== 'person' || r.kind !== 'person' || !back || back.method !== 'persona-of') continue
+        personas.set(l.to, { of: a, on: l.on || l.at.slice(0, 10), at: l.at })
+    }
+    return { people, edges, claims, adj, degrees, via, verified, expired, operated, lapsed, personas, anchors: live, asOf }
 }
 /** The steps between two people, through confirmed links only: [a, …, b], or null. */
 function path(g, a, b) {
@@ -581,6 +595,11 @@ function standing(g, fp) {
     if (g.anchors.includes(fp)) return { level: 'anchor', text: 'an anchor: verification starts here' }
     const v = g.verified.get(fp)
     if (v) return { level: 'verified', text: `verified by ${nameOf(g, v.by)}, ${METHODS[v.method]}, on ${v.on}; valid until ${v.until}`, ...v }
+    const pa = g.personas && g.personas.get(fp)
+    if (pa && !(g.personas.has(pa.of))) {                                  // one level: a persona of a persona is not followed
+        const ms = standing(g, pa.of)
+        return { level: 'persona', text: `a persona of ${nameOf(g, pa.of)}, who holds both keys (their standing: ${ms.text})`, ...pa, master: pa.of, masterLevel: ms.level, trusted: ['anchor', 'verified'].includes(ms.level) }
+    }
     const x = g.expired && g.expired.get(fp)
     if (x) return { level: 'expired', text: `verified by ${nameOf(g, x.by)} on ${x.on}; expired on ${x.until}: to be verified again`, ...x, degree: g.degrees.get(fp) }
     if (g.degrees.has(fp)) return { level: 'linked', text: `${g.degrees.get(fp)} step${g.degrees.get(fp) === 1 ? '' : 's'} from an anchor, through confirmed links`, degree: g.degrees.get(fp) }

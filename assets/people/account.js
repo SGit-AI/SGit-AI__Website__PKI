@@ -101,7 +101,7 @@ export async function identities(master) {
         const meta = JSON.parse(await read('metadata.json') || '{}')
         try {
             const id = await K.importKeystore({ privateKeyPem: await read('private_key.pem'), signingPrivatePem: await read('signing_private.pem'), passphrase: '', label: meta.label || '', created: meta.created || 0 })
-            out.push({ ...id, label: meta.label || '' })
+            out.push({ ...id, label: meta.label || '', role: meta.role || '', persona_of: meta.persona_of || '' })
         } catch (e) { /* a folder that does not read as a key pair is left alone, never deleted */ }
     }
     const pref = await NV.readJson(master, '/' + FILES.identity).catch(() => null)
@@ -109,10 +109,13 @@ export async function identities(master) {
     return out.sort((a, b) => (b.bundle.signing_fingerprint === def) - (a.bundle.signing_fingerprint === def) || (a.created - b.created))
 }
 /** Keep a key pair in the master (one commit, published). Optionally make it the default. */
-export async function saveIdentity(master, id, { makeDefault = false } = {}) {
+export async function saveIdentity(master, id, { makeDefault = false, role = '', persona_of = '' } = {}) {
     const folder = `/keys/${id.bundle.fingerprint.replace(':', '_')}`
+    const meta = { label: id.bundle.label, algorithm: 'RSA-OAEP', key_size: 4096, encryption_fingerprint: id.bundle.fingerprint, signing_fingerprint: id.bundle.signing_fingerprint, created: id.created || Date.now() }
+    if (role) meta.role = role                      // pki.sgit.ai's own: "master", or "persona" with the master's fingerprint
+    if (persona_of) meta.persona_of = persona_of
     const files = {
-        'metadata.json': JSON.stringify({ label: id.bundle.label, algorithm: 'RSA-OAEP', key_size: 4096, encryption_fingerprint: id.bundle.fingerprint, signing_fingerprint: id.bundle.signing_fingerprint, created: id.created || Date.now() }, null, 2),
+        'metadata.json': JSON.stringify(meta, null, 2),
         'private_key.pem': pemPrivate(id.private.encrypt), 'public_key.pem': id.bundle.encrypt,
         'signing_private.pem': pemPrivate(id.private.sign), 'signing_public.pem': id.bundle.sign,
     }
@@ -123,9 +126,23 @@ export async function saveIdentity(master, id, { makeDefault = false } = {}) {
 }
 export async function setDefault(master, fp) { await NV.writeFile(master, '/', FILES.identity, JSON.stringify({ v: 1, default: fp, set: now() }, null, 1)); await NV.publish(master) }
 
+/** Every file in a vault, walked from the root: [{ path, folder }], folders first, sorted. For the vault explorer. */
+export async function tree(v, folder = '/', depth = 0, out = []) {
+    if (depth > 8) return out
+    const names = (await NV.listFiles(v, folder).catch(() => [])).sort((a, b) => (b.endsWith('/') - a.endsWith('/')) || a.localeCompare(b))
+    for (const n of names) {
+        const p = (folder === '/' ? '' : folder) + '/' + n.replace(/\/$/, '')
+        if (n.endsWith('/')) { out.push({ path: p, folder: true, depth }); await tree(v, p, depth + 1, out) } else out.push({ path: p, folder: false, depth })
+    }
+    return out
+}
+
 // ------------------------------------------------------------ the book
 const safe = s => String(s).replace(/[^A-Za-z0-9_.-]/g, '-').slice(0, 80)
 export const book = {
+    /** The account's profile: { username, name, blurb, avatar (a small data: URL) }. Private: in the book, not the register. */
+    async profile(bk) { return NV.readJson(bk, '/profile.json').catch(() => null) },
+    async saveProfile(bk, p) { await NV.writeFile(bk, '/', 'profile.json', JSON.stringify({ v: 1, ...p }, null, 1)); await NV.publish(bk) },
     /** The person's own statements for one key, oldest first. */
     async statements(bk, fp) {
         const folder = `/record/${K.dirOf(fp)}`

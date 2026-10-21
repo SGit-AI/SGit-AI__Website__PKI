@@ -2,12 +2,15 @@
  * ui.js: what every page of the directory shares. The register as read from directory/index.json, the person's vault
  * (opened with a passkey, kept open for the life of the tab), the vault bar at the top of each tool page, QR codes.
  *
- * Two ways to hold your keys, and the page always says which:
+ * Three ways to hold your keys, and the page always says which:
  *   vault     the passkey opens a door, the door the master, the master holds the keys (account.js). The keys follow
  *             you to every device whose passkey (or recovery code) opens a door. Writing vaults needs an SG/Send
  *             access key, typed once and kept in the master, or carried by an invitation.
- *   browser   no access key yet: the key pair is kept in this browser's local storage, its private halves encrypted
- *             with a passphrase in sgit's own format, and offered as a file for sgit. It moves into a vault later.
+ *   local     the passkey, and no vault behind it yet: the whole account (profile, keys, record, contacts) is kept in
+ *             this browser, encrypted with a key the same passkey derives (local.js). No passphrase, no access key;
+ *             it travels nowhere, and moves into a vault, then leaves the browser, when an access key comes.
+ *   browser   the older way, kept for those who used it: a key pair in local storage, its private halves encrypted
+ *             with a passphrase in sgit's own format. It moves into a vault later.
  *
  * Where the keys live while the tab is open: in memory, and for the tab's life in sessionStorage (the door's
  * passphrase and id, so a page change does not ask for the passkey again), as the newsroom's pane does. Nothing
@@ -18,10 +21,11 @@
 import * as K from './keys.js'
 import * as D from './directory.js'
 import * as A from './account.js'
+import * as L from './local.js'
 import { doorFrom, prfBytes, recoveryBytes, PRF_INPUT_TEXT, sha256 } from './door.js'
 
 export const ROOT = new URL('../../', import.meta.url)
-export { K, D, A }
+export { K, D, A, L }
 
 // ------------------------------------------------------------ small things
 export function h(tag, attrs, ...kids) {
@@ -99,8 +103,11 @@ const session = {
 }
 const listeners = new Set()
 export const vault = {
-    mode: null,               // null (closed) | 'vault' | 'browser'
+    mode: null,               // null (closed) | 'vault' | 'local' | 'browser'
     sg: null, door: null, master: null, book: null, token: '', doors: [], ids: [], inbox: null,
+    doorKey: null,            // the door's derivation ({ seed, passphrase, vaultId }); door is the door vault itself
+    local: null,              // the decrypted local account, in local mode
+    profile: null,            // { username, name, blurb, avatar }, from the book or the local account
     onChange(fn) { listeners.add(fn); return () => listeners.delete(fn) },
     changed() { for (const fn of listeners) { try { fn(this) } catch (e) { console.error(e) } } },
     get open() { return !!this.mode },
@@ -114,7 +121,8 @@ export const vault = {
     async _resume() {
         if (this.open) return true
         const s = session.get()
-        if (s && s.door) { try { await this.openDoor(s.door, s.path); return true } catch (e) { session.set(null); return false } }
+        if (s && s.door && s.local) { try { await this.openLocal(s.door, s.cred || null); return true } catch (e) { session.set(null); return false } }
+        if (s && s.door) { try { await this.openDoor(s.door, s.path, s.cred || null); return true } catch (e) { session.set(null); return false } }
         if (s && s.browser) { const pass = s.browser; try { await this.openBrowser(pass); return true } catch (e) { session.set(null); return false } }
         return false
     },
@@ -122,11 +130,82 @@ export const vault = {
     async withPasskey() {
         const prf = await prfBytes(PRF_INPUT_TEXT)
         const door = await doorFrom(prf.bytes)
-        try { await this.openDoor(door, prf.path) }
-        catch (e) { if (e.code === 'ENOVAULT') { e.door = door; e.prf = prf } throw e }
+        try { await this.openDoor(door, prf.path, prf) }
+        catch (e) {
+            if (e.code === 'ENOVAULT' && L.exists(door)) { await this.openLocal(door, prf); return prf }   // kept in this browser
+            if (e.code === 'ENOVAULT') { e.door = door; e.prf = prf } throw e
+        }
         return prf
     },
-    async openDoor(door, path = '') {
+    /**
+     * The login: one passkey gesture, whatever is behind it. A vault at the door opens; with none, the account this
+     * browser keeps for that passkey opens; with neither, a new account starts, in this browser. The vault server
+     * unreachable and a local account here: that opens, and says so. Returns { mode, fresh, offline, prf }.
+     */
+    async signIn() { return this._signInWith(await prfBytes(PRF_INPUT_TEXT)) },
+    /**
+     * The sign-up: a new passkey, then the same as signIn. When the authenticator returns the PRF bytes at creation (the
+     * spec says they are the bytes an assertion would give), there is one gesture; when not, a second one, the login.
+     */
+    async signUp(name = '') {
+        const cred = await this.makePasskey(name)
+        const ext = (cred && cred.getClientExtensionResults && cred.getClientExtensionResults()) || {}
+        if (ext.prf && ext.prf.enabled === false) { const e = new Error('The passkey was made, but its provider does not do PRF, so it cannot open a vault here.'); e.code = 'ENOPRF'; throw e }
+        if (ext.prf && ext.prf.results && ext.prf.results.first) return this._signInWith({ bytes: new Uint8Array(ext.prf.results.first), path: cred.authenticatorAttachment || 'not reported', credId: cred.id })
+        return this.signIn()
+    },
+    async _signInWith(prf) {
+        const door = await doorFrom(prf.bytes)
+        try { await this.openDoor(door, prf.path, prf); return { mode: 'vault', prf } }
+        catch (e) {
+            if (e.code === 'ENOVAULT') {
+                if (L.exists(door)) { await this.openLocal(door, prf); return { mode: 'local', prf } }
+                await this.createLocal(door, prf); return { mode: 'local', fresh: true, prf }
+            }
+            if (L.exists(door)) { await this.openLocal(door, prf); return { mode: 'local', prf, offline: err(e) } }
+            throw e
+        }
+    },
+    async openLocal(door, prf) {
+        const acct = await L.read(door)
+        if (!acct) { const e = new Error('this browser keeps no account for that passkey'); e.code = 'ENOLOCAL'; throw e }
+        const ids = []
+        for (const k of acct.keys) { try { ids.push(await L.identityOf(k)) } catch (e) { /* a key that does not read is left, not dropped */ } }
+        ids.sort((a, b) => (b.bundle.signing_fingerprint === acct.default) - (a.bundle.signing_fingerprint === acct.default))
+        Object.assign(this, { mode: 'local', doorKey: door, door: null, local: acct, ids, profile: acct.profile || null, master: null, book: null, token: '', doors: [], inbox: null, browserIds: null })
+        session.set({ door, local: true, cred: credOf(prf) })
+        this.changed()
+    },
+    async createLocal(door, prf) { await L.write(door, L.empty()); await L.persist(); await this.openLocal(door, prf) },
+    async saveLocal() { await L.write(this.doorKey, this.local) },
+    /** Local to vault: the three vaults, made with the access key; every key, the profile and the book moved in; checked; then the browser's copy removed. */
+    async upgrade(token) {
+        if (this.mode !== 'local') throw new Error('nothing kept in this browser to move')
+        if (!token) throw new Error('an SG/Send access key is needed to create vaults')
+        const door = this.doorKey, acct = this.local, cred = (session.get() || {}).cred || {}
+        const sg = await this.client(token)
+        const a = await A.createAccount({ sgSend: sg, door, record: { kind: 'passkey', path: cred.path || '', credential_id: cred.credId || '', device: deviceName() }, token })
+        const def = acct.default || (acct.keys[0] && (await L.identityOf(acct.keys[0])).bundle.signing_fingerprint)
+        for (const k of acct.keys) { const id = await L.identityOf(k); await A.saveIdentity(a.master, id, { makeDefault: id.bundle.signing_fingerprint === def, role: k.role, persona_of: k.persona_of }) }
+        if (acct.profile && (acct.profile.username || acct.profile.name || acct.profile.avatar)) await A.book.saveProfile(a.book, acct.profile)
+        Object.assign(this, { mode: 'vault', door: a.door, master: a.master, book: a.book, token, doors: a.doors, inbox: null, profile: acct.profile || null })
+        await this.moveBook(acct.book)
+        this.ids = await A.identities(a.master)
+        if (this.ids.length < acct.keys.length) throw new Error(`${acct.keys.length - this.ids.length} key(s) did not read back from the vault; the copy in this browser is kept`)
+        L.remove(door); this.local = null
+        session.set({ door, path: cred.path || '', cred })
+        this.changed()
+        return a.recovery
+    },
+    async saveProfile(p) {
+        const profile = { username: '', name: '', blurb: '', avatar: '', ...(this.profile || {}), ...p, updated: new Date().toISOString() }
+        if (this.mode === 'vault') await A.book.saveProfile(this.book, profile)
+        else if (this.mode === 'local') { this.local.profile = profile; await this.saveLocal() }
+        else throw new Error('sign in with a passkey to keep a profile')
+        this.profile = profile
+        this.changed()
+    },
+    async openDoor(door, path = '', prf = null) {
         const carry = this.mode === 'browser' ? (this.browserIds || []) : []      // a browser key moves into the vault
         const sg = await this.client('')
         const u = await A.unlock({ sgSend: sg, door })
@@ -136,14 +215,16 @@ export const vault = {
         if (missing.length && this.token) { for (const c of missing) await A.saveIdentity(u.master, c, { makeDefault: !this.ids.length }); this.ids = await A.identities(u.master) }
         if (carry.length && this.token) await this.moveLocalBook()
         this.inbox = await A.readInbox(u.master)
-        session.set({ door, path })
+        this.doorKey = door; this.local = null
+        this.profile = u.book ? await A.book.profile(u.book).catch(() => null) : null
+        session.set({ door, path, cred: credOf(prf) || (session.get() || {}).cred || null })
         this.changed()
     },
     async create(door, prf, token) {
         const sg = await this.client(token)
         const a = await A.createAccount({ sgSend: sg, door, record: { kind: 'passkey', path: prf.path, credential_id: prf.credId, device: deviceName() }, token })
-        Object.assign(this, { mode: 'vault', door: a.door, master: a.master, book: a.book, token, doors: a.doors, ids: [], inbox: null })
-        session.set({ door, path: prf.path })
+        Object.assign(this, { mode: 'vault', door: a.door, master: a.master, book: a.book, token, doors: a.doors, ids: [], inbox: null, doorKey: door, local: null, profile: null })
+        session.set({ door, path: prf.path, cred: credOf(prf) })
         // a key the browser was holding moves in now
         const local = readLocal()
         if (local && this.browserIds && this.browserIds.length) { for (const id of this.browserIds) await A.saveIdentity(this.master, id, { makeDefault: true }); this.ids = await A.identities(this.master); await this.moveLocalBook() }
@@ -158,26 +239,29 @@ export const vault = {
         if (door && prf) {
             if (!this.token) throw new Error('the master holds no access key, so a door cannot be written from here')
             await A.addDoor({ sgSend: this.sg, master: this.master, door, record: { kind: 'passkey', path: prf.path, credential_id: prf.credId, device: deviceName() } })
-            session.set({ door, path: prf.path })
+            session.set({ door, path: prf.path, cred: credOf(prf) })
         }
     },
-    async makePasskey() {
-        await navigator.credentials.create({ publicKey: {
+    /** A new passkey for this site. The name is what the passkey list shows; nothing else about the person goes in it. */
+    async makePasskey(name = '') {
+        const n = String(name || '').trim().slice(0, 64)
+        return navigator.credentials.create({ publicKey: {
             challenge: crypto.getRandomValues(new Uint8Array(32)), rp: { id: location.hostname, name: 'pki.sgit.ai' },
-            user: { id: crypto.getRandomValues(new Uint8Array(16)), name: 'pki.sgit.ai', displayName: 'Your keys on pki.sgit.ai' },
+            user: { id: crypto.getRandomValues(new Uint8Array(16)), name: n ? `${n} · pki.sgit.ai` : 'pki.sgit.ai', displayName: n || 'Your keys on pki.sgit.ai' },
             pubKeyCredParams: [{ type: 'public-key', alg: -7 }, { type: 'public-key', alg: -257 }],
             authenticatorSelection: { residentKey: 'required', userVerification: 'required' },
             extensions: { prf: { eval: { first: await sha256(PRF_INPUT_TEXT) } } }, timeout: 120000,
         } })
     },
     /** What the browser mode kept (its statements and contacts) into the book, skipping what is already there. */
-    async moveLocalBook() {
-        const b = localBook()
+    async moveLocalBook() { return this.moveBook(localBook()) },
+    async moveBook(b) {
         for (const [fp, sts] of Object.entries(b.record || {})) {
             const have = new Set(await Promise.all((await A.book.statements(this.book, fp)).map(x => K.statementId(x))))
             for (const st of sts) if (!have.has(await K.statementId(st))) await A.book.addStatement(this.book, st)
         }
         for (const c of Object.values(b.contacts || {})) await A.book.saveContact(this.book, c)
+        for (const sub of Object.values(b.agents || {})) await A.book.saveAgent(this.book, sub)
     },
     // -------------------------------------------------------- browser mode
     async openBrowser(passphrase) {
@@ -197,33 +281,61 @@ export const vault = {
         await this.openBrowser(passphrase)
     },
     // -------------------------------------------------------- keys and the book, in either mode
-    async addIdentity(id) {
-        if (this.mode === 'vault') { await A.saveIdentity(this.master, id, { makeDefault: !this.ids.length }); this.ids = await A.identities(this.master) }
+    async addIdentity(id, { role = '', persona_of = '' } = {}) {
+        if (!this.ids.length && !role) role = 'master'                  // the first key is the master: the others are signed from it
+        if (this.mode === 'vault') { await A.saveIdentity(this.master, id, { makeDefault: !this.ids.length, role, persona_of }); this.ids = await A.identities(this.master) }
+        else if (this.mode === 'local') {
+            this.local.keys = this.local.keys.filter(k => k.sign !== K.b64(id.private.sign)).concat([L.keptOf(id, { role, persona_of })])
+            if (!this.local.default) this.local.default = id.bundle.signing_fingerprint
+            await this.saveLocal(); this.ids = await this._localIds()
+        }
         else throw new Error('open a vault, or keep the key in this browser, first')
         this.changed()
     },
     async setDefault(fp) {
         if (this.mode === 'vault') { await A.setDefault(this.master, fp); this.ids = await A.identities(this.master) }
+        else if (this.mode === 'local') { this.local.default = fp; await this.saveLocal(); this.ids = await this._localIds() }
         else this.ids.sort((a, b) => (b.bundle.signing_fingerprint === fp) - (a.bundle.signing_fingerprint === fp))
         this.changed()
     },
-    async statements(fp) { return this.mode === 'vault' ? A.book.statements(this.book, fp) : (localBook().record[fp] || []) },
+    async _localIds() {
+        const ids = []; for (const k of this.local.keys) { try { ids.push(await L.identityOf(k)) } catch (e) { /* left */ } }
+        return ids.sort((a, b) => (b.bundle.signing_fingerprint === this.local.default) - (a.bundle.signing_fingerprint === this.local.default))
+    },
+    /** The book outside a vault: the local account's in local mode, the browser mode's own otherwise. */
+    _lb() { if (this.mode === 'local') { const b = this.local.book = this.local.book || {}; b.record = b.record || {}; b.contacts = b.contacts || {}; b.agents = b.agents || {}; return b } return localBook() },
+    async _saveLb(b) { if (this.mode === 'local') { this.local.book = b; await this.saveLocal() } else saveLocalBook(b) },
+    async statements(fp) { return this.mode === 'vault' ? A.book.statements(this.book, fp) : (this._lb().record[fp] || []) },
     async addStatement(st) {
         if (this.mode === 'vault') return A.book.addStatement(this.book, st)
-        const b = localBook(); (b.record[st.record] = b.record[st.record] || []).push(st); saveLocalBook(b)
+        const b = this._lb(); (b.record[st.record] = b.record[st.record] || []).push(st); await this._saveLb(b)
     },
-    async contacts() { return this.mode === 'vault' ? A.book.contacts(this.book) : Object.values(localBook().contacts) },
-    async saveContact(c) { if (this.mode === 'vault') return A.book.saveContact(this.book, c); const b = localBook(); b.contacts[c.bundle.signing_fingerprint] = { v: 1, ...c, updated: new Date().toISOString() }; saveLocalBook(b) },
-    async agents() { return this.mode === 'vault' ? A.book.agents(this.book) : Object.values(localBook().agents || {}) },
-    async saveAgent(sub) { if (this.mode === 'vault') return A.book.saveAgent(this.book, sub); const b = localBook(); (b.agents = b.agents || {})[sub.record] = sub; saveLocalBook(b) },
-    async removeContact(fp) { if (this.mode === 'vault') return A.book.removeContact(this.book, fp); const b = localBook(); delete b.contacts[fp]; saveLocalBook(b) },
-    close() { session.set(null); Object.assign(this, { mode: null, door: null, master: null, book: null, token: '', doors: [], ids: [], inbox: null, browserIds: null }); this.changed() },
+    async contacts() { return this.mode === 'vault' ? A.book.contacts(this.book) : Object.values(this._lb().contacts) },
+    async saveContact(c) { if (this.mode === 'vault') return A.book.saveContact(this.book, c); const b = this._lb(); b.contacts[c.bundle.signing_fingerprint] = { v: 1, ...c, updated: new Date().toISOString() }; await this._saveLb(b) },
+    async agents() { return this.mode === 'vault' ? A.book.agents(this.book) : Object.values(this._lb().agents || {}) },
+    async saveAgent(sub) { if (this.mode === 'vault') return A.book.saveAgent(this.book, sub); const b = this._lb(); (b.agents = b.agents || {})[sub.record] = sub; await this._saveLb(b) },
+    async removeContact(fp) { if (this.mode === 'vault') return A.book.removeContact(this.book, fp); const b = this._lb(); delete b.contacts[fp]; await this._saveLb(b) },
+    /** The master key: the one marked so, or (for keys made before roles) the default. Personas are the keys that name it. */
+    get masterKey() { return this.ids.find(i => i.role === 'master') || this.ids.find(i => !i.role || i.role !== 'persona') || null },
+    personasOf(fp) { return this.ids.filter(i => i.role === 'persona' && i.persona_of === fp) },
+    close() { session.set(null); Object.assign(this, { mode: null, door: null, master: null, book: null, token: '', doors: [], ids: [], inbox: null, browserIds: null, doorKey: null, local: null, profile: null }); this.changed() },
 }
+const credOf = prf => prf && (prf.path || prf.credId) ? { path: prf.path || '', credId: prf.credId || '' } : null
 function readLocal() { try { return JSON.parse(localStorage.getItem(LOCAL) || 'null') } catch (e) { return null } }
 function localBook() { try { return JSON.parse(localStorage.getItem(LOCAL_BOOK) || 'null') || { v: 1, record: {}, contacts: {} } } catch (e) { return { v: 1, record: {}, contacts: {} } } }
 function saveLocalBook(b) { localStorage.setItem(LOCAL_BOOK, JSON.stringify(b)) }
 export const hasBrowserKey = () => !!readLocal()
 function deviceName() { const ua = navigator.userAgent || ''; return /iPhone|iPad/.test(ua) ? 'iOS' : /Android/.test(ua) ? 'Android' : /Mac/.test(ua) ? 'Mac' : /Windows/.test(ua) ? 'Windows' : /Linux/.test(ua) ? 'Linux' : 'a browser' }
+
+/** A default avatar: a 5×5 mirrored pattern from a hash (FNV-1a, then xorshift) of a name, as an SVG data: URL. Deterministic, offline. */
+export function avatarFor(seed) {
+    let x = 2166136261 >>> 0; const bits = []
+    for (const c of String(seed || '?')) { x ^= c.charCodeAt(0); x = Math.imul(x, 16777619) >>> 0 }
+    for (let i = 0; i < 15; i++) { x ^= x << 13; x >>>= 0; x ^= x >>> 17; x ^= x << 5; x >>>= 0; bits.push(x & 1) }
+    const hue = x % 360, fg = `hsl(${hue} 55% 42%)`, bg = `hsl(${hue} 40% 92%)`
+    let r = ''; for (let row = 0; row < 5; row++) for (let col = 0; col < 3; col++) if (bits[row * 3 + col]) for (const c of new Set([col, 4 - col])) r += `<rect x="${c + 1}" y="${row + 1}" width="1" height="1"/>`
+    return 'data:image/svg+xml;utf8,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7 7" shape-rendering="crispEdges"><rect width="7" height="7" fill="${bg}"/><g fill="${fg}">${r}</g></svg>`)
+}
 
 // ------------------------------------------------------------ the vault bar
 /**
@@ -238,13 +350,16 @@ export function vaultBar(mount, opts = {}) {
     const draw = () => {
         panel.replaceChildren()
         if (vault.open) {
-            const me = vault.me
+            const me = vault.me, pr = vault.profile
             bar.replaceChildren(
-                h('span', { class: 'state open' }, vault.mode === 'vault' ? '● Your vault is open' : '● Your key, from this browser'),
-                h('span', { class: 'who' }, me ? `${me.bundle.label || 'your key'} · ${me.bundle.signing_fingerprint}` : 'no key yet'),
+                pr && (pr.avatar || pr.username) ? h('img', { class: 'vav', alt: '', src: pr.avatar || avatarFor(pr.username || (me && me.bundle.signing_fingerprint) || '') }) : null,
+                h('span', { class: 'state open' }, vault.mode === 'vault' ? '● Your vault is open' : vault.mode === 'local' ? '● Signed in · kept in this browser' : '● Your key, from this browser'),
+                h('span', { class: 'who' }, pr && pr.username ? `@${pr.username} · ` : '', me ? `${me.bundle.label || 'your key'} · ${me.bundle.signing_fingerprint}` : 'no key yet'),
                 h('span', { class: 'grow' }),
+                h('a', { class: 'btn small', href: pageUrl('account/index.html') }, 'Your account'),
                 h('a', { class: 'btn small', href: pageUrl('vault/index.html') }, 'Your vault'),
                 ...(vault.mode === 'browser' ? [h('button', { type: 'button', class: 'btn small', title: 'Open (or create) a vault with a passkey; this browser’s key moves into it', onclick: e => busy(e.target, withPasskey) }, 'Move into a vault')] : []),
+                ...(vault.mode === 'local' ? [h('button', { type: 'button', class: 'btn small', title: 'Create your vault with an access key; everything this browser keeps moves into it', onclick: () => upgradePanel() }, 'Move into a vault')] : []),
                 h('button', { type: 'button', class: 'btn small', onclick: () => vault.close() }, 'Close'))
             return
         }
@@ -268,6 +383,22 @@ export function vaultBar(mount, opts = {}) {
         try { await vault.makePasskey(); say(msg('ok', 'A passkey was made for pki.sgit.ai. Now open with it: the first time, there is no vault behind it yet, and the page will make one.')) }
         catch (e) { say(msg('warn', `The passkey was not made: ${err(e)}`)) }
     }
+    function upgradePanel() {
+        const access = h('input', { class: 't', type: 'password', autocomplete: 'off', placeholder: 'an SG/Send access key', value: opts.accessKey || '' })
+        const go = h('button', { type: 'button', class: 'btn primary' }, 'Create my vault')
+        go.addEventListener('click', () => busy(go, async () => {
+            if (!access.value.trim()) return panel.prepend(msg('warn', 'An access key is needed to create vaults.'))
+            panel.prepend(msg('', 'Creating three vaults (a door, a master, a book), moving your keys, profile and record in, and a recovery door…'))
+            try { showRecovery(await vault.upgrade(access.value.trim())) } catch (e) { panel.prepend(msg('bad', err(e))) }
+        }))
+        say(h('h3', {}, 'Move into a vault'), h('p', { class: 'small' }, 'Your account is kept in this browser only. With an access key, it moves into a vault opened by the same passkey, and then follows you to every device; the copy here is removed once the vault reads it back.'),
+            h('label', { class: 'f' }, 'SG/Send access key'), access, h('div', { class: 'acts' }, go))
+    }
+    function showRecovery(rc) {
+        say(msg('warn', h('b', {}, 'Your recovery code, shown once. Write it down: '), h('span', { class: 'mono' }, rc.shown)),
+            h('p', { class: 'dim small' }, 'It opens a second door to the same master: for a device with no passkey, and for the day the passkey is gone. This page does not keep it.'),
+            h('div', { class: 'acts' }, h('button', { type: 'button', class: 'btn', onclick: () => draw() }, 'I have written it down')))
+    }
     function firstTime(door, prf) {
         const access = h('input', { class: 't', type: 'password', autocomplete: 'off', placeholder: 'an SG/Send access key', value: opts.accessKey || '' })
         const code = h('input', { class: 't', type: 'text', autocomplete: 'off', placeholder: 'XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XX' })
@@ -276,10 +407,7 @@ export function vaultBar(mount, opts = {}) {
             if (!access.value.trim()) return say(msg('warn', 'An access key is needed to create vaults. Ask whoever invited you, or write to agent@riskmandate.ai.'))
             panel.prepend(msg('', 'Creating three vaults (a door, a master, a book) and a recovery door…'))
             try {
-                const rc = await vault.create(door, prf, access.value.trim())
-                say(msg('warn', h('b', {}, 'Your recovery code, shown once. Write it down: '), h('span', { class: 'mono' }, rc.shown)),
-                    h('p', { class: 'dim small' }, 'It opens a second door to the same master: for a device with no passkey, and for the day the passkey is gone. This page does not keep it.'),
-                    h('div', { class: 'acts' }, h('button', { type: 'button', class: 'btn', onclick: () => draw() }, 'I have written it down')))
+                showRecovery(await vault.create(door, prf, access.value.trim()))
             } catch (e) { say(msg('bad', e.code === 'EEXISTS' ? 'A vault already exists at this door: open with the passkey again.' : err(e))) }
         }))
         const join = h('button', { type: 'button', class: 'btn' }, 'Add this passkey with the code')
@@ -292,7 +420,9 @@ export function vaultBar(mount, opts = {}) {
             h('div', { class: 'acts' }, go),
             h('h3', {}, 'Already have a vault from another device'),
             h('label', { class: 'f' }, 'Recovery code'), code, h('div', { class: 'acts' }, join),
-            h('p', { class: 'dim small' }, 'No access key? You can still make your key and keep it in this browser for now, from your vault page.'))
+            h('h3', {}, 'No access key yet'),
+            h('p', { class: 'small' }, 'Keep everything in this browser, encrypted with a key this passkey derives: no passphrase. It moves into a vault when you have an access key.'),
+            h('div', { class: 'acts' }, h('button', { type: 'button', class: 'btn', onclick: e => busy(e.target, async () => { try { await vault.createLocal(door, prf) } catch (x) { panel.prepend(msg('bad', err(x))) } }) }, 'Keep it in this browser')))
     }
     function recover() {
         const code = h('input', { class: 't', type: 'text', autocomplete: 'off', placeholder: 'XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XX' })

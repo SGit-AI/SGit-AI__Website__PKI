@@ -40,6 +40,7 @@ NAV = [
     # one menu deeper, under Archive: kept as the record of the thinking, not as the front of the site.
     ("People", "people/index.html", [
         ("&#9679; The register of people", "people/index.html"),
+        ("&#9679; Sign in &amp; your account", "account/index.html"),
         ("&#9679; Your vault &amp; your keys", "vault/index.html"),
         ("&#9679; Send a message", "send/index.html"),
         ("&#9679; Invite someone", "invite/index.html"),
@@ -48,7 +49,7 @@ NAV = [
         ("Articles", "articles/index.html"),
         ("How it works", "people/how.html"),
         ("The brief", "documents/people-directory.html"),
-    ], ("storyboards/", "articles/", "people/", "vault/", "send/", "m/", "invite/", "join/", "agents/")),
+    ], ("account/", "login/", "storyboards/", "articles/", "people/", "vault/", "send/", "m/", "invite/", "join/", "agents/")),
     ("The rules", "failure/index.html", [
         ("Why the old ones failed (2019)", "failure/index.html"),
         ("The four rules", "rules/index.html"),
@@ -87,6 +88,8 @@ NAV = [
 FOOTER = [
     ("People", [
         ("&#9679; The register", "people/index.html"),
+        ("&#9679; Sign in", "login/index.html"),
+        ("&#9679; Your account", "account/index.html"),
         ("&#9679; Your vault", "vault/index.html"),
         ("&#9679; Send a message", "send/index.html"),
         ("Open a message", "m/index.html"),
@@ -161,6 +164,7 @@ def nav_html(rel, up):
             f'  <a class="ver" href="{up}admin/versions.html" title="Site release history" data-site-version></a>\n'
             f'  <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>\n'
             f'  <div class="nav-items">\n{rows}\n  </div>\n'
+            f'  <a class="gh signin" href="{up}login/index.html" data-signin>Sign in</a>\n'
             f'  <a class="gh" href="{GH}">★ GitHub</a>\n'
             f'  <script src="{up}assets/version.js" defer></script>\n'
             f'  <script src="{up}assets/nav.js" defer></script>\n'

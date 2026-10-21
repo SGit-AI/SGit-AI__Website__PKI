@@ -30,6 +30,14 @@
   }
   var nav = document.querySelector('nav.site');
   if (!nav) return;
+  /* Signed in, in this tab (the session the account pages keep, holding no name), the button goes to the account. */
+  var si = nav.querySelector('[data-signin]');
+  try {
+    if (si && window.sessionStorage && sessionStorage.getItem('pki.vault.session')) {
+      si.textContent = '\u25CF Your account';
+      si.setAttribute('href', si.getAttribute('href').replace('login/index.html', 'account/index.html'));
+    }
+  } catch (e) {}
   var toggle = nav.querySelector('.nav-toggle');
   if (toggle) {
     toggle.addEventListener('click', function () {
