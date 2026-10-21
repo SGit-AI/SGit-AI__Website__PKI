@@ -92,6 +92,11 @@
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
     <tr>
+<td class="vnum">v0.2.7</td>
+<td class="vdate">21 Oct 2026</td>
+<td><b>The first key, and the next ones.</b> The welcome now asks where to keep the account before any key is made, so with an access key the vault is created first and the master key is born in it. With no anchor in the register, the overview says how the first one is enrolled (vault, master key, inbox, then the submission handed to the site's agent, with the fingerprint confirmed out of band). For newcomers, a key is now shareable before it is in the register: <b>Share as a QR code</b> shows a key link (<code>send/#k1.…</code>, the two public keys and the label, about 900 characters); Send reads it, shows the fingerprint to compare, and seals an access key to it; the newcomer opens the message signed in, and <b>Create my vault with it</b> makes their vault, by them, with everything their browser kept moved in. The recovery code shown after that now stays on screen until dismissed (a redraw could hide it). <code>test_people_login.mjs</code> adds both journeys.</td>
+    </tr>
+    <tr>
 <td class="vnum">v0.2.6</td>
 <td class="vdate">21 Oct 2026</td>
 <td><b>A login made of a passkey.</b> <a href="../login/index.html">Sign in</a>: one button signs up and in; a vault at the passkey's door opens, with none the account this browser keeps for that passkey opens, with neither a new one starts. The new browser-only account needs no passphrase and no access key: one local storage entry, AES-256-GCM under a key the passkey derives (<code>assets/people/local.js</code>), and it moves into the door/master/book vaults when an access key comes, removed from the browser once the vault reads it back. <a href="../account/index.html">Your account</a>, with a side menu: overview, profile (username, name, picture, a line about you), keys and personas, storage and devices, and the vault as files with secrets masked. A master key, and personas it signs: two links, "persona" and "persona-of", read by the register as one person holding both keys. A Sign in button in the nav on every page. Tested end to end in Chromium (<code>test_people_login.mjs</code>), and written up: <a href="../articles/a-login-made-of-a-passkey.html">a login made of a passkey</a>, signed.</td>

@@ -648,6 +648,13 @@ const __message = (() => {
  * Everything after # stays in the browser: a fragment is never sent to a server. The page that opens it rebuilds the
  * .enc text, unlocks the reader's vault, and decrypts there.
  *
+ * A public key is a link too (k1), to show as a QR code or send, so someone can seal a message (an access key, say) to
+ * a person who is not in the register yet. It carries the two keys' SPKI bytes and the label; the bundle and both
+ * fingerprints are recomputed from them. It is not secret, and not authenticated: the camera, face to face, or a
+ * fingerprint compared on a channel already known, is what says whose key it is.
+ *
+ *     https://pki.sgit.ai/send/#k1.<encryption SPKI>.<signing SPKI>.<label, utf-8>          (base64url, each)
+ *
  * An invitation is a link too, signed by the inviter, naming nobody (the invitee has no key yet):
  *
  *     https://pki.sgit.ai/join/#i1.<inviter signing fp, 16 hex>.<expires yyyymmdd>.<nonce, 16 hex>.<sig>[&n=<name>][&k=<access key>]
@@ -658,7 +665,7 @@ const __message = (() => {
  *
  * @module message
  */
-const { b64, unb64, b64url, unb64url, canon, utf8, signBytes, verifyBytes, seal, unseal, parseEnvelope, hex, unhex } = __keys
+const { b64, unb64, b64url, unb64url, canon, utf8, fromUtf8, unpem, bundleOf, signBytes, verifyBytes, seal, unseal, parseEnvelope, hex, unhex } = __keys
 
 const KIND = 'pki.sgit.ai/message/v1'
 const SITE = 'https://pki.sgit.ai/'
@@ -762,8 +769,19 @@ function parseInvite(text) {
     return { from, expires, nonce: m[3], name: q.get('n') || '', accessKey: q.get('k') || '', expired: expires < new Date().toISOString().slice(0, 10),
              verify: bundle => bundle && bundle.signing_fingerprint === from ? verifyBytes(bundle.sign, unb64url(m[4]), inviteBytes(from, m[2], m[3])) : Promise.resolve(null) }
 }
+/** A public bundle as a k1 code and a link to the send page with it. */
+function keyCode(bundle) {
+    const code = `k1.${b64url(unpem(bundle.encrypt).der)}.${b64url(unpem(bundle.sign).der)}.${b64url(utf8(bundle.label || ''))}`
+    return { code, url: SITE + 'send/#' + code }
+}
+/** Read a k1 code (in a link or alone): the bundle, recomputed; null when there is none. */
+async function parseKeyCode(text) {
+    const m = /k1\.([A-Za-z0-9_-]{100,1200})\.([A-Za-z0-9_-]{60,200})\.([A-Za-z0-9_-]{0,200})/.exec(String(text || ''))
+    if (!m) return null
+    return bundleOf(unb64url(m[1]), unb64url(m[2]), fromUtf8(unb64url(m[3])))
+}
 
-return { KIND, SITE, MAX_QR_CHARS, compose, verifyMessage, problems, sealMessage, codeOf, parseCode, openMessage, invite, parseInvite, unhex }
+return { KIND, SITE, MAX_QR_CHARS, compose, verifyMessage, problems, sealMessage, codeOf, parseCode, openMessage, invite, parseInvite, keyCode, parseKeyCode, unhex }
 })()
 
 // ---------------------------------------------------------------- the tool (agents/pki-agent.src.mjs)

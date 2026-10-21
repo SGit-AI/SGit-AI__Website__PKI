@@ -6,7 +6,7 @@
 > counts when it goes both ways, which is also the answer to how the old web of trust was
 > destroyed in 2019.
 
-*Source: <https://pki.sgit.ai/index.html> · site v0.2.6 · markdown twin of the front page.*
+*Source: <https://pki.sgit.ai/index.html> · site v0.2.7 · markdown twin of the front page.*
 
 ---
 

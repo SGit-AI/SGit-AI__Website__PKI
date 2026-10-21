@@ -18,6 +18,16 @@ function grantButton(g) {
         return b
     }
     const b = h('button', { type: 'button', class: 'btn primary', id: 'grant-use' }, 'Create my vault with it')
+    if (vault.mode === 'local') {                     // signed in, kept in this browser: the vault is made here, by them, now
+        b.addEventListener('click', () => busy(b, async () => {
+            try {
+                const rc = await vault.upgrade(g.token)
+                // in the bar's panel, which the page's redraw (the vault just changed) leaves alone until it is dismissed
+                bar.showRecovery(rc); window.scrollTo(0, 0)
+            } catch (e) { b.parentNode.prepend(msg('bad', err(e))) }
+        }))
+        return b
+    }
     b.addEventListener('click', () => { bar.setAccessKey(g.token); window.scrollTo(0, 0); b.replaceWith(h('span', { class: 'ok' }, vault.mode === 'browser' ? 'Ready: press “Move into a vault” above, make or use a passkey, and the key goes in with your keys.' : 'Ready: press “Open with my passkey” above; the first time, the form to create your vault has the key in it.')) })
     return b
 }

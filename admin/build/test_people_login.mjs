@@ -12,6 +12,9 @@
  *   signs out, signs in again with the same passkey: the same account, from this browser;
  *   moves it all into a vault with an access key; the browser copy is gone;
  *   signs out, clears the tab, signs in: the vault opens, with her profile, master key and persona.
+ * As Eve, the first anchor's way: signs up, and with an access key the vault is made before the key, so the master key
+ * is born in it. As Fay, a newcomer with no access key: signs up in this browser, makes her key and shows it as a key
+ * link (k1); Eve opens it on Send, seals an access key to it; Fay opens the message and her vault is made, by her.
  * Skips, saying so, when Playwright is not installed.
  */
 import fs from 'fs'
@@ -79,12 +82,12 @@ try {
     await p.setInputFiles('#pf-avatar', { name: 'me.png', mimeType: 'image/png', buffer: png })
     await p.waitForFunction(() => document.querySelector('.pf-pic img').src.startsWith('data:image/jpeg'))
     await p.click('#pf-save')
+    await p.locator('#welcome-browser').waitFor()
+    await p.click('#welcome-browser')
     await p.locator('#master-go').waitFor()
     check((await p.inputValue('#master-label')) === 'Dee Example', 'step 2: the master key is named from the profile')
     await p.click('#master-go')
-    await p.locator('#welcome-done').waitFor({ timeout: 90000 })
-    await p.click('#welcome-done')
-    await p.locator('.profile-card').waitFor()
+    await p.locator('.profile-card').waitFor({ timeout: 90000 })
     check((await text(p, '.profile-card')).includes('Testing the login.') && (await p.getAttribute('.profile-card img', 'src')).startsWith('data:image/jpeg'), 'the overview: name, blurb and the picture, shrunk to a JPEG here')
     check((await p.locator('.steps li.done').count()) === 3, 'three of six steps done: profile, master key, identity statement signed')
     // personas
@@ -140,6 +143,62 @@ try {
     await p.locator('#tree button', { hasText: 'signing_private.pem' }).first().click()
     await p.locator('.viewer pre').waitFor()
     check((await text(p, '.viewer pre')).includes('masked'), 'the explorer lists the master’s files, a private key masked until revealed')
+    // ---------------------------------------------------------------- Eve: vault first, then the key
+    const eve = await person('Eve'), e = eve.page
+    await e.goto(SITE + 'login/index.html')
+    await e.locator('details.signup summary').click()
+    await e.fill('#signup-name', 'eve')
+    await e.click('#signup-go')
+    await e.locator('#pf-name').waitFor({ timeout: 60000 })
+    await e.fill('#pf-name', 'Eve Anchor')
+    await e.click('#pf-save')
+    await e.locator('#upgrade-key').waitFor()
+    check((await e.locator('#anchor-callout').count()) === 0, 'the welcome asks where to keep it before any key is made')
+    await e.fill('#upgrade-key', mock.token)
+    await e.click('#upgrade-go')
+    await e.locator('#recovery-code').waitFor({ timeout: 120000 })
+    await e.click('#recovery-done')
+    await e.locator('#master-go').waitFor({ timeout: 60000 })
+    check((await text(e, '.vpanel')).includes('in your master vault'), 'with an access key, the vault comes first: the master key will be made in it')
+    await e.click('#master-go')
+    await e.locator('.profile-card').waitFor({ timeout: 90000 })
+    check((await text(e, '.side')).includes('vault') && (await localKeys(e)).length === 0, 'Eve’s master key was born in her vault; nothing kept in the browser')
+    check((await e.locator('#anchor-callout').count()) === 1 && (await text(e, '#anchor-callout')).includes('sha256:'), 'with no anchor in the register, the overview says how the first one is enrolled, with her fingerprint')
+    // ---------------------------------------------------------------- Fay: a key first, then an access key sealed to it
+    const fay = await person('Fay'), f = fay.page
+    await f.goto(SITE + 'login/index.html')
+    await f.locator('details.signup summary').click()
+    await f.click('#signup-go')
+    await f.locator('#pf-name').waitFor({ timeout: 60000 })
+    await f.fill('#pf-name', 'Fay Newcomer')
+    await f.click('#pf-save')
+    await f.click('#welcome-browser')
+    await f.locator('#master-go').waitFor()
+    await f.click('#master-go')
+    await f.locator('.profile-card').waitFor({ timeout: 90000 })
+    await f.goto(SITE + 'account/index.html#keys')
+    await f.locator('.keycard.master button', { hasText: 'Share as a QR code' }).click()
+    await f.locator('.share svg').waitFor()
+    const keyLink = await f.evaluate(() => [...document.querySelectorAll('.share button')].length && document.querySelector('.share .mono').textContent)
+    const fayFp = keyLink
+    const link = await f.evaluate(async () => (await import('/assets/people/message.js')).keyCode((await import('/assets/people/ui.js')).vault.masterKey.bundle).url)
+    check(link.includes('/send/#k1.') && link.length < 1400, `Fay’s key as a link short enough for a QR code (${link.length} characters)`)
+    await e.goto(SITE + 'send/index.html' + link.slice(link.indexOf('#')))
+    await e.locator('#send-keynote p').waitFor({ timeout: 60000 })
+    check((await text(e, '#send-keynote')).includes(fayFp) && (await text(e, '#send-keynote')).includes('compare'), 'on Send, Eve sees Fay’s fingerprint to compare, and the warning that a link proves nothing')
+    await e.fill('#send-grant', mock.token)
+    await e.click('#send-go')
+    await e.locator('#send-link').waitFor({ timeout: 60000 })
+    const grantLink = await text(e, '#send-link')
+    await f.goto(SITE + 'm/index.html' + grantLink.slice(grantLink.indexOf('#')))
+    await f.getByRole('button', { name: 'Open it with my keys' }).click()
+    await f.locator('#grant-use').waitFor({ timeout: 60000 })
+    await f.click('#grant-use')
+    await f.locator('#recovery-code').waitFor({ timeout: 120000 })
+    check((await localKeys(f)).length === 0, 'Fay opens it and her vault is made, by her, with the access key sealed to her key; the browser copy is gone')
+    await f.goto(SITE + 'account/index.html#keys')
+    await f.locator('.keycard.master').waitFor({ timeout: 60000 })
+    check((await text(f, '.keycard.master')).includes(fayFp) && (await text(f, '.keycard.master')).includes('in your master vault'), 'and her key is in it')
 } catch (e) { failed++; console.log('FAIL', e.message.split('\n')[0]); if (process.env.SHOT) for (const c of browser.contexts()) for (const pg of c.pages()) { await pg.screenshot({ path: process.env.SHOT, fullPage: true }).catch(() => {}); console.log('  at', pg.url()) } }
 finally {
     check(errors.length === 0, errors.length ? `no page errors (${errors.length}: ${errors.slice(0, 3).join(' | ')})` : 'no page errors')

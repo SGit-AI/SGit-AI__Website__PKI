@@ -11,7 +11,8 @@ const dir = await loadDirectory().catch(() => null)
 let contacts = []
 
 const to = h('select', { class: 't', id: 'send-to' })
-const paste = h('textarea', { class: 't code', placeholder: 'or paste their public bundle (sgit pki export)', rows: 3 })
+const paste = h('textarea', { class: 't code', id: 'send-paste', placeholder: 'or paste their public bundle (sgit pki export), or their key link (…/send/#k1.…)', rows: 3 })
+const keyNote = h('div', { id: 'send-keynote' })
 const subject = h('input', { class: 't', id: 'send-subject', maxlength: 200, placeholder: 'optional' })
 const text = h('textarea', { class: 't', id: 'send-text', placeholder: 'What only they should read' })
 const files = h('input', { type: 'file', multiple: true })
@@ -44,8 +45,20 @@ async function refresh() { contacts = vault.open ? await vault.contacts().catch(
 vault.onChange(refresh)
 refresh()
 
-function recipient() {
-    if (paste.value.trim()) { let b; try { b = JSON.parse(paste.value) } catch (e) { throw new Error('the pasted bundle is not JSON') } return { bundle: b, name: b.label || 'them', rec: null } }
+/** A key link (k1) in the address or pasted: the bundle, recomputed, and the fingerprint to compare with its owner. */
+async function fromKeyLink(text) {
+    const b = await M.parseKeyCode(text)
+    if (!b) return null
+    const rec = dir && dir.byFp.get(b.signing_fingerprint)
+    keyNote.replaceChildren(msg(rec ? 'ok' : 'warn', 'A key from a link: ', h('b', {}, b.label || '(no label)'), ' · ', h('span', { class: 'mono' }, b.signing_fingerprint),
+        rec ? ` · in the register as ${rec.name}.` : '. Not in the register: a key link proves nothing about whose key it is, so compare this fingerprint with them, face to face or on a channel you already know is theirs, before you seal anything that matters to it.'))
+    return b
+}
+async function recipient() {
+    if (paste.value.trim()) {
+        const k = await fromKeyLink(paste.value); if (k) return { bundle: k, name: k.label || 'them', rec: (dir && dir.byFp.get(k.signing_fingerprint)) || null }
+        let b; try { b = JSON.parse(paste.value) } catch (e) { throw new Error('the pasted text is neither a bundle nor a key link') } return { bundle: b, name: b.label || 'them', rec: null }
+    }
     const fp = to.value
     if (!fp) throw new Error('pick who it is for')
     const rec = dir && dir.byFp.get(fp)
@@ -59,7 +72,7 @@ go.addEventListener('click', () => busy(go, async () => {
     out.replaceChildren()
     await vault.settled()
     try {
-        const r = recipient()
+        const r = await recipient()
         const p = await K.checkBundle(r.bundle); if (p.length) throw new Error(p.join('; '))
         const grant = grantKey.value.trim() ? { token: grantKey.value.trim(), name: grantName.value.trim() } : null
         if (!text.value.trim() && !files.files.length && !grant) throw new Error('nothing to send')
@@ -86,7 +99,7 @@ go.addEventListener('click', () => busy(go, async () => {
 }))
 
 app.replaceChildren(
-    h('label', { class: 'f' }, 'To'), to, paste,
+    h('label', { class: 'f' }, 'To'), to, paste, keyNote,
     h('label', { class: 'f' }, 'Subject'), subject,
     h('label', { class: 'f' }, 'Message'), text,
     h('details', { class: 'vpanel' }, h('summary', {}, h('b', {}, 'Hand over an access key')),
@@ -94,3 +107,5 @@ app.replaceChildren(
         grantKey, grantName),
     h('label', { class: 'f' }, 'Files ', h('span', { class: 'dim' }, '(optional, 2 MB each; a file makes it too long for a QR code, so it goes as a link or to their inbox)')), files,
     h('div', { class: 'acts' }, signLine), h('div', { class: 'acts' }, go), out)
+if (/#k1\./.test(location.hash)) fromKeyLink(location.hash).then(b => { if (b) { paste.value = location.hash.slice(1); document.querySelector('details.vpanel').open = true } }).catch(e => keyNote.replaceChildren(msg('bad', err(e))))
+paste.addEventListener('input', () => { if (/k1\./.test(paste.value)) fromKeyLink(paste.value).catch(() => {}); else keyNote.replaceChildren() })

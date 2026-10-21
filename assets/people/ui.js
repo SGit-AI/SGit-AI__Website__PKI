@@ -395,7 +395,7 @@ export function vaultBar(mount, opts = {}) {
             h('label', { class: 'f' }, 'SG/Send access key'), access, h('div', { class: 'acts' }, go))
     }
     function showRecovery(rc) {
-        say(msg('warn', h('b', {}, 'Your recovery code, shown once. Write it down: '), h('span', { class: 'mono' }, rc.shown)),
+        say(msg('warn', h('b', {}, 'Your recovery code, shown once. Write it down: '), h('span', { class: 'mono', id: 'recovery-code' }, rc.shown)),
             h('p', { class: 'dim small' }, 'It opens a second door to the same master: for a device with no passkey, and for the day the passkey is gone. This page does not keep it.'),
             h('div', { class: 'acts' }, h('button', { type: 'button', class: 'btn', onclick: () => draw() }, 'I have written it down')))
     }
@@ -441,5 +441,5 @@ export function vaultBar(mount, opts = {}) {
     vault.resume().then(ok => { if (!ok) draw() })
     /** A grant opened on this page offers its access key to the vault's first-time form. */
     const setAccessKey = k => { opts.accessKey = k; draw() }
-    return { draw, say, setAccessKey }
+    return { draw, say, setAccessKey, showRecovery }
 }

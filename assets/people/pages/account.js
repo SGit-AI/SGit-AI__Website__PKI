@@ -1,8 +1,9 @@
 /* account/index.html: your account. Signed in with a passkey, a section of its own: your profile, your master key and
    the personas it signs, where it is all kept (this browser, or a vault that follows you), and the vault itself, as
    files. The tools (record, links, contacts, inbox, agents) stay where they are and are linked from the side. */
-import { h, msg, err, busy, vault, pageUrl, download, copyButton, avatarFor, loadDirectory, standingPill, K, D, A, L } from '../ui.js'
+import { h, msg, err, busy, vault, pageUrl, download, copyButton, avatarFor, loadDirectory, standingPill, qr, K, D, A, L } from '../ui.js'
 import { signInCard } from '../signin.js'
+import * as M from '../message.js'
 
 const app = document.getElementById('app')
 const SECTIONS = [['overview', 'Overview', '◉'], ['profile', 'Profile', '☺'], ['keys', 'Keys & personas', '⚿'], ['storage', 'Storage & devices', '▣'], ['explorer', 'Your vault, as files', '☰']]
@@ -21,7 +22,9 @@ vault.onChange(() => draw())
 app.replaceChildren(h('p', { class: 'dim' }, 'Checking this tab’s session…'))
 vault.resume().then(() => draw(), () => draw())
 
+let holding = false                                   // a recovery code on screen: no redraw until it is dismissed
 async function draw() {
+    if (holding) return
     const t = ++drawing
     if (!vault.open) return app.replaceChildren(h('div', { class: 'acct-out' }, signInCard({ onDone: r => go(r.fresh ? 'welcome' : 'overview') })))
     const pane = h('section', { class: 'pane', id: 'pane-' + route })
@@ -45,14 +48,20 @@ const head = (title, ...lead) => [h('h2', {}, title), lead.length ? h('p', { cla
 // ------------------------------------------------------------ welcome: the three steps after the first sign-in
 async function welcome(pane) {
     const p = vault.profile || {}, m = vault.masterKey
-    const step = !p.set ? 1 : !m ? 2 : 3              // set: the profile form was saved once (the sign-up's username alone is not that)
+    // set: the profile form was saved once (the sign-up's username alone is not that). The place comes before the key,
+    // so that with an access key the vault is made first and the master key is born in it, never in the browser.
+    const placed = vault.mode === 'vault' || !!(vault.local && vault.local.placed)
+    const step = !p.set ? 1 : !placed && !m ? 2 : !m ? 3 : 4
+    if (step === 4) return go('overview')
     const li = (n, t) => h('li', { class: n < step ? 'done' : n === step ? 'now' : '' }, t)
     pane.append(...head('Welcome', 'Your passkey is your login. Three steps, and the account is yours.'),
-        h('ol', { class: 'steps' }, li(1, 'Who you are: a username, a name, a picture, a line about you.'), li(2, 'Your master key: the key pair every other key of yours is signed from.'), li(3, 'Where to keep it all: this browser, or a vault that follows you.')))
+        h('ol', { class: 'steps' }, li(1, 'Who you are: a username, a name, a picture, a line about you.'), li(2, 'Where to keep it all: a vault that follows you (with an access key), or this browser.'), li(3, 'Your master key: the key pair every other key of yours is signed from, made where you chose.')))
     const box = h('div', { class: 'vpanel' }); pane.append(box)
     if (step === 1) return profileForm(box, { submit: 'Save and go on' })
-    if (step === 2) return masterMaker(box)
-    box.append(h('h3', {}, '3 · Where to keep it'), storageChoice(), h('div', { class: 'acts' }, h('button', { type: 'button', class: 'btn primary', id: 'welcome-done', onclick: () => go('overview') }, vault.mode === 'vault' ? 'Done' : 'Keep it in this browser for now')))
+    if (step === 3) return masterMaker(box)
+    const stay = h('button', { type: 'button', class: 'btn', id: 'welcome-browser' }, 'No access key: keep it in this browser for now')
+    stay.addEventListener('click', () => busy(stay, async () => { vault.local.placed = true; await vault.saveLocal(); draw() }))
+    box.append(h('h3', {}, '2 · Where to keep it'), storageChoice(), h('div', { class: 'acts' }, stay))
 }
 
 // ------------------------------------------------------------ overview
@@ -73,6 +82,9 @@ async function overview(pane) {
         tile('Master key', m ? h('span', { class: 'mono' }, fpOf(m)) : 'none yet', '#keys', m ? m.bundle.label : 'make it on Keys'),
         tile('Personas', String(personas.length), '#keys', personas.length ? personas.map(x => x.bundle.label).join(', ') : 'keys signed by your master'),
         tile('In the register', rec ? standingPill(g, fpOf(m), rec) : 'not yet', rec ? pageUrl('people/person.html') + '#' + K.dirOf(fpOf(m)) : '#keys', st ? st.text : 'publish your record from Keys')))
+    if (dir && !dir.index.anchors.length) pane.append(h('div', { class: 'vpanel', id: 'anchor-callout' }, h('h3', {}, 'The register has no anchor yet'),
+        h('p', { class: 'small' }, 'Every verification starts from an anchor, and the first is Dinis Cruz: his record is the root the others hang from. If that is you, the order is: a vault first (with your access key, so the key is born in it), then your master key, then an inbox (', h('a', { href: pageUrl('vault/index.html') + '#record' }, 'Your record'), ', step 3, so new people’s records reach you sealed). Then Keys → Publish… → Copy it, and hand the submission to the site’s agent, with the fingerprint below read out of band. The agent checks every signature, writes your record, names your key in ', h('code', {}, 'directory/anchors.json'), ', and releases. A submission holds public keys and signed statements only: nothing in it is secret, and what makes it yours is the fingerprint you confirm.'),
+        m ? h('p', {}, 'Your master key’s fingerprint: ', h('b', { class: 'mono' }, fpOf(m))) : null))
     const verified = st && ['anchor', 'verified'].includes(st.level)
     const items = [[!!(p.username || p.name), 'A profile', '#profile'], [!!m, 'A master key', '#keys'], [!!(mine && mine.identity), 'Your identity statement, signed by your master key', '#keys'],
                    [!!rec, 'Your record in the register', '#keys'], [verified, 'Verified by an anchor (in person, on a call, or on a channel known to be yours)', pageUrl('people/how.html')], [vault.mode === 'vault', 'In a vault, so it follows you across devices', '#storage']]
@@ -203,6 +215,7 @@ async function keyCard(id, { master, dir, m }) {
     const acts = h('div', { class: 'acts' },
         h('button', { type: 'button', class: 'btn small', onclick: () => download(`${id.bundle.label || 'key'}.public.json`.replace(/[^A-Za-z0-9_.-]+/g, '-'), JSON.stringify(id.bundle, null, 2)) }, 'Public bundle'),
         inUse ? null : h('button', { type: 'button', class: 'btn small', onclick: e => busy(e.target, () => vault.setDefault(fp)) }, 'Use this key'),
+        h('button', { type: 'button', class: 'btn small', onclick: e => busy(e.target, () => share(id, card)) }, 'Share as a QR code'),
         h('button', { type: 'button', class: 'btn small', onclick: () => forSgit(id, card) }, 'For the sgit CLI…'),
         mine.identity ? h('button', { type: 'button', class: 'btn small primary', onclick: e => busy(e.target, () => publish(id, card, dir, m)) }, 'Publish…') : null,
         master && mine.identity ? h('a', { class: 'btn small', href: pageUrl('vault/index.html') + '#record' }, 'Evidence & inbox') : null)
@@ -212,6 +225,13 @@ async function keyCard(id, { master, dir, m }) {
     }
     card.append(acts)
     return card
+}
+/** The public key as a k1 link and its QR code: so someone can seal to it (an access key, say) before it is in the register. */
+async function share(id, card) {
+    const k = M.keyCode(id.bundle)
+    card.append(h('div', { class: 'vpanel share' }, h('div', { class: 'qr' }, await qr(k.url, { caption: false }),
+        h('div', { class: 'url' }, h('p', { class: 'small' }, 'Your public key, as a link. Whoever scans it lands on Send with your key filled in, and can seal a message to you, an access key for instance, before you are in the register. It is not secret. It is also not proof of anything: they should see this fingerprint on your screen, or hear it from you, before they trust it.'),
+            h('p', {}, h('b', { class: 'mono' }, fpOf(id))), h('div', { class: 'acts' }, copyButton(k.url, 'Copy the link'))))))
 }
 function forSgit(id, card) {
     const pass = h('input', { class: 't', type: 'password', autocomplete: 'new-password', placeholder: 'a passphrase for sgit to ask for, 10 characters or more' })
@@ -255,11 +275,12 @@ function upgradeForm() {
         if (!key.value.trim()) return out.replaceChildren(msg('warn', 'An access key, please: whoever invited you can give you one, or write to agent@riskmandate.ai.'))
         out.replaceChildren(msg('', 'Creating three vaults (a door, a master, a book), moving your keys, profile and record in, reading them back, and a recovery door…'))
         try {
-            const rc = await vault.upgrade(key.value.trim())
+            holding = true
+            const rc = await vault.upgrade(key.value.trim()).catch(e => { holding = false; throw e })
             app.replaceChildren(h('div', { class: 'acct-out' }, h('div', { class: 'signin' }, h('h2', {}, 'Your vault is made'),
                 msg('warn', h('b', {}, 'Your recovery code, shown once. Write it down: '), h('span', { class: 'mono', id: 'recovery-code' }, rc.shown)),
                 h('p', { class: 'small' }, 'It opens a second door to the same vault: for a device with no passkey, and for the day the passkey is gone. This page does not keep it. The copy this browser kept has been removed: your account now lives in the vault.'),
-                h('div', { class: 'acts' }, h('button', { type: 'button', class: 'btn primary', id: 'recovery-done', onclick: () => go('overview') }, 'I have written it down')))))
+                h('div', { class: 'acts' }, h('button', { type: 'button', class: 'btn primary', id: 'recovery-done', onclick: () => { holding = false; go(vault.masterKey ? 'overview' : 'welcome') } }, 'I have written it down')))))
         } catch (e) { out.replaceChildren(msg('bad', err(e))) }
     }))
     return h('div', { class: 'vpanel' }, h('h3', {}, 'Move into a vault'), h('p', { class: 'small' }, 'The same passkey opens it afterwards, on any device. Your keys, profile, record and contacts move in; the copy here is removed once the vault reads them back.'),
