@@ -181,7 +181,7 @@ async function links(body, dir) {
     // waiting for me
     const waiting = dir ? [...dir.records].filter(r => r.ok && r.links.some(l => l.to === fp) && !myLinks.has(r.fp)) : []
     body.append(h('h3', {}, 'Waiting for you to confirm'))
-    body.append(waiting.length ? h('table', { class: 'kv' }, h('tbody', {}, ...waiting.map(r => { const l = r.links.find(x => x.to === fp); return h('tr', {}, h('th', {}, h('a', { href: pageUrl('people/person.html') + '#' + r.dir }, r.name)), h('td', {}, l.method ? `says: ${D.METHODS[l.method]}${l.on ? ', ' + l.on : ''}` : 'says they know you', ' ', h('button', { type: 'button', class: 'btn small primary', onclick: e => busy(e.target, async () => { await vault.addStatement(await D.linkStatement(me, { to: r.fp, method: 'known' })); draw() }) }, 'Yes, I know them: link back'))) }))) : h('p', { class: 'dim small' }, 'Nobody in the register has linked to you without your link back.'))
+    body.append(waiting.length ? h('div', {}, ...waiting.map(r => waitingCard(r, r.links.find(x => x.to === fp), me))) : h('p', { class: 'dim small' }, 'Nobody in the register has linked to you without your link back.'))
     // link to someone
     const target = linkTarget() ? K.fpOfDir(linkTarget()) : ''
     const pick = h('select', { class: 't' }, h('option', { value: '' }, '— pick someone in the register —'), ...(dir ? dir.records.filter(r => r.ok && r.fp !== fp && (!myLinks.has(r.fp) || r.fp === target)).map(r => h('option', { value: r.fp, selected: r.fp === target }, `${r.name} · ${r.fp}`)) : []))
@@ -225,6 +225,26 @@ async function links(body, dir) {
 
 // ------------------------------------------------------------ agents
 const PENDING = 'pki.agent.pending'
+/** One key that links to you and waits for your link back: everything its record says, before you decide. An agent that
+    names you as its operator is confirmed from the Agents tab (an "operates" link with an end date), never here. */
+function waitingCard(r, l, me) {
+    const id = r.identity.body, agent = r.kind === 'agent', asOperator = agent && l.method === 'operated-by'
+    const rows = [
+        ['Fingerprint', h('span', {}, h('b', { class: 'mono' }, r.fp), h('div', { class: 'warn small' }, 'Compare it with one you got from them on a channel you already trust, character for character.'))],
+        ['Kind', agent ? `an agent${id.runtime ? ' · runs on ' + id.runtime : ''}${id.session ? ' · a session key: it dies with the session' : ''}` : 'a person'],
+        id.about ? ['About', id.about] : null,
+        ['Their link to you', `${l.method ? D.METHODS[l.method] : 'they know you'}${l.on ? ', ' + l.on : ''}${l.until ? ', until ' + l.until : ''}, signed ${String(l.at).slice(0, 10)}${l.policy ? ' · policy ' + l.policy : ''}`],
+        ['In the register since', String(r.identity.created_at).slice(0, 10) + ` · ${r.statements.length} statement(s)`],
+        r.evidence.length ? ['Evidence', h('ul', { class: 'small' }, ...r.evidence.map(e => h('li', {}, `${D.EVIDENCE[e.kind] ? D.EVIDENCE[e.kind].label : e.kind}: ${e.value}`, e.url ? [' · ', h('a', { href: e.url, rel: 'noopener' }, e.url)] : '')))] : ['Evidence', h('span', { class: 'dim' }, 'none')],
+    ].filter(Boolean)
+    const act = asOperator
+        ? h('button', { type: 'button', class: 'btn small primary', onclick: () => { pendingAgent(D.submission(r.statements.map(e => e.st))); location.hash = '#agents' } }, 'Review and confirm as its operator →')
+        : h('button', { type: 'button', class: 'btn small primary', onclick: e => busy(e.target, async () => { await vault.addStatement(await D.linkStatement(me, { to: r.fp, method: 'known' })); draw() }) }, 'Yes, I know them: link back')
+    return h('details', { class: 'vpanel waiting' }, h('summary', {}, h('b', {}, r.name), ' ', h('span', { class: 'pill ' + (agent ? 'agent' : '') }, agent ? 'agent' : 'person'), ' ', h('span', { class: 'dim small' }, asOperator ? 'names you as its operator' : `says: ${l.method ? D.METHODS[l.method] : 'they know you'}`)),
+        h('table', { class: 'kv' }, h('tbody', {}, ...rows.map(([k, v]) => h('tr', {}, h('th', {}, k), h('td', {}, v))))),
+        h('p', { class: 'small' }, asOperator ? 'It is an agent asking you to operate it. That is an "operates" link with an end date, signed in the Agents tab, where you choose how long and under which policy.' : 'Linking back writes, in your record, that you know the owner of this key. With their link, it counts both ways.'),
+        h('div', { class: 'acts' }, act, h('a', { class: 'btn small', href: pageUrl('people/person.html') + '#' + r.dir }, 'Its page in the register')))
+}
 function pendingAgent(sub) { try { if (sub) sessionStorage.setItem(PENDING, JSON.stringify(sub)); else sessionStorage.removeItem(PENDING) } catch (e) { /* fine */ } }
 const readPending = () => { try { return JSON.parse(sessionStorage.getItem(PENDING) || 'null') } catch (e) { return null } }
 async function agents(body, dir) {

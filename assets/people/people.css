@@ -173,3 +173,4 @@ pre.file{background:var(--term-bg);color:#e6edf3;border-radius:10px;padding:.8re
   .pf,.explore{grid-template-columns:1fr}
   .profile-card{flex-direction:column;text-align:center}
 }
+.vpanel.waiting summary{cursor:pointer}
