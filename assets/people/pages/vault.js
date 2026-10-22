@@ -316,7 +316,8 @@ async function agents(body, dir) {
         const renew = h('button', { type: 'button', class: 'btn small' }, 'Confirm again')
         renew.addEventListener('click', () => { pendingAgent(a); draw() })
         rows.push(h('tr', {}, h('th', {}, rec ? h('a', { href: pageUrl('people/person.html') + '#' + K.dirOf(fp) }, name) : name),
-            h('td', {}, h('span', { class: 'mono dim' }, fp), h('div', { class: 'small' }, st ? st.text : `not in the register yet${a.confirmed ? `; you signed until ${a.confirmed.until}` : ''}`), renew)))
+            h('td', {}, h('span', { class: 'mono dim' }, fp), h('div', { class: 'small' }, st ? st.text : 'not in the register yet'),
+                a.confirmed && !(st && st.level === 'operated' && st.until >= a.confirmed.until) ? h('div', { class: 'small warn' }, `You signed “operates” until ${a.confirmed.until}, in your vault. The register shows it once your record is published: Your account → Keys → Publish…`) : null, renew)))
     }
     body.append(h('h3', {}, 'Your agents'), rows.length ? h('table', { class: 'kv' }, h('tbody', {}, ...rows)) : h('p', { class: 'dim small' }, 'None yet.'))
 

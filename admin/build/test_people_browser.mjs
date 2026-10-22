@@ -129,7 +129,7 @@ try {
     await p.click('#send-go')
     await p.locator('#send-link').waitFor({ timeout: 30000 })
     const link = (await text(p, '#send-link')).trim()
-    check(link.startsWith('https://pki.sgit.ai/m/#m1.') && (await p.locator('#send-out svg').count()) === 1, 'she seals a message to a fixture: a link and a QR code')
+    check(link.startsWith('https://pki.sgit.ai/m/#m1.') && (await p.locator('#send-out img.qrimg').count()) === 1, 'she seals a message to a fixture: a link and a QR code')
     await p.goto(SITE + 'm/index.html' + link.slice(link.indexOf('#')))
     await p.click('#open-fixture')
     await p.locator('.msgcard .body').waitFor()

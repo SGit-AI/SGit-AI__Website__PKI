@@ -238,7 +238,7 @@ const put = (card, kind, node) => { node.setAttribute('data-panel', kind); card.
 async function share(id, card) {
     if (!slot(card, 'share')) return
     const k = M.keyCode(id.bundle)
-    put(card, 'share', h('div', { class: 'vpanel share' }, h('div', { class: 'qr' }, await qr(k.url, { caption: false }),
+    put(card, 'share', h('div', { class: 'vpanel share' }, h('div', { class: 'qr' }, await qr(k.url, { caption: false, actions: 'my-public-key' }),
         h('div', { class: 'url' }, h('p', { class: 'small' }, 'Your public key, as a link. Whoever scans it lands on Send with your key filled in, and can seal a message to you, an access key for instance, before you are in the register. It is not secret. It is also not proof of anything: they should see this fingerprint on your screen, or hear it from you, before they trust it.'),
             h('p', {}, h('b', { class: 'mono' }, fpOf(id))), h('div', { class: 'acts' }, copyButton(k.url, 'Copy the link'))))))
 }

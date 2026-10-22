@@ -18,7 +18,7 @@ async function draw() {
     go.addEventListener('click', () => busy(go, async () => {
         try {
             const inv = await M.invite(me, { days: Number(days.value), name: name.value.trim(), accessKey: withKey.checked ? vault.token : '' })
-            out.replaceChildren(h('div', { class: 'qr' }, await qr(inv.url), h('div', { class: 'url' },
+            out.replaceChildren(h('div', { class: 'qr' }, await qr(inv.url, { actions: 'invitation' }), h('div', { class: 'url' },
                 h('p', { class: 'small' }, 'Show the QR code, or send the link. They scan it, make a passkey and a key, and their first link points at you; it shows on your Links tab, waiting for you to link back.'),
                 h('span', { class: 'mono' }, inv.url), h('div', { class: 'acts' }, copyButton(inv.url, 'Copy the link'), h('button', { type: 'button', class: 'btn', onclick: () => window.print() }, 'Print')),
                 withKey.checked ? msg('warn', 'This link carries your access key: whoever has the link can create vaults on it. Send it only to the person, and make a new one if it goes astray.') : null)))

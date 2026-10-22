@@ -178,7 +178,7 @@ try {
     await f.locator('.profile-card').waitFor({ timeout: 90000 })
     await f.goto(SITE + 'account/index.html#keys')
     await f.locator('.keycard.master button', { hasText: 'Share as a QR code' }).click()
-    await f.locator('.share svg').waitFor()
+    await f.locator('.share img.qrimg').waitFor()
     const keyLink = await f.evaluate(() => [...document.querySelectorAll('.share button')].length && document.querySelector('.share .mono').textContent)
     const fayFp = keyLink
     const link = await f.evaluate(async () => (await import('/assets/people/message.js')).keyCode((await import('/assets/people/ui.js')).vault.masterKey.bundle).url)

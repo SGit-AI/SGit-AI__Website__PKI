@@ -55,7 +55,7 @@ export async function busy(btn, fn) { if (btn) btn.disabled = true; try { return
 export const pageUrl = rel => new URL(rel, ROOT).href
 
 /** A QR code as an SVG element (qrcode-generator, vendored), with the text printed above it, as the brief asks. */
-export async function qr(text, { caption = true } = {}) {
+export async function qr(text, { caption = true, actions = true } = {}) {
     const { default: qrcode } = await import('../vendor/qrcode-generator/2.0.4/qrcode.mjs')
     const q = qrcode(0, 'L'); q.addData(String(text), 'Byte'); q.make()
     const n = q.getModuleCount(), m = 4, size = n + m * 2
@@ -67,7 +67,25 @@ export async function qr(text, { caption = true } = {}) {
     }
     const wrap = h('div', { class: 'code' })
     if (caption) wrap.append(h('p', { class: 'printable' }, String(text).length > 64 ? String(text).slice(0, 60) + '…' : String(text)))
-    wrap.insertAdjacentHTML('beforeend', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}" shape-rendering="crispEdges" role="img" aria-label="QR code"><rect width="${size}" height="${size}" fill="#fff"/><path d="${d}" fill="#000"/></svg>`)
+    // drawn as a PNG image (8 pixels a module), so it can be copied or saved like any picture and pasted into another
+    // session; the SVG stays as the fallback where a canvas is not available
+    const px = 8, cv = document.createElement('canvas'); cv.width = cv.height = size * px
+    const c2 = cv.getContext && cv.getContext('2d')
+    if (!c2) { wrap.insertAdjacentHTML('beforeend', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}" shape-rendering="crispEdges" role="img" aria-label="QR code"><rect width="${size}" height="${size}" fill="#fff"/><path d="${d}" fill="#000"/></svg>`); return wrap }
+    c2.fillStyle = '#fff'; c2.fillRect(0, 0, cv.width, cv.height); c2.fillStyle = '#000'
+    for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) if (q.isDark(r, c)) c2.fillRect((c + m) * px, (r + m) * px, px, px)
+    const png = cv.toDataURL('image/png')
+    wrap.append(h('img', { class: 'qrimg', src: png, alt: 'QR code', width: size * px, height: size * px }))
+    if (actions) {
+        const copy = h('button', { type: 'button', class: 'btn small' }, 'Copy the image')
+        copy.addEventListener('click', async () => {
+            try { const blob = await new Promise(res => cv.toBlob(res, 'image/png')); await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]); copy.textContent = 'Copied' }
+            catch (e) { copy.textContent = 'Copy failed: right-click the image' }
+            setTimeout(() => { copy.textContent = 'Copy the image' }, 2000)
+        })
+        const save = h('button', { type: 'button', class: 'btn small', onclick: () => { const a = h('a', { href: png, download: (typeof actions === 'string' ? actions : 'qr-code') + '.png' }); document.body.append(a); a.click(); a.remove() } }, 'Download PNG')
+        wrap.append(h('div', { class: 'acts' }, copy, save))
+    }
     return wrap
 }
 

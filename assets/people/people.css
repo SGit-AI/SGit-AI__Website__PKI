@@ -174,3 +174,4 @@ pre.file{background:var(--term-bg);color:#e6edf3;border-radius:10px;padding:.8re
   .profile-card{flex-direction:column;text-align:center}
 }
 .vpanel.waiting summary{cursor:pointer}
+.qr .code img.qrimg{display:block;width:100%;height:auto;image-rendering:pixelated}
