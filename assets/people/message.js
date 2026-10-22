@@ -156,4 +156,48 @@ export async function parseKeyCode(text) {
     if (!m) return null
     return bundleOf(unb64url(m[1]), unb64url(m[2]), fromUtf8(unb64url(m[3])))
 }
+// ------------------------------------------------------------ QR codes for agents: strict JSON, two kinds
+/**
+ * What a QR code carries when an agent is to read it: one JSON object, of one of two kinds, with exactly these keys.
+ * An agent reading a QR code reads data someone else made, carried by hand: so the text is parsed, never interpreted,
+ * and anything outside the shape below is refused before a byte of it is used.
+ *
+ *   { "v": 1, "kind": "pki.sgit.ai/qr/sealed/v1", "to": "sha256:<16 hex>", "from": "sha256:<16 hex>", "code": "m1.…" }
+ *   { "v": 1, "kind": "pki.sgit.ai/qr/key/v1", "fp": "sha256:<16 hex>", "label": "<80 printable characters>", "code": "k1.…" }
+ *
+ * "to" and "from" repeat what the sealed code says (the recipient's fingerprint and the signer's), and must agree with
+ * it; the code is what is opened, and its signature is what is trusted. A pki.sgit.ai link (/m/#m1.…, /send/#k1.…) is
+ * read too, and turned into the same object, for a QR code made for a phone.
+ */
+export const QR_SEALED = 'pki.sgit.ai/qr/sealed/v1', QR_KEY = 'pki.sgit.ai/qr/key/v1'
+const FPX = /^sha256:[0-9a-f]{16}$/, M1X = /^m1\.[0-9a-f]{16}(\.[A-Za-z0-9_-]+){3}(\.[A-Za-z0-9_-]+\.[0-9a-f]{16})?$/, K1X = /^k1\.[A-Za-z0-9_-]{100,1200}\.[A-Za-z0-9_-]{60,200}\.[A-Za-z0-9_-]{0,200}$/
+export function qrSealed({ to, from = '', code }) { const o = { v: 1, kind: QR_SEALED, to }; if (from) o.from = from; o.code = code; return JSON.stringify(o) }
+export function qrKey({ fp, label = '', code }) { return JSON.stringify({ v: 1, kind: QR_KEY, fp, label: String(label).slice(0, 80), code }) }
+export function parseQrText(text) {
+    const s = String(text == null ? '' : text).trim()
+    if (s.length > 3000) throw new Error('longer than any QR code this site makes: refused')
+    if (s.startsWith('{')) {
+        let o; try { o = JSON.parse(s) } catch (e) { throw new Error('not JSON: refused') }
+        if (!o || typeof o !== 'object' || Array.isArray(o)) throw new Error('not a JSON object: refused')
+        const keys = Object.keys(o).sort().join(','), allowed = o.kind === QR_SEALED ? ['code', 'from', 'kind', 'to', 'v'] : o.kind === QR_KEY ? ['code', 'fp', 'kind', 'label', 'v'] : null
+        if (!allowed) throw new Error('an unknown kind of QR code: refused')
+        if (o.v !== 1) throw new Error('an unknown version: refused')
+        if (keys.split(',').some(k => !allowed.includes(k))) throw new Error(`unexpected fields (${keys}): refused`)
+        for (const k of Object.keys(o)) if (k !== 'v' && typeof o[k] !== 'string') throw new Error(`${k} is not a string: refused`)
+        if (o.kind === QR_SEALED) {
+            if (!FPX.test(o.to || '') || (o.from != null && !FPX.test(o.from)) || !M1X.test(o.code || '')) throw new Error('a field is not in its shape: refused')
+            const c = parseCode(o.code)
+            if (!c || c.to !== o.to || (o.from && c.signer !== o.from)) throw new Error('to or from does not match the sealed code: refused')
+            return { kind: 'sealed', to: o.to, from: o.from || c.signer || '', code: o.code }
+        }
+        if (!FPX.test(o.fp || '') || !K1X.test(o.code || '') || /[\u0000-\u001f\u007f]/.test(o.label || '') || String(o.label || '').length > 80) throw new Error('a field is not in its shape: refused')
+        return { kind: 'key', fp: o.fp, label: o.label || '', code: o.code }
+    }
+    const m = /^https:\/\/pki\.sgit\.ai\/(m|send)\/(?:index\.html)?#((?:m1|k1)\.[A-Za-z0-9_.-]+)$/.exec(s) || /^((m1|k1)\.[A-Za-z0-9_.-]+)$/.exec(s) && [null, null, s]
+    if (!m) throw new Error('neither a pki.sgit.ai QR object nor a pki.sgit.ai link: refused')
+    const code = m[2]
+    if (code.startsWith('m1.')) { if (!M1X.test(code)) throw new Error('a sealed code not in its shape: refused'); const c = parseCode(code); return { kind: 'sealed', to: c.to, from: c.signer || '', code } }
+    if (!K1X.test(code)) throw new Error('a key code not in its shape: refused')
+    return { kind: 'key', fp: '', label: '', code }
+}
 export { unhex }

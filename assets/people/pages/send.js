@@ -87,11 +87,14 @@ go.addEventListener('click', () => busy(go, async () => {
         if (fits) {
             boxes.push(h('div', { class: 'qr' }, await qr(sealed.url, { actions: 'sealed-message' }), h('div', { class: 'url' }, h('p', { class: 'small' }, 'Show them the QR code, or send them the link. It opens in their browser and their vault reads it; the part after # never reaches a server.'), h('span', { class: 'mono', id: 'send-link' }, sealed.url), h('div', { class: 'acts' }, copyButton(sealed.url, 'Copy the link')))))
         } else boxes.push(msg('warn', `Too long for one QR code (${sealed.url.length} characters). The link still works, or send it to their inbox, or as a file.`), h('div', { class: 'acts' }, copyButton(sealed.url, 'Copy the link')))
-        const acts = h('div', { class: 'acts' }, h('button', { type: 'button', class: 'btn', onclick: () => download('message.txt.enc', sealed.enc, 'text/plain') }, 'Download as .enc (for sgit pki decrypt)'))
+        const forAgent = M.qrSealed({ to: r.bundle.signing_fingerprint, from: from ? from.bundle.signing_fingerprint : '', code: sealed.code })
+        const agentQr = h('div')
+        const acts = h('div', { class: 'acts' }, h('button', { type: 'button', class: 'btn', onclick: () => download('message.txt.enc', sealed.enc, 'text/plain') }, 'Download as .enc (for sgit pki decrypt)'),
+            forAgent.length <= M.MAX_QR_CHARS ? h('button', { type: 'button', class: 'btn', id: 'send-agent-qr', onclick: async e => { e.target.remove(); agentQr.replaceChildren(h('h3', {}, 'The QR code for an agent'), h('p', { class: 'small' }, 'The same sealed message as strict JSON, the shape an agent checks before it opens anything (pki.sgit.ai/handover.md). Carry the image to the agent\u2019s session.'), h('div', { class: 'qr' }, await qr(forAgent, { caption: false, actions: 'sealed-for-an-agent' }))) } }, 'QR code for an agent (JSON)') : null)
         if (r.rec && r.rec.inbox) acts.prepend(h('button', { type: 'button', class: 'btn primary', id: 'send-inbox', onclick: e => busy(e.target, async () => {
             try { await A.deliver(r.rec.inbox, sealed.enc); e.target.replaceWith(h('span', { class: 'ok' }, `Delivered to ${r.name}’s inbox: the server said ok, and can say nothing else.`)) } catch (x) { out.prepend(msg('bad', err(x))) }
         }) }, `Deliver to ${r.name}’s inbox`))
-        boxes.push(acts)
+        boxes.push(acts, agentQr)
         if (grant && vault.mode === 'vault') { await A.book.saveGrant(vault.book, { v: 1, to: r.bundle.signing_fingerprint, to_name: r.name, at: m.at, name: grant.name || '', token_sha256: await K.sha256hex(grant.token) }); boxes.push(h('p', { class: 'dim small' }, 'The hand-over is in your book, under Your vaults: who, when, and the key’s SHA-256, never the key.')) }
         if (vault.mode === 'vault') { await A.book.saveMessage(vault.book, 'out', { to: r.bundle.signing_fingerprint, at: m.at, subject: m.subject || '', text: m.text, how: r.rec && r.rec.inbox ? 'link or inbox' : 'link', code: sealed.code }); boxes.push(h('p', { class: 'dim small' }, 'A copy is kept in your book, under Sent.')) }
         out.replaceChildren(...boxes)

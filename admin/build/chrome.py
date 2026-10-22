@@ -45,11 +45,12 @@ NAV = [
         ("&#9679; Send a message", "send/index.html"),
         ("&#9679; Invite someone", "invite/index.html"),
         ("&#9679; Identities for agents", "agents/index.html"),
+        ("&#9679; Hand over a vault key (for agents)", "handover/index.html"),
         ("&#9679; Storyboards", "storyboards/index.html"),
         ("Articles", "articles/index.html"),
         ("How it works", "people/how.html"),
         ("The brief", "documents/people-directory.html"),
-    ], ("account/", "login/", "storyboards/", "articles/", "people/", "vault/", "send/", "m/", "invite/", "join/", "agents/")),
+    ], ("handover/", "account/", "login/", "storyboards/", "articles/", "people/", "vault/", "send/", "m/", "invite/", "join/", "agents/")),
     ("The rules", "failure/index.html", [
         ("Why the old ones failed (2019)", "failure/index.html"),
         ("The four rules", "rules/index.html"),

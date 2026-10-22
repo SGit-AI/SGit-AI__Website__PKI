@@ -151,6 +151,8 @@ for (const f of htmlFiles) {
   if (a.status !== 0) errors.push((a.stderr || 'articles/ is stale').trim());
   const sb = require('child_process').spawnSync('python3', [path.join(ROOT, 'admin/build/gen_storyboards.py'), '--check'], { encoding: 'utf8' });
   if (sb.status !== 0) errors.push((sb.stderr || 'storyboards/ is stale').trim());
+  const ho = require('child_process').spawnSync('python3', [path.join(ROOT, 'admin/build/gen_handover.py'), '--check'], { encoding: 'utf8' });
+  if (ho.status !== 0) errors.push((ho.stderr || 'handover/ is stale').trim());
 }
 
 // --- 4. key-leak tripwire -------------------------------------------------

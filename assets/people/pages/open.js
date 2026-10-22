@@ -4,6 +4,7 @@
 import { h, msg, err, loadDirectory, pageUrl, busy, vaultBar, vault, download, ROOT, K, A } from '../ui.js'
 import * as M from '../message.js'
 import { messageCard } from '../cards.js'
+import * as QR from '../qrread.js'
 
 const app = document.getElementById('app')
 const bar = vaultBar(document.getElementById('vault-bar-mount'))
@@ -32,12 +33,39 @@ function grantButton(g) {
     return b
 }
 
+/** The text of the QR code in an image: the browser's own detector when it has one, this site's reader when not. */
+async function fromImage(blob, out) {
+    out.replaceChildren(h('p', { class: 'dim small' }, 'Reading the QR code…'))
+    try {
+        const bmp = await createImageBitmap(blob)
+        if ('BarcodeDetector' in window) { try { const r = await new BarcodeDetector({ formats: ['qr_code'] }).detect(bmp); if (r[0] && r[0].rawValue) { out.replaceChildren(); return r[0].rawValue } } catch (e) { /* the reader below */ } }
+        const c = document.createElement('canvas'); c.width = bmp.width; c.height = bmp.height
+        const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, c.width, c.height); x.drawImage(bmp, 0, 0)
+        const d = x.getImageData(0, 0, c.width, c.height).data, lum = new Uint8Array(c.width * c.height)
+        for (let i = 0; i < lum.length; i++) lum[i] = Math.round(0.299 * d[i * 4] + 0.587 * d[i * 4 + 1] + 0.114 * d[i * 4 + 2])
+        const text = QR.readQr(lum, c.width, c.height); out.replaceChildren(); return text
+    } catch (e) { out.replaceChildren(msg('bad', 'No QR code read from that image (', err(e), '). Crop it to the code, straight on, and try again.')); return null }
+}
+let onPasteImage = null                               // the paste handler of the page as last drawn
+document.addEventListener('paste', e => { const it = [...(e.clipboardData && e.clipboardData.items || [])].find(i => i.type.startsWith('image/')); if (it && onPasteImage) { e.preventDefault(); onPasteImage(it.getAsFile()) } })
 async function draw() {
     const code = M.parseCode(location.hash)
     if (!code) {
-        const paste = h('textarea', { class: 't code', placeholder: 'https://pki.sgit.ai/m/#m1.… or m1.…' })
-        return app.replaceChildren(h('p', {}, 'Nothing to open in this address. Paste a message link:'), paste, h('div', { class: 'acts' }, h('button', { type: 'button', class: 'btn primary', onclick: () => { const c = M.parseCode(paste.value); if (c) { location.hash = c.code } } }, 'Open')))
+        const paste = h('textarea', { class: 't code', id: 'open-paste', placeholder: 'https://pki.sgit.ai/m/#m1.…, m1.…, or the JSON a QR code for an agent holds: {"v":1,"kind":"pki.sgit.ai/qr/sealed/v1",…}' })
+        const out = h('div', { id: 'open-qr-out' })
+        const take = text => {
+            try { const q = M.parseQrText(text); if (q.kind !== 'sealed') return out.replaceChildren(msg('warn', 'That is a public key, not a sealed message: send to it from Send.')); location.hash = q.code }
+            catch (e) { out.replaceChildren(msg('bad', err(e))) }
+        }
+        const file = h('input', { type: 'file', accept: 'image/*', id: 'open-qr-file', class: 'visually-hidden' })
+        file.addEventListener('change', () => { if (file.files[0]) fromImage(file.files[0], out).then(t => t && take(t)) })
+        onPasteImage = blob => fromImage(blob, out).then(t => t && take(t))
+        return app.replaceChildren(h('p', {}, 'Nothing to open in this address. Bring the message here:'),
+            h('h3', {}, 'A QR code image'), h('p', { class: 'small' }, 'Choose the image, or paste it here (Cmd/Ctrl+V). It is read in this browser; nothing is uploaded.'),
+            h('div', { class: 'acts' }, h('label', { class: 'btn primary', for: 'open-qr-file' }, 'Choose a QR image'), file), out,
+            h('h3', {}, 'Or its text'), paste, h('div', { class: 'acts' }, h('button', { type: 'button', class: 'btn primary', onclick: () => take(paste.value) }, 'Open')))
     }
+    onPasteImage = null
     const toRec = dir && dir.byFp.get(code.to), fromRec = code.signer && dir && [...dir.byFp.values()].find(r => r.bundle && r.bundle.signing_fingerprint === code.signer)
     const head = [h('p', {}, 'A sealed message for ', h('b', {}, toRec ? toRec.name : code.to), toRec ? h('span', { class: 'mono dim' }, ` (${code.to})`) : '', code.signer ? ['; the envelope says it was signed by ', h('b', {}, fromRec ? fromRec.name : code.signer)] : '; unsigned', '.')]
     const known = dir ? new Map([...dir.byFp].map(([k, r]) => [k, r.bundle])) : new Map()

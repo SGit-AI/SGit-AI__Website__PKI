@@ -30,10 +30,13 @@
 import fs from 'fs'
 import os from 'os'
 import path from 'path'
+import zlib from 'zlib'
+import { execFileSync } from 'child_process'
 import * as K from '../assets/people/keys.js'
 import * as D from '../assets/people/directory.js'
 import * as M from '../assets/people/message.js'
 import * as EV from '../assets/people/evidence.js'
+import * as QR from '../assets/people/qrread.js'
 import { qrcode } from '../assets/vendor/qrcode-generator/2.0.4/qrcode.mjs'
 
 const HOME = process.env.PKI_AGENT_HOME || path.join(os.homedir(), '.sg-send')
@@ -141,11 +144,36 @@ function svgOf(text) {
     for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) { if (!q.isDark(r, c)) continue; let run = 1; while (c + run < n && q.isDark(r, c + run)) run++; d += `M${c + m} ${r + m}h${run}v1h-${run}z`; c += run - 1 }
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}" width="${size * 8}" height="${size * 8}" shape-rendering="crispEdges"><rect width="${size}" height="${size}" fill="#fff"/><path d="${d}" fill="#000"/></svg>\n`
 }
-function qrOut(url, file) {
-    if (!file) return
-    if (url.length > M.MAX_QR_CHARS) { console.error(`pki-agent: ${url.length} characters: too long for one QR code; the link still works`); return }
-    fs.writeFileSync(file, svgOf(url)); say(`QR code: ${file}`)
+/** A QR code file: PNG (8 pixels a module) or SVG, by the name's extension. Its text is the strict JSON an agent reads
+    (message.js qrSealed / qrKey), or the plain link with --qr-link, for a phone's camera. */
+async function qrOut(text, file) {
+    if (!file || file === true) return
+    if (text.length > M.MAX_QR_CHARS) { console.error(`pki-agent: ${text.length} characters: too long for one QR code; the link still works`); return }
+    if (/\.svg$/i.test(file)) fs.writeFileSync(file, svgOf(text))
+    else {
+        const q = qrcode(0, 'L'); q.addData(String(text), 'Byte'); q.make()
+        const n = q.getModuleCount(), m = 4, px = 8, size = (n + m * 2) * px, lum = new Uint8Array(size * size).fill(255)
+        for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) if (q.isDark(r, c)) for (let y = 0; y < px; y++) lum.fill(0, ((r + m) * px + y) * size + (c + m) * px, ((r + m) * px + y) * size + (c + m + 1) * px)
+        const png = await QR.encodePng(lum, size, size, d => zlib.deflateSync(d))
+        if (QR.readQr((await QR.decodePng(png, d => zlib.inflateSync(d))).lum, size, size) !== text) die('the QR code did not read back: not written')
+        fs.writeFileSync(file, png)
+    }
+    say(`QR code: ${path.resolve(file)} (${/^\{/.test(text) ? 'strict JSON, for an agent' : 'a link, for a phone'})`)
 }
+/** What a QR code image holds, read and checked against the two shapes this site makes; nothing else gets through. */
+async function fromQrImage(file) {
+    const img = await QR.decodePng(fs.readFileSync(file), d => zlib.inflateSync(d))
+    let text; try { text = QR.readQr(img.lum, img.w, img.h) } catch (e) { die(`${file}: no QR code read (${e.message}). Save the image as a PNG, cropped to the code, and try again.`) }
+    try { return M.parseQrText(text) } catch (e) { die(`${file}: ${e.message}`) }
+}
+/** Where a sealed code comes from: a QR image, a file of strict JSON, a link, an m1 code, or an .enc file. */
+async function sourceOf(src) {
+    if (/\.png$/i.test(src) && fs.existsSync(src)) return fromQrImage(src)
+    const text = fs.existsSync(src) ? fs.readFileSync(src, 'utf8').trim() : String(src).trim()
+    if (text.startsWith('{') || /^(https:\/\/pki\.sgit\.ai\/|m1\.|k1\.)/.test(text)) { try { return M.parseQrText(text) } catch (e) { die(e.message) } }
+    return { kind: 'enc', enc: text }
+}
+const qrTextOf = (sealed, to, from) => flags['qr-link'] ? sealed.url : M.qrSealed({ to, from, code: sealed.code })
 const policyOf = v => { if (!v) return ''; if (D.POLICY.test(String(v))) return String(v); if (!fs.existsSync(String(v))) die(`--policy ${v}: neither a sha256:<64 hex> nor a file`); return null }
 async function policyHash(v) { const p = policyOf(v); return p !== null ? p : 'sha256:' + await K.sha256hex(fs.readFileSync(String(v))) }
 const expiresIn = days => days ? new Date(Date.now() + Number(days) * 86400000).toISOString() : ''
@@ -168,9 +196,12 @@ const commands = {
   pin <root fingerprint> [--dns DOMAIN]                    the root to trust, given out of band (or PKI_ROOT)
   root                                                     check the pinned root: register, anchors, DNS
   trust <fingerprint>                                      does it chain to the pinned root? (and its policy)
-  keyqr [--out F.svg]                                      this agent's public key as a link and a QR code
+  keyqr [--out F.png]                                      this agent's public key as a link and a QR code
+  read-qr <image.png>                                      what a QR image holds, checked (never the secret)
+  QR files: --qr / --out F.png (or .svg); strict JSON for an agent by default, --qr-link for a phone's camera
+  seal --from-vault DIR: the vault key straight from sgit vault show-key, never printed
   policy <file>                                            the sha256 a link names a behaviour policy by
-  open <link | m1… | file.enc>                             open a message sealed to this agent
+  open <qr.png | link | m1… | file.enc> [--save DIR]       open a message sealed to this agent
   sign <file>                                              a signature sgit pki verify checks (file.sig)
   link <fingerprint> [--method known]                      link to any key in the register
   evidence --kind link|website|github|dns|key --value V [--url U]   a signed claim, e.g. the session's own URL
@@ -235,22 +266,29 @@ Keys: ${KEYS} (sgit's layout${PASS ? ', encrypted with SG_SEND_PASSPHRASE' : ', 
         if (!to) die(`--to ${flags.to}: not in the register`)
         await vouched(reg, to.fp)
         const sealed = await M.sealMessage(await M.compose({ to: to.bundle, from: id, subject: flags.subject || '', text: String(flags.text || ''), expires: expiresIn(flags.expires) }), to.bundle, id)
-        say(sealed.url); qrOut(sealed.url, flags.qr)
+        say(sealed.url); await qrOut(qrTextOf(sealed, to.fp, id.bundle.signing_fingerprint), flags.qr)
     },
     async seal() {
         const id = await me(), reg = await register()
         const tos = String(flags.to && flags.to !== true ? flags.to : (pinned() || {}).fp || '').split(',').map(x => x.trim()).filter(Boolean)
         if (!tos.length) die('seal: --to FP, or pin a root to seal to it by default')
         let data, name = flags.name && flags.name !== true ? String(flags.name) : ''
-        if (flags.file) { data = fs.readFileSync(String(flags.file)); name = name || path.basename(String(flags.file)) } else if (flags.text) data = K.utf8(String(flags.text))
-        else die('seal: --file F or --text T (a file keeps a secret out of the shell history)')
+        if (flags['from-vault']) {
+            // the vault key straight from sgit, into memory: it is never printed, never written to a file here
+            const dir = flags['from-vault'] === true ? '.' : String(flags['from-vault'])
+            let out; try { out = execFileSync('sgit', ['vault', 'show-key'], { cwd: dir, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }) } catch (e) { die(`sgit vault show-key in ${dir} failed: is it an sgit vault, and is sgit installed?`) }
+            const m = new RegExp('sgit_private_' + 'vault_[A-Za-z0-9]+:[a-z0-9]+').exec(out)
+            if (!m) die('sgit vault show-key printed no vault key that this tool recognises: nothing sealed')
+            data = K.utf8(m[0]); name = name || `vault key: ${m[0].split(':').pop()}`
+        } else if (flags.file) { data = fs.readFileSync(String(flags.file)); name = name || path.basename(String(flags.file)) } else if (flags.text) data = K.utf8(String(flags.text))
+        else die('seal: --from-vault DIR, --file F or --text T (never paste a key on the command line: --text is for tests)')
         for (const fp of tos) {
             const to = reg.byFp.get(fp); if (!to) die(`${fp}: not in the register`)
             await vouched(reg, fp)
             const m = await M.compose({ to: to.bundle, from: id, subject: `A secret: ${name || 'unnamed'}`, text: `Sealed to ${fp} by ${id.bundle.signing_fingerprint}. Open it with your key; the secret is the file inside.`, files: [{ name: name || 'secret.txt', type: 'application/octet-stream', data }], expires: expiresIn(flags.expires || 7) })
             const sealed = await M.sealMessage(m, to.bundle, id)
             say(`${to.name} (${fp}):`); say(sealed.url)
-            qrOut(sealed.url, flags.qr ? (tos.length > 1 ? String(flags.qr).replace(/(\.svg)?$/, `-${K.dirOf(fp)}.svg`) : String(flags.qr)) : '')
+            await qrOut(qrTextOf(sealed, fp, id.bundle.signing_fingerprint), flags.qr && flags.qr !== true ? (tos.length > 1 ? String(flags.qr).replace(/(\.(svg|png))?$/i, m => `-${K.dirOf(fp)}${m || '.png'}`) : String(flags.qr)) : '')
         }
     },
     async pin() {
@@ -271,23 +309,29 @@ Keys: ${KEYS} (sgit's layout${PASS ? ', encrypted with SG_SEND_PASSPHRASE' : ', 
     async keyqr() {
         const id = await me(), k = M.keyCode(id.bundle)
         say(k.url); say(`fingerprint: ${id.bundle.signing_fingerprint} (read it to whoever scans this)`)
-        qrOut(k.url, flags.out)
+        await qrOut(flags['qr-link'] ? k.url : M.qrKey({ fp: id.bundle.signing_fingerprint, label: id.bundle.label, code: k.code }), flags.out)
+    },
+    async 'read-qr'() {
+        const f = args[0]; if (!f || !fs.existsSync(f)) die('read-qr <image.png>')
+        const q = await fromQrImage(f)
+        say(JSON.stringify(q.kind === 'sealed' ? { kind: q.kind, to: q.to, from: q.from, bytes: q.code.length } : { kind: q.kind, fp: q.fp, label: q.label, fingerprint_from_key: (await M.parseKeyCode(q.code)).signing_fingerprint }, null, 2))
     },
     async policy() {
         const f = args[0]; if (!f || !fs.existsSync(f)) die('policy <file>')
         say('sha256:' + await K.sha256hex(fs.readFileSync(f)))
     },
     async open() {
-        const src = args[0]; if (!src) die('open <link | m1… | file.enc>')
-        const code = M.parseCode(src)
-        const enc = code ? code.enc : fs.readFileSync(src, 'utf8').trim()
+        const src = args[0]; if (!src) die('open <qr.png | qr.json | link | m1… | file.enc>')
+        const got = await sourceOf(src)
+        if (got.kind === 'key') die('that is a public key, not a sealed message: nothing to open')
+        const enc = got.kind === 'sealed' ? M.parseCode(got.code).enc : got.enc
         const id = await me()
         let known = new Map(); try { known = new Map([...(await register()).byFp].map(([k, r]) => [k, r.bundle])) } catch (e) { /* offline: signatures unchecked */ }
         const o = await M.openMessage(enc, [id], known)
         let trust = 'no root pinned'
         if (o.msg.from && pinned()) { try { const reg = await register(), { g, p } = await fromRoot(reg), t = D.trustFrom(g, o.msg.from, p.fp); trust = t.ok ? `chains to the root: ${t.chain.join(' → ')}` : `NOT vouched for by the root: ${t.why}` } catch (e) { trust = 'not checked: ' + e.message } }
         say(JSON.stringify({ from: o.msg.from || null, signature: o.verified === true ? 'checks' : o.verified === false ? 'DOES NOT CHECK' : 'not checked (sender not in the register)', sender_trust: trust, at: o.msg.at, expires: o.msg.expires || null, subject: o.msg.subject || '', text: o.msg.text, files: (o.msg.files || []).map(f => f.name), problems: o.problems }, null, 2))
-        if (flags.save && o.msg.files) for (const f of o.msg.files) { fs.writeFileSync(path.join(flags.save, path.basename(f.name)), K.unb64(f.data)); say(`saved ${f.name}`) }
+        if (flags.save && o.msg.files) for (const f of o.msg.files) { const n = path.basename(String(f.name)).replace(/[^A-Za-z0-9._-]+/g, '-').replace(/^\.+/, '') || 'file'; writeSecret(path.join(String(flags.save), n), Buffer.from(K.unb64(f.data))); say(`saved ${path.join(String(flags.save), n)} (0600; its contents not shown)`) }
     },
     async keyfile() {
         const id = await me()

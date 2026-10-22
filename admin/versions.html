@@ -26,6 +26,7 @@
       <a class="sl" href="../send/index.html">&#9679; Send a message</a>
       <a class="sl" href="../invite/index.html">&#9679; Invite someone</a>
       <a class="sl" href="../agents/index.html">&#9679; Identities for agents</a>
+      <a class="sl" href="../handover/index.html">&#9679; Hand over a vault key (for agents)</a>
       <a class="sl" href="../storyboards/index.html">&#9679; Storyboards</a>
       <a class="sl" href="../articles/index.html">Articles</a>
       <a class="sl" href="../people/how.html">How it works</a>
@@ -91,6 +92,11 @@
 <div class="tablewrap"><table class="vers">
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
+    <tr>
+<td class="vnum">v0.2.12</td>
+<td class="vdate">22 Oct 2026</td>
+<td><b>Handing over a vault key, by QR code.</b> <a href="../handover.md">pki.sgit.ai/handover.md</a>: the instructions an agent follows to hand a vault key to Dinis's vault keeper (or to Dinis), and the keeper follows to receive it; the same as a page at <a href="../handover/index.html">/handover/</a>. QR codes made for agents now hold <b>strict JSON</b> of two shapes (a sealed message, a public key), checked field by field before anything is opened: extra fields, unknown kinds, a "to" or "from" that disagrees with the sealed code, are refused. The agent tool writes QR codes as PNG files (and reads them back before writing), reads them with <code>read-qr</code> and <code>open image.png</code> through a QR reader of its own (<code>assets/people/qrread.js</code>: no library), and seals a vault key straight from <code>sgit vault show-key</code> with <code>seal --from-vault DIR</code>, so the key is never printed. The message page opens a QR image, chosen or pasted, read in the browser; Send offers the agent's JSON QR code beside the link.</td>
+    </tr>
     <tr>
 <td class="vnum">v0.2.11</td>
 <td class="vdate">22 Oct 2026</td>

@@ -27,6 +27,7 @@
       <a class="sl" href="../send/index.html">&#9679; Send a message</a>
       <a class="sl" href="../invite/index.html">&#9679; Invite someone</a>
       <a class="sl here" href="../agents/index.html">&#9679; Identities for agents</a>
+      <a class="sl" href="../handover/index.html">&#9679; Hand over a vault key (for agents)</a>
       <a class="sl" href="../storyboards/index.html">&#9679; Storyboards</a>
       <a class="sl" href="../articles/index.html">Articles</a>
       <a class="sl" href="../people/how.html">How it works</a>
@@ -110,6 +111,8 @@
   node pki-agent.mjs submit        # or: node pki-agent.mjs submission
 Then tell me your fingerprint, so I can compare it before I confirm you.</code></pre>
 <p>The session prints its fingerprint in your chat, the record arrives in your inbox, and you confirm it in your vault, a week is a good length for a session. From then on you can send that session a secret it alone can read (<a href="../send/index.html">send</a>, then paste the link; it runs <code>node pki-agent.mjs open &lt;link&gt;</code>), and it can sign what it produces (<code>node pki-agent.mjs sign report.md</code>, checked by anyone with <code>sgit pki verify</code>).</p>
+
+<p class="msg ok"><b>Handing over a vault key?</b> The step-by-step instructions, for an agent to read and follow: <a href="../handover.md">pki.sgit.ai/handover.md</a> (for people: <a href="../handover/index.html">the handover page</a>).</p>
 
 <h2 id="secrets">Before a secret: the pinned root</h2>
 <p>An agent asked to hand over a vault key should not seal it to whatever key it is shown: "here is the public key of the session that will decrypt it" is the same move as the social engineering it replaces, unless the agent can check whose key that is. So <code>send</code> and <code>seal</code> refuse any recipient that does not chain to a <b>root the agent pinned</b>, a fingerprint it was given out of band, in its instructions, never read from this site (whoever can change the site can change <code>anchors.json</code>). The register is read with that key as the only anchor. A recipient passes when it is the root, a person the root verified, a persona of either, or an agent operated, in date, by a chain whose person at the top is one of those; and when both sides of an agent's links name a behaviour policy, the two must agree.</p>

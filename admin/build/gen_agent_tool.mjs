@@ -12,7 +12,7 @@ import path from 'path'
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../..')
 const SRC = path.join(ROOT, 'agents/pki-agent.src.mjs'), OUT = path.join(ROOT, 'agents/pki-agent.mjs')
-const MODULES = ['keys', 'directory', 'message', 'evidence']     // in dependency order
+const MODULES = ['keys', 'directory', 'message', 'evidence', 'qrread']     // in dependency order
 const QR = 'assets/vendor/qrcode-generator/2.0.4/qrcode.mjs'      // vendored, unedited; bundled as a namespace too
 
 function namespace(name) {
@@ -38,8 +38,8 @@ function build() {
     src = src.slice(head.length)
     src = src.replace(/^import \* as (\w+) from '\.\.\/assets\/people\/(\w+)\.js'\n/gm, (_, as, mod) => `const ${as} = __${mod}\n`)
     src = src.replace(/^import \{ qrcode \} from '\.\.\/assets\/vendor\/qrcode-generator\/2\.0\.4\/qrcode\.mjs'\n/m, 'const { qrcode } = __qrcode\n')
-    const imports = src.match(/^import .* from '(fs|os|path)'\n/gm).join('')
-    src = src.replace(/^import .* from '(fs|os|path)'\n/gm, '')
+    const imports = src.match(/^import .* from '(fs|os|path|zlib|child_process)'\n/gm).join('')
+    src = src.replace(/^import .* from '(fs|os|path|zlib|child_process)'\n/gm, '')
     return head.replace(' * agents/pki-agent.mjs is generated', ' * THIS FILE is generated') + imports + '\n' + qrNamespace() + '\n' + MODULES.map(namespace).join('\n') + '\n// ---------------------------------------------------------------- the tool (agents/pki-agent.src.mjs)\n' + src
 }
 const out = build()
