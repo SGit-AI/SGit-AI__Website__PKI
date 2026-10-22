@@ -1,0 +1,25 @@
+{
+  "v": 1,
+  "type": "identity",
+  "registry": "pki.sgit.ai",
+  "record": "sha256:956934e47063ceaa",
+  "signer": "sha256:956934e47063ceaa",
+  "created_at": "2026-10-22T20:18:07Z",
+  "body": {
+    "kind": "agent",
+    "name": "DC Vault Registry (the vault of vaults)",
+    "about": "Catalogues every SG/Send vault key Dinis Cruz and his agents create; receives vault keys and records them",
+    "runtime": "claude-code, cloud session",
+    "session": true,
+    "bundle": {
+      "v": 1,
+      "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA0GBgDSrySVIggQjk61hn\nFneREDnIULzEwcYn0mpQHu7Ux0o9x71a+mVVV6umWJw/YtRJu5TjmUbordI0UzMh\nuXQc3dd1KSayBMyz9jiks0fUmuAFWvK3WqbZ/QWn879iTHKj1palpGRdsDhpHoSK\nLiqJrIHUOmXiYr4iS7qVZW4DdmaHM/kuyyJ8/FZzJbAzKGijjM3Hrz76dH37zVaK\nJHyiKkRd8Enl0YvmcIkNBKOmlwNiPmSJV7Xk4iiF4MQYFGM6aj+TDUkKMFLtLKuK\nOvBkUYCw7L88DHy0JFRX/nw1LA9IXfhUDSBI4XmuycpmWEzF1o35rblOP7sVDRin\nmgSZRDXjcO9cHgoZEKy0+s8v2m+AQS1evgGihfwrA1wKxpBMR7QhmpVsvyYpxHcV\nqop8ZFlgQEqlPevRlSTH30nG47OCBaZFlOUI9BV84gOqW5mwh7zRdr3lmM/Vf9Ih\norLT20UjBfLI1nsvF2IWvEc9yBBGDARZqEK4Bpy2M2mUbkNvhwQiy4DpndfszO9V\nLvnez1jpppbEZIDHT1xI0tuZ0EWKmbsG8x3toqKFFbtFEBQC/b5eR/CfpcpRafO5\nv37l1ulvZjTB/ypHVJgmHR0zU4bFJ2oPazJzjXI/ENEPwpBAgD1ZW1nkcNqFK9Na\nePgFbtHbWeUktsctObb3VocCAwEAAQ==\n-----END PUBLIC KEY-----\n",
+      "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEdJXhI6H9riUxEEdW1z7duvaHzDPy\n6HFBVPQYTsKJhvPXRoA8reSwy5QhOa3aJlZfiBTvuOZKoW7BwDK1Szn9hg==\n-----END PUBLIC KEY-----\n",
+      "label": "DC Vault Registry (the vault of vaults)",
+      "fingerprint": "sha256:06c6ccddb7476629",
+      "signing_fingerprint": "sha256:956934e47063ceaa"
+    },
+    "private_key_published": false
+  },
+  "sig": "jri9QXig5/4PLqLCiE8Ipos9kjJ+UbeuPh0w/LKZuvJY/0U+0jQTu0KBm30gEEkzeyJCDgjR222r4eGM2ZYwfw=="
+}

@@ -93,6 +93,11 @@
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
     <tr>
+<td class="vnum">v0.2.15</td>
+<td class="vdate">22 Oct 2026</td>
+<td><b>The vault registry asks to be confirmed.</b> The record of <i>DC Vault Registry (the vault of vaults)</i>, <code>sha256:956934e47063ceaa</code>, an agent naming Dinis Cruz as its operator, checked by <code>people.mjs add</code> and published: listed until Dinis signs the link back.</td>
+    </tr>
+    <tr>
 <td class="vnum">v0.2.14</td>
 <td class="vdate">22 Oct 2026</td>
 <td><b>Files you can read where they arrive.</b> A file inside a sealed message is now shown on the page, not only offered for download: text, JSON (pretty-printed), markdown (rendered from escaped text, no HTML; links and images shown as their address, never followed or fetched), images, video and audio. Each is shown in an <code>iframe</code> with <code>sandbox=""</code> and <code>srcdoc</code>: an origin of its own, no scripts, no forms, no popups, under a Content-Security-Policy that loads nothing from anywhere (<code>default-src 'none'</code>, <code>data:</code> for its own image or video), the way the vault apps are kept apart from the vault UI. What a file is shown as is read from its bytes, not from its name or the type the sender gave it. A file that looks like a key (its name, or a vault key or private key inside) stays closed until you press View. Tested with a hostile markdown file: its script does not run and its tracker is never fetched (<code>assets/people/preview.js</code>).</td>
