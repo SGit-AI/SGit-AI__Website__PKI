@@ -93,6 +93,11 @@
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
     <tr>
+<td class="vnum">v0.2.14</td>
+<td class="vdate">22 Oct 2026</td>
+<td><b>Files you can read where they arrive.</b> A file inside a sealed message is now shown on the page, not only offered for download: text, JSON (pretty-printed), markdown (rendered from escaped text, no HTML; links and images shown as their address, never followed or fetched), images, video and audio. Each is shown in an <code>iframe</code> with <code>sandbox=""</code> and <code>srcdoc</code>: an origin of its own, no scripts, no forms, no popups, under a Content-Security-Policy that loads nothing from anywhere (<code>default-src 'none'</code>, <code>data:</code> for its own image or video), the way the vault apps are kept apart from the vault UI. What a file is shown as is read from its bytes, not from its name or the type the sender gave it. A file that looks like a key (its name, or a vault key or private key inside) stays closed until you press View. Tested with a hostile markdown file: its script does not run and its tracker is never fetched (<code>assets/people/preview.js</code>).</td>
+    </tr>
+    <tr>
 <td class="vnum">v0.2.13</td>
 <td class="vdate">22 Oct 2026</td>
 <td><b>The first anchor.</b> Dinis Cruz's record is in the register: his master key, <code>sha256:db7f79fdd87e030a</code>, made in his own vault with his passkey, its submission checked signature by signature by <code>people.mjs add</code>, and named in <code>directory/anchors.json</code>. With it, his signed link operates the site agent (<code>sha256:a0f2ccfe07781213</code>) until 29 October, and agents that pin his key can now check whom they seal to: <a href="../handover.md">the handover</a> works end to end.</td>

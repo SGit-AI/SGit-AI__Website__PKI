@@ -146,6 +146,29 @@ try {
     await p.locator('.msgcard .body').waitFor()
     check((await text(p, '.msgcard .body')).includes('A secret for Bruno') && (await text(p, '.msgcard .meta')).includes('signed by a key not in the register'), 'the message page opens it with the fixture’s key; her signature is “not checked”, as her key is not in the register yet')
 
+    // files in a message, shown in a sandbox: hostile markdown, JSON, text, an image, and bytes that are none of these
+    {
+        const M = await import(path.join(ROOT, 'assets/people/message.js'))
+        const fx = JSON.parse(fs.readFileSync(path.join(ROOT, 'directory/fixtures', bruno.dir + '.json'), 'utf8'))
+        const enc = s => Buffer.from(s).toString('base64')
+        const png = 'iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAAFklEQVR4nGP8z8DAwMDAxMDAwMDAAAANHQEDasKb6QAAAABJRU5ErkJggg=='
+        const hostile = '# Notes\n\n<script>parent.document.title="pwned"</script>\n\n![tracker](https://evil.example/pixel.png) and [a link](https://evil.example/x)\n\n- one\n- **two**\n'
+        const files = [{ name: 'notes.md', type: 'text/html', data: enc(hostile) }, { name: 'data.json', type: 'application/json', data: enc('{"a":1,"b":[2,3]}') },
+                       { name: 'plain.txt', type: 'text/plain', data: enc('just text <b>not bold</b>') }, { name: 'pic.txt', type: 'text/plain', data: png }, { name: 'blob.bin', type: 'text/plain', data: Buffer.from([0, 1, 2, 255, 0]).toString('base64') }]
+        const sealed = await M.sealMessage(await M.compose({ to: fx.bundle, text: 'files', files }), fx.bundle, null)
+        const outside = []
+        p.on('request', r => { if (/evil\.example/.test(r.url())) outside.push(r.url()) })
+        await p.goto(SITE + 'm/index.html#' + sealed.code)
+        await p.click('#open-fixture')
+        await p.locator('.msgfile').first().waitFor({ timeout: 30000 })
+        await p.waitForTimeout(1000)
+        const frames = await p.$$eval('iframe.preview-frame', fs => fs.map(f => ({ sandbox: f.getAttribute('sandbox'), csp: /default-src 'none'/.test(f.srcdoc), script: /<script/i.test(f.srcdoc), doc: f.contentDocument === null, title: f.title })))
+        const kinds = await p.$$eval('.msgfile', rows => rows.map(r => r.textContent))
+        check(frames.length === 3 && frames.every(f => f.sandbox === '' && f.csp && !f.script && f.doc), `the first three files are shown, each in a sandboxed frame (sandbox="", an origin of its own, a CSP that loads nothing; no <script> survives): ${frames.map(f => f.title).join(', ')}`)
+        check(/notes\.md.*markdown/.test(kinds[0]) && /data\.json.*json/.test(kinds[1]) && /plain\.txt.*text/.test(kinds[2]) && /pic\.txt.*image/.test(kinds[3]) && !/View|Hide/.test(kinds[4]), 'what a file is shown as comes from its bytes: an image called .txt is an image; bytes that are nothing are a download only')
+        check(outside.length === 0 && (await p.title()) !== 'pwned', `nothing the files name is fetched (the markdown's tracker image and link are shown as addresses), and its script never runs${outside.length ? ': ' + outside.join(', ') : ''}`)
+    }
+
     // her invitation
     await p.goto(SITE + 'invite/index.html')
     await p.locator('#invite-go').waitFor()
