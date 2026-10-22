@@ -11,14 +11,16 @@
     "evidence": 32
   },
   "counts": {
-    "real_keys": 0,
+    "real_keys": 1,
     "agent_keys": 1,
-    "records": 9,
+    "records": 10,
     "fixtures": 8,
-    "confirmed_links": 0,
-    "confirmed_links_with_fixtures": 5
+    "confirmed_links": 1,
+    "confirmed_links_with_fixtures": 6
   },
-  "anchors": [],
+  "anchors": [
+    "sha256:db7f79fdd87e030a"
+  ],
   "fixture_anchors": [
     "sha256:e72089f7dc55b380"
   ],
@@ -507,6 +509,54 @@
             "on": ""
           },
           "sig": "SxOVmjDxd4SCL9ZjpE8rLQq9OzT/2h3c5NpXr0AZqzi9IBdqftebOMXvoBb98ERXlhrwjG8XJ5Y/HuuTt5agSg=="
+        }
+      ]
+    },
+    {
+      "fp": "sha256:db7f79fdd87e030a",
+      "dir": "sha256-db7f79fdd87e030a",
+      "fixture": false,
+      "ok": true,
+      "name": "dinis.cruz",
+      "revoked": null,
+      "statements": [
+        {
+          "v": 1,
+          "type": "identity",
+          "registry": "pki.sgit.ai",
+          "record": "sha256:db7f79fdd87e030a",
+          "signer": "sha256:db7f79fdd87e030a",
+          "created_at": "2026-10-22T14:14:45Z",
+          "body": {
+            "kind": "person",
+            "name": "dinis.cruz",
+            "about": "",
+            "bundle": {
+              "v": 1,
+              "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA5FxM1q81lHlz1VLE0NNy\nb6BBN8QyOULDP4NE1o2Lizjpa2HBypSeHPznaCG4r7Oj5EVFP6hU5WARs27bTJ4N\nLyUDKagK9BLa5J0i3iU8NvIw2WYp31kBqTSGXMBVpiEAonpdjQJijDeEtyM+UP+v\n72bh+l5hOL5vpd8XAwSQozjddX7djp1qsQHEhkS6W87jYkvKmqarTy3LdUw03yCB\nggyRPrPddI+vuAd4p9EWH5VVGEKtTPZqVkSpQYjhfnruSq0vjDEd84yZklMguLD4\nTkiq7kTcJQoRjlur4e8ItFXOEvYD9LxyTj1tuxfERvMnXvRXjC6clVuI9cv7/xv1\nZtG5Ktpg4WwXjk4yiYnViIO4adruqu2u9VAW9uSJsRCTKp8yPnCNgWBjvEhASmhq\nf1aDiulSe1GxVXBQNtgJx/Nf4JuxRtZHiN8yTPfY2ScPF8M6hKA/wAVgJJc6wogO\nqylvvh/cFzNyXUisl1l79p70dZOtG0CF0w8TtPNuqX9vf5yef6P1yPFcN1C7oXCg\nZxkfLY2c+wZyfDz+TCPKqtuM6kjAnfeK5rm+zXlPTpYJJe1FNspFHHZcqvR4KVtw\ndEuMZlmiDkaJWBjzrm1zaGTcH3cyZJafzPrCMA/PCVYXTA0i8SFrn6oxbq2nGeHJ\nJnL/O28ugyQz3qio5jdUAsUCAwEAAQ==\n-----END PUBLIC KEY-----\n",
+              "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEU0Khy4R9u1HpVoSNfZ0/Sd9+a6NK\n1o1xs1hPDd+B/dk/xMAwc+qzWP15JU3TCk9hQ4/ipeWal2KnvbDpVDK4Nw==\n-----END PUBLIC KEY-----\n",
+              "label": "dinis.cruz",
+              "fingerprint": "sha256:d642edaf9176db9f",
+              "signing_fingerprint": "sha256:db7f79fdd87e030a"
+            },
+            "private_key_published": false
+          },
+          "sig": "4a/jt3mWwa2/0TnQDdCxkAkupPmt58VqKRfpaDF0XiotRQk3kl0l7RdzxIivn2/frjeVuHT2zW/s6gmoSJj8lw=="
+        },
+        {
+          "v": 1,
+          "type": "link",
+          "registry": "pki.sgit.ai",
+          "record": "sha256:db7f79fdd87e030a",
+          "signer": "sha256:db7f79fdd87e030a",
+          "created_at": "2026-10-22T14:30:06Z",
+          "body": {
+            "to": "sha256:a0f2ccfe07781213",
+            "method": "operates",
+            "on": "2026-10-22",
+            "until": "2026-10-29"
+          },
+          "sig": "aL024CotJqM3KoTmu+KsjHMCc2Z6ZrfR17AajVmjpYDfq+OYpcCxgCpgQmsb3tlp7byGXjv2BjZMbWBRPjDhcw=="
         }
       ]
     },
