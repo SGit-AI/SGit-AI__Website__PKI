@@ -8,7 +8,7 @@ const size = n => n < 1024 ? `${n} bytes` : n < 1048576 ? `${(n / 1024).toFixed(
 const looksSecret = f => /key|secret|token|passw|credential|\.pem$/i.test(String(f.name)) || /sgit_(private|public)_|BEGIN [A-Z ]*PRIVATE KEY/.test(atob(String(f.data || '')).slice(0, 4096))
 /** One attached file: its name, a sandboxed view when it is something a page can show safely, and a download. The
     first few that can be shown are open; the rest open on a press. */
-function fileRow(f, open) {
+function fileRow(f, open, forward) {
     const bytes = K.unb64(f.data), view = frameFor(f.name, bytes, h)
     const row = h('div', { class: 'msgfile' })
     const head = h('div', { class: 'acts' }, h('span', { class: 'mono small' }, f.name), h('span', { class: 'dim small' }, size(bytes.length) + (view ? ` · ${view.kind}` : '')))
@@ -18,14 +18,18 @@ function fileRow(f, open) {
         head.append(tog)
     }
     head.append(h('button', { type: 'button', class: 'btn small', onclick: () => download(f.name, new Blob([bytes]), 'application/octet-stream') }, '⬇ Download'))
+    if (forward) {
+        let panel = null
+        head.append(h('button', { type: 'button', class: 'btn small primary', onclick: () => { if (panel) { panel.remove(); panel = null } else { panel = forward(f); row.append(panel) } } }, 'Forward, sealed, to…'))
+    }
     row.append(head)
     if (view && open) row.append(view.el)
     return row
 }
 
 /** One message: who it is from and whether that checks (true, false, or null: "not checked", never "forged"), the text, the files. */
-export function messageCard(m, verified, nameOf, actions = []) {
-    const files = (m.files || []).map((f, i) => fileRow(f, i < 3 && !looksSecret(f)))
+export function messageCard(m, verified, nameOf, actions = [], { forward = null } = {}) {
+    const files = (m.files || []).map((f, i) => fileRow(f, i < 3 && !looksSecret(f), forward))
     return h('div', { class: 'msgcard' },
         h('div', { class: 'meta' }, m.from ? ['from ', h('b', {}, nameOf(m.from)), verified === true ? h('span', { class: 'ok' }, ' · signature checks') : verified === false ? h('span', { class: 'bad' }, ' · SIGNATURE DOES NOT CHECK') : h('span', { class: 'warn' }, ' · signed by a key not in the register or your contacts')] : 'unsigned: the sender is not named', ` · ${m.at || ''}`),
         m.subject ? h('h3', {}, m.subject) : null,

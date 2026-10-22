@@ -4,6 +4,7 @@
    browser that opens it. */
 import { h, msg, err, loadDirectory, pageUrl, copyButton, download, busy, vaultBar, vault, qr, K, A } from '../ui.js'
 import * as M from '../message.js'
+import { readImage } from '../qrimage.js'
 
 const app = document.getElementById('app')
 vaultBar(document.getElementById('vault-bar-mount'))
@@ -13,6 +14,8 @@ let contacts = []
 const to = h('select', { class: 't', id: 'send-to' })
 const paste = h('textarea', { class: 't code', id: 'send-paste', placeholder: 'or paste their public bundle (sgit pki export), or their key link (…/send/#k1.…)', rows: 3 })
 const keyNote = h('div', { id: 'send-keynote' })
+const keyImg = h('input', { type: 'file', accept: 'image/*', id: 'send-key-img', class: 'visually-hidden' })
+keyImg.addEventListener('change', async () => { if (!keyImg.files[0]) return; try { paste.value = await readImage(keyImg.files[0]); to.value = ''; await fromKeyLink(paste.value) || keyNote.replaceChildren(msg('bad', 'That QR code holds no key.')) } catch (e) { keyNote.replaceChildren(msg('bad', 'No QR code read from that image: ', err(e))) } })
 const subject = h('input', { class: 't', id: 'send-subject', maxlength: 200, placeholder: 'optional' })
 const text = h('textarea', { class: 't', id: 'send-text', placeholder: 'What only they should read' })
 const files = h('input', { type: 'file', multiple: true })
@@ -102,7 +105,7 @@ go.addEventListener('click', () => busy(go, async () => {
 }))
 
 app.replaceChildren(
-    h('label', { class: 'f' }, 'To'), to, paste, keyNote,
+    h('label', { class: 'f' }, 'To'), to, paste, h('div', { class: 'acts' }, h('label', { class: 'btn small', for: 'send-key-img' }, 'or choose their key QR image'), keyImg), keyNote,
     h('label', { class: 'f' }, 'Subject'), subject,
     h('label', { class: 'f' }, 'Message'), text,
     h('details', { class: 'vpanel' }, h('summary', {}, h('b', {}, 'Hand over an access key')),

@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Generates handover/index.html and /handover.md from handover/index.md: the instructions an agent follows to hand a
+"""Generates handover/index.html and /handover.md from handover/index.md, and handover/for-you.html from
+handover/for-you.md (the same flows from Dinis's side: what he does).
+
+handover/index.md is the instructions an agent follows to hand a
 vault key over, sealed, as a QR code. The markdown is the source, and is published twice: at handover/index.md beside
 the page, and at /handover.md, the short address Dinis gives an agent.
 
@@ -20,10 +23,10 @@ PAGE = """<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Handing over a vault key · pki.sgit.ai</title>
-<meta name="description" content="Instructions for agents: hand a vault key to Dinis Cruz's vault keeper, sealed to a key that chains to the root, as a QR code holding strict JSON. The short address for an agent: pki.sgit.ai/handover.md.">
-<link rel="canonical" href="https://pki.sgit.ai/handover/index.html">
-<link rel="alternate" type="text/markdown" href="index.md" title="These instructions as markdown, for agents">
+<title>{title} · pki.sgit.ai</title>
+<meta name="description" content="{desc}">
+<link rel="canonical" href="https://pki.sgit.ai/handover/{slug}.html">
+<link rel="alternate" type="text/markdown" href="{slug}.md" title="This page as markdown">
 <link rel="stylesheet" href="../assets/site.css">
 <link rel="stylesheet" href="../assets/people/people.css">
 </head>
@@ -32,8 +35,8 @@ PAGE = """<!doctype html>
 <nav class="site"><div class="row"></div></nav>
 
 <main class="doc article">
-<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="../agents/index.html">agents</a> / handover</div>
-<p class="msg ok">For an agent: <b>https://pki.sgit.ai/handover.md</b> is this page as markdown, the version to read. Paste into a session: <i>Read https://pki.sgit.ai/handover.md and follow it. The root is sha256:db7f79fdd87e030a. The recipient is &lt;fingerprint&gt;.</i></p>
+<div class="crumb"><a href="../index.html">pki.sgit.ai</a> / <a href="../agents/index.html">agents</a> / {crumb}</div>
+{banner}
 {body}
 <p class="dim small">The tool: <a href="../agents/pki-agent.mjs">agents/pki-agent.mjs</a> (<code>seal</code>, <code>read-qr</code>, <code>open</code>, <code>trust</code>). Why it is built this way: <a href="../articles/agents-vault-keys-and-the-root.html">agents, vault keys and the root</a>; drawn: <a href="../storyboards/a-vault-key-handed-over.html">a vault key, handed over</a>.</p>
 </main>
@@ -49,10 +52,26 @@ def strip(t):
     return re.sub(r'<footer class="site">.*?</footer>', "", t, flags=re.S)
 
 
+PAGES = {
+    "index": dict(title="Handing over a vault key", crumb="handover",
+                  desc="Instructions for agents: hand a vault key to Dinis Cruz's vault keeper, sealed to a key that chains to the root, as a QR code holding strict JSON. The short address for an agent: pki.sgit.ai/handover.md.",
+                  banner='<p class="msg ok">For an agent: <b>https://pki.sgit.ai/handover.md</b> is this page as markdown, the version to read. Paste into a session: <i>Read https://pki.sgit.ai/handover.md and follow it. The root is sha256:db7f79fdd87e030a. The recipient is &lt;fingerprint&gt;.</i> What you do, from your side: <a href="for-you.html">agents and vault keys: what you do</a>.</p>'),
+    "for-you": dict(title="Agents and vault keys: what you do", crumb="what you do",
+                    desc="Four recipes for Dinis Cruz, the root: give an agent a vault key he holds, onboard a new agent, have one agent hand a vault key to another, receive a key himself. Each key travels sealed; he carries an image.",
+                    banner='<p class="msg ok">This is your side. The agents\' side, to give them: <a href="../handover.md">pki.sgit.ai/handover.md</a>.</p>'),
+}
+
+
 def main():
-    md = SRC.read_text()
-    page = PAGE.replace("{body}", render(md))
-    outs = {ROOT / "handover/index.html": page, ROOT / "handover.md": md}
+    outs = {}
+    for slug, meta in PAGES.items():
+        md = (ROOT / f"handover/{slug}.md").read_text()
+        page = PAGE
+        for k, v in meta.items():
+            page = page.replace("{" + k + "}", v)
+        outs[ROOT / f"handover/{slug}.html"] = page.replace("{slug}", slug).replace("{body}", render(md))
+        if slug == "index":
+            outs[ROOT / "handover.md"] = md
     if "--check" in sys.argv:
         stale = [p.name for p, t in outs.items() if not p.exists() or strip(p.read_text()) != strip(t)]
         if stale:
@@ -61,7 +80,7 @@ def main():
         return
     for p, t in outs.items():
         p.write_text(t)
-    print("gen_handover: handover/index.html and handover.md written")
+    print("gen_handover: " + ", ".join(str(p.relative_to(ROOT)) for p in outs) + " written")
 
 
 if __name__ == "__main__":

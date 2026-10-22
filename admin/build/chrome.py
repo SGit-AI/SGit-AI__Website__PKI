@@ -46,6 +46,7 @@ NAV = [
         ("&#9679; Open a message (QR image or link)", "m/index.html"),
         ("&#9679; Invite someone", "invite/index.html"),
         ("&#9679; Identities for agents", "agents/index.html"),
+        ("&#9679; Agents &amp; vault keys: what you do", "handover/for-you.html"),
         ("&#9679; Hand over a vault key (for agents)", "handover/index.html"),
         ("&#9679; Storyboards", "storyboards/index.html"),
         ("Articles", "articles/index.html"),

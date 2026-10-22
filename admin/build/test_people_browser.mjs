@@ -171,7 +171,7 @@ try {
 
     // a batch: a zip of QR images, sealed to her, opened together on the message page
     {
-        const M = await import(path.join(ROOT, 'assets/people/message.js')), QR = await import(path.join(ROOT, 'assets/people/qrread.js'))
+        const M = await import(path.join(ROOT, 'assets/people/message.js')), QR = await import(path.join(ROOT, 'assets/people/qrread.js')), K2 = await import(path.join(ROOT, 'assets/people/keys.js'))
         const { qrcode } = await import(path.join(ROOT, 'assets/vendor/qrcode-generator/2.0.4/qrcode.mjs'))
         const { makeZip } = await import('./zipfixture.mjs'), zlib = await import('zlib')
         await p.goto(SITE + 'vault/index.html'); await p.locator('#vault-bar').waitFor()
@@ -186,6 +186,29 @@ try {
         await p.locator('#batch-cards .msgcard').nth(1).waitFor({ timeout: 60000 }).catch(async e => { await p.screenshot({ path: '/tmp/claude-0/-home-user-SGit-AI--Website--PKI/a4b0d5a1-e4ef-596c-9c9b-79001e8aa63e/scratchpad/fail.png', fullPage: true }); throw e })
         const bodies = await p.$$eval('#batch-cards .msgcard .body', b => b.map(x => x.textContent))
         check(bodies.join('|') === 'batch message 1|batch message 2' && (await text(p, 'table.kv')).includes('refused'), 'a zip of QR images: both messages for her open together, one under the other; the entry that lies about its size is refused')
+        // a vault key she holds, forwarded sealed to another key, never shown: the key arrives as its QR image
+        const fx2 = JSON.parse(fs.readFileSync(path.join(ROOT, 'directory/fixtures', bruno.dir + '.json'), 'utf8'))
+        const keyMsg = await M.sealMessage(await M.compose({ to: ana, text: 'a vault key', files: [{ name: 'vault key: test', data: Buffer.from('the vault key, for the test').toString('base64') }] }), ana, null)
+        await p.goto(SITE + 'm/index.html#' + keyMsg.code)
+        await p.locator('.msgfile').first().waitFor({ timeout: 60000 })
+        check((await p.locator('.msgfile iframe').count()) === 0, 'a file that looks like a key is not shown until asked for')
+        await p.getByRole('button', { name: 'Forward, sealed, to…' }).click()
+        const keyPng = await png(M.qrKey({ fp: fx2.bundle.signing_fingerprint, label: 'Bruno', code: M.keyCode(fx2.bundle).code }))
+        await p.setInputFiles('.forward input[type=file]', { name: 'key.png', mimeType: 'image/png', buffer: keyPng })
+        await p.locator('.forward p.msg.ok').first().waitFor({ timeout: 30000 })
+        await p.getByRole('button', { name: 'Seal it to them' }).click()
+        await p.locator('.forward img.qrimg').waitFor({ timeout: 30000 })
+        const fwdSrc = await p.locator('.forward img.qrimg').getAttribute('src')
+        const fimg = await QR.decodePng(Buffer.from(fwdSrc.split(',')[1], 'base64'), d => zlib.inflateSync(d))
+        const fq = M.parseQrText(QR.readQr(fimg.lum, fimg.w, fimg.h))
+        const fo = await M.openMessage(M.parseCode(fq.code).enc, [{ bundle: fx2.bundle, private: { encrypt: K2.unb64(fx2.private.encrypt), sign: K2.unb64(fx2.private.sign) } }], new Map([[ana.signing_fingerprint, ana]]))
+        check(fq.to === fx2.bundle.signing_fingerprint && fo.verified === true && Buffer.from(fo.msg.files[0].data, 'base64').toString() === 'the vault key, for the test' && (await p.locator('.msgfile iframe').count()) === 0,
+            'forwarded, sealed, from the key’s QR image: the image opens with that key alone, signed by her, the file intact, and it was never shown on her page')
+        // a key QR brought to the message page: what to do with it
+        await p.goto(SITE + 'm/index.html')
+        await p.setInputFiles('#open-qr-file', { name: 'key.png', mimeType: 'image/png', buffer: keyPng })
+        await p.locator('#key-box').waitFor({ timeout: 30000 })
+        check((await text(p, '#key-box')).includes(fx2.bundle.signing_fingerprint) && (await p.locator('#key-box a', { hasText: 'Send to this key' }).count()) === 1, 'a key QR on the message page: its fingerprint to compare, and the way on (Send to it, or Forward from the message that holds the key)')
     }
 
     // her invitation
