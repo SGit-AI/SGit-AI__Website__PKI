@@ -122,7 +122,8 @@ async function draw() {
             batchView(items, out)
         }
         file.addEventListener('change', () => { if (file.files.length) onFiles([...file.files]) })
-        return app.replaceChildren(h('p', {}, 'Nothing to open in this address. Bring the message here:'),
+        return app.replaceChildren(h('p', { class: 'msg ok' }, 'Giving an agent a vault key you hold? Open the message that carries it here; then, on its file, press ', h('b', {}, 'Forward, sealed, to…'), ' and bring the agent’s key. Step by step: ', h('a', { href: pageUrl('handover/for-you.html') + '#give' }, 'recipe 1'), '.'),
+            h('p', {}, 'Nothing to open in this address. Bring the message here:'),
             h('h3', {}, 'QR code images'), h('p', { class: 'small' }, 'One image or many, or a zip of them: choose them, drop them on this page, or paste (Cmd/Ctrl+V). They are read in this browser; nothing is uploaded.'),
             h('div', { class: 'acts' }, h('label', { class: 'btn primary', for: 'open-qr-file' }, 'Choose QR images or a zip'), file), out,
             h('h3', {}, 'Or its text'), paste, h('div', { class: 'acts' }, h('button', { type: 'button', class: 'btn primary', onclick: () => take(paste.value) }, 'Open')),

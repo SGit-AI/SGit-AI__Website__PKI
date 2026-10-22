@@ -5,6 +5,7 @@ import { h, msg, err, loadDirectory, standingPill, pageUrl, copyButton, download
 import * as M from '../message.js'
 import * as EV from '../evidence.js'
 import { messageCard } from '../cards.js'
+import { forwardPanel } from '../forward.js'
 
 const app = document.getElementById('app'), barMount = document.getElementById('vault-bar-mount')
 vaultBar(barMount)
@@ -391,13 +392,13 @@ async function inbox(body, dir) {
                 let agentSub = null
                 if (subFile) { try { const j = JSON.parse(new TextDecoder().decode(K.unb64(subFile.data))); if (j.statements && j.statements[0] && j.statements[0].body.kind === 'agent') agentSub = j } catch (e) { /* not one */ } }
                 const confirm = agentSub ? h('button', { type: 'button', class: 'btn small primary', onclick: () => { pendingAgent(agentSub); tab = 'agents'; history.replaceState(null, '', '#agents'); draw() } }, 'Confirm this agent…') : null
-                box.append(o ? messageCard(o.msg, o.verified, nameOf, [confirm, keep, drop].filter(Boolean)) : h('div', { class: 'msgcard' }, msg('bad', `Could not be opened: ${err(e1)}`), h('div', { class: 'acts' }, drop)))
+                box.append(o ? messageCard(o.msg, o.verified, nameOf, [confirm, keep, drop].filter(Boolean), { forward: f => forwardPanel(f, dir) }) : h('div', { class: 'msgcard' }, msg('bad', `Could not be opened: ${err(e1)}`), h('div', { class: 'acts' }, drop)))
             }
         }))
         body.append(h('p', { class: 'small' }, 'Your inbox is an append lane on your book vault. What arrives is sealed to your key; it is opened here, with the key from your master.'), h('div', { class: 'acts' }, check), box)
     }
     const kept = await A.book.messages(vault.book, 'in')
-    body.append(h('h3', {}, 'Kept'), kept.length ? h('div', {}, ...kept.map(m => messageCard(m.msg, m.verified, nameOf))) : h('p', { class: 'dim small' }, 'Nothing kept yet.'))
+    body.append(h('h3', {}, 'Kept'), kept.length ? h('div', {}, ...kept.map(m => messageCard(m.msg, m.verified, nameOf, [], { forward: f => forwardPanel(f, dir) }))) : h('p', { class: 'dim small' }, 'Nothing kept yet.'))
     const sent = await A.book.messages(vault.book, 'out')
     if (sent.length) body.append(h('h3', {}, 'Sent'), h('div', {}, ...sent.map(m => h('div', { class: 'msgcard' }, h('div', { class: 'meta' }, `to ${nameOf(m.to)} · ${m.at} · ${m.how}`), h('div', { class: 'body' }, m.subject ? m.subject + '\n\n' : '', m.text || '')))))
 }
