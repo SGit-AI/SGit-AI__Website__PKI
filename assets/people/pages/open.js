@@ -65,8 +65,50 @@ async function keyBox(q, out) {
     out.replaceChildren(h('div', { class: 'vpanel', id: 'key-box' }, h('h3', {}, 'A public key, not a message'),
         h('table', { class: 'kv' }, h('tbody', {}, h('tr', {}, h('th', {}, 'Says it is'), h('td', {}, q.label || b.label || '(no label)')),
             h('tr', {}, h('th', {}, 'Fingerprint'), h('td', {}, h('b', { class: 'mono' }, b.signing_fingerprint), h('div', { class: 'warn small' }, rec ? `In the register, as ${rec.name}.` : 'Not in the register: compare it, character for character, with the one the agent printed in its own session.'))))),
-        h('p', { class: 'small' }, 'To give it a vault key you hold: open the message that brought you the key, and press ', h('b', {}, 'Forward, sealed, to…'), ' on the file; bring this key there. To seal something new to it: ', h('b', {}, 'Send'), '. To make it one of your agents: it sends you its record (', h('a', { href: pageUrl('handover/for-you.html') + '#onboard' }, 'how'), ').'),
-        h('div', { class: 'acts' }, h('a', { class: 'btn primary', href: pageUrl('send/index.html') + '#' + q.code }, 'Send to this key →'), h('a', { class: 'btn', href: pageUrl('handover/for-you.html') }, 'Agents and vault keys: what you do'))))
+        giveBox(q, b, rec),
+        h('p', { class: 'small' }, 'To seal something new to it: ', h('b', {}, 'Send'), '. To make it one of your agents: it sends you its record (', h('a', { href: pageUrl('handover/for-you.html') + '#onboard' }, 'how'), ').'),
+        h('div', { class: 'acts' }, h('a', { class: 'btn', href: pageUrl('send/index.html') + '#' + q.code }, 'Send to this key →'), h('a', { class: 'btn', href: pageUrl('handover/for-you.html') }, 'Agents and vault keys: what you do'))))
+}
+/** From a key brought here: a vault key you hold, sealed straight to it. The files of your kept messages, or of a
+    message brought now (its QR image), each with "Seal it to …": the forward panel opens with this key already in. */
+function giveBox(q, b, rec) {
+    const name = rec ? rec.name : (q.label || b.label || 'this key')
+    const box = h('div', { class: 'vpanel', id: 'give-box' }, h('h3', {}, `Give it a vault key you hold`))
+    // the vault may still be reopening from the tab's session: fill the box when it has, and again if it opens later
+    const fill = () => { box.replaceChildren(h('h3', {}, 'Give it a vault key you hold')); fillGive(box, q, name) }
+    box.append(h('p', { class: 'dim small' }, 'Opening your vault…'))
+    vault.settled().then(fill)
+    const off = vault.onChange(() => { if (!box.isConnected) return off(); fill() })
+    return box
+}
+function fillGive(box, q, name) {
+    if (!vault.open || !vault.ids.length) { box.append(msg('warn', 'Open your vault above with your passkey: the vault key you hold is opened with your key, and the forward is signed with it.')); return }
+    const list = h('div'), out = h('div')
+    const offer = (m, from) => {
+        for (const f of (m.files || [])) {
+            const row = h('div', { class: 'msgfile' }, h('div', { class: 'acts' }, h('span', { class: 'mono small' }, f.name), h('span', { class: 'dim small' }, from)))
+            const btn = h('button', { type: 'button', class: 'btn small primary' }, `Seal it to ${name}…`)
+            btn.addEventListener('click', () => { btn.remove(); row.append(forwardPanel(f, dir, q.code)) })
+            row.firstChild.append(btn); list.append(row)
+        }
+    }
+    const img = h('input', { type: 'file', accept: 'image/*', id: 'give-msg-img', class: 'visually-hidden' })
+    img.addEventListener('change', async () => {
+        if (!img.files[0]) return
+        try {
+            const mq = M.parseQrText(await readImage(img.files[0]))
+            if (mq.kind !== 'sealed') return out.replaceChildren(msg('warn', 'That image is a key, not the message that carries the vault key.'))
+            const o = await M.openMessage(M.parseCode(mq.code).enc, vault.ids, new Map())
+            out.replaceChildren(); if (!(o.msg.files || []).length) return out.append(msg('warn', 'That message carries no file.'))
+            offer(o.msg, 'from the message you just brought')
+        } catch (e) { out.replaceChildren(msg('bad', err(e))) }
+    })
+    box.append(h('p', { class: 'small' }, `The vault key is opened here with your key and sealed again to ${name}, in memory: it is not shown, not downloaded, not pasted.`),
+        h('div', { class: 'acts' }, h('label', { class: 'btn primary', for: 'give-msg-img' }, 'Bring the message that carries it (its QR image)'), img), out, list)
+    if (vault.mode === 'vault') A.book.messages(vault.book, 'in').then(kept => {
+        const withFiles = kept.filter(k => k.msg && (k.msg.files || []).length)
+        if (withFiles.length) { list.prepend(h('p', { class: 'small' }, 'Or one you kept in your book:')); for (const k of withFiles) offer(k.msg, `kept · ${k.msg.subject || ''} · ${String(k.at || '').slice(0, 10)}`) }
+    }).catch(() => {})
 }
 let onFiles = null                                    // what the page as last drawn does with files dropped or pasted
 let lastBatch = null                                  // a batch read, kept across a redraw (the vault opening, say)
@@ -122,12 +164,15 @@ async function draw() {
             batchView(items, out)
         }
         file.addEventListener('change', () => { if (file.files.length) onFiles([...file.files]) })
-        return app.replaceChildren(h('p', { class: 'msg ok' }, 'Giving an agent a vault key you hold? Open the message that carries it here; then, on its file, press ', h('b', {}, 'Forward, sealed, to…'), ' and bring the agent’s key. Step by step: ', h('a', { href: pageUrl('handover/for-you.html') + '#give' }, 'recipe 1'), '.'),
+        app.replaceChildren(h('p', { class: 'msg ok' }, 'Giving an agent a vault key you hold? Open the message that carries it here; then, on its file, press ', h('b', {}, 'Forward, sealed, to…'), ' and bring the agent’s key. Step by step: ', h('a', { href: pageUrl('handover/for-you.html') + '#give' }, 'recipe 1'), '.'),
             h('p', {}, 'Nothing to open in this address. Bring the message here:'),
             h('h3', {}, 'QR code images'), h('p', { class: 'small' }, 'One image or many, or a zip of them: choose them, drop them on this page, or paste (Cmd/Ctrl+V). They are read in this browser; nothing is uploaded.'),
             h('div', { class: 'acts' }, h('label', { class: 'btn primary', for: 'open-qr-file' }, 'Choose QR images or a zip'), file), out,
             h('h3', {}, 'Or its text'), paste, h('div', { class: 'acts' }, h('button', { type: 'button', class: 'btn primary', onclick: () => take(paste.value) }, 'Open')),
-            lastBatch ? batchView(lastBatch, out) : null)
+            null)
+        // a batch read before a redraw (the vault opening, say) is shown again: one key as its key box, the rest as a list
+        if (lastBatch) { if (lastBatch.length === 1 && lastBatch[0].q && lastBatch[0].q.kind === 'key') keyBox(lastBatch[0].q, out); else batchView(lastBatch, out) }
+        return
     }
     onFiles = null
     const toRec = dir && dir.byFp.get(code.to), fromRec = code.signer && dir && [...dir.byFp.values()].find(r => r.bundle && r.bundle.signing_fingerprint === code.signer)

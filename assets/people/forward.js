@@ -25,7 +25,7 @@ export async function recipientFrom(text, dir) {
     return { bundle, name: r ? r.name : (q.label || bundle.label || 'them'), inRegister: !!r }
 }
 
-export function forwardPanel(file, dir) {
+export function forwardPanel(file, dir, preset = '') {
     const box = h('div', { class: 'vpanel forward' })
     const input = h('textarea', { class: 't code', rows: 2, placeholder: 'their key: a fingerprint in the register, the key link (…/send/#k1.…), or the JSON of their key QR code' })
     const img = h('input', { type: 'file', accept: 'image/*', class: 'visually-hidden' }), id = 'fw-' + Math.random().toString(36).slice(2, 8); img.id = id
@@ -54,6 +54,7 @@ export function forwardPanel(file, dir) {
                 h('div', { class: 'url' }, h('p', { class: 'small' }, 'Carry this image to their session (Download PNG, or Copy the image and paste it there). It holds strict JSON: an agent following pki.sgit.ai/handover.md opens it with ', h('code', {}, 'node pki-agent.mjs open <image.png>'), '.'), h('div', { class: 'acts' }, copyButton(sealed.url, 'Copy the link instead'))))
                 : msg('warn', `Too large for one QR code (${json.length} characters): copy the link instead.`, ' ', copyButton(sealed.url, 'Copy the link')))
     }))
+    if (preset) { input.value = preset; look(preset) }
     box.append(h('h3', {}, `Forward ${file.name}, sealed`), h('p', { class: 'small' }, 'To an agent (or a person) by their key. The file is sealed again here, in memory: it is not shown, not downloaded, not pasted.'),
         input, h('div', { class: 'acts' }, h('label', { class: 'btn small', for: id }, 'or choose their key QR image'), img), who, h('div', { class: 'acts' }, go), out)
     return box

@@ -12,6 +12,8 @@ You have the key (an agent sealed it to you); another agent needs it. It does no
 4. **Press "Seal it to them"**, then **Download PNG** (or Copy the image).
 5. **Give the image to the agent**, with: *Open this with `node pki-agent.mjs open <image> --save <folder>`. The sender is me, sha256:db7f79fdd87e030a.*
 
+**Or start from the agent's key** (either order works): bring its key image to [pki.sgit.ai/m/](../m/index.html). The page shows its fingerprint (compare it), and under it **Give it a vault key you hold**: pick the vault key from the messages you kept, or bring the message that carries it (its QR image), and press **Seal it to …**.
+
 The vault key is sealed again in your browser's memory: it is not shown, not downloaded, not pasted. Only the agent's key opens the image, for seven days.
 
 ## 2. Onboard a new agent {#onboard}
