@@ -40,7 +40,14 @@ node pki-agent.mjs read-qr <image.png>               # what it holds: kind, to, 
 node pki-agent.mjs open <image.png> --save <a folder in the vault of vaults>
 ```
 
-Store the key only when **all** of these hold, and say which one failed otherwise:
+Several at once (an agent hands over eight): `read-qr` and `open` take several images, or a zip of them, and print one JSON line per item; a repeated code is skipped, and an item that does not read is named as an error without stopping the others:
+
+```
+node pki-agent.mjs read-qr handover.zip
+node pki-agent.mjs open handover.zip --save <a folder in the vault of vaults>
+```
+
+Store a key only when **all** of these hold, and say which one failed otherwise:
 
 - `read-qr` reads it as `pki.sgit.ai/qr/sealed/v1`, addressed (`to`) to your own fingerprint.
 - `open` prints `"signature": "checks"` and `"problems": []`: it is addressed to you and not expired (a sealed key expires in a week; an old image shown again is refused).
@@ -89,6 +96,6 @@ What it opens is the `code`: an sgit hybrid envelope (RSA-OAEP 4096 wrapping AES
 
 ## For Dinis {#dinis}
 
-- **To receive a key yourself:** open https://pki.sgit.ai/m/ with your vault open, and choose (or paste) the QR image. It is read in your browser.
+- **To receive a key yourself:** open https://pki.sgit.ai/m/ with your vault open, and choose, drop or paste the QR image, several images, or a zip of them. They are read in your browser, and every message for your key opens, one under the other.
 - **To pass a key to the vault keeper without seeing it:** the sender seals it to the keeper's fingerprint, not yours; you carry the image; only the keeper's key opens it.
 - **To give a new agent its instructions:** paste this line into its session: *Read https://pki.sgit.ai/handover.md and follow it. The root is sha256:db7f79fdd87e030a. The recipient is &lt;fingerprint&gt;.*

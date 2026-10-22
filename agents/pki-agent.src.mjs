@@ -37,6 +37,7 @@ import * as D from '../assets/people/directory.js'
 import * as M from '../assets/people/message.js'
 import * as EV from '../assets/people/evidence.js'
 import * as QR from '../assets/people/qrread.js'
+import * as Z from '../assets/people/unzip.js'
 import { qrcode } from '../assets/vendor/qrcode-generator/2.0.4/qrcode.mjs'
 
 const HOME = process.env.PKI_AGENT_HOME || path.join(os.homedir(), '.sg-send')
@@ -166,6 +167,23 @@ async function fromQrImage(file) {
     let text; try { text = QR.readQr(img.lum, img.w, img.h) } catch (e) { die(`${file}: no QR code read (${e.message}). Save the image as a PNG, cropped to the code, and try again.`) }
     try { return M.parseQrText(text) } catch (e) { die(`${file}: ${e.message}`) }
 }
+const inflateRaw = (d, max) => { try { return zlib.inflateRawSync(d, { maxOutputLength: max }) } catch (e) { throw new Error('an entry inflates past what it declares: refused') } }
+/** Every source behind the arguments, a zip opened into its entries: [{ name, src | bytes }]. */
+async function expand(list) {
+    const out = []
+    for (const a of list) {
+        if (/\.zip$/i.test(a) && fs.existsSync(a)) { let es; try { es = await Z.unzip(fs.readFileSync(a), inflateRaw) } catch (e) { die(`${a}: ${e.message}`) } for (const e of es) out.push({ name: `${a} › ${e.name}`, bytes: e.bytes, error: e.error }) }
+        else out.push({ name: a, src: a })
+    }
+    return out
+}
+/** What one entry of a zip holds: a PNG read as a QR code, or text in one of the two shapes. */
+async function entryOf(e) {
+    if (e.error) throw new Error(e.error)
+    const b = e.bytes
+    if (b[0] === 0x89 && b[1] === 0x50) { const img = await QR.decodePng(b, d => zlib.inflateSync(d)); return M.parseQrText(QR.readQr(img.lum, img.w, img.h)) }
+    return M.parseQrText(new TextDecoder('utf-8', { fatal: true }).decode(b))
+}
 /** Where a sealed code comes from: a QR image, a file of strict JSON, a link, an m1 code, or an .enc file. */
 async function sourceOf(src) {
     if (/\.png$/i.test(src) && fs.existsSync(src)) return fromQrImage(src)
@@ -178,6 +196,11 @@ const policyOf = v => { if (!v) return ''; if (D.POLICY.test(String(v))) return 
 async function policyHash(v) { const p = policyOf(v); return p !== null ? p : 'sha256:' + await K.sha256hex(fs.readFileSync(String(v))) }
 const expiresIn = days => days ? new Date(Date.now() + Number(days) * 86400000).toISOString() : ''
 
+/** This tool, run again on one item: a batch opens each message exactly as a single open does. */
+function spawnSelf(argv) {
+    try { return { ok: true, out: execFileSync(process.execPath, [process.argv[1], ...argv], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], env: process.env }) } }
+    catch (e) { return { ok: false, err: String(e.stderr || e.message) } }
+}
 // ------------------------------------------------------------ the commands
 const commands = {
     async help() {
@@ -197,11 +220,12 @@ const commands = {
   root                                                     check the pinned root: register, anchors, DNS
   trust <fingerprint>                                      does it chain to the pinned root? (and its policy)
   keyqr [--out F.png]                                      this agent's public key as a link and a QR code
-  read-qr <image.png>                                      what a QR image holds, checked (never the secret)
+  read-qr <image.png | batch.zip> […]                      what QR images hold, checked (never the secret)
   QR files: --qr / --out F.png (or .svg); strict JSON for an agent by default, --qr-link for a phone's camera
   seal --from-vault DIR: the vault key straight from sgit vault show-key, never printed
   policy <file>                                            the sha256 a link names a behaviour policy by
-  open <qr.png | link | m1… | file.enc> [--save DIR]       open a message sealed to this agent
+  open <qr.png | batch.zip | link | m1… | file.enc> […] [--save DIR]   open messages sealed to this agent (a batch:
+                                                           one JSON line each)
   sign <file>                                              a signature sgit pki verify checks (file.sig)
   link <fingerprint> [--method known]                      link to any key in the register
   evidence --kind link|website|github|dns|key --value V [--url U]   a signed claim, e.g. the session's own URL
@@ -312,7 +336,13 @@ Keys: ${KEYS} (sgit's layout${PASS ? ', encrypted with SG_SEND_PASSPHRASE' : ', 
         await qrOut(flags['qr-link'] ? k.url : M.qrKey({ fp: id.bundle.signing_fingerprint, label: id.bundle.label, code: k.code }), flags.out)
     },
     async 'read-qr'() {
-        const f = args[0]; if (!f || !fs.existsSync(f)) die('read-qr <image.png>')
+        if (!args.length) die('read-qr <image.png | batch.zip> […]')
+        const list = await expand(args)
+        if (list.length > 1 || list[0].bytes || list[0].error) {
+            for (const e of list) { try { const q = e.bytes || e.error ? await entryOf(e) : await fromQrImage(e.src); say(JSON.stringify(q.kind === 'sealed' ? { item: e.name, kind: q.kind, to: q.to, from: q.from, bytes: q.code.length } : { item: e.name, kind: q.kind, fp: q.fp, label: q.label })) } catch (x) { say(JSON.stringify({ item: e.name, error: x.message })) } }
+            return
+        }
+        const f = args[0]; if (!fs.existsSync(f)) die('read-qr <image.png>')
         const q = await fromQrImage(f)
         say(JSON.stringify(q.kind === 'sealed' ? { kind: q.kind, to: q.to, from: q.from, bytes: q.code.length } : { kind: q.kind, fp: q.fp, label: q.label, fingerprint_from_key: (await M.parseKeyCode(q.code)).signing_fingerprint }, null, 2))
     },
@@ -321,8 +351,21 @@ Keys: ${KEYS} (sgit's layout${PASS ? ', encrypted with SG_SEND_PASSPHRASE' : ', 
         say('sha256:' + await K.sha256hex(fs.readFileSync(f)))
     },
     async open() {
-        const src = args[0]; if (!src) die('open <qr.png | qr.json | link | m1… | file.enc>')
-        const got = await sourceOf(src)
+        if (!args.length) die('open <qr.png | batch.zip | qr.json | link | m1… | file.enc> […]')
+        const list = await expand(args)
+        if (list.length > 1) {                                  // a batch: each opened in turn, one JSON line each
+            const seen = new Set()
+            for (const e of list) {
+                let got; try { got = e.bytes || e.error ? await entryOf(e) : await sourceOf(e.src) } catch (x) { say(JSON.stringify({ item: e.name, error: x.message })); continue }
+                if (got.kind !== 'sealed') { say(JSON.stringify({ item: e.name, error: 'not a sealed message' })); continue }
+                if (seen.has(got.code)) { say(JSON.stringify({ item: e.name, skipped: 'the same message again' })); continue }
+                seen.add(got.code)
+                const r = spawnSelf(['open', got.code, ...(flags.save ? ['--save', String(flags.save)] : [])])
+                say(JSON.stringify({ item: e.name, ...(r.ok ? JSON.parse(r.out.slice(0, r.out.lastIndexOf('}') + 1)) : { error: r.err.trim() }) }))
+            }
+            return
+        }
+        const got = list[0].bytes ? await entryOf(list[0]).catch(e => die(e.message)) : await sourceOf(list[0].src)
         if (got.kind === 'key') die('that is a public key, not a sealed message: nothing to open')
         const enc = got.kind === 'sealed' ? M.parseCode(got.code).enc : got.enc
         const id = await me()

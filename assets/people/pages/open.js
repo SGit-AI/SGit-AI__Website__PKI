@@ -5,6 +5,7 @@ import { h, msg, err, loadDirectory, pageUrl, busy, vaultBar, vault, download, R
 import * as M from '../message.js'
 import { messageCard } from '../cards.js'
 import * as QR from '../qrread.js'
+import { unzip, isZip, inflateRawBrowser } from '../unzip.js'
 
 const app = document.getElementById('app')
 const bar = vaultBar(document.getElementById('vault-bar-mount'))
@@ -34,20 +35,71 @@ function grantButton(g) {
 }
 
 /** The text of the QR code in an image: the browser's own detector when it has one, this site's reader when not. */
-async function fromImage(blob, out) {
-    out.replaceChildren(h('p', { class: 'dim small' }, 'Reading the QR code…'))
-    try {
-        const bmp = await createImageBitmap(blob)
-        if ('BarcodeDetector' in window) { try { const r = await new BarcodeDetector({ formats: ['qr_code'] }).detect(bmp); if (r[0] && r[0].rawValue) { out.replaceChildren(); return r[0].rawValue } } catch (e) { /* the reader below */ } }
-        const c = document.createElement('canvas'); c.width = bmp.width; c.height = bmp.height
-        const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, c.width, c.height); x.drawImage(bmp, 0, 0)
-        const d = x.getImageData(0, 0, c.width, c.height).data, lum = new Uint8Array(c.width * c.height)
-        for (let i = 0; i < lum.length; i++) lum[i] = Math.round(0.299 * d[i * 4] + 0.587 * d[i * 4 + 1] + 0.114 * d[i * 4 + 2])
-        const text = QR.readQr(lum, c.width, c.height); out.replaceChildren(); return text
-    } catch (e) { out.replaceChildren(msg('bad', 'No QR code read from that image (', err(e), '). Crop it to the code, straight on, and try again.')); return null }
+async function readImage(blob) {
+    const bmp = await createImageBitmap(blob)
+    if ('BarcodeDetector' in window) { try { const r = await new BarcodeDetector({ formats: ['qr_code'] }).detect(bmp); if (r[0] && r[0].rawValue) return r[0].rawValue } catch (e) { /* the reader below */ } }
+    const c = document.createElement('canvas'); c.width = bmp.width; c.height = bmp.height
+    const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, c.width, c.height); x.drawImage(bmp, 0, 0)
+    const d = x.getImageData(0, 0, c.width, c.height).data, lum = new Uint8Array(c.width * c.height)
+    for (let i = 0; i < lum.length; i++) lum[i] = Math.round(0.299 * d[i * 4] + 0.587 * d[i * 4 + 1] + 0.114 * d[i * 4 + 2])
+    return QR.readQr(lum, c.width, c.height)
 }
-let onPasteImage = null                               // the paste handler of the page as last drawn
-document.addEventListener('paste', e => { const it = [...(e.clipboardData && e.clipboardData.items || [])].find(i => i.type.startsWith('image/')); if (it && onPasteImage) { e.preventDefault(); onPasteImage(it.getAsFile()) } })
+const IMAGE = b => (b[0] === 0x89 && b[1] === 0x50) || (b[0] === 0xff && b[1] === 0xd8) || (b[0] === 0x47 && b[1] === 0x49) || (b[0] === 0x52 && b[8] === 0x57)
+/** Every file brought (images, zips of them, JSON or text files), each read to one of the two QR shapes or an error. */
+async function readAll(files) {
+    const entries = []
+    for (const f of files) {
+        const bytes = new Uint8Array(await f.arrayBuffer())
+        if (isZip(bytes)) { try { for (const e of await unzip(bytes, inflateRawBrowser)) entries.push({ name: `${f.name} › ${e.name}`, ...e }) } catch (e) { entries.push({ name: f.name, error: err(e) }) } }
+        else entries.push({ name: f.name || 'pasted image', bytes })
+    }
+    const out = [], seen = new Set()
+    for (const e of entries) {
+        if (e.error) { out.push(e); continue }
+        try {
+            const text = IMAGE(e.bytes) ? await readImage(new Blob([e.bytes])) : new TextDecoder('utf-8', { fatal: true }).decode(e.bytes)
+            const q = M.parseQrText(text)
+            if (q.kind === 'sealed' && seen.has(q.code)) { out.push({ name: e.name, dup: true, q }); continue }
+            if (q.kind === 'sealed') seen.add(q.code)
+            out.push({ name: e.name, q })
+        } catch (x) { out.push({ name: e.name, error: IMAGE(e.bytes) ? `no QR code read (${err(x)})` : err(x) }) }
+    }
+    return out
+}
+let onFiles = null                                    // what the page as last drawn does with files dropped or pasted
+let lastBatch = null                                  // a batch read, kept across a redraw (the vault opening, say)
+document.addEventListener('paste', e => { const fs = [...(e.clipboardData && e.clipboardData.items || [])].filter(i => i.kind === 'file').map(i => i.getAsFile()); if (fs.length && onFiles) { e.preventDefault(); onFiles(fs) } })
+document.addEventListener('dragover', e => { if (onFiles) { e.preventDefault(); document.body.classList.add('dropping') } })
+document.addEventListener('dragleave', e => { if (!e.relatedTarget) document.body.classList.remove('dropping') })
+document.addEventListener('drop', e => { document.body.classList.remove('dropping'); if (onFiles && e.dataTransfer && e.dataTransfer.files.length) { e.preventDefault(); onFiles([...e.dataTransfer.files]) } })
+
+/** A batch: what each file held, and every message for one of your keys opened, one under the other. */
+function batchView(items, out) {
+    const known = dir ? new Map([...dir.byFp].map(([k, r]) => [k, r.bundle])) : new Map()
+    const nameOf = f => (dir && dir.byFp.get(f) && dir.byFp.get(f).name) || f
+    const mine = new Set(vault.ids.map(i => i.bundle.signing_fingerprint))
+    const sealed = items.filter(i => i.q && i.q.kind === 'sealed' && !i.dup)
+    const rows = items.map((it, n) => h('tr', {}, h('th', {}, String(n + 1)), h('td', {}, h('span', { class: 'mono small' }, it.name)),
+        h('td', { class: 'small' }, it.error ? h('span', { class: 'bad' }, it.error) : it.dup ? h('span', { class: 'dim' }, 'the same message again: skipped') : it.q.kind === 'key' ? 'a public key (send to it from Send)'
+            : ['for ', h('b', {}, nameOf(it.q.to)), mine.has(it.q.to) ? h('span', { class: 'ok' }, ' (you)') : '', it.q.from ? [' · from ', h('span', { class: 'mono' }, nameOf(it.q.from))] : ' · unsigned'])))
+    const cards = h('div', { id: 'batch-cards' })
+    const go = h('button', { type: 'button', class: 'btn primary', id: 'batch-open' }, `Open ${sealed.filter(i => mine.has(i.q.to)).length} with my keys`)
+    go.addEventListener('click', () => busy(go, async () => {
+        cards.replaceChildren()
+        for (const [n, it] of sealed.entries()) {
+            const head = h('h3', {}, `${n + 1} of ${sealed.length} · `, h('span', { class: 'mono small' }, it.name))
+            if (!mine.has(it.q.to)) { cards.append(head, msg('warn', `Sealed to ${nameOf(it.q.to)}, not to one of your keys: only its owner opens it.`)); continue }
+            try {
+                const o = await M.openMessage(M.parseCode(it.q.code).enc, vault.ids, known), acts = []
+                if (vault.mode === 'vault') { const keep = h('button', { type: 'button', class: 'btn' }, 'Keep it in my book'); keep.addEventListener('click', () => busy(keep, async () => { await A.book.saveMessage(vault.book, 'in', { id: it.q.code.slice(-24), at: o.msg.at, msg: o.msg, verified: o.verified }); keep.replaceWith(h('span', { class: 'ok' }, 'kept')) })); acts.push(keep) }
+                cards.append(head, o.problems.length ? msg('warn', o.problems.join('; ')) : null, messageCard(o.msg, o.verified, nameOf, acts))
+            } catch (e) { cards.append(head, msg('bad', err(e))) }
+        }
+    }))
+    out.replaceChildren(h('h2', {}, `${items.length} item${items.length === 1 ? '' : 's'} read`), h('table', { class: 'kv' }, h('tbody', {}, ...rows)),
+        vault.open && vault.ids.length ? h('div', { class: 'acts' }, go) : msg('warn', 'Open your vault above with your passkey to open them.'), cards)
+    if (vault.open && vault.ids.length && sealed.some(i => mine.has(i.q.to))) go.click()
+}
 async function draw() {
     const code = M.parseCode(location.hash)
     if (!code) {
@@ -57,15 +109,23 @@ async function draw() {
             try { const q = M.parseQrText(text); if (q.kind !== 'sealed') return out.replaceChildren(msg('warn', 'That is a public key, not a sealed message: send to it from Send.')); location.hash = q.code }
             catch (e) { out.replaceChildren(msg('bad', err(e))) }
         }
-        const file = h('input', { type: 'file', accept: 'image/*', id: 'open-qr-file', class: 'visually-hidden' })
-        file.addEventListener('change', () => { if (file.files[0]) fromImage(file.files[0], out).then(t => t && take(t)) })
-        onPasteImage = blob => fromImage(blob, out).then(t => t && take(t))
+        const file = h('input', { type: 'file', accept: 'image/*,.zip,.json,.txt', multiple: true, id: 'open-qr-file', class: 'visually-hidden' })
+        onFiles = async files => {
+            out.replaceChildren(h('p', { class: 'dim small' }, `Reading ${files.length} file${files.length === 1 ? '' : 's'}…`))
+            const items = await readAll(files)
+            lastBatch = items
+            if (items.length === 1 && items[0].q && items[0].q.kind === 'sealed') return (location.hash = items[0].q.code)
+            if (items.length === 1 && items[0].error) return out.replaceChildren(msg('bad', `${items[0].name}: ${items[0].error}. Crop it to the code, straight on, and try again.`))
+            batchView(items, out)
+        }
+        file.addEventListener('change', () => { if (file.files.length) onFiles([...file.files]) })
         return app.replaceChildren(h('p', {}, 'Nothing to open in this address. Bring the message here:'),
-            h('h3', {}, 'A QR code image'), h('p', { class: 'small' }, 'Choose the image, or paste it here (Cmd/Ctrl+V). It is read in this browser; nothing is uploaded.'),
-            h('div', { class: 'acts' }, h('label', { class: 'btn primary', for: 'open-qr-file' }, 'Choose a QR image'), file), out,
-            h('h3', {}, 'Or its text'), paste, h('div', { class: 'acts' }, h('button', { type: 'button', class: 'btn primary', onclick: () => take(paste.value) }, 'Open')))
+            h('h3', {}, 'QR code images'), h('p', { class: 'small' }, 'One image or many, or a zip of them: choose them, drop them on this page, or paste (Cmd/Ctrl+V). They are read in this browser; nothing is uploaded.'),
+            h('div', { class: 'acts' }, h('label', { class: 'btn primary', for: 'open-qr-file' }, 'Choose QR images or a zip'), file), out,
+            h('h3', {}, 'Or its text'), paste, h('div', { class: 'acts' }, h('button', { type: 'button', class: 'btn primary', onclick: () => take(paste.value) }, 'Open')),
+            lastBatch ? batchView(lastBatch, out) : null)
     }
-    onPasteImage = null
+    onFiles = null
     const toRec = dir && dir.byFp.get(code.to), fromRec = code.signer && dir && [...dir.byFp.values()].find(r => r.bundle && r.bundle.signing_fingerprint === code.signer)
     const head = [h('p', {}, 'A sealed message for ', h('b', {}, toRec ? toRec.name : code.to), toRec ? h('span', { class: 'mono dim' }, ` (${code.to})`) : '', code.signer ? ['; the envelope says it was signed by ', h('b', {}, fromRec ? fromRec.name : code.signer)] : '; unsigned', '.')]
     const known = dir ? new Map([...dir.byFp].map(([k, r]) => [k, r.bundle])) : new Map()

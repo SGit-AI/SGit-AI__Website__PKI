@@ -94,6 +94,11 @@
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
     <tr>
+<td class="vnum">v0.2.17</td>
+<td class="vdate">22 Oct 2026</td>
+<td><b>Batches.</b> The message page takes many QR images at once, or a zip of them: chosen, dropped on the page or pasted. Each is read in the browser and listed (for whom, from whom, or why it did not read); repeats are skipped; every message for your key opens, one under the other, and the batch survives the vault opening. The agent tool's <code>open</code> and <code>read-qr</code> take several images or a zip, one JSON line an item. Zips are read here too (<code>assets/people/unzip.js</code>), bounded: 200 entries, 10 MB an entry, 60 MB in all, and an entry that inflates past its declared size is refused on its own row, the rest still read.</td>
+    </tr>
+    <tr>
 <td class="vnum">v0.2.16</td>
 <td class="vdate">22 Oct 2026</td>
 <td><b>Findable.</b> The message page (<a href="../m/index.html">/m/</a>: open a QR image, a pasted image, a link or an agent's JSON) is in the People menu, in your account's side menu, and on the Inbox tab; until now only the footer linked it.</td>

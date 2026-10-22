@@ -12,7 +12,7 @@ import path from 'path'
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../..')
 const SRC = path.join(ROOT, 'agents/pki-agent.src.mjs'), OUT = path.join(ROOT, 'agents/pki-agent.mjs')
-const MODULES = ['keys', 'directory', 'message', 'evidence', 'qrread']     // in dependency order
+const MODULES = ['keys', 'directory', 'message', 'evidence', 'qrread', 'unzip']     // in dependency order
 const QR = 'assets/vendor/qrcode-generator/2.0.4/qrcode.mjs'      // vendored, unedited; bundled as a namespace too
 
 function namespace(name) {

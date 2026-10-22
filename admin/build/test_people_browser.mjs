@@ -169,6 +169,25 @@ try {
         check(outside.length === 0 && (await p.title()) !== 'pwned', `nothing the files name is fetched (the markdown's tracker image and link are shown as addresses), and its script never runs${outside.length ? ': ' + outside.join(', ') : ''}`)
     }
 
+    // a batch: a zip of QR images, sealed to her, opened together on the message page
+    {
+        const M = await import(path.join(ROOT, 'assets/people/message.js')), QR = await import(path.join(ROOT, 'assets/people/qrread.js'))
+        const { qrcode } = await import(path.join(ROOT, 'assets/vendor/qrcode-generator/2.0.4/qrcode.mjs'))
+        const { makeZip } = await import('./zipfixture.mjs'), zlib = await import('zlib')
+        await p.goto(SITE + 'vault/index.html'); await p.locator('#vault-bar').waitFor()
+        let ana = null
+        for (let i = 0; i < 120 && !ana; i++) { ana = await p.evaluate(async () => { const v = (await import('/assets/people/ui.js')).vault; await v.settled(); return v.me ? v.me.bundle : null }); if (!ana) await p.waitForTimeout(500) }
+        const png = async text => { const q = qrcode(0, 'L'); q.addData(text, 'Byte'); q.make(); const n = q.getModuleCount(), px = 6, size = (n + 8) * px, lum = new Uint8Array(size * size).fill(255); for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) if (q.isDark(r, c)) for (let y = 0; y < px; y++) lum.fill(0, ((r + 4) * px + y) * size + (c + 4) * px, ((r + 4) * px + y) * size + (c + 5) * px); return Buffer.from(await QR.encodePng(lum, size, size, d => zlib.deflateSync(d))) }
+        const codes = []
+        for (const n of [1, 2]) { const sd = await M.sealMessage(await M.compose({ to: ana, text: `batch message ${n}` }), ana, null); codes.push(await png(M.qrSealed({ to: ana.signing_fingerprint, code: sd.code }))) }
+        const zip = makeZip([{ name: 'a/one.png', bytes: codes[0] }, { name: 'a/two.png', bytes: codes[1], deflate: true }, { name: 'liar.png', bytes: Buffer.alloc(50000, 1), deflate: true, lieSize: 10 }])
+        await p.goto(SITE + 'm/index.html')
+        await p.setInputFiles('#open-qr-file', { name: 'codes.zip', mimeType: 'application/zip', buffer: zip })
+        await p.locator('#batch-cards .msgcard').nth(1).waitFor({ timeout: 60000 }).catch(async e => { await p.screenshot({ path: '/tmp/claude-0/-home-user-SGit-AI--Website--PKI/a4b0d5a1-e4ef-596c-9c9b-79001e8aa63e/scratchpad/fail.png', fullPage: true }); throw e })
+        const bodies = await p.$$eval('#batch-cards .msgcard .body', b => b.map(x => x.textContent))
+        check(bodies.join('|') === 'batch message 1|batch message 2' && (await text(p, 'table.kv')).includes('refused'), 'a zip of QR images: both messages for her open together, one under the other; the entry that lies about its size is refused')
+    }
+
     // her invitation
     await p.goto(SITE + 'invite/index.html')
     await p.locator('#invite-go').waitFor()

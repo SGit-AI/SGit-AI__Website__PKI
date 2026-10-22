@@ -126,6 +126,22 @@ try {
     const kq2 = await run(['keyqr', '--out', 'me.png'], REG)
     const rk = JSON.parse((await run(['read-qr', 'me.png'], REG)).stdout)
     check(kq2.status === 0 && rk.kind === 'key' && rk.fp === fp && rk.fingerprint_from_key === fp, 'keyqr --out F.png: the public key as strict JSON; the fingerprint it names is the one the key recomputes to')
+    // ---------------------------------------------------------------- a batch: a zip of QR images
+    {
+        const { makeZip } = await import('./zipfixture.mjs')
+        const two = []
+        for (const n of [1, 2]) { fs.writeFileSync(path.join(home, `k${n}.txt`), `vault key number ${n}, for the test`); await run(['seal', '--to', fp, '--file', `k${n}.txt`, '--name', `key-${n}`, '--qr', `q${n}.png`], REG); two.push(fs.readFileSync(path.join(home, `q${n}.png`))) }
+        fs.writeFileSync(path.join(home, 'batch.zip'), makeZip([{ name: 'codes/q1.png', bytes: two[0] }, { name: 'codes/q2.png', bytes: two[1], deflate: true }, { name: 'codes/q1-again.png', bytes: two[0] }, { name: 'notes.txt', bytes: Buffer.from('not a code'), deflate: true }]))
+        fs.mkdirSync(path.join(home, 'batch'))
+        const ob = await run(['open', 'batch.zip', '--save', 'batch'], REG)
+        const lines = ob.stdout.trim().split('\n').map(l => JSON.parse(l))
+        check(lines.length === 4 && lines.filter(l => l.signature === 'checks').length === 2 && lines.some(l => l.skipped) && lines.some(l => l.error) && fs.readFileSync(path.join(home, 'batch', 'key-2'), 'utf8') === 'vault key number 2, for the test', 'open batch.zip: two sealed keys opened and saved, the repeat skipped, the stray file named as an error, one JSON line each')
+        const rb = (await run(['read-qr', 'batch.zip'], REG)).stdout.trim().split('\n').map(l => JSON.parse(l))
+        check(rb.filter(l => l.kind === 'sealed').length === 3 && !JSON.stringify(rb).includes('vault key number'), 'read-qr batch.zip: what each entry holds, and no secret')
+        fs.writeFileSync(path.join(home, 'liar.zip'), makeZip([{ name: 'big.png', bytes: Buffer.alloc(200000, 7), deflate: true, lieSize: 100 }]))
+        const lz = await run(['read-qr', 'liar.zip'], REG)
+        check(/inflates past|not the 100 it declares|refused/.test(lz.stdout + lz.stderr), 'a zip whose entry inflates past its declared size is refused (a zip bomb stops at the bound)')
+    }
     const dnsPin = await run(['pin', opFp, '--dns', 'no-such-domain.invalid'], REG)
     const dn = await run(['seal', '--text', 'x'], REG)
     check(dnsPin.status === 0 && dn.status !== 0 && /DNS|dns/.test(dn.stderr), 'a pin that names a domain refuses when DNS does not carry the root (or cannot be read)')
