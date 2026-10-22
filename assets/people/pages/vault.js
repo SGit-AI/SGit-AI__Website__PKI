@@ -371,6 +371,7 @@ async function inbox(body, dir) {
     const known = dir ? new Map([...dir.byFp].map(([k, r]) => [k, r.bundle])) : new Map()
     for (const c of await vault.contacts()) known.set(c.bundle.signing_fingerprint, c.bundle)
     const nameOf = f => (dir && dir.byFp.get(f) && dir.byFp.get(f).name) || f
+    body.append(h('p', { class: 'small' }, 'A message that came as a QR image or a link: ', h('a', { class: 'btn small primary', href: pageUrl('m/index.html') }, 'Open a message (QR image or link)')))
     if (!vault.inbox) body.append(h('p', { class: 'dim' }, 'You have no inbox yet: open one from Your record, step 3. Messages sent as links open on the message page, and can be saved here.'))
     else {
         const check = h('button', { type: 'button', class: 'btn primary' }, 'Check for new messages'), box = h('div')

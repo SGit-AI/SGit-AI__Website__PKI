@@ -43,6 +43,7 @@ NAV = [
         ("&#9679; Sign in &amp; your account", "account/index.html"),
         ("&#9679; Your vault &amp; your keys", "vault/index.html"),
         ("&#9679; Send a message", "send/index.html"),
+        ("&#9679; Open a message (QR image or link)", "m/index.html"),
         ("&#9679; Invite someone", "invite/index.html"),
         ("&#9679; Identities for agents", "agents/index.html"),
         ("&#9679; Hand over a vault key (for agents)", "handover/index.html"),

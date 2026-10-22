@@ -8,7 +8,7 @@ import * as M from '../message.js'
 const app = document.getElementById('app')
 const SECTIONS = [['overview', 'Overview', '◉'], ['profile', 'Profile', '☺'], ['keys', 'Keys & personas', '⚿'], ['storage', 'Storage & devices', '▣'], ['explorer', 'Your vault, as files', '☰']]
 const TOOLS = [['vault/index.html#record', 'Your record'], ['vault/index.html#links', 'Links'], ['vault/index.html#contacts', 'Contacts'], ['vault/index.html#inbox', 'Inbox'],
-               ['vault/index.html#agents', 'Agents'], ['send/index.html', 'Send a message'], ['invite/index.html', 'Invite someone'], ['people/index.html', 'The register']]
+               ['vault/index.html#agents', 'Agents'], ['m/index.html', 'Open a message (QR)'], ['send/index.html', 'Send a message'], ['invite/index.html', 'Invite someone'], ['people/index.html', 'The register']]
 const parse = () => { const m = location.hash.match(/^#([a-z]+)/); return m && (m[1] === 'welcome' || SECTIONS.some(s => s[0] === m[1])) ? m[1] : 'overview' }
 let route = parse(), drawing = 0
 const today = () => new Date().toISOString().slice(0, 10)
