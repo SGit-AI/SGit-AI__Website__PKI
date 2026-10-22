@@ -234,13 +234,19 @@ async function agents(body, dir) {
     body.append(h('p', {}, 'An agent makes its own key where it runs and hands you its public record: an identity, and a link naming your key as its operator. You confirm it with a link back, signed here, with an end date: until then the register shows it as operated by you. Its private key never comes to you. ', h('a', { href: pageUrl('agents/index.html') }, 'How agents get a key'), '.'))
 
     // confirm one
-    const paste = h('textarea', { class: 't code', placeholder: '{"kind": "pki.sgit.ai/submission/v1", "record": "sha256:…", "statements": […]} — from node pki-agent.mjs submission, or from your inbox' })
+    const paste = h('textarea', { class: 't code', id: 'agent-paste', placeholder: 'the agent’s fingerprint, sha256:…, when its record is in the register; or its submission, {"kind": "pki.sgit.ai/submission/v1", …}, from node pki-agent.mjs submission or your inbox' })
     const p0 = readPending(); if (p0) paste.value = JSON.stringify(p0, null, 1)
     const check = h('button', { type: 'button', class: 'btn primary' }, 'Check it')
     const out = h('div')
     check.addEventListener('click', () => busy(check, async () => {
         out.replaceChildren()
-        let sub; try { sub = JSON.parse(paste.value) } catch (e) { return out.append(msg('bad', 'That is not JSON.')) }
+        let sub
+        const fpIn = paste.value.trim()
+        if (K.FP.test(fpIn)) {                                // an agent already in the register: its record, as published
+            const rec = dir && dir.byFp.get(fpIn)
+            if (!rec) return out.append(msg('bad', `${fpIn} is not in the register: paste its submission instead.`))
+            sub = D.submission(rec.statements.map(e => e.st))
+        } else { try { sub = JSON.parse(paste.value) } catch (e) { return out.append(msg('bad', 'That is neither a fingerprint nor a submission (JSON).')) } }
         const r = await D.readRecord(sub.statements || [])
         if (!r.ok) return out.append(msg('bad', 'The record does not read cleanly: ', r.problems.join('; ')))
         if (r.kind !== 'agent') return out.append(msg('bad', 'This is not an agent’s record (its identity is a ' + r.kind + ').'))

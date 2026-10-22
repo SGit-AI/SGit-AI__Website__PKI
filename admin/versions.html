@@ -92,6 +92,11 @@
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
     <tr>
+<td class="vnum">v0.2.9</td>
+<td class="vdate">22 Oct 2026</td>
+<td><b>Getting the first anchor in.</b> Dinis made his account and master key (<code>sha256:db7f79fdd87e030a</code>); the site agent's record now names that key as its operator, waiting for his link back. The Agents tab takes a fingerprint as well as a submission, so confirming an agent already in the register is one paste. On a key card, For the sgit CLI, Share as a QR code and Publish no longer stack a second panel when pressed twice: pressing again closes it (Publish refreshes it).</td>
+    </tr>
+    <tr>
 <td class="vnum">v0.2.8</td>
 <td class="vdate">21 Oct 2026</td>
 <td><b>Agents, vault keys and the root.</b> From Dinis's memo on handing vault keys between agents, with its gaps closed in code. The agent tool's <code>send</code> and <code>seal</code> now refuse any recipient that does not chain to a <b>root the agent pinned</b> out of band (<code>pin</code>, or <code>PKI_ROOT</code>; optionally confirmed in a DNS TXT record), reading the register with that key as the only anchor (<code>directory.js trustFrom</code>). New commands: <code>root</code>, <code>trust</code>, <code>seal</code> (a vault key sealed to the root by default, and to the keeper when asked, as a link and a QR file), <code>keyqr</code>, <code>policy</code>; <code>operator --policy</code>. Links can name a behaviour policy by hash; the Agents tab signs it, agent pages show whether both sides agree, and the tool refuses when they do not. Sealed messages carry an expiry inside the signature. The article: <a href="../articles/agents-vault-keys-and-the-root.html">agents, vault keys and the root</a>, signed; the storyboard: <a href="../storyboards/a-vault-key-handed-over.html">a vault key, handed over</a>, sixteen technical panels, with new props (action lists that play in order, sessions, browsers, DNS, chains, policies, the append lane, refusals) and a new character, the Keeper.</td>

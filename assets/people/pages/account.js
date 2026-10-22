@@ -226,22 +226,33 @@ async function keyCard(id, { master, dir, m }) {
     card.append(acts)
     return card
 }
+/** One panel of each kind under a key card: pressing its button again closes it (and Publish, which reads the
+    register afresh, replaces it). Returns false when the press only closed it. */
+function slot(card, kind) {
+    const old = card.querySelector(`:scope > [data-panel="${kind}"]`)
+    if (old) { old.remove(); return false }
+    return true
+}
+const put = (card, kind, node) => { node.setAttribute('data-panel', kind); card.append(node) }
 /** The public key as a k1 link and its QR code: so someone can seal to it (an access key, say) before it is in the register. */
 async function share(id, card) {
+    if (!slot(card, 'share')) return
     const k = M.keyCode(id.bundle)
-    card.append(h('div', { class: 'vpanel share' }, h('div', { class: 'qr' }, await qr(k.url, { caption: false }),
+    put(card, 'share', h('div', { class: 'vpanel share' }, h('div', { class: 'qr' }, await qr(k.url, { caption: false }),
         h('div', { class: 'url' }, h('p', { class: 'small' }, 'Your public key, as a link. Whoever scans it lands on Send with your key filled in, and can seal a message to you, an access key for instance, before you are in the register. It is not secret. It is also not proof of anything: they should see this fingerprint on your screen, or hear it from you, before they trust it.'),
             h('p', {}, h('b', { class: 'mono' }, fpOf(id))), h('div', { class: 'acts' }, copyButton(k.url, 'Copy the link'))))))
 }
 function forSgit(id, card) {
+    if (!slot(card, 'sgit')) return
     const pass = h('input', { class: 't', type: 'password', autocomplete: 'new-password', placeholder: 'a passphrase for sgit to ask for, 10 characters or more' })
-    const go = h('button', { type: 'button', class: 'btn primary' }, 'Download the script')
+    const go = h('button', { type: 'button', class: 'btn primary' }, 'Download the script'), note = h('div')
     go.addEventListener('click', () => busy(go, async () => {
-        if (pass.value.length < 10) return card.append(msg('warn', 'At least 10 characters.'))
+        if (pass.value.length < 10) return note.replaceChildren(msg('warn', 'At least 10 characters.'))
+        note.replaceChildren()
         const ks = await K.keystoreFiles(id, pass.value)
         download(`sgit-key-${ks.folder}.sh`, K.keystoreScript(ks), 'text/x-shellscript')
     }))
-    card.append(h('div', { class: 'vpanel' }, h('p', { class: 'small' }, 'A shell script that writes this key into ~/.sg-send/keys/, where sgit looks, its private halves encrypted with the passphrase you type here.'), pass, h('div', { class: 'acts' }, go)))
+    put(card, 'sgit', h('div', { class: 'vpanel' }, h('p', { class: 'small' }, 'A shell script that writes this key into ~/.sg-send/keys/, where sgit looks, its private halves encrypted with the passphrase you type here.'), pass, note, h('div', { class: 'acts' }, go)))
 }
 /** What is signed and not yet in the register, for this key (and, for a persona, the master's link to it), as one file. */
 async function publish(id, card, dir, m) {
@@ -250,10 +261,11 @@ async function publish(id, card, dir, m) {
     const parts = [await unsentOf(fpOf(id))]
     if (m) parts.push(await unsentOf(fpOf(m)))
     const subs = parts.filter(p => p.out.length).map(p => D.submission(dir && dir.byFp.get(p.fp) ? p.out : p.sts))
-    if (!subs.length) return card.append(msg('ok', 'Everything signed for this key is in the register.'))
+    const old = card.querySelector(':scope > [data-panel="publish"]'); if (old) old.remove()
+    if (!subs.length) return put(card, 'publish', msg('ok', 'Everything signed for this key is in the register.'))
     const text = JSON.stringify(subs.length === 1 ? subs[0] : D.submissions(subs), null, 1)
     const n = subs.reduce((s, x) => s + x.statements.length, 0)
-    card.append(h('div', { class: 'vpanel' }, h('p', { class: 'small' }, `${n} signed statement(s) not in the register yet${m ? ', the persona’s and your master’s link to it' : ''}: a file of signed statements and nothing else. The register checks every signature before it writes anything.`),
+    put(card, 'publish', h('div', { class: 'vpanel' }, h('p', { class: 'small' }, `${n} signed statement(s) not in the register yet${m ? ', the persona’s and your master’s link to it' : ''}: a file of signed statements and nothing else. The register checks every signature before it writes anything.`),
         h('div', { class: 'acts' }, h('button', { type: 'button', class: 'btn primary', onclick: () => download(`pki-submission-${K.dirOf(fpOf(id))}.json`, text) }, 'Download the submission'), copyButton(text, 'Copy it'),
             h('a', { class: 'btn', href: `mailto:agent@riskmandate.ai?subject=${encodeURIComponent('pki.sgit.ai submission ' + fpOf(id))}&body=${encodeURIComponent('My submission for the register is attached.')}` }, 'Email it'))))
 }
