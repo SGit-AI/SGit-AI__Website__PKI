@@ -163,7 +163,9 @@ try {
     await e.click('#master-go')
     await e.locator('.profile-card').waitFor({ timeout: 90000 })
     check((await text(e, '.side')).includes('vault') && (await localKeys(e)).length === 0, 'Eve’s master key was born in her vault; nothing kept in the browser')
-    check((await e.locator('#anchor-callout').count()) === 1 && (await text(e, '#anchor-callout')).includes('sha256:'), 'with no anchor in the register, the overview says how the first one is enrolled, with her fingerprint')
+    const anchored = JSON.parse(fs.readFileSync(path.join(ROOT, 'directory/index.json'), 'utf8')).anchors.length > 0
+    check(anchored ? (await e.locator('#anchor-callout').count()) === 0 : (await e.locator('#anchor-callout').count()) === 1 && (await text(e, '#anchor-callout')).includes('sha256:'),
+        anchored ? 'with an anchor in the register, the overview no longer asks for the first one' : 'with no anchor in the register, the overview says how the first one is enrolled, with her fingerprint')
     // ---------------------------------------------------------------- Fay: a key first, then an access key sealed to it
     const fay = await person('Fay'), f = fay.page
     await f.goto(SITE + 'login/index.html')
