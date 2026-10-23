@@ -96,6 +96,11 @@
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
     <tr>
+<td class="vnum">v0.2.25</td>
+<td class="vdate">23 Oct 2026</td>
+<td><b>The vault's own app.</b> A vault opened on <a href="../v/index.html">Open a vault</a> now runs its own app, the way the SG/App host on vault.sgraph.ai runs it: the entry page (from <code>.vault/app.json</code>, <code>app.json</code> or <code>index.html</code>) in a sandboxed frame with an opaque origin, a <code>window.sg</code> bridge answering from the vault (<code>sg.vfs.read/readText/list</code>, <code>sg.loadCss/loadJs</code>, vault images, links to its other pages), read-only, <code>.vault/</code> refused and the network closed. The window is the vault's, full width, under an SG/App bar (App or Files, Give to an agent…, full width or page, close); the file browser stays one press away.</td>
+    </tr>
+    <tr>
 <td class="vnum">v0.2.24</td>
 <td class="vdate">23 Oct 2026</td>
 <td><b>A vault key travels as a file.</b> A vault key written into a message (in a key exchange, or on Send) is taken out of the text and sealed as a file, <code>vault-key-&lt;id&gt;.txt</code>, in the full form sgit takes; the text keeps only a placeholder naming the vault. The agent tool does the same on its side: <code>open</code> never prints a vault key that arrives in a message's text, it names it by its vault id and saves it as a file with <code>--save</code>. A vault open on the vault page has <b>Give this vault to an agent…</b>: paste the agent's key image, confirm its fingerprint, and the vault key goes to it sealed, as a file, never on your screen. Secret files inside an opened vault (private keys, tokens, other vaults' keys) are masked until revealed.</td>

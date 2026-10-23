@@ -91,7 +91,7 @@ export async function myKeyQr() {
             h('div', { class: 'url' }, h('div', { class: 'acts' }, copyButton(kc.url, 'Copy the link')))))
 }
 
-export function qrDesk({ dir, compact = false, onSealed = null } = {}) {
+export function qrDesk({ dir, compact = false, onSealed = null, replay = true } = {}) {
     const out = h('div', { id: 'open-qr-out' }), mine = h('div')
     const show = (items) => {
         lastBatch = items
@@ -120,6 +120,6 @@ export function qrDesk({ dir, compact = false, onSealed = null } = {}) {
         h('details', { class: 'qrdesk-text' }, h('summary', { class: 'small' }, 'Paste text instead'), paste, h('div', { class: 'acts' }, h('button', { type: 'button', class: 'btn', onclick: openText }, 'Open'))),
         mine, out)
     // a batch read before a redraw (the vault opening, say) is shown again
-    if (lastBatch) show(lastBatch)
+    if (lastBatch && replay) show(lastBatch)
     return desk
 }

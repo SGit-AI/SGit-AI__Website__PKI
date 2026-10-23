@@ -15,6 +15,7 @@ import { frameFor } from './preview.js'
 import * as M from './message.js'
 import { readImage } from './qrimage.js'
 import { keyExchange } from './exchange.js'
+import { appEntry, mountApp } from './vaultapp.js'
 
 const KEY_RE = /(?:sgit_private_vault_)?([a-z0-9]{16,64}):([a-z0-9]{6,32})\b/
 export function vaultKeyIn(bytes) {
@@ -57,23 +58,46 @@ async function readBytes(v, path) {
 const SECRET = /(^|\/)(private_key\.pem|signing_private\.pem|[^/]*private[^/]*\.pem|access-token\.json|[^/]*-key\.json|[^/]*token[^/]*|recovery-code\.json|master-key\.json|vault-key[^/]*)$/i
 const size = n => n < 1024 ? `${n} bytes` : n < 1048576 ? `${(n / 1024).toFixed(1)} KB` : `${(n / 1048576).toFixed(1)} MB`
 
-export function vaultViewer(key, { from = '', popout = false } = {}) {
+const FULL = 'pki.vv.full'
+const fullPref = () => { try { return localStorage.getItem(FULL) !== '0' } catch (e) { return true } }
+/** The page's full width: the site's nav, footer and the page's own top give way to the vault, as on vault.sgraph.ai. */
+export function setFull(on) { document.body.classList.toggle('vv-full', !!on); try { localStorage.setItem(FULL, on ? '1' : '0') } catch (e) { /* fine */ } }
+
+/** A vault opened from its key: its own app when it has one (as the SG/App host runs it), or its files. */
+export function vaultViewer(key, { from = '', popout = false, onClose = null } = {}) {
     const id = vaultIdOf(key)
     const box = h('section', { class: 'vaultview', id: 'vault-view' })
-    const head = h('div', { class: 'vv-head' }, h('b', {}, 'Vault ', h('span', { class: 'mono' }, id)), from ? h('span', { class: 'dim small' }, ` · its key came sealed from ${from}`) : null)
-    if (popout) head.append(h('button', { type: 'button', class: 'btn small', onclick: () => openVaultWindow(key, from) }, 'Open in a new window ↗'))
+    const title = h('span', { class: 'vv-title' }, 'Opening the vault…'), status = h('span', { class: 'vv-chips' })
+    const modeApp = h('button', { type: 'button', class: 'vv-tab', id: 'vv-mode-app', hidden: true }, 'App'), modeFiles = h('button', { type: 'button', class: 'vv-tab', id: 'vv-mode-files' }, 'Files')
     const give = h('div', { id: 'vv-give' })
-    head.append(h('button', { type: 'button', class: 'btn small primary', id: 'vv-give-btn', onclick: () => { if (give.firstChild) give.replaceChildren(); else give.replaceChildren(givePanel(key)) } }, 'Give this vault to an agent…'))
-    const list = h('ul', { class: 'tree', id: 'vv-tree' }, h('li', { class: 'dim' }, 'Opening the vault…'))
+    const fullBtn = h('button', { type: 'button', class: 'vv-btn', id: 'vv-full-btn', title: 'Use the whole window' })
+    const syncFull = () => { fullBtn.textContent = document.body.classList.contains('vv-full') ? '⤡ Page' : '⤢ Full width' }
+    fullBtn.addEventListener('click', () => { setFull(!document.body.classList.contains('vv-full')); syncFull() })
+    const hud = h('div', { class: 'vv-hud' },
+        h('span', { class: 'vv-brand' }, 'SG', h('i', {}, '/'), 'App'), title,
+        h('span', { class: 'vv-id mono', title: from ? `its key came sealed from ${from}` : '' }, id), status,
+        h('span', { class: 'vv-grow' }),
+        h('span', { class: 'vv-tabs' }, modeApp, modeFiles),
+        h('button', { type: 'button', class: 'vv-btn primary', id: 'vv-give-btn', onclick: () => { if (give.firstChild) give.replaceChildren(); else give.replaceChildren(givePanel(key)) } }, 'Give to an agent…'),
+        popout ? h('button', { type: 'button', class: 'vv-btn', onclick: () => openVaultWindow(key, from) }, '↗') : null,
+        fullBtn,
+        onClose ? h('button', { type: 'button', class: 'vv-btn', id: 'vv-close', title: 'Close the vault', onclick: () => { setFull(false); onClose() } }, '✕') : null,
+        h('span', { class: 'vv-ro', title: 'Opened with a key that came sealed to you: read only' }, '👁 Read-only'))
+    const loading = h('div', { class: 'vv-loading' }, h('div', { class: 'vv-lock' }, '🔐'), h('b', {}, 'Loading vault'), h('div', { class: 'vv-bar' }, h('i')), h('span', { class: 'dim small' }, 'Opening vault…'))
+    const appHost = h('div', { class: 'vv-app', id: 'vv-app', hidden: true })
+    const list = h('ul', { class: 'tree', id: 'vv-tree' })
     const view = h('div', { class: 'viewer', id: 'vv-file' }, h('p', { class: 'dim small' }, 'Pick a file.'))
-    box.append(head, give, h('p', { class: 'dim small' }, 'The key is in this tab’s memory only: not shown, not in the address. Files open in a sandbox that runs and loads nothing.'), h('div', { class: 'explore' }, list, view))
+    const filesPane = h('div', { class: 'vv-files', hidden: true }, h('p', { class: 'dim small' }, 'The key is in this tab’s memory only: not shown, not in the address. Files open in a sandbox that runs and loads nothing.'), h('div', { class: 'explore' }, list, view))
+    const mode = m => { appHost.hidden = m !== 'app'; filesPane.hidden = m !== 'files'; modeApp.classList.toggle('on', m === 'app'); modeFiles.classList.toggle('on', m === 'files') }
+    modeApp.addEventListener('click', () => mode('app')); modeFiles.addEventListener('click', () => mode('files'))
+    box.append(hud, give, loading, appHost, filesPane)
+    setFull(fullPref()); syncFull()
     ;(async () => {
         try {
             await A.loadLibrary(ROOT)
+            loading.querySelector('span').textContent = 'Decrypting its tree…'
             const v = await A.NV.openVault(vault.sg || A.client(''), key)
             const files = await A.tree(v)
-            list.replaceChildren()
-            if (!files.length) list.append(h('li', { class: 'dim' }, '(empty)'))
             let first = null
             for (const f of files) {
                 const label = f.path.split('/').pop()
@@ -84,9 +108,19 @@ export function vaultViewer(key, { from = '', popout = false } = {}) {
                 list.append(h('li', { style: `padding-left:${f.depth * .9}rem` }, b))
                 if (!secret && (!first || /(^|\/)(README\.md|index\.md)$/i.test(f.path) && f.depth === 0)) first = { f, b }
             }
-            head.append(h('span', { class: 'dim small' }, ` · ${files.filter(f => !f.folder).length} files`))
+            if (!files.length) list.append(h('li', { class: 'dim' }, '(empty)'))
+            status.append(h('span', { class: 'vv-chip' }, `${files.filter(f => !f.folder).length} files`), from ? h('span', { class: 'vv-chip', title: 'who sealed its key to you' }, `from ${from}`) : null)
             if (first) show(v, first.f.path, view, list, first.b)
-        } catch (e) { list.replaceChildren(h('li', {}, msg('bad', e.code === 'ENOVAULT' ? `No vault answers to that key (${id}).` : 'The vault did not open: ' + err(e)))) }
+            const app = await appEntry(v)
+            loading.remove()
+            if (!app) { title.textContent = 'Files'; mode('files'); return }
+            title.textContent = app.title || app.entry
+            modeApp.hidden = false
+            mode('app')
+            const errs = h('span', { class: 'vv-chip bad', hidden: true })
+            status.append(errs)
+            await mountApp(v, appHost, app, { info: { vaultName: app.title || '' }, onError: m => { errs.hidden = false; errs.textContent = '⚠ the app reported an error'; errs.title = m } })
+        } catch (e) { loading.replaceWith(msg('bad', e.code === 'ENOVAULT' ? `No vault answers to that key (${id}).` : 'The vault did not open: ' + err(e))); title.textContent = 'Not opened' }
     })()
     return box
 }

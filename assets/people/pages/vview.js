@@ -14,7 +14,7 @@ const nameOf = f => (dir && dir.byFp.get(f) && dir.byFp.get(f).name) || f
 const mount = h('div', { id: 'vv-mount' })
 let shown = null                                      // { key, from }: kept across a redraw (the vault reopening)
 
-const showVault = (key, from = '') => { shown = { key, from }; mount.replaceChildren(vaultViewer(key, { from })); mount.scrollIntoView({ behavior: 'smooth', block: 'start' }) }
+const showVault = (key, from = '') => { shown = { key, from }; app.classList.add('vv-open'); mount.replaceChildren(vaultViewer(key, { from, onClose: () => { shown = null; app.classList.remove('vv-open'); mount.replaceChildren() } })); mount.scrollIntoView({ block: 'start' }) }
 setVaultOpener(showVault)                              // "Open the vault" on a message here opens it here
 receiveVaultKey(showVault)
 
@@ -34,9 +34,8 @@ async function openSealed(code) {
 }
 
 function draw() {
-    app.replaceChildren(shown ? null : h('p', { class: 'lead' }, 'An agent gave you a QR image that carries a vault key? Drop or paste it here: it opens with your key, and the vault opens below.'),
-        qrDesk({ dir, compact: !!shown, onSealed: openSealed }), mount)
-    if (shown && !mount.firstChild) showVault(shown.key, shown.from)
+    app.replaceChildren(h('p', { class: 'lead' }, 'An agent gave you a QR image that carries a vault key? Drop or paste it here: it opens with your key, and the vault opens below.'),
+        qrDesk({ dir, compact: true, onSealed: openSealed, replay: false }), mount)
 }
 vault.onChange(() => { if (!shown) draw() })
 draw()

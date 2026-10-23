@@ -236,3 +236,36 @@ body:has(main.tool) footer.site .cols>div:first-child>p:not(.verline):not(.partn
 body:has(main.tool) footer.site .cols>div:first-child{display:flex;flex-wrap:wrap;gap:.3rem 1rem;align-items:baseline}
 body:has(main.tool) footer.site .brandline{font-size:.85rem}
 body:has(main.tool) footer.site .partnote,body:has(main.tool) footer.site .verline{margin:0;font-size:.72rem;max-width:none}
+/* a vault's own app, as the SG/App host shows it */
+.vaultview{padding:0;overflow:hidden}
+.vv-hud{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;background:#141a2e;color:#e8ecf4;padding:.45rem .8rem;font-size:.85rem}
+.vv-brand{font-weight:800;letter-spacing:.01em}.vv-brand i{color:#6ea8ff;font-style:normal}
+.vv-title{font-weight:700}
+.vv-id{opacity:.6;font-size:.75rem}
+.vv-chips{display:flex;gap:.3rem;flex-wrap:wrap}
+.vv-chip{border:1px solid #2c3550;border-radius:999px;padding:.05rem .5rem;font-size:.72rem;color:#b8c2d8}
+.vv-chip.bad{border-color:#a33;color:#ffb3b3}
+.vv-grow{flex:1}
+.vv-tabs{display:inline-flex;border:1px solid #2c3550;border-radius:8px;overflow:hidden}
+.vv-tab{background:transparent;color:#b8c2d8;border:0;padding:.2rem .7rem;font:inherit;cursor:pointer}
+.vv-tab.on{background:#2c3550;color:#fff}
+.vv-btn{background:transparent;color:#e8ecf4;border:1px solid #2c3550;border-radius:8px;padding:.2rem .6rem;font:inherit;cursor:pointer}
+.vv-btn.primary{background:#2c5f57;border-color:#2c5f57}
+.vv-btn:hover{border-color:#6ea8ff}
+.vv-ro{border:1px solid #2c3550;border-radius:999px;padding:.1rem .55rem;color:#9fc5ff;font-size:.75rem}
+.vaultview #vv-give>.vpanel{margin:.6rem}
+.vv-files{padding:.8rem 1rem}
+.vv-app{height:78vh;background:#fff}
+.vault-app-frame{border:0;width:100%;height:100%;display:block;background:#fff}
+.vv-loading{display:flex;flex-direction:column;align-items:center;gap:.6rem;padding:4rem 1rem;background:#0f1419;color:#5ed1c4}
+.vv-lock{font-size:2.6rem}
+.vv-bar{width:min(380px,80%);height:4px;background:#232a33;border-radius:4px;overflow:hidden}
+.vv-bar i{display:block;height:100%;width:35%;background:#5ed1c4;border-radius:4px;animation:vvbar 1.4s ease-in-out infinite}
+@keyframes vvbar{0%{margin-left:-35%}100%{margin-left:100%}}
+/* full width: the vault takes the window, as on vault.sgraph.ai */
+body.vv-full nav.site,body.vv-full footer.site,body.vv-full main.tool>.crumb,body.vv-full main.tool>h1,body.vv-full #vault-bar-mount,body.vv-full #app>.lead,body.vv-full #app>.qrdesk{display:none!important}
+body.vv-full main.tool{max-width:none!important;margin:0!important;padding:0!important}
+body.vv-full .vaultview{margin:0;border:0;border-radius:0;height:100vh;display:flex;flex-direction:column}
+body.vv-full .vv-app{flex:1;height:auto}
+body.vv-full .vv-files{flex:1;overflow:auto}
+#app.vv-open>.lead{display:none}

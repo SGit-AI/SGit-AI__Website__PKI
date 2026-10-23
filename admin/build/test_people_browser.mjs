@@ -53,7 +53,7 @@ async function person(name) {
     })
     const page = await ctx.newPage()
     page.on('pageerror', e => errors.push(`${name}: ${e.message}`))
-    page.on('console', m => { if (m.type() === 'error' && !/favicon|404/.test(m.text())) errors.push(`${name} console: ${m.text()}`) })
+    page.on('console', m => { if (m.type() === 'error' && !/favicon|404|evil\.example/.test(m.text())) errors.push(`${name} console: ${m.text()}`) })
     const cdp = await ctx.newCDPSession(page)
     await cdp.send('WebAuthn.enable')
     const { authenticatorId } = await cdp.send('WebAuthn.addVirtualAuthenticator', { options: { protocol: 'ctap2', transport: 'internal', hasResidentKey: true, hasUserVerification: true, isUserVerified: true, hasPrf: true, automaticPresenceSimulation: true } })
@@ -245,6 +245,14 @@ try {
             const NV = ui.A.NV, x = await NV.createVault(v.sg, { name: 'an agent’s vault' })
             await NV.writeFile(x, '/', 'README.md', '# The agent’s vault\n\nMade for the test. <script>parent.document.title="pwned"</script>\n')
             await NV.writeFile(x, '/notes', 'plan.txt', 'step one')
+            // a small vault app, written to the SG/App contract: window.sg for its files, links routed by the host
+            await NV.writeFile(x, '/', 'index.html', '<!doctype html><html><head><meta charset="utf-8"><title>Test app</title></head><body><h1 id="t">The agent’s app</h1><p id="plan">…</p><p id="prot">…</p><p id="net">…</p><a id="go" href="notes/two.html">next</a>'
+                + '<script>sg.loadCss("app.css");sg.vfs.readText("notes/plan.txt").then(function(t){document.getElementById("plan").textContent="plan: "+t});'
+                + 'sg.vfs.read(".vault/settings").then(function(){document.getElementById("prot").textContent="read"},function(e){document.getElementById("prot").textContent="refused "+e.code});'
+                + 'fetch("https://evil.example/x").then(function(){document.getElementById("net").textContent="sent"},function(){document.getElementById("net").textContent="blocked"});'
+                + 'document.getElementById("t").dataset.app=sg.app.context+"|"+sg.app.writable<\/script></body></html>')
+            await NV.writeFile(x, '/', 'app.css', 'h1{color:rgb(1, 2, 3)}')
+            await NV.writeFile(x, '/notes', 'two.html', '<!doctype html><html><head></head><body><h1 id="two">Page two</h1></body></html>')
             await NV.publish(x)
             return NV.prefixedKey(x)
         })
@@ -253,6 +261,18 @@ try {
         await p.goto(SITE + 'v/index.html')
         await p.locator('#open-qr-file').waitFor({ state: 'attached', timeout: 60000 })
         await p.setInputFiles('#open-qr-file', { name: 'vault.png', mimeType: 'image/png', buffer: vpng })
+        // its own app first, as vault.sgraph.ai runs it: a sandboxed frame, window.sg answering from the vault
+        const af = p.frameLocator('#vv-app iframe.vault-app-frame')
+        await af.locator('#plan', { hasText: 'plan: step one' }).waitFor({ timeout: 60000 })
+        await af.locator('#net', { hasText: /blocked|sent/ }).waitFor({ timeout: 30000 })
+        const appState = { color: await af.locator('#t').evaluate(e => getComputedStyle(e).color), ctx: await af.locator('#t').getAttribute('data-app'), prot: await af.locator('#prot').innerText(), net: await af.locator('#net').innerText(),
+            sandbox: await p.locator('#vv-app iframe').getAttribute('sandbox'), full: await p.evaluate(() => document.body.classList.contains('vv-full') && getComputedStyle(document.querySelector('nav.site')).display === 'none') }
+        check(appState.color === 'rgb(1, 2, 3)' && appState.ctx === 'app|false' && appState.prot === 'refused EPROTECTED' && appState.net === 'blocked' && appState.sandbox === 'allow-scripts allow-forms' && appState.full,
+            `the vault’s own app runs, full width, as the SG/App host runs it: its CSS and files through window.sg, read-only, .vault/ refused, no network (${JSON.stringify(appState)})`)
+        await af.locator('#go').click()
+        await p.frameLocator('#vv-app iframe.vault-app-frame').locator('#two').waitFor({ timeout: 30000 })
+        check(true, 'a link to another page of the vault opens it in place')
+        await p.click('#vv-mode-files')
         await p.locator('#vv-tree button', { hasText: 'plan.txt' }).waitFor({ timeout: 60000 })
         await p.locator('#vv-file iframe.preview-frame').waitFor({ timeout: 30000 })
         const vtext = await text(p, '#vault-view'), vid = vkey.split(':').pop()
@@ -276,7 +296,7 @@ try {
         await p.goto(SITE + 'm/index.html#' + vmsg.code)
         await p.locator('.vv-open').waitFor({ timeout: 60000 })
         const [popup] = await Promise.all([p.waitForEvent('popup'), p.click('.vv-open')])
-        await popup.locator('#vv-tree button', { hasText: 'plan.txt' }).waitFor({ timeout: 60000 })
+        await popup.frameLocator('#vv-app iframe.vault-app-frame').locator('#plan', { hasText: 'plan: step one' }).waitFor({ timeout: 60000 })
         check(!popup.url().includes(vid) && !popup.url().includes('#'), 'Open the vault ↗ on a message: a new window, the vault open in it, nothing of the key in its address')
         await popup.close()
     }
