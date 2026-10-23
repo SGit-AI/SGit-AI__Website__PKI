@@ -80,6 +80,14 @@ try {
     const op = await run(['open', sealed.url], REG)
     let opened = null; try { opened = JSON.parse(op.stdout) } catch (e) { /* below */ }
     check(opened && opened.text === 'a token for the agent' && opened.signature === 'checks', 'open reads a message sealed to the agent, and the operator’s signature checks against the register')
+    // a vault key written into a message's text: never printed, kept as a file
+    const pass = 'q7' + 'x'.repeat(20) + 'k2', vkText = `the key: ${pass}:3ytzxm3g, for the evidence vault`
+    const inText = await M.sealMessage(await M.compose({ to: agentBundle, from: operator, text: vkText }), agentBundle, operator)
+    fs.mkdirSync(path.join(home, 'vk'), { recursive: true })
+    const vo = await run(['open', inText.url, '--save', 'vk'], REG)
+    const vkSaved = (() => { try { return fs.readFileSync(path.join(home, 'vk', 'vault-key-3ytzxm3g.txt'), 'utf8') } catch (e) { return '' } })()
+    check(vo.status === 0 && !vo.stdout.includes(pass) && /vault-key-3ytzxm3g\.txt/.test(vo.stdout) && vkSaved.trim() === 'sgit_private_' + 'vault_' + pass + ':3ytzxm3g',
+        'a vault key in a message’s text is never printed: open names it by its vault id and saves it as a file, in the full form sgit takes')
 
     // ---------------------------------------------------------------- trust from a pinned root
     const opFp = operator.bundle.signing_fingerprint

@@ -201,3 +201,16 @@ export function parseQrText(text) {
     return { kind: 'key', fp: '', label: '', code }
 }
 export { unhex }
+// ------------------------------------------------------------ vault keys in text: found, so they travel as files
+/** A vault key in text, prefixed or as passphrase:vault-id alone. The prefix is split so this file holds no key-shaped literal. */
+export const VAULT_KEY_RE = new RegExp('(?:sgit_private_' + 'vault_)?\\b([a-z0-9]{16,64}):([a-z0-9]{6,32})\\b', 'g')
+const PREFIXED = (pass, id) => 'sgit_private_' + 'vault_' + pass + ':' + id
+/** Every vault key in a text: [{ id, key (prefixed, the form sgit takes) }], and the text with each one replaced by a
+    placeholder naming only its vault id. */
+export function vaultKeysIn(text) {
+    const keys = [], seen = new Set()
+    const redacted = String(text || '').replace(VAULT_KEY_RE, (_, pass, id) => { if (!seen.has(id)) { seen.add(id); keys.push({ id, key: PREFIXED(pass, id) }) } return `‹the vault key of ${id}: sent as a file, not shown›` })
+    return { keys, text: redacted }
+}
+/** The file a vault key travels in. */
+export const vaultKeyFile = k => ({ name: `vault-key-${k.id}.txt`, type: 'text/plain', data: b64(utf8(k.key + '\n')) })

@@ -3123,8 +3123,21 @@ function parseQrText(text) {
     if (!K1X.test(code)) throw new Error('a key code not in its shape: refused')
     return { kind: 'key', fp: '', label: '', code }
 }
+// ------------------------------------------------------------ vault keys in text: found, so they travel as files
+/** A vault key in text, prefixed or as passphrase:vault-id alone. The prefix is split so this file holds no key-shaped literal. */
+const VAULT_KEY_RE = new RegExp('(?:sgit_private_' + 'vault_)?\\b([a-z0-9]{16,64}):([a-z0-9]{6,32})\\b', 'g')
+const PREFIXED = (pass, id) => 'sgit_private_' + 'vault_' + pass + ':' + id
+/** Every vault key in a text: [{ id, key (prefixed, the form sgit takes) }], and the text with each one replaced by a
+    placeholder naming only its vault id. */
+function vaultKeysIn(text) {
+    const keys = [], seen = new Set()
+    const redacted = String(text || '').replace(VAULT_KEY_RE, (_, pass, id) => { if (!seen.has(id)) { seen.add(id); keys.push({ id, key: PREFIXED(pass, id) }) } return `‹the vault key of ${id}: sent as a file, not shown›` })
+    return { keys, text: redacted }
+}
+/** The file a vault key travels in. */
+const vaultKeyFile = k => ({ name: `vault-key-${k.id}.txt`, type: 'text/plain', data: b64(utf8(k.key + '\n')) })
 
-return { KIND, SITE, MAX_QR_CHARS, compose, verifyMessage, problems, sealMessage, codeOf, parseCode, openMessage, invite, parseInvite, keyCode, parseKeyCode, QR_SEALED, qrSealed, qrKey, parseQrText, unhex }
+return { KIND, SITE, MAX_QR_CHARS, compose, verifyMessage, problems, sealMessage, codeOf, parseCode, openMessage, invite, parseInvite, keyCode, parseKeyCode, QR_SEALED, qrSealed, qrKey, parseQrText, VAULT_KEY_RE, vaultKeysIn, vaultKeyFile, unhex }
 })()
 
 // ---------------------------------------------------------------- assets/people/evidence.js
@@ -3738,7 +3751,8 @@ Keys: ${KEYS} (sgit's layout${PASS ? ', encrypted with SG_SEND_PASSPHRASE' : ', 
         const id = await me(), reg = await register(), to = reg.byFp.get(flags.to)
         if (!to) die(`--to ${flags.to}: not in the register`)
         await vouched(reg, to.fp)
-        const sealed = await M.sealMessage(await M.compose({ to: to.bundle, from: id, subject: flags.subject || '', text: String(flags.text || ''), expires: expiresIn(flags.expires) }), to.bundle, id)
+        const vk = M.vaultKeysIn(String(flags.text || ''))                 // a vault key in the text goes as a file
+        const sealed = await M.sealMessage(await M.compose({ to: to.bundle, from: id, subject: flags.subject || '', text: vk.text, files: vk.keys.map(M.vaultKeyFile), expires: expiresIn(flags.expires) }), to.bundle, id)
         say(sealed.url); await qrOut(qrTextOf(sealed, to.fp, id.bundle.signing_fingerprint), flags.qr)
     },
     async seal() {
@@ -3824,8 +3838,11 @@ Keys: ${KEYS} (sgit's layout${PASS ? ', encrypted with SG_SEND_PASSPHRASE' : ', 
         const o = await M.openMessage(enc, [id], known)
         let trust = 'no root pinned'
         if (o.msg.from && pinned()) { try { const reg = await register(), { g, p } = await fromRoot(reg), t = D.trustFrom(g, o.msg.from, p.fp); trust = t.ok ? `chains to the root: ${t.chain.join(' → ')}` : `NOT vouched for by the root: ${t.why}` } catch (e) { trust = 'not checked: ' + e.message } }
-        say(JSON.stringify({ from: o.msg.from || null, signature: o.verified === true ? 'checks' : o.verified === false ? 'DOES NOT CHECK' : 'not checked (sender not in the register)', sender_trust: trust, at: o.msg.at, expires: o.msg.expires || null, subject: o.msg.subject || '', text: o.msg.text, files: (o.msg.files || []).map(f => f.name), problems: o.problems }, null, 2))
-        if (flags.save && o.msg.files) for (const f of o.msg.files) { const n = path.basename(String(f.name)).replace(/[^A-Za-z0-9._-]+/g, '-').replace(/^\.+/, '') || 'file'; writeSecret(path.join(String(flags.save), n), Buffer.from(K.unb64(f.data))); say(`saved ${path.join(String(flags.save), n)} (0600; its contents not shown)`) }
+        // a vault key written into the text is never printed: it becomes a file like any other, saved with --save
+        const vk = M.vaultKeysIn(o.msg.text), files = [...(o.msg.files || []), ...vk.keys.map(M.vaultKeyFile)]
+        say(JSON.stringify({ from: o.msg.from || null, signature: o.verified === true ? 'checks' : o.verified === false ? 'DOES NOT CHECK' : 'not checked (sender not in the register)', sender_trust: trust, at: o.msg.at, expires: o.msg.expires || null, subject: o.msg.subject || '', text: vk.text, files: files.map(f => f.name), problems: o.problems,
+            ...(vk.keys.length ? { note: `the text carried ${vk.keys.length === 1 ? 'a vault key' : vk.keys.length + ' vault keys'}: not printed, kept as ${vk.keys.map(k => `vault-key-${k.id}.txt`).join(', ')}${flags.save ? '' : ' (run again with --save <folder> to write it)'}` } : {}) }, null, 2))
+        if (flags.save && files.length) for (const f of files) { const n = path.basename(String(f.name)).replace(/[^A-Za-z0-9._-]+/g, '-').replace(/^\.+/, '') || 'file'; writeSecret(path.join(String(flags.save), n), Buffer.from(K.unb64(f.data))); say(`saved ${path.join(String(flags.save), n)} (0600; its contents not shown)`) }
     },
     async keyfile() {
         const id = await me()

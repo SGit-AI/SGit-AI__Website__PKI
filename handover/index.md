@@ -53,7 +53,7 @@ Store a key only when **all** of these hold, and say which one failed otherwise:
 - `open` prints `"signature": "checks"` and `"problems": []`: it is addressed to you and not expired (a sealed key expires in a week; an old image shown again is refused).
 - `"sender_trust"` says `chains to the root`, **or** Dinis has told you, in this conversation, the sender's fingerprint and that it is his agent, and it matches `from`.
 
-Then commit the saved file into the vault of vaults, and delete the copy outside it. Do not print it, do not read it back into the conversation. Reply with: the vault's name, the sender's fingerprint, and "stored".
+A vault key that came in a message's text (not as a file) is never printed by `open`: it is saved as `vault-key-<id>.txt` with the others. Then commit the saved file into the vault of vaults, and delete the copy outside it. Do not print it, do not read it back into the conversation. Reply with: the vault's name, the sender's fingerprint, and "stored".
 
 ## C: being enrolled (once per agent) {#enrol}
 

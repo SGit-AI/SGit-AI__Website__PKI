@@ -260,6 +260,18 @@ try {
             'a vault from its QR code: dropped on the vault page, opened with her key, the vault opens there, its README in a sandbox; the key itself is never on the page')
         await p.locator('#vv-tree button', { hasText: 'plan.txt' }).click()
         await p.waitForFunction(() => document.querySelector('#vv-file .vh') && document.querySelector('#vv-file .vh').textContent.includes('plan.txt'), null, { timeout: 30000 })
+        // give the vault open here to an agent: its key image, its fingerprint confirmed, the vault key sealed as a file
+        await p.click('#vv-give-btn')
+        await p.setInputFiles('#vv-agent-key', { name: 'agent-key.png', mimeType: 'image/png', buffer: keyPng })
+        await p.click('#xchg-match')
+        await p.locator('#xchg-go').waitFor({ timeout: 30000 })
+        check(await p.locator('label.xchg-option:has-text("The key of this vault") input').isChecked(), 'Give this vault to an agent: after the fingerprint, this vault’s key is what is offered first')
+        await p.click('#xchg-go')
+        await p.locator('#vault-view img.qrimg').waitFor({ timeout: 30000 })
+        const gv = await QR.decodePng(Buffer.from((await p.locator('#vault-view img.qrimg').getAttribute('src')).split(',')[1], 'base64'), d => zlib.inflateSync(d))
+        const gvo = await M.openMessage(M.parseCode(M.parseQrText(QR.readQr(gv.lum, gv.w, gv.h)).code).enc, [{ bundle: fx2.bundle, private: { encrypt: K2.unb64(fx2.private.encrypt), sign: K2.unb64(fx2.private.sign) } }], new Map([[ana.signing_fingerprint, ana]]))
+        check(gvo.verified === true && gvo.msg.files[0].name === `vault-key-${vid}.txt` && Buffer.from(gvo.msg.files[0].data, 'base64').toString().trim() === vkey && !gvo.msg.text.includes(vkey.split(':')[0]) && !(await text(p, '#vault-view')).includes(vkey.split(':')[0].replace(/^sgit_private_vault_/, '')),
+            'the agent gets the vault key as a file, in the full form sgit takes, signed by her; it was never on her screen')
         // and from a message anywhere else: Open the vault, in a new window, the key handed over in memory
         await p.goto(SITE + 'm/index.html#' + vmsg.code)
         await p.locator('.vv-open').waitFor({ timeout: 60000 })

@@ -82,7 +82,8 @@ go.addEventListener('click', () => busy(go, async () => {
         const attached = []
         for (const f of files.files) { if (f.size > 2 * 1024 * 1024) throw new Error(`${f.name} is over 2 MB`); attached.push({ name: f.name, type: f.type, data: new Uint8Array(await f.arrayBuffer()) }) }
         const from = sign.checked && vault.open ? vault.me : null
-        const m = await M.compose({ to: r.bundle, from, subject: subject.value.trim(), text: text.value || (grant ? 'An SG/Send access key, for you to create your vault with. Open this with your key, and the page will offer to keep it in your vault.' : ''), files: attached, grant })
+        const vk = M.vaultKeysIn(text.value)            // a vault key typed in goes as a file, never as text
+        const m = await M.compose({ to: r.bundle, from, subject: subject.value.trim(), text: vk.text || (grant ? 'An SG/Send access key, for you to create your vault with. Open this with your key, and the page will offer to keep it in your vault.' : ''), files: [...attached, ...vk.keys.map(M.vaultKeyFile)], grant })
         const sealed = await M.sealMessage(m, r.bundle, from)
         const fits = sealed.url.length <= M.MAX_QR_CHARS
         const boxes = [h('h2', {}, `Sealed to ${r.name}`),

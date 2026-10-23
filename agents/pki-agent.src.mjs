@@ -289,7 +289,8 @@ Keys: ${KEYS} (sgit's layout${PASS ? ', encrypted with SG_SEND_PASSPHRASE' : ', 
         const id = await me(), reg = await register(), to = reg.byFp.get(flags.to)
         if (!to) die(`--to ${flags.to}: not in the register`)
         await vouched(reg, to.fp)
-        const sealed = await M.sealMessage(await M.compose({ to: to.bundle, from: id, subject: flags.subject || '', text: String(flags.text || ''), expires: expiresIn(flags.expires) }), to.bundle, id)
+        const vk = M.vaultKeysIn(String(flags.text || ''))                 // a vault key in the text goes as a file
+        const sealed = await M.sealMessage(await M.compose({ to: to.bundle, from: id, subject: flags.subject || '', text: vk.text, files: vk.keys.map(M.vaultKeyFile), expires: expiresIn(flags.expires) }), to.bundle, id)
         say(sealed.url); await qrOut(qrTextOf(sealed, to.fp, id.bundle.signing_fingerprint), flags.qr)
     },
     async seal() {
@@ -375,8 +376,11 @@ Keys: ${KEYS} (sgit's layout${PASS ? ', encrypted with SG_SEND_PASSPHRASE' : ', 
         const o = await M.openMessage(enc, [id], known)
         let trust = 'no root pinned'
         if (o.msg.from && pinned()) { try { const reg = await register(), { g, p } = await fromRoot(reg), t = D.trustFrom(g, o.msg.from, p.fp); trust = t.ok ? `chains to the root: ${t.chain.join(' → ')}` : `NOT vouched for by the root: ${t.why}` } catch (e) { trust = 'not checked: ' + e.message } }
-        say(JSON.stringify({ from: o.msg.from || null, signature: o.verified === true ? 'checks' : o.verified === false ? 'DOES NOT CHECK' : 'not checked (sender not in the register)', sender_trust: trust, at: o.msg.at, expires: o.msg.expires || null, subject: o.msg.subject || '', text: o.msg.text, files: (o.msg.files || []).map(f => f.name), problems: o.problems }, null, 2))
-        if (flags.save && o.msg.files) for (const f of o.msg.files) { const n = path.basename(String(f.name)).replace(/[^A-Za-z0-9._-]+/g, '-').replace(/^\.+/, '') || 'file'; writeSecret(path.join(String(flags.save), n), Buffer.from(K.unb64(f.data))); say(`saved ${path.join(String(flags.save), n)} (0600; its contents not shown)`) }
+        // a vault key written into the text is never printed: it becomes a file like any other, saved with --save
+        const vk = M.vaultKeysIn(o.msg.text), files = [...(o.msg.files || []), ...vk.keys.map(M.vaultKeyFile)]
+        say(JSON.stringify({ from: o.msg.from || null, signature: o.verified === true ? 'checks' : o.verified === false ? 'DOES NOT CHECK' : 'not checked (sender not in the register)', sender_trust: trust, at: o.msg.at, expires: o.msg.expires || null, subject: o.msg.subject || '', text: vk.text, files: files.map(f => f.name), problems: o.problems,
+            ...(vk.keys.length ? { note: `the text carried ${vk.keys.length === 1 ? 'a vault key' : vk.keys.length + ' vault keys'}: not printed, kept as ${vk.keys.map(k => `vault-key-${k.id}.txt`).join(', ')}${flags.save ? '' : ' (run again with --save <folder> to write it)'}` } : {}) }, null, 2))
+        if (flags.save && files.length) for (const f of files) { const n = path.basename(String(f.name)).replace(/[^A-Za-z0-9._-]+/g, '-').replace(/^\.+/, '') || 'file'; writeSecret(path.join(String(flags.save), n), Buffer.from(K.unb64(f.data))); say(`saved ${path.join(String(flags.save), n)} (0600; its contents not shown)`) }
     },
     async keyfile() {
         const id = await me()

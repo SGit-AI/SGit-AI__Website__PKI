@@ -20,7 +20,7 @@ import { sealFileTo } from './forward.js'
 const confirmed = new Set()                          // fingerprints confirmed in this tab: a redraw (the vault opening) keeps the step
 export const keyish = f => /vault[ _-]?key|secret|token|key\b/i.test(String(f.name))
 
-export function keyExchange(q, bundle, rec) {
+export function keyExchange(q, bundle, rec, { extra = [] } = {}) {
     const name = rec ? rec.name : (q.label || bundle.label || 'this agent'), fp = bundle.signing_fingerprint
     const target = { bundle, name, inRegister: !!rec }
     const box = h('div', { class: 'vpanel exchange', id: 'key-box' })
@@ -28,7 +28,7 @@ export function keyExchange(q, bundle, rec) {
     const yes = h('button', { type: 'button', class: 'btn primary', id: 'xchg-match' }, 'Yes, it matches')
     const no = h('button', { type: 'button', class: 'btn' }, 'No')
     no.addEventListener('click', () => { step2.replaceChildren(msg('bad', 'Stop here: give it nothing. A key that does not match is not the agent you are talking to. Ask the agent to print its fingerprint again (node pki-agent.mjs whoami).')); step3.replaceChildren() })
-    yes.addEventListener('click', () => { yes.disabled = true; no.disabled = true; confirmed.add(fp); choose(step2, step3, target) })
+    yes.addEventListener('click', () => { yes.disabled = true; no.disabled = true; confirmed.add(fp); choose(step2, step3, target, extra) })
     box.append(h('h2', {}, `Key exchange with ${name}`),
         h('p', { class: 'small' }, 'An agent showed you its public key. Check it is the one it printed, choose what to give it, and carry one image back. Only its key opens what you give it.'),
         h('ol', { class: 'steps' }, h('li', { class: 'now' }, 'Same fingerprint as the agent printed in its own session?')),
@@ -39,7 +39,7 @@ export function keyExchange(q, bundle, rec) {
     return box
 }
 
-async function choose(step2, step3, target) {
+async function choose(step2, step3, target, extra = []) {
     step2.replaceChildren(h('p', { class: 'dim small' }, 'Opening your vault…'))
     await vault.settled()
     if (!vault.open || !vault.me) return step2.replaceChildren(msg('warn', 'Open your vault above with your passkey: what you give is signed with your key.'))
@@ -50,6 +50,7 @@ async function choose(step2, step3, target) {
         options.push(o)
         list.append(h('label', { class: 'xchg-option', for: id }, h('input', { type: 'radio', name: 'xchg', id, value: String(options.length - 1), checked }), ' ', h('span', {}, o.label)))
     }
+    for (const o of extra) radio(o, false)               // given by the page: the vault open on it, say
     const pickDefault = () => { const all = [...list.querySelectorAll('input')]; const i = options.findIndex(o => o.file && keyish(o.file)); (all[i >= 0 ? i : 0] || {}).checked = true }
     const img = h('input', { type: 'file', accept: 'image/*', id: 'xchg-msg-img', class: 'visually-hidden' })
     img.addEventListener('change', async () => {
@@ -88,10 +89,13 @@ async function choose(step2, step3, target) {
         if (o.text) {
             const text = note.value.trim()
             if (!text) return step3.replaceChildren(msg('warn', 'Write the message first.'))
-            const m = await M.compose({ to: target.bundle, from: vault.me, subject: 'A message', text, expires: new Date(Date.now() + 7 * 86400000).toISOString() })
+            // a vault key written into the message travels as a file (sgit's full form), never as text an agent prints
+            const vk = M.vaultKeysIn(text)
+            const m = await M.compose({ to: target.bundle, from: vault.me, subject: vk.keys.length ? `A vault key: ${vk.keys.map(k => k.id).join(', ')}` : 'A message', text: vk.text, files: vk.keys.map(M.vaultKeyFile), expires: new Date(Date.now() + 7 * 86400000).toISOString() })
             const sealed = await M.sealMessage(m, target.bundle, vault.me)
             json = M.qrSealed({ to: fp, from: me, code: sealed.code })
-            line = `Open this with: node pki-agent.mjs open <image>. The sender is me, ${me}. It is a message from me.`
+            line = vk.keys.length ? `Open this with: node pki-agent.mjs open <image> --save <folder>. The sender is me, ${me}. The vault key of ${vk.keys.map(k => k.id).join(', ')} is a file in it.`
+                : `Open this with: node pki-agent.mjs open <image>. The sender is me, ${me}. It is a message from me.`
             label = `message-for-${target.name}`.replace(/[^A-Za-z0-9_.-]+/g, '-')
         } else if (o.mine) {
             json = M.qrKey({ fp: me, label: vault.me.bundle.label, code: M.keyCode(vault.me.bundle).code })
@@ -104,7 +108,7 @@ async function choose(step2, step3, target) {
         }
         if (json.length > M.MAX_QR_CHARS) return step3.replaceChildren(msg('bad', `Too large for one QR code (${json.length} characters).`))
         step3.replaceChildren(h('ol', { class: 'steps', start: 3 }, h('li', { class: 'now' }, 'Give this image to the agent, with the line below.')),
-            o.mine ? msg('ok', 'Your public key: nothing secret.') : o.text ? msg('ok', `Your message, sealed to ${target.name} and signed by you, expiring in 7 days. Only its key opens it.`) : msg('ok', `Sealed to ${target.name}, signed by you, expiring in 7 days. Only its key opens it.`),
+            o.mine ? msg('ok', 'Your public key: nothing secret.') : o.text ? msg('ok', `Your message, sealed to ${target.name} and signed by you, expiring in 7 days. Only its key opens it.${M.vaultKeysIn(note.value).keys.length ? ' The vault key in it goes as a file, not as text.' : ''}`) : msg('ok', `Sealed to ${target.name}, signed by you, expiring in 7 days. Only its key opens it.`),
             h('div', { class: 'qr' }, await qr(json, { caption: false, actions: label }),
                 h('div', { class: 'url' }, h('p', { class: 'small' }, h('b', {}, 'Tell the agent:')), h('pre', { class: 'xchg-line' }, line), h('div', { class: 'acts' }, copyButton(line, 'Copy the line')))))
         step3.append(h('p', { class: 'small dim' }, 'Something else for the same agent? Choose it above and press the button again.'))
