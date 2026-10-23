@@ -25,6 +25,13 @@ export async function recipientFrom(text, dir) {
     return { bundle, name: r ? r.name : (q.label || bundle.label || 'them'), inRegister: !!r }
 }
 
+/** A file sealed to a target, signed by the open vault's key, expiring in a week: { sealed, json } (json: the agent QR text). */
+export async function sealFileTo(file, target) {
+    const m = await M.compose({ to: target.bundle, from: vault.me, subject: `A secret: ${file.name}`, text: `Sealed to ${target.bundle.signing_fingerprint} by ${vault.me.bundle.signing_fingerprint}. The secret is the file inside.`,
+        files: [{ name: file.name, type: 'application/octet-stream', data: file.data }], expires: new Date(Date.now() + 7 * 86400000).toISOString() })
+    const sealed = await M.sealMessage(m, target.bundle, vault.me)
+    return { sealed, json: M.qrSealed({ to: target.bundle.signing_fingerprint, from: vault.me.bundle.signing_fingerprint, code: sealed.code }) }
+}
 export function forwardPanel(file, dir, preset = '') {
     const box = h('div', { class: 'vpanel forward' })
     const input = h('textarea', { class: 't code', rows: 2, placeholder: 'their key: a fingerprint in the register, the key link (…/send/#k1.…), or the JSON of their key QR code' })
@@ -45,10 +52,7 @@ export function forwardPanel(file, dir, preset = '') {
     go.addEventListener('click', () => busy(go, async () => {
         if (!target) return out.replaceChildren(msg('warn', 'Bring their key first.'))
         if (!vault.me) return out.replaceChildren(msg('warn', 'Open your vault: the forward is signed with your key, so they know it is from you.'))
-        const m = await M.compose({ to: target.bundle, from: vault.me, subject: `A secret: ${file.name}`, text: `Forwarded, sealed to ${target.bundle.signing_fingerprint}, by ${vault.me.bundle.signing_fingerprint}. The secret is the file inside.`,
-            files: [{ name: file.name, type: 'application/octet-stream', data: file.data }], expires: new Date(Date.now() + 7 * 86400000).toISOString() })
-        const sealed = await M.sealMessage(m, target.bundle, vault.me)
-        const json = M.qrSealed({ to: target.bundle.signing_fingerprint, from: vault.me.bundle.signing_fingerprint, code: sealed.code })
+        const { sealed, json } = await sealFileTo(file, target)
         out.replaceChildren(msg('ok', `Sealed to ${target.name}, signed by you, expiring in 7 days. Only their key opens it.`),
             json.length <= M.MAX_QR_CHARS ? h('div', { class: 'qr' }, await qr(json, { caption: false, actions: `for-${target.name}`.replace(/[^A-Za-z0-9_.-]+/g, '-') }),
                 h('div', { class: 'url' }, h('p', { class: 'small' }, 'Carry this image to their session (Download PNG, or Copy the image and paste it there). It holds strict JSON: an agent following pki.sgit.ai/handover.md opens it with ', h('code', {}, 'node pki-agent.mjs open <image.png>'), '.'), h('div', { class: 'acts' }, copyButton(sealed.url, 'Copy the link instead'))))

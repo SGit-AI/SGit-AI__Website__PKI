@@ -6,6 +6,7 @@ import * as M from '../message.js'
 import { messageCard } from '../cards.js'
 import { readImage, isImage } from '../qrimage.js'
 import { forwardPanel } from '../forward.js'
+import { keyExchange } from '../exchange.js'
 import { unzip, isZip, inflateRawBrowser } from '../unzip.js'
 
 const app = document.getElementById('app')
@@ -58,59 +59,15 @@ async function readAll(files) {
     return out
 }
 /** A public key brought here (an agent's key QR code): whose it claims to be, its fingerprint to compare, and what to do. */
+/** A public key brought here (an agent's key QR code): the page flips into a key exchange (exchange.js). */
 async function keyBox(q, out) {
     let b; try { b = await M.parseKeyCode(q.code) } catch (e) { return out.replaceChildren(msg('bad', err(e))) }
     if (q.fp && q.fp !== b.signing_fingerprint) return out.replaceChildren(msg('bad', 'The fingerprint this QR code names is not the one its key computes to: refused.'))
-    const rec = dir && dir.byFp.get(b.signing_fingerprint)
-    out.replaceChildren(h('div', { class: 'vpanel', id: 'key-box' }, h('h3', {}, 'A public key, not a message'),
-        h('table', { class: 'kv' }, h('tbody', {}, h('tr', {}, h('th', {}, 'Says it is'), h('td', {}, q.label || b.label || '(no label)')),
-            h('tr', {}, h('th', {}, 'Fingerprint'), h('td', {}, h('b', { class: 'mono' }, b.signing_fingerprint), h('div', { class: 'warn small' }, rec ? `In the register, as ${rec.name}.` : 'Not in the register: compare it, character for character, with the one the agent printed in its own session.'))))),
-        giveBox(q, b, rec),
-        h('p', { class: 'small' }, 'To seal something new to it: ', h('b', {}, 'Send'), '. To make it one of your agents: it sends you its record (', h('a', { href: pageUrl('handover/for-you.html') + '#onboard' }, 'how'), ').'),
-        h('div', { class: 'acts' }, h('a', { class: 'btn', href: pageUrl('send/index.html') + '#' + q.code }, 'Send to this key →'), h('a', { class: 'btn', href: pageUrl('handover/for-you.html') }, 'Agents and vault keys: what you do'))))
-}
-/** From a key brought here: a vault key you hold, sealed straight to it. The files of your kept messages, or of a
-    message brought now (its QR image), each with "Seal it to …": the forward panel opens with this key already in. */
-function giveBox(q, b, rec) {
-    const name = rec ? rec.name : (q.label || b.label || 'this key')
-    const box = h('div', { class: 'vpanel', id: 'give-box' }, h('h3', {}, `Give it a vault key you hold`))
-    // the vault may still be reopening from the tab's session: fill the box when it has, and again if it opens later
-    const fill = () => { box.replaceChildren(h('h3', {}, 'Give it a vault key you hold')); fillGive(box, q, name) }
-    box.append(h('p', { class: 'dim small' }, 'Opening your vault…'))
-    vault.settled().then(fill)
-    const off = vault.onChange(() => { if (!box.isConnected) return off(); fill() })
-    return box
-}
-function fillGive(box, q, name) {
-    if (!vault.open || !vault.ids.length) { box.append(msg('warn', 'Open your vault above with your passkey: the vault key you hold is opened with your key, and the forward is signed with it.')); return }
-    const list = h('div'), out = h('div')
-    const offer = (m, from) => {
-        for (const f of (m.files || [])) {
-            const row = h('div', { class: 'msgfile' }, h('div', { class: 'acts' }, h('span', { class: 'mono small' }, f.name), h('span', { class: 'dim small' }, from)))
-            const btn = h('button', { type: 'button', class: 'btn small primary' }, `Seal it to ${name}…`)
-            btn.addEventListener('click', () => { btn.remove(); row.append(forwardPanel(f, dir, q.code)) })
-            row.firstChild.append(btn); list.append(row)
-        }
-    }
-    const img = h('input', { type: 'file', accept: 'image/*', id: 'give-msg-img', class: 'visually-hidden' })
-    img.addEventListener('change', async () => {
-        if (!img.files[0]) return
-        try {
-            const mq = M.parseQrText(await readImage(img.files[0]))
-            if (mq.kind !== 'sealed') return out.replaceChildren(msg('warn', 'That image is a key, not the message that carries the vault key.'))
-            const o = await M.openMessage(M.parseCode(mq.code).enc, vault.ids, new Map())
-            out.replaceChildren(); if (!(o.msg.files || []).length) return out.append(msg('warn', 'That message carries no file.'))
-            offer(o.msg, 'from the message you just brought')
-        } catch (e) { out.replaceChildren(msg('bad', err(e))) }
-    })
-    box.append(h('p', { class: 'small' }, `The vault key is opened here with your key and sealed again to ${name}, in memory: it is not shown, not downloaded, not pasted.`),
-        h('div', { class: 'acts' }, h('label', { class: 'btn primary', for: 'give-msg-img' }, 'Bring the message that carries it (its QR image)'), img), out, list)
-    if (vault.mode === 'vault') A.book.messages(vault.book, 'in').then(kept => {
-        const withFiles = kept.filter(k => k.msg && (k.msg.files || []).length)
-        if (withFiles.length) { list.prepend(h('p', { class: 'small' }, 'Or one you kept in your book:')); for (const k of withFiles) offer(k.msg, `kept · ${k.msg.subject || ''} · ${String(k.at || '').slice(0, 10)}`) }
-    }).catch(() => {})
+    out.replaceChildren(keyExchange(q, b, dir && dir.byFp.get(b.signing_fingerprint)))
+    out.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 let onFiles = null                                    // what the page as last drawn does with files dropped or pasted
+let lastOpened = null                                // { code, ids, label }: a message opened, opened again after a redraw (the vault resuming)
 let lastBatch = null                                  // a batch read, kept across a redraw (the vault opening, say)
 document.addEventListener('paste', e => { const fs = [...(e.clipboardData && e.clipboardData.items || [])].filter(i => i.kind === 'file').map(i => i.getAsFile()); if (fs.length && onFiles) { e.preventDefault(); onFiles(fs) } })
 document.addEventListener('dragover', e => { if (onFiles) { e.preventDefault(); document.body.classList.add('dropping') } })
@@ -164,7 +121,7 @@ async function draw() {
             batchView(items, out)
         }
         file.addEventListener('change', () => { if (file.files.length) onFiles([...file.files]) })
-        app.replaceChildren(h('p', { class: 'msg ok' }, 'Giving an agent a vault key you hold? Open the message that carries it here; then, on its file, press ', h('b', {}, 'Forward, sealed, to…'), ' and bring the agent’s key. Step by step: ', h('a', { href: pageUrl('handover/for-you.html') + '#give' }, 'recipe 1'), '.'),
+        app.replaceChildren(h('p', { class: 'msg ok' }, 'Giving an agent a vault key you hold? Bring its key QR image here (paste it): the page switches into a key exchange, you confirm its fingerprint, and you get the image to give back. Step by step: ', h('a', { href: pageUrl('handover/for-you.html') + '#give' }, 'recipe 1'), '.'),
             h('p', {}, 'Nothing to open in this address. Bring the message here:'),
             h('h3', {}, 'QR code images'), h('p', { class: 'small' }, 'One image or many, or a zip of them: choose them, drop them on this page, or paste (Cmd/Ctrl+V). They are read in this browser; nothing is uploaded.'),
             h('div', { class: 'acts' }, h('label', { class: 'btn primary', for: 'open-qr-file' }, 'Choose QR images or a zip'), file), out,
@@ -184,6 +141,7 @@ async function draw() {
     const tryOpen = async (ids, label) => {
         try {
             const o = await M.openMessage(code.enc, ids, known)
+            lastOpened = { code: code.code, ids, label }
             const acts = []
             if (vault.mode === 'vault' && !(toRec && toRec.fixture)) {
                 const keep = h('button', { type: 'button', class: 'btn primary' }, 'Keep it in my book')
@@ -205,6 +163,7 @@ async function draw() {
     }) }, `Open it as ${toRec.name} (a fixture)`))
     app.replaceChildren(...head, acts, result)
     if (vault.open && vault.ids.some(i => i.bundle.signing_fingerprint === code.to)) acts.querySelector('#open-mine').click()
+    else if (lastOpened && lastOpened.code === code.code) tryOpen(lastOpened.ids, lastOpened.label)
 }
 vault.onChange(() => draw())
 window.addEventListener('hashchange', () => draw())

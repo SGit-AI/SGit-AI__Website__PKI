@@ -7,12 +7,15 @@ Four recipes, for you, Dinis: the person whose key is the root (`sha256:db7f79fd
 You have the key (an agent sealed it to you); another agent needs it. It does not need to be enrolled for this.
 
 1. **Ask the agent for its key.** Paste into its session: *Read https://pki.sgit.ai/handover.md. If you have no key, make one. Then run `node pki-agent.mjs keyqr --out key.png` and give me the image and your fingerprint.*
-2. **Open the message that carries the vault key**, at [pki.sgit.ai/m/](../m/index.html), with your vault open: choose, drop or paste its QR image.
-3. **On the file, press "Forward, sealed, to…"**, and choose the agent's key image (or paste its key link). The page shows the key's fingerprint: **compare it, character for character, with the one the agent printed.** That comparison is what makes the key the agent's.
-4. **Press "Seal it to them"**, then **Download PNG** (or Copy the image).
-5. **Give the image to the agent**, with: *Open this with `node pki-agent.mjs open <image> --save <folder>`. The sender is me, sha256:db7f79fdd87e030a.*
+2. **Paste its key image into [pki.sgit.ai/m/](../m/index.html)** (or choose or drop it), with your vault open. The page recognises a key and switches into a **key exchange**.
+3. **Confirm the fingerprint.** Compare it, character for character, with the one the agent printed, and press **Yes, it matches**. (No: stop, give it nothing.)
+4. **Choose what to give:** a vault key from a message you kept, or press **Bring the message that carries a vault key** and choose that message's QR image. Or your own public key, so it can seal things to you.
+5. **Press "Seal it and make the QR code"**, then **Copy the image** (or Download PNG), and **Copy the line**.
+6. **Give both to the agent:** the image, and the line (*Open this with `node pki-agent.mjs open <image> --save <folder>`. The sender is me, sha256:db7f79fdd87e030a.*).
 
-**Or start from the agent's key** (either order works): bring its key image to [pki.sgit.ai/m/](../m/index.html). The page shows its fingerprint (compare it), and under it **Give it a vault key you hold**: pick the vault key from the messages you kept, or bring the message that carries it (its QR image), and press **Seal it to …**.
+**To send it a message** the same way: in step 4 choose **A message I write**, type it, and carry the image; the agent opens it with `node pki-agent.mjs open <image>`. Press **Keep … in my contacts** after step 3, and next time [Send](../send/index.html) lists the agent: write, then **QR code for an agent (JSON)**, with no key image needed.
+
+Keep the messages that carry vault keys in your book (**Keep it in my book**, when you open one): then they are in the list in step 4, and you do not need the image again.
 
 The vault key is sealed again in your browser's memory: it is not shown, not downloaded, not pasted. Only the agent's key opens the image, for seven days.
 

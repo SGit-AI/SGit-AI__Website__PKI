@@ -208,18 +208,27 @@ try {
         await p.goto(SITE + 'm/index.html')
         await p.setInputFiles('#open-qr-file', { name: 'key.png', mimeType: 'image/png', buffer: keyPng })
         await p.locator('#key-box').waitFor({ timeout: 30000 })
-        check((await text(p, '#key-box')).includes(fx2.bundle.signing_fingerprint) && (await p.locator('#key-box a', { hasText: 'Send to this key' }).count()) === 1, 'a key QR on the message page: its fingerprint to compare, and the way on (Send to it, or Forward from the message that holds the key)')
-        // and from there, the other way round: the key first, then the message that carries the vault key
-        await p.locator('#give-msg-img').waitFor({ state: 'attached', timeout: 30000 }).catch(async e => { await p.screenshot({ path: '/tmp/claude-0/-home-user-SGit-AI--Website--PKI/a4b0d5a1-e4ef-596c-9c9b-79001e8aa63e/scratchpad/fail.png', fullPage: true }); throw e })
-        await p.setInputFiles('#give-msg-img', { name: 'msg.png', mimeType: 'image/png', buffer: await png(M.qrSealed({ to: ana.signing_fingerprint, code: keyMsg.code })) })
-        await p.locator('#give-box button', { hasText: 'Seal it to' }).first().click()
-        await p.locator('#give-box .forward p.msg.ok').first().waitFor({ timeout: 30000 })
-        await p.locator('#give-box').getByRole('button', { name: 'Seal it to them' }).click()
-        await p.locator('#give-box img.qrimg').waitFor({ timeout: 30000 })
-        const g = await QR.decodePng(Buffer.from((await p.locator('#give-box img.qrimg').getAttribute('src')).split(',')[1], 'base64'), d => zlib.inflateSync(d))
+        check((await text(p, '#key-box')).includes(fx2.bundle.signing_fingerprint) && (await text(p, '#key-box')).includes('Key exchange with') && (await p.locator('#xchg-go').count()) === 0,
+            'a key QR on the message page flips it into a key exchange: the fingerprint to compare first, nothing to give until it is confirmed')
+        await p.click('#xchg-match')
+        await p.locator('#xchg-msg-img').waitFor({ state: 'attached', timeout: 30000 }).catch(async e => { await p.screenshot({ path: '/tmp/claude-0/-home-user-SGit-AI--Website--PKI/a4b0d5a1-e4ef-596c-9c9b-79001e8aa63e/scratchpad/fail.png', fullPage: true }); throw e })
+        await p.setInputFiles('#xchg-msg-img', { name: 'msg.png', mimeType: 'image/png', buffer: await png(M.qrSealed({ to: ana.signing_fingerprint, code: keyMsg.code })) })
+        await p.locator('#key-box p.msg.ok').first().waitFor({ timeout: 30000 })
+        await p.click('#xchg-go')
+        await p.locator('#key-box img.qrimg').waitFor({ timeout: 30000 })
+        check((await text(p, '#key-box')).includes('pki-agent.mjs open') && (await p.locator('#key-box iframe').count()) === 0, 'confirmed, chosen, one button: the QR image to carry, the line to tell the agent, and the vault key never shown')
+        const g = await QR.decodePng(Buffer.from((await p.locator('#key-box img.qrimg').getAttribute('src')).split(',')[1], 'base64'), d => zlib.inflateSync(d))
         const gq = M.parseQrText(QR.readQr(g.lum, g.w, g.h))
         const go2 = await M.openMessage(M.parseCode(gq.code).enc, [{ bundle: fx2.bundle, private: { encrypt: K2.unb64(fx2.private.encrypt), sign: K2.unb64(fx2.private.sign) } }], new Map([[ana.signing_fingerprint, ana]]))
-        check(Buffer.from(go2.msg.files[0].data, 'base64').toString() === 'the vault key, for the test' && go2.verified === true, 'the key first, then the message: “Give it a vault key you hold” seals the vault key straight to the key brought, never shown')
+        check(Buffer.from(go2.msg.files[0].data, 'base64').toString() === 'the vault key, for the test' && go2.verified === true, 'the key first, then the message: the exchange seals the vault key straight to the key brought, signed by her')
+        // the same exchange, a message she writes
+        await p.check('label.xchg-option:has-text("A message I write") input')
+        await p.fill('#xchg-text', 'hello agent, from Ana')
+        await p.click('#xchg-go')
+        await p.waitForFunction(() => document.querySelector('#key-box .xchg-line') && document.querySelector('#key-box .xchg-line').textContent.includes('a message from me'), null, { timeout: 30000 })
+        const t = await QR.decodePng(Buffer.from((await p.locator('#key-box img.qrimg').getAttribute('src')).split(',')[1], 'base64'), d => zlib.inflateSync(d))
+        const to = await M.openMessage(M.parseCode(M.parseQrText(QR.readQr(t.lum, t.w, t.h)).code).enc, [{ bundle: fx2.bundle, private: { encrypt: K2.unb64(fx2.private.encrypt), sign: K2.unb64(fx2.private.sign) } }], new Map([[ana.signing_fingerprint, ana]]))
+        check(to.msg.text === 'hello agent, from Ana' && to.verified === true, 'a message she writes, sealed to the agent in the same exchange: its QR image opens with the agent’s key alone, signed by her')
     }
 
     // her invitation
