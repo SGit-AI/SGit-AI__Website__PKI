@@ -30,7 +30,7 @@ export const LIB = ['sg-send/sg-send-crypto.js', 'sg-send/sg-send.js', 'sg-vault
     'sg-vault/sg-vault-commit.js', 'sg-vault/sg-vault.js', 'sg-vault/sg-vault--file-ops.js', 'sg-vault/sg-vault--folder-ops.js', 'sg-vault/sg-vault--sync.js',
     'sg-vault/sg-vault--history.js', 'sg-vault/sg-vault--branches.js'].map(f => `assets/vendor/sg-vault/v0.2.3/${f}`).concat(['assets/vendor/sg-vault/local/sg-vault--create-with-id.js'])
 export const FILES = { masterKey: 'master-key.json', doorRecord: 'door.json', book: 'book.json', doors: 'doors.json', identity: 'identity.json', inbox: 'inbox.json',
-                       token: { folder: '/.vault', name: 'access-token.json' } }
+                       token: { folder: '/.vault', name: 'access-token.json' }, recovery: { folder: '/.vault', name: 'recovery-code.json' } }
 const now = () => new Date().toISOString()
 const BOOK_README = '# A book on pki.sgit.ai\n\nMade by pki.sgit.ai for one person. record/ holds their own signed statements (what they published to the register), contacts/ the people they write to, messages/ what they sent and received, invites/ the invitations they made, notes/ their private notes. The private keys are not here: they are in the master vault, which holds this vault\'s key.\n'
 
@@ -49,8 +49,9 @@ export const client = (token = '', endpoint = ENDPOINT) => NV.client({ endpoint,
 const doorRecord = (door, rec) => ({ v: 1, kind: rec.kind || 'passkey', path: rec.path || '', credential_id: rec.credential_id || '', device: rec.device || '', created: now(), vault_id: door.vaultId })
 
 /**
- * The first device: door, master and book, and a recovery door. Returns { door, master, book, token, doors, recovery }
- * where recovery is the code to show once ({ code, shown }) and never keep.
+ * The first device: door, master and book, and a recovery door. Returns { door, master, book, token, doors, recovery }.
+ * The recovery code is kept in the master (.vault/recovery-code.json), not shown: the passkey is the login, and the code
+ * is there for the day someone asks for it (Storage → Show my recovery code), or for a password manager to hold.
  */
 export async function createAccount({ sgSend, door, record = {}, token, cloneBranch }) {
     if (!token) throw new Error('an SG/Send access key is needed to create vaults')
@@ -67,10 +68,19 @@ export async function createAccount({ sgSend, door, record = {}, token, cloneBra
     await NV.publish(master)
     await NV.writeFile(book, '/', 'README.md', BOOK_README)
     await NV.publish(book)
-    const recovery = recoveryCode()
-    const added = await NV.addDoor({ sgSend: sgSend, master, door: await doorFrom(recovery.bytes), record: { kind: 'recovery', device: record.device || '' }, cloneBranch })
-    return { door: doorVault, master, book, token, doors: added.doors, recovery: { code: recovery.code, shown: recovery.shown } }
+    const { recovery, doors } = await newRecovery({ sgSend, master, device: record.device || '', cloneBranch })
+    return { door: doorVault, master, book, token, doors, recovery: { code: recovery.code, shown: recovery.shown } }
 }
+/** A recovery code: a door of its own to the master, and the code kept in the master, so nobody has to find a place for it. */
+export async function newRecovery({ sgSend, master, device = '', cloneBranch }) {
+    const recovery = recoveryCode()
+    const added = await NV.addDoor({ sgSend, master, door: await doorFrom(recovery.bytes), record: { kind: 'recovery', device }, cloneBranch })
+    await NV.writeFile(master, FILES.recovery.folder, FILES.recovery.name, JSON.stringify({ v: 1, code: recovery.shown, made: now() }))
+    await NV.publish(master)
+    return { recovery, doors: added.doors }
+}
+/** The recovery code kept in the master, or null (an account made before codes were kept). */
+export async function keptRecovery(master) { const r = await NV.readJson(master, `${FILES.recovery.folder}/${FILES.recovery.name}`).catch(() => null); return r && r.code ? r : null }
 
 /** Open the door, the master (with the access key it holds) and the book. ENOVAULT: no door at this address yet. */
 export async function unlock({ sgSend, door, cloneBranch }) {
@@ -168,6 +178,7 @@ export const book = {
         const out = []; for (const n of names) { try { out.push({ file: n, ...JSON.parse(await NV.readText(bk, `${folder}/${n}`)) }) } catch (e) { /* skip */ } }
         return out
     },
+    async removeMessage(bk, box, file) { const ok = await NV.removeFile(bk, `/messages/${box}`, file); if (ok) await NV.publish(bk); return ok },
     async saveMessage(bk, box, m) {
         const name = `${(m.at || now()).replace(/[:.]/g, '-')}__${safe(m.id || K.hex(globalThis.crypto.getRandomValues(new Uint8Array(6))))}.json`
         await NV.writeFile(bk, `/messages/${box}`, name, JSON.stringify(m, null, 2)); await NV.publish(bk)

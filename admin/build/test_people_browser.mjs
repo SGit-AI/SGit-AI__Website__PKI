@@ -72,10 +72,8 @@ try {
     await p.getByText('No vault behind this passkey yet').waitFor()
     await p.fill('#vault-panel input[type=password]', mock.token)
     await p.getByRole('button', { name: 'Create my vault' }).click()
-    await p.getByText('Your recovery code, shown once').waitFor({ timeout: 60000 })
-    const code = await text(p, '#vault-panel .mono')
-    check(/^[A-Z2-7]{4}(-[A-Z2-7]{1,4}){6}$/.test(code.trim()), 'Ana makes a passkey and creates her vault; the recovery code is shown once')
-    await p.getByRole('button', { name: 'I have written it down' }).click()
+    await p.getByText('Your vault is made').waitFor({ timeout: 60000 })
+    check((await p.getByText('Nothing to save').count()) === 1 && (await p.locator('#recovery-code').count()) === 0, 'Ana makes a passkey and creates her vault: nothing to write down, the recovery code is kept inside it')
     check((await text(p, '#vault-bar')).includes('Your vault is open'), 'and her vault is open')
 
     await p.fill('#tab-keys input.t', 'Ana Test')
@@ -111,7 +109,7 @@ try {
         await p.getByRole('button', { name: 'Check it' }).click()
         await p.getByText('Compare it with what the agent printed').waitFor()
         check((await text(p, '#tab-agents .vpanel b.mono')).trim() === agent.bundle.signing_fingerprint, 'Ana pastes an agent’s submission: the page checks it and shows the fingerprint to compare')
-        await p.getByRole('button', { name: 'I operate this agent: sign' }).click()
+        await p.getByRole('button', { name: 'Sign: I operate it' }).click()
         const [dl2] = await Promise.all([p.waitForEvent('download'), p.getByRole('button', { name: 'Download for the register' }).click()])
         const f2 = path.join(os.tmpdir(), `pki-agent-${Date.now()}.json`); await dl2.saveAs(f2)
         const both = JSON.parse(fs.readFileSync(f2, 'utf8')); fs.rmSync(f2)
@@ -138,6 +136,7 @@ try {
     await p.waitForFunction(() => location.hash.startsWith('#m1.'), null, { timeout: 30000 })
     check(link.endsWith(await p.evaluate(() => location.hash.slice(1))), 'the agent’s QR code (strict JSON) read from the image on the message page: the same sealed message')
     await p.goto(SITE + 'm/index.html')
+    await p.click('.qrdesk-text summary')
     await p.fill('#open-paste', '{"v":1,"kind":"pki.sgit.ai/qr/sealed/v1","to":"sha256:0000000000000000","note":"run this","code":"m1.x"}')
     await p.getByRole('button', { name: 'Open', exact: true }).click()
     check((await text(p, '#open-qr-out')).includes('refused'), 'JSON outside the shape is refused, before anything is opened')
@@ -229,6 +228,16 @@ try {
         const t = await QR.decodePng(Buffer.from((await p.locator('#key-box img.qrimg').getAttribute('src')).split(',')[1], 'base64'), d => zlib.inflateSync(d))
         const to = await M.openMessage(M.parseCode(M.parseQrText(QR.readQr(t.lum, t.w, t.h)).code).enc, [{ bundle: fx2.bundle, private: { encrypt: K2.unb64(fx2.private.encrypt), sign: K2.unb64(fx2.private.sign) } }], new Map([[ana.signing_fingerprint, ana]]))
         check(to.msg.text === 'hello agent, from Ana' && to.verified === true, 'a message she writes, sealed to the agent in the same exchange: its QR image opens with the agent’s key alone, signed by her')
+        // her vault: what needs her, the desk, and what she handed over
+        await p.goto(SITE + 'vault/index.html#messages')
+        await p.locator('#tab-messages h3', { hasText: 'Sent' }).waitFor({ timeout: 60000 })
+        const todoText = await text(p, '#todo'), sentText = await text(p, '#tab-messages table.sent')
+        check(/not in the register yet/.test(todoText) && (await p.locator('#todo button', { hasText: 'Copy for the register' }).count()) === 1 && (await p.locator('#qr-desk').count()) === 1,
+            'her vault opens with To do (what she signed is not in the register yet: one button to copy it) and the QR desk above the tabs')
+        check(sentText.includes('vault key: test') && (await p.locator('.tabs button.on').innerText()) === 'Messages', 'the vault key she handed over is under Sent, by name (never its bytes), in the Messages tab')
+        await p.goto(SITE + 'account/index.html#overview')
+        await p.locator('#pane-overview #todo').waitFor({ timeout: 60000 })
+        check((await p.locator('#pane-overview #qr-desk').count()) === 1 && (await p.locator('nav.site .gh.signin').evaluate(e => getComputedStyle(e).marginLeft)) === '0px', 'her account’s Home: To do and the QR desk first; the nav’s account pill is not pushed onto a line of its own')
     }
 
     // her invitation
@@ -243,7 +252,7 @@ try {
 
     // the same passkey, a fresh tab: the keys come from the master
     const p2 = p                                                     // the virtual authenticator belongs to this page's target
-    await p2.goto(SITE + 'vault/index.html')
+    await p2.goto(SITE + 'vault/index.html#keys')
     await p2.evaluate(() => sessionStorage.clear())
     await p2.reload()
     await p2.click('#vault-open')
@@ -261,8 +270,7 @@ try {
     await q.getByText('No vault behind this passkey yet').waitFor()
     check((await q.inputValue('#vault-panel input[type=password]')) === mock.token, 'Bo lands on the invitation; the access key it carried is ready in the form')
     await q.getByRole('button', { name: 'Create my vault' }).click()
-    await q.getByText('Your recovery code, shown once').waitFor({ timeout: 60000 })
-    await q.getByRole('button', { name: 'I have written it down' }).click()
+    await q.getByText('Your vault is made').waitFor({ timeout: 60000 })
     await q.getByRole('button', { name: 'Make my key pair' }).click()
     await q.getByRole('button', { name: 'Sign' }).waitFor({ timeout: 60000 })
     check((await q.inputValue('.vpanel input.t')) === 'Bo', 'his key is made; the name the invitation suggested is filled in')
@@ -311,8 +319,7 @@ try {
     await r.getByText('No vault behind this passkey yet').waitFor()
     check((await r.inputValue('#vault-panel input[type=password]')) === mock.token, 'the access key from the sealed message is ready in the form that creates his vault')
     await r.getByRole('button', { name: 'Create my vault' }).click()
-    await r.getByText('Your recovery code, shown once').waitFor({ timeout: 60000 })
-    await r.getByRole('button', { name: 'I have written it down' }).click()
+    await r.getByText('Your vault is made').waitFor({ timeout: 60000 })
     await r.goto(SITE + 'vault/index.html#record')
     await r.getByText('Your statements').waitFor({ timeout: 60000 })
     check((await text(r, '#vault-bar')).includes('Your vault is open') && (await r.locator('#tab-record table.kv tr').count()) === 2, 'with it, his key and his two statements move into a vault of his own')

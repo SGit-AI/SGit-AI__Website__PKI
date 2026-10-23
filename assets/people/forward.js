@@ -9,7 +9,7 @@
  *
  * @module forward
  */
-import { h, msg, err, busy, vault, qr, copyButton, K } from './ui.js'
+import { h, msg, err, busy, vault, qr, copyButton, K, A } from './ui.js'
 import * as M from './message.js'
 import { readImage } from './qrimage.js'
 
@@ -30,6 +30,8 @@ export async function sealFileTo(file, target) {
     const m = await M.compose({ to: target.bundle, from: vault.me, subject: `A secret: ${file.name}`, text: `Sealed to ${target.bundle.signing_fingerprint} by ${vault.me.bundle.signing_fingerprint}. The secret is the file inside.`,
         files: [{ name: file.name, type: 'application/octet-stream', data: file.data }], expires: new Date(Date.now() + 7 * 86400000).toISOString() })
     const sealed = await M.sealMessage(m, target.bundle, vault.me)
+    // a hand-off is kept under Sent (the file's name, never its bytes): so the page knows which vault key went where
+    if (vault.mode === 'vault') await A.book.saveMessage(vault.book, 'out', { to: target.bundle.signing_fingerprint, to_name: target.name || '', at: m.at, subject: m.subject, handed: file.name, how: 'QR image', code: sealed.code }).catch(() => {})
     return { sealed, json: M.qrSealed({ to: target.bundle.signing_fingerprint, from: vault.me.bundle.signing_fingerprint, code: sealed.code }) }
 }
 export function forwardPanel(file, dir, preset = '') {

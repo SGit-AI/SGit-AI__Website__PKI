@@ -412,10 +412,10 @@ export function vaultBar(mount, opts = {}) {
         say(h('h3', {}, 'Move into a vault'), h('p', { class: 'small' }, 'Your account is kept in this browser only. With an access key, it moves into a vault opened by the same passkey, and then follows you to every device; the copy here is removed once the vault reads it back.'),
             h('label', { class: 'f' }, 'SG/Send access key'), access, h('div', { class: 'acts' }, go))
     }
-    function showRecovery(rc) {
-        say(msg('warn', h('b', {}, 'Your recovery code, shown once. Write it down: '), h('span', { class: 'mono', id: 'recovery-code' }, rc.shown)),
-            h('p', { class: 'dim small' }, 'It opens a second door to the same master: for a device with no passkey, and for the day the passkey is gone. This page does not keep it.'),
-            h('div', { class: 'acts' }, h('button', { type: 'button', class: 'btn', onclick: () => draw() }, 'I have written it down')))
+    /** The vault is made: nothing to write down. The recovery code is kept inside it (Your account → Storage). */
+    function showRecovery() {
+        draw()
+        say(msg('ok', h('b', {}, 'Your vault is made. '), 'Nothing to save: your passkey opens it. A recovery code is kept inside it, for when you want one (', h('a', { href: pageUrl('account/index.html') + '#storage' }, 'Storage'), ').'))
     }
     function firstTime(door, prf) {
         const access = h('input', { class: 't', type: 'password', autocomplete: 'off', placeholder: 'an SG/Send access key', value: opts.accessKey || '' })

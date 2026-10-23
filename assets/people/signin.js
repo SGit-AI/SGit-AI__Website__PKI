@@ -18,7 +18,7 @@ export function nextUrl(fresh) {
 }
 
 export function signInCard({ onDone } = {}) {
-    const card = h('div', { class: 'signin' })
+    const card = h('div', { class: 'signin-card' })
     const out = h('div', { class: 'signin-out', 'aria-live': 'polite' })
     const done = r => (onDone ? onDone(r) : location.assign(nextUrl(r.fresh)))
     const why = e => {

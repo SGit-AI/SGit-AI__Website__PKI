@@ -18,7 +18,7 @@ import { readImage } from './qrimage.js'
 import { sealFileTo } from './forward.js'
 
 const confirmed = new Set()                          // fingerprints confirmed in this tab: a redraw (the vault opening) keeps the step
-const keyish = f => /vault[ _-]?key|secret|token|key\b/i.test(String(f.name))
+export const keyish = f => /vault[ _-]?key|secret|token|key\b/i.test(String(f.name))
 
 export function keyExchange(q, bundle, rec) {
     const name = rec ? rec.name : (q.label || bundle.label || 'this agent'), fp = bundle.signing_fingerprint
@@ -31,7 +31,7 @@ export function keyExchange(q, bundle, rec) {
     yes.addEventListener('click', () => { yes.disabled = true; no.disabled = true; confirmed.add(fp); choose(step2, step3, target) })
     box.append(h('h2', {}, `Key exchange with ${name}`),
         h('p', { class: 'small' }, 'An agent showed you its public key. Check it is the one it printed, choose what to give it, and carry one image back. Only its key opens what you give it.'),
-        h('ol', { class: 'steps' }, h('li', { class: 'now' }, 'Is this the fingerprint the agent printed in its own session?')),
+        h('ol', { class: 'steps' }, h('li', { class: 'now' }, 'Same fingerprint as the agent printed in its own session?')),
         h('p', { class: 'fpbig mono' }, fp),
         rec ? msg('ok', `In the register, as ${rec.name}.`) : h('p', { class: 'dim small' }, 'It is not in the register yet, so this comparison is the check: character for character.'),
         h('div', { class: 'acts' }, yes, no), step2, step3)
@@ -111,6 +111,6 @@ async function choose(step2, step3, target) {
         step3.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }))
     step2.replaceChildren(remember ? h('div', { class: 'acts' }, remember) : null, h('ol', { class: 'steps', start: 2 }, h('li', { class: 'now' }, 'What to give it')),
-        list, noteBox, h('div', { class: 'acts' }, h('label', { class: 'btn small', for: 'xchg-msg-img' }, 'Bring the message that carries a vault key (its QR image)'), img), out,
+        list, noteBox, h('div', { class: 'acts' }, h('label', { class: 'btn small', for: 'xchg-msg-img' }, 'Add from a message QR image…'), img), out,
         h('div', { class: 'acts' }, go))
 }

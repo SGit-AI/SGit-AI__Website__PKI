@@ -15,8 +15,8 @@
     "agent_keys": 2,
     "records": 11,
     "fixtures": 8,
-    "confirmed_links": 1,
-    "confirmed_links_with_fixtures": 6
+    "confirmed_links": 2,
+    "confirmed_links_with_fixtures": 7
   },
   "anchors": [
     "sha256:db7f79fdd87e030a"
@@ -606,6 +606,36 @@
             "until": "2026-10-29"
           },
           "sig": "aL024CotJqM3KoTmu+KsjHMCc2Z6ZrfR17AajVmjpYDfq+OYpcCxgCpgQmsb3tlp7byGXjv2BjZMbWBRPjDhcw=="
+        },
+        {
+          "v": 1,
+          "type": "link",
+          "registry": "pki.sgit.ai",
+          "record": "sha256:db7f79fdd87e030a",
+          "signer": "sha256:db7f79fdd87e030a",
+          "created_at": "2026-10-22T20:19:07Z",
+          "body": {
+            "to": "sha256:a0f2ccfe07781213",
+            "method": "operates",
+            "on": "2026-10-22",
+            "until": "2026-10-29"
+          },
+          "sig": "z4d6Fvdvs3rTtMhDmEoys/FNsILv+M75si3IVhJzVC4+5ksknh06xWNf+xhJv63rbTNtMvuB1QQWQk9WpRhzCg=="
+        },
+        {
+          "v": 1,
+          "type": "link",
+          "registry": "pki.sgit.ai",
+          "record": "sha256:db7f79fdd87e030a",
+          "signer": "sha256:db7f79fdd87e030a",
+          "created_at": "2026-10-23T13:33:34Z",
+          "body": {
+            "to": "sha256:956934e47063ceaa",
+            "method": "operates",
+            "on": "2026-10-23",
+            "until": "2026-10-30"
+          },
+          "sig": "JSar3/+rv1HHzsqkLObUKFhNe3NKJnhCWVutQJ8nhVxDZVubX6Eyxep/ILhqo+SKwhWClkFi6XRQw9v/rUv6Og=="
         }
       ]
     },

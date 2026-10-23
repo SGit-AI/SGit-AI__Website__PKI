@@ -6,24 +6,36 @@ import * as M from '../message.js'
 import * as EV from '../evidence.js'
 import { messageCard } from '../cards.js'
 import { forwardPanel } from '../forward.js'
+import { todo, todoPanel, pendingAgent, readPending } from '../attention.js'
+import { qrDesk } from '../desk.js'
+import { keyish } from '../exchange.js'
 
 const app = document.getElementById('app'), barMount = document.getElementById('vault-bar-mount')
 vaultBar(barMount)
-let tab = (location.hash.match(/^#(keys|record|links|agents|contacts|inbox|vaults)\b/) || [])[1] || 'keys'
+const TAB_RE = /^#(agents|messages|inbox|links|contacts|record|keys|storage|vaults)\b/
+const ALIAS = { inbox: 'messages', vaults: 'storage' }
+const hashTab = () => { const t = (location.hash.match(TAB_RE) || [])[1]; return t ? (ALIAS[t] || t) : null }
 const linkTarget = () => (location.hash.match(/link=(sha256-[0-9a-f]{16})/) || [])[1]
-if (linkTarget()) tab = 'links'
-const TABS = [['keys', 'Your keys'], ['record', 'Your record'], ['links', 'Links'], ['agents', 'Agents'], ['contacts', 'Contacts'], ['inbox', 'Inbox'], ['vaults', 'Your vaults']]
+let tab = hashTab() || (linkTarget() ? 'links' : null)        // null: the first tab with something to do, else Messages
+const TABS = [['agents', 'Agents'], ['messages', 'Messages'], ['links', 'Links'], ['contacts', 'Contacts'], ['record', 'Your record'], ['keys', 'Keys'], ['storage', 'Storage']]
 const say = (box, kind, ...kids) => box.prepend(msg(kind, ...kids))
+const TAB_OF = href => { const m = /#(\w+)/.exec(href || ''); return m ? (m[1] === 'link' ? 'links' : m[1]) : null }
 
 async function draw() {
     const dir = await loadDirectory().catch(() => null)
-    const tabs = h('div', { class: 'tabs', role: 'tablist' }, ...TABS.map(([id, label]) => h('button', { type: 'button', class: id === tab ? 'on' : '', onclick: () => { tab = id; history.replaceState(null, '', '#' + id); draw() } }, label)))
-    const body = h('div', { id: 'tab-' + tab })
-    app.replaceChildren(tabs, body)
-    try { await ({ keys, record, links, agents, contacts, inbox, vaults })[tab](body, dir) } catch (e) { say(body, 'bad', err(e)) }
+    const items = await todo(dir).catch(() => [])
+    // no tab asked for: Keys while there is no key to work with, then the first tab with something to do, else Messages
+    if (!tab && vault.open && !vault.ids.length) tab = 'keys'          // making the first key: stay on Keys once it is made
+    if (!tab && vault.open && vault.ids.length) tab = (items.map(i => i.action && (TAB_OF(i.action.href) || (i.action.run ? 'agents' : null))).find(t => TABS.some(([id]) => id === t))) || 'messages'
+    const tab_ = tab || 'keys'
+    const tabs = h('div', { class: 'tabs', role: 'tablist' }, ...TABS.map(([id, label]) => h('button', { type: 'button', class: id === tab_ ? 'on' : '', onclick: () => { tab = id; history.replaceState(null, '', '#' + id); draw() } }, label)))
+    const body = h('div', { id: 'tab-' + tab_ })
+    const top = vault.open ? [todoPanel(items, { compact: true }), qrDesk({ dir, compact: true })] : []
+    app.replaceChildren(...top, tabs, body)
+    try { await ({ keys, record, links, agents, contacts, messages, storage })[tab_](body, dir) } catch (e) { say(body, 'bad', err(e)) }
 }
 vault.onChange(() => draw())
-window.addEventListener('hashchange', () => { const t = (location.hash.match(/^#(keys|record|links|agents|contacts|inbox|vaults)\b/) || [])[1] || (linkTarget() ? 'links' : null); if (t && t !== tab) { tab = t; draw() } })
+window.addEventListener('hashchange', () => { const t = hashTab() || (linkTarget() ? 'links' : null); if (t && t !== tab) { tab = t; draw() } })
 draw()
 
 // ------------------------------------------------------------ keys
@@ -225,7 +237,6 @@ async function links(body, dir) {
 }
 
 // ------------------------------------------------------------ agents
-const PENDING = 'pki.agent.pending'
 /** One key that links to you and waits for your link back: everything its record says, before you decide. An agent that
     names you as its operator is confirmed from the Agents tab (an "operates" link with an end date), never here. */
 function waitingCard(r, l, me) {
@@ -246,13 +257,12 @@ function waitingCard(r, l, me) {
         h('p', { class: 'small' }, asOperator ? 'It is an agent asking you to operate it. That is an "operates" link with an end date, signed in the Agents tab, where you choose how long and under which policy.' : 'Linking back writes, in your record, that you know the owner of this key. With their link, it counts both ways.'),
         h('div', { class: 'acts' }, act, h('a', { class: 'btn small', href: pageUrl('people/person.html') + '#' + r.dir }, 'Its page in the register')))
 }
-function pendingAgent(sub) { try { if (sub) sessionStorage.setItem(PENDING, JSON.stringify(sub)); else sessionStorage.removeItem(PENDING) } catch (e) { /* fine */ } }
-const readPending = () => { try { return JSON.parse(sessionStorage.getItem(PENDING) || 'null') } catch (e) { return null } }
 async function agents(body, dir) {
     if (!vault.open || !vault.me) return body.append(msg('warn', 'Open your vault, with a key in it, first.'))
     const mine = new Set(vault.ids.map(i => i.bundle.signing_fingerprint))
     const g = dir ? dir.graph : null
-    body.append(h('p', {}, 'An agent makes its own key where it runs and hands you its public record: an identity, and a link naming your key as its operator. You confirm it with a link back, signed here, with an end date: until then the register shows it as operated by you. Its private key never comes to you. ', h('a', { href: pageUrl('agents/index.html') }, 'How agents get a key'), '.'))
+    body.append(h('p', {}, 'Paste an agent’s submission or fingerprint. Check the fingerprint, then sign.'),
+        h('details', { class: 'small' }, h('summary', {}, 'Why?'), h('p', {}, 'An agent makes its own key where it runs and hands you its public record: an identity, and a link naming your key as its operator. You confirm it with a link back, signed here, with an end date: until then the register shows it as operated by you. Its private key never comes to you. ', h('a', { href: pageUrl('agents/index.html') }, 'How agents get a key'), '.')))
 
     // confirm one
     const paste = h('textarea', { class: 't code', id: 'agent-paste', placeholder: 'the agent’s fingerprint, sha256:…, when its record is in the register; or its submission, {"kind": "pki.sgit.ai/submission/v1", …}, from node pki-agent.mjs submission or your inbox' })
@@ -276,7 +286,7 @@ async function agents(body, dir) {
         const days = h('select', { class: 't' }, ...[[1, 'a day'], [7, 'a week'], [30, '30 days'], [90, '90 days'], [365, 'a year']].map(([d, l]) => h('option', { value: d, selected: d === (r.identity.body.session ? 7 : 30) }, l)))
         const claimed = (r.links.find(l => l.method === 'operated-by' && l.policy) || {}).policy || ''
         const policy = h('textarea', { class: 't code', id: 'agent-policy', rows: 3, placeholder: 'optional: the behaviour policy it runs under, pasted as text, or its sha256:<64 hex>' }, claimed)
-        const sign = h('button', { type: 'button', class: 'btn primary' }, 'I operate this agent: sign')
+        const sign = h('button', { type: 'button', class: 'btn primary' }, 'Sign: I operate it')
         sign.addEventListener('click', () => busy(sign, async () => {
             const op = vault.ids.find(i => i.bundle.signing_fingerprint === by.value)
             const pv = policy.value.trim()
@@ -318,7 +328,7 @@ async function agents(body, dir) {
         renew.addEventListener('click', () => { pendingAgent(a); draw() })
         rows.push(h('tr', {}, h('th', {}, rec ? h('a', { href: pageUrl('people/person.html') + '#' + K.dirOf(fp) }, name) : name),
             h('td', {}, h('span', { class: 'mono dim' }, fp), h('div', { class: 'small' }, st ? st.text : 'not in the register yet'),
-                a.confirmed && !(st && st.level === 'operated' && st.until >= a.confirmed.until) ? h('div', { class: 'small warn' }, `You signed “operates” until ${a.confirmed.until}, in your vault. The register shows it once your record is published: Your account → Keys → Publish…`) : null, renew)))
+                a.confirmed && !(st && st.level === 'operated' && st.until >= a.confirmed.until) ? h('div', { class: 'small warn' }, `Signed until ${a.confirmed.until}, not published yet: To do → Copy for the register.`) : null, renew)))
     }
     body.append(h('h3', {}, 'Your agents'), rows.length ? h('table', { class: 'kv' }, h('tbody', {}, ...rows)) : h('p', { class: 'dim small' }, 'None yet.'))
 
@@ -366,44 +376,69 @@ async function contacts(body, dir) {
     body.append(h('h3', {}, 'Add a contact from a bundle'), h('label', { class: 'f' }, 'Bundle'), bundle, h('label', { class: 'f' }, 'Name'), name, h('label', { class: 'f' }, 'Note'), note, h('div', { class: 'acts' }, add))
 }
 
-// ------------------------------------------------------------ inbox
-async function inbox(body, dir) {
-    if (vault.mode !== 'vault') return body.append(msg('warn', 'The inbox is in your vault: open it with your passkey.'))
+// ------------------------------------------------------------ messages
+/* What came to you and what you gave: New (the inbox, when you have one), Kept, Sent. Messages arrive mostly as QR
+   images now, on the desk above; what you keep lands here. */
+let keptFilter = 'all'
+async function messages(body, dir) {
+    if (vault.mode !== 'vault') return body.append(msg('warn', 'Messages are kept in your vault: open it with your passkey.'))
     const known = dir ? new Map([...dir.byFp].map(([k, r]) => [k, r.bundle])) : new Map()
     for (const c of await vault.contacts()) known.set(c.bundle.signing_fingerprint, c.bundle)
     const nameOf = f => (dir && dir.byFp.get(f) && dir.byFp.get(f).name) || f
-    body.append(h('p', { class: 'small' }, 'A message that came as a QR image or a link: ', h('a', { class: 'btn small primary', href: pageUrl('m/index.html') }, 'Open a message (QR image or link)')))
-    if (!vault.inbox) body.append(h('p', { class: 'dim' }, 'You have no inbox yet: open one from Your record, step 3. Messages sent as links open on the message page, and can be saved here.'))
-    else {
-        const check = h('button', { type: 'button', class: 'btn primary' }, 'Check for new messages'), box = h('div')
-        check.addEventListener('click', () => busy(check, async () => {
-            box.replaceChildren(msg('', 'Listing the lane…'))
-            const w = await A.waiting(vault.inbox)
-            if (!w.length) return box.replaceChildren(msg('ok', 'Nothing waiting.'))
+    const agentConfirm = o => {
+        const subFile = o && (o.msg.files || []).find(f => f.name === 'submission.json')
+        if (!subFile) return null
+        try { const j = JSON.parse(new TextDecoder().decode(K.unb64(subFile.data))); if (j.statements && j.statements[0] && j.statements[0].body.kind === 'agent') return h('button', { type: 'button', class: 'btn small primary', onclick: () => { pendingAgent(j); tab = 'agents'; history.replaceState(null, '', '#agents'); draw() } }, 'Confirm this agent…') } catch (e) { /* not one */ }
+        return null
+    }
+    // new, in the inbox: checked when the tab opens
+    if (vault.inbox) {
+        const box = h('div', { id: 'inbox-new' }, h('p', { class: 'dim small' }, 'Checking your inbox…'))
+        body.append(h('h3', {}, 'New'), box)
+        A.waiting(vault.inbox).then(async w => {
+            if (!w.length) return box.replaceChildren(h('p', { class: 'dim small' }, 'Nothing new in your inbox.'))
             box.replaceChildren()
             for (const item of w) {
                 let o = null, e1 = null
                 try { o = await M.openMessage(item.enc, vault.ids, known) } catch (e) { e1 = e }
-                const keep = h('button', { type: 'button', class: 'btn small primary' }, 'Keep in my book')
-                keep.addEventListener('click', () => busy(keep, async () => { await A.book.saveMessage(vault.book, 'in', { id: item.file_id, at: o.msg.at, msg: o.msg, verified: o.verified }); await A.markRead(vault.inbox, item.inbox, [item.file_id]); keep.replaceWith(h('span', { class: 'ok small' }, 'kept')) }))
+                const keep = h('button', { type: 'button', class: 'btn small primary' }, 'Keep')
+                keep.addEventListener('click', () => busy(keep, async () => { await A.book.saveMessage(vault.book, 'in', { id: item.file_id, at: o.msg.at, msg: o.msg, verified: o.verified }); await A.markRead(vault.inbox, item.inbox, [item.file_id]); draw() }))
                 const drop = h('button', { type: 'button', class: 'btn small' }, 'Discard')
                 drop.addEventListener('click', () => busy(drop, async () => { await A.markRead(vault.inbox, item.inbox, [item.file_id]); drop.closest('.msgcard').remove() }))
-                const subFile = o && (o.msg.files || []).find(f => f.name === 'submission.json')
-                let agentSub = null
-                if (subFile) { try { const j = JSON.parse(new TextDecoder().decode(K.unb64(subFile.data))); if (j.statements && j.statements[0] && j.statements[0].body.kind === 'agent') agentSub = j } catch (e) { /* not one */ } }
-                const confirm = agentSub ? h('button', { type: 'button', class: 'btn small primary', onclick: () => { pendingAgent(agentSub); tab = 'agents'; history.replaceState(null, '', '#agents'); draw() } }, 'Confirm this agent…') : null
-                box.append(o ? messageCard(o.msg, o.verified, nameOf, [confirm, keep, drop].filter(Boolean), { forward: f => forwardPanel(f, dir) }) : h('div', { class: 'msgcard' }, msg('bad', `Could not be opened: ${err(e1)}`), h('div', { class: 'acts' }, drop)))
+                box.append(o ? messageCard(o.msg, o.verified, nameOf, [agentConfirm(o), keep, drop].filter(Boolean), { forward: f => forwardPanel(f, dir) }) : h('div', { class: 'msgcard' }, msg('bad', `Could not be opened: ${err(e1)}`), h('div', { class: 'acts' }, drop)))
             }
-        }))
-        body.append(h('p', { class: 'small' }, 'Your inbox is an append lane on your book vault. What arrives is sealed to your key; it is opened here, with the key from your master.'), h('div', { class: 'acts' }, check), box)
+        }).catch(e => box.replaceChildren(msg('warn', 'The inbox did not answer: ', err(e))))
     }
-    const kept = await A.book.messages(vault.book, 'in')
-    body.append(h('h3', {}, 'Kept'), kept.length ? h('div', {}, ...kept.map(m => messageCard(m.msg, m.verified, nameOf, [], { forward: f => forwardPanel(f, dir) }))) : h('p', { class: 'dim small' }, 'Nothing kept yet.'))
-    const sent = await A.book.messages(vault.book, 'out')
-    if (sent.length) body.append(h('h3', {}, 'Sent'), h('div', {}, ...sent.map(m => h('div', { class: 'msgcard' }, h('div', { class: 'meta' }, `to ${nameOf(m.to)} · ${m.at} · ${m.how}`), h('div', { class: 'body' }, m.subject ? m.subject + '\n\n' : '', m.text || '')))))
+    // kept
+    const kept = await A.book.messages(vault.book, 'in'), sent = await A.book.messages(vault.book, 'out')
+    const passedTo = new Map()                          // a file's name -> where it went (from Sent)
+    for (const m of sent) if (m.handed) (passedTo.get(m.handed) || passedTo.set(m.handed, []).get(m.handed)).push(m)
+    const hasKey = k => ((k.msg && k.msg.files) || []).some(keyish)
+    const fromAgent = k => { const r = dir && k.msg && dir.byFp.get(k.msg.from); return !!(r && r.kind === 'agent') }
+    const FILTERS = [['all', 'All', () => true], ['keys', 'Vault keys', hasKey], ['agents', 'From agents', fromAgent]]
+    if (/#messages\?keys/.test(location.hash)) keptFilter = 'keys'
+    const shown = kept.filter(FILTERS.find(f => f[0] === keptFilter)[2])
+    const chips = h('div', { class: 'chips' }, ...FILTERS.map(([id, label, f]) => h('button', { type: 'button', class: 'chip' + (id === keptFilter ? ' on' : ''), onclick: () => { keptFilter = id; draw() } }, `${label} · ${kept.filter(f).length}`)))
+    const rows = shown.map(k => {
+        const m = k.msg || {}, files = m.files || [], key = hasKey(k)
+        const passed = files.flatMap(f => (passedTo.get(f.name) || []).map(x => `${f.name} → ${x.to_name || nameOf(x.to)}, ${String(x.at).slice(0, 10)}`))
+        const del = h('button', { type: 'button', class: 'btn small' }, 'Delete')
+        del.addEventListener('click', () => busy(del, async () => { if (!confirm(`Delete “${m.subject || 'this message'}” from your book?`)) return; await A.book.removeMessage(vault.book, 'in', k.file); draw() }))
+        return h('details', { class: 'kept' }, h('summary', {},
+                h('span', { class: 'kept-icon', title: key ? 'carries a vault key' : '' }, key ? '🔑' : '✉'),
+                h('b', {}, m.subject || '(no subject)'), h('span', { class: 'dim small' }, ` · from ${m.from ? nameOf(m.from) : 'unsigned'} · ${String(k.at || m.at || '').slice(0, 10)}`),
+                key ? h('span', { class: passed.length ? 'pill ok small' : 'pill warn small' }, passed.length ? 'passed on' : 'not passed on') : null),
+            passed.length ? h('p', { class: 'small ok' }, 'Passed on: ', passed.join('; ')) : null,
+            messageCard(m, k.verified, nameOf, [del], { forward: f => forwardPanel(f, dir) }))
+    })
+    body.append(h('h3', {}, `Kept · ${kept.length}`), kept.length ? chips : null,
+        rows.length ? h('div', { class: 'kept-list' }, ...rows) : h('p', { class: 'dim small' }, kept.length ? 'None in this filter.' : 'Nothing kept. Open a message on the desk above and press Keep.'))
+    // sent
+    body.append(h('h3', {}, `Sent · ${sent.length}`), sent.length ? h('table', { class: 'kv sent' }, h('tbody', {}, ...sent.map(m => h('tr', {},
+        h('th', {}, m.to_name || nameOf(m.to)), h('td', {}, h('b', {}, m.handed ? `🔑 ${m.handed}` : (m.subject || '(no subject)')), h('span', { class: 'dim small' }, ` · ${String(m.at).slice(0, 16).replace('T', ' ')} · ${m.how || ''}`)))))) : h('p', { class: 'dim small' }, 'Nothing sent yet.'))
 }
-// ------------------------------------------------------------ vaults
-async function vaults(body) {
+// ------------------------------------------------------------ storage
+async function storage(body) {
     if (!vault.open) return body.append(h('p', {}, 'Open your vault above. The design, from the newsroom: your passkey derives the address and key of a small door vault; the door holds the key of your master vault; the master holds your private keys, your access key and the key of your book. Nothing is stored to be found, and nothing leaves this browser but ciphertext.'))
     if (vault.mode === 'browser') return body.append(msg('warn', 'Your key is in this browser only. Open a vault with a passkey (above, after Close) and make or import the key there to have it on every device; or download it for the sgit CLI from Your keys.'))
     body.append(h('table', { class: 'kv' }, h('tbody', {},

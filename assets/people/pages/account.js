@@ -4,11 +4,13 @@
 import { h, msg, err, busy, vault, pageUrl, download, copyButton, avatarFor, loadDirectory, standingPill, qr, K, D, A, L } from '../ui.js'
 import { signInCard } from '../signin.js'
 import * as M from '../message.js'
+import { todo, todoPanel } from '../attention.js'
+import { qrDesk, setDropHandler } from '../desk.js'
 
 const app = document.getElementById('app')
-const SECTIONS = [['overview', 'Overview', '◉'], ['profile', 'Profile', '☺'], ['keys', 'Keys & personas', '⚿'], ['storage', 'Storage & devices', '▣'], ['explorer', 'Your vault, as files', '☰']]
-const TOOLS = [['vault/index.html#record', 'Your record'], ['vault/index.html#links', 'Links'], ['vault/index.html#contacts', 'Contacts'], ['vault/index.html#inbox', 'Inbox'],
-               ['vault/index.html#agents', 'Agents'], ['m/index.html', 'Open a message (QR)'], ['send/index.html', 'Send a message'], ['invite/index.html', 'Invite someone'], ['people/index.html', 'The register']]
+const SECTIONS = [['overview', 'Home', '◉'], ['profile', 'Profile', '☺'], ['keys', 'Keys & personas', '⚿'], ['storage', 'Storage & devices', '▣'], ['explorer', 'Your vault, as files', '☰']]
+const TOOLS = [['vault/index.html#record', 'Your record'], ['vault/index.html#links', 'Links'], ['vault/index.html#contacts', 'Contacts'], ['vault/index.html#messages', 'Messages'],
+               ['vault/index.html#agents', 'Agents'], ['m/index.html', 'QR desk (full page)'], ['send/index.html', 'Send a message'], ['invite/index.html', 'Invite someone'], ['people/index.html', 'The register']]
 const parse = () => { const m = location.hash.match(/^#([a-z]+)/); return m && (m[1] === 'welcome' || SECTIONS.some(s => s[0] === m[1])) ? m[1] : 'overview' }
 let route = parse(), drawing = 0
 const today = () => new Date().toISOString().slice(0, 10)
@@ -22,11 +24,10 @@ vault.onChange(() => draw())
 app.replaceChildren(h('p', { class: 'dim' }, 'Checking this tab’s session…'))
 vault.resume().then(() => draw(), () => draw())
 
-let holding = false                                   // a recovery code on screen: no redraw until it is dismissed
 async function draw() {
-    if (holding) return
     const t = ++drawing
     if (!vault.open) return app.replaceChildren(h('div', { class: 'acct-out' }, signInCard({ onDone: r => go(r.fresh ? 'welcome' : 'overview') })))
+    setDropHandler(null)                              // only Home carries the QR desk
     const pane = h('section', { class: 'pane', id: 'pane-' + route })
     app.replaceChildren(h('div', { class: 'acct' }, side(), pane))
     try { await ({ welcome, overview, profile, keys, storage, explorer })[route](pane) } catch (e) { if (t === drawing) pane.prepend(msg('bad', err(e))) }
@@ -76,6 +77,7 @@ async function overview(pane) {
     pane.append(h('div', { class: 'profile-card' }, h('img', { class: 'avatar big', alt: '', src: avatarOf() }),
         h('div', {}, h('h2', {}, p.name || (p.username ? '@' + p.username : 'Your account')), p.username ? h('div', { class: 'dim' }, '@' + p.username) : null,
             p.blurb ? h('p', {}, p.blurb) : h('p', { class: 'dim small' }, h('a', { href: '#profile' }, 'Add a line about you')))))
+    pane.append(todoPanel(await todo(dir).catch(() => [])), qrDesk({ dir }))
     const tile = (label, value, href, note) => h('a', { class: 'tile', href }, h('div', { class: 'tl' }, label), h('div', { class: 'tv' }, value), note ? h('div', { class: 'tn' }, note) : null)
     pane.append(h('div', { class: 'tiles' },
         tile('Kept', vault.mode === 'vault' ? 'In your vault' : 'In this browser', '#storage', vault.mode === 'vault' ? 'follows you to every device' : 'only here, until you move it into a vault'),
@@ -89,7 +91,7 @@ async function overview(pane) {
     const items = [[!!(p.username || p.name), 'A profile', '#profile'], [!!m, 'A master key', '#keys'], [!!(mine && mine.identity), 'Your identity statement, signed by your master key', '#keys'],
                    [!!rec, 'Your record in the register', '#keys'], [verified, 'Verified by an anchor (in person, on a call, or on a channel known to be yours)', pageUrl('people/how.html')], [vault.mode === 'vault', 'In a vault, so it follows you across devices', '#storage']]
     const next = items.findIndex(x => !x[0])
-    pane.append(h('h3', {}, 'Your account, step by step'), h('ol', { class: 'steps' }, ...items.map(([ok, t, href], i) => h('li', { class: ok ? 'done' : i === next ? 'now' : '' }, ok ? t : h('a', { href }, t)))))
+    if (next >= 0) pane.append(h('h3', {}, 'Your account, step by step'), h('ol', { class: 'steps' }, ...items.map(([ok, t, href], i) => h('li', { class: ok ? 'done' : i === next ? 'now' : '' }, ok ? t : h('a', { href }, t)))))
 }
 
 // ------------------------------------------------------------ profile
@@ -287,12 +289,8 @@ function upgradeForm() {
         if (!key.value.trim()) return out.replaceChildren(msg('warn', 'An access key, please: whoever invited you can give you one, or write to agent@riskmandate.ai.'))
         out.replaceChildren(msg('', 'Creating three vaults (a door, a master, a book), moving your keys, profile and record in, reading them back, and a recovery door…'))
         try {
-            holding = true
-            const rc = await vault.upgrade(key.value.trim()).catch(e => { holding = false; throw e })
-            app.replaceChildren(h('div', { class: 'acct-out' }, h('div', { class: 'signin' }, h('h2', {}, 'Your vault is made'),
-                msg('warn', h('b', {}, 'Your recovery code, shown once. Write it down: '), h('span', { class: 'mono', id: 'recovery-code' }, rc.shown)),
-                h('p', { class: 'small' }, 'It opens a second door to the same vault: for a device with no passkey, and for the day the passkey is gone. This page does not keep it. The copy this browser kept has been removed: your account now lives in the vault.'),
-                h('div', { class: 'acts' }, h('button', { type: 'button', class: 'btn primary', id: 'recovery-done', onclick: () => { holding = false; go(vault.masterKey ? 'overview' : 'welcome') } }, 'I have written it down')))))
+            await vault.upgrade(key.value.trim())
+            go(vault.masterKey ? 'overview' : 'welcome')       // nothing to write down: the recovery code is kept in the vault
         } catch (e) { out.replaceChildren(msg('bad', err(e))) }
     }))
     return h('div', { class: 'vpanel' }, h('h3', {}, 'Move into a vault'), h('p', { class: 'small' }, 'The same passkey opens it afterwards, on any device. Your keys, profile, record and contacts move in; the copy here is removed once the vault reads them back.'),
@@ -325,6 +323,19 @@ async function storage(pane) {
         pane.append(h('h3', {}, 'Doors: what opens your vault'), h('table', { class: 'kv' }, h('tbody', {}, ...(vault.doors || []).map(d => h('tr', {},
             h('th', {}, d.kind === 'recovery' ? 'recovery code' : 'passkey'), h('td', {}, d.device || 'a device', d.path ? ` · ${d.path}` : '', ' · made ', String(d.created || '').slice(0, 10), ' · door ', h('span', { class: 'mono' }, d.vault_id || '')))))),
             h('p', { class: 'dim small' }, 'A passkey that syncs (iCloud Keychain, Google Password Manager) is the same door on every device it reaches. A passkey that does not (a security key, Windows Hello) is a door of its own: add it here.'))
+        // the recovery code: kept in the master, shown when asked for
+        const rbox = h('div', { id: 'recovery-box' })
+        const kept = await A.keptRecovery(vault.master)
+        if (kept) {
+            const show = h('button', { type: 'button', class: 'btn small', id: 'recovery-show' }, 'Show my recovery code')
+            show.addEventListener('click', () => show.replaceWith(h('span', {}, h('b', { class: 'mono', id: 'recovery-code' }, kept.code), ' ', copyButton(kept.code, 'Copy'))))
+            rbox.append(h('p', { class: 'small' }, 'Kept inside your vault since ', String(kept.made).slice(0, 10), '. You do not need it while your passkey works. Want a copy outside, in a password manager? ', show))
+        } else {
+            const make = h('button', { type: 'button', class: 'btn small', id: 'recovery-make' }, 'Make a recovery code, kept here')
+            make.addEventListener('click', () => busy(make, async () => { const r = await A.newRecovery({ sgSend: vault.sg, master: vault.master }); vault.doors = r.doors; draw() }))
+            rbox.append(h('p', { class: 'small' }, 'This vault was made when the code was shown once and not kept. Make a new one, kept inside the vault (the old one still works, if you wrote it down). ', make))
+        }
+        pane.append(h('h3', {}, 'Recovery code'), rbox)
         const add = h('button', { type: 'button', class: 'btn', id: 'door-add' }, 'Add another passkey as a door')
         add.addEventListener('click', () => busy(add, async () => {
             try {
@@ -345,7 +356,7 @@ async function storage(pane) {
 }
 
 // ------------------------------------------------------------ the vault, as files
-const SECRET = /(^|\/)(private_key\.pem|signing_private\.pem|access-token\.json|master-key\.json|book\.json|doors\.json|inbox\.json)$/
+const SECRET = /(^|\/)(private_key\.pem|signing_private\.pem|access-token\.json|recovery-code\.json|master-key\.json|book\.json|doors\.json|inbox\.json)$/
 async function explorer(pane) {
     pane.append(...head('Your vault, as files', 'What is actually kept, as it is kept. Secret files are masked until you reveal them, here, on your screen.'))
     if (vault.mode === 'local') {

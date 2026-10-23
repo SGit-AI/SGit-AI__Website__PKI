@@ -304,5 +304,5 @@ pre.mermaid{background:var(--panel);border:1px solid var(--line);border-radius:1
 
 /* v0.1.66: the version badge is filled at load time from assets/version.js; empty without JS */
 nav.site a.ver:empty{display:none}
-nav.site .gh.signin{background:var(--accent-dk);border-color:var(--accent-dk);color:#fff;font-weight:600}
+nav.site .gh.signin{margin:0;max-width:none;box-shadow:none;background:var(--accent-dk);border-color:var(--accent-dk);color:#fff;font-weight:600}
 nav.site .gh.signin:hover{background:var(--accent)}
