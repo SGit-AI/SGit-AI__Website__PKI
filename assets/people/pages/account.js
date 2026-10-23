@@ -10,7 +10,7 @@ import { qrDesk, setDropHandler } from '../desk.js'
 const app = document.getElementById('app')
 const SECTIONS = [['overview', 'Home', '◉'], ['profile', 'Profile', '☺'], ['keys', 'Keys & personas', '⚿'], ['storage', 'Storage & devices', '▣'], ['explorer', 'Your vault, as files', '☰']]
 const TOOLS = [['vault/index.html#record', 'Your record'], ['vault/index.html#links', 'Links'], ['vault/index.html#contacts', 'Contacts'], ['vault/index.html#messages', 'Messages'],
-               ['vault/index.html#agents', 'Agents'], ['m/index.html', 'QR desk (full page)'], ['send/index.html', 'Send a message'], ['invite/index.html', 'Invite someone'], ['people/index.html', 'The register']]
+               ['vault/index.html#agents', 'Agents'], ['m/index.html', 'QR desk (full page)'], ['v/index.html', 'Open a vault (QR)'], ['send/index.html', 'Send a message'], ['invite/index.html', 'Invite someone'], ['people/index.html', 'The register']]
 const parse = () => { const m = location.hash.match(/^#([a-z]+)/); return m && (m[1] === 'welcome' || SECTIONS.some(s => s[0] === m[1])) ? m[1] : 'overview' }
 let route = parse(), drawing = 0
 const today = () => new Date().toISOString().slice(0, 10)

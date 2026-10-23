@@ -25,6 +25,7 @@
       <a class="sl" href="../vault/index.html">&#9679; Your vault &amp; your keys</a>
       <a class="sl" href="../send/index.html">&#9679; Send a message</a>
       <a class="sl" href="../m/index.html">&#9679; Open a message (QR image or link)</a>
+      <a class="sl" href="../v/index.html">&#9679; Open a vault (its QR image)</a>
       <a class="sl" href="../invite/index.html">&#9679; Invite someone</a>
       <a class="sl" href="../agents/index.html">&#9679; Identities for agents</a>
       <a class="sl" href="../handover/for-you.html">&#9679; Agents &amp; vault keys: what you do</a>
@@ -94,6 +95,11 @@
 <div class="tablewrap"><table class="vers">
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
+    <tr>
+<td class="vnum">v0.2.23</td>
+<td class="vdate">23 Oct 2026</td>
+<td><b>Open a vault from its QR code.</b> A new page, <a href="../v/index.html">Open a vault</a>: drop or paste the QR image an agent gave you; it opens with your key, and when it carries a vault key the vault opens there, its files listed and each shown in a sandboxed frame. Any message file that holds a vault key now has <b>Open the vault ↗</b>: a new window, the key handed over in memory (never in the address, never shown). The tool pages keep their footer at the bottom of the window, as one quiet line, instead of riding up and down as the page fills. An agent that is not confirmed now says which side is missing, and <code>pki-agent.mjs trust</code> names the register version that answered. (v0.2.22 did not reach the site: GitHub Pages answered 502; this release carries it.)</td>
+    </tr>
     <tr>
 <td class="vnum">v0.2.22</td>
 <td class="vdate">23 Oct 2026</td>
@@ -921,6 +927,7 @@ chapter 15 records as fixed here.</td>
     <a href="../vault/index.html">&#9679; Your vault</a>
     <a href="../send/index.html">&#9679; Send a message</a>
     <a href="../m/index.html">Open a message</a>
+    <a href="../v/index.html">Open a vault</a>
     <a href="../invite/index.html">&#9679; Invite someone</a>
     <a href="../agents/index.html">&#9679; Identities for agents</a>
     <a href="../storyboards/index.html">&#9679; Storyboards</a>

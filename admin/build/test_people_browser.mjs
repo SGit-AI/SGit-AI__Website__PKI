@@ -238,6 +238,35 @@ try {
         await p.goto(SITE + 'account/index.html#overview')
         await p.locator('#pane-overview #todo').waitFor({ timeout: 60000 })
         check((await p.locator('#pane-overview #qr-desk').count()) === 1 && (await p.locator('nav.site .gh.signin').evaluate(e => getComputedStyle(e).marginLeft)) === '0px', 'her account’s Home: To do and the QR desk first; the nav’s account pill is not pushed onto a line of its own')
+
+        // a vault from its QR code: an agent made a vault, and sealed its key to her
+        const vkey = await p.evaluate(async () => {
+            const ui = await import('/assets/people/ui.js'), v = ui.vault; await v.settled()
+            const NV = ui.A.NV, x = await NV.createVault(v.sg, { name: 'an agent’s vault' })
+            await NV.writeFile(x, '/', 'README.md', '# The agent’s vault\n\nMade for the test. <script>parent.document.title="pwned"</script>\n')
+            await NV.writeFile(x, '/notes', 'plan.txt', 'step one')
+            await NV.publish(x)
+            return NV.prefixedKey(x)
+        })
+        const vmsg = await M.sealMessage(await M.compose({ to: ana, text: 'the key of my vault', files: [{ name: 'vault-key.txt', data: Buffer.from(vkey + '\n').toString('base64') }] }), ana, null)
+        const vpng = await png(M.qrSealed({ to: ana.signing_fingerprint, code: vmsg.code }))
+        await p.goto(SITE + 'v/index.html')
+        await p.locator('#open-qr-file').waitFor({ state: 'attached', timeout: 60000 })
+        await p.setInputFiles('#open-qr-file', { name: 'vault.png', mimeType: 'image/png', buffer: vpng })
+        await p.locator('#vv-tree button', { hasText: 'plan.txt' }).waitFor({ timeout: 60000 })
+        await p.locator('#vv-file iframe.preview-frame').waitFor({ timeout: 30000 })
+        const vtext = await text(p, '#vault-view'), vid = vkey.split(':').pop()
+        check(vtext.includes(vid) && !vtext.includes(vkey.split(':')[0].replace(/^sgit_private_vault_/, '')) && (await p.locator('#vv-file iframe').getAttribute('sandbox')) === '' && (await p.title()) !== 'pwned',
+            'a vault from its QR code: dropped on the vault page, opened with her key, the vault opens there, its README in a sandbox; the key itself is never on the page')
+        await p.locator('#vv-tree button', { hasText: 'plan.txt' }).click()
+        await p.waitForFunction(() => document.querySelector('#vv-file .vh') && document.querySelector('#vv-file .vh').textContent.includes('plan.txt'), null, { timeout: 30000 })
+        // and from a message anywhere else: Open the vault, in a new window, the key handed over in memory
+        await p.goto(SITE + 'm/index.html#' + vmsg.code)
+        await p.locator('.vv-open').waitFor({ timeout: 60000 })
+        const [popup] = await Promise.all([p.waitForEvent('popup'), p.click('.vv-open')])
+        await popup.locator('#vv-tree button', { hasText: 'plan.txt' }).waitFor({ timeout: 60000 })
+        check(!popup.url().includes(vid) && !popup.url().includes('#'), 'Open the vault ↗ on a message: a new window, the vault open in it, nothing of the key in its address')
+        await popup.close()
     }
 
     // her invitation

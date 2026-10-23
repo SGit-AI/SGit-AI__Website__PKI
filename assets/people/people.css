@@ -219,3 +219,20 @@ details.kept[open]>summary{border-bottom:1px solid var(--line)}
 details.kept>.msgcard,details.kept>p{margin:.6rem .8rem}
 .kept-icon{width:1.4rem;text-align:center}
 .pill.ok{background:#e3f4ea;color:#1e7a46}.pill.warn{background:#fdf0dc;color:#9a6200}
+/* a vault, opened from its key */
+.vaultview{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:.8rem 1rem;margin:1rem 0}
+.vv-head{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-bottom:.2rem}
+.vv-head .btn{margin-left:auto}
+.vaultview .preview{height:520px!important}
+ul.tree button.linkish.on{font-weight:700;text-decoration:underline}
+/* the tool pages (sign in, account, vault, desk): the footer stays at the bottom of the window instead of riding up and
+   down while the page fills in, and it is one quiet line: the nav above already carries the whole site map */
+body:has(main.tool){min-height:100vh;display:flex;flex-direction:column}
+body:has(main.tool)>main.tool{flex:1 0 auto;width:100%;box-sizing:border-box}
+body:has(main.tool) footer.site{margin-top:2rem;padding:.7rem 0;background:transparent}
+body:has(main.tool) footer.site .cols{display:block}
+body:has(main.tool) footer.site .cols>div:not(:first-child),
+body:has(main.tool) footer.site .cols>div:first-child>p:not(.verline):not(.partnote){display:none}
+body:has(main.tool) footer.site .cols>div:first-child{display:flex;flex-wrap:wrap;gap:.3rem 1rem;align-items:baseline}
+body:has(main.tool) footer.site .brandline{font-size:.85rem}
+body:has(main.tool) footer.site .partnote,body:has(main.tool) footer.site .verline{margin:0;font-size:.72rem;max-width:none}

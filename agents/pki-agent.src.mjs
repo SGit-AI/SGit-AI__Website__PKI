@@ -328,7 +328,9 @@ Keys: ${KEYS} (sgit's layout${PASS ? ', encrypted with SG_SEND_PASSPHRASE' : ', 
     async trust() {
         const fp = args[0]; if (!K.FP.test(String(fp))) die('trust <sha256:16 hex>')
         const { g, p } = await fromRoot(await register())
-        say(JSON.stringify(D.trustFrom(g, fp, p.fp), null, 2))
+        // which register answered: a refusal from yesterday's register reads differently from today's
+        const site = await fetch(REGISTER + 'assets/version.js').then(r => r.text()).then(t => (t.match(/"(v[0-9.]+)"/) || [])[1] || '').catch(() => '')
+        say(JSON.stringify({ ...D.trustFrom(g, fp, p.fp), register: `${REGISTER}directory/index.json${site ? ', site ' + site : ''}` }, null, 2))
     },
     async keyqr() {
         const id = await me(), k = M.keyCode(id.bundle)

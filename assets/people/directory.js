@@ -288,7 +288,10 @@ export function standing(g, fp) {
         }
         const x = g.lapsed.get(fp)
         if (x) return { level: 'expired', text: `an agent operated by ${nameOf(g, x.by)} until ${x.until}: to be confirmed again`, ...x }
-        return { level: 'listed', text: 'an agent in the register, not confirmed by an operator' }
+        // say which side is missing: an agent that names no operator, or one whose operator has published no link back
+        const named = (rec.links || []).filter(l => l.method === 'operated-by').map(l => l.to)
+        if (!named.length) return { level: 'listed', text: 'an agent in the register, not confirmed by an operator: it names no operator (node pki-agent.mjs operator <fp>, then its submission)' }
+        return { level: 'listed', text: `an agent in the register, not confirmed by an operator: it names ${named.map(x => nameOf(g, x)).join(', ')} as its operator, and the register holds no "operates" link back (if one was signed, it is not published yet)`, named }
     }
     if (g.anchors.includes(fp)) return { level: 'anchor', text: 'an anchor: verification starts here' }
     const v = g.verified.get(fp)
