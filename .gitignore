@@ -17,6 +17,8 @@ downloads/
 eggs/
 .eggs/
 lib/
+# ...but the site's released library is the site (pki.sgit.ai/lib/: versioned, hash-pinned)
+!/lib/
 lib64/
 parts/
 sdist/

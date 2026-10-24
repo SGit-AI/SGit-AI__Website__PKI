@@ -1,0 +1,53 @@
+{
+  "v": 1,
+  "kind": "pki.sgit.ai/lib/v1",
+  "version": "v0.2.28",
+  "immutable": true,
+  "levels": {
+    "release": "vN: breaking changes; nothing is promised between releases",
+    "major": "vN.M: best effort not to break, and it may",
+    "minor": "vN.M.P: small changes; each is written once and never changed",
+    "latest": "any folder named latest moves to the newest version under it; everything else is immutable"
+  },
+  "released": "2026-10-24",
+  "base": "https://pki.sgit.ai/lib/v0/v0.2/v0.2.28/",
+  "files": {
+    "keys.js": {
+      "bytes": 19688,
+      "sha256": "7c97cbd9dab3c3969b6bed4f24bce211c0406cee15c5a88458fec9fc5d48d143",
+      "sri": "sha384-Rvz7Lm4BLUAt6Pxo3rjJo+SkUoTugfl5G8zlYkDJ1sYHmhaUhl3deL9TaDZD/wl/"
+    },
+    "message.js": {
+      "bytes": 15667,
+      "sha256": "ad91e33ab9a711cad431bfc92f5610c5fe131e828a8e99450dbeccb1535b3b49",
+      "sri": "sha384-pWiFSVJu+ls1o8N9PuLYWaBQyBaF/VbTbRof4BDdZ890qdlbeMIB4DPSa81CJVhx"
+    },
+    "directory.js": {
+      "bytes": 28163,
+      "sha256": "7369832f63eb4b4fb5d3d820b2aa4b4f3287c37d03f8d5652942d13b186f1c53",
+      "sri": "sha384-DH9r0UjVIghI6uy9yh2Jga2ukUrEFTdcJKC+4jLx4S6xHHA4XiK+wBkbNiT0BWKu"
+    },
+    "delegation.js": {
+      "bytes": 11032,
+      "sha256": "0ecb7f7b9dc520550f147618927b5c3608125bcc801a719545e556c6dc984b6b",
+      "sri": "sha384-1wSp4WGqpQN+OnlRXIQgGUenlNtNwrWSqwCxyl/ndNmcjRPWSr8nhSVRlvxbJMGy"
+    },
+    "sso.js": {
+      "bytes": 5989,
+      "sha256": "f250b6766e3f955081e7a8c562c77336bd81ffc13528c7f77f3d99b9b9052982",
+      "sri": "sha384-vqBGC0t3nevD6homUes0oukDK+OIIWu3clYmswLzfEYx8GfIoYKx+TQak9/0fDMj"
+    }
+  },
+  "importmap": {
+    "imports": {
+      "pki/": "https://pki.sgit.ai/lib/v0/v0.2/v0.2.28/"
+    },
+    "integrity": {
+      "https://pki.sgit.ai/lib/v0/v0.2/v0.2.28/keys.js": "sha384-Rvz7Lm4BLUAt6Pxo3rjJo+SkUoTugfl5G8zlYkDJ1sYHmhaUhl3deL9TaDZD/wl/",
+      "https://pki.sgit.ai/lib/v0/v0.2/v0.2.28/message.js": "sha384-pWiFSVJu+ls1o8N9PuLYWaBQyBaF/VbTbRof4BDdZ890qdlbeMIB4DPSa81CJVhx",
+      "https://pki.sgit.ai/lib/v0/v0.2/v0.2.28/directory.js": "sha384-DH9r0UjVIghI6uy9yh2Jga2ukUrEFTdcJKC+4jLx4S6xHHA4XiK+wBkbNiT0BWKu",
+      "https://pki.sgit.ai/lib/v0/v0.2/v0.2.28/delegation.js": "sha384-1wSp4WGqpQN+OnlRXIQgGUenlNtNwrWSqwCxyl/ndNmcjRPWSr8nhSVRlvxbJMGy",
+      "https://pki.sgit.ai/lib/v0/v0.2/v0.2.28/sso.js": "sha384-vqBGC0t3nevD6homUes0oukDK+OIIWu3clYmswLzfEYx8GfIoYKx+TQak9/0fDMj"
+    }
+  }
+}
