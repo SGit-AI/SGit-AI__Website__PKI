@@ -199,7 +199,7 @@ async function links(body, dir) {
     const target = linkTarget() ? K.fpOfDir(linkTarget()) : ''
     const pick = h('select', { class: 't' }, h('option', { value: '' }, '— pick someone in the register —'), ...(dir ? dir.records.filter(r => r.ok && r.fp !== fp && (!myLinks.has(r.fp) || r.fp === target)).map(r => h('option', { value: r.fp, selected: r.fp === target }, `${r.name} · ${r.fp}`)) : []))
     const other = h('input', { class: 't code', placeholder: 'or a fingerprint: sha256:…', value: target && !(dir && dir.byFp.has(target)) ? target : '' })
-    const method = h('select', { class: 't' }, ...Object.entries(D.METHODS).map(([k, v]) => h('option', { value: k, selected: k === 'known' }, v)))
+    const method = h('select', { class: 't' }, ...Object.entries(D.METHODS).filter(([k]) => k !== 'delegates').map(([k, v]) => h('option', { value: k, selected: k === 'known' }, v)))
     const on = h('input', { class: 't', type: 'date', value: new Date().toISOString().slice(0, 10) })
     const yearOn = d => { const x = new Date(d + 'T00:00:00Z'); x.setUTCFullYear(x.getUTCFullYear() + 1); return x.toISOString().slice(0, 10) }
     const until = h('input', { class: 't', type: 'date', value: yearOn(on.value) })

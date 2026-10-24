@@ -222,5 +222,46 @@ else {
         check((await D.readRecord([idSt])).ok, 'and a key sgit made can start a record in the register')
     } finally { fs.rmSync(home, { recursive: true, force: true }) }
 }
+// --- signing in elsewhere: a delegation, soft or strong, checked from a pinned root, no revocation list ------------------
+{
+    const DG = await import(path.join(ROOT, 'assets/people/delegation.js'))
+    const adaFp = ada.bundle.signing_fingerprint, site = 'https://newsroom.example', browser = await K.generate('a browser')
+    const now = Date.parse('2026-10-24T09:00:00Z'), asOf = '2026-10-24'
+    const req = await DG.parseRequest({ v: 1, kind: DG.REQUEST, client: site, return: site + '/pki/back.html', key: M.keyCode(browser.bundle).code, can: ['identity', 'sign:feedback'], days: 30, nonce: 'n'.repeat(24) })
+    for (const [bad, why] of [[{ ...req, client: site, return: 'https://evil.example/x', key: req.key, bundle: undefined }, 'a return address on another origin'], [{ v: 1, kind: DG.REQUEST, client: site, return: site + '/', key: req.key, can: ['root'], days: 30, nonce: 'n'.repeat(24) }, 'an unknown use'], [{ v: 1, kind: DG.REQUEST, client: site, return: site + '/', key: req.key, can: ['identity'], days: 30, nonce: 'n'.repeat(24), note: 'x' }, 'an extra field']]) {
+        const raw = { v: 1, kind: DG.REQUEST, ...bad }; delete raw.bundle
+        let refused = false; try { await DG.parseRequest(raw) } catch (e) { refused = true }
+        check(refused, `an authorize request is refused for ${why}`)
+    }
+    const soft = await DG.makeDelegation(ada, req, { name: 'Ada', from: now })
+    const gSoft = D.graph([await D.readRecord(adaRec)], { anchors: [adaFp], asOf })
+    let c = await DG.checkDelegation(soft, { g: gSoft, root: adaFp, origin: site, asOf })
+    check(c.ok && c.level === 'soft', `soft: signed by the root, for this site, in date, not listed (${c.why})`)
+    check((await DG.checkDelegation(soft, { g: gSoft, root: adaFp, origin: 'https://other.example', asOf })).level === 'invalid', 'a delegation is worth nothing at another site')
+    check((await DG.checkDelegation({ ...soft, can: [...soft.can, 'delegate'] }, { g: gSoft, root: adaFp, origin: site, asOf })).level === 'invalid', 'a delegation widened after it was signed does not check')
+    check((await DG.checkDelegation(soft, { g: gSoft, root: adaFp, origin: site, asOf: '2026-12-01' })).level === 'invalid', 'past its date, it is over')
+    // strong: the root's record lists it today
+    const live = await DG.makeDelegation(ada, req, { live: true, name: 'Ada', from: now }), liveId = await DG.delegationId(live)
+    check((await DG.checkDelegation(live, { g: gSoft, root: adaFp, origin: site, asOf })).level === 'not-vouched', 'a live delegation the record does not list is not good (not published yet, or withdrawn)')
+    const vouch = await D.linkStatement(ada, { to: browser.bundle.signing_fingerprint, method: 'delegates', on: asOf, until: live.until, delegation: liveId, can: live.can }, T(20))
+    const adaVouches = await D.readRecord([...adaRec, vouch])
+    check(adaVouches.ok, 'a delegates link reads in a record: the delegation by hash, its until, its uses')
+    const gStrong = D.graph([adaVouches], { anchors: [adaFp], asOf })
+    c = await DG.checkDelegation(live, { g: gStrong, root: adaFp, origin: site, asOf })
+    check(c.ok && c.level === 'strong', `strong: the root’s record vouches for it today (${c.why})`)
+    const gWithdrawn = D.graph([await D.readRecord([...adaRec, vouch, await D.withdrawStatement(ada, vouch, 'lost the iPad', T(21))])], { anchors: [adaFp], asOf })
+    check((await DG.checkDelegation(live, { g: gWithdrawn, root: adaFp, origin: site, asOf })).level === 'not-vouched', 'withdrawn: the link is gone from the record, and the delegation stops, with no list of revoked keys anywhere')
+    check((await DG.checkDelegation(soft, { g: gStrong, root: adaFp, origin: site, asOf })).level === 'soft', 'a link names one delegation by hash: it does not lift another to strong')
+    // notes signed by the browser key
+    const note = await DG.signNote(browser, { text: 'this figure is wrong' }, live)
+    let v = await DG.verifyNote(note, { g: gStrong, root: adaFp, origin: site, need: 'sign:feedback', asOf })
+    check(v.ok && v.level === 'strong' && v.payload.text === 'this figure is wrong', 'a note signed by the browser key checks, strong, back to the root')
+    check(!(await DG.verifyNote({ ...note, payload: { text: 'this figure is right' } }, { g: gStrong, root: adaFp, origin: site, asOf })).ok, 'a note changed after it was signed fails')
+    check(!(await DG.verifyNote(note, { g: gStrong, root: adaFp, origin: site, need: 'sign:payments', asOf })).ok, 'a note for a use the delegation does not allow fails')
+    const other = await K.generate('another root')
+    const otherRec = [await D.identityStatement(other, { name: 'Other' }, T(1))]
+    check(!(await DG.checkDelegation(soft, { g: D.graph([await D.readRecord(adaRec), await D.readRecord(otherRec)], { anchors: [other.bundle.signing_fingerprint], asOf }), root: other.bundle.signing_fingerprint, origin: site, asOf })).ok, 'from another pinned root, the same delegation is not vouched for')
+}
+
 console.log(failed ? `\n${failed} FAILED` : '\nall passed')
 process.exit(failed ? 1 : 0)

@@ -2637,7 +2637,7 @@ const EVIDENCE = {
     link: { label: 'A profile', machine: false, how: 'LinkedIn or another profile: a link a person checks, not a machine' },
 }
 /** The verification methods an anchor may name. Published by name; the details stay in the anchor's vault. */
-const METHODS = { 'in-person': 'met in person', 'video-call': 'on a video call', 'known-channel': 'on a channel already known to be theirs', 'invitation': 'through an invitation they accepted', 'known': 'known to me',
+const METHODS = { 'delegates': 'vouches for this key, for the uses it names (a sign-in elsewhere)', 'in-person': 'met in person', 'video-call': 'on a video call', 'known-channel': 'on a channel already known to be theirs', 'invitation': 'through an invitation they accepted', 'known': 'known to me',
                           'operates': 'runs this agent', 'operated-by': 'is the agent of this key',
                           'persona': 'is another key of mine (a persona)', 'persona-of': 'is a persona of this key' }
 const AGENT_DAYS = 30
@@ -2671,10 +2671,12 @@ const agentStatement = (identity, { name, about = '', runtime = '', session = fa
     statement(identity, 'identity', { kind: 'agent', name: String(name).trim(), about: String(about || '').trim(), runtime: String(runtime || '').trim(), session: !!session, bundle: identity.bundle, private_key_published: false }, at)
 const evidenceStatement = (identity, { kind, value, url = '' }, at) => statement(identity, 'evidence', { kind, value: String(value).trim(), url: String(url || '').trim() }, at)
 const POLICY = /^sha256:[0-9a-f]{64}$/
-function linkStatement(identity, { to, method = '', on = '', until = '', policy = '' }, at) {
+function linkStatement(identity, { to, method = '', on = '', until = '', policy = '', delegation = '', can = null }, at) {
     const body = { to, method, on }
     if (until) body.until = until
     if (policy) body.policy = policy
+    if (delegation) body.delegation = delegation           // a "delegates" link: the delegation it vouches for, by hash
+    if (can) body.can = can
     return statement(identity, 'link', body, at)
 }
 const inboxStatement = (identity, { endpoint, vault, token }, at) => statement(identity, 'inbox', { endpoint, vault, token }, at)
@@ -2729,7 +2731,7 @@ async function readRecord(statements, { dir = null, fixture = false } = {}) {
     for (const e of live('link')) lastLink.set(e.st.body.to, { id: e.id, at: e.st.created_at, ...e.st.body })
     out.links = [...lastLink.values()]
     const inb = live('inbox'); out.inbox = inb.length ? { id: inb[inb.length - 1].id, ...inb[inb.length - 1].st.body } : null
-    const toAgents = out.links.filter(l => l.method === 'operates').length
+    const toAgents = out.links.filter(l => l.method === 'operates' || l.method === 'delegates').length
     if (out.links.length - toAgents > BOUNDS.links) problems.push(`${out.links.length - toAgents} live links: over the bound of ${BOUNDS.links} (rule 3)`)
     if (toAgents > BOUNDS.agents) problems.push(`${toAgents} operated agents: over the bound of ${BOUNDS.agents} (rule 3); use a fleet key`)
     out.kind = idSt.body.kind
@@ -2760,6 +2762,9 @@ function shapeProblems(st, fp) {
             if (b.on && !/^\d{4}-\d\d-\d\d$/.test(b.on)) return 'on is a date, yyyy-mm-dd'
             if (b.until && (!/^\d{4}-\d\d-\d\d$/.test(b.until) || (b.on && b.until < b.on))) return 'until is a date, yyyy-mm-dd, not before on'
             if (b.policy != null && !POLICY.test(String(b.policy))) return 'a policy is named by its sha256:<64 hex>'
+            if (b.method === 'delegates' && (!POLICY.test(String(b.delegation)) || !b.until || !Array.isArray(b.can) || !b.can.length || b.can.length > 8 || !b.can.every(c => /^(identity|delegate|sign(:[a-z0-9-]{1,32})?)$/.test(String(c)))))
+                return 'a delegates link names its delegation (sha256:<64 hex>), an until date and the uses it allows'
+            if (b.method !== 'delegates' && (b.delegation != null || b.can != null)) return 'only a delegates link names a delegation'
             return null
         case 'inbox':
             if (!/^https:\/\/[a-z0-9.-]+$/.test(String(b.endpoint)) || !/^[a-z0-9]{4,24}$/.test(String(b.vault)) || !/^[0-9a-f]{16,128}$/.test(String(b.token))) return 'an inbox is an https endpoint, a vault id and a hex append token'

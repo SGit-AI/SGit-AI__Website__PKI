@@ -26,6 +26,7 @@
       <a class="sl" href="../send/index.html">&#9679; Send a message</a>
       <a class="sl" href="../m/index.html">&#9679; Open a message (QR image or link)</a>
       <a class="sl" href="../v/index.html">&#9679; Open a vault (its QR image)</a>
+      <a class="sl" href="../sso/index.html">&#9679; Sign in with pki.sgit.ai (for sites)</a>
       <a class="sl" href="../invite/index.html">&#9679; Invite someone</a>
       <a class="sl" href="../agents/index.html">&#9679; Identities for agents</a>
       <a class="sl" href="../handover/for-you.html">&#9679; Agents &amp; vault keys: what you do</a>
@@ -95,6 +96,11 @@
 <div class="tablewrap"><table class="vers">
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
+    <tr>
+<td class="vnum">v0.2.26</td>
+<td class="vdate">24 Oct 2026</td>
+<td><b>Sign in with pki.sgit.ai.</b> A site sends you to <a href="../authorize/index.html">authorize/</a> with a key its browser made; you read who asks and for what, and your key signs a delegation for that browser, at that site only, for those uses, until a date. Back at the site, every note the browser signs carries it, and anyone checks it against the register from a root they pinned. <b>Soft</b>: signed and in date, works at once. <b>Strong</b>: your own record lists the delegation today (a new <code>delegates</code> link naming its hash and uses), so withdrawing the link ends it everywhere at the next check, with no revocation list; a delegation can say it is only good while listed, and anything that may delegate further always is. The record names the browser key and the hash, never the site. Who someone is, in one file: <a href="../id/index.json">id/</a>. For sites: <code>assets/people/sso.js</code>, explained and tried on <a href="../sso/index.html">Sign in with pki.sgit.ai</a>.</td>
+    </tr>
     <tr>
 <td class="vnum">v0.2.25</td>
 <td class="vdate">23 Oct 2026</td>

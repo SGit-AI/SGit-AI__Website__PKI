@@ -301,6 +301,45 @@ try {
         await popup.close()
     }
 
+    // sign in elsewhere with her key: the sso page plays the site; a register that holds her record is served to it
+    {
+        const real = JSON.parse(fs.readFileSync(path.join(ROOT, 'directory/index.json'), 'utf8'))
+        const serveWith = async () => {
+            const sts = await p.evaluate(async fp => { const v = (await import('/assets/people/ui.js')).vault; await v.resume(); await v.settled(); return v.statements(fp) }, anaFp)
+            const idx = { ...real, records: [...real.records, { fp: anaFp, dir: anaFp.replace(':', '-'), fixture: false, ok: true, name: 'Ana Test', revoked: null, statements: sts }] }
+            await p.unroute('**/directory/index.json').catch(() => {})
+            await p.route('**/directory/index.json', r => r.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(idx) }))
+        }
+        await serveWith()
+        await p.goto(SITE + 'sso/index.html')
+        await p.evaluate(fp => localStorage.setItem('pki.sso.demo.root', fp), anaFp)
+        await p.reload()
+        await p.locator('#sso-login').click({ timeout: 60000 })
+        await p.locator('#az-card').waitFor({ timeout: 120000 })
+        const card = await text(p, '#az-card')
+        check(card.includes(new URL(SITE).host) && card.includes('sign feedback as you') && (await p.locator('#az-soft').isChecked()), 'Sign in with pki.sgit.ai: the site sends her to authorize/, which says who asks and for what, soft by default')
+        await p.click('#az-allow')
+        await p.locator('#sso-name').waitFor({ timeout: 120000 })
+        check((await text(p, '#sso-name')) === 'Ana Test' && (await p.locator('#sso-level').textContent()) === 'soft' && !p.url().includes('#'), 'back at the site: signed in as Ana, soft, checked against the register from the root it pinned; nothing left in the address')
+        await p.click('#sso-sign')
+        await p.locator('#sso-check p.msg').first().waitFor({ timeout: 60000 })
+        const chk = await text(p, '#sso-check')
+        check(/Checked against the register: soft/.test(chk) && /one character changed: refused/.test(chk), 'a note her browser signs checks against the register; the same note changed by one character is refused')
+        // strong: only while her record vouches for it
+        await p.getByRole('button', { name: 'Sign out' }).click()
+        await p.locator('#sso-login').click({ timeout: 60000 })
+        await p.locator('#az-card').waitFor({ timeout: 120000 })
+        await p.check('#az-strong')
+        await p.click('#az-allow')
+        await p.locator('#sso-name').waitFor({ timeout: 120000 })
+        check((await p.locator('#sso-level').textContent()) === 'not-vouched', 'strong, before her record is published: not vouched for yet, and the site says so')
+        await serveWith()                                        // her record, published, now carries the delegates link
+        await p.reload()
+        await p.locator('#sso-level').waitFor({ state: 'attached', timeout: 120000 })
+        check((await p.locator('#sso-level').textContent()) === 'strong', 'published: her record vouches for it today, and the same sign-in is strong')
+        await p.unroute('**/directory/index.json')
+    }
+
     // her invitation
     await p.goto(SITE + 'invite/index.html')
     await p.locator('#invite-go').waitFor()

@@ -269,3 +269,9 @@ body.vv-full .vaultview{margin:0;border:0;border-radius:0;height:100vh;display:f
 body.vv-full .vv-app{flex:1;height:auto}
 body.vv-full .vv-files{flex:1;overflow:auto}
 #app.vv-open>.lead{display:none}
+/* sign in elsewhere */
+.authorize{max-width:620px;margin:1rem auto}
+.az-who{text-align:center;margin:.4rem 0 1rem}
+.az-host{font-size:1.5rem;font-weight:800;color:var(--fg)}
+.az-can{margin:.2rem 0 .8rem}.az-can li{margin:.2rem 0}
+.az-modes{display:flex;flex-direction:column;gap:.4rem;margin:.8rem 0}
