@@ -59,6 +59,7 @@ const back = await s.finish()                               // on the page you r
 if (!s.session()) button.onclick = () => s.login({ can: ['identity', 'sign:feedback'], days: 30 })
 const note = await s.sign({ text: 'this figure is wrong' })
 const v = await s.verify(note, { need: 'sign:feedback' })   // { ok, level: 'strong' | 'soft', why, … }`),
+        h('p', { class: 'small' }, 'The design: ', h('a', { href: pageUrl('articles/sign-in-with-a-key-soft-and-strong.html') }, 'signing in with a key, soft and strong'), '. For a site adding it: ', h('a', { href: pageUrl('articles/sign-in-with-pki-sgit-ai-for-sites.html') }, 'the integration guide'), '.'),
         h('p', { class: 'small' }, 'Who someone is, in one file: ', h('a', { href: pageUrl('id/index.json') }, 'id/index.json'), ' and ', h('code', {}, 'id/sha256-….json'), ' (name, keys, inbox, and what they vouch for today).'))
 }
 const s0 = await sso({ root: pinned() }).catch(() => null)

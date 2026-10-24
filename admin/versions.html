@@ -97,6 +97,11 @@
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
     <tr>
+<td class="vnum">v0.2.27</td>
+<td class="vdate">24 Oct 2026</td>
+<td><b>Two articles on signing in with a key</b>, both signed by the site agent: <a href="../articles/sign-in-with-a-key-soft-and-strong.html">the pattern and its architecture</a> (an OAuth-shaped redirect returning a signature; soft and strong; why no revocation list; keys of keys; what it protects against), and <a href="../articles/sign-in-with-pki-sgit-ai-for-sites.html">the guide for sites adding it</a> (what to vendor, the root to pin, the five calls, which level to accept for what, the shapes on the wire, the mistakes to avoid, and the newsroom's Pen).</td>
+    </tr>
+    <tr>
 <td class="vnum">v0.2.26</td>
 <td class="vdate">24 Oct 2026</td>
 <td><b>Sign in with pki.sgit.ai.</b> A site sends you to <a href="../authorize/index.html">authorize/</a> with a key its browser made; you read who asks and for what, and your key signs a delegation for that browser, at that site only, for those uses, until a date. Back at the site, every note the browser signs carries it, and anyone checks it against the register from a root they pinned. <b>Soft</b>: signed and in date, works at once. <b>Strong</b>: your own record lists the delegation today (a new <code>delegates</code> link naming its hash and uses), so withdrawing the link ends it everywhere at the next check, with no revocation list; a delegation can say it is only good while listed, and anything that may delegate further always is. The record names the browser key and the hash, never the site. Who someone is, in one file: <a href="../id/index.json">id/</a>. For sites: <code>assets/people/sso.js</code>, explained and tried on <a href="../sso/index.html">Sign in with pki.sgit.ai</a>.</td>
