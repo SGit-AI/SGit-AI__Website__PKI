@@ -338,6 +338,15 @@ try {
         await p.locator('#sso-level').waitFor({ state: 'attached', timeout: 120000 })
         check((await p.locator('#sso-level').textContent()) === 'strong', 'published: her record vouches for it today, and the same sign-in is strong')
         await p.unroute('**/directory/index.json')
+        // the same client, loaded from the released library: an exact version, and its hashes as the manifest lists them
+        const libOk = await p.evaluate(async () => {
+            const idx = await (await fetch('/lib/index.json')).json(), v = idx.versions[idx.versions.length - 1]
+            const d = '/lib/' + v.version.replace(/^v(\d+)\.(\d+)\..*$/, 'v$1/v$1.$2/') + v.version + '/'
+            const m = await import(d + 'sso.js')
+            const ok = []; for (const [f, h] of Object.entries(v.files)) { const b = await (await fetch(d + f)).arrayBuffer(); const x = [...new Uint8Array(await crypto.subtle.digest('SHA-256', b))].map(n => n.toString(16).padStart(2, '0')).join(''); ok.push(x === h.sha256) }
+            return typeof m.sso === 'function' && ok.every(Boolean) && ok.length === 5
+        })
+        check(libOk, 'the client loads from the released library (lib/vN/vN.M/vN.M.P/), and every file there matches the hash its index lists')
     }
 
     // her invitation

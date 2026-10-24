@@ -52,8 +52,8 @@ async function draw(back = null) {
         h('ul', {}, h('li', {}, h('b', {}, 'Soft'), ': the delegation is signed by your key, names the site and the uses, and ends on its date. It works at once, and it cannot be taken back early.'),
             h('li', {}, h('b', {}, 'Strong'), ': your own record, today, lists the delegation (a “delegates” link naming its hash and its uses). Withdraw the link and it stops everywhere at the next check: no revocation list, absence is the answer. A delegation can say it is only good while listed, so a stolen copy dies with the link.')),
         h('h3', {}, 'For a site'),
-        h('p', { class: 'small' }, 'Vendor ', h('code', {}, 'assets/people/'), ' ', h('code', {}, 'keys.js, message.js, directory.js, delegation.js, sso.js'), ', then:'),
-        h('pre', { class: 'xchg-line' }, `import { sso } from './pki/sso.js'
+        h('p', { class: 'small' }, 'Load a released version from ', h('a', { href: pageUrl('lib/index.json') }, 'lib/'), ' (an exact version, pinned by the hashes in its signed manifest, or a channel that moves), then:'),
+        h('pre', { class: 'xchg-line' }, `import { sso } from 'https://pki.sgit.ai/lib/v0/v0.2/v0.2.28/sso.js'   // or 'pki/sso.js' through the manifest's import map
 const s = await sso({ root: 'sha256:db7f79fdd87e030a' })   // the root you trust, pinned
 const back = await s.finish()                               // on the page you return to
 if (!s.session()) button.onclick = () => s.login({ can: ['identity', 'sign:feedback'], days: 30 })

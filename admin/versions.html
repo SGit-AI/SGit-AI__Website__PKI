@@ -97,6 +97,11 @@
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
     <tr>
+<td class="vnum">v0.2.28</td>
+<td class="vdate">24 Oct 2026</td>
+<td><b>The code for other sites, released like software.</b> <a href="../lib/index.json">lib/</a> holds pki.sgit.ai's five shared modules (keys, message, directory, delegation, sso) as versions: an exact version, <code>lib/v0/v0.2/v0.2.28/</code>, is written once and never changed, with a signed <code>manifest.json</code> (every file's size, sha256 and SRI hash, and an import map with <code>integrity</code> ready to paste) and <code>notes/release.md</code> and <code>notes/security.md</code>. Three levels, one rule: a release (<code>v0</code>) may break anything, a major (<code>v0.2</code>) tries not to, a minor (<code>v0.2.28</code>) is small; anything named <code>latest</code> moves (<code>lib/latest/</code>, <code>lib/v0/latest/</code>, <code>lib/v0/v0.2/latest/</code>), everything else is written once. A new exact version is cut only when the code changed; an exact version changed after release fails the build. The integration guide now says: pin an exact version and its hashes, or copy its folder.</td>
+    </tr>
+    <tr>
 <td class="vnum">v0.2.27</td>
 <td class="vdate">24 Oct 2026</td>
 <td><b>Two articles on signing in with a key</b>, both signed by the site agent: <a href="../articles/sign-in-with-a-key-soft-and-strong.html">the pattern and its architecture</a> (an OAuth-shaped redirect returning a signature; soft and strong; why no revocation list; keys of keys; what it protects against), and <a href="../articles/sign-in-with-pki-sgit-ai-for-sites.html">the guide for sites adding it</a> (what to vendor, the root to pin, the five calls, which level to accept for what, the shapes on the wire, the mistakes to avoid, and the newsroom's Pen).</td>

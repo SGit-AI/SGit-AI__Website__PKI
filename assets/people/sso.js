@@ -1,6 +1,7 @@
 /**
- * sso.js: "Sign in with pki.sgit.ai", for any site. Vendor this folder's keys.js, message.js, directory.js,
- * delegation.js and this file; nothing here talks to a server but the register's public JSON.
+ * sso.js: "Sign in with pki.sgit.ai", for any site. Load it from a released, hash-pinned version,
+ * https://pki.sgit.ai/lib/v0/v0.2/v0.2.N/sso.js (with keys.js, message.js, directory.js, delegation.js beside it),
+ * or vendor that folder; nothing here talks to a server but the register's public JSON.
  *
  *   const s = await sso({ root: 'sha256:…' })        root: the fingerprint you pinned, out of band; never the register's say-so
  *   await s.login({ can: ['identity', 'sign:feedback'], days: 30 })    makes this browser's key, goes to pki.sgit.ai
@@ -23,7 +24,7 @@ import * as DG from './delegation.js'
 
 const HERE = new URL(import.meta.url)
 const ON_PKI = /(^|\.)pki\.sgit\.ai$/.test(HERE.hostname) || /^(localhost|127\.0\.0\.1)$/.test(HERE.hostname)
-const DEFAULT_PKI = ON_PKI ? new URL('../../', HERE).href : 'https://pki.sgit.ai/'
+const DEFAULT_PKI = ON_PKI ? HERE.origin + '/' : 'https://pki.sgit.ai/'      // served from pki.sgit.ai (assets/ or lib/), or vendored elsewhere
 
 export async function sso({ root, pki = DEFAULT_PKI, store = localStorage, origin = location.origin } = {}) {
     if (!K.FP.test(String(root || ''))) throw new Error('sso: pin the root fingerprint (sha256:<16 hex>) you trust; it is never read from the register')
