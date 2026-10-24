@@ -34,14 +34,26 @@ export const FILES = { masterKey: 'master-key.json', doorRecord: 'door.json', bo
 const now = () => new Date().toISOString()
 const BOOK_README = '# A book on pki.sgit.ai\n\nMade by pki.sgit.ai for one person. record/ holds their own signed statements (what they published to the register), contacts/ the people they write to, messages/ what they sent and received, invites/ the invitations they made, notes/ their private notes. The private keys are not here: they are in the master vault, which holds this vault\'s key.\n'
 
-/** The vault library, as plain scripts, in VENDOR.md's order, from this origin and nowhere else. */
+/** The vault library, as plain scripts, in VENDOR.md's order, from this origin and nowhere else. A script that fails
+    to load (the site mid-deploy, a dropped connection) is tried again, three times, the last two past any cached
+    failure; one that loaded is not loaded twice; and a failure is not remembered, so the next press tries again. */
 let loading = null
+const loaded = new Set()
+const wait = ms => new Promise(r => setTimeout(r, ms))
+function loadScript(url) { return new Promise((res, rej) => { const s = document.createElement('script'); s.src = url; s.onload = res; s.onerror = () => { s.remove(); rej(new Error('failed')) }; document.head.append(s) }) }
 export function loadLibrary(root) {
     if (typeof SGVault !== 'undefined' && typeof SGVault.createWithId === 'function') return Promise.resolve()
     if (loading) return loading
     loading = (async () => {
-        for (const f of LIB) await new Promise((res, rej) => { const s = document.createElement('script'); s.src = new URL(f, root).href; s.onload = res; s.onerror = () => rej(new Error(`could not load ${f}`)); document.head.append(s) })
-    })()
+        for (const f of LIB) {
+            if (loaded.has(f)) continue
+            const url = new URL(f, root).href
+            for (let i = 0; ; i++) {
+                try { await loadScript(i ? `${url}?retry=${Date.now()}` : url); loaded.add(f); break }
+                catch (e) { if (i === 2) throw new Error(`could not load ${f}: the site may have been updating; press again in a moment`); await wait(i ? 1500 : 400) }
+            }
+        }
+    })().catch(e => { loading = null; throw e })
     return loading
 }
 export const client = (token = '', endpoint = ENDPOINT) => NV.client({ endpoint, token })

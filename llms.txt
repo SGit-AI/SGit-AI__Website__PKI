@@ -9,7 +9,7 @@
 > the other: the answer to the 2019 keyserver flood. Since v0.2.0 (18 October 2026) people
 > come first; the agent-registry work is kept under /archive/.
 
-Site version: v0.2.28 (18 October 2026). Published by the sgit project — participant
+Site version: v0.2.29 (18 October 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## The register of people (start here)

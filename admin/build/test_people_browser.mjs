@@ -64,6 +64,9 @@ const text = async (page, sel) => (await page.locator(sel).first().textContent()
 try {
     // ---------------------------------------------------------------- Ana
     const ana = await person('Ana'), p = ana.page
+    // the site mid-deploy: the first request for one of the vault library's scripts fails; the page tries again
+    let failedOnce = false
+    await p.route('**/sg-send/sg-send-crypto.js*', r => { if (!failedOnce) { failedOnce = true; return r.fulfill({ status: 404, body: 'not yet' }) } return r.continue() })
     await p.goto(SITE + 'vault/index.html')
     await p.click('#vault-open')
     await p.getByRole('button', { name: 'Make a passkey for pki.sgit.ai' }).click()
@@ -75,6 +78,8 @@ try {
     await p.getByText('Your vault is made').waitFor({ timeout: 60000 })
     check((await p.getByText('Nothing to save').count()) === 1 && (await p.locator('#recovery-code').count()) === 0, 'Ana makes a passkey and creates her vault: nothing to write down, the recovery code is kept inside it')
     check((await text(p, '#vault-bar')).includes('Your vault is open'), 'and her vault is open')
+    check(failedOnce, 'a vault library script that failed to load once (the site mid-deploy) was tried again, and the vault opened')
+    await p.unroute('**/sg-send/sg-send-crypto.js*')
 
     await p.fill('#tab-keys input.t', 'Ana Test')
     await p.getByRole('button', { name: 'Make a key pair' }).click()
@@ -175,7 +180,7 @@ try {
         const { makeZip } = await import('./zipfixture.mjs'), zlib = await import('zlib')
         await p.goto(SITE + 'vault/index.html'); await p.locator('#vault-bar').waitFor()
         let ana = null
-        for (let i = 0; i < 120 && !ana; i++) { ana = await p.evaluate(async () => { const v = (await import('/assets/people/ui.js')).vault; await v.settled(); return v.me ? v.me.bundle : null }); if (!ana) await p.waitForTimeout(500) }
+        for (let i = 0; i < 120 && !ana; i++) { ana = await p.evaluate(async () => { const v = (await import('/assets/people/ui.js')).vault; await v.resume(); await v.settled(); return v.me ? v.me.bundle : null }); if (!ana) await p.waitForTimeout(500) }
         const png = async text => { const q = qrcode(0, 'L'); q.addData(text, 'Byte'); q.make(); const n = q.getModuleCount(), px = 6, size = (n + 8) * px, lum = new Uint8Array(size * size).fill(255); for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) if (q.isDark(r, c)) for (let y = 0; y < px; y++) lum.fill(0, ((r + 4) * px + y) * size + (c + 4) * px, ((r + 4) * px + y) * size + (c + 5) * px); return Buffer.from(await QR.encodePng(lum, size, size, d => zlib.deflateSync(d))) }
         const codes = []
         for (const n of [1, 2]) { const sd = await M.sealMessage(await M.compose({ to: ana, text: `batch message ${n}` }), ana, null); codes.push(await png(M.qrSealed({ to: ana.signing_fingerprint, code: sd.code }))) }
