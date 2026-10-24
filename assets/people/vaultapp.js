@@ -38,16 +38,60 @@ export async function readBytes(v, path) {
     if (!(v.listFolder(folder) || []).some(e => e.name === name && e.type === 'file')) return null
     return new Uint8Array(await v.getFile(folder, name))
 }
-const readJson = async (v, p) => { const b = await readBytes(v, p).catch(() => null); if (!b) return null; try { return JSON.parse(new TextDecoder().decode(b)) } catch (e) { return null } }
+const parseJson = b => { if (!b) return null; try { return JSON.parse(new TextDecoder().decode(b)) } catch (e) { return null } }
+const b64ToHex = b => { try { const bin = atob(String(b)); let x = ''; for (let i = 0; i < bin.length; i++) x += bin.charCodeAt(i).toString(16).padStart(2, '0'); return x.length === 64 ? x : null } catch (e) { return null } }
 
-/** The app a vault declares, or its index.html; null when it has neither. */
-export async function appEntry(v) {
-    const meta = (await readJson(v, '.vault/app.json')) || (await readJson(v, 'app.json')) || {}
-    const entry = String(meta.entry || '').replace(/^\//, '') || ((await readBytes(v, 'index.html').catch(() => null)) ? 'index.html' : '')
+/**
+ * The vault as its app sees it: its own files, and its linked vaults. A `<name>.link.json` (a pointer: ref_id, vault_id,
+ * no secret) makes the folder `<name>/` another vault; its read key is in the parent's owner record,
+ * .vault/owner/ro-links.json, as vault.sgraph.ai keeps it. A linked vault opens read-only, the first time a path under it
+ * is read, and its own links are not followed (one level, as the SG/App host does).
+ *   vfsOf(v, sg) -> { read(path) -> bytes | null, files() -> [path], mounts }
+ */
+export async function vfsOf(v, sg) {
+    const own = (await A.tree(v)).filter(f => !f.folder).map(f => f.path.replace(/^\//, ''))
+    const ro = parseJson(await readBytes(v, '.vault/owner/ro-links.json').catch(() => null)) || {}
+    const mounts = []
+    for (const f of own) {
+        if (!/\.link\.json$/i.test(f) || PROTECTED(f)) continue
+        const l = parseJson(await readBytes(v, f).catch(() => null))
+        if (!l || !l.ref_id || (l.type && l.type !== 'vault')) continue
+        const rec = ro[l.ref_id] || {}
+        mounts.push({ prefix: f.replace(/\.link\.json$/i, ''), label: l.label || rec.label || '', vid: l.vault_id || rec.vault_id || '', hex: rec.read_key ? b64ToHex(rec.read_key) : null, child: null, files: [] })
+    }
+    const open = async m => {
+        if (!m.child) { m.child = await NV().openReadOnly(sg, m.vid, m.hex); m.files = (await A.tree(m.child)).filter(f => !f.folder).map(f => f.path.replace(/^\//, '')).filter(f => !PROTECTED(f)) }
+        return m
+    }
+    const at = p => mounts.find(m => p === m.prefix || p.startsWith(m.prefix + '/'))
+    return {
+        mounts,
+        async read(p) {
+            p = String(p).replace(/^\//, '')
+            const m = at(p)
+            if (!m) return readBytes(v, p)
+            if (!m.hex || !m.vid) return null                         // a link with no read key here: nothing to read
+            const rest = p.slice(m.prefix.length + 1)
+            if (!rest || PROTECTED(rest)) return null
+            return readBytes((await open(m)).child, rest)
+        },
+        async files() {
+            const out = [...own]
+            for (const m of mounts) if (m.hex && m.vid) { try { await open(m); out.push(...m.files.map(f => `${m.prefix}/${f}`)) } catch (e) { /* unreachable: its paths stay absent */ } }
+            return out
+        },
+    }
+}
+
+/** The app a vault declares, or its index.html; null when it has neither. fs: a vfsOf(). */
+export async function appEntry(fs) {
+    const readJson = async p => parseJson(await fs.read(p).catch(() => null))
+    const meta = (await readJson('.vault/app.json')) || (await readJson('app.json')) || {}
+    const entry = String(meta.entry || '').replace(/^\//, '') || ((await fs.read('index.html').catch(() => null)) ? 'index.html' : '')
     if (!entry || PROTECTED(entry) || !/\.html?$/i.test(entry)) return null
     const res = meta.resources || {}
     let title = meta.title || meta.name || ''
-    if (!title) { const b = await readBytes(v, entry).catch(() => null); const m = b && /<title[^>]*>([^<]{1,120})<\/title>/i.exec(new TextDecoder().decode(b.subarray(0, 8192))); title = m ? m[1].trim() : '' }
+    if (!title) { const b = await fs.read(entry).catch(() => null); const m = b && /<title[^>]*>([^<]{1,120})<\/title>/i.exec(new TextDecoder().decode(b.subarray(0, 8192))); title = m ? m[1].trim() : '' }
     return { entry, title, css: [].concat(res.css || []), js: [].concat(res.js || []) }
 }
 
@@ -93,24 +137,24 @@ function bridge(path, info) {
 }
 
 /** The app, in a frame filling host. Returns { frame, stop }: stop() removes the page's listener. */
-export async function mountApp(v, host, app, { onError = () => {}, onNav = () => {}, info = {} } = {}) {
+export async function mountApp(fs, host, app, { onError = () => {}, onNav = () => {}, info = {}, vaultId = '' } = {}) {
     const frame = document.createElement('iframe')
     frame.setAttribute('sandbox', 'allow-scripts allow-forms')
     frame.setAttribute('referrerpolicy', 'no-referrer')
     frame.className = 'vault-app-frame'
     frame.title = app.title || 'the vault’s app'
     let current = app.entry
-    const files = (await A.tree(v)).filter(f => !f.folder).map(f => f.path.replace(/^\//, ''))
-    const fullInfo = { vaultId: v.vaultId || '', fileCount: files.length, ...info }
+    const files = await fs.files()
+    const fullInfo = { vaultId, fileCount: files.length, ...info }
 
     async function load(path, hash = '') {
-        const bytes = await readBytes(v, path)
+        const bytes = await fs.read(path)
         if (!bytes) { frame.srcdoc = `<!doctype html><meta charset="utf-8"><body style="font:15px system-ui;padding:2rem;color:#444">Not in this vault: <code>${path.replace(/[<&]/g, '')}</code></body>`; return }
         let html = new TextDecoder().decode(bytes), pre = ''
         if (/\.(md|markdown)$/i.test(path)) html = `<!doctype html><html><head><meta charset="utf-8"><style>body{font:16px/1.6 system-ui,sans-serif;max-width:860px;margin:2rem auto;padding:0 1.2rem;color:#1c1d21}pre{white-space:pre-wrap}</style></head><body>${markdown(html)}</body></html>`
         if (path === app.entry) {                        // app.json's resources, inlined first, as the host does
-            for (const c of app.css) { const b = await readBytes(v, join('', c)).catch(() => null); if (b) pre += `<style data-sg-preload="${c.replace(/"/g, '')}">${new TextDecoder().decode(b).replace(/<\/style/gi, '<\\/style')}</style>` }
-            for (const j of app.js) { const b = await readBytes(v, join('', j)).catch(() => null); if (b) pre += `<script data-sg-preload="${j.replace(/"/g, '')}">${new TextDecoder().decode(b).replace(/<\/script/gi, '<\\/script')}<\/script>` }
+            for (const c of app.css) { const b = await fs.read(join('', c)).catch(() => null); if (b) pre += `<style data-sg-preload="${c.replace(/"/g, '')}">${new TextDecoder().decode(b).replace(/<\/style/gi, '<\\/style')}</style>` }
+            for (const j of app.js) { const b = await fs.read(join('', j)).catch(() => null); if (b) pre += `<script data-sg-preload="${j.replace(/"/g, '')}">${new TextDecoder().decode(b).replace(/<\/script/gi, '<\\/script')}<\/script>` }
         }
         const inject = bridge(path, fullInfo) + pre
         const out = html.replace(/(<head[^>]*>)/i, '$1' + inject)
@@ -127,7 +171,7 @@ export async function mountApp(v, host, app, { onError = () => {}, onNav = () =>
         if (d.__sgVfsReadReq) {
             const p = String(d.path || '').startsWith('/') ? String(d.path).slice(1) : join(dirOf(current), String(d.path || ''))
             if (PROTECTED(p)) return reply(e, { __sgVfsReadReply: d.__sgVfsReadReq, ok: false, err: 'Protected path', code: 'EPROTECTED' })
-            const b = await readBytes(v, p).catch(() => null)
+            const b = await fs.read(p).catch(() => null)
             if (!b) return reply(e, { __sgVfsReadReply: d.__sgVfsReadReq, ok: false, err: 'ENOENT', code: 'ENOENT', path: p })
             const buf = b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength)
             return reply(e, { __sgVfsReadReply: d.__sgVfsReadReq, ok: true, buf, path: p })

@@ -161,6 +161,8 @@ export const vault = {
      * unreachable and a local account here: that opens, and says so. Returns { mode, fresh, offline, prf }.
      */
     async signIn() { return this._signInWith(await prfBytes(PRF_INPUT_TEXT)) },
+    /** After EHYBRID: the person chose a new account on this device, with the passkey answer already in hand. */
+    async startHere(door, prf) { await this.createLocal(door, prf); return { mode: 'local', fresh: true, prf } },
     /**
      * The sign-up: a new passkey, then the same as signIn. When the authenticator returns the PRF bytes at creation (the
      * spec says they are the bytes an assertion would give), there is one gesture; when not, a second one, the login.
@@ -169,15 +171,18 @@ export const vault = {
         const cred = await this.makePasskey(name)
         const ext = (cred && cred.getClientExtensionResults && cred.getClientExtensionResults()) || {}
         if (ext.prf && ext.prf.enabled === false) { const e = new Error('The passkey was made, but its provider does not do PRF, so it cannot open a vault here.'); e.code = 'ENOPRF'; throw e }
-        if (ext.prf && ext.prf.results && ext.prf.results.first) return this._signInWith({ bytes: new Uint8Array(ext.prf.results.first), path: cred.authenticatorAttachment || 'not reported', credId: cred.id })
-        return this.signIn()
+        if (ext.prf && ext.prf.results && ext.prf.results.first) return this._signInWith({ bytes: new Uint8Array(ext.prf.results.first), path: cred.authenticatorAttachment || 'not reported', credId: cred.id }, { made: true })
+        return this._signInWith(await prfBytes(PRF_INPUT_TEXT), { made: true })
     },
-    async _signInWith(prf) {
+    async _signInWith(prf, { made = false } = {}) {          // made: a passkey made just now, so a new account is meant
         const door = await doorFrom(prf.bytes)
         try { await this.openDoor(door, prf.path, prf); return { mode: 'vault', prf } }
         catch (e) {
             if (e.code === 'ENOVAULT') {
                 if (L.exists(door)) { await this.openLocal(door, prf); return { mode: 'local', prf } }
+                // a passkey from another device (a phone, by QR code) that finds nothing: on some computers it gives
+                // other PRF bytes than on the device that made the account, so ask before starting a second account
+                if (prf.path === 'cross-platform' && !made) { const h = new Error('a passkey from another device, and no account answers to it here'); h.code = 'EHYBRID'; h.door = door; h.prf = prf; throw h }
                 await this.createLocal(door, prf); return { mode: 'local', fresh: true, prf }
             }
             if (L.exists(door)) { await this.openLocal(door, prf); return { mode: 'local', prf, offline: err(e) } }

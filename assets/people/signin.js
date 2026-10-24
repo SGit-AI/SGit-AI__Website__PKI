@@ -30,8 +30,24 @@ export function signInCard({ onDone } = {}) {
     go.addEventListener('click', () => busy(go, async () => {
         out.replaceChildren(h('p', { class: 'dim small' }, 'Waiting for your passkey…'))
         try { const r = await vault.signIn(); out.replaceChildren(r.offline ? msg('warn', `The vault server did not answer (${r.offline}); the copy this browser keeps is open.`) : msg('ok', 'Signed in.')); done(r) }
-        catch (e) { out.replaceChildren(why(e)); if (e && e.name === 'NotAllowedError') signup.open = true }
+        catch (e) { if (e && e.code === 'EHYBRID') return out.replaceChildren(hybrid(e)); out.replaceChildren(why(e)); if (e && e.name === 'NotAllowedError') signup.open = true }
     }))
+    /** A passkey from another device found no account: the known issue, and two ways on (articles/a-login-made-of-a-passkey). */
+    const hybrid = e => {
+        const code = h('input', { class: 't', id: 'hybrid-code', autocomplete: 'off', placeholder: 'XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XX' })
+        const join = h('button', { type: 'button', class: 'btn primary', id: 'hybrid-join' }, 'Open my account and add this device')
+        join.addEventListener('click', () => busy(join, async () => {
+            try { await vault.recover(code.value, e.door, e.prf); done({ mode: 'vault' }) }
+            catch (x) { box.append(msg('bad', x.code === 'ENOVAULT' ? 'No vault answers to that code.' : err(x))) }
+        }))
+        const fresh = h('button', { type: 'button', class: 'btn', id: 'hybrid-new' }, 'Start a new account on this device')
+        fresh.addEventListener('click', () => busy(fresh, async () => done(await vault.startHere(e.door, e.prf))))
+        const box = h('div', { class: 'vpanel', id: 'hybrid-box' },
+            msg('warn', h('b', {}, 'Your passkey came from another device (the QR code), and no account answers to it here.')),
+            h('p', { class: 'small' }, 'On some computers (older macOS, Intel Macs among them), a passkey used through your phone gives this site a different answer than it does on the device that made your account, so it cannot find your vault. If you already have an account, open it with your recovery code: this device’s passkey is then added to it, and opens it next time. Your code is in Your account → Storage & devices, on a device where you are signed in. ', h('a', { href: pageUrl('articles/a-login-made-of-a-passkey.html') + '#known-issues' }, 'Why')),
+            h('label', { class: 'f', for: 'hybrid-code' }, 'Recovery code'), code, h('div', { class: 'acts' }, join, fresh))
+        return box
+    }
     const name = h('input', { class: 't', id: 'signup-name', maxlength: 32, autocomplete: 'username', placeholder: 'a username, e.g. dinis' })
     const make = h('button', { type: 'button', class: 'btn', id: 'signup-go' }, 'Create a passkey and my account')
     make.addEventListener('click', () => busy(make, async () => {

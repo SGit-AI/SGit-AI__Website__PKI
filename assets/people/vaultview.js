@@ -15,7 +15,7 @@ import { frameFor } from './preview.js'
 import * as M from './message.js'
 import { readImage } from './qrimage.js'
 import { keyExchange } from './exchange.js'
-import { appEntry, mountApp } from './vaultapp.js'
+import { appEntry, mountApp, vfsOf } from './vaultapp.js'
 
 const KEY_RE = /(?:sgit_private_vault_)?([a-z0-9]{16,64}):([a-z0-9]{6,32})\b/
 export function vaultKeyIn(bytes) {
@@ -59,7 +59,7 @@ const SECRET = /(^|\/)(private_key\.pem|signing_private\.pem|[^/]*private[^/]*\.
 const size = n => n < 1024 ? `${n} bytes` : n < 1048576 ? `${(n / 1024).toFixed(1)} KB` : `${(n / 1048576).toFixed(1)} MB`
 
 const FULL = 'pki.vv.full'
-const fullPref = () => { try { return localStorage.getItem(FULL) !== '0' } catch (e) { return true } }
+const fullPref = () => { try { return localStorage.getItem(FULL) === '1' } catch (e) { return false } }      // off unless chosen: the page stays a pki.sgit.ai page
 /** The page's full width: the site's nav, footer and the page's own top give way to the vault, as on vault.sgraph.ai. */
 export function setFull(on) { document.body.classList.toggle('vv-full', !!on); try { localStorage.setItem(FULL, on ? '1' : '0') } catch (e) { /* fine */ } }
 
@@ -96,7 +96,8 @@ export function vaultViewer(key, { from = '', popout = false, onClose = null } =
         try {
             await A.loadLibrary(ROOT)
             loading.querySelector('span').textContent = 'Decrypting its tree…'
-            const v = await A.NV.openVault(vault.sg || A.client(''), key)
+            const sg = vault.sg || A.client('')
+            const v = await A.NV.openVault(sg, key)
             const files = await A.tree(v)
             let first = null
             for (const f of files) {
@@ -111,7 +112,9 @@ export function vaultViewer(key, { from = '', popout = false, onClose = null } =
             if (!files.length) list.append(h('li', { class: 'dim' }, '(empty)'))
             status.append(h('span', { class: 'vv-chip' }, `${files.filter(f => !f.folder).length} files`), from ? h('span', { class: 'vv-chip', title: 'who sealed its key to you' }, `from ${from}`) : null)
             if (first) show(v, first.f.path, view, list, first.b)
-            const app = await appEntry(v)
+            const fs = await vfsOf(v, sg)                        // with its linked vaults, read-only
+            if (fs.mounts.length) status.append(h('span', { class: 'vv-chip', title: fs.mounts.map(m => `${m.prefix}/ → vault ${m.vid}${m.hex ? '' : ' (no read key here)'}`).join('\n') }, `${fs.mounts.length} linked vault${fs.mounts.length === 1 ? '' : 's'}`))
+            const app = await appEntry(fs)
             loading.remove()
             if (!app) { title.textContent = 'Files'; mode('files'); return }
             title.textContent = app.title || app.entry
@@ -119,7 +122,7 @@ export function vaultViewer(key, { from = '', popout = false, onClose = null } =
             mode('app')
             const errs = h('span', { class: 'vv-chip bad', hidden: true })
             status.append(errs)
-            await mountApp(v, appHost, app, { info: { vaultName: app.title || '' }, onError: m => { errs.hidden = false; errs.textContent = '⚠ the app reported an error'; errs.title = m } })
+            await mountApp(fs, appHost, app, { vaultId: id, info: { vaultName: app.title || '' }, onError: m => { errs.hidden = false; errs.textContent = '⚠ the app reported an error'; errs.title = m } })
         } catch (e) { loading.replaceWith(msg('bad', e.code === 'ENOVAULT' ? `No vault answers to that key (${id}).` : 'The vault did not open: ' + err(e))); title.textContent = 'Not opened' }
     })()
     return box

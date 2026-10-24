@@ -263,9 +263,9 @@ body:has(main.tool) footer.site .partnote,body:has(main.tool) footer.site .verli
 .vv-bar i{display:block;height:100%;width:35%;background:#5ed1c4;border-radius:4px;animation:vvbar 1.4s ease-in-out infinite}
 @keyframes vvbar{0%{margin-left:-35%}100%{margin-left:100%}}
 /* full width: the vault takes the window, as on vault.sgraph.ai */
-body.vv-full nav.site,body.vv-full footer.site,body.vv-full main.tool>.crumb,body.vv-full main.tool>h1,body.vv-full #vault-bar-mount,body.vv-full #app>.lead,body.vv-full #app>.qrdesk{display:none!important}
+body.vv-full footer.site,body.vv-full main.tool>.crumb,body.vv-full main.tool>h1,body.vv-full #vault-bar-mount,body.vv-full #app>.lead,body.vv-full #app>.qrdesk{display:none!important}
 body.vv-full main.tool{max-width:none!important;margin:0!important;padding:0!important}
-body.vv-full .vaultview{margin:0;border:0;border-radius:0;height:100vh;display:flex;flex-direction:column}
+body.vv-full .vaultview{margin:0;border:0;border-radius:0;height:calc(100dvh - var(--vv-nav, 60px));display:flex;flex-direction:column}
 body.vv-full .vv-app{flex:1;height:auto}
 body.vv-full .vv-files{flex:1;overflow:auto}
 #app.vv-open>.lead{display:none}

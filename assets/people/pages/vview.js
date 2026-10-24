@@ -14,6 +14,8 @@ const nameOf = f => (dir && dir.byFp.get(f) && dir.byFp.get(f).name) || f
 const mount = h('div', { id: 'vv-mount' })
 let shown = null                                      // { key, from }: kept across a redraw (the vault reopening)
 
+/** A vault under the message that carried it (the message stays). */
+const showVaultIn = (box, key, from = '') => { shown = { key, from }; app.classList.add('vv-open'); box.replaceChildren(vaultViewer(key, { from, onClose: () => { shown = null; app.classList.remove('vv-open'); box.remove() } })) }
 const showVault = (key, from = '') => { shown = { key, from }; app.classList.add('vv-open'); mount.replaceChildren(vaultViewer(key, { from, onClose: () => { shown = null; app.classList.remove('vv-open'); mount.replaceChildren() } })); mount.scrollIntoView({ block: 'start' }) }
 setVaultOpener(showVault)                              // "Open the vault" on a message here opens it here
 receiveVaultKey(showVault)
@@ -28,8 +30,10 @@ async function openSealed(code) {
         const o = await M.openMessage(M.parseCode(code).enc, vault.ids, known)
         const keys = (o.msg.files || []).map(f => vaultKeyIn(f.data)).filter(Boolean)
         const from = o.msg.from ? nameOf(o.msg.from) : ''
-        if (keys.length === 1 && !o.problems.length) return showVault(keys[0], from + (o.verified === true ? '' : ' (signature not checked)'))
-        mount.replaceChildren(o.problems.length ? msg('warn', o.problems.join('; ')) : null, messageCard(o.msg, o.verified, nameOf))
+        // the message as it is, as anywhere else on the site; the vault it carries opens under it
+        const card = h('div', { id: 'vv-message' }, o.problems.length ? msg('warn', o.problems.join('; ')) : null, messageCard(o.msg, o.verified, nameOf))
+        mount.replaceChildren(card)
+        if (keys.length === 1 && !o.problems.length) { const vbox = h('div'); card.after(vbox); showVaultIn(vbox, keys[0], from + (o.verified === true ? '' : ' (signature not checked)')) }
     } catch (e) { mount.replaceChildren(msg('bad', /not sealed|no key/.test(err(e)) ? 'None of your keys opens it.' : err(e))) }
 }
 

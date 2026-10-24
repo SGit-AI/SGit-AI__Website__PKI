@@ -251,13 +251,20 @@ try {
             await NV.writeFile(x, '/', 'README.md', '# The agent’s vault\n\nMade for the test. <script>parent.document.title="pwned"</script>\n')
             await NV.writeFile(x, '/notes', 'plan.txt', 'step one')
             // a small vault app, written to the SG/App contract: window.sg for its files, links routed by the host
-            await NV.writeFile(x, '/', 'index.html', '<!doctype html><html><head><meta charset="utf-8"><title>Test app</title></head><body><h1 id="t">The agent’s app</h1><p id="plan">…</p><p id="prot">…</p><p id="net">…</p><a id="go" href="notes/two.html">next</a>'
+            await NV.writeFile(x, '/', 'index.html', '<!doctype html><html><head><meta charset="utf-8"><title>Test app</title></head><body><h1 id="t">The agent’s app</h1><p id="plan">…</p><p id="prot">…</p><p id="net">…</p><p id="linked">…</p><a id="go" href="notes/two.html">next</a>'
                 + '<script>sg.loadCss("app.css");sg.vfs.readText("notes/plan.txt").then(function(t){document.getElementById("plan").textContent="plan: "+t});'
                 + 'sg.vfs.read(".vault/settings").then(function(){document.getElementById("prot").textContent="read"},function(e){document.getElementById("prot").textContent="refused "+e.code});'
+                + 'sg.vfs.readText("data/info.txt").then(function(t){document.getElementById("linked").textContent=t},function(e){document.getElementById("linked").textContent="failed "+e.code});'
                 + 'fetch("https://evil.example/x").then(function(){document.getElementById("net").textContent="sent"},function(){document.getElementById("net").textContent="blocked"});'
                 + 'document.getElementById("t").dataset.app=sg.app.context+"|"+sg.app.writable<\/script></body></html>')
             await NV.writeFile(x, '/', 'app.css', 'h1{color:rgb(1, 2, 3)}')
             await NV.writeFile(x, '/notes', 'two.html', '<!doctype html><html><head></head><body><h1 id="two">Page two</h1></body></html>')
+            // a linked vault, as vault.sgraph.ai links them: data.link.json in the parent, the child's read key in the owner record
+            const child = await NV.createVault(v.sg, { name: 'the app’s data' })
+            await NV.writeFile(child, '/', 'info.txt', 'from the linked vault'); await NV.publish(child)
+            const rk = await NV.readKeyHex(child), rkB64 = btoa(String.fromCharCode(...rk.match(/../g).map(x => parseInt(x, 16))))
+            await NV.writeFile(x, '/', 'data.link.json', JSON.stringify({ ref_id: 'lk-data', vault_id: child.vaultId, type: 'vault', label: 'data' }))
+            await NV.writeFile(x, '/.vault/owner', 'ro-links.json', JSON.stringify({ 'lk-data': { type: 'vault', vault_id: child.vaultId, read_key: rkB64 } }))
             await NV.publish(x)
             return NV.prefixedKey(x)
         })
@@ -271,9 +278,16 @@ try {
         await af.locator('#plan', { hasText: 'plan: step one' }).waitFor({ timeout: 60000 })
         await af.locator('#net', { hasText: /blocked|sent/ }).waitFor({ timeout: 30000 })
         const appState = { color: await af.locator('#t').evaluate(e => getComputedStyle(e).color), ctx: await af.locator('#t').getAttribute('data-app'), prot: await af.locator('#prot').innerText(), net: await af.locator('#net').innerText(),
-            sandbox: await p.locator('#vv-app iframe').getAttribute('sandbox'), full: await p.evaluate(() => document.body.classList.contains('vv-full') && getComputedStyle(document.querySelector('nav.site')).display === 'none') }
-        check(appState.color === 'rgb(1, 2, 3)' && appState.ctx === 'app|false' && appState.prot === 'refused EPROTECTED' && appState.net === 'blocked' && appState.sandbox === 'allow-scripts allow-forms' && appState.full,
-            `the vault’s own app runs, full width, as the SG/App host runs it: its CSS and files through window.sg, read-only, .vault/ refused, no network (${JSON.stringify(appState)})`)
+            sandbox: await p.locator('#vv-app iframe').getAttribute('sandbox'), message: (await p.locator('#vv-message .msgcard').count()) === 1 }
+        await af.locator('#linked', { hasText: /linked vault|failed/ }).waitFor({ timeout: 60000 })
+        appState.linked = await af.locator('#linked').innerText()
+        await p.click('#vv-full-btn')
+        appState.full = await p.evaluate(() => document.body.classList.contains('vv-full') && getComputedStyle(document.querySelector('nav.site')).display !== 'none' && getComputedStyle(document.querySelector('footer.site')).display === 'none')
+        await p.click('#vv-full-btn')
+        check(appState.color === 'rgb(1, 2, 3)' && appState.ctx === 'app|false' && appState.prot === 'refused EPROTECTED' && appState.net === 'blocked' && appState.sandbox === 'allow-scripts allow-forms' && appState.message,
+            `the message as anywhere else, and under it the vault’s own app, as the SG/App host runs it: its CSS and files through window.sg, read-only, .vault/ refused, no network (${JSON.stringify(appState)})`)
+        check(appState.linked === 'from the linked vault', 'a linked vault (data.link.json, its read key in the owner record) is read through, read-only, as vault.sgraph.ai does')
+        check(appState.full, 'full width on demand: the site’s own bar stays, so the page never strands you')
         await af.locator('#go').click()
         await p.frameLocator('#vv-app iframe.vault-app-frame').locator('#two').waitFor({ timeout: 30000 })
         check(true, 'a link to another page of the vault opens it in place')

@@ -45,7 +45,7 @@ const mock = await startMock()
 const browser = await chromium.launch({ executablePath: fs.existsSync('/opt/pw-browsers/chromium') ? undefined : undefined })
 const errors = []
 
-async function person(name) {
+async function person(name, transport = 'internal') {
     const ctx = await browser.newContext({ acceptDownloads: true })
     await ctx.route('https://dev.send.sgraph.ai/**', async route => {
         const req = route.request(), u = new URL(req.url())
@@ -57,7 +57,7 @@ async function person(name) {
     page.on('console', m => { if (m.type() === 'error' && !/favicon|404/.test(m.text())) errors.push(`${name} console: ${m.text()}`) })
     const cdp = await ctx.newCDPSession(page)
     await cdp.send('WebAuthn.enable')
-    const { authenticatorId } = await cdp.send('WebAuthn.addVirtualAuthenticator', { options: { protocol: 'ctap2', transport: 'internal', hasResidentKey: true, hasUserVerification: true, isUserVerified: true, hasPrf: true, automaticPresenceSimulation: true } })
+    const { authenticatorId } = await cdp.send('WebAuthn.addVirtualAuthenticator', { options: { protocol: 'ctap2', transport, hasResidentKey: true, hasUserVerification: true, isUserVerified: true, hasPrf: true, automaticPresenceSimulation: true } })
     return { ctx, page, cdp, authenticatorId }
 }
 const text = async (page, sel) => (await page.locator(sel).first().textContent()) || ''
@@ -200,6 +200,24 @@ try {
     await f.goto(SITE + 'account/index.html#keys')
     await f.locator('.keycard.master').waitFor({ timeout: 60000 })
     check((await text(f, '.keycard.master')).includes(fayFp) && (await text(f, '.keycard.master')).includes('in your master vault'), 'and her key is in it')
+    // a passkey from another device (reported as cross-platform: a phone by QR code, or a security key) that finds no account
+    {
+        const g = await person('Gil', 'usb'), q = g.page
+        await q.goto(SITE + 'login/index.html')
+        await q.locator('summary', { hasText: 'Create an account' }).click()
+        await q.fill('#signup-name', 'gil')
+        await q.click('#signup-go')
+        await q.waitForURL(/account\/index\.html/, { timeout: 60000 })
+        check(true, 'a security key (cross-platform) makes an account at sign-up: the guard is only for a passkey that finds nothing')
+        await q.evaluate(() => { for (const k of Object.keys(localStorage)) if (k.startsWith('pki.local.v1.')) localStorage.removeItem(k); sessionStorage.clear() })   // as on another computer
+        await q.goto(SITE + 'login/index.html')
+        await q.click('#login-go')
+        await q.locator('#hybrid-box').waitFor({ timeout: 60000 })
+        check((await localKeys(q)).length === 0 && (await text(q, '#hybrid-box')).includes('recovery code'), 'the same passkey, on a computer with no account for it: the page stops and explains, instead of quietly starting a second account')
+        await q.click('#hybrid-new')
+        await q.waitForURL(/account\/index\.html/, { timeout: 60000 })
+        check((await localKeys(q)).length === 1, 'and “Start a new account on this device” still starts one, when that is what is meant')
+    }
 } catch (e) { failed++; console.log('FAIL', e.message.split('\n')[0]); if (process.env.SHOT) for (const c of browser.contexts()) for (const pg of c.pages()) { await pg.screenshot({ path: process.env.SHOT, fullPage: true }).catch(() => {}); console.log('  at', pg.url()) } }
 finally {
     check(errors.length === 0, errors.length ? `no page errors (${errors.length}: ${errors.slice(0, 3).join(' | ')})` : 'no page errors')

@@ -97,6 +97,11 @@
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
     <tr>
+<td class="vnum">v0.2.30</td>
+<td class="vdate">24 Oct 2026</td>
+<td><b>Linked vaults, the message kept, and a known passkey issue.</b> A vault's app that lives in, or reads from, a <b>linked vault</b> now works on Open a vault: a <code>&lt;name&gt;.link.json</code> makes <code>&lt;name&gt;/</code> another vault, opened read-only through the read key in the parent's <code>.vault/owner/ro-links.json</code>, as vault.sgraph.ai does (one level). The message that carried a vault key shows as it does everywhere, with the vault under it; full width is off until chosen, and keeps the site's own bar. <b>Known issue:</b> on some computers (a 2018 Intel iMac, for one) a passkey used through the phone's QR code reaches the page with other PRF bytes, so it finds no account; the page used to start a second, empty one quietly. It now stops, explains, and offers to open your account with your recovery code, which adds this device as a door, or to start a new one. Written up in <a href="../articles/a-login-made-of-a-passkey.html#known-issues">a login made of a passkey</a>.</td>
+    </tr>
+    <tr>
 <td class="vnum">v0.2.29</td>
 <td class="vdate">24 Oct 2026</td>
 <td><b>Sign-in survives a site update.</b> A vault library script that failed to load once (the site mid-deploy, a dropped connection) used to fail every press until the page was reloaded, with "could not load assets/vendor/sg-vault/…". Each script is now tried three times, the last two past any cached failure; a script that loaded is not loaded again; and a failure is not remembered, so pressing again works.</td>
