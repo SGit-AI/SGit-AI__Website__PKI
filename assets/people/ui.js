@@ -22,7 +22,7 @@ import * as K from './keys.js'
 import * as D from './directory.js'
 import * as A from './account.js'
 import * as L from './local.js'
-import { doorFrom, prfBytes, recoveryBytes, PRF_INPUT_TEXT, sha256 } from './door.js'
+import { doorFrom, prfBytes, recoveryBytes, recoveryCode, PRF_INPUT_TEXT, sha256 } from './door.js'
 
 export const ROOT = new URL('../../', import.meta.url)
 export { K, D, A, L }
@@ -161,6 +161,29 @@ export const vault = {
      * unreachable and a local account here: that opens, and says so. Returns { mode, fresh, offline, prf }.
      */
     async signIn() { return this._signInWith(await prfBytes(PRF_INPUT_TEXT)) },
+    /**
+     * An account opened by a sign-in code instead of a passkey: for a computer whose passkeys give no PRF answer
+     * (NordPass's, most password managers', Windows without Windows Hello). The code is 128 random bits, the door is
+     * derived from it exactly as from a passkey's PRF bytes (and as a recovery code's door is), and it is kept nowhere
+     * here: it is shown once, in a form a password manager saves as the login for this site. Returns { code (shown form) }.
+     */
+    async createWithCode() {
+        const rc = recoveryCode(), door = await doorFrom(rc.bytes)
+        await this.createLocal(door, { path: 'code' })
+        return { mode: 'local', fresh: true, code: rc.shown }
+    },
+    /** Sign in with a sign-in code (or a recovery code: the same construction): a vault at its door, else this browser's account for it. */
+    async signInWithCode(code) {
+        const bytes = recoveryBytes(code)
+        if (!bytes) { const e = new Error('A code is 26 letters and digits (A–Z, 2–7), with or without the dashes.'); e.code = 'EBADCODE'; throw e }
+        const door = await doorFrom(bytes)
+        try { await this.openDoor(door, 'code'); return { mode: 'vault' } }
+        catch (e) {
+            if (e.code !== 'ENOVAULT') { if (L.exists(door)) { await this.openLocal(door, { path: 'code' }); return { mode: 'local', offline: err(e) } } throw e }
+            if (L.exists(door)) { await this.openLocal(door, { path: 'code' }); return { mode: 'local' } }
+            const x = new Error('No account answers to that code, here or in a vault. An account kept in one browser opens only in that browser, until it is moved into a vault.'); x.code = 'ENOCODE'; throw x
+        }
+    },
     /** After EHYBRID: the person chose a new account on this device, with the passkey answer already in hand. */
     async startHere(door, prf) { await this.createLocal(door, prf); return { mode: 'local', fresh: true, prf } },
     /**

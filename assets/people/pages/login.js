@@ -1,9 +1,10 @@
 /* login/index.html: sign in (or sign up) with a passkey. One button; what is behind the passkey decides the rest. */
 import { h, msg, vault, avatarFor } from '../ui.js'
-import { signInCard, nextUrl } from '../signin.js'
+import { signInCard, nextUrl, holdingCode } from '../signin.js'
 
 const app = document.getElementById('app')
 function draw() {
+    if (holdingCode()) return                         // a sign-in code on screen, not yet saved: leave it
     if (!vault.open) return app.replaceChildren(signInCard())
     const p = vault.profile || {}, me = vault.me
     app.replaceChildren(h('div', { class: 'signin-card' },

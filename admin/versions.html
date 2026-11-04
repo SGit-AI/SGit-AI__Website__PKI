@@ -98,6 +98,11 @@
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
     <tr>
+<td class="vnum">v0.2.33</td>
+<td class="vdate">4 Nov 2026</td>
+<td><b>Sign in with a code, where passkeys cannot.</b> A passkey that gives no PRF answer (NordPass's, several password managers', and what Windows without Windows Hello falls back to) is now caught at sign-up, before any account exists, and the sign-in card offers <b>No passkey on this computer? Use a sign-in code</b>. A sign-in code is 26 letters and digits, 128 random bits, from which the account's door is derived exactly as from a passkey's answer. It is shown once, in a username and password form so the password manager saves it as the login for pki.sgit.ai and fills it in next time, and it is kept nowhere else. Once the account is in a vault, the same code opens it from any browser. The page does not redraw over a code that is not yet saved. Check this computer now points to it. Written up in the login article's known issues.</td>
+    </tr>
+    <tr>
 <td class="vnum">v0.2.32</td>
 <td class="vdate">4 Nov 2026</td>
 <td><b>Check this computer.</b> A new page, <a href="../check/index.html">check/</a>, for anyone whose passkey does not open an account here (Windows without Windows Hello, a password manager in front of passkeys such as NordPass, older Macs): it reads what the browser says it can do (WebAuthn, a platform passkey store, client capabilities, Bluetooth, an extension replacing the passkey calls), makes one throwaway test passkey and uses it twice with PRF, and says what works and what to change, with a report to copy. Nothing is sent anywhere. Linked from the sign-in card and the People menu.</td>

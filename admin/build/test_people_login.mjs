@@ -216,6 +216,53 @@ try {
         await r.locator('#check-out p.msg.bad').waitFor({ timeout: 60000 })
         check((await text(r, '#check-out')).includes('no PRF answer'), 'and on a computer whose passkeys give no PRF (as NordPass’s do), it says so, and why an account cannot open here')
     }
+    // no PRF (NordPass's passkeys, and others): sign-up is caught, and a sign-in code opens the account instead
+    {
+        const k = await person('Kai'), q = k.page
+        await k.cdp.send('WebAuthn.removeVirtualAuthenticator', { authenticatorId: k.authenticatorId })
+        await k.cdp.send('WebAuthn.addVirtualAuthenticator', { options: { protocol: 'ctap2', transport: 'internal', hasResidentKey: true, hasUserVerification: true, isUserVerified: true, hasPrf: false, automaticPresenceSimulation: true } })
+        await q.goto(SITE + 'login/index.html')
+        await q.locator('summary', { hasText: 'Create an account' }).click()
+        await q.fill('#signup-name', 'kai')
+        await q.click('#signup-go')
+        await q.locator('#codes[open]').waitFor({ timeout: 60000 })
+        check((await text(q, '.signin-out')).includes('no PRF answer') && (await localKeys(q)).length === 0, 'a passkey with no PRF (as NordPass’s) is caught at sign-up, before any account: the page offers a sign-in code instead')
+        await q.fill('#code-user', 'kai')
+        await q.click('#code-new')
+        await q.locator('#code-save').waitFor({ timeout: 60000 })
+        const code = await q.inputValue('#save-code')
+        check(/^[A-Z2-7]{4}(-[A-Z2-7]{1,4}){6}$/.test(code) && (await q.getAttribute('#save-code', 'autocomplete')) === 'new-password' && (await q.inputValue('#save-user')) === 'kai' && (await localKeys(q)).length === 1, 'an account made with a sign-in code: the code shown once, in a username and password form a password manager saves')
+        await q.click('#save-go')
+        await q.waitForURL(/account\/index\.html/, { timeout: 60000 })
+        await q.click('#signout')
+        await q.waitForURL(/login\/index\.html/)
+        await q.evaluate(() => sessionStorage.clear())
+        await q.reload()
+        await q.locator('#codes summary').click()
+        await q.fill('#code-in', 'AAAA-BBBB-CCCC-DDDD-EEEE-FFFF-GG')
+        await q.click('#code-go')
+        await q.locator('.signin-out p.msg.warn').waitFor({ timeout: 60000 })
+        check((await text(q, '.signin-out')).includes('No account answers to that code'), 'a wrong code opens nothing, and says so')
+        await q.fill('#code-in', code.toLowerCase().replace(/-/g, ' '))
+        await q.click('#code-go')
+        await q.waitForURL(/account\/index\.html/, { timeout: 60000 })
+        await q.locator('#side-name').waitFor({ timeout: 60000 })
+        check((await text(q, '#side-name')).includes('kai'), 'signed out and back in with the code alone (typed any way: case and dashes do not matter): the same account')
+        // moved into a vault, the same code opens it from another browser
+        await q.goto(SITE + 'account/index.html#storage')
+        await q.locator('#upgrade-key').waitFor({ timeout: 60000 })
+        await q.fill('#upgrade-key', mock.token)
+        await q.click('#upgrade-go')
+        await q.locator('#pane-overview, #pane-welcome').first().waitFor({ timeout: 120000 })
+        const k2 = await person('Kai elsewhere'), q2 = k2.page
+        await q2.goto(SITE + 'login/index.html')
+        await q2.locator('#codes summary').click()
+        await q2.fill('#code-in', code)
+        await q2.click('#code-go')
+        await q2.waitForURL(/account\/index\.html/, { timeout: 120000 })
+        await q2.locator('#side-name').waitFor({ timeout: 60000 })
+        check((await text(q2, '#side-name')).includes('kai') && (await text(q2, '.side')).includes('vault') && (await localKeys(q2)).length === 0, 'moved into a vault, the same code opens it from another browser, with nothing kept there')
+    }
     // a passkey from another device (reported as cross-platform: a phone by QR code, or a security key) that finds no account
     {
         const g = await person('Gil', 'usb'), q = g.page

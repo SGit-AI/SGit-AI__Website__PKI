@@ -2,7 +2,7 @@
    the personas it signs, where it is all kept (this browser, or a vault that follows you), and the vault itself, as
    files. The tools (record, links, contacts, inbox, agents) stay where they are and are linked from the side. */
 import { h, msg, err, busy, vault, pageUrl, download, copyButton, avatarFor, loadDirectory, standingPill, qr, K, D, A, L } from '../ui.js'
-import { signInCard } from '../signin.js'
+import { signInCard, holdingCode } from '../signin.js'
 import * as M from '../message.js'
 import { todo, todoPanel } from '../attention.js'
 import { qrDesk, setDropHandler } from '../desk.js'
@@ -25,6 +25,7 @@ app.replaceChildren(h('p', { class: 'dim' }, 'Checking this tab’s session…')
 vault.resume().then(() => draw(), () => draw())
 
 async function draw() {
+    if (holdingCode()) return                         // a sign-in code on screen, not yet saved: leave it
     const t = ++drawing
     if (!vault.open) return app.replaceChildren(h('div', { class: 'acct-out' }, signInCard({ onDone: r => go(r.fresh ? 'welcome' : 'overview') })))
     setDropHandler(null)                              // only Home carries the QR desk

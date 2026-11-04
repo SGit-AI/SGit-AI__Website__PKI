@@ -112,8 +112,8 @@ main.tool.login{max-width:560px}
 .signin-mark span{color:var(--accent-dk)}
 .btn.big-btn{font-size:1rem;padding:.7rem 1.2rem;border-radius:10px}
 .btn .kicon{font-size:1.15rem;line-height:1}
-.signup{margin-top:1rem;border-top:1px solid var(--line);padding-top:.8rem}
-.signup summary{cursor:pointer;font-weight:600;font-size:.9rem}
+.signup,.signup-alt{margin-top:1rem;border-top:1px solid var(--line);padding-top:.8rem}
+.signup summary,.signup-alt summary{cursor:pointer;font-weight:600;font-size:.9rem}
 .signin-foot{margin-top:1rem}
 .acct-out{padding:.5rem 0}
 img.avatar{width:44px;height:44px;border-radius:50%;object-fit:cover;border:1px solid var(--line2);background:var(--panel2);flex:none}
