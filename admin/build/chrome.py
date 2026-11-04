@@ -41,6 +41,7 @@ NAV = [
     ("People", "people/index.html", [
         ("&#9679; The register of people", "people/index.html"),
         ("&#9679; Sign in &amp; your account", "account/index.html"),
+        ("&#9679; Passkey not working? Check this computer", "check/index.html"),
         ("&#9679; Your vault &amp; your keys", "vault/index.html"),
         ("&#9679; Send a message", "send/index.html"),
         ("&#9679; Open a message (QR image or link)", "m/index.html"),
@@ -54,7 +55,7 @@ NAV = [
         ("Articles", "articles/index.html"),
         ("How it works", "people/how.html"),
         ("The brief", "documents/people-directory.html"),
-    ], ("handover/", "account/", "login/", "storyboards/", "articles/", "people/", "vault/", "send/", "m/", "v/", "sso/", "authorize/", "invite/", "join/", "agents/")),
+    ], ("handover/", "account/", "login/", "storyboards/", "articles/", "people/", "vault/", "send/", "m/", "v/", "sso/", "authorize/", "check/", "invite/", "join/", "agents/")),
     ("The rules", "failure/index.html", [
         ("Why the old ones failed (2019)", "failure/index.html"),
         ("The four rules", "rules/index.html"),

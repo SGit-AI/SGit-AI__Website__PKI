@@ -200,6 +200,22 @@ try {
     await f.goto(SITE + 'account/index.html#keys')
     await f.locator('.keycard.master').waitFor({ timeout: 60000 })
     check((await text(f, '.keycard.master')).includes(fayFp) && (await text(f, '.keycard.master')).includes('in your master vault'), 'and her key is in it')
+    // the check page: what this computer can do, a test passkey used twice, a report to copy
+    {
+        const c = await person('Cam'), q = c.page
+        await q.goto(SITE + 'check/index.html')
+        await q.click('#check-go')
+        await q.locator('#check-out p.msg.ok').waitFor({ timeout: 60000 })
+        const rep = JSON.parse(await text(q, '#check-report'))
+        check(rep.test.create.ok && rep.test.use1.prf && rep.test.use1.prf_hash === rep.test.use2.prf_hash && rep.verdict.some(v => v.level === 'ok') && rep.environment.webauthn, 'the check page: a test passkey made and used twice, the same PRF answer both times, “passkeys work here”, and a report to copy')
+        const n = await person('Noa'), r = n.page
+        await n.cdp.send('WebAuthn.removeVirtualAuthenticator', { authenticatorId: n.authenticatorId })
+        await n.cdp.send('WebAuthn.addVirtualAuthenticator', { options: { protocol: 'ctap2', transport: 'internal', hasResidentKey: true, hasUserVerification: true, isUserVerified: true, hasPrf: false, automaticPresenceSimulation: true } })
+        await r.goto(SITE + 'check/index.html')
+        await r.click('#check-go')
+        await r.locator('#check-out p.msg.bad').waitFor({ timeout: 60000 })
+        check((await text(r, '#check-out')).includes('no PRF answer'), 'and on a computer whose passkeys give no PRF (as NordPass’s do), it says so, and why an account cannot open here')
+    }
     // a passkey from another device (reported as cross-platform: a phone by QR code, or a security key) that finds no account
     {
         const g = await person('Gil', 'usb'), q = g.page

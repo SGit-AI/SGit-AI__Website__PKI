@@ -65,6 +65,6 @@ export function signInCard({ onDone } = {}) {
         h('h2', {}, 'Sign in'),
         h('p', { class: 'dim' }, 'One passkey. No password, no email, no account on a server.'),
         h('div', { class: 'acts' }, go), out, signup,
-        h('p', { class: 'dim small signin-foot' }, 'Lost the passkey? ', h('a', { href: pageUrl('vault/index.html') }, 'Open with your recovery code'), ' · ', h('a', { href: pageUrl('articles/a-login-made-of-a-passkey.html') }, 'How this login works')))
+        h('p', { class: 'dim small signin-foot' }, 'Passkey not working on this computer? ', h('a', { href: pageUrl('check/index.html'), id: 'check-link' }, 'Check this computer'), '. Lost the passkey? ', h('a', { href: pageUrl('vault/index.html') }, 'Open with your recovery code'), ' · ', h('a', { href: pageUrl('articles/a-login-made-of-a-passkey.html') }, 'How this login works')))
     return card
 }
