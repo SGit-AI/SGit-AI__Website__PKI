@@ -10,7 +10,7 @@
   "session": true,
   "anchor": false,
   "revoked": null,
-  "standing": "an agent operated by dinis.cruz; confirmed 2026-10-23, valid until 2026-10-30",
+  "standing": "an agent operated by dinis.cruz until 2026-10-30: to be confirmed again",
   "key": "k1.MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA0GBgDSrySVIggQjk61hnFneREDnIULzEwcYn0mpQHu7Ux0o9x71a-mVVV6umWJw_YtRJu5TjmUbordI0UzMhuXQc3dd1KSayBMyz9jiks0fUmuAFWvK3WqbZ_QWn879iTHKj1palpGRdsDhpHoSKLiqJrIHUOmXiYr4iS7qVZW4DdmaHM_kuyyJ8_FZzJbAzKGijjM3Hrz76dH37zVaKJHyiKkRd8Enl0YvmcIkNBKOmlwNiPmSJV7Xk4iiF4MQYFGM6aj-TDUkKMFLtLKuKOvBkUYCw7L88DHy0JFRX_nw1LA9IXfhUDSBI4XmuycpmWEzF1o35rblOP7sVDRinmgSZRDXjcO9cHgoZEKy0-s8v2m-AQS1evgGihfwrA1wKxpBMR7QhmpVsvyYpxHcVqop8ZFlgQEqlPevRlSTH30nG47OCBaZFlOUI9BV84gOqW5mwh7zRdr3lmM_Vf9IhorLT20UjBfLI1nsvF2IWvEc9yBBGDARZqEK4Bpy2M2mUbkNvhwQiy4DpndfszO9VLvnez1jpppbEZIDHT1xI0tuZ0EWKmbsG8x3toqKFFbtFEBQC_b5eR_CfpcpRafO5v37l1ulvZjTB_ypHVJgmHR0zU4bFJ2oPazJzjXI_ENEPwpBAgD1ZW1nkcNqFK9NaePgFbtHbWeUktsctObb3VocCAwEAAQ.MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEdJXhI6H9riUxEEdW1z7duvaHzDPy6HFBVPQYTsKJhvPXRoA8reSwy5QhOa3aJlZfiBTvuOZKoW7BwDK1Szn9hg.REMgVmF1bHQgUmVnaXN0cnkgKHRoZSB2YXVsdCBvZiB2YXVsdHMp",
   "encryption_fingerprint": "sha256:06c6ccddb7476629",
   "bundle": {

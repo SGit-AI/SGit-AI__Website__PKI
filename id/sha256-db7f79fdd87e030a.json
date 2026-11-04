@@ -24,8 +24,8 @@
       "to": "sha256:a0f2ccfe07781213",
       "name": "pki.sgit.ai site agent (Claude Code session, 19 October 2026)",
       "method": "operates",
-      "on": "2026-10-22",
-      "until": "2026-10-29"
+      "on": "2026-11-04",
+      "until": "2026-11-11"
     },
     {
       "to": "sha256:956934e47063ceaa",

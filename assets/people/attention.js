@@ -46,7 +46,7 @@ export async function todo(dir) {
         const soon = day(7)
         for (const [map, ended] of [[g.operated, false], [g.lapsed, true]]) for (const [fp, v] of map) {
             if (!mineSet.has(v.by) || v.until > soon) continue
-            if (myLinksTo(fp).some(l => l.method === 'operates' && D.validUntil(l) > soon)) continue      // renewed, not yet published: item 3
+            if (myLinksTo(fp).some(l => l.method === 'operates' && D.validUntil(l) > v.until)) continue   // renewed (published or not): item 3 covers it
             const r = dir.byFp.get(fp); if (!r) continue
             items.push({ level: ended ? 'bad' : 'warn', text: `${r.name}: confirmation ${ended ? 'ended' : 'ends'} ${v.until}.`, sub: fp, action: { ...confirmAction(r), label: 'Renew' } })
         }

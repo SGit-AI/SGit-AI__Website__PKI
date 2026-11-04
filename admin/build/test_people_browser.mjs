@@ -180,7 +180,9 @@ try {
         const { makeZip } = await import('./zipfixture.mjs'), zlib = await import('zlib')
         await p.goto(SITE + 'vault/index.html'); await p.locator('#vault-bar').waitFor()
         let ana = null
-        for (let i = 0; i < 120 && !ana; i++) { ana = await p.evaluate(async () => { const v = (await import('/assets/people/ui.js')).vault; await v.resume(); await v.settled(); return v.me ? v.me.bundle : null }); if (!ana) await p.waitForTimeout(500) }
+        let diag = ''                                    // intermittent: when her vault does not reopen in time, say what the tab holds
+        for (let i = 0; i < 120 && !ana; i++) { const r = await p.evaluate(async () => { const v = (await import('/assets/people/ui.js')).vault; let er = ''; try { await v.resume() } catch (x) { er = String(x && x.message) } await v.settled(); return { b: v.me ? v.me.bundle : null, d: JSON.stringify({ er, ss: Object.keys(sessionStorage), open: v.open, mode: v.mode, ids: (v.ids || []).length, url: location.href }) } }); ana = r.b; diag = r.d; if (!ana) await p.waitForTimeout(500) }
+        if (!ana) throw new Error(`her vault did not reopen in the tab: ${diag}`)
         const png = async text => { const q = qrcode(0, 'L'); q.addData(text, 'Byte'); q.make(); const n = q.getModuleCount(), px = 6, size = (n + 8) * px, lum = new Uint8Array(size * size).fill(255); for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) if (q.isDark(r, c)) for (let y = 0; y < px; y++) lum.fill(0, ((r + 4) * px + y) * size + (c + 4) * px, ((r + 4) * px + y) * size + (c + 5) * px); return Buffer.from(await QR.encodePng(lum, size, size, d => zlib.deflateSync(d))) }
         const codes = []
         for (const n of [1, 2]) { const sd = await M.sealMessage(await M.compose({ to: ana, text: `batch message ${n}` }), ana, null); codes.push(await png(M.qrSealed({ to: ana.signing_fingerprint, code: sd.code }))) }

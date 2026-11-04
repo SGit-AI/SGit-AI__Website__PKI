@@ -97,6 +97,11 @@
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
   <tbody>
     <tr>
+<td class="vnum">v0.2.31</td>
+<td class="vdate">4 Nov 2026</td>
+<td><b>Register:</b> Dinis Cruz operates the site agent again, until 11 Nov (checked by people.mjs add). <b>To do</b> no longer lists an agent's ended confirmation once you have signed a renewal that ends later; until it is published, the renewal shows as a statement to copy for the register.</td>
+    </tr>
+    <tr>
 <td class="vnum">v0.2.30</td>
 <td class="vdate">24 Oct 2026</td>
 <td><b>Linked vaults, the message kept, and a known passkey issue.</b> A vault's app that lives in, or reads from, a <b>linked vault</b> now works on Open a vault: a <code>&lt;name&gt;.link.json</code> makes <code>&lt;name&gt;/</code> another vault, opened read-only through the read key in the parent's <code>.vault/owner/ro-links.json</code>, as vault.sgraph.ai does (one level). The message that carried a vault key shows as it does everywhere, with the vault under it; full width is off until chosen, and keeps the site's own bar. <b>Known issue:</b> on some computers (a 2018 Intel iMac, for one) a passkey used through the phone's QR code reaches the page with other PRF bytes, so it finds no account; the page used to start a second, empty one quietly. It now stops, explains, and offers to open your account with your recovery code, which adds this device as a door, or to start a new one. Written up in <a href="../articles/a-login-made-of-a-passkey.html#known-issues">a login made of a passkey</a>.</td>
