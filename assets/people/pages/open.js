@@ -35,11 +35,19 @@ function grantButton(g) {
 }
 
 let lastOpened = null                                // { code, ids, label }: a message opened, opened again after a redraw (the vault resuming)
+// An .enc brought to the desk opens at this page's address (#m1.…) when its m1 text is short enough for one; a longer
+// one (files in it) or one no m1 carries opens here in memory, and Back returns to the desk.
+const MAX_HASH_CHARS = 32 * 1024
+let pending = null                                   // { to, signer, enc, code }: a sealed message opened in memory, not at an address
+const inMemory = q => ({ to: q.to, signer: q.from || null, enc: q.enc, code: q.code || q.enc.slice(-48) })
 async function draw() {
-    const code = M.parseCode(location.hash)
+    const code = pending || M.parseCode(location.hash)
     if (!code) {
         app.replaceChildren(h('h2', {}, 'The QR desk'),
-            qrDesk({ dir, onSealed: c => { location.hash = c } }),
+            qrDesk({ dir, onSealed: (c, q) => {
+                if (c && c.length <= MAX_HASH_CHARS) { location.hash = c; return }
+                pending = inMemory(q); history[location.hash === '#opened' ? 'replaceState' : 'pushState']({ pending: true }, '', location.pathname + '#opened'); draw().catch(e => app.replaceChildren(msg('bad', err(e))))
+            } }),
             h('p', { class: 'dim small' }, 'Giving an agent a vault key you hold: ', h('a', { href: pageUrl('handover/for-you.html') + '#give' }, 'recipe 1'), '.'))
         return
     }
@@ -78,5 +86,6 @@ async function draw() {
     else if (lastOpened && lastOpened.code === code.code) tryOpen(lastOpened.ids, lastOpened.label)
 }
 vault.onChange(() => draw())
-window.addEventListener('hashchange', () => draw())
+window.addEventListener('hashchange', () => { pending = null; draw() })
+window.addEventListener('popstate', () => { if (pending && location.hash !== '#opened') { pending = null; draw() } })
 draw().catch(e => app.replaceChildren(msg('bad', err(e))))

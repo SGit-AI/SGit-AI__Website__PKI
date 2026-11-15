@@ -263,5 +263,34 @@ else {
     check(!(await DG.checkDelegation(soft, { g: D.graph([await D.readRecord(adaRec), await D.readRecord(otherRec)], { anchors: [other.bundle.signing_fingerprint], asOf }), root: other.bundle.signing_fingerprint, origin: site, asOf })).ok, 'from another pinned root, the same delegation is not vouched for')
 }
 
+// --- an .enc brought to the desk (issue 2026-11-15: a sealed .enc could not be opened in Your vault) --------------
+{
+    // a public key code sealed and signed, as in the report: past one QR code, so the send page offered the .enc
+    const long = await M.compose({ to: bo.bundle, from: ada, text: M.keyCode(cy.bundle).code + '\n' + 'x'.repeat(1500) })
+    const s = await M.sealMessage(long, bo.bundle, ada)
+    check(s.enc.length > 3000, `the .enc of a long message is past the QR bound (${s.enc.length} characters)`)
+    check(await throws(() => M.parseQrText(s.enc), /longer than any QR/), 'parseQrText alone still refuses it, as the report saw')
+    const q = M.parseSealedText(s.enc)
+    check(q && q.kind === 'enc' && q.from === ada.bundle.signing_fingerprint, 'parseSealedText reads it as an .enc, and names the signer the envelope names')
+    const wrapped = s.enc.match(/.{1,76}/g).join('\n') + '\n'
+    check(M.parseSealedText(wrapped).enc === s.enc, 'a pasted .enc with line breaks reads as the same envelope')
+    const short = await M.sealMessage(await M.compose({ to: bo.bundle, from: ada, text: 'short' }), bo.bundle, ada)
+    check(M.parseSealedText(short.url).kind === 'sealed' && M.parseSealedText(M.qrSealed({ to: bo.bundle.signing_fingerprint, from: ada.bundle.signing_fingerprint, code: short.code })).kind === 'sealed', 'links and QR JSON still read as before')
+    check(M.parseEncText('aGVsbG8gd29ybGQ=') === null && await throws(() => M.parseSealedText('aGVsbG8gd29ybGQ='), /neither a pki\.sgit\.ai/), 'base64 that is not an envelope is not taken for one')
+    check(await throws(() => M.parseEncText('A'.repeat(M.MAX_ENC_CHARS + 4)), /longer than/), 'an .enc past its own bound is refused')
+    // resolved with the reader's keys: the key that opens it is the recipient
+    const r = await M.resolveEnc(q, [cy, bo])
+    check(r.kind === 'sealed' && r.to === bo.bundle.signing_fingerprint && r.from === ada.bundle.signing_fingerprint, 'resolveEnc finds the recipient among the keys given (the second of two)')
+    check(r.code === s.code, 'and rebuilds the same m1 code the send page made')
+    const o = await M.openMessage(M.encOf(r), [bo], new Map([[ada.bundle.signing_fingerprint, ada.bundle]]))
+    check(o.msg.text.startsWith('k1.') && o.verified === true, 'the message opens from it, signature checked')
+    check(await throws(() => M.resolveEnc(q, [cy, ada]), /not sealed to any/), 'sealed to someone else: ENOTMINE, so the desk can say so')
+    try { await M.resolveEnc(q, [cy]) } catch (e) { check(e.code === 'ENOTMINE', 'the error carries the code ENOTMINE') }
+    // an envelope whose signature the m1 form cannot carry is still opened, from the envelope itself
+    const env = JSON.parse(atob(s.enc)); env.s = K.b64(new Uint8Array(72))
+    const odd = btoa(JSON.stringify(env)), ro = await M.resolveEnc(M.parseSealedText(odd), [bo])
+    check(ro.code === '' && ro.enc === odd && M.encOf(ro) === odd, 'no m1 carries a 72-byte signature: code is empty, and the envelope as it came is what opens')
+}
+
 console.log(failed ? `\n${failed} FAILED` : '\nall passed')
 process.exit(failed ? 1 : 0)

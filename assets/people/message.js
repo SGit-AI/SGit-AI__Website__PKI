@@ -200,6 +200,49 @@ export function parseQrText(text) {
     if (!K1X.test(code)) throw new Error('a key code not in its shape: refused')
     return { kind: 'key', fp: '', label: '', code }
 }
+// ------------------------------------------------------------ an .enc brought here: sgit's envelope, as text
+/**
+ * The .enc the send page downloads (and sgit pki encrypt writes) is base64 of sgit's envelope JSON. It carries files
+ * (2 MB each, base64 twice over), so it is far past any QR code and has a bound of its own.
+ */
+export const MAX_ENC_CHARS = 16 * 1024 * 1024
+/**
+ * Text that is sgit's envelope: { kind: 'enc', enc, from } (from: the signer the envelope names, or ''), or null when
+ * it is not one. The envelope names its signer when signed, never its recipient: who it is for is found by opening
+ * it with your keys (resolveEnc), as sgit pki decrypt does. Line breaks and spaces (a wrapped paste) are dropped.
+ */
+export function parseEncText(text) {
+    const s = String(text == null ? '' : text).replace(/\s+/g, '')
+    if (!s || s.length % 4 || !/^[A-Za-z0-9+/]+={0,2}$/.test(s)) return null
+    if (s.length > MAX_ENC_CHARS) throw new Error(`an .enc longer than ${MAX_ENC_CHARS} characters: refused`)
+    let env; try { env = parseEnvelope(s) } catch (e) { return null }
+    if (![env.w, env.i, env.c].every(x => typeof x === 'string')) return null
+    if (env.f != null && !FPX.test(env.f)) throw new Error('the envelope names a signer not in its shape: refused')
+    return { kind: 'enc', enc: s, from: env.f || '' }
+}
+/** What the desk reads from text: an .enc (any length), else a QR object or a pki.sgit.ai link (parseQrText). */
+export function parseSealedText(text) { return parseEncText(text) || parseQrText(text) }
+/**
+ * An .enc opened with one of these identities becomes an ordinary sealed item, { kind: 'sealed', to, from, code, enc }:
+ * its recipient is the key that opened it. code is the m1 text rebuilt from it, or '' when the m1 form cannot carry
+ * this envelope exactly (a signature of another length, say); enc is always the envelope as it came, and is what is
+ * opened. No key opens it → an error with code ENOTMINE.
+ */
+export async function resolveEnc(q, identities) {
+    for (const id of identities) {
+        try { await unseal(id.private.encrypt, q.enc) } catch (e) { if (/changed on the way/.test(e.message)) throw e; continue }
+        const to = id.bundle.signing_fingerprint
+        let code = ''
+        try {
+            const c = codeOf(q.enc, to), back = c && parseCode(c), a = parseEnvelope(q.enc), b = back && parseEnvelope(back.enc)
+            if (back && back.code === c && ['w', 'i', 'c', 's', 'f'].every(k => (a[k] || '') === (b[k] || ''))) code = c
+        } catch (e) { /* kept as the envelope alone */ }
+        return { kind: 'sealed', to, from: q.from || '', code, enc: q.enc }
+    }
+    const e = new Error('not sealed to any of these keys'); e.code = 'ENOTMINE'; throw e
+}
+/** The envelope a sealed item opens with: its own (an .enc brought here), else rebuilt from its m1 code. */
+export const encOf = q => q.enc || parseCode(q.code).enc
 export { unhex }
 // ------------------------------------------------------------ vault keys in text: found, so they travel as files
 /** A vault key in text, prefixed or as passphrase:vault-id alone. The prefix is split so this file holds no key-shaped literal. */

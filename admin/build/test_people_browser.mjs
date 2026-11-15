@@ -192,6 +192,39 @@ try {
         await p.locator('#batch-cards .msgcard').nth(1).waitFor({ timeout: 60000 }).catch(async e => { await p.screenshot({ path: '/tmp/claude-0/-home-user-SGit-AI--Website--PKI/a4b0d5a1-e4ef-596c-9c9b-79001e8aa63e/scratchpad/fail.png', fullPage: true }); throw e })
         const bodies = await p.$$eval('#batch-cards .msgcard .body', b => b.map(x => x.textContent))
         check(bodies.join('|') === 'batch message 1|batch message 2' && (await text(p, 'table.kv')).includes('refused'), 'a zip of QR images: both messages for her open together, one under the other; the entry that lies about its size is refused')
+        // an .enc (issue 2026-11-15): too long for a QR code, downloaded from the send page, opened on this site
+        {
+            const longText = 'an .enc for Ana ' + 'y'.repeat(3000)
+            const s1 = await M.sealMessage(await M.compose({ to: ana, text: longText }), ana, null)
+            await p.goto(SITE + 'm/index.html')
+            await p.setInputFiles('#open-qr-file', { name: 'message.txt.enc', mimeType: 'text/plain', buffer: Buffer.from(s1.enc) })
+            await p.locator('.msgcard .body').first().waitFor({ timeout: 60000 })
+            check(s1.enc.length > 3000 && (await text(p, '.msgcard .body')) === longText && p.url().includes('#m1.'), `an .enc file chosen on the message page (${s1.enc.length} characters) opens with her key, at its m1 address`)
+            // pasted, wrapped, on her vault page's desk
+            await p.goto(SITE + 'vault/index.html'); await p.locator('#qr-desk').waitFor({ timeout: 60000 })
+            await p.click('#qr-desk .qrdesk-text summary')
+            await p.fill('#open-paste', s1.enc.match(/.{1,76}/g).join('\n'))
+            await p.click('#qr-desk .qrdesk-text button')
+            await p.locator('#batch-cards .msgcard .body').first().waitFor({ timeout: 60000 })
+            check((await text(p, '#batch-cards .msgcard .body')) === longText, 'the same .enc pasted as text (line breaks and all) into Your vault opens there')
+            // sealed to someone else: said plainly
+            const brunoFx = JSON.parse(fs.readFileSync(path.join(ROOT, 'directory/fixtures', bruno.dir + '.json'), 'utf8'))
+            const s2 = await M.sealMessage(await M.compose({ to: brunoFx.bundle, text: 'not for Ana ' + 'z'.repeat(3000) }), brunoFx.bundle, null)
+            await p.fill('#open-paste', s2.enc)
+            await p.click('#qr-desk .qrdesk-text button')
+            await p.locator('#open-qr-out .bad').waitFor({ timeout: 60000 })
+            check(/none of your keys opens it/.test(await text(p, '#open-qr-out .bad')), 'an .enc sealed to someone else says so, not that it is too long for a QR code')
+            // past one address: opened in memory on the message page, and Back returns to the desk
+            const big = Buffer.alloc(40000, 7).toString('base64')
+            const s3 = await M.sealMessage(await M.compose({ to: ana, text: 'with a file', files: [{ name: 'big.bin', type: 'application/octet-stream', data: big }] }), ana, null)
+            await p.goto(SITE + 'm/index.html')
+            await p.setInputFiles('#open-qr-file', { name: 'big.enc', mimeType: 'text/plain', buffer: Buffer.from(s3.enc) })
+            await p.locator('.msgcard .body').first().waitFor({ timeout: 60000 })
+            check((await text(p, '.msgcard .body')) === 'with a file' && p.url().endsWith('#opened'), `an .enc too long for an address (${s3.enc.length} characters) opens in memory`)
+            await p.goBack(); await p.locator('#qr-desk').waitFor({ timeout: 30000 })
+            await p.waitForTimeout(1500)
+            check(!p.url().includes('#opened') && (await p.locator('.msgcard').count()) === 0, 'Back from it returns to the QR desk, and stays there')
+        }
         // a vault key she holds, forwarded sealed to another key, never shown: the key arrives as its QR image
         const fx2 = JSON.parse(fs.readFileSync(path.join(ROOT, 'directory/fixtures', bruno.dir + '.json'), 'utf8'))
         const keyMsg = await M.sealMessage(await M.compose({ to: ana, text: 'a vault key', files: [{ name: 'vault key: test', data: Buffer.from('the vault key, for the test').toString('base64') }] }), ana, null)

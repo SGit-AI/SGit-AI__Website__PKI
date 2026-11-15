@@ -21,13 +21,13 @@ setVaultOpener(showVault)                              // "Open the vault" on a 
 receiveVaultKey(showVault)
 
 /** One sealed message: opened with your keys; the vault it carries opens straight away, anything else shows as a message. */
-async function openSealed(code) {
+async function openSealed(code, q = null) {
     mount.replaceChildren(h('p', { class: 'dim small' }, 'Opening it with your key…'))
     await vault.settled()
     if (!vault.open || !vault.ids.length) return mount.replaceChildren(msg('warn', 'Open your vault above with your passkey: the QR code is sealed to your key.'))
     try {
         const known = dir ? new Map([...dir.byFp].map(([k, r]) => [k, r.bundle])) : new Map()
-        const o = await M.openMessage(M.parseCode(code).enc, vault.ids, known)
+        const o = await M.openMessage(q ? M.encOf(q) : M.parseCode(code).enc, vault.ids, known)
         const keys = (o.msg.files || []).map(f => vaultKeyIn(f.data)).filter(Boolean)
         const from = o.msg.from ? nameOf(o.msg.from) : ''
         // the message as it is, as anywhere else on the site; the vault it carries opens under it

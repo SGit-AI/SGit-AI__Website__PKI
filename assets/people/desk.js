@@ -3,8 +3,10 @@
  * exchange (exchange.js), messages for your keys open, one under the other. The message page is a full-page desk;
  * your account and your vault carry the same desk at the top, since most of what you do now arrives as a QR image.
  *
- *   qrDesk({ dir, compact, onSealed })   the element; onSealed(code) for one sealed message (the message page opens it
- *                                        at its own address), else it opens in place
+ *   qrDesk({ dir, compact, onSealed })   the element; onSealed(code, q) for one sealed message (the message page opens it
+ *                                        at its own address), else it opens in place. An .enc file (or its pasted text)
+ *                                        is opened with your keys first (resolveAll): then it is a sealed message like
+ *                                        any other, with q.enc the envelope as it came and code '' when no m1 carries it
  *
  * @module desk
  */
@@ -30,7 +32,7 @@ export async function readAll(files) {
         if (e.error) { out.push(e); continue }
         try {
             const text = IMAGE(e.bytes) ? await readImage(new Blob([e.bytes])) : new TextDecoder('utf-8', { fatal: true }).decode(e.bytes)
-            const q = M.parseQrText(text)
+            const q = M.parseSealedText(text)
             if (q.kind === 'sealed' && seen.has(q.code)) { out.push({ name: e.name, dup: true, q }); continue }
             if (q.kind === 'sealed') seen.add(q.code)
             out.push({ name: e.name, q })
@@ -47,6 +49,7 @@ export async function keyBox(q, out, dir) {
 }
 let onFiles = null                                    // what the page as last drawn does with files dropped or pasted
 let lastBatch = null                                  // a batch read, kept across a redraw (the vault opening, say)
+let showSeq = 0                                       // the newest read wins: a redraw replaying a batch while an .enc is still being opened
 export const setDropHandler = fn => { onFiles = fn }
 document.addEventListener('paste', e => { const fs = [...(e.clipboardData && e.clipboardData.items || [])].filter(i => i.kind === 'file').map(i => i.getAsFile()); if (fs.length && onFiles) { e.preventDefault(); onFiles(fs) } })
 document.addEventListener('dragover', e => { if (onFiles) { e.preventDefault(); document.body.classList.add('dropping') } })
@@ -70,8 +73,8 @@ export function batchView(items, out, dir) {
             const head = h('h3', {}, `${n + 1} of ${sealed.length} · `, h('span', { class: 'mono small' }, it.name))
             if (!mine.has(it.q.to)) { cards.append(head, msg('warn', `Sealed to ${nameOf(it.q.to)}, not to one of your keys: only its owner opens it.`)); continue }
             try {
-                const o = await M.openMessage(M.parseCode(it.q.code).enc, vault.ids, known), acts = []
-                if (vault.mode === 'vault') { const keep = h('button', { type: 'button', class: 'btn' }, 'Keep it in my book'); keep.addEventListener('click', () => busy(keep, async () => { await A.book.saveMessage(vault.book, 'in', { id: it.q.code.slice(-24), at: o.msg.at, msg: o.msg, verified: o.verified }); keep.replaceWith(h('span', { class: 'ok' }, 'kept')) })); acts.push(keep) }
+                const o = await M.openMessage(M.encOf(it.q), vault.ids, known), acts = []
+                if (vault.mode === 'vault') { const keep = h('button', { type: 'button', class: 'btn' }, 'Keep it in my book'); keep.addEventListener('click', () => busy(keep, async () => { await A.book.saveMessage(vault.book, 'in', { id: (it.q.code || it.q.enc).slice(-24), at: o.msg.at, msg: o.msg, verified: o.verified }); keep.replaceWith(h('span', { class: 'ok' }, 'kept')) })); acts.push(keep) }
                 cards.append(head, o.problems.length ? msg('warn', o.problems.join('; ')) : null, messageCard(o.msg, o.verified, nameOf, acts, { forward: f => forwardPanel(f, dir) }))
             } catch (e) { cards.append(head, msg('bad', err(e))) }
         }
@@ -91,22 +94,45 @@ export async function myKeyQr() {
             h('div', { class: 'url' }, h('div', { class: 'acts' }, copyButton(kc.url, 'Copy the link')))))
 }
 
+/**
+ * .enc items, opened with your keys, become ordinary sealed items (M.resolveEnc): the key that opens one says who it
+ * was for. With the vault closed, or with none of your keys opening it, the item says why instead.
+ */
+export async function resolveAll(items, dir) {
+    if (!items.some(i => i.q && i.q.kind === 'enc')) return items
+    await vault.settled()
+    const nameOf = f => (dir && dir.byFp.get(f) && dir.byFp.get(f).name) || f
+    const out = [], seen = new Set()
+    for (const it of items) {
+        if (!it.q || it.q.kind !== 'enc') { out.push(it); continue }
+        if (seen.has(it.q.enc)) { out.push({ name: it.name, dup: true, q: it.q }); continue }
+        seen.add(it.q.enc)
+        if (!vault.open || !vault.ids.length) { out.push({ name: it.name, plain: true, error: 'an .enc does not say who it is for, so it is opened by trying your keys: open your vault above first' }); continue }
+        try { out.push({ name: it.name, q: await M.resolveEnc(it.q, vault.ids) }) }
+        catch (e) { out.push({ name: it.name, plain: true, error: e.code === 'ENOTMINE' ? `none of your keys opens it, so it was sealed to someone else${it.q.from ? ` (the envelope says it was signed by ${nameOf(it.q.from)})` : ' (and it is unsigned)'}; only its recipient can open it` : err(e) }) }
+    }
+    return out
+}
+
 export function qrDesk({ dir, compact = false, onSealed = null, replay = true } = {}) {
     const out = h('div', { id: 'open-qr-out' }), mine = h('div')
-    const show = (items) => {
-        lastBatch = items
-        if (items.length === 1 && items[0].q && items[0].q.kind === 'sealed' && onSealed) return onSealed(items[0].q.code)
+    const show = async (read) => {
+        lastBatch = read                              // as read: an .enc is tried again once the vault opens
+        const seq = ++showSeq
+        const items = await resolveAll(read, dir)
+        if (seq !== showSeq) return
+        if (items.length === 1 && items[0].q && items[0].q.kind === 'sealed' && onSealed) { lastBatch = null; return onSealed(items[0].q.code, items[0].q) }   // handed over: not replayed on the next redraw (Back to the desk)
         if (items.length === 1 && items[0].q && items[0].q.kind === 'key') return keyBox(items[0].q, out, dir)
-        if (items.length === 1 && items[0].error) return out.replaceChildren(msg('bad', `${items[0].name}: ${items[0].error}. Crop it to the code, straight on, and try again.`))
+        if (items.length === 1 && items[0].error) return out.replaceChildren(msg('bad', `${items[0].name}: ${items[0].error}.${items[0].plain ? '' : ' Crop it to the code, straight on, and try again.'}`))
         batchView(items, out, dir)
     }
     const take = async files => { out.replaceChildren(h('p', { class: 'dim small' }, `Reading ${files.length} file${files.length === 1 ? '' : 's'}…`)); show(await readAll(files)) }
     setDropHandler(take)
-    const file = h('input', { type: 'file', accept: 'image/*,.zip,.json,.txt', multiple: true, id: 'open-qr-file', class: 'visually-hidden' })
+    const file = h('input', { type: 'file', accept: 'image/*,.zip,.json,.txt,.enc', multiple: true, id: 'open-qr-file', class: 'visually-hidden' })
     file.addEventListener('change', () => { if (file.files.length) take([...file.files]) })
-    const paste = h('textarea', { class: 't code', id: 'open-paste', rows: 3, placeholder: 'https://pki.sgit.ai/m/#m1.…, a k1 key link, or the JSON a QR code holds: {"v":1,"kind":"pki.sgit.ai/qr/…",…}' })
+    const paste = h('textarea', { class: 't code', id: 'open-paste', rows: 3, placeholder: 'https://pki.sgit.ai/m/#m1.…, a k1 key link, the JSON a QR code holds ({"v":1,"kind":"pki.sgit.ai/qr/…",…}), or the text of an .enc file' })
     const openText = () => {
-        try { const q = M.parseQrText(paste.value); show([{ name: 'pasted text', q }]) }
+        try { const q = M.parseSealedText(paste.value); show([{ name: 'pasted text', q }]) }
         catch (e) { out.replaceChildren(msg('bad', err(e))) }
     }
     const keyBtn = h('button', { type: 'button', class: 'btn', id: 'my-key-btn' }, 'My key as a QR code')
@@ -114,9 +140,9 @@ export function qrDesk({ dir, compact = false, onSealed = null, replay = true } 
     const desk = h('section', { class: 'qrdesk' + (compact ? ' compact' : ''), id: 'qr-desk' },
         h('div', { class: 'qrdesk-zone' },
             h('div', { class: 'qrdesk-icon', 'aria-hidden': 'true' }, '▣'),
-            h('div', {}, h('b', {}, 'Drop, paste or choose a QR image'),
+            h('div', {}, h('b', {}, 'Drop, paste or choose a QR image or an .enc file'),
                 h('div', { class: 'dim small' }, 'An agent’s key starts a key exchange; a message for you opens here. Several images or a zip work too. Read in this browser; nothing is uploaded.')),
-            h('div', { class: 'acts' }, h('label', { class: 'btn primary', for: 'open-qr-file' }, 'Choose images'), file, keyBtn)),
+            h('div', { class: 'acts' }, h('label', { class: 'btn primary', for: 'open-qr-file' }, 'Choose files'), file, keyBtn)),
         h('details', { class: 'qrdesk-text' }, h('summary', { class: 'small' }, 'Paste text instead'), paste, h('div', { class: 'acts' }, h('button', { type: 'button', class: 'btn', onclick: openText }, 'Open'))),
         mine, out)
     // a batch read before a redraw (the vault opening, say) is shown again
