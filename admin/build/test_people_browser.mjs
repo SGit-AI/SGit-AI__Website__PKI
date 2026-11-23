@@ -225,6 +225,28 @@ try {
             await p.waitForTimeout(1500)
             check(!p.url().includes('#opened') && (await p.locator('.msgcard').count()) === 0, 'Back from it returns to the QR desk, and stays there')
         }
+        // an agent's submission dropped on the QR desk (2026-11-23: it said "unknown kind of QR code ... crop it"):
+        // it goes to Agents → Confirm an agent, checked at once
+        {
+            const DD = await import(path.join(ROOT, 'assets/people/directory.js'))
+            const ag = await K2.generate('desk test agent')
+            const sub = DD.submission([await DD.agentStatement(ag, { name: 'desk test agent', runtime: 'a test', session: true }), await DD.linkStatement(ag, { to: ana.signing_fingerprint, method: 'operated-by' })])
+            const file = { name: 'agent-submission.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(sub, null, 1)) }
+            await p.goto(SITE + 'vault/index.html#keys'); await p.locator('#qr-desk').waitFor({ timeout: 60000 })
+            await p.setInputFiles('#open-qr-file', file)
+            await p.locator('#tab-agents .vpanel h3').first().waitFor({ timeout: 60000 })
+            check(p.url().endsWith('#agents') && (await text(p, '#tab-agents .vpanel h3')) === 'desk test agent' && (await text(p, '#tab-agents .vpanel')).includes(ag.bundle.signing_fingerprint), 'a submission dropped on the vault page opens Agents → Confirm an agent, already checked, its fingerprint shown')
+            await p.goto(SITE + 'm/index.html'); await p.locator('#qr-desk').waitFor({ timeout: 60000 })
+            await p.setInputFiles('#open-qr-file', file)
+            await p.waitForURL(/vault\/index\.html#agents$/, { timeout: 60000 }); await p.locator('#tab-agents .vpanel h3').first().waitFor({ timeout: 60000 })
+            check((await text(p, '#tab-agents .vpanel h3')) === 'desk test agent', 'dropped on the message page, it goes to the vault’s Agents tab the same way')
+            await p.click('#qr-desk .qrdesk-text summary')
+            await p.fill('#open-paste', '{"kind":"something else"}')
+            await p.click('#qr-desk .qrdesk-text button')
+            await p.locator('#open-qr-out .bad').waitFor({ timeout: 30000 })
+            check(!/Crop it/.test(await text(p, '#open-qr-out .bad')), 'text the desk cannot read is refused without the advice meant for a photo')
+            await p.evaluate(() => sessionStorage.removeItem('pki.agent.pending'))
+        }
         // a vault key she holds, forwarded sealed to another key, never shown: the key arrives as its QR image
         const fx2 = JSON.parse(fs.readFileSync(path.join(ROOT, 'directory/fixtures', bruno.dir + '.json'), 'utf8'))
         const keyMsg = await M.sealMessage(await M.compose({ to: ana, text: 'a vault key', files: [{ name: 'vault key: test', data: Buffer.from('the vault key, for the test').toString('base64') }] }), ana, null)

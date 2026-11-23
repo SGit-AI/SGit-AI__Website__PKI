@@ -10,7 +10,8 @@
  *
  * @module desk
  */
-import { h, msg, err, busy, vault, qr, copyButton, pageUrl, A } from './ui.js'
+import { h, msg, err, busy, vault, qr, copyButton, pageUrl, D, A } from './ui.js'
+import { pendingAgent } from './attention.js'
 import * as M from './message.js'
 import { messageCard } from './cards.js'
 import { readImage, isImage } from './qrimage.js'
@@ -32,13 +33,36 @@ export async function readAll(files) {
         if (e.error) { out.push(e); continue }
         try {
             const text = IMAGE(e.bytes) ? await readImage(new Blob([e.bytes])) : new TextDecoder('utf-8', { fatal: true }).decode(e.bytes)
-            const q = M.parseSealedText(text)
+            const q = submissionIn(text) || M.parseSealedText(text)
             if (q.kind === 'sealed' && seen.has(q.code)) { out.push({ name: e.name, dup: true, q }); continue }
             if (q.kind === 'sealed') seen.add(q.code)
             out.push({ name: e.name, q })
-        } catch (x) { out.push({ name: e.name, error: IMAGE(e.bytes) ? `no QR code read (${err(x)})` : err(x) }) }
+        } catch (x) { out.push({ name: e.name, plain: !IMAGE(e.bytes), error: IMAGE(e.bytes) ? `no QR code read (${err(x)})` : err(x) }) }
     }
     return out
+}
+/**
+ * An agent's submission (pki.sgit.ai/submission/v1, from pki-agent.mjs submission), dropped or pasted here by mistake:
+ * it belongs to your vault's Agents tab, Confirm an agent. { kind: 'submission', sub, agent, record } or null.
+ */
+export function submissionIn(text) {
+    const s = String(text == null ? '' : text).trim()
+    if (!s.startsWith('{')) return null
+    let o; try { o = JSON.parse(s) } catch (e) { return null }
+    if (!o || o.kind !== D.SUBMISSION || !Array.isArray(o.statements)) return null
+    const first = o.statements[0]
+    return { kind: 'submission', sub: o, agent: !!(first && first.body && first.body.kind === 'agent'), record: String(o.record || '') }
+}
+/**
+ * Hand a submission to Confirm an agent: kept for the Agents tab (as the To do list's Confirm does), which checks it at
+ * once. The vault page takes it in place (it answers the event); any other page goes to the vault's Agents tab.
+ */
+export function toAgents(q, out) {
+    if (!q.agent) return out.replaceChildren(msg('warn', 'A person’s submission for the register: it goes in with node admin/build/people.mjs add, not here.'))
+    pendingAgent(q.sub)
+    const ev = new CustomEvent('pki:agent-submission', { cancelable: true })
+    window.dispatchEvent(ev)
+    if (!ev.defaultPrevented) location.href = pageUrl('vault/index.html') + '#agents'
 }
 /** A public key brought here (an agent's key QR code): the page flips into a key exchange (exchange.js). */
 export async function keyBox(q, out, dir) {
@@ -63,7 +87,7 @@ export function batchView(items, out, dir) {
     const mine = new Set(vault.ids.map(i => i.bundle.signing_fingerprint))
     const sealed = items.filter(i => i.q && i.q.kind === 'sealed' && !i.dup)
     const rows = items.map((it, n) => h('tr', {}, h('th', {}, String(n + 1)), h('td', {}, h('span', { class: 'mono small' }, it.name)),
-        h('td', { class: 'small' }, it.error ? h('span', { class: 'bad' }, it.error) : it.dup ? h('span', { class: 'dim' }, 'the same message again: skipped') : it.q.kind === 'key' ? ['a public key: ', h('a', { href: pageUrl('send/index.html') + '#' + it.q.code }, 'send to it')]
+        h('td', { class: 'small' }, it.error ? h('span', { class: 'bad' }, it.error) : it.dup ? h('span', { class: 'dim' }, 'the same message again: skipped') : it.q.kind === 'submission' ? (it.q.agent ? ['an agent’s submission, ', h('span', { class: 'mono' }, it.q.record), ': ', h('button', { type: 'button', class: 'btn small', onclick: () => toAgents(it.q, out) }, 'Confirm it in Agents')] : 'a person’s submission: for the register, not here') : it.q.kind === 'key' ? ['a public key: ', h('a', { href: pageUrl('send/index.html') + '#' + it.q.code }, 'send to it')]
             : ['for ', h('b', {}, nameOf(it.q.to)), mine.has(it.q.to) ? h('span', { class: 'ok' }, ' (you)') : '', it.q.from ? [' · from ', h('span', { class: 'mono' }, nameOf(it.q.from))] : ' · unsigned'])))
     const cards = h('div', { id: 'batch-cards' })
     const go = h('button', { type: 'button', class: 'btn primary', id: 'batch-open' }, `Open ${sealed.filter(i => mine.has(i.q.to)).length} with my keys`)
@@ -123,6 +147,7 @@ export function qrDesk({ dir, compact = false, onSealed = null, replay = true } 
         if (seq !== showSeq) return
         if (items.length === 1 && items[0].q && items[0].q.kind === 'sealed' && onSealed) { lastBatch = null; return onSealed(items[0].q.code, items[0].q) }   // handed over: not replayed on the next redraw (Back to the desk)
         if (items.length === 1 && items[0].q && items[0].q.kind === 'key') return keyBox(items[0].q, out, dir)
+        if (items.length === 1 && items[0].q && items[0].q.kind === 'submission') { lastBatch = null; return toAgents(items[0].q, out) }
         if (items.length === 1 && items[0].error) return out.replaceChildren(msg('bad', `${items[0].name}: ${items[0].error}.${items[0].plain ? '' : ' Crop it to the code, straight on, and try again.'}`))
         batchView(items, out, dir)
     }
@@ -132,8 +157,8 @@ export function qrDesk({ dir, compact = false, onSealed = null, replay = true } 
     file.addEventListener('change', () => { if (file.files.length) take([...file.files]) })
     const paste = h('textarea', { class: 't code', id: 'open-paste', rows: 3, placeholder: 'https://pki.sgit.ai/m/#m1.…, a k1 key link, the JSON a QR code holds ({"v":1,"kind":"pki.sgit.ai/qr/…",…}), or the text of an .enc file' })
     const openText = () => {
-        try { const q = M.parseSealedText(paste.value); show([{ name: 'pasted text', q }]) }
-        catch (e) { out.replaceChildren(msg('bad', err(e))) }
+        try { const q = submissionIn(paste.value) || M.parseSealedText(paste.value); show([{ name: 'pasted text', q }]) }
+        catch (e) { out.replaceChildren(msg('bad', `pasted text: ${err(e)}`)) }
     }
     const keyBtn = h('button', { type: 'button', class: 'btn', id: 'my-key-btn' }, 'My key as a QR code')
     keyBtn.addEventListener('click', async () => { if (mine.firstChild) return mine.replaceChildren(); mine.replaceChildren(await myKeyQr()) })

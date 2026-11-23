@@ -35,6 +35,8 @@ async function draw() {
     try { await ({ keys, record, links, agents, contacts, messages, storage })[tab_](body, dir) } catch (e) { say(body, 'bad', err(e)) }
 }
 vault.onChange(() => draw())
+// an agent's submission dropped or pasted on the QR desk above: taken here, into Agents → Confirm an agent (desk.js toAgents)
+window.addEventListener('pki:agent-submission', e => { e.preventDefault(); tab = 'agents'; history.replaceState(null, '', '#agents'); draw() })
 window.addEventListener('hashchange', () => { const t = hashTab() || (linkTarget() ? 'links' : null); if (t && t !== tab) { tab = t; draw() } })
 draw()
 
@@ -316,7 +318,7 @@ async function agents(body, dir) {
             h('div', { class: 'acts' }, sign)))
     }))
     body.append(h('h3', {}, 'Confirm an agent'), paste, h('div', { class: 'acts' }, check), out)
-    if (p0) check.click()
+    if (p0) { check.click(); paste.scrollIntoView({ behavior: 'smooth', block: 'start' }) }
 
     // mine
     const kept = await vault.agents()
