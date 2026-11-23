@@ -12,4 +12,4 @@ Channels: `lib/latest/` (the newest of all), `lib/vN/latest/`, `lib/vN/vN.M/late
 
 For code that must not change under you, pin an exact version and its hashes. A `latest` folder is a choice to take every change.
 
-Newest: v0.2.28. Every version and its hashes: [index.json](index.json).
+Newest: v0.2.34. Every version and its hashes: [index.json](index.json).
