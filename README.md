@@ -65,22 +65,23 @@ three pages to a site.
 
 ## Release process
 
-1. Bump `admin/build/version.txt` (vX.Y.Z, exactly once per release) and add a row to
-   `admin/versions.html`; update `admin/comms.html`.
-2. `node admin/build/people.mjs build` if a record changed; `python3 admin/build/chrome.py` — propagates the version badge and any nav/footer change
-   to every page. (`gen_documents.py` first, if a document was added; `gen_records.py`
-   if a registry record changed.)
-3. `node admin/build/validate.js`
-4. `git commit -am "site vX.Y.Z: ..." && git push origin dev` — the `site vX.Y.Z:`
-   prefix is load-bearing, not decoration: `tag-release` finds the release commit by
-   scanning subjects for it, and refuses the release when the newest one it finds
-   disagrees with `version.txt`. A subject in any other shape fails the job after the
-   push, and nothing deploys until a commit carrying the prefix lands.
+CI owns the version (as on [web-summit.sgit.ai](https://github.com/SGit-AI/SGit-AI__Website__Web-Summit) and
+[newsroom.sgit.ai](https://github.com/SGit-AI/SGit-AI__Website__Newsroom);
+[why](https://newsroom.sgit.ai/articles/ci-owns-the-version.html)): nobody who pushes writes a number.
 
-Every push to `dev` runs `.github/workflows/deploy-pages.yml`: validate → auto-tag
-(`vX.Y.Z`, verified against version.txt and the commit subject, next-minor enforced) →
-deploy to GitHub Pages. Pull requests run validation only. Same pipeline as
-[SGit-AI__Website](https://github.com/SGit-AI/SGit-AI__Website) and
-[SGit-AI__Website__NHI](https://github.com/SGit-AI/SGit-AI__Website__NHI).
+1. Do the work. `node admin/build/people.mjs build` if a record changed; `python3 admin/build/chrome.py` if the
+   nav or footer changed (`gen_documents.py` first, if a document was added; `gen_records.py` if a registry record
+   changed).
+2. `PKI_PENDING_RELEASE=1 node admin/build/validate.js`: the gate as CI runs it on a pushed commit (lib/ may trail
+   `assets/people`: the release makes it).
+3. Commit with a subject that says what shipped (it becomes the release's line in the history) and push to `dev`.
+   Do not touch `admin/build/version.txt`, `admin/versions.html`'s rows or `lib/`.
+
+Every push to `dev` runs `.github/workflows/deploy-pages.yml`: validate → release → deploy. The release job runs
+`admin/build/tag_release.sh`: it bumps the last number of the newest version (tag or `version.txt`), writes
+`version.txt` and the `admin/versions.html` row, stamps the chrome, releases `lib/` when its code changed (its
+manifest signed only when the `PKI_AGENT_KEY` secret is set), runs the gate on that tree, commits it as GitHub
+Actions (`site vX.Y.Z: <your subject>`), tags it, pushes, and deploys exactly that tree. Pull requests run the
+gate only. A push to `main` or a manual dispatch deploys the tree as it is, with no number.
 
 All content CC BY 4.0 unless noted. Code under the repository licence.

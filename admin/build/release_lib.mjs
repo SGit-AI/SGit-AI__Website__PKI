@@ -73,6 +73,8 @@ function writeFolder(dir, entry, channel) {
         base: `https://pki.sgit.ai/${path.relative(ROOT, dir)}/`, files: entry.files,
         importmap: { imports: { 'pki/': `https://pki.sgit.ai/${path.relative(ROOT, dirOf(entry.version))}/` }, integrity: Object.fromEntries(FILES.map(f => [`https://pki.sgit.ai/${path.relative(ROOT, dirOf(entry.version))}/${f}`, entry.files[f].sri])) } }
     fs.writeFileSync(path.join(dir, 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n')
+    // a signature of the manifest this replaces must not stay beside it: unsigned is plainly unsigned, never wrongly signed
+    fs.rmSync(path.join(dir, 'manifest.json.sig'), { force: true })
     const s = spawnSync('node', [path.join(ROOT, 'agents/pki-agent.mjs'), 'sign', path.join(dir, 'manifest.json')], { encoding: 'utf8' })
     if (s.status !== 0) console.warn(`lib: ${path.relative(ROOT, dir)}/manifest.json not signed (no agent key here): ${(s.stderr || '').trim().slice(0, 120)}`)
 }
@@ -86,6 +88,7 @@ function writeNotes(dir, entry, prev) {
     fs.mkdirSync(path.join(dir, 'notes'), { recursive: true })
     fs.writeFileSync(path.join(dir, 'notes/release.md'), head + `## Changed\n\n${table}\n\n${kept.length ? `Carried over unchanged from ${prev.version}: ${kept.map(f => '`' + f + '`').join(', ')}.\n\n` : ''}## Notes\n\n${section('Release notes') || '(none written)'}\n`)
     fs.writeFileSync(path.join(dir, 'notes/security.md'), head + `## Security\n\n${section('Security') || 'No security-relevant change in this release.'}\n`)
+    fs.mkdirSync(path.dirname(nextF), { recursive: true })
     fs.writeFileSync(nextF, '## Release notes\n\n## Security\n')
 }
 let entry = last

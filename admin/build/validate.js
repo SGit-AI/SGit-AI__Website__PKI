@@ -152,7 +152,17 @@ for (const f of htmlFiles) {
   const sb = require('child_process').spawnSync('python3', [path.join(ROOT, 'admin/build/gen_storyboards.py'), '--check'], { encoding: 'utf8' });
   if (sb.status !== 0) errors.push((sb.stderr || 'storyboards/ is stale').trim());
   const lb = require('child_process').spawnSync('node', [path.join(ROOT, 'admin/build/release_lib.mjs'), '--check'], { encoding: 'utf8' });
-  if (lb.status !== 0) errors.push((lb.stderr || 'lib/ is stale').trim());
+  if (lb.status !== 0) {
+    // CI owns the version (admin/build/tag_release.sh): a pushed work commit carries no release, so lib/ trailing
+    // assets/people is expected there, and the release job makes the new lib version before it runs this gate again
+    // without PKI_PENDING_RELEASE. An exact version changed after release is refused either way.
+    const lines = (lb.stderr || 'lib/ is stale').trim().split('\n').filter(Boolean)
+    const stale = l => /changed since v\d+\.\d+\.\d+: run node admin\/build\/release_lib\.mjs/.test(l)
+    for (const l of lines) {
+      if (process.env.PKI_PENDING_RELEASE === '1' && stale(l)) console.log(`validate: ${l.trim()} (pending: the release job makes it)`)
+      else errors.push(l.trim())
+    }
+  }
   const ho = require('child_process').spawnSync('python3', [path.join(ROOT, 'admin/build/gen_handover.py'), '--check'], { encoding: 'utf8' });
   if (ho.status !== 0) errors.push((ho.stderr || 'handover/ is stale').trim());
 }

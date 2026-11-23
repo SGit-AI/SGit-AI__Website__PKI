@@ -92,7 +92,7 @@
 <main class="doc">
 <div class="crumb"><a href="../index.html">pki.sgit.ai</a> / admin / versions</div>
 <h1>Release history</h1>
-<p class="lead">Every push to <code>dev</code> is a release: CI validates the site, verifies the version bump, tags the commit <code>v{release}.{major}.{minor}</code>, and deploys to GitHub Pages. The version is owned by <code>admin/build/version.txt</code> and must agree with the release commit's subject.</p>
+<p class="lead">Every push to <code>dev</code> is a release, and CI owns the version: it validates the pushed commit, then numbers the release (the last number of the newest version, plus one), writes this row from the pushed commit's subject, releases <code>lib/</code> when its code changed, checks the result, commits and tags it <code>v{release}.{major}.{minor}</code>, and deploys it to GitHub Pages. Nobody who pushes writes a number (<code>admin/build/tag_release.sh</code>).</p>
 
 <div class="tablewrap"><table class="vers">
   <thead><tr><th>Version</th><th>Date</th><th>What shipped</th></tr></thead>
