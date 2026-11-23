@@ -11,8 +11,9 @@
 #                 of the newest version, writes version.txt and the versions row, stamps the chrome,
 #                 releases lib/ (signed when the PKI_AGENT_KEY secret is set), runs the gate on that
 #                 tree, commits as GitHub Actions ("site vX.Y.Z: <the pushed subject>"), tags it and
-#                 pushes; then deploys exactly that tree. A pending run that is dropped is harmless:
-#                 its commits ride the next release.
+#                 pushes, and uploads exactly that tree (one artifact name per attempt). A pending run
+#                 that is dropped is harmless: its commits ride the next release.
+#      deploy-release — deploys that artifact, in its own job: a failed deploy re-runs alone.
 #   3. deploy   — a push to main, or a manual dispatch: deploys the tree as it is, no number.
 name: deploy-pages
 on:
@@ -52,11 +53,8 @@ jobs:
       cancel-in-progress: false
     permissions:
       contents: write
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    outputs:
+      artifact: ${{ steps.name.outputs.artifact }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -76,14 +74,39 @@ jobs:
         run: |
           mkdir -p /tmp/site
           rsync -a ./ /tmp/site/ --exclude '.git' --exclude '.github' --exclude '.sg_vault'
-      - uses: actions/configure-pages@v5
-        with:
-          enablement: true
+      # One name per attempt: a re-run must not meet the artifact an earlier attempt left on this run
+      # (deploy-pages refuses two of the same name), and deploy-release reads this name, not a fixed one.
+      - id: name
+        run: echo "artifact=github-pages-${{ github.run_attempt }}" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-pages-artifact@v3
         with:
           path: /tmp/site
+          name: ${{ steps.name.outputs.artifact }}
+
+  deploy-release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [release]
+    # its own job: the upload has settled by the time it starts, and a failed deploy re-runs alone,
+    # with the artifact the release job made (no new number)
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    permissions:
+      pages: write
+      id-token: write
+      actions: read
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: ${{ needs.release.outputs.artifact }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -92,12 +115,13 @@ jobs:
     # main (a deploy test or fallback) and manual dispatch: the tree as it is, no number
     if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
     concurrency:
-      group: release
+      group: pages
       cancel-in-progress: false
     permissions:
       contents: read
       pages: write
       id-token: write
+      actions: read
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -107,11 +131,14 @@ jobs:
         run: |
           mkdir -p /tmp/site
           rsync -a ./ /tmp/site/ --exclude '.git' --exclude '.github' --exclude '.sg_vault'
-      - uses: actions/configure-pages@v5
-        with:
-          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: /tmp/site
+          name: github-pages-${{ github.run_attempt }}
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: github-pages-${{ github.run_attempt }}
