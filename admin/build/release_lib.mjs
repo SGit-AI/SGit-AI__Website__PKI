@@ -14,8 +14,10 @@
  *                          files changed since the last version (sha256 before and after) and the ones carried over
  *
  * A new exact version is made only when the code changed: a site release that leaves these files alone makes none.
- * Each manifest is signed with the site agent's key when it is here (manifest.json.sig, as `sgit pki sign` writes),
- * and the register's page for that key is how anyone checks it.
+ * A manifest is signed only when an operator's key is on the machine that runs this (manifest.json.sig, as `sgit pki
+ * sign` writes; the register's page for that key is how anyone checks it). CI releases (admin/build/tag_release.sh)
+ * hold no key and never will, so from v0.2.34 a version ships unsigned; a signature can be added beside an exact
+ * version later, out of band, since .sig files are not part of its immutable hashes. lib/README.md says which are signed.
  *
  *   node admin/build/release_lib.mjs            release (from admin/build/version.txt)
  *   node admin/build/release_lib.mjs --check    exit 1 when lib/ is stale, or an exact version was changed
@@ -76,7 +78,7 @@ function writeFolder(dir, entry, channel) {
     // a signature of the manifest this replaces must not stay beside it: unsigned is plainly unsigned, never wrongly signed
     fs.rmSync(path.join(dir, 'manifest.json.sig'), { force: true })
     const s = spawnSync('node', [path.join(ROOT, 'agents/pki-agent.mjs'), 'sign', path.join(dir, 'manifest.json')], { encoding: 'utf8' })
-    if (s.status !== 0) console.warn(`lib: ${path.relative(ROOT, dir)}/manifest.json not signed (no agent key here): ${(s.stderr || '').trim().slice(0, 120)}`)
+    if (s.status !== 0) console.warn(`lib: ${path.relative(ROOT, dir)}/manifest.json left unsigned (no operator key here; CI never holds one): ${(s.stderr || '').trim().slice(0, 120)}`)
 }
 /** The exact version's notes: what admin/lib/next.md says, and what changed, worked out here. next.md is then emptied. */
 function writeNotes(dir, entry, prev) {
@@ -108,7 +110,13 @@ if (needNew) {
 const latestOf = pre => [...index.versions].reverse().find(e => e.version.startsWith(pre + '.'))
 const chans = { latest: entry.version, [maj]: latestOf(maj).version, [min]: latestOf(min).version }
 for (const ch of ['latest', maj, min]) writeFolder(chanDir(ch), index.versions.find(e => e.version === chans[ch]), ch === 'latest' ? 'latest' : `${ch}/latest`)
-fs.writeFileSync(path.join(LIB, 'README.md'), `# pki.sgit.ai/lib: the code other sites use\n\nThree levels, and one rule: **anything named \`latest\` moves; everything else is written once and never changed.**\n\n| Level | Example | Promise |\n|---|---|---|\n| release | \`v0\` | breaking changes: nothing is promised between releases |\n| major | \`v0.2\` | best effort not to break, and it may |\n| minor | \`v0.2.28\` | small changes; an exact version, never changed after release |\n\nChannels: \`lib/latest/\` (the newest of all), \`lib/vN/latest/\`, \`lib/vN/vN.M/latest/\`. Exact versions: \`lib/vN/vN.M/vN.M.P/\`, each with \`manifest.json\` (every file's sha256 and SRI hash, an import map with integrity, signed: \`manifest.json.sig\`) and \`notes/release.md\`, \`notes/security.md\`.\n\nFor code that must not change under you, pin an exact version and its hashes. A \`latest\` folder is a choice to take every change.\n\nNewest: ${chans.latest}. Every version and its hashes: [index.json](index.json).\n`)
+// what is signed, from what is on disk: never a claim the files do not back
+function signedLine() {
+    const sigOf = e => { const f = path.join(dirOf(e.version), 'manifest.json.sig'); try { return JSON.parse(fs.readFileSync(f, 'utf8')).fingerprint || '?' } catch (x) { return null } }
+    const signed = index.versions.map(e => [e.version, sigOf(e)]).filter(([, fp]) => fp), unsigned = index.versions.filter(e => !sigOf(e)).map(e => e.version)
+    return `Signatures: ${signed.length ? signed.map(([v, fp]) => `${v} is signed (\`${fp}\`)`).join(', ') : 'no version is signed'}. ${unsigned.length ? `${unsigned.join(', ')} ${unsigned.length === 1 ? 'is' : 'are'} **unsigned**: released by CI, which holds no key. A version without \`manifest.json.sig\` is unsigned; pin its hashes, and do not read a signature into it.` : ''}`.trim()
+}
+fs.writeFileSync(path.join(LIB, 'README.md'), `# pki.sgit.ai/lib: the code other sites use\n\nThree levels, and one rule: **anything named \`latest\` moves; everything else is written once and never changed.**\n\n| Level | Example | Promise |\n|---|---|---|\n| release | \`v0\` | breaking changes: nothing is promised between releases |\n| major | \`v0.2\` | best effort not to break, and it may |\n| minor | \`v0.2.28\` | small changes; an exact version, never changed after release |\n\nChannels: \`lib/latest/\` (the newest of all), \`lib/vN/latest/\`, \`lib/vN/vN.M/latest/\`. Exact versions: \`lib/vN/vN.M/vN.M.P/\`, each with \`manifest.json\` (every file's sha256 and SRI hash, an import map with integrity, and \`manifest.json.sig\` when signed) and \`notes/release.md\`, \`notes/security.md\`.\n\n${signedLine()}\n\nFor code that must not change under you, pin an exact version and its hashes. A \`latest\` folder is a choice to take every change.\n\nNewest: ${chans.latest}. Every version and its hashes: [index.json](index.json).\n`)
 index.channels = { ...(index.channels || {}), ...chans }
 index._about = 'pki.sgit.ai code for other sites. Anything named latest moves; everything else is written once. Written by admin/build/release_lib.mjs.'
 index.levels = LEVELS

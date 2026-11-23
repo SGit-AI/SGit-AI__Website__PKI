@@ -75,13 +75,20 @@ CI owns the version (as on [web-summit.sgit.ai](https://github.com/SGit-AI/SGit-
 2. `PKI_PENDING_RELEASE=1 node admin/build/validate.js`: the gate as CI runs it on a pushed commit (lib/ may trail
    `assets/people`: the release makes it).
 3. Commit with a subject that says what shipped (it becomes the release's line in the history) and push to `dev`.
-   Do not touch `admin/build/version.txt`, `admin/versions.html`'s rows or `lib/`.
+   Do not touch `admin/build/version.txt`, `admin/versions.html`'s rows or `lib/`. Then `git pull` before your next
+   push: CI's release commit lands on `dev` after every push.
 
 Every push to `dev` runs `.github/workflows/deploy-pages.yml`: validate → release → deploy. The release job runs
 `admin/build/tag_release.sh`: it bumps the last number of the newest version (tag or `version.txt`), writes
-`version.txt` and the `admin/versions.html` row, stamps the chrome, releases `lib/` when its code changed (its
-manifest signed only when the `PKI_AGENT_KEY` secret is set), runs the gate on that tree, commits it as GitHub
-Actions (`site vX.Y.Z: <your subject>`), tags it, pushes, and deploys exactly that tree. Pull requests run the
+`version.txt` and one `admin/versions.html` row naming every commit the release carries, stamps the chrome, releases
+`lib/` when its code changed, runs the gate on that tree (`validate.js` and the three test suites, since commits that
+landed meanwhile ride the release), commits it as GitHub Actions (`site vX.Y.Z: <your subject>`), tags it, pushes,
+and deploys exactly that tree.
+
+`lib/` releases made by CI are **unsigned**: the release job runs code from `dev`'s head, so it holds no key, and
+`lib/README.md` says which versions are signed. When you change `assets/people/{keys,message,directory,delegation,sso}.js`,
+write what changed and anything security-relevant in `admin/lib/next.md` (its `## Release notes` and `## Security`)
+in the same commit: the release copies them into the new version's immutable `notes/` and empties the file. Pull requests run the
 gate only. A push to `main` or a manual dispatch deploys the tree as it is, with no number.
 
 All content CC BY 4.0 unless noted. Code under the repository licence.

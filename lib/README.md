@@ -8,7 +8,9 @@ Three levels, and one rule: **anything named `latest` moves; everything else is 
 | major | `v0.2` | best effort not to break, and it may |
 | minor | `v0.2.28` | small changes; an exact version, never changed after release |
 
-Channels: `lib/latest/` (the newest of all), `lib/vN/latest/`, `lib/vN/vN.M/latest/`. Exact versions: `lib/vN/vN.M/vN.M.P/`, each with `manifest.json` (every file's sha256 and SRI hash, an import map with integrity, signed: `manifest.json.sig`) and `notes/release.md`, `notes/security.md`.
+Channels: `lib/latest/` (the newest of all), `lib/vN/latest/`, `lib/vN/vN.M/latest/`. Exact versions: `lib/vN/vN.M/vN.M.P/`, each with `manifest.json` (every file's sha256 and SRI hash, an import map with integrity, and `manifest.json.sig` when signed) and `notes/release.md`, `notes/security.md`.
+
+Signatures: v0.2.28 is signed (`sha256:a0f2ccfe07781213`). v0.2.34 is **unsigned**: released by CI, which holds no key. A version without `manifest.json.sig` is unsigned; pin its hashes, and do not read a signature into it.
 
 For code that must not change under you, pin an exact version and its hashes. A `latest` folder is a choice to take every change.
 

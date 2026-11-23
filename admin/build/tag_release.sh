@@ -4,9 +4,10 @@
 # passed on the pushed commit:
 #   1. take the branch head as it is now (a push that landed meanwhile rides this release),
 #   2. read the newest version (the newest tag, or version.txt if it is higher) and bump the last number,
-#   3. write admin/build/version.txt and the admin/versions.html row (the pushed subject), stamp the chrome
-#      (chrome.py: assets/version.js, llms.txt, index.md), release lib/ when its code changed (release_lib.mjs,
-#      signed when PKI_AGENT_KEY is set), and run the gate on exactly that tree,
+#   3. write admin/build/version.txt and one admin/versions.html row naming every commit since the last release,
+#      stamp the chrome (chrome.py: assets/version.js, llms.txt, index.md), release lib/ when its code changed
+#      (release_lib.mjs; unsigned: CI holds no key), and run the full gate on exactly that tree: validate.js and the
+#      three test suites, since a commit that rode in has not necessarily passed its own validate job,
 #   4. commit as GitHub Actions ("site vX.Y.Z: <the pushed subject>"), tag that commit, push the branch, then the
 #      tag; if the branch moved, start again from its new head (three tries).
 # The release job then deploys the tree this script built and checked. PUSH=0 does everything but push.
@@ -14,6 +15,15 @@ set -euo pipefail
 BRANCH=${BRANCH:?BRANCH must be set (dev)}
 PUSH=${PUSH:-1}
 git config user.name 'GitHub Actions'; git config user.email 'actions@github.com'
+
+# the gate, as the validate job runs it, without PKI_PENDING_RELEASE: lib/ must be released by now
+gate() {
+  node admin/build/validate.js
+  node admin/build/test_people.mjs > /tmp/test_people.log 2>&1 || { tail -40 /tmp/test_people.log; return 1; }
+  node admin/build/test_people_vault.mjs > /tmp/test_people_vault.log 2>&1 || { tail -40 /tmp/test_people_vault.log; return 1; }
+  node admin/build/test_agent_tool.mjs > /tmp/test_agent_tool.log 2>&1 || { tail -40 /tmp/test_agent_tool.log; return 1; }
+  echo "gate: validate.js, test_people, test_people_vault, test_agent_tool passed"
+}
 
 # guard (a warning, not a stop): only CI writes version.txt; a number written by hand is replaced
 if [ -n "${BEFORE:-}" ] && git cat-file -e "$BEFORE" 2>/dev/null; then
@@ -30,7 +40,7 @@ for try in 1 2 3; do
   HEADVER=$(grep -oP '^site v\K[0-9]+\.[0-9]+\.[0-9]+(?=:)' <<< "$SUBJECT" || true)
   if [ -n "$HEADVER" ] && [ "$(git log -1 --format=%an)" = 'GitHub Actions' ]; then
     echo "the head is already a CI release ($SUBJECT); checking it to deploy, no new number"
-    node admin/build/validate.js; exit 0
+    gate; exit 0
   fi
   LAST_TAG=$(git tag --list 'v[0-9]*.[0-9]*.[0-9]*' | sort -V | tail -1); LAST_TAG=${LAST_TAG:-v0.0.0}
   FILE=$(tr -d '[:space:]' < admin/build/version.txt 2>/dev/null || echo v0.0.0)
@@ -39,23 +49,41 @@ for try in 1 2 3; do
   NEW="v$A.$B.$((C + 1))"
   echo "newest version $LAST (tag $LAST_TAG, version.txt $FILE) -> $NEW on $BRANCH"
 
-  printf '%s\n' "$NEW" > admin/build/version.txt
+  # every commit this release carries: since the newest release commit ("site vX.Y.Z: ..."), newest first.
+  # Read once into a variable: piping git log into an early-exiting reader dies of SIGPIPE under pipefail.
+  LOG=$(git log --format='%H%x09%s')
+  BASE=$(grep -m1 -P '^[0-9a-f]+\tsite v[0-9]+\.[0-9]+\.[0-9]+: ' <<< "$LOG" | cut -f1 || true)
+  if [ -n "$BASE" ]; then RIDERS=$(git log --no-merges --format='%h%x09%s' "$BASE..HEAD"); else RIDERS=''; fi
+  [ -n "$RIDERS" ] || RIDERS=$(git log -1 --format='%h%x09%s')
+  N=$(grep -c . <<< "$RIDERS")
   WHAT=$(sed -E 's/^site v[0-9.]+: //' <<< "$SUBJECT")
-  # the release history row, newest first: what shipped is the pushed subject (escaped), and where it came from
-  node -e '
-    const fs = require("fs"), [v, what, from] = process.argv.slice(1), f = "admin/versions.html"
+  echo "this release carries $N commit(s) since ${BASE:0:9}"
+
+  printf '%s\n' "$NEW" > admin/build/version.txt
+  # the release history row, newest first: every commit it carries (escaped), each with its short hash
+  RIDERS="$RIDERS" node -e '
+    const fs = require("fs"), [v] = process.argv.slice(1), f = "admin/versions.html"
     const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
     const d = new Date(), date = `${d.getUTCDate()} ${d.toLocaleString("en-GB", { month: "short", timeZone: "UTC" })} ${d.getUTCFullYear()}`
     const t = fs.readFileSync(f, "utf8")
     if (t.includes(`class="vnum">${v}<`)) process.exit(0)
-    const row = `    <tr>\n<td class="vnum">${v}</td>\n<td class="vdate">${date}</td>\n<td>${esc(what)} <span class="dim">(released by CI from ${from})</span></td>\n    </tr>\n`
+    const rs = process.env.RIDERS.split("\n").filter(Boolean).map(l => { const i = l.indexOf("\t"); return [l.slice(0, i), l.slice(i + 1)] })
+    const item = ([h, s]) => `${esc(s)} <span class="dim">(${h})</span>`
+    const what = rs.length === 1 ? `${item(rs[0])} <span class="dim">released by CI</span>`
+      : `${rs.map(item).join("<br>\n")}<br>\n<span class="dim">${rs.length} commits, released by CI</span>`
+    const row = `    <tr>\n<td class="vnum">${v}</td>\n<td class="vdate">${date}</td>\n<td>${what}</td>\n    </tr>\n`
     if (!t.includes("<tbody>\n")) { console.error("admin/versions.html: no <tbody> to add the row to"); process.exit(1) }
-    fs.writeFileSync(f, t.replace("<tbody>\n", "<tbody>\n" + row))' "$NEW" "$WHAT" "$(git rev-parse --short=9 HEAD)"
+    fs.writeFileSync(f, t.replace("<tbody>\n", "<tbody>\n" + row))' "$NEW"
   python3 admin/build/chrome.py > /dev/null
   node admin/build/release_lib.mjs
-  node admin/build/validate.js
   git add -A
-  git commit -q -m "site $NEW: $WHAT" -m "Released by CI from $(git rev-parse --short HEAD) ($SUBJECT)"
+  gate
+  # the gate checks the tree; it must not change it (a test leaving a file behind would ride into the release)
+  if ! git diff --quiet || [ -n "$(git ls-files --others --exclude-standard)" ]; then
+    git diff --stat; git ls-files --others --exclude-standard; echo "::error::the gate changed the tree; nothing released"; exit 1
+  fi
+  MSG_SUBJECT="site $NEW: $WHAT"; [ "$N" -gt 1 ] && MSG_SUBJECT="$MSG_SUBJECT (+$((N - 1)) more)"
+  git commit -q -m "$MSG_SUBJECT" -m "Released by CI from $(git rev-parse --short HEAD), carrying $N commit(s):" -m "$(sed -E 's/\t/ /' <<< "$RIDERS")"
   git tag "$NEW"
   [ "$PUSH" = 1 ] || { echo "PUSH=0: would release $NEW"; exit 0; }
   if git push -q origin "HEAD:$BRANCH"; then git push -q origin "refs/tags/$NEW"; echo "released $NEW"; exit 0; fi

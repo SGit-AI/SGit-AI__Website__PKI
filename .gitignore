@@ -19,6 +19,8 @@ eggs/
 lib/
 # ...but the site's released library is the site (pki.sgit.ai/lib/: versioned, hash-pinned)
 !/lib/
+# ...and its release notes, written in a work commit and consumed by the release (admin/build/release_lib.mjs)
+!/admin/lib/
 lib64/
 parts/
 sdist/

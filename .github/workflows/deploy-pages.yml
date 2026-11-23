@@ -9,8 +9,8 @@
 #   2. release  — on a push to dev, one at a time (concurrency group "release", never cancelled):
 #                 admin/build/tag_release.sh takes dev's head as it is now, bumps the last number
 #                 of the newest version, writes version.txt and the versions row, stamps the chrome,
-#                 releases lib/ (signed when the PKI_AGENT_KEY secret is set), runs the gate on that
-#                 tree, commits as GitHub Actions ("site vX.Y.Z: <the pushed subject>"), tags it and
+#                 releases lib/ (unsigned: CI holds no key, by design), runs the gate (validate.js and
+#                 the three test suites) on that tree, commits as GitHub Actions ("site vX.Y.Z: <the pushed subject>"), tags it and
 #                 pushes, and uploads exactly that tree (one artifact name per attempt). A pending run
 #                 that is dropped is harmless: its commits ride the next release.
 #      deploy-release — deploys that artifact, in its own job: a failed deploy re-runs alone.
@@ -67,8 +67,8 @@ jobs:
         env:
           BRANCH: ${{ github.ref_name }}
           BEFORE: ${{ github.event.before }}
-          # the site agent's key, one line from `node agents/pki-agent.mjs keyfile`: signs lib manifests when set
-          PKI_AGENT_KEY: ${{ secrets.PKI_AGENT_KEY }}
+          # No signing key here, on purpose: this job runs code from dev's head, so any secret in its environment is
+          # readable by anything pushed to dev. lib manifests are signed, if at all, out of band by an operator.
         run: admin/build/tag_release.sh
       - name: Assemble the site artifact (the tree just released and checked)
         run: |
