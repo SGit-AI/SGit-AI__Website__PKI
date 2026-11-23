@@ -23,6 +23,13 @@
       "is": "person",
       "anchor": true,
       "url": "https://pki.sgit.ai/id/sha256-db7f79fdd87e030a.json"
+    },
+    {
+      "fp": "sha256:eefbe996d9c67a7c",
+      "name": "decisions.b@SovereignWebsite.dinis (Claude Code session)",
+      "is": "agent",
+      "anchor": false,
+      "url": "https://pki.sgit.ai/id/sha256-eefbe996d9c67a7c.json"
     }
   ]
 }

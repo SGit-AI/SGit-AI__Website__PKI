@@ -1,0 +1,25 @@
+{
+  "v": 1,
+  "type": "identity",
+  "registry": "pki.sgit.ai",
+  "record": "sha256:eefbe996d9c67a7c",
+  "signer": "sha256:eefbe996d9c67a7c",
+  "created_at": "2026-11-23T13:54:21Z",
+  "body": {
+    "kind": "agent",
+    "name": "decisions.b@SovereignWebsite.dinis (Claude Code session)",
+    "about": "Records Dinis Cruz's approvals, given in its own session, as signed decision records in SovereignWebsite__IaC decisions/. A session key: it lives as long as this session.",
+    "runtime": "claude-code, cloud session",
+    "session": true,
+    "bundle": {
+      "v": 1,
+      "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAp7Qo2obA5OCYuMovtfNp\ntHztdmn1m1NvUBHjKeJIAcbVKvUBlHXe4Dzk7NgZV8dDPzkQDEe1CeuJiviUdY2S\ncaXwx8lPOnFyh7rgvmppV70cfnbyovYk9ftBqE0D9RQGeWFS4JWVQ2XQBkuxCXKB\n9v6m/n/0GLINNrtXTEKjY6IrOnS8xeSYgIRyYUC0H+4lynNnYXLS5F9cp1/O5WdN\n/e54a4jR39+i05N1ZkQauvE4zV2k3I49Z4NF6bk4pohd0H+C7kj7IyeMod8+LbVJ\nBEtlB4ftLGiFiIcnLf+lS9bKhzHtesk+ap7tm8Hdz4FpcyN0nj0ukrnVaDkj40T/\naM5qX6EUngTkkqHqZ7V6Ey3JbmkJc3ny+jpB4mNYFm5QSGkrBAQJHXVV47yuEd8U\nZYS16du4sEwiYevWoON75gdYP0Vfrw+76Ff+NY1/gZVgSaJvN4wQfCjlX0+orlNz\nPGyM2gCJtxKqx8JEwbfFUViB7pZ0khROXki1qNROmipSBys3AF9c1olJjcfKE/ZJ\nu/QEEBnF7O0yT3a4UR5eeuQ+37TTyNC6nfxGLWsSRmCU+bOHFJuRpFCEjGnO/g1p\nRCsRjCTlnMLv8oXkTWLopCxgYLF8NkqDzA2D0mCT8uLlO+K5WNNtmIIQ5RDiqhSj\nC0J0JKs4iEoXnRybTirjTekCAwEAAQ==\n-----END PUBLIC KEY-----\n",
+      "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEFaZaEb4L76gay4oTlcv60fyoBvrq\nmCr4tGniMg0TDDoO/T+Wq5OmbnnXOZK6px1VqQQR/53sz0vHVbKrjdEFsQ==\n-----END PUBLIC KEY-----\n",
+      "label": "decisions.b@SovereignWebsite.dinis",
+      "fingerprint": "sha256:a23b2dd69959b6e0",
+      "signing_fingerprint": "sha256:eefbe996d9c67a7c"
+    },
+    "private_key_published": false
+  },
+  "sig": "CB2D6TpYz6WrBngZmggm10djHHgb3QAkDj6CBlYyPVrfHZhpjAhw762HEjuUuzHGeA/gnUA4tCHTc/nx1XltFg=="
+}
